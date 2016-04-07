@@ -18,6 +18,7 @@ package org.drools.benchmarks.session;
 
 import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.StatelessKieSession;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -37,11 +38,9 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public abstract class AbstractSessionBenchmark {
 
-    protected boolean holdSessionReferences = false;
-    protected boolean reuseKieBase = false;
-
     protected KieBase kieBase;
     protected KieSession kieSession;
+    protected StatelessKieSession statelessKieSession;
 
     public abstract void setup();
 
@@ -49,11 +48,16 @@ public abstract class AbstractSessionBenchmark {
     public void tearDown() {
         if (kieSession != null) {
             kieSession.dispose();
+            kieSession = null;
         }
+        statelessKieSession = null;
     }
 
     protected void createKieSession() {
         kieSession = kieBase.newKieSession();
     }
 
+    protected void createStatelessKieSession() {
+        statelessKieSession = kieBase.newStatelessKieSession();
+    }
 }
