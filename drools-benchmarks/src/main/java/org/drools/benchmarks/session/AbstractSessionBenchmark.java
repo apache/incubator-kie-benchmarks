@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks;
-
-import java.util.concurrent.TimeUnit;
+package org.drools.benchmarks.session;
 
 import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
@@ -29,6 +27,8 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
+
+import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)

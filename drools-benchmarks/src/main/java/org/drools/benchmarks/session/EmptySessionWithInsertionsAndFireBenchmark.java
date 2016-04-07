@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks;
+package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.util.TestUtil;
 import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 
-public class EmptySessionBenchmark extends AbstractSessionBenchmark {
+import java.util.Date;
+
+@Warmup(iterations = 100)
+@Measurement(iterations = 100)
+public class EmptySessionWithInsertionsAndFireBenchmark extends AbstractSessionBenchmark {
 
     @Setup(Level.Iteration)
     @Override
@@ -33,5 +39,16 @@ public class EmptySessionBenchmark extends AbstractSessionBenchmark {
     @Benchmark
     public void testCreateEmptySession() {
         createKieSession();
+        kieSession.insert( "1" );
+        kieSession.insert( new Integer(1) );
+        kieSession.insert( new Long(1L) );
+        kieSession.insert( new Short((short)1) );
+        kieSession.insert( new Double(1.0) );
+        kieSession.insert( new Float(1.0) );
+        kieSession.insert( new Character('1') );
+        kieSession.insert( Boolean.TRUE );
+        kieSession.insert( String.class );
+        kieSession.insert( new Date() );
+        kieSession.fireAllRules();
     }
 }
