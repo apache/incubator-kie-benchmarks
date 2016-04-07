@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.kie</groupId>
+    <artifactId>kie-parent-with-dependencies</artifactId>
+    <version>7.0.0-SNAPSHOT</version>
+    <!-- relativePath causes out-of-date problems on hudson slaves -->
+    <!--<relativePath>../droolsjbpm-build-bootstrap/pom.xml</relativePath>-->
+  </parent>
+
+  <artifactId>kie-benchmarks</artifactId>
+  <packaging>pom</packaging>
+
+  <name>KIE Benchmarks</name>
+  <description>
+    Various benchmarks related to KIE projects.
+  </description>
+
+  <properties>
+    <version.jmh>1.11.3</version.jmh>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core</artifactId>
+        <version>${version.jmh}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-generator-annprocess</artifactId>
+        <version>${version.jmh}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <module>drools-benchmarks</module>
+  </modules>
+
+  <repositories>
+    <!-- Bootstrap repository to locate the parent pom when the parent pom has not been build locally. -->
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <scm>
+    <connection>scm:git:git@github.com:droolsjbpm/kie-benchmarks.git</connection>
+    <developerConnection>scm:git:git@github.com:droolsjbpm/kie-benchmarks.git</developerConnection>
+    <url>https://github.com/droolsjbpm/kie-benchmarks</url>
+  </scm>
+</project>
