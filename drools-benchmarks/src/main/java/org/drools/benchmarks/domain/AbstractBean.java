@@ -15,18 +15,24 @@
 
 package org.drools.benchmarks.domain;
 
-public class E extends AbstractBean {
-    private int value;
+import java.util.concurrent.atomic.AtomicLong;
 
-    public E( int value ) {
-        this.value = value;
+public abstract class AbstractBean {
+    private static final AtomicLong idGenerator = new AtomicLong( 0 );
+
+    private final long id;
+
+    protected AbstractBean() {
+        id = idGenerator.getAndIncrement();
     }
 
-    public int getValue() {
-        return value;
+    @Override
+    public int hashCode() {
+        return (int)(id ^ (id >>> 32));
     }
 
-    public void setValue( int value ) {
-        this.value = value;
+    @Override
+    public boolean equals( Object obj ) {
+        return this.getClass() == obj.getClass() && id == ((AbstractBean)obj).id;
     }
 }

@@ -15,7 +15,7 @@
 
 package org.drools.benchmarks.domain;
 
-public class A {
+public class A extends AbstractBean {
     private int value;
 
     public A( int value ) {
