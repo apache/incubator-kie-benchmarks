@@ -37,6 +37,21 @@ public class UpdatesOnJoinBenchmark extends AbstractSessionBenchmark {
     @Param({"1", "10", "100"})
     private int rulesNr;
 
+    @Param({"1", "10", "100"})
+    private int factsNr;
+
+    private A[] as;
+    private B[] bs;
+    private C[] cs;
+    private D[] ds;
+    private E[] es;
+
+    private FactHandle[] aFHs;
+    private FactHandle[] bFHs;
+    private FactHandle[] cFHs;
+    private FactHandle[] dFHs;
+    private FactHandle[] eFHs;
+
     @Setup(Level.Iteration)
     @Override
     public void setup() {
@@ -57,35 +72,50 @@ public class UpdatesOnJoinBenchmark extends AbstractSessionBenchmark {
         kieBase = new KieHelper().addContent( drl, ResourceType.DRL )
                                  .build( TestUtil.getKieBaseConfiguration() );
 
+        createKieSession();
+
+        as = new A[factsNr];
+        bs = new B[factsNr];
+        cs = new C[factsNr];
+        ds = new D[factsNr];
+        es = new E[factsNr];
+
+        aFHs = new FactHandle[factsNr];
+        bFHs = new FactHandle[factsNr];
+        cFHs = new FactHandle[factsNr];
+        dFHs = new FactHandle[factsNr];
+        eFHs = new FactHandle[factsNr];
     }
 
     @Benchmark
     public void testCreateEmptySession() {
-        createKieSession();
-        kieSession.fireAllRules();
+        for (int i = 0; i < factsNr; i++) {
+            as[i] = new A( rulesNr + 1 );
+            aFHs[i] = kieSession.insert( as[i] );
+            bs[i] = new B( rulesNr + 3 );
+            bFHs[i] = kieSession.insert( bs[i] );
+            cs[i] = new C( rulesNr + 5 );
+            cFHs[i] = kieSession.insert( cs[i] );
+            ds[i] = new D( rulesNr + 7 );
+            dFHs[i] = kieSession.insert( ds[i] );
+            es[i] = new E( rulesNr + 9 );
+            eFHs[i] = kieSession.insert( es[i] );
+        }
 
-        A a = new A( rulesNr + 1 );
-        FactHandle aFH = kieSession.insert( a );
-        B b = new B( rulesNr + 3 );
-        FactHandle bFH = kieSession.insert( b );
-        C c = new C( rulesNr + 5 );
-        FactHandle cFH = kieSession.insert( c );
-        D d = new D( rulesNr + 7 );
-        FactHandle dFH = kieSession.insert( d );
-        E e = new E( rulesNr + 9 );
-        FactHandle eFH = kieSession.insert( e );
 
         for (int i = 0; i < loopCount; i++) {
-            a.setValue( a.getValue() + 1 );
-            kieSession.update( aFH, a );
-            b.setValue( b.getValue() + 1 );
-            kieSession.update( bFH, b );
-            c.setValue( c.getValue() + 1 );
-            kieSession.update( cFH, c );
-            d.setValue( d.getValue() + 1 );
-            kieSession.update( dFH, d );
-            e.setValue( e.getValue() + 1 );
-            kieSession.update( eFH, e );
+            for (int j = 0; j < factsNr; j++) {
+                as[j].setValue( as[j].getValue() + 1 );
+                kieSession.update( aFHs[j], as[j] );
+                bs[j].setValue( bs[j].getValue() + 1 );
+                kieSession.update( bFHs[j], bs[j] );
+                cs[j].setValue( cs[j].getValue() + 1 );
+                kieSession.update( cFHs[j], cs[j] );
+                ds[j].setValue( ds[j].getValue() + 1 );
+                kieSession.update( dFHs[j], ds[j] );
+                es[j].setValue( es[j].getValue() + 1 );
+                kieSession.update( eFHs[j], es[j] );
+            }
         }
 
         kieSession.fireAllRules();
