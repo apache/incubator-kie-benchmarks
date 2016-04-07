@@ -15,15 +15,13 @@
 
 package org.drools.benchmarks.session;
 
-import org.drools.benchmarks.util.TestUtil;
-import org.kie.internal.utils.KieHelper;
+import java.util.Date;
+
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
-
-import java.util.Date;
 
 @Warmup(iterations = 100)
 @Measurement(iterations = 100)
@@ -32,7 +30,7 @@ public class EmptySessionWithInsertionsAndFireBenchmark extends AbstractSessionB
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        kieBase = new KieHelper().build(TestUtil.getKieBaseConfiguration());
+        createEmptyKieBase();
     }
 
     @Benchmark

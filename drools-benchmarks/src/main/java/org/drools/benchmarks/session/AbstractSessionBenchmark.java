@@ -13,12 +13,14 @@
  * limitations under the License.
  */
 
-
 package org.drools.benchmarks.session;
 
+import org.drools.benchmarks.util.TestUtil;
 import org.kie.api.KieBase;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
+import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -59,5 +61,14 @@ public abstract class AbstractSessionBenchmark {
 
     protected void createStatelessKieSession() {
         statelessKieSession = kieBase.newStatelessKieSession();
+    }
+
+    protected void createEmptyKieBase() {
+        kieBase = new KieHelper().build(TestUtil.getKieBaseConfiguration());
+    }
+
+    protected void createKieBaseFromDrl(final String drl) {
+        kieBase = new KieHelper().addContent(drl, ResourceType.DRL)
+                .build(TestUtil.getKieBaseConfiguration());
     }
 }
