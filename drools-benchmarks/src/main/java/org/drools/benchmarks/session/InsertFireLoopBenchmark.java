@@ -25,19 +25,13 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
-public class UpdateFireLoopBenchmark extends AbstractBenchmark {
-
-    @Param({"10", "100", "1000"})
-    private int loopCount;
+public class InsertFireLoopBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})
     private int rulesNr;
 
     @Param({"1", "10", "100"})
     private int factsNr;
-
-    private A a;
-    private FactHandle aFH;
 
     @Setup
     public void setupKieBase() {
@@ -58,20 +52,15 @@ public class UpdateFireLoopBenchmark extends AbstractBenchmark {
     @Override
     public void setup() {
         createKieSession();
-
-        a = new A( rulesNr + 1 );
-        aFH = kieSession.insert( a );
-        for ( int i = 0; i < factsNr; i++ ) {
-            kieSession.insert( new B( loopCount + rulesNr + 3 ) );
-        }
-        kieSession.fireAllRules();
     }
 
     @Benchmark
     public void test() {
-        for (int i = 0; i < loopCount; i++) {
-            a.setValue( a.getValue() + 1 );
-            kieSession.update( aFH, a );
+        A a = new A( rulesNr + 1 );
+        FactHandle aFH = kieSession.insert( a );
+        for ( int i = 0; i < factsNr; i++ ) {
+            kieSession.insert( new B( rulesNr + 3 ) );
+            kieSession.fireAllRules();
         }
     }
 }
