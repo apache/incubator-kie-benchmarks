@@ -55,23 +55,27 @@ public class UpdatesOnJoinBenchmark extends AbstractSessionBenchmark {
     private FactHandle[] dFHs;
     private FactHandle[] eFHs;
 
-    @Setup(Level.Iteration)
-    @Override
-    public void setup() {
+    @Setup
+    public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
         for (int i = 0; i < rulesNr; i++) {
             sb.append( "rule R" + i + " when\n" +
-                       "  A( $a : value > " + i + ")\n" +
-                       "  B( $b : value > $a)\n" +
-                       "  C( $c : value > $b)\n" +
-                       "  D( $d : value > $c)\n" +
-                       "  E( $e : value > $d)\n" +
-                       "then\n" +
-                       "end\n" );
+                    "  A( $a : value > " + i + ")\n" +
+                    "  B( $b : value > $a)\n" +
+                    "  C( $c : value > $b)\n" +
+                    "  D( $d : value > $c)\n" +
+                    "  E( $e : value > $d)\n" +
+                    "then\n" +
+                    "end\n" );
         }
 
         createKieBaseFromDrl(sb.toString());
+    }
+
+    @Setup(Level.Iteration)
+    @Override
+    public void setup() {
         createKieSession();
 
         as = new A[factsNr];

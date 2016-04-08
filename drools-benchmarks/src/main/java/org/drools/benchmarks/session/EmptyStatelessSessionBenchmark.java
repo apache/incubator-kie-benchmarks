@@ -25,7 +25,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 100)
 public class EmptyStatelessSessionBenchmark extends AbstractSessionBenchmark {
 
-    @Setup(Level.Iteration)
+    @Setup
     @Override
     public void setup() {
         createEmptyKieBase();

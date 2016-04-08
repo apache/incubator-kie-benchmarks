@@ -51,33 +51,37 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractSessionBenchmark
     private FactHandle[] dFHs;
     private FactHandle[] eFHs;
 
-    @Setup(Level.Iteration)
-    @Override
-    public void setup() {
+    @Setup
+    public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
         sb.append( "rule R0 salience 10 when\n" +
-                   "  $factA : A( $a : value > 0)\n" +
-                   "  B( $b : value > $a)\n" +
-                   "  C( $c : value > $b)\n" +
-                   "  D( $d : value > $c)\n" +
-                   "  E( $e : value > $d)\n" +
-                   "then\n" +
-                   "  modify( $factA ) { setValue(-1) }; \n" +
-                   "end\n" );
+                "  $factA : A( $a : value > 0)\n" +
+                "  B( $b : value > $a)\n" +
+                "  C( $c : value > $b)\n" +
+                "  D( $d : value > $c)\n" +
+                "  E( $e : value > $d)\n" +
+                "then\n" +
+                "  modify( $factA ) { setValue(-1) }; \n" +
+                "end\n" );
 
         for (int i = 1; i < rulesNr; i++) {
             sb.append( "rule R" + i + " when\n" +
-                       "  A( $a : value > " + i + ")\n" +
-                       "  B( $b : value > $a)\n" +
-                       "  C( $c : value > $b)\n" +
-                       "  D( $d : value > $c)\n" +
-                       "  E( $e : value > $d)\n" +
-                       "then\n" +
-                       "end\n" );
+                    "  A( $a : value > " + i + ")\n" +
+                    "  B( $b : value > $a)\n" +
+                    "  C( $c : value > $b)\n" +
+                    "  D( $d : value > $c)\n" +
+                    "  E( $e : value > $d)\n" +
+                    "then\n" +
+                    "end\n" );
         }
 
         createKieBaseFromDrl(sb.toString());
+    }
+
+    @Setup(Level.Iteration)
+    @Override
+    public void setup() {
         createKieSession();
 
         bs = new B[factsNr];
