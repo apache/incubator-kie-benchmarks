@@ -16,20 +16,8 @@
 package org.drools.benchmarks.session;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 100)
-@Measurement(iterations = 100)
-public class EmptySessionBenchmark extends AbstractSessionBenchmark {
-
-    @Setup
-    @Override
-    public void setup() {
-        createEmptyKieBase();
-    }
+public class EmptySessionBenchmark extends AbstractEmptySessionBenchmark {
 
     @Benchmark
     public void testCreateEmptySession() {
