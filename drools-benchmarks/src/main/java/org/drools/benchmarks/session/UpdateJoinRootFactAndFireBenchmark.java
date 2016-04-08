@@ -35,6 +35,22 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractSessionBenchmark
     @Param({"1", "10", "100"})
     private int rulesNr;
 
+    @Param({"1", "10", "100"})
+    private int factsNr;
+
+    @Param({"true", "false"})
+    private boolean insertLastJoinItem;
+
+    private B[] bs;
+    private C[] cs;
+    private D[] ds;
+    private E[] es;
+
+    private FactHandle[] bFHs;
+    private FactHandle[] cFHs;
+    private FactHandle[] dFHs;
+    private FactHandle[] eFHs;
+
     @Setup(Level.Iteration)
     @Override
     public void setup() {
@@ -63,20 +79,34 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractSessionBenchmark
 
         createKieBaseFromDrl(sb.toString());
         createKieSession();
+
+        bs = new B[factsNr];
+        cs = new C[factsNr];
+        ds = new D[factsNr];
+        es = new E[factsNr];
+
+        bFHs = new FactHandle[factsNr];
+        cFHs = new FactHandle[factsNr];
+        dFHs = new FactHandle[factsNr];
+        eFHs = new FactHandle[factsNr];
     }
 
     @Benchmark
-    public void testCreateEmptySession() {
+    public void test() {
         A a = new A( -1 );
         FactHandle aFH = kieSession.insert( a );
-        B b = new B( 3 );
-        FactHandle bFH = kieSession.insert( b );
-        C c = new C( 5 );
-        FactHandle cFH = kieSession.insert( c );
-        D d = new D( 7 );
-        FactHandle dFH = kieSession.insert( d );
-        E e = new E( 9 );
-        FactHandle eFH = kieSession.insert( e );
+        for (int i = 0; i < factsNr; i++) {
+            bs[i] = new B( rulesNr + 3 );
+            bFHs[i] = kieSession.insert( bs[i] );
+            cs[i] = new C( rulesNr + 5 );
+            cFHs[i] = kieSession.insert( cs[i] );
+            ds[i] = new D( rulesNr + 7 );
+            dFHs[i] = kieSession.insert( ds[i] );
+            if (insertLastJoinItem) {
+                es[i] = new E( rulesNr + 9 );
+                eFHs[i] = kieSession.insert( es[i] );
+            }
+        }
 
         for (int i = 0; i < loopCount; i++) {
             a.setValue( 1 );

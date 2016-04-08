@@ -37,6 +37,12 @@ public class UpdatesOnJoinBenchmark extends AbstractSessionBenchmark {
     @Param({"1", "10", "100"})
     private int factsNr;
 
+    @Param({"true", "false"})
+    private boolean insertLastJoinItem;
+
+    @Param({"true", "false"})
+    private boolean resetA;
+
     private A[] as;
     private B[] bs;
     private C[] cs;
@@ -82,7 +88,7 @@ public class UpdatesOnJoinBenchmark extends AbstractSessionBenchmark {
     }
 
     @Benchmark
-    public void testCreateEmptySession() {
+    public void test() {
         for (int i = 0; i < factsNr; i++) {
             as[i] = new A( rulesNr + 1 );
             aFHs[i] = kieSession.insert( as[i] );
@@ -92,8 +98,10 @@ public class UpdatesOnJoinBenchmark extends AbstractSessionBenchmark {
             cFHs[i] = kieSession.insert( cs[i] );
             ds[i] = new D( rulesNr + 7 );
             dFHs[i] = kieSession.insert( ds[i] );
-            es[i] = new E( rulesNr + 9 );
-            eFHs[i] = kieSession.insert( es[i] );
+            if (insertLastJoinItem) {
+                es[i] = new E( rulesNr + 9 );
+                eFHs[i] = kieSession.insert( es[i] );
+            }
         }
 
         for (int i = 0; i < loopCount; i++) {
@@ -106,8 +114,16 @@ public class UpdatesOnJoinBenchmark extends AbstractSessionBenchmark {
                 kieSession.update( cFHs[j], cs[j] );
                 ds[j].setValue( ds[j].getValue() + 1 );
                 kieSession.update( dFHs[j], ds[j] );
-                es[j].setValue( es[j].getValue() + 1 );
-                kieSession.update( eFHs[j], es[j] );
+                if (insertLastJoinItem) {
+                    es[j].setValue( es[j].getValue() + 1 );
+                    kieSession.update( eFHs[j], es[j] );
+                }
+            }
+            for (int j = 0; j < factsNr; j++) {
+                if ( resetA ) {
+                    as[j].setValue( -1 );
+                    kieSession.update( aFHs[j], as[j] );
+                }
             }
         }
 
