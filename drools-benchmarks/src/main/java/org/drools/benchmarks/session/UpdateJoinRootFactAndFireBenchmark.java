@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.session;
 
+import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
 import org.drools.benchmarks.domain.C;
@@ -27,7 +28,7 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
-public class UpdateJoinRootFactAndFireBenchmark extends AbstractSessionBenchmark {
+public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
 
     @Param({"10", "100", "1000"})
     private int loopCount;

@@ -13,9 +13,11 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.session;
+package org.drools.benchmarks.common;
 
-import org.drools.benchmarks.util.TestUtil;
+import java.util.concurrent.TimeUnit;
+
+import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
@@ -31,14 +33,12 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
-import java.util.concurrent.TimeUnit;
-
 @BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
 @Warmup(iterations = 30)
 @Measurement(iterations = 20)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-public abstract class AbstractSessionBenchmark {
+public abstract class AbstractBenchmark {
 
     protected KieBase kieBase;
     protected KieSession kieSession;

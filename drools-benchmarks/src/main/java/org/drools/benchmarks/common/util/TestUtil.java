@@ -14,7 +14,7 @@
  */
 
 
-package org.drools.benchmarks.util;
+package org.drools.benchmarks.common.util;
 
 import org.kie.api.KieBaseConfiguration;
 import org.kie.internal.KnowledgeBaseFactory;

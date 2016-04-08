@@ -15,13 +15,14 @@
 
 package org.drools.benchmarks.session;
 
+import org.drools.benchmarks.common.AbstractBenchmark;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
 @Warmup(iterations = 100)
 @Measurement(iterations = 100)
-public abstract class AbstractEmptySessionBenchmark extends AbstractSessionBenchmark {
+public abstract class AbstractEmptySessionBenchmark extends AbstractBenchmark {
 
     @Setup
     @Override
