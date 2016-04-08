@@ -19,19 +19,22 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
+import org.drools.benchmarks.domain.C;
+import org.drools.benchmarks.domain.D;
+import org.drools.benchmarks.domain.E;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
-public class RuleUnlikingBenchmark extends AbstractBenchmark {
+public class SegmentPropagationBenchmark extends AbstractBenchmark {
 
     @Param({"10", "100", "1000"})
     private int loopCount;
 
     @Param({"1", "10", "100"})
-    private int rulesNr;
+    private int treesNr;
 
     @Param({"1", "10", "100"})
     private int factsNr;
@@ -42,10 +45,23 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
-        for ( int i = 0; i < rulesNr; i++ ) {
-            sb.append( "rule R" + i + " when\n" +
+        for ( int i = 0; i < treesNr; i++ ) {
+            sb.append( "rule R" + i + "C when\n" +
                        "  A( $a : value > " + i + ")\n" +
                        "  B( $b : value > $a)\n" +
+                       "  C( value > $b)\n" +
+                       "then\n" +
+                       "end\n" );
+            sb.append( "rule R" + i + "D when\n" +
+                       "  A( $a : value > " + i + ")\n" +
+                       "  B( $b : value > $a)\n" +
+                       "  D( value > $b)\n" +
+                       "then\n" +
+                       "end\n" );
+            sb.append( "rule R" + i + "E when\n" +
+                       "  A( $a : value > " + i + ")\n" +
+                       "  B( $b : value > $a)\n" +
+                       "  E( value > $b)\n" +
                        "then\n" +
                        "end\n" );
         }
@@ -58,9 +74,12 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
     public void setup() {
         createKieSession();
 
-        aFH = kieSession.insert( new A( rulesNr + 1 ) );
+        aFH = kieSession.insert( new A( treesNr + 1 ) );
         for ( int i = 0; i < factsNr; i++ ) {
-            kieSession.insert( new B( rulesNr + 3 ) );
+            kieSession.insert( new B( treesNr + 3 ) );
+            kieSession.insert( new C( treesNr + 5 ) );
+            kieSession.insert( new D( treesNr + 7 ) );
+            kieSession.insert( new E( treesNr + 9 ) );
         }
 
         kieSession.fireAllRules();
@@ -71,7 +90,7 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
         for (int i = 0; i < loopCount; i++) {
             kieSession.delete( aFH );
             kieSession.fireAllRules();
-            kieSession.insert( new A( rulesNr + 1 ) );
+            kieSession.insert( new A( treesNr + 1 ) );
             kieSession.fireAllRules();
         }
     }

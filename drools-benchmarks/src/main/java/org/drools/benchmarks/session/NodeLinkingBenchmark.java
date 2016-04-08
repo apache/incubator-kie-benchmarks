@@ -17,7 +17,6 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -25,7 +24,7 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
-public class RuleUnlikingBenchmark extends AbstractBenchmark {
+public class NodeLinkingBenchmark extends AbstractBenchmark {
 
     @Param({"10", "100", "1000"})
     private int loopCount;
@@ -36,8 +35,6 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
     @Param({"1", "10", "100"})
     private int factsNr;
 
-    private FactHandle aFH;
-
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
@@ -46,6 +43,9 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
             sb.append( "rule R" + i + " when\n" +
                        "  A( $a : value > " + i + ")\n" +
                        "  B( $b : value > $a)\n" +
+                       "  C( $c : value > $b)\n" +
+                       "  D( $d : value > $c)\n" +
+                       "  E( $e : value > $d)\n" +
                        "then\n" +
                        "end\n" );
         }
@@ -57,21 +57,14 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
     @Override
     public void setup() {
         createKieSession();
-
-        aFH = kieSession.insert( new A( rulesNr + 1 ) );
-        for ( int i = 0; i < factsNr; i++ ) {
-            kieSession.insert( new B( rulesNr + 3 ) );
-        }
-
-        kieSession.fireAllRules();
     }
 
     @Benchmark
     public void test() {
         for (int i = 0; i < loopCount; i++) {
-            kieSession.delete( aFH );
+            FactHandle bFH = kieSession.insert( new B( 1 ) );
             kieSession.fireAllRules();
-            kieSession.insert( new A( rulesNr + 1 ) );
+            kieSession.delete( bFH );
             kieSession.fireAllRules();
         }
     }
