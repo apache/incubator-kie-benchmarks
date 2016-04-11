@@ -29,13 +29,13 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
 
     private static final String RULENAME_PREFIX = "AccountBalance";
 
-    @Param({"2", "10", "100"})
+    @Param({"2", "6", "10"})
     private int rulesNr;
 
-    @Param({"1", "10", "100"})
+    @Param({"1", "6", "10"})
     private int factsNr;
 
-    private Set<Account> accounts = new HashSet<>();
+    private Set<Account> accounts;
 
     @Setup
     public void setupKieBase() {
@@ -58,12 +58,12 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
         }
 
         createKieBaseFromDrl(sb.toString());
-        generateFacts();
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
+        generateFacts();
         createKieSession();
     }
 
@@ -76,6 +76,7 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
     }
 
     private void generateFacts() {
+        accounts = new HashSet<>();
         for (int i = 1; i <= factsNr; i++) {
             final Account account = new Account();
             account.setBalance(i * 10000);

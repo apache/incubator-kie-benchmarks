@@ -33,10 +33,10 @@ public class SegmentPropagationBenchmark extends AbstractBenchmark {
     @Param({"10", "100", "1000"})
     private int loopCount;
 
-    @Param({"1", "10", "100"})
+    @Param({"1", "5", "10"})
     private int treesNr;
 
-    @Param({"1", "10", "100"})
+    @Param({"1", "5", "10"})
     private int factsNr;
 
     private FactHandle aFH;
