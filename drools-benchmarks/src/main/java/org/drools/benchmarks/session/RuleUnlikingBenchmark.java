@@ -71,7 +71,7 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
         for (int i = 0; i < loopCount; i++) {
             kieSession.delete( aFH );
             kieSession.fireAllRules();
-            kieSession.insert( new A( rulesNr + 1 ) );
+            aFH = kieSession.insert( new A( rulesNr + 1 ) );
             kieSession.fireAllRules();
         }
     }
