@@ -29,13 +29,13 @@ import org.openjdk.jmh.annotations.Setup;
 
 public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
-    @Param({"10", "100", "1000"})
+    @Param({"1", "10", "100"})
     private int loopCount;
 
-    @Param({"1", "10", "100"})
+    @Param({"1", "4", "16"})
     private int rulesNr;
 
-    @Param({"1", "10", "100"})
+    @Param({"1", "4", "16"})
     private int factsNr;
 
     @Param({"true", "false"})

@@ -29,10 +29,10 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
 
     private static final String RULENAME_PREFIX = "AccountBalance";
 
-    @Param({"2", "6", "10"})
+    @Param({"1", "4", "16"})
     private int rulesNr;
 
-    @Param({"1", "6", "10"})
+    @Param({"1", "4", "16"})
     private int factsNr;
 
     private Set<Account> accounts;
@@ -41,7 +41,10 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
-        final int rulesNumber = rulesNr / 2;
+        int rulesNumber = rulesNr / 2;
+        if (rulesNumber == 0) {
+            rulesNumber = 1;
+        }
         for (int i = 1; i <= rulesNumber; i = i + 2) {
 
             sb.append(" rule " + RULENAME_PREFIX + i + "\n" +
