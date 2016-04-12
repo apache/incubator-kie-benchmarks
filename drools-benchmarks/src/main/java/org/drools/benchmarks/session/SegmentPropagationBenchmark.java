@@ -39,6 +39,9 @@ public class SegmentPropagationBenchmark extends AbstractBenchmark {
     @Param({"1", "4", "16"})
     private int factsNr;
 
+    @Param({"true", "false"})
+    private boolean rulelinked;
+
     private FactHandle aFH;
 
     @Setup
@@ -77,9 +80,11 @@ public class SegmentPropagationBenchmark extends AbstractBenchmark {
         aFH = kieSession.insert( new A( treesNr + 1 ) );
         for ( int i = 0; i < factsNr; i++ ) {
             kieSession.insert( new B( treesNr + 3 ) );
-            kieSession.insert( new C( treesNr + 5 ) );
-            kieSession.insert( new D( treesNr + 7 ) );
-            kieSession.insert( new E( treesNr + 9 ) );
+            if (rulelinked) {
+                kieSession.insert( new C( treesNr + 5 ) );
+                kieSession.insert( new D( treesNr + 7 ) );
+                kieSession.insert( new E( treesNr + 9 ) );
+            }
         }
 
         kieSession.fireAllRules();
