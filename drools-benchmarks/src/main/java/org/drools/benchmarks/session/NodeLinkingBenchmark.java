@@ -24,6 +24,11 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ * This benchmark start from an empty working memory and inserts a single fact in an
+ * insert/fire/delete/fire loop, so this is intended to measure the cost of the
+ * linking/unlinking of a single node.
+ */
 public class NodeLinkingBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})

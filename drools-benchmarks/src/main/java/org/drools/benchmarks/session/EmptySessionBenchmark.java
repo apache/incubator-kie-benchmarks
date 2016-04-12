@@ -17,6 +17,9 @@ package org.drools.benchmarks.session;
 
 import org.openjdk.jmh.annotations.Benchmark;
 
+/**
+ * Benchmarks the creation of a ksession from an empty kbase
+ */
 public class EmptySessionBenchmark extends AbstractEmptySessionBenchmark {
 
     @Benchmark

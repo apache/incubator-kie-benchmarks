@@ -28,6 +28,12 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ * In this benchmark only the first rule (with higher salience) fires, and when it happens
+ * its consequence changes the value of the join chain root fact so that no other rule can fire.
+ * This benchmark is then intended to show the advantages of phreak's laziness that completely
+ * avoids the evaluation of rules that cannot fire.
+ */
 public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})

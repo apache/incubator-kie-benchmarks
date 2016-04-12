@@ -16,11 +16,10 @@
 package org.drools.benchmarks.session;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.Warmup;
 
+/**
+ * Benchmarks the creation of a stateless ksession from an empty kbase
+ */
 public class EmptyStatelessSessionBenchmark extends AbstractEmptySessionBenchmark {
 
     @Benchmark

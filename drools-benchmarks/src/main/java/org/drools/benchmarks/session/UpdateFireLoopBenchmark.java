@@ -25,6 +25,9 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ *
+ */
 public class UpdateFireLoopBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})

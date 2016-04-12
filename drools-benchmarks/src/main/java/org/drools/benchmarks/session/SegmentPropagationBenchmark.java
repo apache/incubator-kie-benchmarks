@@ -28,6 +28,12 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ * This benchmark has a twofold purpose:
+ * - when rulelinked is true it measures the cost of segment propagation on 2 peers
+ * - when rulelinked is false the first segment is linked, but the whole rule isn't
+ *   so this measures the cost of a segment linking/unlinking.
+ */
 public class SegmentPropagationBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})

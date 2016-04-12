@@ -19,6 +19,9 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ * Benchmarks firing on a ksession created from an empty kbase
+ */
 public class EmptySessionFireBenchmark extends AbstractEmptySessionBenchmark {
 
     @Setup(Level.Iteration)

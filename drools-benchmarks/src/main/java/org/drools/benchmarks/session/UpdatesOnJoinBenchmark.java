@@ -27,6 +27,10 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ * This benchmark updates multiple times all the facts of a long join chain, but fires
+ * only at the end of the update loop.
+ */
 public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})

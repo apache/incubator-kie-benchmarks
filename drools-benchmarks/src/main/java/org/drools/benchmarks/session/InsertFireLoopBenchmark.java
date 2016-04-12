@@ -25,6 +25,9 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ * Inserts facts and fires at each insertion causing the activation of all rules.
+ */
 public class InsertFireLoopBenchmark extends AbstractBenchmark {
 
     @Param({"1", "4", "16"})

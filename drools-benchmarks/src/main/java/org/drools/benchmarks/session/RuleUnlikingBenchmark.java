@@ -25,6 +25,10 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
+/**
+ * Initially all rules are totally linked, so the remove/fire/insert/fire loop causes the
+ * linking/unlinking of the whole rule.
+ */
 public class RuleUnlikingBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})
