@@ -16,6 +16,7 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.util.TestUtil;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
 import org.drools.benchmarks.domain.C;
@@ -33,20 +34,22 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
-    @Param({"1", "10", "100"})
+    @Param({"1"})
     private int loopCount;
 
-    @Param({"1", "4", "16"})
+    @Param({"16"})
     private int rulesNr;
 
-    @Param({"1", "4", "16"})
+    @Param({"16"})
     private int factsNr;
 
-    @Param({"true", "false"})
+    @Param({"true"})
     private boolean insertLastJoinItem;
 
-    @Param({"true", "false"})
+    @Param({"false"})
     private boolean resetA;
+
+    private boolean isSmokeTestsRun;
 
     private A[] as;
     private B[] bs;
@@ -62,17 +65,19 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        StringBuilder sb = new StringBuilder();
+        isSmokeTestsRun = TestUtil.isSmokeTestsRun();
+        final StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
         for (int i = 0; i < rulesNr; i++) {
             sb.append( "rule R" + i + " when\n" +
                     "  A( $a : value > " + i + ")\n" +
                     "  B( $b : value > $a)\n" +
                     "  C( $c : value > $b)\n" +
-                    "  D( $d : value > $c)\n" +
-                    "  E( $e : value > $d)\n" +
-                    "then\n" +
-                    "end\n" );
+                    "  D( $d : value > $c)\n");
+            if (!isSmokeTestsRun) {
+                sb.append("  E( $e : value > $d)\n");
+            }
+            sb.append(" then\n" + "end\n");
         }
 
         createKieBaseFromDrl(sb.toString());
@@ -87,13 +92,16 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
         bs = new B[factsNr];
         cs = new C[factsNr];
         ds = new D[factsNr];
-        es = new E[factsNr];
 
         aFHs = new FactHandle[factsNr];
         bFHs = new FactHandle[factsNr];
         cFHs = new FactHandle[factsNr];
         dFHs = new FactHandle[factsNr];
-        eFHs = new FactHandle[factsNr];
+
+        if (!isSmokeTestsRun) {
+            es = new E[factsNr];
+            eFHs = new FactHandle[factsNr];
+        }
     }
 
     @Benchmark
@@ -105,11 +113,19 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
             bFHs[i] = kieSession.insert( bs[i] );
             cs[i] = new C( rulesNr + 5 );
             cFHs[i] = kieSession.insert( cs[i] );
-            ds[i] = new D( rulesNr + 7 );
-            dFHs[i] = kieSession.insert( ds[i] );
-            if (insertLastJoinItem) {
-                es[i] = new E( rulesNr + 9 );
-                eFHs[i] = kieSession.insert( es[i] );
+
+            if (isSmokeTestsRun) {
+                if (insertLastJoinItem) {
+                    ds[i] = new D( rulesNr + 7 );
+                    dFHs[i] = kieSession.insert( ds[i] );
+                }
+            } else {
+                ds[i] = new D( rulesNr + 7 );
+                dFHs[i] = kieSession.insert( ds[i] );
+                if (insertLastJoinItem) {
+                    es[i] = new E( rulesNr + 9 );
+                    eFHs[i] = kieSession.insert( es[i] );
+                }
             }
         }
 
@@ -121,11 +137,19 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
                 kieSession.update( bFHs[j], bs[j] );
                 cs[j].setValue( cs[j].getValue() + 1 );
                 kieSession.update( cFHs[j], cs[j] );
-                ds[j].setValue( ds[j].getValue() + 1 );
-                kieSession.update( dFHs[j], ds[j] );
-                if (insertLastJoinItem) {
-                    es[j].setValue( es[j].getValue() + 1 );
-                    kieSession.update( eFHs[j], es[j] );
+
+                if (isSmokeTestsRun) {
+                    if (insertLastJoinItem) {
+                        ds[j].setValue( ds[j].getValue() + 1 );
+                        kieSession.update( dFHs[j], ds[j] );
+                    }
+                } else {
+                    ds[j].setValue( ds[j].getValue() + 1 );
+                    kieSession.update( dFHs[j], ds[j] );
+                    if (insertLastJoinItem) {
+                        es[j].setValue( es[j].getValue() + 1 );
+                        kieSession.update( eFHs[j], es[j] );
+                    }
                 }
             }
             for (int j = 0; j < factsNr; j++) {

@@ -22,8 +22,12 @@ import org.kie.internal.builder.conf.RuleEngineOption;
 
 public final class TestUtil {
 
+    public static boolean isSmokeTestsRun() {
+        return Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_SMOKE_TESTS));
+    }
+
     public static boolean useReteoo() {
-        return "reteoo".equals(System.getProperty("engine.type"));
+        return RuleEngineOption.RETEOO.toString().equals(System.getProperty(Constants.PROP_KEY_ENGINE_TYPE));
     }
 
     public static KieBaseConfiguration getKieBaseConfiguration() {
