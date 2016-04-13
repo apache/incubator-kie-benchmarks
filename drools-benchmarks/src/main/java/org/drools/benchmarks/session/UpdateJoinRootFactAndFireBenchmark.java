@@ -50,27 +50,31 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
         sb.append( "rule R0 salience 10 when\n" +
                 "  $factA : A( $a : value > 0)\n" +
                 "  B( $b : value > $a)\n" +
                 "  C( $c : value > $b)\n" +
-                "  D( $d : value > $c)\n" +
-                "  E( $e : value > $d)\n" +
-                "then\n" +
+                "  D( $d : value > $c)\n");
+        if (!isSmokeTestsRun) {
+            sb.append("  E( $e : value > $d)\n");
+        }
+        sb.append(" then\n" +
                 "  modify( $factA ) { setValue(-1) }; \n" +
-                "end\n" );
+                " end\n" );
 
         for (int i = 1; i < rulesNr; i++) {
             sb.append( "rule R" + i + " when\n" +
                     "  A( $a : value > " + i + ")\n" +
                     "  B( $b : value > $a)\n" +
                     "  C( $c : value > $b)\n" +
-                    "  D( $d : value > $c)\n" +
-                    "  E( $e : value > $d)\n" +
-                    "then\n" +
-                    "end\n" );
+                    "  D( $d : value > $c)\n");
+            if (!isSmokeTestsRun) {
+                sb.append("  E( $e : value > $d)\n");
+            }
+            sb.append(" then\n" +
+                    " end\n");
         }
 
         createKieBaseFromDrl(sb.toString());
@@ -89,9 +93,16 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
         for (int i = 0; i < factsNr; i++) {
             kieSession.insert( new B( rulesNr + 3 ) );
             kieSession.insert( new C( rulesNr + 5 ) );
-            kieSession.insert( new D( rulesNr + 7 ) );
-            if (insertLastJoinItem) {
-                kieSession.insert( new E( rulesNr + 9 ) );
+
+            if (isSmokeTestsRun) {
+                if (insertLastJoinItem) {
+                    kieSession.insert( new D( rulesNr + 7 ) );
+                }
+            } else {
+                kieSession.insert( new D( rulesNr + 7 ) );
+                if (insertLastJoinItem) {
+                    kieSession.insert( new E( rulesNr + 9 ) );
+                }
             }
         }
 

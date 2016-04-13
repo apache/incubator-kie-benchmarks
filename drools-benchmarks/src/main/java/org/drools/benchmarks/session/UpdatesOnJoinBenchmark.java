@@ -49,8 +49,6 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
     @Param({"true", "false"})
     private boolean resetA;
 
-    private boolean isSmokeTestsRun;
-
     private A[] as;
     private B[] bs;
     private C[] cs;
@@ -65,7 +63,6 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        isSmokeTestsRun = TestUtil.isSmokeTestsRun();
         final StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
         for (int i = 0; i < rulesNr; i++) {
