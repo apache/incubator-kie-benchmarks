@@ -34,19 +34,19 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
-    @Param({"1"})
+    @Param({"1", "10", "100"})
     private int loopCount;
 
-    @Param({"16"})
+    @Param({"1", "4", "16"})
     private int rulesNr;
 
-    @Param({"16"})
+    @Param({"1", "4", "16"})
     private int factsNr;
 
-    @Param({"true"})
+    @Param({"true", "false"})
     private boolean insertLastJoinItem;
 
-    @Param({"false"})
+    @Param({"true", "false"})
     private boolean resetA;
 
     private boolean isSmokeTestsRun;
