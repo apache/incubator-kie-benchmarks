@@ -15,10 +15,10 @@
 
 package org.drools.benchmarks.common;
 
+import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
-import org.kie.api.KieBaseConfiguration;
-import org.kie.api.conf.KieBaseOption;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
@@ -32,8 +32,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
-
-import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
@@ -71,13 +69,8 @@ public abstract class AbstractBenchmark {
         kieBase = new KieHelper().build(TestUtil.getKieBaseConfiguration());
     }
 
-    protected void createKieBaseFromDrl(String drl, KieBaseOption... options) {
-        KieBaseConfiguration conf = TestUtil.getKieBaseConfiguration();
-        if (options != null) {
-            for (KieBaseOption option : options) {
-                conf.setOption(option);
-            }
-        }
-        kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(conf);
+    protected void createKieBaseFromDrl(final String drl) {
+        kieBase = new KieHelper().addContent(drl, ResourceType.DRL)
+                .build(TestUtil.getKieBaseConfiguration());
     }
 }
