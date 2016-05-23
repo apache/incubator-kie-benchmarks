@@ -19,7 +19,9 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
-import org.kie.api.runtime.rule.FactHandle;
+import org.drools.core.impl.StatefulKnowledgeSessionImpl;
+import org.kie.api.conf.EventProcessingOption;
+import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
@@ -30,25 +32,44 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class InsertFireLoopBenchmark extends AbstractBenchmark {
 
-    @Param({"1", "4", "16"})
+    @Param({"3", "9", "27"})
     private int rulesNr;
 
     @Param({"1", "4", "16"})
     private int factsNr;
 
+    @Param({"true", "false"})
+    private boolean multithread;
+
+    @Param({"true", "false"})
+    private boolean async;
+
+    @Param({"true", "false"})
+    private boolean cep;
+
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
+        if (cep) {
+            sb.append( "declare A @role( event ) @timestamp( value ) end\n" +
+                       "declare B @role( event ) @timestamp( value ) end\n" );
+        }
         for ( int i = 0; i < rulesNr; i++ ) {
-            sb.append( "rule R" + i + " when\n" +
-                       "  A( $a : value > " + i + ")\n" +
-                       "  B( $b : value > $a)\n" +
-                       "then\n" +
-                       "end\n" );
+            sb.append( "rule R" + i + " when\n");
+            if (cep) {
+                sb.append( "  $a : A( value > " + i + ")\n" +
+                           "  B( this after $a )\n" );
+            } else {
+                sb.append( "  A( $a : value > " + i + ")\n" +
+                           "  B( $b : value > $a)\n" );
+            }
+            sb.append( "then end\n" );
         }
 
-        createKieBaseFromDrl( sb.toString() );
+        createKieBaseFromDrl( sb.toString(),
+                              multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
+                              cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
     }
 
     @Setup(Level.Iteration)
@@ -59,10 +80,19 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
 
     @Benchmark
     public void test() {
+        StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
         A a = new A( rulesNr + 1 );
-        FactHandle aFH = kieSession.insert( a );
+        if (async) {
+            session.insertAsync( a );
+        } else {
+            session.insert( a );
+        }
         for ( int i = 0; i < factsNr; i++ ) {
-            kieSession.insert( new B( rulesNr + 3 ) );
+            if (async) {
+                session.insertAsync( new B( rulesNr + 3 ) );
+            } else {
+                session.insert( new B( rulesNr + 3 ) );
+            }
             kieSession.fireAllRules();
         }
     }
