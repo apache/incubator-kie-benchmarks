@@ -19,6 +19,8 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
+import org.drools.benchmarks.domain.C;
+import org.drools.benchmarks.domain.D;
 import org.drools.core.impl.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
@@ -47,6 +49,12 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
     @Param({"true", "false"})
     private boolean cep;
 
+    @Param({"1", "2", "3"})
+    private int joinsNr;
+
+    @Param({"true", "false"})
+    private boolean batchFire;
+
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
@@ -54,15 +62,33 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
         if (cep) {
             sb.append( "declare A @role( event ) @timestamp( value ) end\n" +
                        "declare B @role( event ) @timestamp( value ) end\n" );
+            if (joinsNr > 1) {
+                sb.append( "declare C @role( event ) @timestamp( value ) end\n" );
+            }
+            if (joinsNr > 2) {
+                sb.append( "declare D @role( event ) @timestamp( value ) end\n" );
+            }
         }
         for ( int i = 0; i < rulesNr; i++ ) {
             sb.append( "rule R" + i + " when\n");
             if (cep) {
                 sb.append( "  $a : A( value > " + i + ")\n" +
-                           "  B( this after $a )\n" );
+                           "  $b : B( this after $a )\n" );
+                if (joinsNr > 1) {
+                    sb.append( "  $c : C( this after $b )\n" );
+                }
+                if (joinsNr > 2) {
+                    sb.append( "  $d : D( this after $c )\n" );
+                }
             } else {
                 sb.append( "  A( $a : value > " + i + ")\n" +
                            "  B( $b : value > $a)\n" );
+                if (joinsNr > 1) {
+                    sb.append( "  C( $c : value > $b )\n" );
+                }
+                if (joinsNr > 2) {
+                    sb.append( "  D( $d : value > $c )\n" );
+                }
             }
             sb.append( "then end\n" );
         }
@@ -89,10 +115,27 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
         }
         for ( int i = 0; i < factsNr; i++ ) {
             if (async) {
-                session.insertAsync( new B( rulesNr + 3 ) );
+                session.insertAsync( new B( rulesNr + i + 3 ) );
+                if (joinsNr > 1) {
+                    session.insertAsync( new C( rulesNr + factsNr + i + 3 ) );
+                }
+                if (joinsNr > 2) {
+                    session.insertAsync( new D( rulesNr + factsNr*2 + i + 3 ) );
+                }
             } else {
-                session.insert( new B( rulesNr + 3 ) );
+                session.insert( new B( rulesNr + i + 3 ) );
+                if (joinsNr > 1) {
+                    session.insert( new C( rulesNr + factsNr + i + 3 ) );
+                }
+                if (joinsNr > 2) {
+                    session.insert( new D( rulesNr + factsNr*2 + i + 3 ) );
+                }
             }
+            if (!batchFire) {
+                kieSession.fireAllRules();
+            }
+        }
+        if (batchFire) {
             kieSession.fireAllRules();
         }
     }
