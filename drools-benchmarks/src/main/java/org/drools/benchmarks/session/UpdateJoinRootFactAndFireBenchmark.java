@@ -17,11 +17,9 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.domain.A;
-import org.drools.benchmarks.domain.B;
-import org.drools.benchmarks.domain.C;
-import org.drools.benchmarks.domain.D;
-import org.drools.benchmarks.domain.E;
+import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.providers.RulesWithJoins;
+import org.drools.benchmarks.domain.*;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -52,7 +50,7 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         final StringBuilder sb = new StringBuilder();
         sb.append( "import org.drools.benchmarks.domain.*;\n" );
-        sb.append( "rule R0 salience 10 when\n" +
+        sb.append( "rule R salience 10 when\n" +
                 "  $factA : A( $a : value > 0)\n" +
                 "  B( $b : value > $a)\n" +
                 "  C( $c : value > $b)\n" +
@@ -64,18 +62,9 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
                 "  modify( $factA ) { setValue(-1) }; \n" +
                 " end\n" );
 
-        for (int i = 1; i < rulesNr; i++) {
-            sb.append( "rule R" + i + " when\n" +
-                    "  A( $a : value > " + i + ")\n" +
-                    "  B( $b : value > $a)\n" +
-                    "  C( $c : value > $b)\n" +
-                    "  D( $d : value > $c)\n");
-            if (!isSmokeTestsRun) {
-                sb.append("  E( $e : value > $d)\n");
-            }
-            sb.append(" then\n" +
-                    " end\n");
-        }
+        final int numberOfJoins = isSmokeTestsRun ? 3 : 4;
+        final DrlProvider drlProvider = new RulesWithJoins(numberOfJoins, false, false);
+        sb.append(drlProvider.getDrl(rulesNr - 1));
 
         createKieBaseFromDrl(sb.toString());
     }

@@ -17,6 +17,8 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.providers.RulesWithJoins;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
 import org.kie.api.runtime.rule.FactHandle;
@@ -44,17 +46,8 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        StringBuilder sb = new StringBuilder();
-        sb.append( "import org.drools.benchmarks.domain.*;\n" );
-        for ( int i = 0; i < rulesNr; i++ ) {
-            sb.append( "rule R" + i + " when\n" +
-                       "  A( $a : value > " + i + ")\n" +
-                       "  B( $b : value > $a)\n" +
-                       "then\n" +
-                       "end\n" );
-        }
-
-        createKieBaseFromDrl( sb.toString() );
+        final DrlProvider drlProvider = new RulesWithJoins(1, false, true);
+        createKieBaseFromDrl( drlProvider.getDrl(rulesNr) );
     }
 
     @Setup(Level.Iteration)
