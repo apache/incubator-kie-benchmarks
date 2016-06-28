@@ -17,22 +17,25 @@ package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.Event;
+import org.drools.benchmarks.common.TemporalOperator;
 
 /**
  * Provides rule(s) with after operator.
  */
-public class AfterRulesProvider implements DrlProvider {
+public class CepRulesProvider implements DrlProvider {
 
     private Class<? extends Event> firstEventClass;
     private Class<? extends Event> secondEventClass;
 
+    private TemporalOperator temporalOperator;
     private String temporalDistanceStart;
     private String temporalDistanceEnd;
 
-    public AfterRulesProvider(final Class<? extends Event> firstEventClass, final Class<? extends Event> secondEventClass,
-            final String temporalDistanceStart, final String temporalDistanceEnd) {
+    public CepRulesProvider(final Class<? extends Event> firstEventClass, final Class<? extends Event> secondEventClass,
+            final TemporalOperator temporalOperator, final String temporalDistanceStart, final String temporalDistanceEnd) {
         this.firstEventClass = firstEventClass;
         this.secondEventClass = secondEventClass;
+        this.temporalOperator = temporalOperator;
         this.temporalDistanceStart = temporalDistanceStart;
         this.temporalDistanceEnd = temporalDistanceEnd;
     }
@@ -57,7 +60,8 @@ public class AfterRulesProvider implements DrlProvider {
         for (int i = 1; i <= numberOfRules; i++) {
             drlBuilder.append(" rule R" + i + " when\n");
             drlBuilder.append("   $event1: " + firstEventClass.getName() + "()\n");
-            drlBuilder.append("   $event2: " + secondEventClass.getName() + "(this after" + temporalDistanceString + " $event1)\n");
+            drlBuilder.append("   $event2: " + secondEventClass.getName()
+                    + "(this " + temporalOperator + " " + temporalDistanceString + " $event1)\n");
             drlBuilder.append( "then end\n" );
         }
 

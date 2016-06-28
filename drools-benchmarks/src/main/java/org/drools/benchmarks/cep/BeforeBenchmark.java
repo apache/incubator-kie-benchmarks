@@ -3,8 +3,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,8 +22,8 @@ import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.Event;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.TemporalOperator;
-import org.drools.benchmarks.common.providers.CepRulesProvider;
 import org.drools.benchmarks.common.providers.BasicEventProvider;
+import org.drools.benchmarks.common.providers.CepRulesProvider;
 import org.drools.benchmarks.domain.EventA;
 import org.drools.benchmarks.domain.EventB;
 import org.kie.api.conf.EventProcessingOption;
@@ -33,9 +34,9 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
 /**
- * Benchmarks "after" CEP operator.
+ * Benchmarks "before" CEP operator.
  */
-public class AfterBenchmark extends AbstractCEPBenchmark {
+public class BeforeBenchmark extends AbstractCEPBenchmark {
 
     @Param({"1", "4", "16"})
     private int rulesNr;
@@ -48,7 +49,7 @@ public class AfterBenchmark extends AbstractCEPBenchmark {
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new CepRulesProvider(EventA.class, EventB.class, TemporalOperator.AFTER, "1", "10");
+        final DrlProvider drlProvider = new CepRulesProvider(EventA.class, EventB.class, TemporalOperator.BEFORE, "1", "10");
         createKieBaseFromDrl(drlProvider.getDrl(rulesNr), EventProcessingOption.STREAM);
     }
 
@@ -57,13 +58,13 @@ public class AfterBenchmark extends AbstractCEPBenchmark {
     public void setup() throws ProviderException {
         final BasicEventProvider eventProvider = new BasicEventProvider();
         events = new TreeSet<Event>();
-        events.addAll(eventProvider.getEvents(EventA.class, eventsNumber / 2, 2, 100, 0));
-        events.addAll(eventProvider.getEvents(EventB.class, eventsNumber / 2, 5, 100, 0));
+        events.addAll(eventProvider.getEvents(EventB.class, eventsNumber / 2, 2, 100, 0));
+        events.addAll(eventProvider.getEvents(EventA.class, eventsNumber / 2, 5, 100, 0));
         createKieSession(ClockTypeOption.get("pseudo"));
     }
 
     @Benchmark
-    public int testAfterOperator() {
+    public int testBeforeOperator() {
         return insertEventsAndFire(events);
     }
 }
