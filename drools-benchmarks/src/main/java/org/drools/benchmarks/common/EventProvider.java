@@ -13,13 +13,16 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.common;
 
-import java.util.concurrent.TimeUnit;
+import java.util.SortedSet;
 
-public class EventB extends AbstractEvent {
+public interface EventProvider {
 
-    public EventB(final int id, final long timeValue, final TimeUnit timeUnit, final long duration) {
-        super(id, timeValue, timeUnit, duration);
-    }
+    <T extends Event> SortedSet<T> getEvents(Class<T> eventClass, int eventsCount, long startTime, long timeIncrement)
+            throws ProviderException;
+
+    <T extends Event> SortedSet<T> getEvents(Class<T> eventClass, int eventsCount,
+            long startTime, long timeIncrement, long duration) throws ProviderException;
+
 }

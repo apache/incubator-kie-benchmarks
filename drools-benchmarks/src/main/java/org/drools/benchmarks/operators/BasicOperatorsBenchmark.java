@@ -79,7 +79,7 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
     }
 
     private void generateFacts() {
-        accounts = new HashSet<>();
+        accounts = new HashSet<Account>();
         for (int i = 1; i <= factsNr; i++) {
             final Account account = new Account();
             account.setBalance(i * 10000);

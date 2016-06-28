@@ -16,12 +16,18 @@
 package org.drools.benchmarks.common;
 
 import java.util.concurrent.TimeUnit;
-
 import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
+import org.kie.api.KieBaseConfiguration;
+import org.kie.api.KieServices;
+import org.kie.api.conf.KieBaseOption;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.StatelessKieSession;
+import org.kie.api.runtime.conf.KieSessionOption;
+import org.kie.internal.KnowledgeBaseFactory;
+import org.kie.internal.builder.conf.RuleEngineOption;
 import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -46,7 +52,7 @@ public abstract class AbstractBenchmark {
 
     protected boolean isSmokeTestsRun = TestUtil.isSmokeTestsRun();
 
-    public abstract void setup();
+    public abstract void setup() throws ProviderException;
 
     @TearDown(Level.Iteration)
     public void tearDown() {
@@ -61,16 +67,53 @@ public abstract class AbstractBenchmark {
         kieSession = kieBase.newKieSession();
     }
 
+    protected void createKieSession(final KieSessionOption... kieSessionOptions) {
+        kieSession = kieBase.newKieSession(getKieSessionConfiguration(kieSessionOptions), null);
+    }
+
     protected void createStatelessKieSession() {
         statelessKieSession = kieBase.newStatelessKieSession();
     }
 
     protected void createEmptyKieBase() {
-        kieBase = new KieHelper().build(TestUtil.getKieBaseConfiguration());
+        kieBase = new KieHelper().build(getKieBaseConfiguration());
     }
 
     protected void createKieBaseFromDrl(final String drl) {
-        kieBase = new KieHelper().addContent(drl, ResourceType.DRL)
-                .build(TestUtil.getKieBaseConfiguration());
+        createKieBaseFromDrl(drl, getKieBaseConfiguration());
+    }
+
+    protected void createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
+        kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(kieBaseConfiguration);
+    }
+
+    protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
+        kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(getKieBaseConfiguration(kieBaseOptions));
+    }
+
+    private KieBaseConfiguration getKieBaseConfiguration() {
+        final KieBaseConfiguration kieBaseConfiguration = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
+        if (TestUtil.useReteoo()) {
+            kieBaseConfiguration.setOption(RuleEngineOption.RETEOO);
+        } else {
+            kieBaseConfiguration.setOption(RuleEngineOption.PHREAK);
+        }
+        return kieBaseConfiguration;
+    }
+
+    private KieBaseConfiguration getKieBaseConfiguration(final KieBaseOption... kieBaseOptions) {
+        final KieBaseConfiguration kieBaseConfiguration = getKieBaseConfiguration();
+        for (KieBaseOption kieBaseOption : kieBaseOptions) {
+            kieBaseConfiguration.setOption(kieBaseOption);
+        }
+        return kieBaseConfiguration;
+    }
+
+    private KieSessionConfiguration getKieSessionConfiguration(final KieSessionOption... kieSessionOptions) {
+        final KieSessionConfiguration kieSessionConfiguration = KieServices.Factory.get().newKieSessionConfiguration();
+        for (KieSessionOption kieSessionOption : kieSessionOptions) {
+            kieSessionConfiguration.setOption(kieSessionOption);
+        }
+        return kieSessionConfiguration;
     }
 }

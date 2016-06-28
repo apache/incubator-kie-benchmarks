@@ -17,7 +17,7 @@ package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DrlProvider;
-import org.drools.benchmarks.common.providers.RulesWithJoins;
+import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
 import org.drools.benchmarks.domain.C;
@@ -65,7 +65,7 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
     @Setup
     public void setupKieBase() {
         final int numberOfJoins = isSmokeTestsRun ? 3 : 4;
-        final DrlProvider drlProvider = new RulesWithJoins(numberOfJoins, false, true);
+        final DrlProvider drlProvider = new RulesWithJoinsProvider(numberOfJoins, false, true);
         createKieBaseFromDrl(drlProvider.getDrl(rulesNr));
     }
 

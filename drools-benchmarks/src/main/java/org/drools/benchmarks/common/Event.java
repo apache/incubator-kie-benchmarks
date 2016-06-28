@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2016 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,15 @@
  * limitations under the License.
  */
 
+package org.drools.benchmarks.common;
 
-package org.drools.benchmarks.common.util;
+public interface Event {
 
-import org.kie.internal.builder.conf.RuleEngineOption;
+    long getTimeValue();
 
-public final class TestUtil {
+    long getDuration();
 
-    public static boolean isSmokeTestsRun() {
-        return Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_SMOKE_TESTS));
-    }
+    void setTimeValue(long timeValue);
 
-    public static boolean useReteoo() {
-        return RuleEngineOption.RETEOO.toString().equals(System.getProperty(Constants.PROP_KEY_ENGINE_TYPE));
-    }
-
-    private TestUtil() {
-    }
+    void setDuration(long duration);
 }

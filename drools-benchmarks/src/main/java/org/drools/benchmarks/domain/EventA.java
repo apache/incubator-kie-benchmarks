@@ -15,11 +15,50 @@
 
 package org.drools.benchmarks.domain;
 
-import java.util.concurrent.TimeUnit;
+import org.drools.benchmarks.common.Event;
 
-public class EventA extends AbstractEvent {
+public class EventA implements Event, Comparable<EventA> {
 
-    public EventA(final int id, final long timeValue, final TimeUnit timeUnit, final long duration) {
-        super(id, timeValue, timeUnit, duration);
+    private long timeValue;
+    private long duration;
+
+    public EventA() {
+        //
+    }
+
+    @Override
+    public long getTimeValue() {
+        return timeValue;
+    }
+
+    @Override
+    public void setTimeValue(final long timeValue) {
+        this.timeValue = timeValue;
+    }
+
+    @Override
+    public long getDuration() {
+        return duration;
+    }
+
+    @Override
+    public void setDuration(final long duration) {
+        this.duration = duration;
+    }
+
+    @Override
+    public int compareTo(final EventA o) {
+        if (timeValue > o.getTimeValue()) return 1;
+        if (timeValue < o.getTimeValue()) return -1;
+        // time of insertion is same for both events, so does not matter which is first
+        return 1;
+    }
+
+    @Override
+    public String toString() {
+        return "EventA{" +
+                "timeValue=" + timeValue +
+                ", duration=" + duration +
+                '}';
     }
 }

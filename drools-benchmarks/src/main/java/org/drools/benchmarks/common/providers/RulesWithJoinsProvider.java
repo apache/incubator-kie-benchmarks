@@ -21,7 +21,7 @@ import org.drools.benchmarks.domain.A;
 /**
  * Provides rule(s) with simple JoinNodes. Can provide rules with JoinNodes also for event processing.
  */
-public class RulesWithJoins implements DrlProvider {
+public class RulesWithJoinsProvider implements DrlProvider {
 
     private final int numberOfJoins;
     private final boolean withCep;
@@ -35,7 +35,7 @@ public class RulesWithJoins implements DrlProvider {
      * @param withCep True, if rules for event processing should be generated, else false.
      * @param appendDrlHeader True, if DRL header should be appended to provided DRL, else false.
      */
-    public RulesWithJoins(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader) {
+    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader) {
         if (numberOfJoins > 4) {
             throw new IllegalArgumentException(
                     "Unsupported number of joins! Maximal allowed number of joins is 4, actual is " + numberOfJoins);
