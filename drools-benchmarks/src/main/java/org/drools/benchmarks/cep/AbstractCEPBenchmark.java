@@ -23,8 +23,8 @@ import org.drools.core.time.SessionPseudoClock;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 60)
-@Measurement(iterations = 20)
+@Warmup(iterations = 80)
+@Measurement(iterations = 30)
 public abstract class AbstractCEPBenchmark extends AbstractBenchmark {
 
     protected int insertEventsAndFire(final SortedSet<Event> events) {

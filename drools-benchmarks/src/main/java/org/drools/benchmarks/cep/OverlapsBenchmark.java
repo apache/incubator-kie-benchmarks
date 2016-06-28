@@ -65,7 +65,7 @@ public class OverlapsBenchmark extends AbstractCEPBenchmark {
     }
 
     @Benchmark
-    public int testBeforeOperator() {
+    public int testOverlapsOperator() {
         return insertEventsAndFire(events);
     }
 }
