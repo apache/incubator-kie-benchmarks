@@ -38,11 +38,11 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class OverlappedByBenchmark extends AbstractCEPBenchmark {
 
-    @Param({"16"})
+    @Param({"1", "4", "16"})
     private int rulesNr;
 
     // 2 events at start, because 2 events trigger a rule.
-    @Param({"16"})
+    @Param({"2", "4", "16"})
     private int eventsNumber;
 
     private SortedSet<Event> events;
