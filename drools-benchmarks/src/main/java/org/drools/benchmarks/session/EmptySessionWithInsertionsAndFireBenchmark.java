@@ -26,7 +26,7 @@ import java.util.Date;
 public class EmptySessionWithInsertionsAndFireBenchmark extends AbstractEmptySessionBenchmark {
 
     @Benchmark
-    public void testCreateEmptySession() {
+    public int testCreateEmptySession() {
         createKieSession();
         kieSession.insert( "1" );
         kieSession.insert( new Integer(1) );
@@ -38,6 +38,6 @@ public class EmptySessionWithInsertionsAndFireBenchmark extends AbstractEmptySes
         kieSession.insert( Boolean.TRUE );
         kieSession.insert( String.class );
         kieSession.insert( new Date() );
-        kieSession.fireAllRules();
+        return kieSession.fireAllRules();
     }
 }

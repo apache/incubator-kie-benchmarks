@@ -91,7 +91,7 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void test() {
+    public int test() {
         for (int i = 0; i < factsNr; i++) {
             as[i] = new A( rulesNr + 1 );
             aFHs[i] = kieSession.insert( as[i] );
@@ -146,6 +146,6 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
             }
         }
 
-        kieSession.fireAllRules();
+        return kieSession.fireAllRules();
     }
 }
