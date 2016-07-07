@@ -54,7 +54,7 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
     @Benchmark
     public void test(final Blackhole eater) {
         A a = new A( rulesNr + 1 );
-        FactHandle aFH = kieSession.insert( a );
+        eater.consume(kieSession.insert( a ));
         for ( int i = 0; i < factsNr; i++ ) {
             eater.consume(kieSession.insert( new B( rulesNr + 3 ) ));
             eater.consume(kieSession.fireAllRules());
