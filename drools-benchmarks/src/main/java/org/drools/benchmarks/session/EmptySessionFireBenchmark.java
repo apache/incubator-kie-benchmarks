@@ -32,7 +32,7 @@ public class EmptySessionFireBenchmark extends AbstractEmptySessionBenchmark {
     }
 
     @Benchmark
-    public int testCreateEmptySession() {
+    public int testFire() {
         return kieSession.fireAllRules();
     }
 }

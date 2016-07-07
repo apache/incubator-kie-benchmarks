@@ -29,6 +29,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * In this benchmark only the first rule (with higher salience) fires, and when it happens
@@ -80,21 +81,21 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void test() {
+    public void test(final Blackhole eater) {
         A a = new A( -1 );
         FactHandle aFH = kieSession.insert( a );
         for (int i = 0; i < factsNr; i++) {
-            kieSession.insert( new B( rulesNr + 3 ) );
-            kieSession.insert( new C( rulesNr + 5 ) );
+            eater.consume(kieSession.insert( new B( rulesNr + 3 ) ));
+            eater.consume(kieSession.insert( new C( rulesNr + 5 ) ));
 
             if (isSmokeTestsRun) {
                 if (insertLastJoinItem) {
-                    kieSession.insert( new D( rulesNr + 7 ) );
+                    eater.consume(kieSession.insert( new D( rulesNr + 7 ) ));
                 }
             } else {
                 kieSession.insert( new D( rulesNr + 7 ) );
                 if (insertLastJoinItem) {
-                    kieSession.insert( new E( rulesNr + 9 ) );
+                    eater.consume(kieSession.insert( new E( rulesNr + 9 ) ));
                 }
             }
         }
@@ -102,7 +103,7 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
         for (int i = 0; i < loopCount; i++) {
             a.setValue( 1 );
             kieSession.update( aFH, a );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.fireAllRules());
         }
     }
 }

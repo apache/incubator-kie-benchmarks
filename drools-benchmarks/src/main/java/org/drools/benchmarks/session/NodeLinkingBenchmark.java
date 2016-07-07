@@ -25,6 +25,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * This benchmark start from an empty working memory and inserts a single fact in an
@@ -55,12 +56,12 @@ public class NodeLinkingBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void test() {
+    public void test(final Blackhole eater) {
         for (int i = 0; i < loopCount; i++) {
             FactHandle bFH = kieSession.insert( new B( 1 ) );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.fireAllRules());
             kieSession.delete( bFH );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.fireAllRules());
         }
     }
 }

@@ -24,6 +24,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 public class BasicOperatorsBenchmark extends AbstractBenchmark {
 
@@ -71,11 +72,11 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void test() {
+    public int test(final Blackhole eater) {
         for (Account account : accounts) {
-            kieSession.insert(account);
+            eater.consume(kieSession.insert(account));
         }
-        kieSession.fireAllRules();
+        return kieSession.fireAllRules();
     }
 
     private void generateFacts() {

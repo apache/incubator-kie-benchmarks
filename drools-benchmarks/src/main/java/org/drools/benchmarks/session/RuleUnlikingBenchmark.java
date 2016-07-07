@@ -26,6 +26,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Initially all rules are totally linked, so the remove/fire/insert/fire loop causes the
@@ -64,12 +65,12 @@ public class RuleUnlikingBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void test() {
+    public void test(final Blackhole eater) {
         for (int i = 0; i < loopCount; i++) {
             kieSession.delete( aFH );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.fireAllRules());
             aFH = kieSession.insert( new A( rulesNr + 1 ) );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.fireAllRules());
         }
     }
 }

@@ -26,6 +26,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Inserts facts and fires at each insertion causing the activation of all rules.
@@ -51,12 +52,12 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void test() {
+    public void test(final Blackhole eater) {
         A a = new A( rulesNr + 1 );
         FactHandle aFH = kieSession.insert( a );
         for ( int i = 0; i < factsNr; i++ ) {
-            kieSession.insert( new B( rulesNr + 3 ) );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.insert( new B( rulesNr + 3 ) ));
+            eater.consume(kieSession.fireAllRules());
         }
     }
 }

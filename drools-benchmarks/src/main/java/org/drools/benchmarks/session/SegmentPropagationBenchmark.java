@@ -27,6 +27,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * This benchmark has a twofold purpose:
@@ -97,12 +98,12 @@ public class SegmentPropagationBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void test() {
+    public void test(final Blackhole eater) {
         for (int i = 0; i < loopCount; i++) {
             kieSession.delete( aFH );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.fireAllRules());
             aFH = kieSession.insert( new A( treesNr + 1 ) );
-            kieSession.fireAllRules();
+            eater.consume(kieSession.fireAllRules());
         }
     }
 }

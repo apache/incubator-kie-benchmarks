@@ -18,6 +18,7 @@ package org.drools.benchmarks.session;
 import org.openjdk.jmh.annotations.Benchmark;
 
 import java.util.Date;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Benchmarks creation of a ksession from an empty kbase, insertion of 10 facts of 10 different classes
@@ -26,18 +27,18 @@ import java.util.Date;
 public class EmptySessionWithInsertionsAndFireBenchmark extends AbstractEmptySessionBenchmark {
 
     @Benchmark
-    public int testCreateEmptySession() {
+    public int testCreateEmptySession(final Blackhole eater) {
         createKieSession();
-        kieSession.insert( "1" );
-        kieSession.insert( new Integer(1) );
-        kieSession.insert( new Long(1L) );
-        kieSession.insert( new Short((short)1) );
-        kieSession.insert( new Double(1.0) );
-        kieSession.insert( new Float(1.0) );
-        kieSession.insert( new Character('1') );
-        kieSession.insert( Boolean.TRUE );
-        kieSession.insert( String.class );
-        kieSession.insert( new Date() );
+        eater.consume(kieSession.insert( "1" ));
+        eater.consume(kieSession.insert( new Integer(1) ));
+        eater.consume(kieSession.insert( new Long(1L) ));
+        eater.consume(kieSession.insert( new Short((short)1) ));
+        eater.consume(kieSession.insert( new Double(1.0) ));
+        eater.consume(kieSession.insert( new Float(1.0) ));
+        eater.consume(kieSession.insert( new Character('1') ));
+        eater.consume(kieSession.insert( Boolean.TRUE ));
+        eater.consume(kieSession.insert( String.class ));
+        eater.consume(kieSession.insert( new Date() ));
         return kieSession.fireAllRules();
     }
 }
