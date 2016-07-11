@@ -38,19 +38,15 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class BeforeBenchmark extends AbstractCEPBenchmark {
 
-    @Param({"1", "4", "16"})
-    private int rulesNr;
-
-    // 2 events at start, because 2 events trigger a rule.
     @Param({"2", "4", "16"})
-    private int eventsNumber;
+    private int rulesAndEventsNumber;
 
     private SortedSet<Event> events;
 
     @Setup
     public void setupKieBase() {
         final DrlProvider drlProvider = new CepRulesProvider(EventA.class, EventB.class, TemporalOperator.BEFORE, "1", "10");
-        createKieBaseFromDrl(drlProvider.getDrl(rulesNr), EventProcessingOption.STREAM);
+        createKieBaseFromDrl(drlProvider.getDrl(rulesAndEventsNumber), EventProcessingOption.STREAM);
     }
 
     @Setup(Level.Iteration)
@@ -58,8 +54,8 @@ public class BeforeBenchmark extends AbstractCEPBenchmark {
     public void setup() throws ProviderException {
         final BasicEventProvider eventProvider = new BasicEventProvider();
         events = new TreeSet<Event>();
-        events.addAll(eventProvider.getEvents(EventB.class, eventsNumber / 2, 2, 100, 0));
-        events.addAll(eventProvider.getEvents(EventA.class, eventsNumber / 2, 5, 100, 0));
+        events.addAll(eventProvider.getEvents(EventB.class, rulesAndEventsNumber / 2, 2, 100, 0));
+        events.addAll(eventProvider.getEvents(EventA.class, rulesAndEventsNumber / 2, 5, 100, 0));
         createKieSession(ClockTypeOption.get("pseudo"));
     }
 
