@@ -61,7 +61,7 @@ public class CepRulesProvider implements DrlProvider {
             drlBuilder.append(" rule R" + i + " when\n");
             drlBuilder.append("   $event1: " + firstEventClass.getName() + "()\n");
             drlBuilder.append("   $event2: " + secondEventClass.getName()
-                    + "(this " + temporalOperator + " " + temporalDistanceString + " $event1)\n");
+                    + "(this != $event1, this " + temporalOperator + " " + temporalDistanceString + " $event1)\n");
             drlBuilder.append( "then end\n" );
         }
 

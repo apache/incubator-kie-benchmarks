@@ -25,12 +25,15 @@ public enum TemporalOperator {
     BEFORE("before"),
     COINCIDES("coincides"),
     DURING("during"),
+    INCLUDES("includes"),
     OVERLAPS("overlaps"),
     OVERLAPPED_BY("overlappedby"),
     FINISHES("finishes"),
     FINISHED_BY("finishedby"),
     MEETS("meets"),
-    MET_BY("metby");
+    MET_BY("metby"),
+    STARTS("starts"),
+    STARTED_BY("startedby");
 
     private final String stringValue;
 
