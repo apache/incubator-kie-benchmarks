@@ -37,7 +37,7 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class AfterBenchmark extends AbstractCEPBenchmark {
 
-    @Param({"2", "4", "16"})
+    @Param({"2", "8", "16"})
     private int rulesAndEventsNumber;
 
     private SortedSet<Event> events;
@@ -60,6 +60,7 @@ public class AfterBenchmark extends AbstractCEPBenchmark {
 
     @Benchmark
     public int testAfterOperator() {
+        System.out.println(insertEventsAndFire(events));
         return insertEventsAndFire(events);
     }
 }

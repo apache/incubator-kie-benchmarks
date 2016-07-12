@@ -38,7 +38,7 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class OverlapsBenchmark extends AbstractCEPBenchmark {
 
-    @Param({"2", "4", "16"})
+    @Param({"2", "8", "32"})
     private int rulesAndEventsNumber;
 
     private SortedSet<Event> events;
