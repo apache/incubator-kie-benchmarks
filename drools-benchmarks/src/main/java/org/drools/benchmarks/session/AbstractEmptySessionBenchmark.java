@@ -15,13 +15,16 @@
 
 package org.drools.benchmarks.session;
 
+import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 100)
-@Measurement(iterations = 100)
+@Warmup(iterations = 4000)
+@Measurement(iterations = 2000)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 public abstract class AbstractEmptySessionBenchmark extends AbstractBenchmark {
 
     @Setup

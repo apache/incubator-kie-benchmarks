@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.session;
 
+import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
@@ -23,8 +24,11 @@ import org.drools.benchmarks.domain.B;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
@@ -32,6 +36,9 @@ import org.openjdk.jmh.infra.Blackhole;
  * insert/fire/delete/fire loop, so this is intended to measure the cost of the
  * linking/unlinking of a single node.
  */
+@Warmup(iterations = 2000)
+@Measurement(iterations = 1000)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class NodeLinkingBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})

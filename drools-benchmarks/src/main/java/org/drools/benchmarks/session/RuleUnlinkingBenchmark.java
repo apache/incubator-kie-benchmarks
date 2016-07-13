@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.session;
 
+import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
@@ -24,15 +25,21 @@ import org.drools.benchmarks.domain.B;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Initially all rules are totally linked, so the remove/fire/insert/fire loop causes the
  * linking/unlinking of the whole rule.
  */
-public class RuleUnlikingBenchmark extends AbstractBenchmark {
+@Warmup(iterations = 300)
+@Measurement(iterations = 400)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+public class RuleUnlinkingBenchmark extends AbstractBenchmark {
 
     @Param({"1", "10", "100"})
     private int loopCount;
