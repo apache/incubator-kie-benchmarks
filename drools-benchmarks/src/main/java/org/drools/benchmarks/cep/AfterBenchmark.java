@@ -60,7 +60,6 @@ public class AfterBenchmark extends AbstractCEPBenchmark {
 
     @Benchmark
     public int testAfterOperator() {
-        System.out.println(insertEventsAndFire(events));
         return insertEventsAndFire(events);
     }
 }
