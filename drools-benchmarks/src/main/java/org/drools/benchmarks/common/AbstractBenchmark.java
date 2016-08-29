@@ -57,6 +57,7 @@ public abstract class AbstractBenchmark {
     @TearDown(Level.Iteration)
     public void tearDown() {
         if (kieSession != null) {
+            kieSession.halt();
             kieSession.dispose();
             kieSession = null;
         }
