@@ -19,9 +19,7 @@ package org.drools.benchmarks.throughput;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.domain.EventA;
 import org.kie.api.conf.EventProcessingOption;
@@ -37,7 +35,7 @@ import org.openjdk.jmh.annotations.Threads;
 @State(Scope.Benchmark)
 public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
 
-    private Future fireUntilHaltThread;
+    private ExecutorService executor;
 
     @Setup
     public void setupKieBase() throws ProviderException {
@@ -45,7 +43,7 @@ public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
                 " declare " + EventA.class.getName() + " @role( event ) @duration(duration) end\n" +
                 " rule R1 \n" +
                 " when \n" +
-                "     EventA() over window:time(200ms)\n" +
+                "     EventA() over window:time(50ms)\n" +
                 " then \n" +
                 " end";
 
@@ -56,32 +54,24 @@ public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
     @Override
     public void setup() throws ProviderException {
         createKieSession();
-        final ExecutorService executor = Executors.newSingleThreadExecutor();
-        fireUntilHaltThread = executor.submit(new Runnable() {
-            @Override
-            public void run() {
-                kieSession.fireUntilHalt();
-            }
-        });
+        executor = Executors.newSingleThreadExecutor();
+        executor.submit(() -> kieSession.fireUntilHalt());
     }
 
     @TearDown(Level.Iteration)
     public void stopFireUntilHaltThread() throws InterruptedException, ExecutionException {
-        try {
-            fireUntilHaltThread.get(10, TimeUnit.MILLISECONDS);
-        } catch (TimeoutException e) {
-            fireUntilHaltThread.cancel(true);
-            fireUntilHaltThread = null;
+        executor.shutdown();
+        if (!executor.awaitTermination(10, TimeUnit.MILLISECONDS)) {
+            executor.shutdownNow();
         }
     }
 
     @Benchmark
-    @Threads(1)
+    @Threads(Threads.MAX)
     public FactHandle insertEvent() {
         final EventA event = new EventA();
-        event.setDuration(100);
+        event.setDuration(40);
         final FactHandle factHandle = kieSession.insert(event);
-//        kieSession.fireAllRules();
         return factHandle;
     }
 }
