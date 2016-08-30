@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.common;
+package org.drools.benchmarks.throughput;
 
 import java.util.concurrent.TimeUnit;
+import org.drools.benchmarks.common.AbstractBenchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;

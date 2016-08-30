@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.cep;
+package org.drools.benchmarks.throughput;
 
-import org.drools.benchmarks.common.AbstractThroughputBenchmark;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.domain.EventA;
 import org.kie.api.conf.EventProcessingOption;
@@ -48,11 +50,13 @@ public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
     @Override
     public void setup() throws ProviderException {
         createKieSession();
-        final Runnable fireUntilHalt = new Runnable() {
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
+        final Future sessionFuture = executor.submit(new Runnable() {
+            @Override
             public void run() {
                 kieSession.fireUntilHalt();
             }
-        };
+        });
     }
 
     @Benchmark
