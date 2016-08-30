@@ -16,9 +16,12 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.domain.EventA;
 import org.kie.api.conf.EventProcessingOption;
@@ -28,10 +31,13 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Threads;
 
 @State(Scope.Benchmark)
 public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
+
+    private Future fireUntilHaltThread;
 
     @Setup
     public void setupKieBase() throws ProviderException {
@@ -51,12 +57,22 @@ public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
     public void setup() throws ProviderException {
         createKieSession();
         final ExecutorService executor = Executors.newSingleThreadExecutor();
-        final Future sessionFuture = executor.submit(new Runnable() {
+        fireUntilHaltThread = executor.submit(new Runnable() {
             @Override
             public void run() {
                 kieSession.fireUntilHalt();
             }
         });
+    }
+
+    @TearDown(Level.Iteration)
+    public void stopFireUntilHaltThread() throws InterruptedException, ExecutionException {
+        try {
+            fireUntilHaltThread.get(10, TimeUnit.MILLISECONDS);
+        } catch (TimeoutException e) {
+            fireUntilHaltThread.cancel(true);
+            fireUntilHaltThread = null;
+        }
     }
 
     @Benchmark
