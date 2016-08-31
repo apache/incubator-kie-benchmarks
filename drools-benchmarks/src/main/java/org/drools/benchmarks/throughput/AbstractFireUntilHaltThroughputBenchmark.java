@@ -21,42 +21,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.ProviderException;
-import org.drools.benchmarks.domain.EventA;
-import org.kie.api.conf.EventProcessingOption;
-import org.kie.api.runtime.rule.FactHandle;
-import org.kie.internal.conf.MultithreadEvaluationOption;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Threads;
 
 @State(Scope.Benchmark)
-public class EventThroughputBenchmark extends AbstractThroughputBenchmark {
-
-    @Param({"true", "false"})
-    private boolean multithread;
+public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
 
     private ExecutorService executor;
-
-    @Setup
-    public void setupKieBase() throws ProviderException {
-        final String drl = " import " + EventA.class.getCanonicalName() + ";\n" +
-                " declare " + EventA.class.getName() + " @role( event ) @duration(duration) end\n" +
-                " rule R1 \n" +
-                " when \n" +
-                "     EventA()\n" +
-                " then \n" +
-                " end";
-
-        createKieBaseFromDrl(
-                drl,
-                EventProcessingOption.STREAM,
-                multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
-    }
 
     @Setup(Level.Iteration)
     @Override
@@ -72,14 +46,5 @@ public class EventThroughputBenchmark extends AbstractThroughputBenchmark {
         if (!executor.awaitTermination(10, TimeUnit.MILLISECONDS)) {
             executor.shutdownNow();
         }
-    }
-
-    @Benchmark
-    @Threads(Threads.MAX)
-    public FactHandle insertEvent() {
-        final EventA event = new EventA();
-        event.setDuration(40);
-        final FactHandle factHandle = kieSession.insert(event);
-        return factHandle;
     }
 }

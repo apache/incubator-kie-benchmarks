@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.domain.event;
 
-public class EventB extends EventA {
+public class EventF extends EventA {
+
+    public EventF() {
+        super();
+    }
+
+    public EventF(final long duration) {
+        super(duration);
+    }
 
     @Override
     public String toString() {
-        return "EventB{" +
+        return "EventF{" +
                 "timeValue=" + getTimeValue() +
                 ", duration=" + getDuration() +
                 '}';
