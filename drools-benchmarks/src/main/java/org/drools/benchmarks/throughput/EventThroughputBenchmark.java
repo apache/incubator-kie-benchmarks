@@ -33,7 +33,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Threads;
 
 @State(Scope.Benchmark)
-public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
+public class EventThroughputBenchmark extends AbstractThroughputBenchmark {
 
     private ExecutorService executor;
 
@@ -43,7 +43,7 @@ public class WindowThroughputBenchmark extends AbstractThroughputBenchmark {
                 " declare " + EventA.class.getName() + " @role( event ) @duration(duration) end\n" +
                 " rule R1 \n" +
                 " when \n" +
-                "     EventA() over window:time(50ms)\n" +
+                "     EventA()\n" +
                 " then \n" +
                 " end";
 
