@@ -16,42 +16,48 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.domain.event.EventA;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Threads;
 
-// TODO - think about merging benchmarks with different number of partitions into one parametrized (how it will influence benchmark time).
-public class EventThroughput1PartitionBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
+public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
+
+    private AtomicInteger counter;
 
     @Param({"true", "false"})
     private boolean multithread;
 
+    @Param({"4"})
+    private int numberOfPartitions;
+
     @Setup
     public void setupKieBase() throws ProviderException {
-        final String drl = " import " + EventA.class.getCanonicalName() + ";\n" +
-                " declare " + EventA.class.getName() + " @role( event ) @duration(duration) end\n" +
-                " rule R1 \n" +
-                " when \n" +
-                "     EventA()\n" +
-                " then \n" +
-                " end";
-
+        final DrlProvider drlProvider = new PartitionedCepRulesProvider(EventA.class, "==");
         createKieBaseFromDrl(
-                drl,
+                drlProvider.getDrl(numberOfPartitions),
                 EventProcessingOption.STREAM,
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
     }
 
+    @Setup(Level.Iteration)
+    public void setupCounter() {
+        counter = new AtomicInteger(0);
+    }
+
     @Benchmark
-    @Threads(1)
+    @Threads(4)
     public FactHandle insertEvent() {
-        final EventA event = new EventA(40);
+        final EventA event = new EventA((counter.incrementAndGet() % numberOfPartitions), 40L);
         final FactHandle factHandle = kieSession.insert(event);
         return factHandle;
     }

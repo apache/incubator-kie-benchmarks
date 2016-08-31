@@ -22,8 +22,12 @@ public class EventB extends EventA {
         super();
     }
 
-    public EventB(final long duration) {
-        super(duration);
+    public EventB(final int id) {
+        super(id);
+    }
+
+    public EventB(final int id, final long duration) {
+        super(id, duration);
     }
 
     @Override
@@ -31,6 +35,7 @@ public class EventB extends EventA {
         return "EventB{" +
                 "timeValue=" + getTimeValue() +
                 ", duration=" + getDuration() +
+                ", id=" + getId() +
                 '}';
     }
 }

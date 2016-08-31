@@ -23,12 +23,27 @@ public class EventA implements Event, Comparable<EventA> {
     private long timeValue;
     private long duration;
 
+    private int id;
+
     public EventA() {
         //
     }
 
-    public EventA(final long duration) {
+    public EventA(final int id) {
+        this.id = id;
+    }
+
+    public EventA(final int id, final long duration) {
         this.duration = duration;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     @Override
@@ -64,6 +79,7 @@ public class EventA implements Event, Comparable<EventA> {
         return "EventA{" +
                 "timeValue=" + timeValue +
                 ", duration=" + duration +
+                ", id=" + id +
                 '}';
     }
 }
