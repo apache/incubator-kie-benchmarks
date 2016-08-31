@@ -24,8 +24,10 @@ import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.domain.EventA;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.rule.FactHandle;
+import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -34,6 +36,9 @@ import org.openjdk.jmh.annotations.Threads;
 
 @State(Scope.Benchmark)
 public class EventThroughputBenchmark extends AbstractThroughputBenchmark {
+
+    @Param({"true", "false"})
+    private boolean multithread;
 
     private ExecutorService executor;
 
@@ -47,7 +52,10 @@ public class EventThroughputBenchmark extends AbstractThroughputBenchmark {
                 " then \n" +
                 " end";
 
-        createKieBaseFromDrl(drl, EventProcessingOption.STREAM);
+        createKieBaseFromDrl(
+                drl,
+                EventProcessingOption.STREAM,
+                multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
     }
 
     @Setup(Level.Iteration)
