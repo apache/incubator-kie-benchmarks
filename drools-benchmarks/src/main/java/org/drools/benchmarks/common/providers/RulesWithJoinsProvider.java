@@ -26,6 +26,12 @@ public class RulesWithJoinsProvider implements DrlProvider {
     private final int numberOfJoins;
     private final boolean withCep;
     private final boolean appendDrlHeader;
+    private final String global;
+    private final String consequence;
+
+    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader) {
+        this(numberOfJoins, withCep, appendDrlHeader, "", "");
+    }
 
     /**
      * Constructor.
@@ -34,8 +40,11 @@ public class RulesWithJoinsProvider implements DrlProvider {
      *                      This number is limited to maximum number of 4 joins in each rule.
      * @param withCep True, if rules for event processing should be generated, else false.
      * @param appendDrlHeader True, if DRL header should be appended to provided DRL, else false.
+     * @param global DRL global.
+     * @param consequence Rule consequence.
      */
-    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader) {
+    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader,
+            final String global, final String consequence) {
         if (numberOfJoins > 4) {
             throw new IllegalArgumentException(
                     "Unsupported number of joins! Maximal allowed number of joins is 4, actual is " + numberOfJoins);
@@ -43,6 +52,8 @@ public class RulesWithJoinsProvider implements DrlProvider {
         this.numberOfJoins = numberOfJoins;
         this.withCep = withCep;
         this.appendDrlHeader = appendDrlHeader;
+        this.global = global;
+        this.consequence = consequence;
     }
 
     @Override
@@ -57,13 +68,16 @@ public class RulesWithJoinsProvider implements DrlProvider {
         if (appendDrlHeader) {
             drlBuilder.append("import " + A.class.getPackage().getName() + ".*;\n");
         }
+        drlBuilder.append( global + "\n" );
         if (withCep) {
             appendCepHeader(drlBuilder);
         }
         for ( int i = 0; i < numberOfRules; i++ ) {
             drlBuilder.append( "rule R" + i + " when\n");
             appendJoins(drlBuilder, i);
-            drlBuilder.append( "then end\n" );
+            drlBuilder.append( "then\n" );
+            drlBuilder.append( consequence + "\n" );
+            drlBuilder.append( "end\n" );
         }
         return drlBuilder.toString();
     }
