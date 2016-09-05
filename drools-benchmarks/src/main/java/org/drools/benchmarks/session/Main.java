@@ -16,6 +16,8 @@
 
 package org.drools.benchmarks.session;
 
+import org.openjdk.jmh.infra.Blackhole;
+
 public class Main {
     public static void main( String[] args ) {
         InsertFireLoopBenchmark benchmark = new InsertFireLoopBenchmark();
@@ -24,7 +26,7 @@ public class Main {
         System.out.println("setup");
         benchmark.setup();
         System.out.println("test");
-        benchmark.test();
+        benchmark.test(new Blackhole());
         System.out.println("done");
     }
 }
