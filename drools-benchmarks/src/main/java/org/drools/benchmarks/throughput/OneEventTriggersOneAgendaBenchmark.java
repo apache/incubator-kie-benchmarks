@@ -16,9 +16,7 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
-import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.domain.event.EventA;
 import org.kie.api.conf.EventProcessingOption;
@@ -26,23 +24,26 @@ import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Threads;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
     private AtomicInteger counter;
 
-    @Param({"true", "false"})
-    private boolean multithread;
+    //@Param({"true", "false"})
+    private boolean multithread = true;
 
-    @Param({"4"})
-    private int numberOfPartitions;
+    //@Param({"4"})
+    private int numberOfPartitions = 4;
+
+    private boolean countFirings = true;
 
     @Setup
-    public void setupKieBase() throws ProviderException {
-        final DrlProvider drlProvider = new PartitionedCepRulesProvider(EventA.class, "==");
+    public void setupKieBase() {
+        final DrlProvider drlProvider = new PartitionedCepRulesProvider(EventA.class, "==", countFirings);
         createKieBaseFromDrl(
                 drlProvider.getDrl(numberOfPartitions),
                 EventProcessingOption.STREAM,
@@ -52,13 +53,19 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     @Setup(Level.Iteration)
     public void setupCounter() {
         counter = new AtomicInteger(0);
+        if (countFirings) {
+            kieSession.setGlobal( "firings", new AtomicInteger(0) );
+        }
     }
 
     @Benchmark
-    @Threads(4)
+    @Threads(1)
     public FactHandle insertEvent() {
         final EventA event = new EventA((counter.incrementAndGet() % numberOfPartitions), 40L);
-        final FactHandle factHandle = kieSession.insert(event);
-        return factHandle;
+        return kieSession.insert(event);
+    }
+
+    public int getFiringsCount() {
+        return ( (AtomicInteger) kieSession.getGlobal( "firings" ) ).get();
     }
 }

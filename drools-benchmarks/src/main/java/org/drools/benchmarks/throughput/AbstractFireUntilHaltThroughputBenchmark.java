@@ -16,16 +16,16 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.common.ProviderException;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
@@ -34,7 +34,7 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
 
     @Setup(Level.Iteration)
     @Override
-    public void setup() throws ProviderException {
+    public void setup() {
         createKieSession();
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> kieSession.fireUntilHalt());

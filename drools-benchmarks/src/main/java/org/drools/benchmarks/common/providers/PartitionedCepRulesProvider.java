@@ -24,13 +24,16 @@ import org.drools.benchmarks.common.Event;
  */
 public class PartitionedCepRulesProvider implements DrlProvider {
 
-    private Class<? extends Event> eventClass;
+    private final Class<? extends Event> eventClass;
 
-    private String constraintOperator;
+    private final String constraintOperator;
 
-    public PartitionedCepRulesProvider(final Class<? extends Event> eventClass, final String constraintOperator) {
+    private final boolean countFirings;
+
+    public PartitionedCepRulesProvider(Class<? extends Event> eventClass, String constraintOperator, boolean countFirings) {
         this.eventClass = eventClass;
         this.constraintOperator = constraintOperator;
+        this.countFirings = countFirings;
     }
 
     @Override
@@ -45,10 +48,18 @@ public class PartitionedCepRulesProvider implements DrlProvider {
         drlBuilder.append("import " + eventClass.getCanonicalName() + ";\n");
         drlBuilder.append("declare " + eventClass.getName() + " @role( event ) @duration(duration) end\n");
 
+        if (countFirings) {
+            drlBuilder.append("global java.util.concurrent.atomic.AtomicInteger firings;\n");
+        }
+
         for (int i = 0; i < numberOfRules; i++) {
             drlBuilder.append(" rule R" + i + " when\n");
             drlBuilder.append(eventClass.getName() + "(id " + constraintOperator + " " + i + ")\n");
-            drlBuilder.append( "then end\n" );
+            drlBuilder.append( "then\n" );
+            if (countFirings) {
+                drlBuilder.append("firings.incrementAndGet();\n");
+            }
+            drlBuilder.append( "end\n" );
         }
 
         return drlBuilder.toString();
