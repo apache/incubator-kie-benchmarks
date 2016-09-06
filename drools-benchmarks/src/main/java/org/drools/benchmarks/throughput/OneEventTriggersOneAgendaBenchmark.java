@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.domain.event.EventA;
@@ -27,8 +28,6 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Threads;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
     private AtomicInteger counter;
@@ -39,11 +38,14 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     //@Param({"4"})
     private int numberOfPartitions = 4;
 
+    //@Param({"0", "1", "2", "4"})
+    private int numberOfJoins = 2;
+
     private boolean countFirings = true;
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new PartitionedCepRulesProvider(EventA.class, "==", countFirings);
+        final DrlProvider drlProvider = new PartitionedCepRulesProvider(EventA.class, "==", numberOfJoins, countFirings);
         createKieBaseFromDrl(
                 drlProvider.getDrl(numberOfPartitions),
                 EventProcessingOption.STREAM,

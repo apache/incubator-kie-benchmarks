@@ -25,15 +25,17 @@ import org.drools.benchmarks.common.Event;
 public class PartitionedCepRulesProvider implements DrlProvider {
 
     private final Class<? extends Event> eventClass;
-
     private final String constraintOperator;
+    private final int numberOfJoins;
 
     private final boolean countFirings;
 
-    public PartitionedCepRulesProvider(Class<? extends Event> eventClass, String constraintOperator, boolean countFirings) {
+    public PartitionedCepRulesProvider(final Class<? extends Event> eventClass, final String constraintOperator,
+            final int numberOfJoins, boolean countFirings) {
         this.eventClass = eventClass;
         this.constraintOperator = constraintOperator;
         this.countFirings = countFirings;
+        this.numberOfJoins = numberOfJoins;
     }
 
     @Override
@@ -54,7 +56,10 @@ public class PartitionedCepRulesProvider implements DrlProvider {
 
         for (int i = 0; i < numberOfRules; i++) {
             drlBuilder.append(" rule R" + i + " when\n");
-            drlBuilder.append(eventClass.getName() + "(id " + constraintOperator + " " + i + ")\n");
+
+            final char startVariableName = 'A';
+            drlBuilder.append(eventClass.getName() + "($" + startVariableName + ": " + "id " + constraintOperator + " " + i + ")\n");
+            addJoins(drlBuilder, startVariableName);
             drlBuilder.append( "then\n" );
             if (countFirings) {
                 drlBuilder.append("firings.incrementAndGet();\n");
@@ -63,5 +68,14 @@ public class PartitionedCepRulesProvider implements DrlProvider {
         }
 
         return drlBuilder.toString();
+    }
+
+    public void addJoins(final StringBuilder drlBuilder, final char startChar) {
+        char previousVariableName = startChar;
+        for (int i = 0; i < numberOfJoins; i++) {
+            final char nextVariableName = ++previousVariableName;
+            drlBuilder.append(eventClass.getName() + "( id == $" + previousVariableName + " )\n");
+            previousVariableName = nextVariableName;
+        }
     }
 }
