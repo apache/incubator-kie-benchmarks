@@ -73,8 +73,8 @@ public class PartitionedCepRulesProvider implements DrlProvider {
     public void addJoins(final StringBuilder drlBuilder, final char startChar) {
         char previousVariableName = startChar;
         for (int i = 0; i < numberOfJoins; i++) {
-            final char nextVariableName = ++previousVariableName;
-            drlBuilder.append(eventClass.getName() + "( id == $" + previousVariableName + " )\n");
+            final char nextVariableName = (char) (previousVariableName + 1);
+            drlBuilder.append(eventClass.getName() + "( $" + nextVariableName + ": id == $" + previousVariableName + " )\n");
             previousVariableName = nextVariableName;
         }
     }
