@@ -16,6 +16,11 @@
 
 package org.drools.benchmarks.throughput;
 
+import org.drools.benchmarks.domain.A;
+import org.drools.benchmarks.domain.B;
+import org.drools.benchmarks.domain.C;
+import org.drools.benchmarks.domain.D;
+import org.drools.benchmarks.domain.E;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
@@ -26,6 +31,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Benchmark)
 public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
@@ -47,4 +53,63 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
             executor.shutdownNow();
         }
     }
+
+    protected void insertJoinEvents(final int numberOfJoins, final long eventId, final int eventValue,
+            final Blackhole eater) {
+        eater.consume(kieSession.insert(new A(eventId, eventValue)));
+        switch (numberOfJoins) {
+            case 0:
+                break;
+            case 1:
+                eater.consume(kieSession.insert(new B(eventId, eventValue)));
+                break;
+            case 2:
+                eater.consume(kieSession.insert(new B(eventId, eventValue)));
+                eater.consume(kieSession.insert(new C(eventId, eventValue)));
+                break;
+            case 3:
+                eater.consume(kieSession.insert(new B(eventId, eventValue)));
+                eater.consume(kieSession.insert(new C(eventId, eventValue)));
+                eater.consume(kieSession.insert(new D(eventId, eventValue)));
+                break;
+            case 4:
+                eater.consume(kieSession.insert(new B(eventId, eventValue)));
+                eater.consume(kieSession.insert(new C(eventId, eventValue)));
+                eater.consume(kieSession.insert(new D(eventId, eventValue)));
+                eater.consume(kieSession.insert(new E(eventId, eventValue)));
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported number of joins! Maximal number of joins is 4.");
+        }
+    }
+
+    public void insertJoinEventsDebug(final int numberOfJoins, final long eventId, final int eventValue) {
+        final A event = new A(eventId, eventValue);
+        kieSession.insert(event);
+        switch (numberOfJoins) {
+            case 0:
+                break;
+            case 1:
+                kieSession.insert(new B(eventId, eventValue));
+                break;
+            case 2:
+                kieSession.insert(new B(eventId, eventValue));
+                kieSession.insert(new C(eventId, eventValue));
+                break;
+            case 3:
+                kieSession.insert(new B(eventId, eventValue));
+                kieSession.insert(new C(eventId, eventValue));
+                kieSession.insert(new D(eventId, eventValue));
+                break;
+            case 4:
+                kieSession.insert(new B(eventId, eventValue));
+                kieSession.insert(new C(eventId, eventValue));
+                kieSession.insert(new D(eventId, eventValue));
+                kieSession.insert(new E(eventId, eventValue));
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported number of joins! Maximal number of joins is 4.");
+        }
+    }
+
 }

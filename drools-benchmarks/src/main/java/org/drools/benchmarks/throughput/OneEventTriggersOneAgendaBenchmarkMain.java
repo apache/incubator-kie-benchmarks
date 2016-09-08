@@ -17,6 +17,7 @@
 package org.drools.benchmarks.throughput;
 
 import java.util.concurrent.ExecutionException;
+import org.drools.benchmarks.domain.AbstractBean;
 
 public class OneEventTriggersOneAgendaBenchmarkMain {
 
@@ -32,8 +33,11 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
         long end = start + ( BENCHMARK_DURATION_IN_SECONDS * 1_000_000_000L );
 
         int i = 0;
+        int numberOfJoins = benchmark.getNumberOfJoins();
+        int numberOfPartitions = benchmark.getNumberOfPartitions();
         while (true) {
-            benchmark.insertEvent();
+            final long id = AbstractBean.getAndIncrementIdGeneratorValue();
+            benchmark.insertJoinEventsDebug(numberOfJoins, id, (int) (id % numberOfPartitions));
             i++;
             if (i % 1000 == 0) {
                 if (System.nanoTime() > end) {

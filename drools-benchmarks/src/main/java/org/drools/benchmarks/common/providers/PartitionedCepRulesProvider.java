@@ -17,25 +17,23 @@
 package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.DrlProvider;
-import org.drools.benchmarks.common.Event;
+import org.drools.benchmarks.domain.A;
 
 /**
  * Provides rule(s) that are partitioned.
  */
 public class PartitionedCepRulesProvider implements DrlProvider {
 
-    private final Class<? extends Event> eventClass;
     private final String constraintOperator;
     private final int numberOfJoins;
 
     private final boolean countFirings;
 
-    public PartitionedCepRulesProvider(final Class<? extends Event> eventClass, final String constraintOperator,
-            final int numberOfJoins, boolean countFirings) {
-        this.eventClass = eventClass;
+    public PartitionedCepRulesProvider(final int numberOfJoins, final String constraintOperator,
+            final boolean countFirings) {
+        this.numberOfJoins = numberOfJoins;
         this.constraintOperator = constraintOperator;
         this.countFirings = countFirings;
-        this.numberOfJoins = numberOfJoins;
     }
 
     @Override
@@ -47,19 +45,16 @@ public class PartitionedCepRulesProvider implements DrlProvider {
     public String getDrl(final int numberOfRules) {
         final StringBuilder drlBuilder = new StringBuilder();
 
-        drlBuilder.append("import " + eventClass.getCanonicalName() + ";\n");
-        drlBuilder.append("declare " + eventClass.getName() + " @role( event ) @duration(duration) end\n");
+        drlBuilder.append("import " + A.class.getPackage().getName() + ".*;\n");
+        appendCepHeader(drlBuilder);
 
         if (countFirings) {
             drlBuilder.append("global java.util.concurrent.atomic.AtomicInteger firings;\n");
         }
 
-        for (int i = 0; i < numberOfRules; i++) {
-            drlBuilder.append(" rule R" + i + " when\n");
-
-            final char startVariableName = 'A';
-            drlBuilder.append(eventClass.getName() + "($" + startVariableName + ": " + "id " + constraintOperator + " " + i + ")\n");
-            addJoins(drlBuilder, startVariableName);
+        for (int partitionNumber = 0; partitionNumber < numberOfRules; partitionNumber++) {
+            drlBuilder.append(" rule R" + partitionNumber + " when\n");
+            addJoins(drlBuilder, partitionNumber);
             drlBuilder.append( "then\n" );
             if (countFirings) {
                 drlBuilder.append("firings.incrementAndGet();\n");
@@ -70,12 +65,28 @@ public class PartitionedCepRulesProvider implements DrlProvider {
         return drlBuilder.toString();
     }
 
-    public void addJoins(final StringBuilder drlBuilder, final char startChar) {
-        char previousVariableName = startChar;
+    public void addJoins(final StringBuilder drlBuilder, final int partitionNumber) {
+        char previousClassName = 'A';
+        drlBuilder.append(previousClassName + "( value " + constraintOperator + " " + partitionNumber + ","
+                + getConstraintVariable(previousClassName) + ": " + "id )\n");
         for (int i = 0; i < numberOfJoins; i++) {
-            final char nextVariableName = (char) (previousVariableName + 1);
-            drlBuilder.append(eventClass.getName() + "( $" + nextVariableName + ": id == $" + previousVariableName + " )\n");
-            previousVariableName = nextVariableName;
+            final char nextClassName = (char) (previousClassName + 1);
+            drlBuilder.append(nextClassName + "( " +
+                    getConstraintVariable(nextClassName) + ": id == " + getConstraintVariable(previousClassName) + " )\n");
+            previousClassName = nextClassName;
         }
+    }
+
+    private void appendCepHeader(final StringBuilder drlBuilder) {
+        char domainClassName = 'A';
+        // Number of joins + 1 because of first class.
+        for (int i = 0; i <= numberOfJoins; i++) {
+            drlBuilder.append("declare " + domainClassName + " @role( event ) end\n");
+            domainClassName++;
+        }
+    }
+
+    private String getConstraintVariable(final char constraintClassName) {
+        return "$" + constraintClassName + "id";
     }
 }

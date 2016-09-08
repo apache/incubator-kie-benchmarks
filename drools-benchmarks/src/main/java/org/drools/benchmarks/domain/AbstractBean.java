@@ -26,6 +26,10 @@ public abstract class AbstractBean {
         id = idGenerator.getAndIncrement();
     }
 
+    public AbstractBean(final long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         return (int)(id ^ (id >>> 32));
@@ -34,5 +38,17 @@ public abstract class AbstractBean {
     @Override
     public boolean equals( Object obj ) {
         return this.getClass() == obj.getClass() && id == ((AbstractBean)obj).id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public static long getAndIncrementIdGeneratorValue() {
+        return idGenerator.getAndIncrement();
+    }
+
+    public static void setIdGeneratorValue(final long value) {
+        idGenerator.set(value);
     }
 }

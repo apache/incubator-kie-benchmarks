@@ -20,19 +20,18 @@ import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.domain.event.EventA;
 import org.drools.core.impl.StatefulKnowledgeSessionImpl;
+import org.drools.benchmarks.domain.AbstractBean;
 import org.kie.api.conf.EventProcessingOption;
-import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Threads;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
-
-    private AtomicInteger counter;
 
     //@Param({"true", "false"})
     private boolean multithread = true;
@@ -50,7 +49,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new PartitionedCepRulesProvider(EventA.class, "==", numberOfJoins, countFirings);
+        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, "==", countFirings);
         createKieBaseFromDrl(
                 drlProvider.getDrl(numberOfPartitions),
                 EventProcessingOption.STREAM,
@@ -59,7 +58,6 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     @Setup(Level.Iteration)
     public void setupCounter() {
-        counter = new AtomicInteger(0);
         if (countFirings) {
             kieSession.setGlobal( "firings", new AtomicInteger(0) );
         }
@@ -67,12 +65,20 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     @Benchmark
     @Threads(1)
-    public FactHandle insertEvent() {
-        final EventA event = new EventA((counter.incrementAndGet() % numberOfPartitions), 40L);
-        return async ? ( (StatefulKnowledgeSessionImpl) kieSession ).insertAsync( event ) : kieSession.insert( event );
+    public void insertEvent(final Blackhole eater) {
+        final long id = AbstractBean.getAndIncrementIdGeneratorValue();
+        insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), eater);
     }
 
     public int getFiringsCount() {
         return ( (AtomicInteger) kieSession.getGlobal( "firings" ) ).get();
+    }
+
+    public int getNumberOfPartitions() {
+        return numberOfPartitions;
+    }
+
+    public int getNumberOfJoins() {
+        return numberOfJoins;
     }
 }
