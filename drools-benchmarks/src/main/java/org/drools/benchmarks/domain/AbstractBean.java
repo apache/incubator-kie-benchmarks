@@ -21,13 +21,20 @@ public abstract class AbstractBean {
     private static final AtomicLong idGenerator = new AtomicLong( 0 );
 
     private final long id;
+    private int value;
 
     protected AbstractBean() {
         id = idGenerator.getAndIncrement();
     }
 
-    public AbstractBean(final long id) {
+    public AbstractBean(final int value) {
+        this();
+        this.value = value;
+    }
+
+    public AbstractBean(final long id, final int value) {
         this.id = id;
+        this.value = value;
     }
 
     @Override
@@ -50,5 +57,13 @@ public abstract class AbstractBean {
 
     public static void setIdGeneratorValue(final long value) {
         idGenerator.set(value);
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(final int value) {
+        this.value = value;
     }
 }

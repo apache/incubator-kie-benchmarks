@@ -16,10 +16,9 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
-import org.drools.benchmarks.domain.event.EventA;
-import org.drools.core.impl.StatefulKnowledgeSessionImpl;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
@@ -28,8 +27,6 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
@@ -50,6 +47,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     @Setup
     public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, "==", countFirings);
+        System.out.println(drlProvider.getDrl(numberOfPartitions));
         createKieBaseFromDrl(
                 drlProvider.getDrl(numberOfPartitions),
                 EventProcessingOption.STREAM,
@@ -67,7 +65,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     @Threads(1)
     public void insertEvent(final Blackhole eater) {
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), eater);
+        insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, eater);
     }
 
     public int getFiringsCount() {
@@ -80,5 +78,9 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     public int getNumberOfJoins() {
         return numberOfJoins;
+    }
+
+    public boolean isAsync() {
+        return async;
     }
 }

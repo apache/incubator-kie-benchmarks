@@ -35,9 +35,10 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
         int i = 0;
         int numberOfJoins = benchmark.getNumberOfJoins();
         int numberOfPartitions = benchmark.getNumberOfPartitions();
+        boolean async = benchmark.isAsync();
         while (true) {
             final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-            benchmark.insertJoinEventsDebug(numberOfJoins, id, (int) (id % numberOfPartitions));
+            benchmark.insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, null);
             i++;
             if (i % 1000 == 0) {
                 if (System.nanoTime() > end) {

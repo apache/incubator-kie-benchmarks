@@ -54,6 +54,6 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Threads(1)
     public void insertEvent(final Blackhole eater) {
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id, (int) id, eater);
+        insertJoinEvents(numberOfJoins, id, (int) id, false, eater);
     }
 }
