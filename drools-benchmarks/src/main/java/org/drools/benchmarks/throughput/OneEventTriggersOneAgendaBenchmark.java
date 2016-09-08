@@ -16,10 +16,10 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.domain.event.EventA;
+import org.drools.core.impl.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.conf.MultithreadEvaluationOption;
@@ -28,6 +28,8 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Threads;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
     private AtomicInteger counter;
@@ -35,11 +37,14 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     //@Param({"true", "false"})
     private boolean multithread = true;
 
+    //@Param({"true", "false"})
+    private boolean async = true;
+
     //@Param({"4"})
     private int numberOfPartitions = 4;
 
     //@Param({"0", "1", "2", "4"})
-    private int numberOfJoins = 2;
+    private int numberOfJoins = 0;
 
     private boolean countFirings = true;
 
@@ -64,7 +69,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     @Threads(1)
     public FactHandle insertEvent() {
         final EventA event = new EventA((counter.incrementAndGet() % numberOfPartitions), 40L);
-        return kieSession.insert(event);
+        return async ? ( (StatefulKnowledgeSessionImpl) kieSession ).insertAsync( event ) : kieSession.insert( event );
     }
 
     public int getFiringsCount() {
