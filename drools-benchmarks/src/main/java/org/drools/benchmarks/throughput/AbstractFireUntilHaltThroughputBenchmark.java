@@ -26,6 +26,7 @@ import org.drools.benchmarks.domain.B;
 import org.drools.benchmarks.domain.C;
 import org.drools.benchmarks.domain.D;
 import org.drools.benchmarks.domain.E;
+import org.drools.core.impl.StatefulKnowledgeSessionImpl;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
@@ -113,9 +114,9 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
 
     private void insertEventAsync(final AbstractBean event, final Blackhole eater) {
         if (eater != null) {
-//            eater.consume(((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event));
+            eater.consume(((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event));
         } else {
-//            ((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event);
+            ((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event);
         }
     }
 }
