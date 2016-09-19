@@ -49,6 +49,8 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     private boolean countFirings = true;
 
+    private AtomicInteger insertCounter;
+
     @Setup
     public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, "==", countFirings);
@@ -67,6 +69,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     @Setup(Level.Iteration)
     public void setupCounter() {
+        insertCounter = new AtomicInteger(0);
         if (countFirings) {
             kieSession.setGlobal( "firings", new AtomicInteger(0) );
         }
@@ -74,9 +77,14 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     @Benchmark
     @Threads(1)
-    public void insertEvent(final Blackhole eater) {
+    public Integer insertEvent(final Blackhole eater) {
+        final int insertCount = insertCounter.get();
+        while (insertCount > (getFiringsCount() * 2)) {
+            // just wait.
+        }
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, eater);
+        return insertCounter.incrementAndGet();
     }
 
     public int getFiringsCount() {
