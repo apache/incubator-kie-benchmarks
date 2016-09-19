@@ -33,7 +33,7 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
 
         if (DO_WARMUP) {
             for ( int i = 0; i < WARMUP_INSERTS; i++ ) {
-                benchmark.insertEvent( null );
+                benchmark.insertEvent( null , null);
             }
 
             terminate( benchmark );
@@ -47,7 +47,7 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
 
         int i = 0;
         while (true) {
-            benchmark.insertEvent(null);
+            benchmark.insertEvent(null, null);
             i++;
             if (i % 1000 == 0) {
                 if (System.nanoTime() > end) {
