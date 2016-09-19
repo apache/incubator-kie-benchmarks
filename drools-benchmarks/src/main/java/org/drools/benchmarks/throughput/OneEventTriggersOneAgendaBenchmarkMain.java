@@ -17,11 +17,13 @@
 package org.drools.benchmarks.throughput;
 
 import java.util.concurrent.ExecutionException;
-import org.drools.benchmarks.domain.AbstractBean;
 
 public class OneEventTriggersOneAgendaBenchmarkMain {
 
     private static final int BENCHMARK_DURATION_IN_SECONDS = 10;
+
+    private static final boolean DO_WARMUP = false;
+    private static final int WARMUP_INSERTS = 2_000_000;
 
     public static void main( String[] args ) {
         OneEventTriggersOneAgendaBenchmark benchmark = new OneEventTriggersOneAgendaBenchmark();
@@ -29,16 +31,23 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
         benchmark.setup();
         benchmark.setupCounter();
 
+        if (DO_WARMUP) {
+            for ( int i = 0; i < WARMUP_INSERTS; i++ ) {
+                benchmark.insertEvent( null );
+            }
+
+            terminate( benchmark );
+            System.gc();
+            benchmark.setup();
+            benchmark.setupCounter();
+        }
+
         long start = System.nanoTime();
         long end = start + ( BENCHMARK_DURATION_IN_SECONDS * 1_000_000_000L );
 
         int i = 0;
-        int numberOfJoins = benchmark.getNumberOfJoins();
-        int numberOfPartitions = benchmark.getNumberOfPartitions();
-        boolean async = benchmark.isAsync();
         while (true) {
-            final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-            benchmark.insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, null);
+            benchmark.insertEvent(null);
             i++;
             if (i % 1000 == 0) {
                 if (System.nanoTime() > end) {
@@ -50,6 +59,10 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
         System.out.println("inserts = " + i);
         System.out.println("firings = " + benchmark.getFiringsCount());
 
+        terminate( benchmark );
+    }
+
+    private static void terminate( OneEventTriggersOneAgendaBenchmark benchmark ) {
         try {
             benchmark.tearDown();
             benchmark.stopFireUntilHaltThread();

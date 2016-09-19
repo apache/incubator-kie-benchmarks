@@ -16,10 +16,6 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.benchmarks.domain.B;
@@ -33,6 +29,11 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
@@ -59,48 +60,40 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
             final boolean async, final Blackhole eater) {
         switch (numberOfJoins) {
             case 0:
-                insertJoinEvents(new AbstractBean[]{new A(eventId, eventValue)}, async, eater);
+                insertJoinEvent(new A(eventId, eventValue), async, eater);
                 break;
             case 1:
-                insertJoinEvents(
-                        new AbstractBean[]{
-                            new A(eventId, eventValue), new B(eventId, eventValue)},
-                        async, eater);
+                insertJoinEvent(new A(eventId, eventValue), async, eater);
+                insertJoinEvent(new B(eventId, eventValue), async, eater);
                 break;
             case 2:
-                insertJoinEvents(
-                        new AbstractBean[]{
-                                new A(eventId, eventValue), new B(eventId, eventValue),
-                                new C(eventId, eventValue)},
-                        async, eater);
+                insertJoinEvent(new A(eventId, eventValue), async, eater);
+                insertJoinEvent(new B(eventId, eventValue), async, eater);
+                insertJoinEvent(new C(eventId, eventValue), async, eater);
                 break;
             case 3:
-                insertJoinEvents(
-                        new AbstractBean[]{
-                                new A(eventId, eventValue), new B(eventId, eventValue),
-                                new C(eventId, eventValue), new D(eventId, eventValue)},
-                        async, eater);
+                insertJoinEvent(new A(eventId, eventValue), async, eater);
+                insertJoinEvent(new B(eventId, eventValue), async, eater);
+                insertJoinEvent(new C(eventId, eventValue), async, eater);
+                insertJoinEvent(new D(eventId, eventValue), async, eater);
                 break;
             case 4:
-                insertJoinEvents(
-                        new AbstractBean[]{
-                                new A(eventId, eventValue), new B(eventId, eventValue),
-                                new C(eventId, eventValue), new D(eventId, eventValue),
-                                new E(eventId, eventValue)},
-                        async, eater);
+                insertJoinEvent(new A(eventId, eventValue), async, eater);
+                insertJoinEvent(new B(eventId, eventValue), async, eater);
+                insertJoinEvent(new C(eventId, eventValue), async, eater);
+                insertJoinEvent(new D(eventId, eventValue), async, eater);
+                insertJoinEvent(new E(eventId, eventValue), async, eater);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported number of joins! Maximal number of joins is 4.");
         }
     }
 
-    private void insertJoinEvents(final AbstractBean[] events, final boolean async, final Blackhole eater) {
-        for (AbstractBean event : events) {
-            if (async) {
-                insertEventAsync(event, eater);
-            } else {
-                insertEvent(event, eater);
-            }
+    private void insertJoinEvent(final AbstractBean event, final boolean async, final Blackhole eater) {
+        if (async) {
+            insertEventAsync(event, eater);
+        } else {
+            insertEvent(event, eater);
         }
     }
 

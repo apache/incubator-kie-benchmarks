@@ -16,9 +16,9 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
+import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
@@ -28,7 +28,12 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
+
+    private static final boolean DUMP_DRL = false;
+    private static final boolean DUMP_RETE = false;
 
     //@Param({"true", "false"})
     private boolean multithread = true;
@@ -47,11 +52,17 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     @Setup
     public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, "==", countFirings);
-        System.out.println(drlProvider.getDrl(numberOfPartitions));
+        String drl = drlProvider.getDrl(numberOfPartitions);
+        if (DUMP_DRL) {
+            System.out.println( drl );
+        }
         createKieBaseFromDrl(
-                drlProvider.getDrl(numberOfPartitions),
+                drl,
                 EventProcessingOption.STREAM,
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
+        if (DUMP_RETE) {
+            ReteDumper.dumpRete( kieBase );
+        }
     }
 
     @Setup(Level.Iteration)
@@ -70,17 +81,5 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     public int getFiringsCount() {
         return ( (AtomicInteger) kieSession.getGlobal( "firings" ) ).get();
-    }
-
-    public int getNumberOfPartitions() {
-        return numberOfPartitions;
-    }
-
-    public int getNumberOfJoins() {
-        return numberOfJoins;
-    }
-
-    public boolean isAsync() {
-        return async;
     }
 }
