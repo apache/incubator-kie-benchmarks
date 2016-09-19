@@ -26,6 +26,7 @@ import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -37,17 +38,17 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     private static final boolean DUMP_DRL = false;
     private static final boolean DUMP_RETE = false;
 
-    //@Param({"true", "false"})
-    private boolean multithread = true;
+    @Param({"true", "false"})
+    private boolean multithread;
 
-    //@Param({"true", "false"})
-    private boolean async = true;
+    @Param({"true", "false"})
+    private boolean async;
 
-    //@Param({"4"})
-    private int numberOfPartitions = 4;
+    @Param({"4", "8"})
+    private int numberOfPartitions;
 
-    //@Param({"0", "1", "2", "4"})
-    private int numberOfJoins = 1;
+    @Param({"0", "1", "2", "4"})
+    private int numberOfJoins;
 
     private boolean countFirings = true;
 
