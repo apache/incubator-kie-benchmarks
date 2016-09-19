@@ -36,7 +36,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     private static final boolean DUMP_RETE = false;
 
     //@Param({"true", "false"})
-    private boolean multithread = true;
+    private boolean multithread = false;
 
     //@Param({"true", "false"})
     private boolean async = true;
@@ -45,11 +45,12 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     private int numberOfPartitions = 4;
 
     //@Param({"0", "1", "2", "4"})
-    private int numberOfJoins = 0;
+    private int numberOfJoins = 1;
 
     private boolean countFirings = true;
 
     private AtomicInteger insertCounter;
+    private AtomicInteger firingCounter;
 
     @Setup
     public void setupKieBase() {
@@ -69,25 +70,31 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     @Setup(Level.Iteration)
     public void setupCounter() {
-        insertCounter = new AtomicInteger(0);
         if (countFirings) {
-            kieSession.setGlobal( "firings", new AtomicInteger(0) );
+            insertCounter = new AtomicInteger(0);
+            firingCounter = new AtomicInteger(0);
+            kieSession.setGlobal( "firings", firingCounter );
         }
     }
 
     @Benchmark
     @Threads(1)
     public Integer insertEvent(final Blackhole eater) {
-        final int insertCount = insertCounter.get();
-        while (insertCount > (getFiringsCount() * 2)) {
-            // just wait.
+        if (countFirings) {
+            final int insertCount = insertCounter.get();
+            if (insertCount % 100 == 99) {
+                while ( insertCount > ( getFiringsCount() * 1.1 ) ) {
+                    // just wait.
+                }
+            }
         }
+
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, eater);
         return insertCounter.incrementAndGet();
     }
 
     public int getFiringsCount() {
-        return ( (AtomicInteger) kieSession.getGlobal( "firings" ) ).get();
+        return firingCounter.get();
     }
 }
