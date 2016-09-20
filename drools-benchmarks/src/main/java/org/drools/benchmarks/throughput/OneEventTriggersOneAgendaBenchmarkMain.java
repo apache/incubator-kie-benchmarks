@@ -63,11 +63,7 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
     }
 
     private static void terminate( OneEventTriggersOneAgendaBenchmark benchmark ) {
-        try {
-            benchmark.tearDown();
-            benchmark.stopFireUntilHaltThread();
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException( e );
-        }
+        benchmark.tearDown();
+        benchmark.stopFireUntilHaltThread();
     }
 }
