@@ -16,6 +16,9 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.benchmarks.domain.B;
@@ -29,11 +32,6 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
@@ -49,10 +47,14 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
     }
 
     @TearDown(Level.Iteration)
-    public void stopFireUntilHaltThread() throws InterruptedException, ExecutionException {
+    public void stopFireUntilHaltThread() {
         executor.shutdown();
-        if (!executor.awaitTermination(10, TimeUnit.MILLISECONDS)) {
-            executor.shutdownNow();
+        try {
+            if (!executor.awaitTermination(10, TimeUnit.MILLISECONDS)) {
+                executor.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
