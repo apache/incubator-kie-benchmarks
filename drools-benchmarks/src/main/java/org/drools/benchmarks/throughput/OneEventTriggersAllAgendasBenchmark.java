@@ -16,22 +16,34 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
+import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
+import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
+    private static final boolean DUMP_DRL = false;
+    private static final boolean DUMP_RETE = false;
+
     @Param({"true", "false"})
     private boolean multithread;
+
+    @Param({"true", "false"})
+    private boolean async;
 
     @Param({"4"})
     private int numberOfPartitions;
@@ -39,21 +51,54 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"0", "1", "2", "4"})
     private int numberOfJoins;
 
+    private AtomicInteger insertCounter;
+    private static AtomicInteger firingCounter;
+
+    @AuxCounters
+    @State(Scope.Thread)
+    public static class FiringsCounter {
+        public int fireCount() {
+            return firingCounter.get();
+        }
+    }
+
     @Setup
     public void setupKieBase() throws ProviderException {
-        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, i -> "value > " + i, false);
+        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, i -> "value > " + i, true);
+        String drl = drlProvider.getDrl(numberOfPartitions);
+        if (DUMP_DRL) {
+            System.out.println( drl );
+        }
         createKieBaseFromDrl(
-                drlProvider.getDrl(numberOfPartitions),
+                drl,
                 EventProcessingOption.STREAM,
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
 
+        if (DUMP_RETE) {
+            ReteDumper.dumpRete( kieBase );
+        }
+        // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
         AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
     }
 
+    @Setup(Level.Iteration)
+    public void setupCounter() {
+        insertCounter = new AtomicInteger(0);
+        firingCounter = new AtomicInteger(0);
+        kieSession.setGlobal("firings", firingCounter);
+    }
+
     @Benchmark
-    @Threads(1)
-    public void insertEvent(final Blackhole eater) {
+    public Integer insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
+        final int insertCount = insertCounter.get();
+        if (insertCount % 100 == 99) {
+            while ( insertCount > ( firingCounter.get() * 1.1 ) ) {
+                // just wait.
+            }
+        }
+
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id, (int) id, false, eater);
+        insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
+        return insertCounter.incrementAndGet();
     }
 }
