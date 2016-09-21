@@ -63,6 +63,10 @@ public abstract class AbstractBean {
         return value;
     }
 
+    public Integer getBoxedValue() {
+        return value;
+    }
+
     public void setValue(final int value) {
         this.value = value;
     }

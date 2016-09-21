@@ -19,20 +19,21 @@ package org.drools.benchmarks.common.providers;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.domain.A;
 
+import java.util.function.Function;
+
 /**
  * Provides rule(s) that are partitioned.
  */
 public class PartitionedCepRulesProvider implements DrlProvider {
 
-    private final String constraintOperator;
+    private final Function<Object, String> constraintBuilder;
     private final int numberOfJoins;
 
     private final boolean countFirings;
 
-    public PartitionedCepRulesProvider(final int numberOfJoins, final String constraintOperator,
-            final boolean countFirings) {
+    public PartitionedCepRulesProvider(int numberOfJoins, Function<Object, String> constraintBuilder, boolean countFirings) {
         this.numberOfJoins = numberOfJoins;
-        this.constraintOperator = constraintOperator;
+        this.constraintBuilder = constraintBuilder;
         this.countFirings = countFirings;
     }
 
@@ -67,8 +68,8 @@ public class PartitionedCepRulesProvider implements DrlProvider {
 
     public void addJoins(final StringBuilder drlBuilder, final int partitionNumber) {
         char previousClassName = 'A';
-        drlBuilder.append(previousClassName + "( value " + constraintOperator + " " + partitionNumber + ","
-                + getConstraintVariable(previousClassName) + ": " + "id )\n");
+        drlBuilder.append(previousClassName + "( " + constraintBuilder.apply( partitionNumber ) + "," +
+                          getConstraintVariable(previousClassName) + ": " + "id )\n");
         for (int i = 0; i < numberOfJoins; i++) {
             final char nextClassName = (char) (previousClassName + 1);
             drlBuilder.append(nextClassName + "( " +

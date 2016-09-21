@@ -16,7 +16,6 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.common.util.ReteDumper;
@@ -32,22 +31,27 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
-    private static final boolean DUMP_DRL = false;
+    private static final boolean DUMP_DRL = true;
     private static final boolean DUMP_RETE = false;
 
-    @Param({"true", "false"})
-    private boolean multithread;
+    //@Param({"true", "false"})
+    private boolean multithread = true;
 
-    @Param({"true", "false"})
-    private boolean async;
+    //@Param({"true", "false"})
+    private boolean async = true;
 
-    @Param({"4", "8"})
-    private int numberOfPartitions;
+    //@Param({"true", "false"})
+    private boolean hashed = true;
 
-    @Param({"0", "1", "2", "4"})
-    private int numberOfJoins;
+    //@Param({"4", "8"})
+    private int numberOfPartitions = 4;
+
+    //@Param({"0", "1", "2", "4"})
+    private int numberOfJoins = 0;
 
     private boolean countFirings = true;
 
@@ -64,7 +68,11 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, "==", countFirings);
+        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins,
+                                                                        hashed ?
+                                                                            i -> "value == " + i :
+                                                                            i -> "boxedValue.equals(" + i + ")",
+                                                                        countFirings);
         String drl = drlProvider.getDrl(numberOfPartitions);
         if (DUMP_DRL) {
             System.out.println( drl );

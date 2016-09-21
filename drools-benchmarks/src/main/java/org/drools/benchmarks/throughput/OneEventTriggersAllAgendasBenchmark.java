@@ -41,7 +41,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
 
     @Setup
     public void setupKieBase() throws ProviderException {
-        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, ">", false);
+        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, i -> "value > " + i, false);
         createKieBaseFromDrl(
                 drlProvider.getDrl(numberOfPartitions),
                 EventProcessingOption.STREAM,
