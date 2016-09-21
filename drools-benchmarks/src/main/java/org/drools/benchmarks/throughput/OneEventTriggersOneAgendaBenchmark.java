@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.common.util.ReteDumper;
@@ -31,27 +32,25 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
-    private static final boolean DUMP_DRL = true;
+    private static final boolean DUMP_DRL = false;
     private static final boolean DUMP_RETE = false;
 
-    //@Param({"true", "false"})
-    private boolean multithread = true;
+    @Param({"true", "false"})
+    private boolean multithread;
 
     //@Param({"true", "false"})
     private boolean async = true;
 
-    //@Param({"true", "false"})
-    private boolean hashed = true;
+    @Param({"true", "false"})
+    private boolean hashed;
 
-    //@Param({"4", "8"})
-    private int numberOfPartitions = 4;
+//    @Param({"4", "8"})
+    private int numberOfPartitions = 8;
 
-    //@Param({"0", "1", "2", "4"})
-    private int numberOfJoins = 0;
+    @Param({"0", "1", "2", "4"})
+    private int numberOfJoins;
 
     private boolean countFirings = true;
 
