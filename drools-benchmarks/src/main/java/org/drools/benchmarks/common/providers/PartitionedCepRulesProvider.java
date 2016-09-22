@@ -50,7 +50,7 @@ public class PartitionedCepRulesProvider implements DrlProvider {
         appendCepHeader(drlBuilder);
 
         if (countFirings) {
-            drlBuilder.append("global java.util.concurrent.atomic.AtomicInteger firings;\n");
+            drlBuilder.append("global java.util.concurrent.atomic.LongAdder firings;\n");
         }
 
         for (int partitionNumber = 0; partitionNumber < numberOfRules; partitionNumber++) {
@@ -58,7 +58,7 @@ public class PartitionedCepRulesProvider implements DrlProvider {
             addJoins(drlBuilder, partitionNumber);
             drlBuilder.append( "then\n" );
             if (countFirings) {
-                drlBuilder.append("firings.incrementAndGet();\n");
+                drlBuilder.append("firings.add(1);\n");
             }
             drlBuilder.append( "end\n" );
         }

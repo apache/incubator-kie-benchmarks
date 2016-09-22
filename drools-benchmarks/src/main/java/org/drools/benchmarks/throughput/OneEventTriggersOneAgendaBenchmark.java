@@ -16,7 +16,7 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.common.util.ReteDumper;
@@ -54,14 +54,14 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
     private boolean countFirings = true;
 
-    private AtomicInteger insertCounter;
-    private static AtomicInteger firingCounter;
+    private LongAdder insertCounter;
+    private static LongAdder firingCounter;
 
     @AuxCounters
     @State(Scope.Thread)
     public static class FiringsCounter {
-        public int fireCount() {
-            return firingCounter.get();
+        public long fireCount() {
+            return firingCounter.longValue();
         }
     }
 
@@ -88,16 +88,16 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     @Setup(Level.Iteration)
     public void setupCounter() {
         if (countFirings) {
-            insertCounter = new AtomicInteger(0);
-            firingCounter = new AtomicInteger(0);
+            insertCounter = new LongAdder();
+            firingCounter = new LongAdder();
             kieSession.setGlobal( "firings", firingCounter );
         }
     }
 
     @Benchmark
-    public Integer insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
+    public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         if (countFirings) {
-            final int insertCount = insertCounter.get();
+            final long insertCount = insertCounter.longValue();
             if (insertCount % 100 == 99) {
                 while ( insertCount > ( getFiringsCount() * 1.1 ) ) {
                     // just wait.
@@ -107,10 +107,10 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
 
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, eater);
-        return insertCounter.incrementAndGet();
+        insertCounter.add(1);
     }
 
-    public int getFiringsCount() {
-        return firingCounter.get();
+    public long getFiringsCount() {
+        return firingCounter.longValue();
     }
 }

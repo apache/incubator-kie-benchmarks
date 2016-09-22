@@ -16,7 +16,7 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
@@ -31,7 +31,6 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
@@ -51,14 +50,14 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"0", "1", "2", "4"})
     private int numberOfJoins;
 
-    private AtomicInteger insertCounter;
-    private static AtomicInteger firingCounter;
+    private LongAdder insertCounter;
+    private static LongAdder firingCounter;
 
     @AuxCounters
     @State(Scope.Thread)
     public static class FiringsCounter {
-        public int fireCount() {
-            return firingCounter.get();
+        public long fireCount() {
+            return firingCounter.longValue();
         }
     }
 
@@ -81,8 +80,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
 
     @Setup(Level.Iteration)
     public void setupCounter() {
-        insertCounter = new AtomicInteger(0);
-        firingCounter = new AtomicInteger(0);
+        insertCounter = new LongAdder();
+        firingCounter = new LongAdder();
 
         // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
         AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
@@ -91,16 +90,16 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     }
 
     @Benchmark
-    public Integer insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
-        final int insertCount = insertCounter.get();
+    public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
+        final long insertCount = insertCounter.longValue();
         if (insertCount % 100 == 99) {
-            while ( insertCount > ( firingCounter.get() * 1.1 ) ) {
+            while ( insertCount > ( firingCounter.longValue() * 1.1 ) ) {
                 // just wait.
             }
         }
 
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
-        return insertCounter.incrementAndGet();
+        insertCounter.add(1);
     }
 }
