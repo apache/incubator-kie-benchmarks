@@ -45,7 +45,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"true"})
     private boolean async;
 
-    @Param({"4"})
+    @Param({"8"})
     private int numberOfPartitions;
 
     @Param({"0", "1", "2", "4"})
@@ -77,14 +77,16 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         if (DUMP_RETE) {
             ReteDumper.dumpRete( kieBase );
         }
-        // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
-        AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
     }
 
     @Setup(Level.Iteration)
     public void setupCounter() {
         insertCounter = new AtomicInteger(0);
         firingCounter = new AtomicInteger(0);
+
+        // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
+        AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
+
         kieSession.setGlobal("firings", firingCounter);
     }
 
