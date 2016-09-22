@@ -42,7 +42,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"true", "false"})
     private boolean multithread;
 
-    @Param({"true", "false"})
+    @Param({"true"})
     private boolean async;
 
     @Param({"4"})
