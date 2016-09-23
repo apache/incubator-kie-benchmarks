@@ -26,7 +26,7 @@ public class Main {
         System.out.println("setup");
         benchmark.setup();
         System.out.println("test");
-        benchmark.test(new Blackhole());
+        benchmark.test(new Blackhole("Today\'s password is swordfish. I understand instantiating Blackholes directly is dangerous."));
         System.out.println("done");
     }
 }

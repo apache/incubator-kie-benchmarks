@@ -47,8 +47,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"8"})
     private int numberOfPartitions;
 
-    @Param({"0", "1", "2", "4"})
-    private int numberOfJoins;
+//    @Param({"0", "1", "2", "4"})
+    private int numberOfJoins = 4;
 
     private LongAdder insertCounter;
     private static LongAdder firingCounter;
@@ -93,7 +93,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
         if (insertCount % 100 == 99) {
-            while ( insertCount > ( firingCounter.longValue() * 1.1 ) ) {
+            while ( (insertCount * numberOfPartitions) > ( firingCounter.longValue() * 1.1 ) ) {
                 // just wait.
             }
         }
