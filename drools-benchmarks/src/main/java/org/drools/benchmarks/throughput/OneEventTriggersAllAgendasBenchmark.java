@@ -47,8 +47,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"8"})
     private int numberOfPartitions;
 
-//    @Param({"0", "1", "2", "4"})
-    private int numberOfJoins = 4;
+    @Param({"0", "1", "2", "4"})
+    private int numberOfJoins;
 
     private LongAdder insertCounter;
     private static LongAdder firingCounter;
