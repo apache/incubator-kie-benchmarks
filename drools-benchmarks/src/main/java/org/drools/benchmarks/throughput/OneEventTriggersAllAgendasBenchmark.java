@@ -46,6 +46,9 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"0", "1", "2", "4"})
     private int numberOfJoins;
 
+    @Param({"1.1", "2.0", "3.0"})
+    private double insertRatio;
+
     @Setup
     public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, i -> "value > " + i, true);
@@ -77,7 +80,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
         if (insertCount % 100 == 99) {
-            while ( (insertCount * numberOfPartitions) > ( firingCounter.longValue() * 1.1 ) ) {
+            while ( (insertCount * numberOfPartitions) > ( firingCounter.longValue() * insertRatio ) ) {
                 // just wait.
             }
         }
