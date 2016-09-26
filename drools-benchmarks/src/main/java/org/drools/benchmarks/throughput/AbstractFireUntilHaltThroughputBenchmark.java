@@ -16,9 +16,6 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.benchmarks.domain.B;
@@ -26,6 +23,7 @@ import org.drools.benchmarks.domain.C;
 import org.drools.benchmarks.domain.D;
 import org.drools.benchmarks.domain.E;
 import org.drools.core.impl.StatefulKnowledgeSessionImpl;
+import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
@@ -33,10 +31,20 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.LongAdder;
+
 @State(Scope.Benchmark)
 public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
 
     private ExecutorService executor;
+
+    private boolean countFirings = true;
+
+    protected LongAdder insertCounter;
+    protected static LongAdder firingCounter;
 
     @Setup(Level.Iteration)
     @Override
@@ -44,6 +52,15 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
         createKieSession();
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> kieSession.fireUntilHalt());
+    }
+
+    @Setup(Level.Iteration)
+    public void setupCounter() {
+        if (countFirings) {
+            insertCounter = new LongAdder();
+            firingCounter = new LongAdder();
+            kieSession.setGlobal( "firings", firingCounter );
+        }
     }
 
     @TearDown(Level.Iteration)
@@ -55,6 +72,14 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @AuxCounters
+    @State(Scope.Thread)
+    public static class FiringsCounter {
+        public long fireCount() {
+            return firingCounter.longValue();
         }
     }
 
@@ -113,5 +138,12 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
         } else {
             ((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event);
         }
+    }
+
+    public abstract void setupKieBase();
+    public abstract void insertEvent(final Blackhole eater, final FiringsCounter resultFirings );
+
+    public long getFiringsCount() {
+        return firingCounter.longValue();
     }
 }

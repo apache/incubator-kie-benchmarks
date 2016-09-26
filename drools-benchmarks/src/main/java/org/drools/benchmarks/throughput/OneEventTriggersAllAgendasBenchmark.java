@@ -16,21 +16,17 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.LongAdder;
 import org.drools.benchmarks.common.DrlProvider;
-import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
+import org.drools.core.impl.InternalKnowledgeBase;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
-import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
@@ -50,19 +46,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"0", "1", "2", "4"})
     private int numberOfJoins;
 
-    private LongAdder insertCounter;
-    private static LongAdder firingCounter;
-
-    @AuxCounters
-    @State(Scope.Thread)
-    public static class FiringsCounter {
-        public long fireCount() {
-            return firingCounter.longValue();
-        }
-    }
-
     @Setup
-    public void setupKieBase() throws ProviderException {
+    public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, i -> "value > " + i, true);
         String drl = drlProvider.getDrl(numberOfPartitions);
         if (DUMP_DRL) {
@@ -76,17 +61,16 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         if (DUMP_RETE) {
             ReteDumper.dumpRete( kieBase );
         }
+        if ( ((InternalKnowledgeBase)kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
+            throw new IllegalStateException();
+        }
     }
 
     @Setup(Level.Iteration)
     public void setupCounter() {
-        insertCounter = new LongAdder();
-        firingCounter = new LongAdder();
-
+        super.setupCounter();
         // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
         AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
-
-        kieSession.setGlobal("firings", firingCounter);
     }
 
     @Benchmark
@@ -101,5 +85,9 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
         insertCounter.add(1);
+    }
+
+    public long getFiringsCount() {
+        return firingCounter.longValue();
     }
 }

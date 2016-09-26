@@ -16,20 +16,16 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.atomic.LongAdder;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
+import org.drools.core.impl.InternalKnowledgeBase;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
-import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
@@ -46,24 +42,13 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     @Param({"true", "false"})
     private boolean hashed;
 
-//    @Param({"4", "8"})
-    private int numberOfPartitions = 8;
+    @Param({"4", "8"})
+    private int numberOfPartitions;
 
     @Param({"0", "1", "2", "4"})
     private int numberOfJoins;
 
     private boolean countFirings = true;
-
-    private LongAdder insertCounter;
-    private static LongAdder firingCounter;
-
-    @AuxCounters
-    @State(Scope.Thread)
-    public static class FiringsCounter {
-        public long fireCount() {
-            return firingCounter.longValue();
-        }
-    }
 
     @Setup
     public void setupKieBase() {
@@ -83,14 +68,8 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
         if (DUMP_RETE) {
             ReteDumper.dumpRete( kieBase );
         }
-    }
-
-    @Setup(Level.Iteration)
-    public void setupCounter() {
-        if (countFirings) {
-            insertCounter = new LongAdder();
-            firingCounter = new LongAdder();
-            kieSession.setGlobal( "firings", firingCounter );
+        if (((InternalKnowledgeBase)kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
+            throw new IllegalStateException();
         }
     }
 
@@ -108,9 +87,5 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, eater);
         insertCounter.add(1);
-    }
-
-    public long getFiringsCount() {
-        return firingCounter.longValue();
     }
 }

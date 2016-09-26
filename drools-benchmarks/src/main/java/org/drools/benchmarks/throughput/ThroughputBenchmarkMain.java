@@ -16,9 +16,9 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.ExecutionException;
+public class ThroughputBenchmarkMain {
 
-public class OneEventTriggersOneAgendaBenchmarkMain {
+    private static final boolean oneTriggerOne = false;
 
     private static final int BENCHMARK_DURATION_IN_SECONDS = 10;
 
@@ -26,7 +26,9 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
     private static final int WARMUP_INSERTS = 2_000_000;
 
     public static void main( String[] args ) {
-        OneEventTriggersOneAgendaBenchmark benchmark = new OneEventTriggersOneAgendaBenchmark();
+        AbstractFireUntilHaltThroughputBenchmark benchmark = oneTriggerOne ?
+                                                             new OneEventTriggersOneAgendaBenchmark() :
+                                                             new OneEventTriggersAllAgendasBenchmark();
         benchmark.setupKieBase();
         benchmark.setup();
         benchmark.setupCounter();
@@ -62,7 +64,7 @@ public class OneEventTriggersOneAgendaBenchmarkMain {
         terminate( benchmark );
     }
 
-    private static void terminate( OneEventTriggersOneAgendaBenchmark benchmark ) {
+    private static void terminate( AbstractFireUntilHaltThroughputBenchmark benchmark ) {
         benchmark.tearDown();
         benchmark.stopFireUntilHaltThread();
     }
