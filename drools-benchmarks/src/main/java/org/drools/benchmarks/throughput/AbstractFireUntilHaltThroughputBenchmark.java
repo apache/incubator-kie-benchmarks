@@ -52,15 +52,7 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
         createKieSession();
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> kieSession.fireUntilHalt());
-    }
-
-    @Setup(Level.Iteration)
-    public void setupCounter() {
-        if (countFirings) {
-            insertCounter = new LongAdder();
-            firingCounter = new LongAdder();
-            kieSession.setGlobal( "firings", firingCounter );
-        }
+        setupCounter();
     }
 
     @TearDown(Level.Iteration)
@@ -80,6 +72,14 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
     public static class FiringsCounter {
         public long fireCount() {
             return firingCounter.longValue();
+        }
+    }
+
+    public void setupCounter() {
+        if (countFirings) {
+            insertCounter = new LongAdder();
+            firingCounter = new LongAdder();
+            kieSession.setGlobal( "firings", firingCounter );
         }
     }
 

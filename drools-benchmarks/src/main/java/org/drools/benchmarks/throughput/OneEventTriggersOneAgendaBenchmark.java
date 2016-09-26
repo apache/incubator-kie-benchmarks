@@ -74,6 +74,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     }
 
     @Benchmark
+    @Override
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         if (countFirings) {
             final long insertCount = insertCounter.longValue();

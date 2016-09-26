@@ -24,7 +24,6 @@ import org.drools.core.impl.InternalKnowledgeBase;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
@@ -50,6 +49,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     private double insertRatio;
 
     @Setup
+    @Override
     public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, i -> "value > " + i, true);
         String drl = drlProvider.getDrl(numberOfPartitions);
@@ -69,14 +69,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         }
     }
 
-    @Setup(Level.Iteration)
-    public void setupCounter() {
-        super.setupCounter();
-        // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
-        AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
-    }
-
     @Benchmark
+    @Override
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
         if (insertCount % 100 == 99) {
@@ -88,6 +82,13 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
         insertCounter.add(1);
+    }
+
+    @Override
+    public void setupCounter() {
+        super.setupCounter();
+        // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
+        AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
     }
 
     public long getFiringsCount() {
