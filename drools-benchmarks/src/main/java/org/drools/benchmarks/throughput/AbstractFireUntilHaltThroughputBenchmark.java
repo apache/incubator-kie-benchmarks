@@ -50,9 +50,9 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
     @Override
     public void setup() {
         createKieSession();
+        setupCounter();
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> kieSession.fireUntilHalt());
-        setupCounter();
     }
 
     @TearDown(Level.Iteration)
