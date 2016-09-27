@@ -34,19 +34,19 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     private static final boolean DUMP_RETE = false;
 
     @Param({"true", "false"})
-    private boolean multithread;
+    private boolean multithread = true;
 
     @Param({"true"})
-    private boolean async;
+    private boolean async = true;
 
-    @Param({"8"})
-    private int numberOfPartitions;
+    @Param({"4", "8"})
+    private int numberOfPartitions = 8;
 
     @Param({"0", "1", "2", "4"})
-    private int numberOfJoins;
+    private int numberOfJoins = 1;
 
-    @Param({"1.1", "2.0", "3.0"})
-    private double insertRatio;
+    @Param({"1.1", "1.5", "2.0"})
+    private double insertRatio = 1.1;
 
     @Setup
     @Override
