@@ -43,21 +43,25 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     private boolean hashed;
 
     @Param({"4", "8"})
-    private int numberOfPartitions;
+    private int numberOfRules;
 
     @Param({"0", "1", "2", "4"})
     private int numberOfJoins;
+
+    @Param({"1", "4", "10"})
+    private int numberOfJoinedEvents;
 
     private boolean countFirings = true;
 
     @Setup
     public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins,
+                                                                        numberOfJoinedEvents,
                                                                         hashed ?
                                                                             i -> "value == " + i :
                                                                             i -> "boxedValue.equals(" + i + ")",
                                                                         countFirings);
-        String drl = drlProvider.getDrl(numberOfPartitions);
+        String drl = drlProvider.getDrl(numberOfRules);
         if (DUMP_DRL) {
             System.out.println( drl );
         }
@@ -86,7 +90,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
         }
 
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id, (int) (id % numberOfPartitions), async, eater);
+        insertJoinEvents(numberOfJoins, id, (int) (id % numberOfRules), async, eater);
         insertCounter.add(1);
     }
 }

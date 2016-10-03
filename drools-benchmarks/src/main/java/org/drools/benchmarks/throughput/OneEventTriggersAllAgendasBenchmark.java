@@ -34,25 +34,29 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     private static final boolean DUMP_RETE = false;
 
     @Param({"true", "false"})
-    private boolean multithread = true;
+    private boolean multithread;
 
     @Param({"true"})
-    private boolean async = true;
+    private boolean async;
 
-    @Param({"4", "8"})
-    private int numberOfPartitions = 8;
+    @Param({"8"})
+    private int numberOfRules;
 
     @Param({"0", "1", "2", "4"})
-    private int numberOfJoins = 1;
+    private int numberOfJoins;
 
-    @Param({"1.1", "1.5", "2.0"})
-    private double insertRatio = 1.1;
+    @Param({"2.0"})
+    private double insertRatio;
+
+    @Param({"10"})
+    private int numberOfJoinedEvents;
 
     @Setup
     @Override
     public void setupKieBase() {
-        final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins, i -> "value > " + i, true);
-        String drl = drlProvider.getDrl(numberOfPartitions);
+        final DrlProvider drlProvider =
+                new PartitionedCepRulesProvider(numberOfJoins, numberOfJoinedEvents, i -> "value > " + i, true);
+        String drl = drlProvider.getDrl(numberOfRules);
         if (DUMP_DRL) {
             System.out.println( drl );
         }
@@ -74,7 +78,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
         if (insertCount % 100 == 99) {
-            while ( (insertCount * numberOfPartitions) > ( firingCounter.longValue() * insertRatio ) ) {
+            while ( (insertCount * numberOfRules) > ( firingCounter.longValue() * insertRatio ) ) {
                 // just wait.
             }
         }
@@ -88,7 +92,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     public void setupCounter() {
         super.setupCounter();
         // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
-        AbstractBean.setIdGeneratorValue(numberOfPartitions + 1);
+        AbstractBean.setIdGeneratorValue(numberOfRules + 1);
     }
 
     public long getFiringsCount() {

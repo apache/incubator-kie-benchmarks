@@ -28,11 +28,14 @@ public class PartitionedCepRulesProvider implements DrlProvider {
 
     private final Function<Object, String> constraintBuilder;
     private final int numberOfJoins;
+    private final int numberOfJoinedEvents;
 
     private final boolean countFirings;
 
-    public PartitionedCepRulesProvider(int numberOfJoins, Function<Object, String> constraintBuilder, boolean countFirings) {
+    public PartitionedCepRulesProvider(final int numberOfJoins, final int numberOfJoinedEvents,
+            final Function<Object, String> constraintBuilder, final boolean countFirings) {
         this.numberOfJoins = numberOfJoins;
+        this.numberOfJoinedEvents = numberOfJoinedEvents;
         this.constraintBuilder = constraintBuilder;
         this.countFirings = countFirings;
     }
@@ -72,8 +75,11 @@ public class PartitionedCepRulesProvider implements DrlProvider {
                           getConstraintVariable(previousClassName) + ": " + "id )\n");
         for (int i = 0; i < numberOfJoins; i++) {
             final char nextClassName = (char) (previousClassName + 1);
-            drlBuilder.append(nextClassName + "( " +
-                    getConstraintVariable(nextClassName) + ": id == " + getConstraintVariable(previousClassName) + " )\n");
+            final String nextVariableName = getConstraintVariable(nextClassName);
+            final String previousVariableName = getConstraintVariable(previousClassName);
+            drlBuilder.append(nextClassName + "( (" +
+                    nextVariableName + ": id <= " + previousVariableName
+                        + ") && (" + nextVariableName + " > (" + previousVariableName + " - " + numberOfJoinedEvents + " )))\n");
             previousClassName = nextClassName;
         }
     }
