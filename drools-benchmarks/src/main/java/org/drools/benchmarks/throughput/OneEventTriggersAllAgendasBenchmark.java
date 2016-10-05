@@ -30,11 +30,11 @@ import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
-    private static final boolean DUMP_DRL = true;
+    private static final boolean DUMP_DRL = false;
     private static final boolean DUMP_RETE = false;
 
-    @Param({"false"})
-    private boolean multithread = false;
+    @Param({"true", "false"})
+    private boolean multithread = true;
 
     @Param({"true"})
     private boolean async = true;
@@ -49,9 +49,10 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     private double insertRatio = 2.0;
 
     @Param({"10"})
-    private int numberOfJoinedEvents = 1;
+    private int numberOfJoinedEvents = 10;
 
     private long firingsPerInsert;
+    private long missingFiringsOnFirstEvents;
 
     @Setup
     @Override
@@ -74,24 +75,24 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
             throw new IllegalStateException();
         }
 
-        firingsPerInsert = numberOfRules * (long)Math.pow(numberOfJoinedEvents, numberOfJoins);
-        System.out.println("(numberOfJoinedEvents ^ numberOfJoins) = " + (numberOfJoinedEvents ^ numberOfJoins));
-        System.out.println("firingsPerInsert = " + firingsPerInsert);
+        long firingsPerRule = (long)Math.pow( Math.max(1, numberOfJoinedEvents), Math.max(1, numberOfJoins) );
+        firingsPerInsert = numberOfRules * firingsPerRule;
+        if (numberOfJoinedEvents > 1 && numberOfJoins > 0) {
+            for (int i = 1; i <= numberOfJoinedEvents; i++) {
+                missingFiringsOnFirstEvents += (firingsPerRule - (long)Math.pow( i, numberOfJoins ));
+            }
+            missingFiringsOnFirstEvents *= numberOfRules;
+        }
     }
 
     @Benchmark
     @Override
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
-        if (insertCount % 10 == 9) {
-            final long expectedFirings = insertCount * firingsPerInsert;
+        if (insertCount % 100 == 99) {
+            final long expectedFirings = (insertCount * firingsPerInsert) - missingFiringsOnFirstEvents;
             while ( expectedFirings > ( firingCounter.longValue() * insertRatio ) ) {
-                System.out.println("expectedFirings = " + expectedFirings + "; firingCounter = " + firingCounter.longValue());
-                try {
-                    Thread.sleep( 100L );
-                } catch (InterruptedException e) {
-                    throw new RuntimeException( e );
-                }
+                Thread.yield();
                 // just wait.
             }
         }

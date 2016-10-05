@@ -77,9 +77,15 @@ public class PartitionedCepRulesProvider implements DrlProvider {
             final char nextClassName = (char) (previousClassName + 1);
             final String nextVariableName = getConstraintVariable(nextClassName);
             final String previousVariableName = getConstraintVariable(previousClassName);
-            drlBuilder.append(nextClassName + "( (" +
-                    nextVariableName + ": id <= " + previousVariableName
-                        + ") && (" + nextVariableName + " > (" + previousVariableName + " - " + numberOfJoinedEvents + " )))\n");
+            if (numberOfJoinedEvents > 0) {
+                drlBuilder.append( nextClassName + "( (" +
+                                   nextVariableName + ": id <= " + previousVariableName
+                                   + ") && (id > (" + previousVariableName + " - " + numberOfJoinedEvents + " )))\n" );
+            } else {
+                drlBuilder.append( nextClassName + "( " +
+                                   nextVariableName + ": id == " + previousVariableName + ")" );
+
+            }
             previousClassName = nextClassName;
         }
     }

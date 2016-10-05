@@ -85,7 +85,6 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
 
     protected void insertJoinEvents(final int numberOfJoins, final long eventId, final int eventValue,
             final boolean async, final Blackhole eater) {
-        System.out.println("eventId = " + eventId + "; eventValue = " + eventValue);
         switch (numberOfJoins) {
             case 0:
                 insertJoinEvent(new A(eventId, eventValue), async, eater);
