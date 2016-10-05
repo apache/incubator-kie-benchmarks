@@ -30,26 +30,28 @@ import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
-    private static final boolean DUMP_DRL = false;
+    private static final boolean DUMP_DRL = true;
     private static final boolean DUMP_RETE = false;
 
-    @Param({"true", "false"})
-    private boolean multithread;
+    @Param({"false"})
+    private boolean multithread = false;
 
     @Param({"true"})
-    private boolean async;
+    private boolean async = true;
 
     @Param({"8"})
-    private int numberOfRules;
+    private int numberOfRules = 8;
 
-    @Param({"0", "1", "2", "4"})
-    private int numberOfJoins;
+    @Param({"1"})
+    private int numberOfJoins = 1;
 
     @Param({"2.0"})
-    private double insertRatio;
+    private double insertRatio = 2.0;
 
     @Param({"10"})
-    private int numberOfJoinedEvents;
+    private int numberOfJoinedEvents = 1;
+
+    private long firingsPerInsert;
 
     @Setup
     @Override
@@ -71,15 +73,25 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         if ( ((InternalKnowledgeBase)kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
             throw new IllegalStateException();
         }
+
+        firingsPerInsert = numberOfRules * (long)Math.pow(numberOfJoinedEvents, numberOfJoins);
+        System.out.println("(numberOfJoinedEvents ^ numberOfJoins) = " + (numberOfJoinedEvents ^ numberOfJoins));
+        System.out.println("firingsPerInsert = " + firingsPerInsert);
     }
 
     @Benchmark
     @Override
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
-        if (insertCount % 100 == 99) {
-            final long expectedFirings = insertCount * numberOfRules * (numberOfJoinedEvents ^ numberOfJoins);
+        if (insertCount % 10 == 9) {
+            final long expectedFirings = insertCount * firingsPerInsert;
             while ( expectedFirings > ( firingCounter.longValue() * insertRatio ) ) {
+                System.out.println("expectedFirings = " + expectedFirings + "; firingCounter = " + firingCounter.longValue());
+                try {
+                    Thread.sleep( 100L );
+                } catch (InterruptedException e) {
+                    throw new RuntimeException( e );
+                }
                 // just wait.
             }
         }
