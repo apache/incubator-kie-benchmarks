@@ -78,7 +78,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
         if (insertCount % 100 == 99) {
-            while ( (insertCount * numberOfRules) > ( firingCounter.longValue() * insertRatio ) ) {
+            final long expectedFirings = insertCount * numberOfRules * (numberOfJoinedEvents ^ numberOfJoins);
+            while ( expectedFirings > ( firingCounter.longValue() * insertRatio ) ) {
                 // just wait.
             }
         }
