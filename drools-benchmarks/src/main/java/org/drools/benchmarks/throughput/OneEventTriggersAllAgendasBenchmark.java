@@ -32,6 +32,7 @@ import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
+    private static final long EVENT_EXPIRATION_BASE_MS = 10;
     private static final boolean DUMP_DRL = false;
     private static final boolean DUMP_RETE = false;
 
@@ -53,9 +54,11 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"10"})
     private int numberOfJoinedEvents = 10;
 
-    // -1 is used as no
-    @Param({"5", "10", "-1"})
-    private long eventsExpirationMs;
+    @Param({"true", "false"})
+    private boolean eventsExpiration;
+
+    @Param({"1", "2", "3"})
+    private int eventsExpirationRatio;
 
     private long firingsPerInsert;
     private long missingFiringsOnFirstEvents;
@@ -63,11 +66,12 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Setup
     @Override
     public void setupKieBase() {
-        if (eventsExpirationMs == -1) {
-            eventsExpirationMs = Long.MAX_VALUE;
-        }
+        final long eventExpirationMs = eventsExpiration ?
+                EVENT_EXPIRATION_BASE_MS * numberOfJoinedEvents * eventsExpirationRatio
+                : Long.MAX_VALUE;
+
         final DrlProvider drlProvider =
-                new PartitionedCepRulesProvider(numberOfJoins, numberOfJoinedEvents, eventsExpirationMs, i -> "value > " + i, true);
+                new PartitionedCepRulesProvider(numberOfJoins, numberOfJoinedEvents, eventExpirationMs, i -> "value > " + i, true);
         String drl = drlProvider.getDrl(numberOfRules);
         if (DUMP_DRL) {
             System.out.println( drl );
@@ -110,7 +114,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
         insertCounter.add(1);
         if (pseudoClock) {
-            ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(eventsExpirationMs, TimeUnit.MILLISECONDS);
+            ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(EVENT_EXPIRATION_BASE_MS, TimeUnit.MILLISECONDS);
         }
     }
 
