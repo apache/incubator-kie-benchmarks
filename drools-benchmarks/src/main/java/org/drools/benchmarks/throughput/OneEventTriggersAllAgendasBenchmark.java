@@ -16,11 +16,13 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.core.impl.InternalKnowledgeBase;
+import org.drools.core.time.SessionPseudoClock;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -51,14 +53,21 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"10"})
     private int numberOfJoinedEvents = 10;
 
+    // -1 is used as no
+    @Param({"5", "10", "-1"})
+    private long eventsExpirationMs;
+
     private long firingsPerInsert;
     private long missingFiringsOnFirstEvents;
 
     @Setup
     @Override
     public void setupKieBase() {
+        if (eventsExpirationMs == -1) {
+            eventsExpirationMs = Long.MAX_VALUE;
+        }
         final DrlProvider drlProvider =
-                new PartitionedCepRulesProvider(numberOfJoins, numberOfJoinedEvents, i -> "value > " + i, true);
+                new PartitionedCepRulesProvider(numberOfJoins, numberOfJoinedEvents, eventsExpirationMs, i -> "value > " + i, true);
         String drl = drlProvider.getDrl(numberOfRules);
         if (DUMP_DRL) {
             System.out.println( drl );
@@ -100,6 +109,9 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
         insertCounter.add(1);
+        if (pseudoClock) {
+            ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(eventsExpirationMs, TimeUnit.MILLISECONDS);
+        }
     }
 
     @Override

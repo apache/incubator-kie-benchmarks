@@ -57,6 +57,7 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
     public void setupKieBase() {
         final DrlProvider drlProvider = new PartitionedCepRulesProvider(numberOfJoins,
                                                                         numberOfJoinedEvents,
+                                                                        Long.MAX_VALUE,
                                                                         hashed ?
                                                                             i -> "value == " + i :
                                                                             i -> "boxedValue.equals(" + i + ")",

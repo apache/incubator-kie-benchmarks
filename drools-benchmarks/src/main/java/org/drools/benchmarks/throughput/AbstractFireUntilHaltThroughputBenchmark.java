@@ -16,6 +16,10 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.LongAdder;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.benchmarks.domain.B;
@@ -23,21 +27,22 @@ import org.drools.benchmarks.domain.C;
 import org.drools.benchmarks.domain.D;
 import org.drools.benchmarks.domain.E;
 import org.drools.core.impl.StatefulKnowledgeSessionImpl;
+import org.drools.core.time.SessionPseudoClock;
+import org.kie.api.runtime.conf.ClockTypeOption;
 import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.LongAdder;
-
 @State(Scope.Benchmark)
 public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
+
+    @Param({"true", "false"})
+    protected boolean pseudoClock;
 
     private ExecutorService executor;
 
@@ -49,7 +54,12 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        if (pseudoClock) {
+            createKieSession(ClockTypeOption.get("pseudo"));
+            ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(1, TimeUnit.MILLISECONDS);
+        } else {
+            createKieSession();
+        }
         setupCounter();
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> kieSession.fireUntilHalt());

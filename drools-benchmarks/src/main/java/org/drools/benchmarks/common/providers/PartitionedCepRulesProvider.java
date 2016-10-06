@@ -29,13 +29,16 @@ public class PartitionedCepRulesProvider implements DrlProvider {
     private final Function<Object, String> constraintBuilder;
     private final int numberOfJoins;
     private final int numberOfJoinedEvents;
+    private final long eventsExpirationMs;
 
     private final boolean countFirings;
 
     public PartitionedCepRulesProvider(final int numberOfJoins, final int numberOfJoinedEvents,
-            final Function<Object, String> constraintBuilder, final boolean countFirings) {
+            final long eventsExpirationMs, final Function<Object, String> constraintBuilder,
+            final boolean countFirings) {
         this.numberOfJoins = numberOfJoins;
         this.numberOfJoinedEvents = numberOfJoinedEvents;
+        this.eventsExpirationMs = eventsExpirationMs;
         this.constraintBuilder = constraintBuilder;
         this.countFirings = countFirings;
     }
@@ -94,7 +97,7 @@ public class PartitionedCepRulesProvider implements DrlProvider {
         char domainClassName = 'A';
         // Number of joins + 1 because of first class.
         for (int i = 0; i <= numberOfJoins; i++) {
-            drlBuilder.append("declare " + domainClassName + " @role( event ) end\n");
+            drlBuilder.append("declare " + domainClassName + " @role( event ) @expires(" + eventsExpirationMs + "ms) end\n");
             domainClassName++;
         }
     }
