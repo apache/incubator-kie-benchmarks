@@ -97,7 +97,11 @@ public class PartitionedCepRulesProvider implements DrlProvider {
         char domainClassName = 'A';
         // Number of joins + 1 because of first class.
         for (int i = 0; i <= numberOfJoins; i++) {
-            drlBuilder.append("declare " + domainClassName + " @role( event ) @expires(" + eventsExpirationMs + "ms) end\n");
+            drlBuilder.append("declare " + domainClassName + " @role( event ) ");
+            if (eventsExpirationMs > 0) {
+                drlBuilder.append("@expires(" + eventsExpirationMs + "ms) ");
+            }
+            drlBuilder.append("end\n");
             domainClassName++;
         }
     }

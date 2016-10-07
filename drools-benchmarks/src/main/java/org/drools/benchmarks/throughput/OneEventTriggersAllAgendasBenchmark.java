@@ -16,7 +16,6 @@
 
 package org.drools.benchmarks.throughput;
 
-import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.common.util.ReteDumper;
@@ -30,6 +29,8 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.concurrent.TimeUnit;
+
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
     private static final long EVENT_EXPIRATION_BASE_MS = 10;
@@ -37,10 +38,10 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     private static final boolean DUMP_RETE = false;
 
     @Param({"true", "false"})
-    private boolean multithread = true;
+    private boolean multithread = false;
 
-    @Param({"true"})
-    private boolean async = true;
+    @Param({"false"})
+    private boolean async = false;
 
     @Param({"8"})
     private int numberOfRules = 8;
@@ -52,13 +53,13 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     private double insertRatio = 2.0;
 
     @Param({"10"})
-    private int numberOfJoinedEvents = 10;
+    private int numberOfJoinedEvents = 2;
 
     @Param({"true", "false"})
-    private boolean eventsExpiration;
+    private boolean eventsExpiration = true;
 
     @Param({"1", "2", "3"})
-    private int eventsExpirationRatio;
+    private int eventsExpirationRatio = 2;
 
     private long firingsPerInsert;
     private long missingFiringsOnFirstEvents;
@@ -67,8 +68,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Override
     public void setupKieBase() {
         final long eventExpirationMs = eventsExpiration ?
-                EVENT_EXPIRATION_BASE_MS * numberOfJoinedEvents * eventsExpirationRatio
-                : Long.MAX_VALUE;
+                EVENT_EXPIRATION_BASE_MS * Math.max(1, numberOfJoinedEvents) * eventsExpirationRatio :
+                -1L;
 
         final DrlProvider drlProvider =
                 new PartitionedCepRulesProvider(numberOfJoins, numberOfJoinedEvents, eventExpirationMs, i -> "value > " + i, true);
@@ -113,7 +114,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
         insertCounter.add(1);
-        if (pseudoClock) {
+        if (eventsExpiration && pseudoClock) {
             ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(EVENT_EXPIRATION_BASE_MS, TimeUnit.MILLISECONDS);
         }
     }
