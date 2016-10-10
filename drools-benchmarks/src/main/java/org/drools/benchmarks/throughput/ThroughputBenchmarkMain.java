@@ -51,10 +51,8 @@ public class ThroughputBenchmarkMain {
         while (true) {
             benchmark.insertEvent(null, null);
             i++;
-            if (i % 1000 == 0) {
-                if (System.nanoTime() > end) {
-                    break;
-                }
+            if (System.nanoTime() > end) {
+                break;
             }
         }
 

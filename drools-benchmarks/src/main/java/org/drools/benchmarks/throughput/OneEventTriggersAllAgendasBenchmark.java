@@ -46,23 +46,25 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"8"})
     private int numberOfRules = 8;
 
-    @Param({"1"})
+    @Param({"1", "2", "4"})
     private int numberOfJoins = 1;
 
     @Param({"2.0"})
     private double insertRatio = 2.0;
 
-    @Param({"10"})
+    @Param({"1", "2", "4", "8"})
     private int numberOfJoinedEvents = 2;
 
-    @Param({"true", "false"})
+    @Param({"true"})
     private boolean eventsExpiration = true;
 
-    @Param({"1", "2", "3"})
+    @Param({"2"})
     private int eventsExpirationRatio = 2;
 
     private long firingsPerInsert;
     private long missingFiringsOnFirstEvents;
+
+    private int maxWait;
 
     @Setup
     @Override
@@ -104,12 +106,19 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
         final long expectedFirings = (insertCount * firingsPerInsert) - missingFiringsOnFirstEvents;
-        for (int i = 0; i < 10000; i++) {
+
+        int i = 0;
+        while (i < maxWait) {
             if (expectedFirings > ( firingCounter.longValue() * insertRatio )) {
                 Blackhole.consumeCPU(1024);
+                i++;
             } else {
                 break;
             }
+        }
+
+        if (i == maxWait && maxWait < 1_000_000_000) {
+            maxWait *= 2;
         }
 
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
@@ -125,6 +134,8 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         super.setupCounter();
         // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
         AbstractBean.setIdGeneratorValue(numberOfRules + 1);
+
+        maxWait = 1000;
     }
 
     public long getFiringsCount() {

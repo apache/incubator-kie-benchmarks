@@ -42,7 +42,7 @@ import java.util.concurrent.atomic.LongAdder;
 @State(Scope.Benchmark)
 public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
 
-    @Param({"true", "false"})
+    @Param({"true"})
     protected boolean pseudoClock = true;
 
     private ExecutorService executor;
