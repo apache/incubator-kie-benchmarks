@@ -105,9 +105,12 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         final long insertCount = insertCounter.longValue();
         if (insertCount % 100 == 99) {
             final long expectedFirings = (insertCount * firingsPerInsert) - missingFiringsOnFirstEvents;
-            while ( expectedFirings > ( firingCounter.longValue() * insertRatio ) ) {
-                Thread.yield();
-                // just wait.
+            for (int i = 0; i < 10000; i++) {
+                if (expectedFirings > ( firingCounter.longValue() * insertRatio )) {
+                    Blackhole.consumeCPU(1024);
+                } else {
+                    break;
+                }
             }
         }
 
