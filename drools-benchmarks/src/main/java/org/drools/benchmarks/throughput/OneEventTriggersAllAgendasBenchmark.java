@@ -103,14 +103,12 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Override
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long insertCount = insertCounter.longValue();
-        if (insertCount % 100 == 99) {
-            final long expectedFirings = (insertCount * firingsPerInsert) - missingFiringsOnFirstEvents;
-            for (int i = 0; i < 10000; i++) {
-                if (expectedFirings > ( firingCounter.longValue() * insertRatio )) {
-                    Blackhole.consumeCPU(1024);
-                } else {
-                    break;
-                }
+        final long expectedFirings = (insertCount * firingsPerInsert) - missingFiringsOnFirstEvents;
+        for (int i = 0; i < 10000; i++) {
+            if (expectedFirings > ( firingCounter.longValue() * insertRatio )) {
+                Blackhole.consumeCPU(1024);
+            } else {
+                break;
             }
         }
 
