@@ -21,6 +21,7 @@ public class ThroughputBenchmarkMain {
     private static final boolean oneTriggerOne = false;
 
     private static final int BENCHMARK_DURATION_IN_SECONDS = 10;
+    private static final int BENCHMARK_DURATION_IN_EVENTS = 10;
 
     private static final boolean DO_WARMUP = false;
     private static final int WARMUP_INSERTS = 2_000_000;
@@ -48,12 +49,18 @@ public class ThroughputBenchmarkMain {
         long end = start + ( BENCHMARK_DURATION_IN_SECONDS * 1_000_000_000L );
 
         int i = 0;
-        while (true) {
+        while (BENCHMARK_DURATION_IN_EVENTS < 0 || i < BENCHMARK_DURATION_IN_EVENTS) {
             benchmark.insertEvent(null, null);
             i++;
             if (System.nanoTime() > end) {
                 break;
             }
+        }
+
+        try {
+            Thread.sleep( 1000L );
+        } catch (InterruptedException e) {
+            throw new RuntimeException( e );
         }
 
         System.out.println("inserts = " + i);

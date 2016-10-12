@@ -61,7 +61,8 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
                                                                         hashed ?
                                                                             i -> "value == " + i :
                                                                             i -> "boxedValue.equals(" + i + ")",
-                                                                        countFirings);
+                                                                        countFirings,
+                                                                        false);
         String drl = drlProvider.getDrl(numberOfRules);
         if (DUMP_DRL) {
             System.out.println( drl );

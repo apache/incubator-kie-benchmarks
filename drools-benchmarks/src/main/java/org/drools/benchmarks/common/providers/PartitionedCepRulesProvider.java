@@ -18,6 +18,7 @@ package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.domain.A;
+import org.drools.benchmarks.throughput.FireLogger;
 
 import java.util.function.Function;
 
@@ -32,15 +33,17 @@ public class PartitionedCepRulesProvider implements DrlProvider {
     private final long eventsExpirationMs;
 
     private final boolean countFirings;
+    private final boolean logFirings;
 
     public PartitionedCepRulesProvider(final int numberOfJoins, final int numberOfJoinedEvents,
             final long eventsExpirationMs, final Function<Object, String> constraintBuilder,
-            final boolean countFirings) {
+            final boolean countFirings, final boolean logFirings) {
         this.numberOfJoins = numberOfJoins;
         this.numberOfJoinedEvents = numberOfJoinedEvents;
         this.eventsExpirationMs = eventsExpirationMs;
         this.constraintBuilder = constraintBuilder;
         this.countFirings = countFirings;
+        this.logFirings = logFirings;
     }
 
     @Override
@@ -58,6 +61,9 @@ public class PartitionedCepRulesProvider implements DrlProvider {
         if (countFirings) {
             drlBuilder.append("global java.util.concurrent.atomic.LongAdder firings;\n");
         }
+        if (logFirings) {
+            drlBuilder.append( "global " + FireLogger.class.getCanonicalName() + " logger;\n" );
+        }
 
         for (int partitionNumber = 0; partitionNumber < numberOfRules; partitionNumber++) {
             drlBuilder.append(" rule R" + partitionNumber + " when\n");
@@ -65,6 +71,9 @@ public class PartitionedCepRulesProvider implements DrlProvider {
             drlBuilder.append( "then\n" );
             if (countFirings) {
                 drlBuilder.append("firings.add(1);\n");
+            }
+            if (logFirings) {
+                drlBuilder.append("logger.log(" + partitionNumber + ", " + getJoinEvents() + ");\n");
             }
             drlBuilder.append( "end\n" );
         }
@@ -74,18 +83,18 @@ public class PartitionedCepRulesProvider implements DrlProvider {
 
     public void addJoins(final StringBuilder drlBuilder, final int partitionNumber) {
         char previousClassName = 'A';
-        drlBuilder.append(previousClassName + "( " + constraintBuilder.apply( partitionNumber ) + "," +
+        drlBuilder.append(getFactBinding(previousClassName) + previousClassName + "( " + constraintBuilder.apply( partitionNumber ) + "," +
                           getConstraintVariable(previousClassName) + ": " + "id )\n");
         for (int i = 0; i < numberOfJoins; i++) {
             final char nextClassName = (char) (previousClassName + 1);
             final String nextVariableName = getConstraintVariable(nextClassName);
             final String previousVariableName = getConstraintVariable(previousClassName);
             if (numberOfJoinedEvents > 0) {
-                drlBuilder.append( nextClassName + "( (" +
+                drlBuilder.append( getFactBinding(nextClassName) + nextClassName + "( (" +
                                    nextVariableName + ": id <= " + previousVariableName
                                    + ") && (id > (" + previousVariableName + " - " + numberOfJoinedEvents + " )))\n" );
             } else {
-                drlBuilder.append( nextClassName + "( " +
+                drlBuilder.append( getFactBinding(nextClassName) + nextClassName + "( " +
                                    nextVariableName + ": id == " + previousVariableName + ")" );
 
             }
@@ -108,5 +117,26 @@ public class PartitionedCepRulesProvider implements DrlProvider {
 
     private String getConstraintVariable(final char constraintClassName) {
         return "$" + constraintClassName + "id";
+    }
+
+    private String getFactBinding(final char constraintClassName) {
+        return "$" + constraintClassName + ": ";
+    }
+
+    protected String getJoinEvents() {
+        switch (numberOfJoins) {
+            case 0:
+                return "$A";
+            case 1:
+                return "$A, $B";
+            case 2:
+                return "$A, $B, $C";
+            case 3:
+                return "$A, $B, $C, $D";
+            case 4:
+                return "$A, $B, $C, $D, $E";
+            default:
+                throw new IllegalArgumentException("Unsupported number of joins! Maximal number of joins is 4.");
+        }
     }
 }

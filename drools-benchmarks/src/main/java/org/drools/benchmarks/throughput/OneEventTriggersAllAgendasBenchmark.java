@@ -25,17 +25,22 @@ import org.drools.core.time.SessionPseudoClock;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.concurrent.TimeUnit;
 
+@Fork(1)
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
     private static final long EVENT_EXPIRATION_BASE_MS = 10;
     private static final boolean DUMP_DRL = false;
     private static final boolean DUMP_RETE = false;
+
+    private static final boolean LOG_FIRINGS = false;
+    private static final FireLogger LOGGER = LOG_FIRINGS ? new FireLogger() : null;
 
     @Param({"true", "false"})
     private boolean multithread = false;
@@ -46,14 +51,16 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"8"})
     private int numberOfRules = 8;
 
-    @Param({"1", "2", "4"})
+//    @Param({"1", "2", "4"})
+    @Param({"1"})
     private int numberOfJoins = 1;
 
-    @Param({"2.0"})
-    private double insertRatio = 2.0;
+    @Param({"1.1"})
+    private double insertRatio = 1.1;
 
-    @Param({"1", "2", "4", "8"})
-    private int numberOfJoinedEvents = 2;
+//    @Param({"1", "2", "4", "8"})
+    @Param({"8"})
+    private int numberOfJoinedEvents = 8;
 
     @Param({"true"})
     private boolean eventsExpiration = true;
@@ -74,7 +81,12 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
                 -1L;
 
         final DrlProvider drlProvider =
-                new PartitionedCepRulesProvider(numberOfJoins, numberOfJoinedEvents, eventExpirationMs, i -> "value > " + i, true);
+                new PartitionedCepRulesProvider(numberOfJoins,
+                                                numberOfJoinedEvents,
+                                                eventExpirationMs,
+                                                i -> "value > " + i,
+                                                true,
+                                                LOG_FIRINGS);
         String drl = drlProvider.getDrl(numberOfRules);
         if (DUMP_DRL) {
             System.out.println( drl );
@@ -136,6 +148,16 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         AbstractBean.setIdGeneratorValue(numberOfRules + 1);
 
         maxWait = 1000;
+
+        if (LOG_FIRINGS) {
+            kieSession.setGlobal( "logger", LOGGER );
+        }
+    }
+
+    @Override
+    public void stopFireUntilHaltThread() {
+        super.stopFireUntilHaltThread();
+        LOGGER.flush();
     }
 
     public long getFiringsCount() {

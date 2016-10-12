@@ -70,4 +70,9 @@ public abstract class AbstractBean {
     public void setValue(final int value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" + id + ")";
+    }
 }
