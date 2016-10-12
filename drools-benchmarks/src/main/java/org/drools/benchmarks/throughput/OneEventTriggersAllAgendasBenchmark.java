@@ -157,7 +157,9 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Override
     public void stopFireUntilHaltThread() {
         super.stopFireUntilHaltThread();
-        LOGGER.flush();
+        if (LOG_FIRINGS) {
+            LOGGER.flush();
+        }
     }
 
     public long getFiringsCount() {
