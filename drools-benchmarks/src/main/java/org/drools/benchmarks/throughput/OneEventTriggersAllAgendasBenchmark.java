@@ -25,14 +25,12 @@ import org.drools.core.time.SessionPseudoClock;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.concurrent.TimeUnit;
 
-@Fork(1)
 public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
 
     private static final long EVENT_EXPIRATION_BASE_MS = 10;
@@ -43,7 +41,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     private static final FireLogger LOGGER = LOG_FIRINGS ? new FireLogger() : null;
 
     @Param({"true", "false"})
-    private boolean multithread = false;
+    private boolean multithread = true;
 
     @Param({"false"})
     private boolean async = false;
@@ -51,22 +49,20 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"8"})
     private int numberOfRules = 8;
 
-//    @Param({"1", "2", "4"})
-    @Param({"1"})
+    @Param({"1", "2", "4"})
     private int numberOfJoins = 1;
 
     @Param({"1.1"})
     private double insertRatio = 1.1;
 
-//    @Param({"1", "2", "4", "8"})
-    @Param({"8"})
-    private int numberOfJoinedEvents = 8;
+    @Param({"1", "2", "4", "8"})
+    private int numberOfJoinedEvents = 1;
 
     @Param({"true"})
     private boolean eventsExpiration = true;
 
-    @Param({"2"})
-    private int eventsExpirationRatio = 2;
+    @Param({"1"})
+    private int eventsExpirationRatio = 1;
 
     private long firingsPerInsert;
     private long missingFiringsOnFirstEvents;
@@ -77,7 +73,7 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Override
     public void setupKieBase() {
         final long eventExpirationMs = eventsExpiration ?
-                EVENT_EXPIRATION_BASE_MS * Math.max(1, numberOfJoinedEvents) * eventsExpirationRatio :
+                EVENT_EXPIRATION_BASE_MS * Math.max(1, numberOfJoinedEvents) * eventsExpirationRatio + 1L :
                 -1L;
 
         final DrlProvider drlProvider =
