@@ -19,7 +19,6 @@ package org.drools.benchmarks.throughput;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
-import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.time.SessionPseudoClock;
@@ -50,9 +49,6 @@ public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventT
     @Param({"1", "2", "4"})
     private int numberOfJoins = 1;
 
-    @Param({"1.1"})
-    private double insertRatio = 1.1;
-
     @Param({"1", "2", "4", "8"})
     private int numberOfJoinedEvents = 1;
 
@@ -71,7 +67,7 @@ public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventT
                         i -> "value > " + i,
                         true,
                         LOG_FIRINGS);
-        String drl = drlProvider.getDrl(numberOfRules);
+        final String drl = drlProvider.getDrl(numberOfRules);
 
         createKieBaseFromDrl(
                 drl,
@@ -88,7 +84,6 @@ public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventT
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
         insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
-        insertCounter.add(1);
         kieSession.fireAllRules();
         if (pseudoClock) {
             ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(EVENT_EXPIRATION_BASE_MS, TimeUnit.MILLISECONDS);
