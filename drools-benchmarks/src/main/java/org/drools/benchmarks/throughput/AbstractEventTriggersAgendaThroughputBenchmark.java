@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.throughput;
 
+import java.util.concurrent.atomic.LongAdder;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.benchmarks.domain.B;
@@ -23,7 +24,6 @@ import org.drools.benchmarks.domain.C;
 import org.drools.benchmarks.domain.D;
 import org.drools.benchmarks.domain.E;
 import org.drools.core.impl.StatefulKnowledgeSessionImpl;
-import org.drools.core.time.SessionPseudoClock;
 import org.kie.api.runtime.conf.ClockTypeOption;
 import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Level;
@@ -31,21 +31,13 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.LongAdder;
-
 @State(Scope.Benchmark)
-public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractThroughputBenchmark {
+public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends AbstractThroughputBenchmark {
 
     @Param({"true"})
     protected boolean pseudoClock = true;
-
-    private ExecutorService executor;
 
     private boolean countFirings = true;
 
@@ -57,25 +49,10 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
     public void setup() {
         if (pseudoClock) {
             createKieSession(ClockTypeOption.get("pseudo"));
-            ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(1, TimeUnit.MILLISECONDS);
         } else {
             createKieSession();
         }
         setupCounter();
-        executor = Executors.newSingleThreadExecutor();
-        executor.submit(() -> kieSession.fireUntilHalt());
-    }
-
-    @TearDown(Level.Iteration)
-    public void stopFireUntilHaltThread() {
-        executor.shutdown();
-        try {
-            if (!executor.awaitTermination(10, TimeUnit.MILLISECONDS)) {
-                executor.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @AuxCounters
@@ -94,34 +71,34 @@ public abstract class AbstractFireUntilHaltThroughputBenchmark extends AbstractT
         }
     }
 
-    protected int insertJoinEvents(final int numberOfJoins, final long eventId, final int eventValue,
+    protected void insertJoinEvents(final int numberOfJoins, final long eventId, final int eventValue,
             final boolean async, final Blackhole eater) {
         switch (numberOfJoins) {
             case 0:
                 insertJoinEvent(new A(eventId, eventValue), async, eater);
-                return 1;
+                break;
             case 1:
                 insertJoinEvent(new A(eventId, eventValue), async, eater);
                 insertJoinEvent(new B(eventId, eventValue), async, eater);
-                return 2;
+                break;
             case 2:
                 insertJoinEvent(new A(eventId, eventValue), async, eater);
                 insertJoinEvent(new B(eventId, eventValue), async, eater);
                 insertJoinEvent(new C(eventId, eventValue), async, eater);
-                return 3;
+                break;
             case 3:
                 insertJoinEvent(new A(eventId, eventValue), async, eater);
                 insertJoinEvent(new B(eventId, eventValue), async, eater);
                 insertJoinEvent(new C(eventId, eventValue), async, eater);
                 insertJoinEvent(new D(eventId, eventValue), async, eater);
-                return 4;
+                break;
             case 4:
                 insertJoinEvent(new A(eventId, eventValue), async, eater);
                 insertJoinEvent(new B(eventId, eventValue), async, eater);
                 insertJoinEvent(new C(eventId, eventValue), async, eater);
                 insertJoinEvent(new D(eventId, eventValue), async, eater);
                 insertJoinEvent(new E(eventId, eventValue), async, eater);
-                return 5;
+                break;
             default:
                 throw new IllegalArgumentException("Unsupported number of joins! Maximal number of joins is 4.");
         }

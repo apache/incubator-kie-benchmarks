@@ -15,6 +15,8 @@
 
 package org.drools.benchmarks.common;
 
+import java.util.concurrent.TimeUnit;
+import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
@@ -37,8 +39,8 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
-
-import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
@@ -46,6 +48,8 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 20)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public abstract class AbstractBenchmark {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     protected KieBase kieBase;
     protected KieSession kieSession;
@@ -86,11 +90,17 @@ public abstract class AbstractBenchmark {
     }
 
     protected void createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
+        if (TestUtil.dumpDrl()) {
+            logDebug("Benchmark DRL", drl);
+        }
         kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(kieBaseConfiguration);
+        if (TestUtil.dumpRete()) {
+            ReteDumper.dumpRete(kieBase);
+        }
     }
 
     protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
-        kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(getKieBaseConfiguration(kieBaseOptions));
+        createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
     }
 
     private KieBaseConfiguration getKieBaseConfiguration() {
@@ -117,5 +127,13 @@ public abstract class AbstractBenchmark {
             kieSessionConfiguration.setOption(kieSessionOption);
         }
         return kieSessionConfiguration;
+    }
+
+    private void logDebug(final String caption, final String logContent) {
+        logger.info("--------------------------------------------");
+        logger.info(caption);
+        logger.info("--------------------------------------------");
+        logger.info(logContent);
+        logger.info("--------------------------------------------");
     }
 }

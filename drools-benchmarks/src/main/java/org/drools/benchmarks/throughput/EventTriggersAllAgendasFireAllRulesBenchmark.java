@@ -19,20 +19,22 @@ package org.drools.benchmarks.throughput;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
+import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.time.SessionPseudoClock;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
-public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
+public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventTriggersAgendaThroughputBenchmark {
 
     private static final long EVENT_EXPIRATION_BASE_MS = 10;
-
     private static final boolean LOG_FIRINGS = false;
     private static final FireLogger LOGGER = LOG_FIRINGS ? new FireLogger() : null;
 
@@ -54,74 +56,41 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
     @Param({"1", "2", "4", "8"})
     private int numberOfJoinedEvents = 1;
 
-    @Param({"true"})
-    private boolean eventsExpiration = true;
-
     @Param({"1"})
     private int eventsExpirationRatio = 1;
-
-    private long firingsPerInsert;
-    private long missingFiringsOnFirstEvents;
-
-    private int maxWait;
 
     @Setup
     @Override
     public void setupKieBase() {
-        final long eventExpirationMs = eventsExpiration ?
-                EVENT_EXPIRATION_BASE_MS * Math.max(1, numberOfJoinedEvents) * eventsExpirationRatio + 1L :
-                -1L;
+        final long eventExpirationMs = EVENT_EXPIRATION_BASE_MS * Math.max(1, numberOfJoinedEvents) * eventsExpirationRatio;
 
         final DrlProvider drlProvider =
                 new PartitionedCepRulesProvider(numberOfJoins,
-                                                numberOfJoinedEvents,
-                                                eventExpirationMs,
-                                                i -> "value > " + i,
-                                                true,
-                                                LOG_FIRINGS);
+                        numberOfJoinedEvents,
+                        eventExpirationMs,
+                        i -> "value > " + i,
+                        true,
+                        LOG_FIRINGS);
         String drl = drlProvider.getDrl(numberOfRules);
+
         createKieBaseFromDrl(
                 drl,
                 EventProcessingOption.STREAM,
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
 
-        if ( ((InternalKnowledgeBase)kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
+        if (((InternalKnowledgeBase) kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
             throw new IllegalStateException();
-        }
-
-        long firingsPerRule = (long)Math.pow( Math.max(1, numberOfJoinedEvents), Math.max(1, numberOfJoins) );
-        firingsPerInsert = numberOfRules * firingsPerRule;
-        if (numberOfJoinedEvents > 1 && numberOfJoins > 0) {
-            for (int i = 1; i <= numberOfJoinedEvents; i++) {
-                missingFiringsOnFirstEvents += (firingsPerRule - (long)Math.pow( i, numberOfJoins ));
-            }
-            missingFiringsOnFirstEvents *= numberOfRules;
         }
     }
 
     @Benchmark
     @Override
     public void insertEvent(final Blackhole eater, final FiringsCounter resultFirings) {
-        final long insertCount = insertCounter.longValue();
-        final long expectedFirings = (insertCount * firingsPerInsert) - missingFiringsOnFirstEvents;
-
-        int i = 0;
-        while (i < maxWait) {
-            if (expectedFirings > ( firingCounter.longValue() * insertRatio )) {
-                Blackhole.consumeCPU(1024);
-                i++;
-            } else {
-                break;
-            }
-        }
-
-        if (i == maxWait && maxWait < 1_000_000_000) {
-            maxWait *= 2;
-        }
-
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertCounter.add(insertJoinEvents(numberOfJoins, id, (int) id, async, eater));
-        if (eventsExpiration && pseudoClock) {
+        insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
+        insertCounter.add(1);
+        kieSession.fireAllRules();
+        if (pseudoClock) {
             ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(EVENT_EXPIRATION_BASE_MS, TimeUnit.MILLISECONDS);
         }
     }
@@ -131,23 +100,15 @@ public class OneEventTriggersAllAgendasBenchmark extends AbstractFireUntilHaltTh
         super.setupCounter();
         // Sets the id generator to correct value so we can use the ids to fire rules. Rules have constraints (value > id)
         AbstractBean.setIdGeneratorValue(numberOfRules + 1);
-
-        maxWait = 1000;
-
         if (LOG_FIRINGS) {
-            kieSession.setGlobal( "logger", LOGGER );
+            kieSession.setGlobal("logger", LOGGER);
         }
     }
 
-    @Override
-    public void stopFireUntilHaltThread() {
-        super.stopFireUntilHaltThread();
+    @TearDown(Level.Iteration)
+    public void cleanup() {
         if (LOG_FIRINGS) {
             LOGGER.flush();
         }
-    }
-
-    public long getFiringsCount() {
-        return firingCounter.longValue();
     }
 }

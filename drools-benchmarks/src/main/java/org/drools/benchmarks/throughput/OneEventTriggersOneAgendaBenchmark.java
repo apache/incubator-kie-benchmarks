@@ -18,7 +18,6 @@ package org.drools.benchmarks.throughput;
 
 import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
-import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.kie.api.conf.EventProcessingOption;
@@ -29,9 +28,6 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
 
 public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThroughputBenchmark {
-
-    private static final boolean DUMP_DRL = false;
-    private static final boolean DUMP_RETE = false;
 
     @Param({"true", "false"})
     private boolean multithread;
@@ -64,16 +60,11 @@ public class OneEventTriggersOneAgendaBenchmark extends AbstractFireUntilHaltThr
                                                                         countFirings,
                                                                         false);
         String drl = drlProvider.getDrl(numberOfRules);
-        if (DUMP_DRL) {
-            System.out.println( drl );
-        }
         createKieBaseFromDrl(
                 drl,
                 EventProcessingOption.STREAM,
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
-        if (DUMP_RETE) {
-            ReteDumper.dumpRete( kieBase );
-        }
+
         if (((InternalKnowledgeBase)kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
             throw new IllegalStateException();
         }
