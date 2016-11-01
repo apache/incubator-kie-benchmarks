@@ -1,11 +1,11 @@
 /*
- * Copyright 2005 JBoss Inc
+ * Copyright 2016 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,16 +27,16 @@ public class ThroughputBenchmarkMain {
     private static final int WARMUP_INSERTS = 2_000_000;
 
     public static void main( String[] args ) {
-        AbstractFireUntilHaltThroughputBenchmark benchmark = oneTriggerOne ?
-                                                             new OneEventTriggersOneAgendaBenchmark() :
-                                                             new OneEventTriggersAllAgendasBenchmark();
+        AbstractEventTriggersAgendasFireUntilHaltBenchmark benchmark = oneTriggerOne ?
+                                                             new EventTriggersOneAgendaFireUntilHaltBenchmark() :
+                                                             new EventTriggersAllAgendasFireUntilHaltBenchmark();
         benchmark.setupKieBase();
         benchmark.setup();
         benchmark.setupCounter();
 
         if (DO_WARMUP) {
             for ( int i = 0; i < WARMUP_INSERTS; i++ ) {
-                benchmark.insertEvent( null , null);
+                benchmark.insertEventBenchmark( null , null);
             }
 
             terminate( benchmark );
@@ -50,7 +50,7 @@ public class ThroughputBenchmarkMain {
 
         int i = 0;
         while (BENCHMARK_DURATION_IN_EVENTS < 0 || i < BENCHMARK_DURATION_IN_EVENTS) {
-            benchmark.insertEvent(null, null);
+            benchmark.insertEventBenchmark(null, null);
             i++;
             if (System.nanoTime() > end) {
                 break;
@@ -69,7 +69,7 @@ public class ThroughputBenchmarkMain {
         terminate( benchmark );
     }
 
-    private static void terminate( AbstractFireUntilHaltThroughputBenchmark benchmark ) {
+    private static void terminate( AbstractEventTriggersAgendasFireUntilHaltBenchmark benchmark ) {
         benchmark.tearDown();
         benchmark.stopFireUntilHaltThread();
     }

@@ -27,20 +27,24 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
 
-public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventTriggersAgendaThroughputBenchmark {
-
+public class EventTriggersOneAgendaFireAllRulesBenchmark extends AbstractEventTriggersAgendaThroughputBenchmark {
 
     @Param({"1", "10", "100"})
     private int fireAllRulesRatio = 1;
 
+    @Param({"true", "false"})
+    private boolean hashed;
+
     private long fireAllRulesCounter;
 
     @Override
-    protected DrlProvider getDrlProvider(final long eventExpirationMs, final boolean logFirings) {
+    protected DrlProvider getDrlProvider(long eventExpirationMs, boolean logFirings) {
         return new PartitionedCepRulesProvider(numberOfJoins,
                 numberOfJoinedEvents,
-                eventExpirationMs,
-                i -> "value > " + i,
+                Long.MAX_VALUE,
+                hashed ?
+                        i -> "value == " + i :
+                        i -> "boxedValue.equals(" + i + ")",
                 true,
                 logFirings);
     }
@@ -54,7 +58,7 @@ public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventT
     @Override
     public void insertEventBenchmark(final Blackhole eater, final FiringsCounter resultFirings) {
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
+        insertJoinEvents(numberOfJoins, id,(int) (id % numberOfRules), async, eater);
         if (fireAllRulesCounter % fireAllRulesRatio == 0) {
             kieSession.fireAllRules();
         }
@@ -66,6 +70,6 @@ public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventT
 
     @Override
     protected long getStartingIdGeneratorValue() {
-        return numberOfRules + 1;
+        return 0;
     }
 }

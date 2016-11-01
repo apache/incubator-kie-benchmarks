@@ -22,50 +22,59 @@ import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.core.time.SessionPseudoClock;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
 
-public class EventTriggersAllAgendasFireAllRulesBenchmark extends AbstractEventTriggersAgendaThroughputBenchmark {
+public class EventTriggersOneAgendaFireUntilHaltBenchmark extends AbstractEventTriggersAgendasFireUntilHaltBenchmark {
 
-
-    @Param({"1", "10", "100"})
-    private int fireAllRulesRatio = 1;
-
-    private long fireAllRulesCounter;
+    @Param({"true", "false"})
+    private boolean hashed;
 
     @Override
-    protected DrlProvider getDrlProvider(final long eventExpirationMs, final boolean logFirings) {
+    protected DrlProvider getDrlProvider(long eventExpirationMs, boolean logFirings) {
         return new PartitionedCepRulesProvider(numberOfJoins,
                 numberOfJoinedEvents,
-                eventExpirationMs,
-                i -> "value > " + i,
+                Long.MAX_VALUE,
+                hashed ?
+                        i -> "value == " + i :
+                        i -> "boxedValue.equals(" + i + ")",
                 true,
                 logFirings);
     }
 
-    @Setup(Level.Iteration)
-    public void prepareBenchmark() {
-        fireAllRulesCounter = 0;
+    @Override
+    protected long getStartingIdGeneratorValue() {
+        return 0;
+    }
+
+    @Override
+    protected long getExpectedFiringsPerInsert() {
+        return (long) Math.pow(Math.max(1, numberOfJoinedEvents), Math.max(1, numberOfJoins));
+    }
+
+    @Override
+    protected long getMissingFiringsOnFirstEvents() {
+        final long firingsPerInsert = getExpectedFiringsPerInsert();
+        long missingFirings = 0;
+        if (numberOfJoinedEvents > 1 && numberOfJoins > 0) {
+            for (int i = 1; i <= numberOfJoinedEvents; i++) {
+                missingFirings += (firingsPerInsert - (long) Math.pow(i, numberOfJoins));
+            }
+        }
+        return missingFirings;
     }
 
     @Benchmark
     @Override
     public void insertEventBenchmark(final Blackhole eater, final FiringsCounter resultFirings) {
+        waitIfNeeded();
+
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id, (int) id, async, eater);
-        if (fireAllRulesCounter % fireAllRulesRatio == 0) {
-            kieSession.fireAllRules();
-        }
-        fireAllRulesCounter++;
+        insertJoinEvents(numberOfJoins, id, (int) (id % numberOfRules), async, eater);
+        insertCounter.add(1);
         if (pseudoClock) {
             ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(EVENT_EXPIRATION_BASE_MS, TimeUnit.MILLISECONDS);
         }
     }
-
-    @Override
-    protected long getStartingIdGeneratorValue() {
-        return numberOfRules + 1;
-    }
 }
+

@@ -17,32 +17,85 @@
 package org.drools.benchmarks.throughput;
 
 import java.util.concurrent.atomic.LongAdder;
+import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.AbstractBean;
 import org.drools.benchmarks.domain.B;
 import org.drools.benchmarks.domain.C;
 import org.drools.benchmarks.domain.D;
 import org.drools.benchmarks.domain.E;
+import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.impl.StatefulKnowledgeSessionImpl;
+import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.conf.ClockTypeOption;
+import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Benchmark)
 public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends AbstractThroughputBenchmark {
 
+    protected static final long EVENT_EXPIRATION_BASE_MS = 10;
+
+    private static final boolean LOG_FIRINGS = false;
+    private static final FireLogger LOGGER = LOG_FIRINGS ? new FireLogger() : null;
+
     @Param({"true"})
     protected boolean pseudoClock = true;
+
+    @Param({"true", "false"})
+    protected boolean multithread = true;
+
+    @Param({"false"})
+    protected boolean async = false;
+
+    @Param({"8"})
+    protected int numberOfRules = 8;
+
+    @Param({"1", "2", "4"})
+    protected int numberOfJoins = 1;
+
+    @Param({"1", "2", "4", "8"})
+    protected int numberOfJoinedEvents = 1;
+
+    @Param({"true"})
+    protected boolean eventsExpiration = true;
+
+    @Param({"1"})
+    protected int eventsExpirationRatio = 1;
 
     private boolean countFirings = true;
 
     protected LongAdder insertCounter;
     protected static LongAdder firingCounter;
+
+    protected abstract DrlProvider getDrlProvider(final long eventExpirationMs, final boolean logFirings);
+    public abstract void insertEventBenchmark(final Blackhole eater, final FiringsCounter resultFirings );
+    protected abstract long getStartingIdGeneratorValue();
+
+    @Setup
+    public void setupKieBase() {
+        final long eventExpirationMs = eventsExpiration ?
+                EVENT_EXPIRATION_BASE_MS * Math.max(1, numberOfJoinedEvents) * eventsExpirationRatio + 1L :
+                -1L;
+        final DrlProvider drlProvider = getDrlProvider(eventExpirationMs, LOG_FIRINGS);
+        final String drl = drlProvider.getDrl(numberOfRules);
+
+        createKieBaseFromDrl(
+                drl,
+                EventProcessingOption.STREAM,
+                multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
+
+        if (((InternalKnowledgeBase) kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
+            throw new IllegalStateException();
+        }
+    }
 
     @Setup(Level.Iteration)
     @Override
@@ -52,7 +105,15 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
         } else {
             createKieSession();
         }
+        AbstractBean.setIdGeneratorValue(getStartingIdGeneratorValue());
         setupCounter();
+    }
+
+    @TearDown(Level.Iteration)
+    public void cleanup() {
+        if (LOG_FIRINGS) {
+            LOGGER.flush();
+        }
     }
 
     @AuxCounters
@@ -69,6 +130,13 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
             firingCounter = new LongAdder();
             kieSession.setGlobal( "firings", firingCounter );
         }
+        if (LOG_FIRINGS) {
+            kieSession.setGlobal("logger", LOGGER);
+        }
+    }
+
+    public long getFiringsCount() {
+        return firingCounter.longValue();
     }
 
     protected void insertJoinEvents(final int numberOfJoins, final long eventId, final int eventValue,
@@ -126,12 +194,5 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
         } else {
             ((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event);
         }
-    }
-
-    public abstract void setupKieBase();
-    public abstract void insertEvent(final Blackhole eater, final FiringsCounter resultFirings );
-
-    public long getFiringsCount() {
-        return firingCounter.longValue();
     }
 }
