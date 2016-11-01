@@ -3,8 +3,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.domain.event;
 
 import org.drools.benchmarks.common.Event;
 
@@ -22,8 +23,27 @@ public class EventA implements Event, Comparable<EventA> {
     private long timeValue;
     private long duration;
 
+    private int id;
+
     public EventA() {
         //
+    }
+
+    public EventA(final int id) {
+        this.id = id;
+    }
+
+    public EventA(final int id, final long duration) {
+        this.duration = duration;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     @Override
@@ -59,6 +79,7 @@ public class EventA implements Event, Comparable<EventA> {
         return "EventA{" +
                 "timeValue=" + timeValue +
                 ", duration=" + duration +
+                ", id=" + id +
                 '}';
     }
 }

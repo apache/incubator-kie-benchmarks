@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.session;
 
-public class EventB extends EventA {
+import org.openjdk.jmh.infra.Blackhole;
 
-    @Override
-    public String toString() {
-        return "EventB{" +
-                "timeValue=" + getTimeValue() +
-                ", duration=" + getDuration() +
-                '}';
+public class Main {
+    public static void main( String[] args ) {
+        InsertFireLoopBenchmark benchmark = new InsertFireLoopBenchmark();
+        System.out.println("setupKieBase");
+        benchmark.setupKieBase();
+        System.out.println("setup");
+        benchmark.setup();
+        System.out.println("test");
+        benchmark.test(new Blackhole("Today\'s password is swordfish. I understand instantiating Blackholes directly is dangerous."));
+        System.out.println("done");
     }
 }
