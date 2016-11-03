@@ -19,16 +19,10 @@ package org.drools.benchmarks.throughput;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.common.DrlProvider;
-import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
-import org.drools.benchmarks.domain.AbstractBean;
-import org.drools.core.time.SessionPseudoClock;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.infra.Blackhole;
 
 public abstract class AbstractEventTriggersAgendasFireUntilHaltBenchmark extends AbstractEventTriggersAgendaThroughputBenchmark {
 
@@ -39,9 +33,9 @@ public abstract class AbstractEventTriggersAgendasFireUntilHaltBenchmark extends
 
     private long firingsPerInsert;
     private long missingFiringsOnFirstEvents;
-    private int maxWait;
 
     protected abstract long getExpectedFiringsPerInsert();
+
     protected abstract long getMissingFiringsOnFirstEvents();
 
     @Setup
@@ -52,8 +46,6 @@ public abstract class AbstractEventTriggersAgendasFireUntilHaltBenchmark extends
 
     @Setup(Level.Iteration)
     public void prepareBenchmark() {
-        maxWait = 1000;
-
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> kieSession.fireUntilHalt());
     }
@@ -70,22 +62,8 @@ public abstract class AbstractEventTriggersAgendasFireUntilHaltBenchmark extends
         }
     }
 
-    protected void waitIfNeeded() {
-        final long insertCount = insertCounter.longValue();
-        final long expectedFirings = (insertCount * firingsPerInsert) - missingFiringsOnFirstEvents;
-
-        int i = 0;
-        while (i < maxWait) {
-            if (expectedFirings > ( firingCounter.longValue() * insertRatio )) {
-                Blackhole.consumeCPU(1024);
-                i++;
-            } else {
-                break;
-            }
-        }
-
-        if (i == maxWait && maxWait < 1_000_000_000) {
-            maxWait *= 2;
-        }
+    protected boolean canInsertEvent() {
+        final long expectedFirings = (insertCounter.longValue() * firingsPerInsert) - missingFiringsOnFirstEvents;
+        return (expectedFirings <= (firingCounter.longValue() * insertRatio));
     }
 }

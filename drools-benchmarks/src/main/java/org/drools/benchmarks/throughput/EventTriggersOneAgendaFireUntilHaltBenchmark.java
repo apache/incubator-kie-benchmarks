@@ -67,13 +67,13 @@ public class EventTriggersOneAgendaFireUntilHaltBenchmark extends AbstractEventT
     @Benchmark
     @Override
     public void insertEventBenchmark(final Blackhole eater, final FiringsCounter resultFirings) {
-        waitIfNeeded();
-
-        final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id, (int) (id % numberOfRules), async, eater);
-        insertCounter.add(1);
-        if (pseudoClock) {
-            ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(EVENT_EXPIRATION_BASE_MS, TimeUnit.MILLISECONDS);
+        if (canInsertEvent()) {
+            final long id = AbstractBean.getAndIncrementIdGeneratorValue();
+            insertJoinEvents(numberOfJoins, id, (int) (id % numberOfRules), async, eater);
+            insertCounter.add(1);
+            if (pseudoClock) {
+                ((SessionPseudoClock) kieSession.getSessionClock()).advanceTime(EVENT_EXPIRATION_BASE_MS, TimeUnit.MILLISECONDS);
+            }
         }
     }
 }

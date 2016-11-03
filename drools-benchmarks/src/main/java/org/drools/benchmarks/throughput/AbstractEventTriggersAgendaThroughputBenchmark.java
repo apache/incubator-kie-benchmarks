@@ -72,7 +72,7 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
 
     private boolean countFirings = true;
 
-    protected LongAdder insertCounter;
+    protected static LongAdder insertCounter;
     protected static LongAdder firingCounter;
 
     protected abstract DrlProvider getDrlProvider(final long eventExpirationMs, final boolean logFirings);
@@ -122,6 +122,7 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
         public long fireCount() {
             return firingCounter.longValue();
         }
+        public long insertCount() { return insertCounter.longValue(); }
     }
 
     public void setupCounter() {
