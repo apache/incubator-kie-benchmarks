@@ -90,8 +90,9 @@ public abstract class AbstractBenchmark {
     }
 
     protected void createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
-        if (TestUtil.dumpDrl()) {
+        if (true) {
             logDebug("Benchmark DRL", drl);
+            System.out.println(drl);
         }
         kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(kieBaseConfiguration);
         if (TestUtil.dumpRete()) {

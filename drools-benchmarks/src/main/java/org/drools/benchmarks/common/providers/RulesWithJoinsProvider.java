@@ -26,25 +26,27 @@ public class RulesWithJoinsProvider implements DrlProvider {
     private final int numberOfJoins;
     private final boolean withCep;
     private final boolean appendDrlHeader;
+    private final boolean prioritizedBySalience;
     private final String global;
     private final String consequence;
 
     public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader) {
-        this(numberOfJoins, withCep, appendDrlHeader, "", "");
+        this(numberOfJoins, withCep, appendDrlHeader, false, "", "");
     }
 
     /**
      * Constructor.
-     *
      * @param numberOfJoins Required number of joins that each rule in provided DRL will contain.
-     *                      This number is limited to maximum number of 4 joins in each rule.
+     * This number is limited to maximum number of 4 joins in each rule.
      * @param withCep True, if rules for event processing should be generated, else false.
      * @param appendDrlHeader True, if DRL header should be appended to provided DRL, else false.
+     * @param prioritizedBySalience If true, the rules are generated with salience and ordered by it.
+     * Each rule gets higher salience that previous one.
      * @param global DRL global.
      * @param consequence Rule consequence.
      */
     public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader,
-            final String global, final String consequence) {
+            final boolean prioritizedBySalience, final String global, final String consequence) {
         if (numberOfJoins > 4) {
             throw new IllegalArgumentException(
                     "Unsupported number of joins! Maximal allowed number of joins is 4, actual is " + numberOfJoins);
@@ -52,6 +54,7 @@ public class RulesWithJoinsProvider implements DrlProvider {
         this.numberOfJoins = numberOfJoins;
         this.withCep = withCep;
         this.appendDrlHeader = appendDrlHeader;
+        this.prioritizedBySalience = prioritizedBySalience;
         this.global = global;
         this.consequence = consequence;
     }
@@ -73,7 +76,11 @@ public class RulesWithJoinsProvider implements DrlProvider {
             appendCepHeader(drlBuilder);
         }
         for ( int i = 0; i < numberOfRules; i++ ) {
-            drlBuilder.append( "rule R" + i + " when\n");
+            drlBuilder.append( "rule R" + i + " \n");
+            if (prioritizedBySalience) {
+                drlBuilder.append("salience " + i);
+            }
+            drlBuilder.append( " when\n");
             appendJoins(drlBuilder, i);
             drlBuilder.append( "then\n" );
             drlBuilder.append( consequence + "\n" );
