@@ -29,9 +29,15 @@ public class RulesWithJoinsProvider implements DrlProvider {
     private final boolean prioritizedBySalience;
     private final String global;
     private final String consequence;
+    private final String rootConstraintValueOperator;
+    private final String joinConstraintValueOperator;
 
     public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader) {
-        this(numberOfJoins, withCep, appendDrlHeader, false, "", "");
+        this(numberOfJoins, withCep, appendDrlHeader, "", "");
+    }
+
+    public RulesWithJoinsProvider(int numberOfJoins, boolean withCep, boolean appendDrlHeader, String global, String consequence) {
+        this(numberOfJoins, withCep, appendDrlHeader, false, global, consequence, ">", ">");
     }
 
     /**
@@ -44,9 +50,12 @@ public class RulesWithJoinsProvider implements DrlProvider {
      * Each rule gets higher salience than previous one.
      * @param global DRL global.
      * @param consequence Rule consequence.
+     * @param rootConstraintValueOperator Operator for matching value in root constraint.
+     * @param joinConstraintValueOperator Operator for matching value in join constraint.
      */
     public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader,
-            final boolean prioritizedBySalience, final String global, final String consequence) {
+            final boolean prioritizedBySalience, final String global, final String consequence,
+            final String rootConstraintValueOperator, final String joinConstraintValueOperator) {
         if (numberOfJoins > 4) {
             throw new IllegalArgumentException(
                     "Unsupported number of joins! Maximal allowed number of joins is 4, actual is " + numberOfJoins);
@@ -57,6 +66,8 @@ public class RulesWithJoinsProvider implements DrlProvider {
         this.prioritizedBySalience = prioritizedBySalience;
         this.global = global;
         this.consequence = consequence;
+        this.rootConstraintValueOperator = rootConstraintValueOperator;
+        this.joinConstraintValueOperator = joinConstraintValueOperator;
     }
 
     @Override
@@ -99,7 +110,7 @@ public class RulesWithJoinsProvider implements DrlProvider {
 
     private void appendJoins(final StringBuilder drlBuilder, final int valueInConstraint) {
         final String[] joinConstraints = withCep ? getJoinConstraintsCep() : getJoinConstraints();
-        drlBuilder.append("  $a : A( value > " + valueInConstraint + ")\n");
+        drlBuilder.append("  $a : A( value " + rootConstraintValueOperator + " " + valueInConstraint + ")\n");
         for (int i = 0; i < numberOfJoins; i++) {
             drlBuilder.append(joinConstraints[i]);
         }
@@ -116,10 +127,10 @@ public class RulesWithJoinsProvider implements DrlProvider {
 
     private String[] getJoinConstraints() {
         return new String[] {
-                "  $b : B( value > $a.value )\n",
-                "  $c : C( value > $b.value )\n",
-                "  $d : D( value > $c.value )\n",
-                "  $e : E( value > $d.value )\n"
+                "  $b : B( value " + joinConstraintValueOperator + " $a.value )\n",
+                "  $c : C( value " + joinConstraintValueOperator + " $b.value )\n",
+                "  $d : D( value " + joinConstraintValueOperator + " $c.value )\n",
+                "  $e : E( value " + joinConstraintValueOperator + " $d.value )\n"
         };
     }
 }

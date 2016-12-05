@@ -21,30 +21,25 @@ import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
-import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.infra.Blackhole;
 
 /**
- * Generates rules ordered by salience with consequence that makes other rules not matched.
- * So only one rule fires, because during firing there's a change that cancels other rule activations.
+ * Inserts root fact and tip node fact only for first rule.
+ * When firing, other rules are fired in a chain. First rule, modifies root
+ * fact so next rule fires, which modifies root fact so next rule fires, etc.
  */
-public class InsertFireHighestSalienceBenchmark extends AbstractBenchmark {
+public class InsertChainedFireBenchmark extends AbstractBenchmark {
 
     @Param({"12", "48", "192", "768"})
     private int rulesNr;
 
-    @Param({"false", "true"})
-    private boolean doUpdate;
-
-    private FactHandle joinedFact;
-
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new RulesWithJoinsProvider( 1, false, true, true, "", "modify($b) {setValue(0)};", ">", ">");
+        final String consequence = "modify($a) {setValue($a.getValue() + 1)};";
+        final DrlProvider drlProvider = new RulesWithJoinsProvider( 1, false, true, false, "", consequence, " == ", ">");
         createKieBaseFromDrl(drlProvider.getDrl(rulesNr));
     }
 
@@ -52,16 +47,14 @@ public class InsertFireHighestSalienceBenchmark extends AbstractBenchmark {
     @Override
     public void setup() {
         createKieSession();
-        kieSession.insert(new A(rulesNr + 1));
-        joinedFact = kieSession.insert(new B(rulesNr + 2));
+        // Partial match for join nodes
+        kieSession.insert(new B(rulesNr + 2));
+        // Match for first rule
+        kieSession.insert(new A(0));
     }
 
     @Benchmark
-    public void test(final Blackhole eater) {
-        eater.consume(kieSession.fireAllRules());
-        if (doUpdate) {
-            kieSession.update(joinedFact, new B(rulesNr + 2));
-            eater.consume(kieSession.fireAllRules());
-        }
+    public int test() {
+        return kieSession.fireAllRules();
     }
 }
