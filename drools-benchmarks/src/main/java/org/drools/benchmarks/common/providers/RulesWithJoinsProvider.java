@@ -78,7 +78,7 @@ public class RulesWithJoinsProvider implements DrlProvider {
         for ( int i = 0; i < numberOfRules; i++ ) {
             drlBuilder.append( "rule R" + i + " \n");
             if (prioritizedBySalience) {
-                drlBuilder.append("salience " + i);
+                drlBuilder.append("salience " + i + " \n");
             }
             drlBuilder.append( " when\n");
             appendJoins(drlBuilder, i);
