@@ -21,22 +21,30 @@ import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
+import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
- * Inserts root fact, but not tip node matching fact and fires.
+ * Generates rules ordered by salience with consequence that makes other rules not matched.
+ * So only one rule fires, because during firing there's a change that cancels other rule activations.
  */
 public class InsertFireHighestSalienceBenchmark extends AbstractBenchmark {
 
     @Param({"12", "48", "192", "768"})
     private int rulesNr;
 
+    @Param({"false", "true"})
+    private boolean doUpdate;
+
+    private FactHandle joinedFact;
+
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new RulesWithJoinsProvider( 1, false, true, true, "", "delete($a);");
+        final DrlProvider drlProvider = new RulesWithJoinsProvider( 1, false, true, true, "", "modify($b) {setValue(0)};");
         createKieBaseFromDrl(drlProvider.getDrl(rulesNr));
     }
 
@@ -45,11 +53,17 @@ public class InsertFireHighestSalienceBenchmark extends AbstractBenchmark {
     public void setup() {
         createKieSession();
         kieSession.insert(new A(rulesNr + 1));
-        kieSession.insert(new B(rulesNr + 2));
+        joinedFact = kieSession.insert(new B(rulesNr + 2));
     }
 
     @Benchmark
-    public int test() {
-        return kieSession.fireAllRules();
+    public void test(final Blackhole eater) {
+        eater.consume(kieSession.fireAllRules());
+        if (doUpdate) {
+            kieSession.update(joinedFact, new B(rulesNr + 2));
+            int fireCount = kieSession.fireAllRules();
+            System.out.println(fireCount);
+            eater.consume(fireCount);
+        }
     }
 }
