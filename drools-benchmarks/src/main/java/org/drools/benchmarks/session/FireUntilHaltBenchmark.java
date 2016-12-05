@@ -64,7 +64,7 @@ public class FireUntilHaltBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         int fireNr = rulesNr * factsNr;
         String consequence = CONSEQUENCE_1 + fireNr + CONSEQUENCE_2;
-        final DrlProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true, false, GLOBAL, consequence);
+        final DrlProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true, GLOBAL, consequence);
         createKieBaseFromDrl( drlProvider.getDrl(rulesNr),
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
                 cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
