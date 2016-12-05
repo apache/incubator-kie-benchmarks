@@ -41,7 +41,7 @@ public class RulesWithJoinsProvider implements DrlProvider {
      * @param withCep True, if rules for event processing should be generated, else false.
      * @param appendDrlHeader True, if DRL header should be appended to provided DRL, else false.
      * @param prioritizedBySalience If true, the rules are generated with salience and ordered by it.
-     * Each rule gets higher salience that previous one.
+     * Each rule gets higher salience than previous one.
      * @param global DRL global.
      * @param consequence Rule consequence.
      */
