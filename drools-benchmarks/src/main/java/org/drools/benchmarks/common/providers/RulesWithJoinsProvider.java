@@ -92,11 +92,7 @@ public class RulesWithJoinsProvider implements DrlProvider {
 
     private void appendJoins(final StringBuilder drlBuilder, final int valueInConstraint) {
         final String[] joinConstraints = withCep ? getJoinConstraintsCep() : getJoinConstraints();
-        if (withCep) {
-            drlBuilder.append("  $a : A( value > " + valueInConstraint + ")\n");
-        } else {
-            drlBuilder.append("  A( $a : value > " + valueInConstraint + ")\n");
-        }
+        drlBuilder.append("  $a : A( value > " + valueInConstraint + ")\n");
         for (int i = 0; i < numberOfJoins; i++) {
             drlBuilder.append(joinConstraints[i]);
         }
@@ -113,10 +109,10 @@ public class RulesWithJoinsProvider implements DrlProvider {
 
     private String[] getJoinConstraints() {
         return new String[] {
-                "  B( $b : value > $a )\n",
-                "  C( $c : value > $b )\n",
-                "  D( $d : value > $c )\n",
-                "  E( $e : value > $d )\n"
+                "  $b : B( value > $a.value )\n",
+                "  $c : C( value > $b.value )\n",
+                "  $d : D( value > $c.value )\n",
+                "  $e : E( value > $d.value )\n"
         };
     }
 }
