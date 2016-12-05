@@ -61,9 +61,7 @@ public class InsertFireHighestSalienceBenchmark extends AbstractBenchmark {
         eater.consume(kieSession.fireAllRules());
         if (doUpdate) {
             kieSession.update(joinedFact, new B(rulesNr + 2));
-            int fireCount = kieSession.fireAllRules();
-            System.out.println(fireCount);
-            eater.consume(fireCount);
+            eater.consume(kieSession.fireAllRules());
         }
     }
 }
