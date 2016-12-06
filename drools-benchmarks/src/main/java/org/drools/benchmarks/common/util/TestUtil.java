@@ -16,6 +16,11 @@
 
 package org.drools.benchmarks.common.util;
 
+import org.drools.benchmarks.domain.B;
+import org.drools.benchmarks.domain.C;
+import org.drools.benchmarks.domain.D;
+import org.drools.benchmarks.domain.E;
+import org.kie.api.runtime.KieSession;
 import org.kie.internal.builder.conf.RuleEngineOption;
 
 public final class TestUtil {
@@ -38,6 +43,32 @@ public final class TestUtil {
 
     public static boolean dumpRete() {
         return isDebug() || Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_DUMP_RETE));
+    }
+
+    public static void insertJoinedFactsToSession(final KieSession kieSession, final int numberOfJoins, final int baseFactValue) {
+        switch (numberOfJoins) {
+
+            case 1:
+                kieSession.insert( new B( baseFactValue + 3 ) );
+                break;
+            case 2:
+                kieSession.insert( new B( baseFactValue + 3 ) );
+                kieSession.insert( new C( baseFactValue + 4 ) );
+                break;
+            case 3:
+                kieSession.insert( new B( baseFactValue + 3 ) );
+                kieSession.insert( new C( baseFactValue + 4 ) );
+                kieSession.insert( new D( baseFactValue + 5 ) );
+                break;
+            case 4:
+                kieSession.insert( new B( baseFactValue + 3 ) );
+                kieSession.insert( new C( baseFactValue + 4 ) );
+                kieSession.insert( new D( baseFactValue + 5 ) );
+                kieSession.insert( new E( baseFactValue + 6 ) );
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported number of joins (" + numberOfJoins + ")!");
+        }
     }
 
     private TestUtil() {
