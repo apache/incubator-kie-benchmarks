@@ -22,6 +22,8 @@ import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.domain.A;
 import org.drools.benchmarks.domain.B;
+import org.drools.benchmarks.domain.C;
+import org.drools.benchmarks.domain.D;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -50,11 +52,14 @@ public class RuleUnlinkingBenchmark extends AbstractBenchmark {
     @Param({"1", "4", "16"})
     private int factsNr;
 
+    @Param({"1", "2", "3"})
+    private int joinsNr;
+
     private FactHandle aFH;
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new RulesWithJoinsProvider(1, false, true);
+        final DrlProvider drlProvider = new RulesWithJoinsProvider(joinsNr, false, true);
         createKieBaseFromDrl( drlProvider.getDrl(rulesNr) );
     }
 
@@ -65,7 +70,22 @@ public class RuleUnlinkingBenchmark extends AbstractBenchmark {
 
         aFH = kieSession.insert( new A( rulesNr + 1 ) );
         for ( int i = 0; i < factsNr; i++ ) {
-            kieSession.insert( new B( rulesNr + 3 ) );
+            switch (joinsNr) {
+                case 1:
+                    kieSession.insert( new B( rulesNr + 3 ) );
+                    break;
+                case 2:
+                    kieSession.insert( new B( rulesNr + 3 ) );
+                    kieSession.insert( new C( rulesNr + 4 ) );
+                    break;
+                case 3:
+                    kieSession.insert( new B( rulesNr + 3 ) );
+                    kieSession.insert( new C( rulesNr + 4 ) );
+                    kieSession.insert( new D( rulesNr + 5 ) );
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported number of joins (" + joinsNr + ")!");
+            }
         }
 
         kieSession.fireAllRules();
