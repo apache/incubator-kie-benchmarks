@@ -16,19 +16,27 @@
 package org.drools.benchmarks.domain;
 
 public class Address {
+    public enum Country {
+        US, CZ, SK
+    }
 
     private String street;
     private String city;
     private String postCode;
+    private Country country;
+    private String uuid;
 
-    public Address() {
+    public Address() {}
+
+    public Address(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(final String street) {
+    public void setStreet(String street) {
         this.street = street;
     }
 
@@ -36,15 +44,45 @@ public class Address {
         return city;
     }
 
-    public void setCity(final String city) {
+    public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        postCode = postalCode;
     }
 
     public String getPostCode() {
         return postCode;
     }
 
-    public void setPostCode(final String postCode) {
+    public void setPostCode(String postCode) {
         this.postCode = postCode;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    @Override
+    public String toString() {
+        return "Address [street=" + street + ", city=" + city + ", postCode=" + postCode + ", country=" + country + ", uuid="
+                + uuid + "]";
     }
 }

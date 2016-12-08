@@ -28,7 +28,6 @@ import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.StatelessKieSession;
 import org.kie.api.runtime.conf.KieSessionOption;
 import org.kie.internal.KnowledgeBaseFactory;
-import org.kie.internal.builder.conf.RuleEngineOption;
 import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -105,11 +104,12 @@ public abstract class AbstractBenchmark {
 
     private KieBaseConfiguration getKieBaseConfiguration() {
         final KieBaseConfiguration kieBaseConfiguration = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
-        if (TestUtil.useReteoo()) {
-            kieBaseConfiguration.setOption(RuleEngineOption.RETEOO);
-        } else {
-            kieBaseConfiguration.setOption(RuleEngineOption.PHREAK);
-        }
+        // Uncomment this if you want to test with Reteoo. Also see pom.xml for drools-reteoo artifact.
+//        if (TestUtil.useReteoo()) {
+//            kieBaseConfiguration.setOption(RuleEngineOption.RETEOO);
+//        } else {
+//            kieBaseConfiguration.setOption(RuleEngineOption.PHREAK);
+//        }
         return kieBaseConfiguration;
     }
 

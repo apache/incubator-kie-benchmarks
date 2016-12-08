@@ -21,7 +21,6 @@ import org.drools.benchmarks.domain.C;
 import org.drools.benchmarks.domain.D;
 import org.drools.benchmarks.domain.E;
 import org.kie.api.runtime.KieSession;
-import org.kie.internal.builder.conf.RuleEngineOption;
 
 public final class TestUtil {
 
@@ -33,9 +32,9 @@ public final class TestUtil {
         return Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_DEBUG));
     }
 
-    public static boolean useReteoo() {
-        return RuleEngineOption.RETEOO.toString().equals(System.getProperty(Constants.PROP_KEY_ENGINE_TYPE));
-    }
+//    public static boolean useReteoo() {
+//        return RuleEngineOption.RETEOO.toString().equals(System.getProperty(Constants.PROP_KEY_ENGINE_TYPE));
+//    }
 
     public static boolean dumpDrl() {
         return isDebug() || Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_DUMP_DRL));
