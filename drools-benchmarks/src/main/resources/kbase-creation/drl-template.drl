@@ -1,0 +1,212 @@
+package org.drools.benchmarks.bre;
+
+import java.util.Date;
+
+import org.drools.benchmarks.domain.Account;
+import org.drools.benchmarks.domain.Address;
+import org.drools.benchmarks.domain.Customer;
+import org.drools.benchmarks.domain.event.NewCustomerEvent;
+import org.drools.benchmarks.domain.Transaction;
+import org.drools.benchmarks.domain.event.TransactionCreatedEvent;
+
+global java.util.ArrayList list;
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+rule "accountBalance@RULE_NUMBER"
+when 
+	$account : Account(balance < @NUMBER1 || > @NUMBER2)
+then
+    modify ($account) { setBalance(@NUMBER2) };
+    list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "accountBalance2_@RULE_NUMBER"
+when 
+	$account : Account(balance >= @NUMBER1 && <= @NUMBER2)
+then
+	modify ($account) { setBalance(@NUMBER2) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "notMatchesPostalCodeWithPrefix@RULE_NUMBER"
+when 
+	$address : Address(postCode not matches "@NUMBER1.*")
+then
+	modify ($address) { setPostCode("@NUMBER1") };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "notContainsAccountWithHighBalance@RULE_NUMBER"
+when 
+	$account : Account(balance > @NUMBER1)
+	$customer : Customer (this == $account.owner, accounts not contains $account)
+then
+	modify ($account) { setBalance(@NUMBER1) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "BrnoPrahaOstrava@RULE_NUMBER"
+when 
+	$address : Address(city in ("Brno", "Praha", "Ostrava", "@NUMBER1"))
+then
+	modify ($address) { setCity("@NUMBER1") };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "BrnoPrahaOstravaAndZlinPrerov@RULE_NUMBER"
+when 
+	$address : Address($postCode : postCode, city in ("Brno", "Praha", "Ostrava", "@NUMBER1"))
+	$address1 : Address(this != $address, postCode == $postCode, city in ("Zlin", "Prerov", $address.city))
+	
+then
+	modify ($address) { setCity("@NUMBER1") };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "exists@RULE_NUMBER"
+when 
+	exists Customer(firstName == "Jake@NUMBER1")
+then
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "forallTransactionsWithPendingStatus@RULE_NUMBER"
+when 
+	not (
+		forall ($t : Transaction(status == Status.PENDING)
+				     Transaction(this == $t, description != null))
+	)
+then
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "accumulate@RULE_NUMBER"
+when
+    $customer : Customer(firstName == "@NUMBER1")
+    $totalBalance : Number() 
+             from accumulate(Account(owner == $customer, $balance : balance ),
+                              init(double total = @NUMBER2;),
+                              action(total += $balance;),
+                              reverse(total -= $balance;),
+                              result(total))
+then
+	modify ($customer) { setFirstName("@NUMBER1") };
+    list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "fromCollect@RULE_NUMBER"
+when 
+	$account : Account()
+    $accounts : ArrayList(size >= @NUMBER1 )
+              from collect(Transaction(accountFrom == $account))
+then
+	modify ($account) { setBalance(@NUMBER1) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "after@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "after_before") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "after_before", this after[@NUMBER1s, @NUMBER2s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "before@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "after_before") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "after_before", this before[@NUMBER1s, @NUMBER2s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "coincides@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "coincides_during") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "coincides_during", this != $tc1, this coincides[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "during@RULE_NUMBER"
+when
+	$nc1 : NewCustomerEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$nc2 : NewCustomerEvent(description == "@NUMBER2", this != $nc1, this during[@NUMBER1s] $nc1) from entry-point "Master Stream"
+then
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "finishes@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this finishes[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "finishedby@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this finishedby[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "meets@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this meets[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "metby@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this metby[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "overlaps@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this overlaps[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "overlappedby@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this overlappedby[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "starts@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this starts[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end
+===============================================================================
+rule "startedby@RULE_NUMBER"
+when
+	$tc1 : TransactionCreatedEvent(description == "@NUMBER1") from entry-point "Master Stream"
+	$tc2 : TransactionCreatedEvent(description == "@NUMBER2", this != $tc1, this startedby[@NUMBER1s] $tc1) from entry-point "Master Stream"
+then
+	modify ($tc1) { setCreationDate(new Date(@NUMBER1)) };
+	list.add(drools.getRule().getName());
+end

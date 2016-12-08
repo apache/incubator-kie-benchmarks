@@ -1,0 +1,66 @@
+package org.drools.benchmarks.bre
+
+import org.drools.benchmarks.domain.Customer;
+import org.drools.benchmarks.domain.Address;
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+rule "Customer from Brno_@RULE_NUMBER"
+when
+    There is a Address with
+    - city "Brno_@NUMBER1"
+    There is a Customer with
+    - above address
+then
+   Log "This guy is living in Brno!"
+   Customer is from Moravia
+end
+===============================================================================
+
+rule "Customer with specified name from specified city_@RULE_NUMBER"
+when
+    There is a Address with
+       - street "SomeStreet@NUMBER1"
+       - city "SomeCity@NUMBER1"
+       - postal code "@NUMBER1"
+    There is a Customer with
+       - first name "Darth@NUMBER1"
+       - last name "Vader@NUMBER1"
+       - above address
+then
+    Log "Customer is bad guy..."
+    Customer is bad guy
+end
+===============================================================================
+
+rule "Remove the street_@RULE_NUMBER"
+when
+    There is a Address with
+    - city "DontCare"
+    - street "Removed street @NUMBER1"
+    - postal code "Who Knows"
+then
+    Log "Removing street as no longer valid..."
+    Street is no longer valid. Delete it.
+end
+
+===============================================================================
+
+rule "Find great street_@RULE_NUMBER"
+when
+    There is a Address with
+    - city "Unknown_@NUMBER1"
+    - street "Super street_@NUMBER1"
+then
+    Log "Great street found. Jay!"
+    This is great street!
+end
+===============================================================================
+
+rule "Customer Luke Skywalker_@RULE_NUMBER"
+when
+    There is a Customer with
+    - first name "Luke@NUMBER1"
+    - last name "Skywalker"
+then
+    Log "Luke is here!"
+    Customer is good guy
+end
