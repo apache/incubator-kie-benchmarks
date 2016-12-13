@@ -1,0 +1,665 @@
+package org.drools.benchmarks.bre
+// list any import classes here.
+import org.drools.benchmarks.domain.event.TransactionCreatedEvent
+import org.drools.benchmarks.domain.event.NewCustomerEvent
+// declarations and global variables
+declare TransactionCreatedEvent
+    @role(event)
+    @duration(duration)
+end
+declare NewCustomerEvent
+    @role(event)
+    @duration(duration)
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[147ms, 149ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[147ms, 149ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[144ms, 147ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[144ms, 147ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[141ms, 144ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[141ms, 144ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[138ms, 141ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[138ms, 141ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[135ms, 138ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[135ms, 138ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[132ms, 135ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[132ms, 135ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[129ms, 132ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[129ms, 132ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[126ms, 129ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[126ms, 129ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[123ms, 126ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[123ms, 126ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[120ms, 123ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[120ms, 123ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[117ms, 120ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[117ms, 120ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[114ms, 117ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[114ms, 117ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[111ms, 114ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[111ms, 114ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[108ms, 111ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[108ms, 111ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[105ms, 108ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[105ms, 108ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[102ms, 105ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[102ms, 105ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[99ms, 102ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[99ms, 102ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[96ms, 99ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[96ms, 99ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[93ms, 96ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[93ms, 96ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[90ms, 93ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[90ms, 93ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[87ms, 90ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[87ms, 90ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[84ms, 87ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[84ms, 87ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[81ms, 84ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[81ms, 84ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[78ms, 81ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[78ms, 81ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[75ms, 78ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[75ms, 78ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[72ms, 75ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[72ms, 75ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[69ms, 72ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[69ms, 72ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[66ms, 69ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[66ms, 69ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[63ms, 66ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[63ms, 66ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[60ms, 63ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[60ms, 63ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[57ms, 60ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[57ms, 60ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[54ms, 57ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[54ms, 57ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[51ms, 54ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[51ms, 54ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[48ms, 51ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[48ms, 51ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[45ms, 48ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[45ms, 48ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[42ms, 45ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[42ms, 45ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[39ms, 42ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[39ms, 42ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[36ms, 39ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[36ms, 39ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[33ms, 36ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[33ms, 36ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[30ms, 33ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[30ms, 33ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[27ms, 30ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[27ms, 30ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[24ms, 27ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[24ms, 27ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[21ms, 24ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[21ms, 24ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[18ms, 21ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[18ms, 21ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[15ms, 18ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[15ms, 18ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[12ms, 15ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[12ms, 15ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[9ms, 12ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[9ms, 12ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[6ms, 9ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[6ms, 9ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[3ms, 6ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[3ms, 6ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlapsNewCustomerCreated", this overlaps[0ms, 3ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "OverlapsOverlappedby_TransactionCreatedOverlappedbyNewCustomerCreated", this overlappedby[0ms, 3ms] $nc) from entry-point "Master Stream"
+then
+end
+
+

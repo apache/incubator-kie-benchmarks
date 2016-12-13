@@ -22,8 +22,8 @@ when
        - city "SomeCity@NUMBER1"
        - postal code "@NUMBER1"
     There is a Customer with
-       - first name "Darth@NUMBER1"
-       - last name "Vader@NUMBER1"
+       - first name "Delicious@NUMBER1"
+       - last name "Gorgonzola@NUMBER1"
        - above address
 then
     Log "Customer is bad guy..."
@@ -55,12 +55,12 @@ then
 end
 ===============================================================================
 
-rule "Customer Luke Skywalker_@RULE_NUMBER"
+rule "Customer That Eidam_@RULE_NUMBER"
 when
     There is a Customer with
-    - first name "Luke@NUMBER1"
-    - last name "Skywalker"
+    - first name "That@NUMBER1"
+    - last name "Eidam"
 then
-    Log "Luke is here!"
+    Log "That is here!"
     Customer is good guy
 end

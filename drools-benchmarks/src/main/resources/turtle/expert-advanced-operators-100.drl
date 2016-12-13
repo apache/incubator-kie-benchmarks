@@ -1,0 +1,635 @@
+package org.drools.benchmarks.bre;
+import org.drools.benchmarks.domain.*;
+// Basic rule template which contains place holders started by @ (e.g. @{row.rowNumber})
+// that have to be replaced by actual values
+
+rule "customerHasSpecifiedAccount_17"
+when 
+    $account : Account (number > 10000 && number <= 10100, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_17"
+when 
+    $account : Account (number > 40000 && number <= 41000, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_17"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 100000 && <= 102000, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_17"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 1000000 && <= 1020000, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_17"
+when 
+    $address : Address (city matches "Br10000.*", uuid == "matchesCityWithPrefixBr10000")
+then
+end
+rule "notMatchesTransactionDescription_17"
+when 
+    $transaction : Transaction (description not matches "BadDescription10100.*", uuid == "notMatchesTransactionDescription10100")
+then
+end
+
+rule "customerHasSpecifiedAccount_16"
+when 
+    $account : Account (number > 9385 && number <= 9485, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_16"
+when 
+    $account : Account (number > 38750 && number <= 39750, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_16"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 96875 && <= 98875, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_16"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 968750 && <= 988750, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_16"
+when 
+    $address : Address (city matches "Br9385.*", uuid == "matchesCityWithPrefixBr9385")
+then
+end
+rule "notMatchesTransactionDescription_16"
+when 
+    $transaction : Transaction (description not matches "BadDescription9485.*", uuid == "notMatchesTransactionDescription9485")
+then
+end
+
+rule "customerHasSpecifiedAccount_15"
+when 
+    $account : Account (number > 8766 && number <= 8866, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_15"
+when 
+    $account : Account (number > 37500 && number <= 38500, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_15"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 93750 && <= 95750, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_15"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 937500 && <= 957500, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_15"
+when 
+    $address : Address (city matches "Br8766.*", uuid == "matchesCityWithPrefixBr8766")
+then
+end
+rule "notMatchesTransactionDescription_15"
+when 
+    $transaction : Transaction (description not matches "BadDescription8866.*", uuid == "notMatchesTransactionDescription8866")
+then
+end
+
+rule "customerHasSpecifiedAccount_14"
+when 
+    $account : Account (number > 8147 && number <= 8247, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_14"
+when 
+    $account : Account (number > 36250 && number <= 37250, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_14"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 90625 && <= 92625, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_14"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 906250 && <= 926250, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_14"
+when 
+    $address : Address (city matches "Br8147.*", uuid == "matchesCityWithPrefixBr8147")
+then
+end
+rule "notMatchesTransactionDescription_14"
+when 
+    $transaction : Transaction (description not matches "BadDescription8247.*", uuid == "notMatchesTransactionDescription8247")
+then
+end
+
+rule "customerHasSpecifiedAccount_13"
+when 
+    $account : Account (number > 7528 && number <= 7628, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_13"
+when 
+    $account : Account (number > 35000 && number <= 36000, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_13"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 87500 && <= 89500, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_13"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 875000 && <= 895000, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_13"
+when 
+    $address : Address (city matches "Br7528.*", uuid == "matchesCityWithPrefixBr7528")
+then
+end
+rule "notMatchesTransactionDescription_13"
+when 
+    $transaction : Transaction (description not matches "BadDescription7628.*", uuid == "notMatchesTransactionDescription7628")
+then
+end
+
+rule "customerHasSpecifiedAccount_12"
+when 
+    $account : Account (number > 6909 && number <= 7009, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_12"
+when 
+    $account : Account (number > 33750 && number <= 34750, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_12"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 84375 && <= 86375, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_12"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 843750 && <= 863750, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_12"
+when 
+    $address : Address (city matches "Br6909.*", uuid == "matchesCityWithPrefixBr6909")
+then
+end
+rule "notMatchesTransactionDescription_12"
+when 
+    $transaction : Transaction (description not matches "BadDescription7009.*", uuid == "notMatchesTransactionDescription7009")
+then
+end
+
+rule "customerHasSpecifiedAccount_11"
+when 
+    $account : Account (number > 6290 && number <= 6390, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_11"
+when 
+    $account : Account (number > 32500 && number <= 33500, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_11"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 81250 && <= 83250, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_11"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 812500 && <= 832500, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_11"
+when 
+    $address : Address (city matches "Br6290.*", uuid == "matchesCityWithPrefixBr6290")
+then
+end
+rule "notMatchesTransactionDescription_11"
+when 
+    $transaction : Transaction (description not matches "BadDescription6390.*", uuid == "notMatchesTransactionDescription6390")
+then
+end
+
+rule "customerHasSpecifiedAccount_10"
+when 
+    $account : Account (number > 5671 && number <= 5771, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_10"
+when 
+    $account : Account (number > 31250 && number <= 32250, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_10"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 78125 && <= 80125, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_10"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 781250 && <= 801250, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_10"
+when 
+    $address : Address (city matches "Br5671.*", uuid == "matchesCityWithPrefixBr5671")
+then
+end
+rule "notMatchesTransactionDescription_10"
+when 
+    $transaction : Transaction (description not matches "BadDescription5771.*", uuid == "notMatchesTransactionDescription5771")
+then
+end
+
+rule "customerHasSpecifiedAccount_9"
+when 
+    $account : Account (number > 5052 && number <= 5152, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_9"
+when 
+    $account : Account (number > 30000 && number <= 31000, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_9"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 75000 && <= 77000, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_9"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 750000 && <= 770000, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_9"
+when 
+    $address : Address (city matches "Br5052.*", uuid == "matchesCityWithPrefixBr5052")
+then
+end
+rule "notMatchesTransactionDescription_9"
+when 
+    $transaction : Transaction (description not matches "BadDescription5152.*", uuid == "notMatchesTransactionDescription5152")
+then
+end
+
+rule "customerHasSpecifiedAccount_8"
+when 
+    $account : Account (number > 4433 && number <= 4533, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_8"
+when 
+    $account : Account (number > 28750 && number <= 29750, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_8"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 71875 && <= 73875, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_8"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 718750 && <= 738750, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_8"
+when 
+    $address : Address (city matches "Br4433.*", uuid == "matchesCityWithPrefixBr4433")
+then
+end
+rule "notMatchesTransactionDescription_8"
+when 
+    $transaction : Transaction (description not matches "BadDescription4533.*", uuid == "notMatchesTransactionDescription4533")
+then
+end
+
+rule "customerHasSpecifiedAccount_7"
+when 
+    $account : Account (number > 3814 && number <= 3914, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_7"
+when 
+    $account : Account (number > 27500 && number <= 28500, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_7"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 68750 && <= 70750, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_7"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 687500 && <= 707500, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_7"
+when 
+    $address : Address (city matches "Br3814.*", uuid == "matchesCityWithPrefixBr3814")
+then
+end
+rule "notMatchesTransactionDescription_7"
+when 
+    $transaction : Transaction (description not matches "BadDescription3914.*", uuid == "notMatchesTransactionDescription3914")
+then
+end
+
+rule "customerHasSpecifiedAccount_6"
+when 
+    $account : Account (number > 3195 && number <= 3295, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_6"
+when 
+    $account : Account (number > 26250 && number <= 27250, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_6"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 65625 && <= 67625, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_6"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 656250 && <= 676250, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_6"
+when 
+    $address : Address (city matches "Br3195.*", uuid == "matchesCityWithPrefixBr3195")
+then
+end
+rule "notMatchesTransactionDescription_6"
+when 
+    $transaction : Transaction (description not matches "BadDescription3295.*", uuid == "notMatchesTransactionDescription3295")
+then
+end
+
+rule "customerHasSpecifiedAccount_5"
+when 
+    $account : Account (number > 2576 && number <= 2676, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_5"
+when 
+    $account : Account (number > 25000 && number <= 26000, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_5"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 62500 && <= 64500, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_5"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 625000 && <= 645000, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_5"
+when 
+    $address : Address (city matches "Br2576.*", uuid == "matchesCityWithPrefixBr2576")
+then
+end
+rule "notMatchesTransactionDescription_5"
+when 
+    $transaction : Transaction (description not matches "BadDescription2676.*", uuid == "notMatchesTransactionDescription2676")
+then
+end
+
+rule "customerHasSpecifiedAccount_4"
+when 
+    $account : Account (number > 1957 && number <= 2057, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_4"
+when 
+    $account : Account (number > 23750 && number <= 24750, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_4"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 59375 && <= 61375, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_4"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 593750 && <= 613750, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_4"
+when 
+    $address : Address (city matches "Br1957.*", uuid == "matchesCityWithPrefixBr1957")
+then
+end
+rule "notMatchesTransactionDescription_4"
+when 
+    $transaction : Transaction (description not matches "BadDescription2057.*", uuid == "notMatchesTransactionDescription2057")
+then
+end
+
+rule "customerHasSpecifiedAccount_3"
+when 
+    $account : Account (number > 1338 && number <= 1438, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_3"
+when 
+    $account : Account (number > 22500 && number <= 23500, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_3"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 56250 && <= 58250, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_3"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 562500 && <= 582500, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_3"
+when 
+    $address : Address (city matches "Br1338.*", uuid == "matchesCityWithPrefixBr1338")
+then
+end
+rule "notMatchesTransactionDescription_3"
+when 
+    $transaction : Transaction (description not matches "BadDescription1438.*", uuid == "notMatchesTransactionDescription1438")
+then
+end
+
+rule "customerHasSpecifiedAccount_2"
+when 
+    $account : Account (number > 719 && number <= 819, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_2"
+when 
+    $account : Account (number > 21250 && number <= 22250, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_2"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 53125 && <= 55125, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_2"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 531250 && <= 551250, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_2"
+when 
+    $address : Address (city matches "Br719.*", uuid == "matchesCityWithPrefixBr719")
+then
+end
+rule "notMatchesTransactionDescription_2"
+when 
+    $transaction : Transaction (description not matches "BadDescription819.*", uuid == "notMatchesTransactionDescription819")
+then
+end
+
+rule "customerHasSpecifiedAccount_1"
+when 
+    $account : Account (number > 100 && number <= 200, uuid == "customerHasSpecifiedAccount")
+    Customer (this == $account.owner, accounts contains $account, uuid == "customerHasSpecifiedAccount")
+then
+end
+rule "customerDoesNotHaveSpecifiedAccount_1"
+when 
+    $account : Account (number > 20000 && number <= 21000, uuid == "customerDoesNotHaveSpecifiedAccount")
+    Customer (this == $account.owner, accounts not contains $account, uuid == "customerDoesNotHaveSpecifiedAccount")
+then
+end
+rule "memberOfCustomersAccounts_1"
+when 
+    $customer : Customer (uuid == "memberOfCustomersAccounts")
+    $account : Account (owner == $customer, this memberOf $customer.accounts, 
+                        balance > 50000 && <= 52000, uuid == "memberOfCustomersAccounts")
+then
+end
+rule "notMemberOfCustomersAccounts_1"
+when 
+    $customer : Customer (uuid == "notMemberOfCustomersAccounts")
+    $account : Account (owner == $customer, this not memberOf $customer.accounts, 
+                        balance > 500000 && <= 520000, uuid == "notMemberOfCustomersAccounts")
+then
+end
+rule "matchesCityWithPrefixBr_1"
+when 
+    $address : Address (city matches "Br100.*", uuid == "matchesCityWithPrefixBr100")
+then
+end
+rule "notMatchesTransactionDescription_1"
+when 
+    $transaction : Transaction (description not matches "BadDescription200.*", uuid == "notMatchesTransactionDescription200")
+then
+end
+
+

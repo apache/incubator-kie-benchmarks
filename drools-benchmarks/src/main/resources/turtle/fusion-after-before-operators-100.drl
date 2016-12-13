@@ -1,0 +1,665 @@
+package org.drools.benchmarks.bre
+// list any import classes here.
+import org.drools.benchmarks.domain.event.TransactionCreatedEvent
+import org.drools.benchmarks.domain.event.NewCustomerEvent
+// declarations and global variables
+declare TransactionCreatedEvent
+    @role(event)
+    @duration(duration)
+end
+declare NewCustomerEvent
+    @role(event)
+    @duration(duration)
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[147ms, 149ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[147ms, 149ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[144ms, 147ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[144ms, 147ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[141ms, 144ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[141ms, 144ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[138ms, 141ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[138ms, 141ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[135ms, 138ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[135ms, 138ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[132ms, 135ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[132ms, 135ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[129ms, 132ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[129ms, 132ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[126ms, 129ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[126ms, 129ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[123ms, 126ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[123ms, 126ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[120ms, 123ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[120ms, 123ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[117ms, 120ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[117ms, 120ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[114ms, 117ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[114ms, 117ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[111ms, 114ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[111ms, 114ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[108ms, 111ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[108ms, 111ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[105ms, 108ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[105ms, 108ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[102ms, 105ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[102ms, 105ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[99ms, 102ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[99ms, 102ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[96ms, 99ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[96ms, 99ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[93ms, 96ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[93ms, 96ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[90ms, 93ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[90ms, 93ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[87ms, 90ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[87ms, 90ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[84ms, 87ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[84ms, 87ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[81ms, 84ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[81ms, 84ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[78ms, 81ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[78ms, 81ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[75ms, 78ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[75ms, 78ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[72ms, 75ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[72ms, 75ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[69ms, 72ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[69ms, 72ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[66ms, 69ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[66ms, 69ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[63ms, 66ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[63ms, 66ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[60ms, 63ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[60ms, 63ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[57ms, 60ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[57ms, 60ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[54ms, 57ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[54ms, 57ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[51ms, 54ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[51ms, 54ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[48ms, 51ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[48ms, 51ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[45ms, 48ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[45ms, 48ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[42ms, 45ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[42ms, 45ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[39ms, 42ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[39ms, 42ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[36ms, 39ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[36ms, 39ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[33ms, 36ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[33ms, 36ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[30ms, 33ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[30ms, 33ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[27ms, 30ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[27ms, 30ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[24ms, 27ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[24ms, 27ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[21ms, 24ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[21ms, 24ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[18ms, 21ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[18ms, 21ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[15ms, 18ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[15ms, 18ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[12ms, 15ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[12ms, 15ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[9ms, 12ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[9ms, 12ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[6ms, 9ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[6ms, 9ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[3ms, 6ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[3ms, 6ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "AfterBefore_TransactionCreatedAfterNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedAfterNewCustomerCreated", this after[0ms, 3ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "AfterBefore_TransactionCreatedBeforeNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "AfterBefore_TransactionCreatedBeforeNewCustomerCreated", this before[0ms, 3ms] $nc) from entry-point "Master Stream"
+then
+end
+
+

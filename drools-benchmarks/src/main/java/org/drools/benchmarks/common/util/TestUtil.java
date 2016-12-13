@@ -71,5 +71,6 @@ public final class TestUtil {
     }
 
     private TestUtil() {
+        // Instantiation of util classes not allowed.
     }
 }

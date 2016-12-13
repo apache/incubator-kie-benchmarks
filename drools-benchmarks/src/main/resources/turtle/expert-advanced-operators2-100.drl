@@ -1,0 +1,626 @@
+package org.drools.benchmarks.bre;
+import org.drools.benchmarks.domain.*;
+// Basic rule template which contains place holders started by @ (e.g. @{row.rowNumber})
+// that have to be replaced by actual values
+
+rule "twoCustomersWithSameNameInfixAnd_20"
+when
+    $cust1 : Customer(firstName == "Johnny10000", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_20"
+when
+    $acc1 : Account(number > 10000, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 10100, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_20"
+when
+    (or $tr1 : Transaction(amount > 100000, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr10000")
+        $tr2 : Transaction(amount <= 102000, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr10000")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_20"
+when
+    $tr : Transaction(description in ("good10000", "great10000", "super10000"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_20"
+when
+    $addr : Address(city in ("Brno10000", "Ostrava10000", "Praha10000", "Zlin10000"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_19"
+when
+    $cust1 : Customer(firstName == "Johnny9496", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_19"
+when
+    $acc1 : Account(number > 9496, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 9596, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_19"
+when
+    (or $tr1 : Transaction(amount > 97376, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr9496")
+        $tr2 : Transaction(amount <= 99376, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr9496")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_19"
+when
+    $tr : Transaction(description in ("good9496", "great9496", "super9496"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_19"
+when
+    $addr : Address(city in ("Brno9496", "Ostrava9496", "Praha9496", "Zlin9496"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_18"
+when
+    $cust1 : Customer(firstName == "Johnny8974", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_18"
+when
+    $acc1 : Account(number > 8974, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 9074, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_18"
+when
+    (or $tr1 : Transaction(amount > 94744, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr8974")
+        $tr2 : Transaction(amount <= 96744, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr8974")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_18"
+when
+    $tr : Transaction(description in ("good8974", "great8974", "super8974"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_18"
+when
+    $addr : Address(city in ("Brno8974", "Ostrava8974", "Praha8974", "Zlin8974"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_17"
+when
+    $cust1 : Customer(firstName == "Johnny8452", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_17"
+when
+    $acc1 : Account(number > 8452, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 8552, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_17"
+when
+    (or $tr1 : Transaction(amount > 92112, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr8452")
+        $tr2 : Transaction(amount <= 94112, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr8452")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_17"
+when
+    $tr : Transaction(description in ("good8452", "great8452", "super8452"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_17"
+when
+    $addr : Address(city in ("Brno8452", "Ostrava8452", "Praha8452", "Zlin8452"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_16"
+when
+    $cust1 : Customer(firstName == "Johnny7930", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_16"
+when
+    $acc1 : Account(number > 7930, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 8030, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_16"
+when
+    (or $tr1 : Transaction(amount > 89480, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr7930")
+        $tr2 : Transaction(amount <= 91480, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr7930")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_16"
+when
+    $tr : Transaction(description in ("good7930", "great7930", "super7930"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_16"
+when
+    $addr : Address(city in ("Brno7930", "Ostrava7930", "Praha7930", "Zlin7930"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_15"
+when
+    $cust1 : Customer(firstName == "Johnny7408", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_15"
+when
+    $acc1 : Account(number > 7408, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 7508, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_15"
+when
+    (or $tr1 : Transaction(amount > 86848, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr7408")
+        $tr2 : Transaction(amount <= 88848, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr7408")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_15"
+when
+    $tr : Transaction(description in ("good7408", "great7408", "super7408"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_15"
+when
+    $addr : Address(city in ("Brno7408", "Ostrava7408", "Praha7408", "Zlin7408"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_14"
+when
+    $cust1 : Customer(firstName == "Johnny6886", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_14"
+when
+    $acc1 : Account(number > 6886, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 6986, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_14"
+when
+    (or $tr1 : Transaction(amount > 84216, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr6886")
+        $tr2 : Transaction(amount <= 86216, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr6886")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_14"
+when
+    $tr : Transaction(description in ("good6886", "great6886", "super6886"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_14"
+when
+    $addr : Address(city in ("Brno6886", "Ostrava6886", "Praha6886", "Zlin6886"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_13"
+when
+    $cust1 : Customer(firstName == "Johnny6364", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_13"
+when
+    $acc1 : Account(number > 6364, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 6464, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_13"
+when
+    (or $tr1 : Transaction(amount > 81584, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr6364")
+        $tr2 : Transaction(amount <= 83584, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr6364")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_13"
+when
+    $tr : Transaction(description in ("good6364", "great6364", "super6364"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_13"
+when
+    $addr : Address(city in ("Brno6364", "Ostrava6364", "Praha6364", "Zlin6364"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_12"
+when
+    $cust1 : Customer(firstName == "Johnny5842", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_12"
+when
+    $acc1 : Account(number > 5842, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 5942, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_12"
+when
+    (or $tr1 : Transaction(amount > 78952, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr5842")
+        $tr2 : Transaction(amount <= 80952, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr5842")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_12"
+when
+    $tr : Transaction(description in ("good5842", "great5842", "super5842"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_12"
+when
+    $addr : Address(city in ("Brno5842", "Ostrava5842", "Praha5842", "Zlin5842"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_11"
+when
+    $cust1 : Customer(firstName == "Johnny5320", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_11"
+when
+    $acc1 : Account(number > 5320, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 5420, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_11"
+when
+    (or $tr1 : Transaction(amount > 76320, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr5320")
+        $tr2 : Transaction(amount <= 78320, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr5320")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_11"
+when
+    $tr : Transaction(description in ("good5320", "great5320", "super5320"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_11"
+when
+    $addr : Address(city in ("Brno5320", "Ostrava5320", "Praha5320", "Zlin5320"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_10"
+when
+    $cust1 : Customer(firstName == "Johnny4798", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_10"
+when
+    $acc1 : Account(number > 4798, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 4898, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_10"
+when
+    (or $tr1 : Transaction(amount > 73688, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr4798")
+        $tr2 : Transaction(amount <= 75688, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr4798")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_10"
+when
+    $tr : Transaction(description in ("good4798", "great4798", "super4798"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_10"
+when
+    $addr : Address(city in ("Brno4798", "Ostrava4798", "Praha4798", "Zlin4798"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_9"
+when
+    $cust1 : Customer(firstName == "Johnny4276", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_9"
+when
+    $acc1 : Account(number > 4276, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 4376, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_9"
+when
+    (or $tr1 : Transaction(amount > 71056, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr4276")
+        $tr2 : Transaction(amount <= 73056, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr4276")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_9"
+when
+    $tr : Transaction(description in ("good4276", "great4276", "super4276"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_9"
+when
+    $addr : Address(city in ("Brno4276", "Ostrava4276", "Praha4276", "Zlin4276"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_8"
+when
+    $cust1 : Customer(firstName == "Johnny3754", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_8"
+when
+    $acc1 : Account(number > 3754, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 3854, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_8"
+when
+    (or $tr1 : Transaction(amount > 68424, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr3754")
+        $tr2 : Transaction(amount <= 70424, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr3754")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_8"
+when
+    $tr : Transaction(description in ("good3754", "great3754", "super3754"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_8"
+when
+    $addr : Address(city in ("Brno3754", "Ostrava3754", "Praha3754", "Zlin3754"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_7"
+when
+    $cust1 : Customer(firstName == "Johnny3232", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_7"
+when
+    $acc1 : Account(number > 3232, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 3332, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_7"
+when
+    (or $tr1 : Transaction(amount > 65792, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr3232")
+        $tr2 : Transaction(amount <= 67792, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr3232")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_7"
+when
+    $tr : Transaction(description in ("good3232", "great3232", "super3232"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_7"
+when
+    $addr : Address(city in ("Brno3232", "Ostrava3232", "Praha3232", "Zlin3232"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_6"
+when
+    $cust1 : Customer(firstName == "Johnny2710", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_6"
+when
+    $acc1 : Account(number > 2710, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 2810, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_6"
+when
+    (or $tr1 : Transaction(amount > 63160, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr2710")
+        $tr2 : Transaction(amount <= 65160, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr2710")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_6"
+when
+    $tr : Transaction(description in ("good2710", "great2710", "super2710"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_6"
+when
+    $addr : Address(city in ("Brno2710", "Ostrava2710", "Praha2710", "Zlin2710"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_5"
+when
+    $cust1 : Customer(firstName == "Johnny2188", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_5"
+when
+    $acc1 : Account(number > 2188, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 2288, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_5"
+when
+    (or $tr1 : Transaction(amount > 60528, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr2188")
+        $tr2 : Transaction(amount <= 62528, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr2188")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_5"
+when
+    $tr : Transaction(description in ("good2188", "great2188", "super2188"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_5"
+when
+    $addr : Address(city in ("Brno2188", "Ostrava2188", "Praha2188", "Zlin2188"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_4"
+when
+    $cust1 : Customer(firstName == "Johnny1666", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_4"
+when
+    $acc1 : Account(number > 1666, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 1766, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_4"
+when
+    (or $tr1 : Transaction(amount > 57896, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr1666")
+        $tr2 : Transaction(amount <= 59896, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr1666")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_4"
+when
+    $tr : Transaction(description in ("good1666", "great1666", "super1666"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_4"
+when
+    $addr : Address(city in ("Brno1666", "Ostrava1666", "Praha1666", "Zlin1666"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_3"
+when
+    $cust1 : Customer(firstName == "Johnny1144", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_3"
+when
+    $acc1 : Account(number > 1144, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 1244, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_3"
+when
+    (or $tr1 : Transaction(amount > 55264, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr1144")
+        $tr2 : Transaction(amount <= 57264, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr1144")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_3"
+when
+    $tr : Transaction(description in ("good1144", "great1144", "super1144"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_3"
+when
+    $addr : Address(city in ("Brno1144", "Ostrava1144", "Praha1144", "Zlin1144"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_2"
+when
+    $cust1 : Customer(firstName == "Johnny622", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_2"
+when
+    $acc1 : Account(number > 622, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 722, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_2"
+when
+    (or $tr1 : Transaction(amount > 52632, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr622")
+        $tr2 : Transaction(amount <= 54632, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr622")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_2"
+when
+    $tr : Transaction(description in ("good622", "great622", "super622"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_2"
+when
+    $addr : Address(city in ("Brno622", "Ostrava622", "Praha622", "Zlin622"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+rule "twoCustomersWithSameNameInfixAnd_1"
+when
+    $cust1 : Customer(firstName == "Johnny100", uuid == "twoCustomersWithSameNameInfixAnd") and
+    $cust2: Customer(firstName == $cust1.firstName, email == $cust1.email, uuid == "twoCustomersWithSameNameInfixAnd")
+then
+end
+rule "accountWithNumberGreaterThanOrLessThanInfixOr_1"
+when
+    $acc1 : Account(number > 100, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr") or
+    $acc2 : Account(number <= 200, uuid == "accountWithNumberGreaterThanAndLessThanInfixOr")
+then
+end
+rule "transactionWithAmountGreaterThanOrLessThanPrefixOr_1"
+when
+    (or $tr1 : Transaction(amount > 50000, uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr100")
+        $tr2 : Transaction(amount <= 52000, 
+                           uuid == "transactionWithAmountGreaterThanOrLessThanPrefixOr100")
+    )
+then
+end
+rule "transactionWithOneOfSpecifiedDescriptions_1"
+when
+    $tr : Transaction(description in ("good100", "great100", "super100"), uuid == "transactionWithOneOfSpecifiedDescriptions") 
+then
+end
+rule "cityIsBrnoOstravaPrahaZlin_1"
+when
+    $addr : Address(city in ("Brno100", "Ostrava100", "Praha100", "Zlin100"), uuid == "cityIsBrnoOstravaPrahaZlin")
+then
+end
+
+
