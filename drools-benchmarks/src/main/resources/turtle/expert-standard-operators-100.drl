@@ -1,0 +1,556 @@
+package org.drools.benchmarks.bre;
+import org.drools.benchmarks.domain.*;
+// Basic rule templates which contains place holders started by @ (e.g. @{row.rowNumber})
+// that have to be replaced by actual values
+
+rule "CustomerIsThatOrStrange_10"
+when 
+	$cust : Customer((firstName == "That10000" || =="Strange10000") 
+	                  && (lastName == "Eidam10000")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_10"
+when 
+	$address : Address(city != "City10000", country == Address.Country.CZ, uuid == "SomeCityInCz10000")
+then
+end
+rule "CustomerWithCertainEmail_10"
+when 
+	$cust : Customer(email == "mail10000" || == "mail30000", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_10"
+when 
+	$address : Address(city == "City10000", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_10"
+when 
+	$account : Account(balance > 10000 || < 20000, uuid == "AccountBalance10000")
+then
+end
+rule "AccountBalance2_10"
+when 
+	$account : Account(balance >= 20000 && <= 21800, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_10"
+when 
+	$t1 : Transaction(amount >= 100000 || amount <= 300000, uuid == "TransactionWithCertainAmount10000")
+then
+end
+rule "TwoTransactionsHaveSameDescription_10"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_10000", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_10"
+when 
+	$t1 : Transaction(description == "evilTransaction_10000" || description == "superEvilTransaction_30000",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_10"
+when 
+	$account : Account(interestRate >= 20000 && <= 21800, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_9"
+when 
+	$cust : Customer((firstName == "That8900" || =="Strange8900") 
+	                  && (lastName == "Eidam8900")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_9"
+when 
+	$address : Address(city != "City8900", country == Address.Country.CZ, uuid == "SomeCityInCz8900")
+then
+end
+rule "CustomerWithCertainEmail_9"
+when 
+	$cust : Customer(email == "mail8900" || == "mail26696", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_9"
+when 
+	$address : Address(city == "City8900", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_9"
+when 
+	$account : Account(balance > 8900 || < 17800, uuid == "AccountBalance8900")
+then
+end
+rule "AccountBalance2_9"
+when 
+	$account : Account(balance >= 17800 && <= 19600, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_9"
+when 
+	$t1 : Transaction(amount >= 89000 || amount <= 266896, uuid == "TransactionWithCertainAmount8900")
+then
+end
+rule "TwoTransactionsHaveSameDescription_9"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_8900", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_9"
+when 
+	$t1 : Transaction(description == "evilTransaction_8900" || description == "superEvilTransaction_26696",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_9"
+when 
+	$account : Account(interestRate >= 17800 && <= 19600, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_8"
+when 
+	$cust : Customer((firstName == "That7800" || =="Strange7800") 
+	                  && (lastName == "Eidam7800")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_8"
+when 
+	$address : Address(city != "City7800", country == Address.Country.CZ, uuid == "SomeCityInCz7800")
+then
+end
+rule "CustomerWithCertainEmail_8"
+when 
+	$cust : Customer(email == "mail7800" || == "mail23384", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_8"
+when 
+	$address : Address(city == "City7800", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_8"
+when 
+	$account : Account(balance > 7800 || < 15600, uuid == "AccountBalance7800")
+then
+end
+rule "AccountBalance2_8"
+when 
+	$account : Account(balance >= 15600 && <= 17400, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_8"
+when 
+	$t1 : Transaction(amount >= 78000 || amount <= 233784, uuid == "TransactionWithCertainAmount7800")
+then
+end
+rule "TwoTransactionsHaveSameDescription_8"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_7800", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_8"
+when 
+	$t1 : Transaction(description == "evilTransaction_7800" || description == "superEvilTransaction_23384",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_8"
+when 
+	$account : Account(interestRate >= 15600 && <= 17400, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_7"
+when 
+	$cust : Customer((firstName == "That6700" || =="Strange6700") 
+	                  && (lastName == "Eidam6700")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_7"
+when 
+	$address : Address(city != "City6700", country == Address.Country.CZ, uuid == "SomeCityInCz6700")
+then
+end
+rule "CustomerWithCertainEmail_7"
+when 
+	$cust : Customer(email == "mail6700" || == "mail20072", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_7"
+when 
+	$address : Address(city == "City6700", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_7"
+when 
+	$account : Account(balance > 6700 || < 13400, uuid == "AccountBalance6700")
+then
+end
+rule "AccountBalance2_7"
+when 
+	$account : Account(balance >= 13400 && <= 15200, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_7"
+when 
+	$t1 : Transaction(amount >= 67000 || amount <= 200672, uuid == "TransactionWithCertainAmount6700")
+then
+end
+rule "TwoTransactionsHaveSameDescription_7"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_6700", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_7"
+when 
+	$t1 : Transaction(description == "evilTransaction_6700" || description == "superEvilTransaction_20072",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_7"
+when 
+	$account : Account(interestRate >= 13400 && <= 15200, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_6"
+when 
+	$cust : Customer((firstName == "That5600" || =="Strange5600") 
+	                  && (lastName == "Eidam5600")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_6"
+when 
+	$address : Address(city != "City5600", country == Address.Country.CZ, uuid == "SomeCityInCz5600")
+then
+end
+rule "CustomerWithCertainEmail_6"
+when 
+	$cust : Customer(email == "mail5600" || == "mail16760", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_6"
+when 
+	$address : Address(city == "City5600", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_6"
+when 
+	$account : Account(balance > 5600 || < 11200, uuid == "AccountBalance5600")
+then
+end
+rule "AccountBalance2_6"
+when 
+	$account : Account(balance >= 11200 && <= 13000, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_6"
+when 
+	$t1 : Transaction(amount >= 56000 || amount <= 167560, uuid == "TransactionWithCertainAmount5600")
+then
+end
+rule "TwoTransactionsHaveSameDescription_6"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_5600", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_6"
+when 
+	$t1 : Transaction(description == "evilTransaction_5600" || description == "superEvilTransaction_16760",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_6"
+when 
+	$account : Account(interestRate >= 11200 && <= 13000, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_5"
+when 
+	$cust : Customer((firstName == "That4500" || =="Strange4500") 
+	                  && (lastName == "Eidam4500")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_5"
+when 
+	$address : Address(city != "City4500", country == Address.Country.CZ, uuid == "SomeCityInCz4500")
+then
+end
+rule "CustomerWithCertainEmail_5"
+when 
+	$cust : Customer(email == "mail4500" || == "mail13448", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_5"
+when 
+	$address : Address(city == "City4500", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_5"
+when 
+	$account : Account(balance > 4500 || < 9000, uuid == "AccountBalance4500")
+then
+end
+rule "AccountBalance2_5"
+when 
+	$account : Account(balance >= 9000 && <= 10800, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_5"
+when 
+	$t1 : Transaction(amount >= 45000 || amount <= 134448, uuid == "TransactionWithCertainAmount4500")
+then
+end
+rule "TwoTransactionsHaveSameDescription_5"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_4500", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_5"
+when 
+	$t1 : Transaction(description == "evilTransaction_4500" || description == "superEvilTransaction_13448",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_5"
+when 
+	$account : Account(interestRate >= 9000 && <= 10800, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_4"
+when 
+	$cust : Customer((firstName == "That3400" || =="Strange3400") 
+	                  && (lastName == "Eidam3400")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_4"
+when 
+	$address : Address(city != "City3400", country == Address.Country.CZ, uuid == "SomeCityInCz3400")
+then
+end
+rule "CustomerWithCertainEmail_4"
+when 
+	$cust : Customer(email == "mail3400" || == "mail10136", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_4"
+when 
+	$address : Address(city == "City3400", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_4"
+when 
+	$account : Account(balance > 3400 || < 6800, uuid == "AccountBalance3400")
+then
+end
+rule "AccountBalance2_4"
+when 
+	$account : Account(balance >= 6800 && <= 8600, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_4"
+when 
+	$t1 : Transaction(amount >= 34000 || amount <= 101336, uuid == "TransactionWithCertainAmount3400")
+then
+end
+rule "TwoTransactionsHaveSameDescription_4"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_3400", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_4"
+when 
+	$t1 : Transaction(description == "evilTransaction_3400" || description == "superEvilTransaction_10136",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_4"
+when 
+	$account : Account(interestRate >= 6800 && <= 8600, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_3"
+when 
+	$cust : Customer((firstName == "That2300" || =="Strange2300") 
+	                  && (lastName == "Eidam2300")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_3"
+when 
+	$address : Address(city != "City2300", country == Address.Country.CZ, uuid == "SomeCityInCz2300")
+then
+end
+rule "CustomerWithCertainEmail_3"
+when 
+	$cust : Customer(email == "mail2300" || == "mail6824", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_3"
+when 
+	$address : Address(city == "City2300", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_3"
+when 
+	$account : Account(balance > 2300 || < 4600, uuid == "AccountBalance2300")
+then
+end
+rule "AccountBalance2_3"
+when 
+	$account : Account(balance >= 4600 && <= 6400, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_3"
+when 
+	$t1 : Transaction(amount >= 23000 || amount <= 68224, uuid == "TransactionWithCertainAmount2300")
+then
+end
+rule "TwoTransactionsHaveSameDescription_3"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_2300", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_3"
+when 
+	$t1 : Transaction(description == "evilTransaction_2300" || description == "superEvilTransaction_6824",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_3"
+when 
+	$account : Account(interestRate >= 4600 && <= 6400, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_2"
+when 
+	$cust : Customer((firstName == "That1200" || =="Strange1200") 
+	                  && (lastName == "Eidam1200")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_2"
+when 
+	$address : Address(city != "City1200", country == Address.Country.CZ, uuid == "SomeCityInCz1200")
+then
+end
+rule "CustomerWithCertainEmail_2"
+when 
+	$cust : Customer(email == "mail1200" || == "mail3512", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_2"
+when 
+	$address : Address(city == "City1200", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_2"
+when 
+	$account : Account(balance > 1200 || < 2400, uuid == "AccountBalance1200")
+then
+end
+rule "AccountBalance2_2"
+when 
+	$account : Account(balance >= 2400 && <= 4200, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_2"
+when 
+	$t1 : Transaction(amount >= 12000 || amount <= 35112, uuid == "TransactionWithCertainAmount1200")
+then
+end
+rule "TwoTransactionsHaveSameDescription_2"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_1200", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_2"
+when 
+	$t1 : Transaction(description == "evilTransaction_1200" || description == "superEvilTransaction_3512",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_2"
+when 
+	$account : Account(interestRate >= 2400 && <= 4200, uuid == "AccountInterestRate")
+then
+end
+
+rule "CustomerIsThatOrStrange_1"
+when 
+	$cust : Customer((firstName == "That100" || =="Strange100") 
+	                  && (lastName == "Eidam100")
+	                  && uuid == "CustomerIsThatOrStrange")
+then
+end
+rule "SomeCityInCz_1"
+when 
+	$address : Address(city != "City100", country == Address.Country.CZ, uuid == "SomeCityInCz100")
+then
+end
+rule "CustomerWithCertainEmail_1"
+when 
+	$cust : Customer(email == "mail100" || == "mail200", uuid == "CustomerWithCertainEmail")
+then
+end
+rule "NonEmptyStreetInCertainCity_1"
+when 
+	$address : Address(city == "City100", street != null && street != "", uuid == "NonEmptyStreetInCertainCity")
+then
+end
+rule "AccountBalance_1"
+when 
+	$account : Account(balance > 100 || < 200, uuid == "AccountBalance100")
+then
+end
+rule "AccountBalance2_1"
+when 
+	$account : Account(balance >= 200 && <= 2000, uuid == "AccountBalance2")
+then
+end
+rule "TransactionWithCertainAmount_1"
+when 
+	$t1 : Transaction(amount >= 1000 || amount <= 2000, uuid == "TransactionWithCertainAmount100")
+then
+end
+rule "TwoTransactionsHaveSameDescription_1"
+when 
+	$t1 : Transaction(uuid == "TwoTransactionsHaveSameDescription_100", amount > 1000)
+	$t2 : Transaction(description == $t1.description)
+then
+end
+rule "TransactionWithCertainDescription_1"
+when 
+	$t1 : Transaction(description == "evilTransaction_100" || description == "superEvilTransaction_200",
+	                  uuid == "TransactionWithCertainDescription")
+then
+end
+rule "AccountInterestRate_1"
+when 
+	$account : Account(interestRate >= 200 && <= 2000, uuid == "AccountInterestRate")
+then
+end
+
+

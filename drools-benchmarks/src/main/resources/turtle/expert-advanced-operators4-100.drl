@@ -1,0 +1,867 @@
+package org.drools.benchmarks.bre;
+import java.util.ArrayList
+import org.drools.benchmarks.domain.*;
+// Basic rule template which contains place holders started by @ (e.g. @{row.rowNumber})
+// that have to be replaced by actual values
+
+rule "transactionsWithCertainAccountFrom_collect_20"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_100000")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_20"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_100000"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_20"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_100000"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_20"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_100000"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_20"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_100000"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_19"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_94798")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_19"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_94798"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_19"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_94798"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_19"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_94798"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_19"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_94798"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_18"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_89587")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_18"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_89587"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_18"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_89587"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_18"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_89587"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_18"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_89587"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_17"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_84376")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_17"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_84376"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_17"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_84376"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_17"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_84376"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_17"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_84376"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_16"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_79165")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_16"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_79165"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_16"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_79165"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_16"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_79165"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_16"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_79165"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_15"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_73954")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_15"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_73954"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_15"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_73954"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_15"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_73954"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_15"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_73954"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_14"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_68743")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_14"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_68743"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_14"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_68743"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_14"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_68743"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_14"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_68743"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_13"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_63532")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_13"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_63532"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_13"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_63532"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_13"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_63532"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_13"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_63532"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_12"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_58321")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_12"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_58321"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_12"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_58321"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_12"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_58321"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_12"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_58321"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_11"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_53110")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_11"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_53110"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_11"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_53110"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_11"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_53110"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_11"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_53110"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_10"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_47899")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_10"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_47899"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_10"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_47899"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_10"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_47899"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_10"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_47899"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_9"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_42688")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_9"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_42688"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_9"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_42688"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_9"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_42688"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_9"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_42688"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_8"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_37477")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_8"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_37477"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_8"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_37477"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_8"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_37477"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_8"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_37477"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_7"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_32266")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_7"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_32266"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_7"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_32266"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_7"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_32266"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_7"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_32266"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_6"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_27055")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_6"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_27055"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_6"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_27055"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_6"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_27055"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_6"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_27055"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_5"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_21844")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_5"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_21844"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_5"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_21844"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_5"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_21844"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_5"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_21844"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_4"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_16633")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_4"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_16633"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_4"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_16633"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_4"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_16633"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_4"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_16633"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_3"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_11422")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_3"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_11422"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_3"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_11422"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_3"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_11422"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_3"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_11422"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_2"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_6211")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_2"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_6211"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_2"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_6211"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_2"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_6211"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_2"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_6211"),
+                         max($balance)
+                        )
+then
+end
+
+rule "transactionsWithCertainAccountFrom_collect_1"
+when
+    $account : Account(uuid == "transactionsWithCertainAccountFrom_collect_1000")
+    $transactions : ArrayList(size >= 2)
+                  from collect (Transaction(accountFrom == $account))
+then
+end
+rule "totalBalanceForCertainAccounts_accumulate_1"
+when
+    $totalBalance : Number ()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_1000"),
+                         init(double total = 0;),
+                         action(total += $balance;),
+                         reverse(total -= $balance;),
+                         result(total)
+                        )
+then
+end
+rule "averageBalanceForCertainAccounts_accumulate_1"
+when
+    $avgBalance : Number()
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_1000"),
+                         average($balance)
+                        )
+then
+end
+rule "minBalanceForCertainAccounts_accumulate_1"
+when
+    $minBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_1000"),
+                         min($balance)
+                        )
+then
+end
+rule "maxBalanceForCertainAccounts_accumulate_1"
+when
+    $maxBalance : Number() 
+        from accumulate (Account($balance : balance, uuid == "totalAverageMinMaxlBalanceForCertainAccounts_accumulate_1000"),
+                         max($balance)
+                        )
+then
+end
+
+

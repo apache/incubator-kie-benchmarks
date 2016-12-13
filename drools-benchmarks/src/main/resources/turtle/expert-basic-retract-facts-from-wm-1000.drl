@@ -1,0 +1,6208 @@
+package org.drools.benchmarks.bre;
+import java.util.Date
+import org.drools.benchmarks.domain.*;
+import org.drools.benchmarks.domain.Address.Country
+import org.drools.benchmarks.domain.Account.AccountType
+dialect "mvel"
+
+rule "Retract address_200"
+when
+    $addr : Address(city != null, uuid == "retractAddress_200")
+then
+    retract($addr);
+end
+rule "Retract customer_200"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_200")
+then
+    retract($cust);
+end
+rule "Retract account_200"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_200")
+then
+    retract($acc);
+end
+rule "Retract transaction_200"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_200")
+then
+    retract($trans);
+end
+rule "Retract credit card_200"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_200")
+then
+    retract($card);
+end
+
+rule "Retract address_199"
+when
+    $addr : Address(city != null, uuid == "retractAddress_199")
+then
+    retract($addr);
+end
+rule "Retract customer_199"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_199")
+then
+    retract($cust);
+end
+rule "Retract account_199"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_199")
+then
+    retract($acc);
+end
+rule "Retract transaction_199"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_199")
+then
+    retract($trans);
+end
+rule "Retract credit card_199"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_199")
+then
+    retract($card);
+end
+
+rule "Retract address_198"
+when
+    $addr : Address(city != null, uuid == "retractAddress_198")
+then
+    retract($addr);
+end
+rule "Retract customer_198"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_198")
+then
+    retract($cust);
+end
+rule "Retract account_198"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_198")
+then
+    retract($acc);
+end
+rule "Retract transaction_198"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_198")
+then
+    retract($trans);
+end
+rule "Retract credit card_198"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_198")
+then
+    retract($card);
+end
+
+rule "Retract address_197"
+when
+    $addr : Address(city != null, uuid == "retractAddress_197")
+then
+    retract($addr);
+end
+rule "Retract customer_197"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_197")
+then
+    retract($cust);
+end
+rule "Retract account_197"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_197")
+then
+    retract($acc);
+end
+rule "Retract transaction_197"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_197")
+then
+    retract($trans);
+end
+rule "Retract credit card_197"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_197")
+then
+    retract($card);
+end
+
+rule "Retract address_196"
+when
+    $addr : Address(city != null, uuid == "retractAddress_196")
+then
+    retract($addr);
+end
+rule "Retract customer_196"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_196")
+then
+    retract($cust);
+end
+rule "Retract account_196"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_196")
+then
+    retract($acc);
+end
+rule "Retract transaction_196"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_196")
+then
+    retract($trans);
+end
+rule "Retract credit card_196"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_196")
+then
+    retract($card);
+end
+
+rule "Retract address_195"
+when
+    $addr : Address(city != null, uuid == "retractAddress_195")
+then
+    retract($addr);
+end
+rule "Retract customer_195"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_195")
+then
+    retract($cust);
+end
+rule "Retract account_195"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_195")
+then
+    retract($acc);
+end
+rule "Retract transaction_195"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_195")
+then
+    retract($trans);
+end
+rule "Retract credit card_195"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_195")
+then
+    retract($card);
+end
+
+rule "Retract address_194"
+when
+    $addr : Address(city != null, uuid == "retractAddress_194")
+then
+    retract($addr);
+end
+rule "Retract customer_194"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_194")
+then
+    retract($cust);
+end
+rule "Retract account_194"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_194")
+then
+    retract($acc);
+end
+rule "Retract transaction_194"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_194")
+then
+    retract($trans);
+end
+rule "Retract credit card_194"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_194")
+then
+    retract($card);
+end
+
+rule "Retract address_193"
+when
+    $addr : Address(city != null, uuid == "retractAddress_193")
+then
+    retract($addr);
+end
+rule "Retract customer_193"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_193")
+then
+    retract($cust);
+end
+rule "Retract account_193"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_193")
+then
+    retract($acc);
+end
+rule "Retract transaction_193"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_193")
+then
+    retract($trans);
+end
+rule "Retract credit card_193"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_193")
+then
+    retract($card);
+end
+
+rule "Retract address_192"
+when
+    $addr : Address(city != null, uuid == "retractAddress_192")
+then
+    retract($addr);
+end
+rule "Retract customer_192"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_192")
+then
+    retract($cust);
+end
+rule "Retract account_192"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_192")
+then
+    retract($acc);
+end
+rule "Retract transaction_192"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_192")
+then
+    retract($trans);
+end
+rule "Retract credit card_192"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_192")
+then
+    retract($card);
+end
+
+rule "Retract address_191"
+when
+    $addr : Address(city != null, uuid == "retractAddress_191")
+then
+    retract($addr);
+end
+rule "Retract customer_191"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_191")
+then
+    retract($cust);
+end
+rule "Retract account_191"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_191")
+then
+    retract($acc);
+end
+rule "Retract transaction_191"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_191")
+then
+    retract($trans);
+end
+rule "Retract credit card_191"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_191")
+then
+    retract($card);
+end
+
+rule "Retract address_190"
+when
+    $addr : Address(city != null, uuid == "retractAddress_190")
+then
+    retract($addr);
+end
+rule "Retract customer_190"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_190")
+then
+    retract($cust);
+end
+rule "Retract account_190"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_190")
+then
+    retract($acc);
+end
+rule "Retract transaction_190"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_190")
+then
+    retract($trans);
+end
+rule "Retract credit card_190"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_190")
+then
+    retract($card);
+end
+
+rule "Retract address_189"
+when
+    $addr : Address(city != null, uuid == "retractAddress_189")
+then
+    retract($addr);
+end
+rule "Retract customer_189"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_189")
+then
+    retract($cust);
+end
+rule "Retract account_189"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_189")
+then
+    retract($acc);
+end
+rule "Retract transaction_189"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_189")
+then
+    retract($trans);
+end
+rule "Retract credit card_189"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_189")
+then
+    retract($card);
+end
+
+rule "Retract address_188"
+when
+    $addr : Address(city != null, uuid == "retractAddress_188")
+then
+    retract($addr);
+end
+rule "Retract customer_188"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_188")
+then
+    retract($cust);
+end
+rule "Retract account_188"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_188")
+then
+    retract($acc);
+end
+rule "Retract transaction_188"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_188")
+then
+    retract($trans);
+end
+rule "Retract credit card_188"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_188")
+then
+    retract($card);
+end
+
+rule "Retract address_187"
+when
+    $addr : Address(city != null, uuid == "retractAddress_187")
+then
+    retract($addr);
+end
+rule "Retract customer_187"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_187")
+then
+    retract($cust);
+end
+rule "Retract account_187"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_187")
+then
+    retract($acc);
+end
+rule "Retract transaction_187"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_187")
+then
+    retract($trans);
+end
+rule "Retract credit card_187"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_187")
+then
+    retract($card);
+end
+
+rule "Retract address_186"
+when
+    $addr : Address(city != null, uuid == "retractAddress_186")
+then
+    retract($addr);
+end
+rule "Retract customer_186"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_186")
+then
+    retract($cust);
+end
+rule "Retract account_186"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_186")
+then
+    retract($acc);
+end
+rule "Retract transaction_186"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_186")
+then
+    retract($trans);
+end
+rule "Retract credit card_186"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_186")
+then
+    retract($card);
+end
+
+rule "Retract address_185"
+when
+    $addr : Address(city != null, uuid == "retractAddress_185")
+then
+    retract($addr);
+end
+rule "Retract customer_185"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_185")
+then
+    retract($cust);
+end
+rule "Retract account_185"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_185")
+then
+    retract($acc);
+end
+rule "Retract transaction_185"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_185")
+then
+    retract($trans);
+end
+rule "Retract credit card_185"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_185")
+then
+    retract($card);
+end
+
+rule "Retract address_184"
+when
+    $addr : Address(city != null, uuid == "retractAddress_184")
+then
+    retract($addr);
+end
+rule "Retract customer_184"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_184")
+then
+    retract($cust);
+end
+rule "Retract account_184"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_184")
+then
+    retract($acc);
+end
+rule "Retract transaction_184"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_184")
+then
+    retract($trans);
+end
+rule "Retract credit card_184"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_184")
+then
+    retract($card);
+end
+
+rule "Retract address_183"
+when
+    $addr : Address(city != null, uuid == "retractAddress_183")
+then
+    retract($addr);
+end
+rule "Retract customer_183"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_183")
+then
+    retract($cust);
+end
+rule "Retract account_183"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_183")
+then
+    retract($acc);
+end
+rule "Retract transaction_183"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_183")
+then
+    retract($trans);
+end
+rule "Retract credit card_183"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_183")
+then
+    retract($card);
+end
+
+rule "Retract address_182"
+when
+    $addr : Address(city != null, uuid == "retractAddress_182")
+then
+    retract($addr);
+end
+rule "Retract customer_182"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_182")
+then
+    retract($cust);
+end
+rule "Retract account_182"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_182")
+then
+    retract($acc);
+end
+rule "Retract transaction_182"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_182")
+then
+    retract($trans);
+end
+rule "Retract credit card_182"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_182")
+then
+    retract($card);
+end
+
+rule "Retract address_181"
+when
+    $addr : Address(city != null, uuid == "retractAddress_181")
+then
+    retract($addr);
+end
+rule "Retract customer_181"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_181")
+then
+    retract($cust);
+end
+rule "Retract account_181"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_181")
+then
+    retract($acc);
+end
+rule "Retract transaction_181"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_181")
+then
+    retract($trans);
+end
+rule "Retract credit card_181"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_181")
+then
+    retract($card);
+end
+
+rule "Retract address_180"
+when
+    $addr : Address(city != null, uuid == "retractAddress_180")
+then
+    retract($addr);
+end
+rule "Retract customer_180"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_180")
+then
+    retract($cust);
+end
+rule "Retract account_180"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_180")
+then
+    retract($acc);
+end
+rule "Retract transaction_180"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_180")
+then
+    retract($trans);
+end
+rule "Retract credit card_180"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_180")
+then
+    retract($card);
+end
+
+rule "Retract address_179"
+when
+    $addr : Address(city != null, uuid == "retractAddress_179")
+then
+    retract($addr);
+end
+rule "Retract customer_179"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_179")
+then
+    retract($cust);
+end
+rule "Retract account_179"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_179")
+then
+    retract($acc);
+end
+rule "Retract transaction_179"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_179")
+then
+    retract($trans);
+end
+rule "Retract credit card_179"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_179")
+then
+    retract($card);
+end
+
+rule "Retract address_178"
+when
+    $addr : Address(city != null, uuid == "retractAddress_178")
+then
+    retract($addr);
+end
+rule "Retract customer_178"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_178")
+then
+    retract($cust);
+end
+rule "Retract account_178"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_178")
+then
+    retract($acc);
+end
+rule "Retract transaction_178"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_178")
+then
+    retract($trans);
+end
+rule "Retract credit card_178"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_178")
+then
+    retract($card);
+end
+
+rule "Retract address_177"
+when
+    $addr : Address(city != null, uuid == "retractAddress_177")
+then
+    retract($addr);
+end
+rule "Retract customer_177"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_177")
+then
+    retract($cust);
+end
+rule "Retract account_177"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_177")
+then
+    retract($acc);
+end
+rule "Retract transaction_177"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_177")
+then
+    retract($trans);
+end
+rule "Retract credit card_177"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_177")
+then
+    retract($card);
+end
+
+rule "Retract address_176"
+when
+    $addr : Address(city != null, uuid == "retractAddress_176")
+then
+    retract($addr);
+end
+rule "Retract customer_176"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_176")
+then
+    retract($cust);
+end
+rule "Retract account_176"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_176")
+then
+    retract($acc);
+end
+rule "Retract transaction_176"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_176")
+then
+    retract($trans);
+end
+rule "Retract credit card_176"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_176")
+then
+    retract($card);
+end
+
+rule "Retract address_175"
+when
+    $addr : Address(city != null, uuid == "retractAddress_175")
+then
+    retract($addr);
+end
+rule "Retract customer_175"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_175")
+then
+    retract($cust);
+end
+rule "Retract account_175"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_175")
+then
+    retract($acc);
+end
+rule "Retract transaction_175"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_175")
+then
+    retract($trans);
+end
+rule "Retract credit card_175"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_175")
+then
+    retract($card);
+end
+
+rule "Retract address_174"
+when
+    $addr : Address(city != null, uuid == "retractAddress_174")
+then
+    retract($addr);
+end
+rule "Retract customer_174"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_174")
+then
+    retract($cust);
+end
+rule "Retract account_174"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_174")
+then
+    retract($acc);
+end
+rule "Retract transaction_174"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_174")
+then
+    retract($trans);
+end
+rule "Retract credit card_174"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_174")
+then
+    retract($card);
+end
+
+rule "Retract address_173"
+when
+    $addr : Address(city != null, uuid == "retractAddress_173")
+then
+    retract($addr);
+end
+rule "Retract customer_173"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_173")
+then
+    retract($cust);
+end
+rule "Retract account_173"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_173")
+then
+    retract($acc);
+end
+rule "Retract transaction_173"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_173")
+then
+    retract($trans);
+end
+rule "Retract credit card_173"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_173")
+then
+    retract($card);
+end
+
+rule "Retract address_172"
+when
+    $addr : Address(city != null, uuid == "retractAddress_172")
+then
+    retract($addr);
+end
+rule "Retract customer_172"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_172")
+then
+    retract($cust);
+end
+rule "Retract account_172"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_172")
+then
+    retract($acc);
+end
+rule "Retract transaction_172"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_172")
+then
+    retract($trans);
+end
+rule "Retract credit card_172"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_172")
+then
+    retract($card);
+end
+
+rule "Retract address_171"
+when
+    $addr : Address(city != null, uuid == "retractAddress_171")
+then
+    retract($addr);
+end
+rule "Retract customer_171"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_171")
+then
+    retract($cust);
+end
+rule "Retract account_171"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_171")
+then
+    retract($acc);
+end
+rule "Retract transaction_171"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_171")
+then
+    retract($trans);
+end
+rule "Retract credit card_171"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_171")
+then
+    retract($card);
+end
+
+rule "Retract address_170"
+when
+    $addr : Address(city != null, uuid == "retractAddress_170")
+then
+    retract($addr);
+end
+rule "Retract customer_170"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_170")
+then
+    retract($cust);
+end
+rule "Retract account_170"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_170")
+then
+    retract($acc);
+end
+rule "Retract transaction_170"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_170")
+then
+    retract($trans);
+end
+rule "Retract credit card_170"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_170")
+then
+    retract($card);
+end
+
+rule "Retract address_169"
+when
+    $addr : Address(city != null, uuid == "retractAddress_169")
+then
+    retract($addr);
+end
+rule "Retract customer_169"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_169")
+then
+    retract($cust);
+end
+rule "Retract account_169"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_169")
+then
+    retract($acc);
+end
+rule "Retract transaction_169"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_169")
+then
+    retract($trans);
+end
+rule "Retract credit card_169"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_169")
+then
+    retract($card);
+end
+
+rule "Retract address_168"
+when
+    $addr : Address(city != null, uuid == "retractAddress_168")
+then
+    retract($addr);
+end
+rule "Retract customer_168"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_168")
+then
+    retract($cust);
+end
+rule "Retract account_168"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_168")
+then
+    retract($acc);
+end
+rule "Retract transaction_168"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_168")
+then
+    retract($trans);
+end
+rule "Retract credit card_168"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_168")
+then
+    retract($card);
+end
+
+rule "Retract address_167"
+when
+    $addr : Address(city != null, uuid == "retractAddress_167")
+then
+    retract($addr);
+end
+rule "Retract customer_167"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_167")
+then
+    retract($cust);
+end
+rule "Retract account_167"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_167")
+then
+    retract($acc);
+end
+rule "Retract transaction_167"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_167")
+then
+    retract($trans);
+end
+rule "Retract credit card_167"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_167")
+then
+    retract($card);
+end
+
+rule "Retract address_166"
+when
+    $addr : Address(city != null, uuid == "retractAddress_166")
+then
+    retract($addr);
+end
+rule "Retract customer_166"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_166")
+then
+    retract($cust);
+end
+rule "Retract account_166"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_166")
+then
+    retract($acc);
+end
+rule "Retract transaction_166"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_166")
+then
+    retract($trans);
+end
+rule "Retract credit card_166"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_166")
+then
+    retract($card);
+end
+
+rule "Retract address_165"
+when
+    $addr : Address(city != null, uuid == "retractAddress_165")
+then
+    retract($addr);
+end
+rule "Retract customer_165"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_165")
+then
+    retract($cust);
+end
+rule "Retract account_165"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_165")
+then
+    retract($acc);
+end
+rule "Retract transaction_165"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_165")
+then
+    retract($trans);
+end
+rule "Retract credit card_165"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_165")
+then
+    retract($card);
+end
+
+rule "Retract address_164"
+when
+    $addr : Address(city != null, uuid == "retractAddress_164")
+then
+    retract($addr);
+end
+rule "Retract customer_164"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_164")
+then
+    retract($cust);
+end
+rule "Retract account_164"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_164")
+then
+    retract($acc);
+end
+rule "Retract transaction_164"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_164")
+then
+    retract($trans);
+end
+rule "Retract credit card_164"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_164")
+then
+    retract($card);
+end
+
+rule "Retract address_163"
+when
+    $addr : Address(city != null, uuid == "retractAddress_163")
+then
+    retract($addr);
+end
+rule "Retract customer_163"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_163")
+then
+    retract($cust);
+end
+rule "Retract account_163"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_163")
+then
+    retract($acc);
+end
+rule "Retract transaction_163"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_163")
+then
+    retract($trans);
+end
+rule "Retract credit card_163"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_163")
+then
+    retract($card);
+end
+
+rule "Retract address_162"
+when
+    $addr : Address(city != null, uuid == "retractAddress_162")
+then
+    retract($addr);
+end
+rule "Retract customer_162"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_162")
+then
+    retract($cust);
+end
+rule "Retract account_162"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_162")
+then
+    retract($acc);
+end
+rule "Retract transaction_162"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_162")
+then
+    retract($trans);
+end
+rule "Retract credit card_162"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_162")
+then
+    retract($card);
+end
+
+rule "Retract address_161"
+when
+    $addr : Address(city != null, uuid == "retractAddress_161")
+then
+    retract($addr);
+end
+rule "Retract customer_161"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_161")
+then
+    retract($cust);
+end
+rule "Retract account_161"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_161")
+then
+    retract($acc);
+end
+rule "Retract transaction_161"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_161")
+then
+    retract($trans);
+end
+rule "Retract credit card_161"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_161")
+then
+    retract($card);
+end
+
+rule "Retract address_160"
+when
+    $addr : Address(city != null, uuid == "retractAddress_160")
+then
+    retract($addr);
+end
+rule "Retract customer_160"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_160")
+then
+    retract($cust);
+end
+rule "Retract account_160"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_160")
+then
+    retract($acc);
+end
+rule "Retract transaction_160"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_160")
+then
+    retract($trans);
+end
+rule "Retract credit card_160"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_160")
+then
+    retract($card);
+end
+
+rule "Retract address_159"
+when
+    $addr : Address(city != null, uuid == "retractAddress_159")
+then
+    retract($addr);
+end
+rule "Retract customer_159"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_159")
+then
+    retract($cust);
+end
+rule "Retract account_159"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_159")
+then
+    retract($acc);
+end
+rule "Retract transaction_159"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_159")
+then
+    retract($trans);
+end
+rule "Retract credit card_159"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_159")
+then
+    retract($card);
+end
+
+rule "Retract address_158"
+when
+    $addr : Address(city != null, uuid == "retractAddress_158")
+then
+    retract($addr);
+end
+rule "Retract customer_158"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_158")
+then
+    retract($cust);
+end
+rule "Retract account_158"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_158")
+then
+    retract($acc);
+end
+rule "Retract transaction_158"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_158")
+then
+    retract($trans);
+end
+rule "Retract credit card_158"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_158")
+then
+    retract($card);
+end
+
+rule "Retract address_157"
+when
+    $addr : Address(city != null, uuid == "retractAddress_157")
+then
+    retract($addr);
+end
+rule "Retract customer_157"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_157")
+then
+    retract($cust);
+end
+rule "Retract account_157"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_157")
+then
+    retract($acc);
+end
+rule "Retract transaction_157"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_157")
+then
+    retract($trans);
+end
+rule "Retract credit card_157"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_157")
+then
+    retract($card);
+end
+
+rule "Retract address_156"
+when
+    $addr : Address(city != null, uuid == "retractAddress_156")
+then
+    retract($addr);
+end
+rule "Retract customer_156"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_156")
+then
+    retract($cust);
+end
+rule "Retract account_156"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_156")
+then
+    retract($acc);
+end
+rule "Retract transaction_156"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_156")
+then
+    retract($trans);
+end
+rule "Retract credit card_156"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_156")
+then
+    retract($card);
+end
+
+rule "Retract address_155"
+when
+    $addr : Address(city != null, uuid == "retractAddress_155")
+then
+    retract($addr);
+end
+rule "Retract customer_155"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_155")
+then
+    retract($cust);
+end
+rule "Retract account_155"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_155")
+then
+    retract($acc);
+end
+rule "Retract transaction_155"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_155")
+then
+    retract($trans);
+end
+rule "Retract credit card_155"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_155")
+then
+    retract($card);
+end
+
+rule "Retract address_154"
+when
+    $addr : Address(city != null, uuid == "retractAddress_154")
+then
+    retract($addr);
+end
+rule "Retract customer_154"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_154")
+then
+    retract($cust);
+end
+rule "Retract account_154"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_154")
+then
+    retract($acc);
+end
+rule "Retract transaction_154"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_154")
+then
+    retract($trans);
+end
+rule "Retract credit card_154"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_154")
+then
+    retract($card);
+end
+
+rule "Retract address_153"
+when
+    $addr : Address(city != null, uuid == "retractAddress_153")
+then
+    retract($addr);
+end
+rule "Retract customer_153"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_153")
+then
+    retract($cust);
+end
+rule "Retract account_153"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_153")
+then
+    retract($acc);
+end
+rule "Retract transaction_153"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_153")
+then
+    retract($trans);
+end
+rule "Retract credit card_153"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_153")
+then
+    retract($card);
+end
+
+rule "Retract address_152"
+when
+    $addr : Address(city != null, uuid == "retractAddress_152")
+then
+    retract($addr);
+end
+rule "Retract customer_152"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_152")
+then
+    retract($cust);
+end
+rule "Retract account_152"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_152")
+then
+    retract($acc);
+end
+rule "Retract transaction_152"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_152")
+then
+    retract($trans);
+end
+rule "Retract credit card_152"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_152")
+then
+    retract($card);
+end
+
+rule "Retract address_151"
+when
+    $addr : Address(city != null, uuid == "retractAddress_151")
+then
+    retract($addr);
+end
+rule "Retract customer_151"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_151")
+then
+    retract($cust);
+end
+rule "Retract account_151"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_151")
+then
+    retract($acc);
+end
+rule "Retract transaction_151"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_151")
+then
+    retract($trans);
+end
+rule "Retract credit card_151"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_151")
+then
+    retract($card);
+end
+
+rule "Retract address_150"
+when
+    $addr : Address(city != null, uuid == "retractAddress_150")
+then
+    retract($addr);
+end
+rule "Retract customer_150"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_150")
+then
+    retract($cust);
+end
+rule "Retract account_150"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_150")
+then
+    retract($acc);
+end
+rule "Retract transaction_150"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_150")
+then
+    retract($trans);
+end
+rule "Retract credit card_150"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_150")
+then
+    retract($card);
+end
+
+rule "Retract address_149"
+when
+    $addr : Address(city != null, uuid == "retractAddress_149")
+then
+    retract($addr);
+end
+rule "Retract customer_149"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_149")
+then
+    retract($cust);
+end
+rule "Retract account_149"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_149")
+then
+    retract($acc);
+end
+rule "Retract transaction_149"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_149")
+then
+    retract($trans);
+end
+rule "Retract credit card_149"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_149")
+then
+    retract($card);
+end
+
+rule "Retract address_148"
+when
+    $addr : Address(city != null, uuid == "retractAddress_148")
+then
+    retract($addr);
+end
+rule "Retract customer_148"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_148")
+then
+    retract($cust);
+end
+rule "Retract account_148"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_148")
+then
+    retract($acc);
+end
+rule "Retract transaction_148"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_148")
+then
+    retract($trans);
+end
+rule "Retract credit card_148"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_148")
+then
+    retract($card);
+end
+
+rule "Retract address_147"
+when
+    $addr : Address(city != null, uuid == "retractAddress_147")
+then
+    retract($addr);
+end
+rule "Retract customer_147"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_147")
+then
+    retract($cust);
+end
+rule "Retract account_147"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_147")
+then
+    retract($acc);
+end
+rule "Retract transaction_147"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_147")
+then
+    retract($trans);
+end
+rule "Retract credit card_147"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_147")
+then
+    retract($card);
+end
+
+rule "Retract address_146"
+when
+    $addr : Address(city != null, uuid == "retractAddress_146")
+then
+    retract($addr);
+end
+rule "Retract customer_146"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_146")
+then
+    retract($cust);
+end
+rule "Retract account_146"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_146")
+then
+    retract($acc);
+end
+rule "Retract transaction_146"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_146")
+then
+    retract($trans);
+end
+rule "Retract credit card_146"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_146")
+then
+    retract($card);
+end
+
+rule "Retract address_145"
+when
+    $addr : Address(city != null, uuid == "retractAddress_145")
+then
+    retract($addr);
+end
+rule "Retract customer_145"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_145")
+then
+    retract($cust);
+end
+rule "Retract account_145"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_145")
+then
+    retract($acc);
+end
+rule "Retract transaction_145"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_145")
+then
+    retract($trans);
+end
+rule "Retract credit card_145"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_145")
+then
+    retract($card);
+end
+
+rule "Retract address_144"
+when
+    $addr : Address(city != null, uuid == "retractAddress_144")
+then
+    retract($addr);
+end
+rule "Retract customer_144"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_144")
+then
+    retract($cust);
+end
+rule "Retract account_144"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_144")
+then
+    retract($acc);
+end
+rule "Retract transaction_144"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_144")
+then
+    retract($trans);
+end
+rule "Retract credit card_144"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_144")
+then
+    retract($card);
+end
+
+rule "Retract address_143"
+when
+    $addr : Address(city != null, uuid == "retractAddress_143")
+then
+    retract($addr);
+end
+rule "Retract customer_143"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_143")
+then
+    retract($cust);
+end
+rule "Retract account_143"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_143")
+then
+    retract($acc);
+end
+rule "Retract transaction_143"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_143")
+then
+    retract($trans);
+end
+rule "Retract credit card_143"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_143")
+then
+    retract($card);
+end
+
+rule "Retract address_142"
+when
+    $addr : Address(city != null, uuid == "retractAddress_142")
+then
+    retract($addr);
+end
+rule "Retract customer_142"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_142")
+then
+    retract($cust);
+end
+rule "Retract account_142"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_142")
+then
+    retract($acc);
+end
+rule "Retract transaction_142"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_142")
+then
+    retract($trans);
+end
+rule "Retract credit card_142"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_142")
+then
+    retract($card);
+end
+
+rule "Retract address_141"
+when
+    $addr : Address(city != null, uuid == "retractAddress_141")
+then
+    retract($addr);
+end
+rule "Retract customer_141"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_141")
+then
+    retract($cust);
+end
+rule "Retract account_141"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_141")
+then
+    retract($acc);
+end
+rule "Retract transaction_141"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_141")
+then
+    retract($trans);
+end
+rule "Retract credit card_141"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_141")
+then
+    retract($card);
+end
+
+rule "Retract address_140"
+when
+    $addr : Address(city != null, uuid == "retractAddress_140")
+then
+    retract($addr);
+end
+rule "Retract customer_140"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_140")
+then
+    retract($cust);
+end
+rule "Retract account_140"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_140")
+then
+    retract($acc);
+end
+rule "Retract transaction_140"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_140")
+then
+    retract($trans);
+end
+rule "Retract credit card_140"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_140")
+then
+    retract($card);
+end
+
+rule "Retract address_139"
+when
+    $addr : Address(city != null, uuid == "retractAddress_139")
+then
+    retract($addr);
+end
+rule "Retract customer_139"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_139")
+then
+    retract($cust);
+end
+rule "Retract account_139"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_139")
+then
+    retract($acc);
+end
+rule "Retract transaction_139"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_139")
+then
+    retract($trans);
+end
+rule "Retract credit card_139"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_139")
+then
+    retract($card);
+end
+
+rule "Retract address_138"
+when
+    $addr : Address(city != null, uuid == "retractAddress_138")
+then
+    retract($addr);
+end
+rule "Retract customer_138"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_138")
+then
+    retract($cust);
+end
+rule "Retract account_138"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_138")
+then
+    retract($acc);
+end
+rule "Retract transaction_138"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_138")
+then
+    retract($trans);
+end
+rule "Retract credit card_138"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_138")
+then
+    retract($card);
+end
+
+rule "Retract address_137"
+when
+    $addr : Address(city != null, uuid == "retractAddress_137")
+then
+    retract($addr);
+end
+rule "Retract customer_137"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_137")
+then
+    retract($cust);
+end
+rule "Retract account_137"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_137")
+then
+    retract($acc);
+end
+rule "Retract transaction_137"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_137")
+then
+    retract($trans);
+end
+rule "Retract credit card_137"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_137")
+then
+    retract($card);
+end
+
+rule "Retract address_136"
+when
+    $addr : Address(city != null, uuid == "retractAddress_136")
+then
+    retract($addr);
+end
+rule "Retract customer_136"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_136")
+then
+    retract($cust);
+end
+rule "Retract account_136"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_136")
+then
+    retract($acc);
+end
+rule "Retract transaction_136"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_136")
+then
+    retract($trans);
+end
+rule "Retract credit card_136"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_136")
+then
+    retract($card);
+end
+
+rule "Retract address_135"
+when
+    $addr : Address(city != null, uuid == "retractAddress_135")
+then
+    retract($addr);
+end
+rule "Retract customer_135"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_135")
+then
+    retract($cust);
+end
+rule "Retract account_135"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_135")
+then
+    retract($acc);
+end
+rule "Retract transaction_135"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_135")
+then
+    retract($trans);
+end
+rule "Retract credit card_135"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_135")
+then
+    retract($card);
+end
+
+rule "Retract address_134"
+when
+    $addr : Address(city != null, uuid == "retractAddress_134")
+then
+    retract($addr);
+end
+rule "Retract customer_134"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_134")
+then
+    retract($cust);
+end
+rule "Retract account_134"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_134")
+then
+    retract($acc);
+end
+rule "Retract transaction_134"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_134")
+then
+    retract($trans);
+end
+rule "Retract credit card_134"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_134")
+then
+    retract($card);
+end
+
+rule "Retract address_133"
+when
+    $addr : Address(city != null, uuid == "retractAddress_133")
+then
+    retract($addr);
+end
+rule "Retract customer_133"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_133")
+then
+    retract($cust);
+end
+rule "Retract account_133"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_133")
+then
+    retract($acc);
+end
+rule "Retract transaction_133"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_133")
+then
+    retract($trans);
+end
+rule "Retract credit card_133"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_133")
+then
+    retract($card);
+end
+
+rule "Retract address_132"
+when
+    $addr : Address(city != null, uuid == "retractAddress_132")
+then
+    retract($addr);
+end
+rule "Retract customer_132"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_132")
+then
+    retract($cust);
+end
+rule "Retract account_132"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_132")
+then
+    retract($acc);
+end
+rule "Retract transaction_132"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_132")
+then
+    retract($trans);
+end
+rule "Retract credit card_132"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_132")
+then
+    retract($card);
+end
+
+rule "Retract address_131"
+when
+    $addr : Address(city != null, uuid == "retractAddress_131")
+then
+    retract($addr);
+end
+rule "Retract customer_131"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_131")
+then
+    retract($cust);
+end
+rule "Retract account_131"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_131")
+then
+    retract($acc);
+end
+rule "Retract transaction_131"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_131")
+then
+    retract($trans);
+end
+rule "Retract credit card_131"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_131")
+then
+    retract($card);
+end
+
+rule "Retract address_130"
+when
+    $addr : Address(city != null, uuid == "retractAddress_130")
+then
+    retract($addr);
+end
+rule "Retract customer_130"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_130")
+then
+    retract($cust);
+end
+rule "Retract account_130"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_130")
+then
+    retract($acc);
+end
+rule "Retract transaction_130"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_130")
+then
+    retract($trans);
+end
+rule "Retract credit card_130"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_130")
+then
+    retract($card);
+end
+
+rule "Retract address_129"
+when
+    $addr : Address(city != null, uuid == "retractAddress_129")
+then
+    retract($addr);
+end
+rule "Retract customer_129"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_129")
+then
+    retract($cust);
+end
+rule "Retract account_129"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_129")
+then
+    retract($acc);
+end
+rule "Retract transaction_129"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_129")
+then
+    retract($trans);
+end
+rule "Retract credit card_129"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_129")
+then
+    retract($card);
+end
+
+rule "Retract address_128"
+when
+    $addr : Address(city != null, uuid == "retractAddress_128")
+then
+    retract($addr);
+end
+rule "Retract customer_128"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_128")
+then
+    retract($cust);
+end
+rule "Retract account_128"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_128")
+then
+    retract($acc);
+end
+rule "Retract transaction_128"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_128")
+then
+    retract($trans);
+end
+rule "Retract credit card_128"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_128")
+then
+    retract($card);
+end
+
+rule "Retract address_127"
+when
+    $addr : Address(city != null, uuid == "retractAddress_127")
+then
+    retract($addr);
+end
+rule "Retract customer_127"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_127")
+then
+    retract($cust);
+end
+rule "Retract account_127"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_127")
+then
+    retract($acc);
+end
+rule "Retract transaction_127"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_127")
+then
+    retract($trans);
+end
+rule "Retract credit card_127"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_127")
+then
+    retract($card);
+end
+
+rule "Retract address_126"
+when
+    $addr : Address(city != null, uuid == "retractAddress_126")
+then
+    retract($addr);
+end
+rule "Retract customer_126"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_126")
+then
+    retract($cust);
+end
+rule "Retract account_126"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_126")
+then
+    retract($acc);
+end
+rule "Retract transaction_126"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_126")
+then
+    retract($trans);
+end
+rule "Retract credit card_126"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_126")
+then
+    retract($card);
+end
+
+rule "Retract address_125"
+when
+    $addr : Address(city != null, uuid == "retractAddress_125")
+then
+    retract($addr);
+end
+rule "Retract customer_125"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_125")
+then
+    retract($cust);
+end
+rule "Retract account_125"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_125")
+then
+    retract($acc);
+end
+rule "Retract transaction_125"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_125")
+then
+    retract($trans);
+end
+rule "Retract credit card_125"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_125")
+then
+    retract($card);
+end
+
+rule "Retract address_124"
+when
+    $addr : Address(city != null, uuid == "retractAddress_124")
+then
+    retract($addr);
+end
+rule "Retract customer_124"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_124")
+then
+    retract($cust);
+end
+rule "Retract account_124"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_124")
+then
+    retract($acc);
+end
+rule "Retract transaction_124"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_124")
+then
+    retract($trans);
+end
+rule "Retract credit card_124"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_124")
+then
+    retract($card);
+end
+
+rule "Retract address_123"
+when
+    $addr : Address(city != null, uuid == "retractAddress_123")
+then
+    retract($addr);
+end
+rule "Retract customer_123"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_123")
+then
+    retract($cust);
+end
+rule "Retract account_123"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_123")
+then
+    retract($acc);
+end
+rule "Retract transaction_123"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_123")
+then
+    retract($trans);
+end
+rule "Retract credit card_123"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_123")
+then
+    retract($card);
+end
+
+rule "Retract address_122"
+when
+    $addr : Address(city != null, uuid == "retractAddress_122")
+then
+    retract($addr);
+end
+rule "Retract customer_122"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_122")
+then
+    retract($cust);
+end
+rule "Retract account_122"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_122")
+then
+    retract($acc);
+end
+rule "Retract transaction_122"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_122")
+then
+    retract($trans);
+end
+rule "Retract credit card_122"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_122")
+then
+    retract($card);
+end
+
+rule "Retract address_121"
+when
+    $addr : Address(city != null, uuid == "retractAddress_121")
+then
+    retract($addr);
+end
+rule "Retract customer_121"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_121")
+then
+    retract($cust);
+end
+rule "Retract account_121"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_121")
+then
+    retract($acc);
+end
+rule "Retract transaction_121"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_121")
+then
+    retract($trans);
+end
+rule "Retract credit card_121"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_121")
+then
+    retract($card);
+end
+
+rule "Retract address_120"
+when
+    $addr : Address(city != null, uuid == "retractAddress_120")
+then
+    retract($addr);
+end
+rule "Retract customer_120"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_120")
+then
+    retract($cust);
+end
+rule "Retract account_120"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_120")
+then
+    retract($acc);
+end
+rule "Retract transaction_120"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_120")
+then
+    retract($trans);
+end
+rule "Retract credit card_120"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_120")
+then
+    retract($card);
+end
+
+rule "Retract address_119"
+when
+    $addr : Address(city != null, uuid == "retractAddress_119")
+then
+    retract($addr);
+end
+rule "Retract customer_119"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_119")
+then
+    retract($cust);
+end
+rule "Retract account_119"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_119")
+then
+    retract($acc);
+end
+rule "Retract transaction_119"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_119")
+then
+    retract($trans);
+end
+rule "Retract credit card_119"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_119")
+then
+    retract($card);
+end
+
+rule "Retract address_118"
+when
+    $addr : Address(city != null, uuid == "retractAddress_118")
+then
+    retract($addr);
+end
+rule "Retract customer_118"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_118")
+then
+    retract($cust);
+end
+rule "Retract account_118"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_118")
+then
+    retract($acc);
+end
+rule "Retract transaction_118"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_118")
+then
+    retract($trans);
+end
+rule "Retract credit card_118"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_118")
+then
+    retract($card);
+end
+
+rule "Retract address_117"
+when
+    $addr : Address(city != null, uuid == "retractAddress_117")
+then
+    retract($addr);
+end
+rule "Retract customer_117"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_117")
+then
+    retract($cust);
+end
+rule "Retract account_117"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_117")
+then
+    retract($acc);
+end
+rule "Retract transaction_117"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_117")
+then
+    retract($trans);
+end
+rule "Retract credit card_117"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_117")
+then
+    retract($card);
+end
+
+rule "Retract address_116"
+when
+    $addr : Address(city != null, uuid == "retractAddress_116")
+then
+    retract($addr);
+end
+rule "Retract customer_116"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_116")
+then
+    retract($cust);
+end
+rule "Retract account_116"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_116")
+then
+    retract($acc);
+end
+rule "Retract transaction_116"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_116")
+then
+    retract($trans);
+end
+rule "Retract credit card_116"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_116")
+then
+    retract($card);
+end
+
+rule "Retract address_115"
+when
+    $addr : Address(city != null, uuid == "retractAddress_115")
+then
+    retract($addr);
+end
+rule "Retract customer_115"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_115")
+then
+    retract($cust);
+end
+rule "Retract account_115"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_115")
+then
+    retract($acc);
+end
+rule "Retract transaction_115"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_115")
+then
+    retract($trans);
+end
+rule "Retract credit card_115"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_115")
+then
+    retract($card);
+end
+
+rule "Retract address_114"
+when
+    $addr : Address(city != null, uuid == "retractAddress_114")
+then
+    retract($addr);
+end
+rule "Retract customer_114"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_114")
+then
+    retract($cust);
+end
+rule "Retract account_114"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_114")
+then
+    retract($acc);
+end
+rule "Retract transaction_114"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_114")
+then
+    retract($trans);
+end
+rule "Retract credit card_114"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_114")
+then
+    retract($card);
+end
+
+rule "Retract address_113"
+when
+    $addr : Address(city != null, uuid == "retractAddress_113")
+then
+    retract($addr);
+end
+rule "Retract customer_113"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_113")
+then
+    retract($cust);
+end
+rule "Retract account_113"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_113")
+then
+    retract($acc);
+end
+rule "Retract transaction_113"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_113")
+then
+    retract($trans);
+end
+rule "Retract credit card_113"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_113")
+then
+    retract($card);
+end
+
+rule "Retract address_112"
+when
+    $addr : Address(city != null, uuid == "retractAddress_112")
+then
+    retract($addr);
+end
+rule "Retract customer_112"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_112")
+then
+    retract($cust);
+end
+rule "Retract account_112"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_112")
+then
+    retract($acc);
+end
+rule "Retract transaction_112"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_112")
+then
+    retract($trans);
+end
+rule "Retract credit card_112"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_112")
+then
+    retract($card);
+end
+
+rule "Retract address_111"
+when
+    $addr : Address(city != null, uuid == "retractAddress_111")
+then
+    retract($addr);
+end
+rule "Retract customer_111"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_111")
+then
+    retract($cust);
+end
+rule "Retract account_111"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_111")
+then
+    retract($acc);
+end
+rule "Retract transaction_111"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_111")
+then
+    retract($trans);
+end
+rule "Retract credit card_111"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_111")
+then
+    retract($card);
+end
+
+rule "Retract address_110"
+when
+    $addr : Address(city != null, uuid == "retractAddress_110")
+then
+    retract($addr);
+end
+rule "Retract customer_110"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_110")
+then
+    retract($cust);
+end
+rule "Retract account_110"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_110")
+then
+    retract($acc);
+end
+rule "Retract transaction_110"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_110")
+then
+    retract($trans);
+end
+rule "Retract credit card_110"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_110")
+then
+    retract($card);
+end
+
+rule "Retract address_109"
+when
+    $addr : Address(city != null, uuid == "retractAddress_109")
+then
+    retract($addr);
+end
+rule "Retract customer_109"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_109")
+then
+    retract($cust);
+end
+rule "Retract account_109"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_109")
+then
+    retract($acc);
+end
+rule "Retract transaction_109"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_109")
+then
+    retract($trans);
+end
+rule "Retract credit card_109"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_109")
+then
+    retract($card);
+end
+
+rule "Retract address_108"
+when
+    $addr : Address(city != null, uuid == "retractAddress_108")
+then
+    retract($addr);
+end
+rule "Retract customer_108"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_108")
+then
+    retract($cust);
+end
+rule "Retract account_108"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_108")
+then
+    retract($acc);
+end
+rule "Retract transaction_108"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_108")
+then
+    retract($trans);
+end
+rule "Retract credit card_108"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_108")
+then
+    retract($card);
+end
+
+rule "Retract address_107"
+when
+    $addr : Address(city != null, uuid == "retractAddress_107")
+then
+    retract($addr);
+end
+rule "Retract customer_107"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_107")
+then
+    retract($cust);
+end
+rule "Retract account_107"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_107")
+then
+    retract($acc);
+end
+rule "Retract transaction_107"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_107")
+then
+    retract($trans);
+end
+rule "Retract credit card_107"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_107")
+then
+    retract($card);
+end
+
+rule "Retract address_106"
+when
+    $addr : Address(city != null, uuid == "retractAddress_106")
+then
+    retract($addr);
+end
+rule "Retract customer_106"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_106")
+then
+    retract($cust);
+end
+rule "Retract account_106"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_106")
+then
+    retract($acc);
+end
+rule "Retract transaction_106"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_106")
+then
+    retract($trans);
+end
+rule "Retract credit card_106"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_106")
+then
+    retract($card);
+end
+
+rule "Retract address_105"
+when
+    $addr : Address(city != null, uuid == "retractAddress_105")
+then
+    retract($addr);
+end
+rule "Retract customer_105"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_105")
+then
+    retract($cust);
+end
+rule "Retract account_105"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_105")
+then
+    retract($acc);
+end
+rule "Retract transaction_105"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_105")
+then
+    retract($trans);
+end
+rule "Retract credit card_105"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_105")
+then
+    retract($card);
+end
+
+rule "Retract address_104"
+when
+    $addr : Address(city != null, uuid == "retractAddress_104")
+then
+    retract($addr);
+end
+rule "Retract customer_104"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_104")
+then
+    retract($cust);
+end
+rule "Retract account_104"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_104")
+then
+    retract($acc);
+end
+rule "Retract transaction_104"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_104")
+then
+    retract($trans);
+end
+rule "Retract credit card_104"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_104")
+then
+    retract($card);
+end
+
+rule "Retract address_103"
+when
+    $addr : Address(city != null, uuid == "retractAddress_103")
+then
+    retract($addr);
+end
+rule "Retract customer_103"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_103")
+then
+    retract($cust);
+end
+rule "Retract account_103"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_103")
+then
+    retract($acc);
+end
+rule "Retract transaction_103"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_103")
+then
+    retract($trans);
+end
+rule "Retract credit card_103"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_103")
+then
+    retract($card);
+end
+
+rule "Retract address_102"
+when
+    $addr : Address(city != null, uuid == "retractAddress_102")
+then
+    retract($addr);
+end
+rule "Retract customer_102"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_102")
+then
+    retract($cust);
+end
+rule "Retract account_102"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_102")
+then
+    retract($acc);
+end
+rule "Retract transaction_102"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_102")
+then
+    retract($trans);
+end
+rule "Retract credit card_102"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_102")
+then
+    retract($card);
+end
+
+rule "Retract address_101"
+when
+    $addr : Address(city != null, uuid == "retractAddress_101")
+then
+    retract($addr);
+end
+rule "Retract customer_101"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_101")
+then
+    retract($cust);
+end
+rule "Retract account_101"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_101")
+then
+    retract($acc);
+end
+rule "Retract transaction_101"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_101")
+then
+    retract($trans);
+end
+rule "Retract credit card_101"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_101")
+then
+    retract($card);
+end
+
+rule "Retract address_100"
+when
+    $addr : Address(city != null, uuid == "retractAddress_100")
+then
+    retract($addr);
+end
+rule "Retract customer_100"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_100")
+then
+    retract($cust);
+end
+rule "Retract account_100"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_100")
+then
+    retract($acc);
+end
+rule "Retract transaction_100"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_100")
+then
+    retract($trans);
+end
+rule "Retract credit card_100"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_100")
+then
+    retract($card);
+end
+
+rule "Retract address_99"
+when
+    $addr : Address(city != null, uuid == "retractAddress_99")
+then
+    retract($addr);
+end
+rule "Retract customer_99"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_99")
+then
+    retract($cust);
+end
+rule "Retract account_99"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_99")
+then
+    retract($acc);
+end
+rule "Retract transaction_99"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_99")
+then
+    retract($trans);
+end
+rule "Retract credit card_99"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_99")
+then
+    retract($card);
+end
+
+rule "Retract address_98"
+when
+    $addr : Address(city != null, uuid == "retractAddress_98")
+then
+    retract($addr);
+end
+rule "Retract customer_98"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_98")
+then
+    retract($cust);
+end
+rule "Retract account_98"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_98")
+then
+    retract($acc);
+end
+rule "Retract transaction_98"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_98")
+then
+    retract($trans);
+end
+rule "Retract credit card_98"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_98")
+then
+    retract($card);
+end
+
+rule "Retract address_97"
+when
+    $addr : Address(city != null, uuid == "retractAddress_97")
+then
+    retract($addr);
+end
+rule "Retract customer_97"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_97")
+then
+    retract($cust);
+end
+rule "Retract account_97"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_97")
+then
+    retract($acc);
+end
+rule "Retract transaction_97"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_97")
+then
+    retract($trans);
+end
+rule "Retract credit card_97"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_97")
+then
+    retract($card);
+end
+
+rule "Retract address_96"
+when
+    $addr : Address(city != null, uuid == "retractAddress_96")
+then
+    retract($addr);
+end
+rule "Retract customer_96"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_96")
+then
+    retract($cust);
+end
+rule "Retract account_96"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_96")
+then
+    retract($acc);
+end
+rule "Retract transaction_96"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_96")
+then
+    retract($trans);
+end
+rule "Retract credit card_96"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_96")
+then
+    retract($card);
+end
+
+rule "Retract address_95"
+when
+    $addr : Address(city != null, uuid == "retractAddress_95")
+then
+    retract($addr);
+end
+rule "Retract customer_95"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_95")
+then
+    retract($cust);
+end
+rule "Retract account_95"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_95")
+then
+    retract($acc);
+end
+rule "Retract transaction_95"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_95")
+then
+    retract($trans);
+end
+rule "Retract credit card_95"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_95")
+then
+    retract($card);
+end
+
+rule "Retract address_94"
+when
+    $addr : Address(city != null, uuid == "retractAddress_94")
+then
+    retract($addr);
+end
+rule "Retract customer_94"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_94")
+then
+    retract($cust);
+end
+rule "Retract account_94"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_94")
+then
+    retract($acc);
+end
+rule "Retract transaction_94"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_94")
+then
+    retract($trans);
+end
+rule "Retract credit card_94"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_94")
+then
+    retract($card);
+end
+
+rule "Retract address_93"
+when
+    $addr : Address(city != null, uuid == "retractAddress_93")
+then
+    retract($addr);
+end
+rule "Retract customer_93"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_93")
+then
+    retract($cust);
+end
+rule "Retract account_93"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_93")
+then
+    retract($acc);
+end
+rule "Retract transaction_93"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_93")
+then
+    retract($trans);
+end
+rule "Retract credit card_93"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_93")
+then
+    retract($card);
+end
+
+rule "Retract address_92"
+when
+    $addr : Address(city != null, uuid == "retractAddress_92")
+then
+    retract($addr);
+end
+rule "Retract customer_92"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_92")
+then
+    retract($cust);
+end
+rule "Retract account_92"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_92")
+then
+    retract($acc);
+end
+rule "Retract transaction_92"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_92")
+then
+    retract($trans);
+end
+rule "Retract credit card_92"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_92")
+then
+    retract($card);
+end
+
+rule "Retract address_91"
+when
+    $addr : Address(city != null, uuid == "retractAddress_91")
+then
+    retract($addr);
+end
+rule "Retract customer_91"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_91")
+then
+    retract($cust);
+end
+rule "Retract account_91"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_91")
+then
+    retract($acc);
+end
+rule "Retract transaction_91"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_91")
+then
+    retract($trans);
+end
+rule "Retract credit card_91"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_91")
+then
+    retract($card);
+end
+
+rule "Retract address_90"
+when
+    $addr : Address(city != null, uuid == "retractAddress_90")
+then
+    retract($addr);
+end
+rule "Retract customer_90"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_90")
+then
+    retract($cust);
+end
+rule "Retract account_90"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_90")
+then
+    retract($acc);
+end
+rule "Retract transaction_90"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_90")
+then
+    retract($trans);
+end
+rule "Retract credit card_90"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_90")
+then
+    retract($card);
+end
+
+rule "Retract address_89"
+when
+    $addr : Address(city != null, uuid == "retractAddress_89")
+then
+    retract($addr);
+end
+rule "Retract customer_89"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_89")
+then
+    retract($cust);
+end
+rule "Retract account_89"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_89")
+then
+    retract($acc);
+end
+rule "Retract transaction_89"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_89")
+then
+    retract($trans);
+end
+rule "Retract credit card_89"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_89")
+then
+    retract($card);
+end
+
+rule "Retract address_88"
+when
+    $addr : Address(city != null, uuid == "retractAddress_88")
+then
+    retract($addr);
+end
+rule "Retract customer_88"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_88")
+then
+    retract($cust);
+end
+rule "Retract account_88"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_88")
+then
+    retract($acc);
+end
+rule "Retract transaction_88"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_88")
+then
+    retract($trans);
+end
+rule "Retract credit card_88"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_88")
+then
+    retract($card);
+end
+
+rule "Retract address_87"
+when
+    $addr : Address(city != null, uuid == "retractAddress_87")
+then
+    retract($addr);
+end
+rule "Retract customer_87"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_87")
+then
+    retract($cust);
+end
+rule "Retract account_87"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_87")
+then
+    retract($acc);
+end
+rule "Retract transaction_87"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_87")
+then
+    retract($trans);
+end
+rule "Retract credit card_87"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_87")
+then
+    retract($card);
+end
+
+rule "Retract address_86"
+when
+    $addr : Address(city != null, uuid == "retractAddress_86")
+then
+    retract($addr);
+end
+rule "Retract customer_86"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_86")
+then
+    retract($cust);
+end
+rule "Retract account_86"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_86")
+then
+    retract($acc);
+end
+rule "Retract transaction_86"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_86")
+then
+    retract($trans);
+end
+rule "Retract credit card_86"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_86")
+then
+    retract($card);
+end
+
+rule "Retract address_85"
+when
+    $addr : Address(city != null, uuid == "retractAddress_85")
+then
+    retract($addr);
+end
+rule "Retract customer_85"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_85")
+then
+    retract($cust);
+end
+rule "Retract account_85"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_85")
+then
+    retract($acc);
+end
+rule "Retract transaction_85"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_85")
+then
+    retract($trans);
+end
+rule "Retract credit card_85"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_85")
+then
+    retract($card);
+end
+
+rule "Retract address_84"
+when
+    $addr : Address(city != null, uuid == "retractAddress_84")
+then
+    retract($addr);
+end
+rule "Retract customer_84"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_84")
+then
+    retract($cust);
+end
+rule "Retract account_84"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_84")
+then
+    retract($acc);
+end
+rule "Retract transaction_84"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_84")
+then
+    retract($trans);
+end
+rule "Retract credit card_84"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_84")
+then
+    retract($card);
+end
+
+rule "Retract address_83"
+when
+    $addr : Address(city != null, uuid == "retractAddress_83")
+then
+    retract($addr);
+end
+rule "Retract customer_83"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_83")
+then
+    retract($cust);
+end
+rule "Retract account_83"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_83")
+then
+    retract($acc);
+end
+rule "Retract transaction_83"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_83")
+then
+    retract($trans);
+end
+rule "Retract credit card_83"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_83")
+then
+    retract($card);
+end
+
+rule "Retract address_82"
+when
+    $addr : Address(city != null, uuid == "retractAddress_82")
+then
+    retract($addr);
+end
+rule "Retract customer_82"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_82")
+then
+    retract($cust);
+end
+rule "Retract account_82"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_82")
+then
+    retract($acc);
+end
+rule "Retract transaction_82"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_82")
+then
+    retract($trans);
+end
+rule "Retract credit card_82"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_82")
+then
+    retract($card);
+end
+
+rule "Retract address_81"
+when
+    $addr : Address(city != null, uuid == "retractAddress_81")
+then
+    retract($addr);
+end
+rule "Retract customer_81"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_81")
+then
+    retract($cust);
+end
+rule "Retract account_81"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_81")
+then
+    retract($acc);
+end
+rule "Retract transaction_81"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_81")
+then
+    retract($trans);
+end
+rule "Retract credit card_81"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_81")
+then
+    retract($card);
+end
+
+rule "Retract address_80"
+when
+    $addr : Address(city != null, uuid == "retractAddress_80")
+then
+    retract($addr);
+end
+rule "Retract customer_80"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_80")
+then
+    retract($cust);
+end
+rule "Retract account_80"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_80")
+then
+    retract($acc);
+end
+rule "Retract transaction_80"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_80")
+then
+    retract($trans);
+end
+rule "Retract credit card_80"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_80")
+then
+    retract($card);
+end
+
+rule "Retract address_79"
+when
+    $addr : Address(city != null, uuid == "retractAddress_79")
+then
+    retract($addr);
+end
+rule "Retract customer_79"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_79")
+then
+    retract($cust);
+end
+rule "Retract account_79"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_79")
+then
+    retract($acc);
+end
+rule "Retract transaction_79"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_79")
+then
+    retract($trans);
+end
+rule "Retract credit card_79"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_79")
+then
+    retract($card);
+end
+
+rule "Retract address_78"
+when
+    $addr : Address(city != null, uuid == "retractAddress_78")
+then
+    retract($addr);
+end
+rule "Retract customer_78"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_78")
+then
+    retract($cust);
+end
+rule "Retract account_78"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_78")
+then
+    retract($acc);
+end
+rule "Retract transaction_78"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_78")
+then
+    retract($trans);
+end
+rule "Retract credit card_78"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_78")
+then
+    retract($card);
+end
+
+rule "Retract address_77"
+when
+    $addr : Address(city != null, uuid == "retractAddress_77")
+then
+    retract($addr);
+end
+rule "Retract customer_77"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_77")
+then
+    retract($cust);
+end
+rule "Retract account_77"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_77")
+then
+    retract($acc);
+end
+rule "Retract transaction_77"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_77")
+then
+    retract($trans);
+end
+rule "Retract credit card_77"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_77")
+then
+    retract($card);
+end
+
+rule "Retract address_76"
+when
+    $addr : Address(city != null, uuid == "retractAddress_76")
+then
+    retract($addr);
+end
+rule "Retract customer_76"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_76")
+then
+    retract($cust);
+end
+rule "Retract account_76"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_76")
+then
+    retract($acc);
+end
+rule "Retract transaction_76"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_76")
+then
+    retract($trans);
+end
+rule "Retract credit card_76"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_76")
+then
+    retract($card);
+end
+
+rule "Retract address_75"
+when
+    $addr : Address(city != null, uuid == "retractAddress_75")
+then
+    retract($addr);
+end
+rule "Retract customer_75"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_75")
+then
+    retract($cust);
+end
+rule "Retract account_75"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_75")
+then
+    retract($acc);
+end
+rule "Retract transaction_75"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_75")
+then
+    retract($trans);
+end
+rule "Retract credit card_75"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_75")
+then
+    retract($card);
+end
+
+rule "Retract address_74"
+when
+    $addr : Address(city != null, uuid == "retractAddress_74")
+then
+    retract($addr);
+end
+rule "Retract customer_74"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_74")
+then
+    retract($cust);
+end
+rule "Retract account_74"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_74")
+then
+    retract($acc);
+end
+rule "Retract transaction_74"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_74")
+then
+    retract($trans);
+end
+rule "Retract credit card_74"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_74")
+then
+    retract($card);
+end
+
+rule "Retract address_73"
+when
+    $addr : Address(city != null, uuid == "retractAddress_73")
+then
+    retract($addr);
+end
+rule "Retract customer_73"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_73")
+then
+    retract($cust);
+end
+rule "Retract account_73"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_73")
+then
+    retract($acc);
+end
+rule "Retract transaction_73"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_73")
+then
+    retract($trans);
+end
+rule "Retract credit card_73"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_73")
+then
+    retract($card);
+end
+
+rule "Retract address_72"
+when
+    $addr : Address(city != null, uuid == "retractAddress_72")
+then
+    retract($addr);
+end
+rule "Retract customer_72"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_72")
+then
+    retract($cust);
+end
+rule "Retract account_72"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_72")
+then
+    retract($acc);
+end
+rule "Retract transaction_72"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_72")
+then
+    retract($trans);
+end
+rule "Retract credit card_72"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_72")
+then
+    retract($card);
+end
+
+rule "Retract address_71"
+when
+    $addr : Address(city != null, uuid == "retractAddress_71")
+then
+    retract($addr);
+end
+rule "Retract customer_71"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_71")
+then
+    retract($cust);
+end
+rule "Retract account_71"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_71")
+then
+    retract($acc);
+end
+rule "Retract transaction_71"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_71")
+then
+    retract($trans);
+end
+rule "Retract credit card_71"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_71")
+then
+    retract($card);
+end
+
+rule "Retract address_70"
+when
+    $addr : Address(city != null, uuid == "retractAddress_70")
+then
+    retract($addr);
+end
+rule "Retract customer_70"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_70")
+then
+    retract($cust);
+end
+rule "Retract account_70"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_70")
+then
+    retract($acc);
+end
+rule "Retract transaction_70"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_70")
+then
+    retract($trans);
+end
+rule "Retract credit card_70"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_70")
+then
+    retract($card);
+end
+
+rule "Retract address_69"
+when
+    $addr : Address(city != null, uuid == "retractAddress_69")
+then
+    retract($addr);
+end
+rule "Retract customer_69"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_69")
+then
+    retract($cust);
+end
+rule "Retract account_69"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_69")
+then
+    retract($acc);
+end
+rule "Retract transaction_69"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_69")
+then
+    retract($trans);
+end
+rule "Retract credit card_69"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_69")
+then
+    retract($card);
+end
+
+rule "Retract address_68"
+when
+    $addr : Address(city != null, uuid == "retractAddress_68")
+then
+    retract($addr);
+end
+rule "Retract customer_68"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_68")
+then
+    retract($cust);
+end
+rule "Retract account_68"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_68")
+then
+    retract($acc);
+end
+rule "Retract transaction_68"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_68")
+then
+    retract($trans);
+end
+rule "Retract credit card_68"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_68")
+then
+    retract($card);
+end
+
+rule "Retract address_67"
+when
+    $addr : Address(city != null, uuid == "retractAddress_67")
+then
+    retract($addr);
+end
+rule "Retract customer_67"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_67")
+then
+    retract($cust);
+end
+rule "Retract account_67"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_67")
+then
+    retract($acc);
+end
+rule "Retract transaction_67"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_67")
+then
+    retract($trans);
+end
+rule "Retract credit card_67"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_67")
+then
+    retract($card);
+end
+
+rule "Retract address_66"
+when
+    $addr : Address(city != null, uuid == "retractAddress_66")
+then
+    retract($addr);
+end
+rule "Retract customer_66"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_66")
+then
+    retract($cust);
+end
+rule "Retract account_66"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_66")
+then
+    retract($acc);
+end
+rule "Retract transaction_66"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_66")
+then
+    retract($trans);
+end
+rule "Retract credit card_66"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_66")
+then
+    retract($card);
+end
+
+rule "Retract address_65"
+when
+    $addr : Address(city != null, uuid == "retractAddress_65")
+then
+    retract($addr);
+end
+rule "Retract customer_65"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_65")
+then
+    retract($cust);
+end
+rule "Retract account_65"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_65")
+then
+    retract($acc);
+end
+rule "Retract transaction_65"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_65")
+then
+    retract($trans);
+end
+rule "Retract credit card_65"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_65")
+then
+    retract($card);
+end
+
+rule "Retract address_64"
+when
+    $addr : Address(city != null, uuid == "retractAddress_64")
+then
+    retract($addr);
+end
+rule "Retract customer_64"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_64")
+then
+    retract($cust);
+end
+rule "Retract account_64"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_64")
+then
+    retract($acc);
+end
+rule "Retract transaction_64"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_64")
+then
+    retract($trans);
+end
+rule "Retract credit card_64"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_64")
+then
+    retract($card);
+end
+
+rule "Retract address_63"
+when
+    $addr : Address(city != null, uuid == "retractAddress_63")
+then
+    retract($addr);
+end
+rule "Retract customer_63"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_63")
+then
+    retract($cust);
+end
+rule "Retract account_63"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_63")
+then
+    retract($acc);
+end
+rule "Retract transaction_63"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_63")
+then
+    retract($trans);
+end
+rule "Retract credit card_63"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_63")
+then
+    retract($card);
+end
+
+rule "Retract address_62"
+when
+    $addr : Address(city != null, uuid == "retractAddress_62")
+then
+    retract($addr);
+end
+rule "Retract customer_62"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_62")
+then
+    retract($cust);
+end
+rule "Retract account_62"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_62")
+then
+    retract($acc);
+end
+rule "Retract transaction_62"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_62")
+then
+    retract($trans);
+end
+rule "Retract credit card_62"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_62")
+then
+    retract($card);
+end
+
+rule "Retract address_61"
+when
+    $addr : Address(city != null, uuid == "retractAddress_61")
+then
+    retract($addr);
+end
+rule "Retract customer_61"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_61")
+then
+    retract($cust);
+end
+rule "Retract account_61"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_61")
+then
+    retract($acc);
+end
+rule "Retract transaction_61"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_61")
+then
+    retract($trans);
+end
+rule "Retract credit card_61"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_61")
+then
+    retract($card);
+end
+
+rule "Retract address_60"
+when
+    $addr : Address(city != null, uuid == "retractAddress_60")
+then
+    retract($addr);
+end
+rule "Retract customer_60"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_60")
+then
+    retract($cust);
+end
+rule "Retract account_60"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_60")
+then
+    retract($acc);
+end
+rule "Retract transaction_60"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_60")
+then
+    retract($trans);
+end
+rule "Retract credit card_60"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_60")
+then
+    retract($card);
+end
+
+rule "Retract address_59"
+when
+    $addr : Address(city != null, uuid == "retractAddress_59")
+then
+    retract($addr);
+end
+rule "Retract customer_59"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_59")
+then
+    retract($cust);
+end
+rule "Retract account_59"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_59")
+then
+    retract($acc);
+end
+rule "Retract transaction_59"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_59")
+then
+    retract($trans);
+end
+rule "Retract credit card_59"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_59")
+then
+    retract($card);
+end
+
+rule "Retract address_58"
+when
+    $addr : Address(city != null, uuid == "retractAddress_58")
+then
+    retract($addr);
+end
+rule "Retract customer_58"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_58")
+then
+    retract($cust);
+end
+rule "Retract account_58"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_58")
+then
+    retract($acc);
+end
+rule "Retract transaction_58"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_58")
+then
+    retract($trans);
+end
+rule "Retract credit card_58"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_58")
+then
+    retract($card);
+end
+
+rule "Retract address_57"
+when
+    $addr : Address(city != null, uuid == "retractAddress_57")
+then
+    retract($addr);
+end
+rule "Retract customer_57"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_57")
+then
+    retract($cust);
+end
+rule "Retract account_57"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_57")
+then
+    retract($acc);
+end
+rule "Retract transaction_57"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_57")
+then
+    retract($trans);
+end
+rule "Retract credit card_57"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_57")
+then
+    retract($card);
+end
+
+rule "Retract address_56"
+when
+    $addr : Address(city != null, uuid == "retractAddress_56")
+then
+    retract($addr);
+end
+rule "Retract customer_56"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_56")
+then
+    retract($cust);
+end
+rule "Retract account_56"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_56")
+then
+    retract($acc);
+end
+rule "Retract transaction_56"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_56")
+then
+    retract($trans);
+end
+rule "Retract credit card_56"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_56")
+then
+    retract($card);
+end
+
+rule "Retract address_55"
+when
+    $addr : Address(city != null, uuid == "retractAddress_55")
+then
+    retract($addr);
+end
+rule "Retract customer_55"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_55")
+then
+    retract($cust);
+end
+rule "Retract account_55"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_55")
+then
+    retract($acc);
+end
+rule "Retract transaction_55"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_55")
+then
+    retract($trans);
+end
+rule "Retract credit card_55"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_55")
+then
+    retract($card);
+end
+
+rule "Retract address_54"
+when
+    $addr : Address(city != null, uuid == "retractAddress_54")
+then
+    retract($addr);
+end
+rule "Retract customer_54"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_54")
+then
+    retract($cust);
+end
+rule "Retract account_54"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_54")
+then
+    retract($acc);
+end
+rule "Retract transaction_54"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_54")
+then
+    retract($trans);
+end
+rule "Retract credit card_54"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_54")
+then
+    retract($card);
+end
+
+rule "Retract address_53"
+when
+    $addr : Address(city != null, uuid == "retractAddress_53")
+then
+    retract($addr);
+end
+rule "Retract customer_53"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_53")
+then
+    retract($cust);
+end
+rule "Retract account_53"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_53")
+then
+    retract($acc);
+end
+rule "Retract transaction_53"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_53")
+then
+    retract($trans);
+end
+rule "Retract credit card_53"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_53")
+then
+    retract($card);
+end
+
+rule "Retract address_52"
+when
+    $addr : Address(city != null, uuid == "retractAddress_52")
+then
+    retract($addr);
+end
+rule "Retract customer_52"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_52")
+then
+    retract($cust);
+end
+rule "Retract account_52"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_52")
+then
+    retract($acc);
+end
+rule "Retract transaction_52"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_52")
+then
+    retract($trans);
+end
+rule "Retract credit card_52"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_52")
+then
+    retract($card);
+end
+
+rule "Retract address_51"
+when
+    $addr : Address(city != null, uuid == "retractAddress_51")
+then
+    retract($addr);
+end
+rule "Retract customer_51"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_51")
+then
+    retract($cust);
+end
+rule "Retract account_51"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_51")
+then
+    retract($acc);
+end
+rule "Retract transaction_51"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_51")
+then
+    retract($trans);
+end
+rule "Retract credit card_51"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_51")
+then
+    retract($card);
+end
+
+rule "Retract address_50"
+when
+    $addr : Address(city != null, uuid == "retractAddress_50")
+then
+    retract($addr);
+end
+rule "Retract customer_50"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_50")
+then
+    retract($cust);
+end
+rule "Retract account_50"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_50")
+then
+    retract($acc);
+end
+rule "Retract transaction_50"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_50")
+then
+    retract($trans);
+end
+rule "Retract credit card_50"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_50")
+then
+    retract($card);
+end
+
+rule "Retract address_49"
+when
+    $addr : Address(city != null, uuid == "retractAddress_49")
+then
+    retract($addr);
+end
+rule "Retract customer_49"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_49")
+then
+    retract($cust);
+end
+rule "Retract account_49"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_49")
+then
+    retract($acc);
+end
+rule "Retract transaction_49"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_49")
+then
+    retract($trans);
+end
+rule "Retract credit card_49"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_49")
+then
+    retract($card);
+end
+
+rule "Retract address_48"
+when
+    $addr : Address(city != null, uuid == "retractAddress_48")
+then
+    retract($addr);
+end
+rule "Retract customer_48"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_48")
+then
+    retract($cust);
+end
+rule "Retract account_48"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_48")
+then
+    retract($acc);
+end
+rule "Retract transaction_48"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_48")
+then
+    retract($trans);
+end
+rule "Retract credit card_48"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_48")
+then
+    retract($card);
+end
+
+rule "Retract address_47"
+when
+    $addr : Address(city != null, uuid == "retractAddress_47")
+then
+    retract($addr);
+end
+rule "Retract customer_47"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_47")
+then
+    retract($cust);
+end
+rule "Retract account_47"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_47")
+then
+    retract($acc);
+end
+rule "Retract transaction_47"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_47")
+then
+    retract($trans);
+end
+rule "Retract credit card_47"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_47")
+then
+    retract($card);
+end
+
+rule "Retract address_46"
+when
+    $addr : Address(city != null, uuid == "retractAddress_46")
+then
+    retract($addr);
+end
+rule "Retract customer_46"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_46")
+then
+    retract($cust);
+end
+rule "Retract account_46"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_46")
+then
+    retract($acc);
+end
+rule "Retract transaction_46"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_46")
+then
+    retract($trans);
+end
+rule "Retract credit card_46"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_46")
+then
+    retract($card);
+end
+
+rule "Retract address_45"
+when
+    $addr : Address(city != null, uuid == "retractAddress_45")
+then
+    retract($addr);
+end
+rule "Retract customer_45"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_45")
+then
+    retract($cust);
+end
+rule "Retract account_45"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_45")
+then
+    retract($acc);
+end
+rule "Retract transaction_45"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_45")
+then
+    retract($trans);
+end
+rule "Retract credit card_45"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_45")
+then
+    retract($card);
+end
+
+rule "Retract address_44"
+when
+    $addr : Address(city != null, uuid == "retractAddress_44")
+then
+    retract($addr);
+end
+rule "Retract customer_44"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_44")
+then
+    retract($cust);
+end
+rule "Retract account_44"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_44")
+then
+    retract($acc);
+end
+rule "Retract transaction_44"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_44")
+then
+    retract($trans);
+end
+rule "Retract credit card_44"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_44")
+then
+    retract($card);
+end
+
+rule "Retract address_43"
+when
+    $addr : Address(city != null, uuid == "retractAddress_43")
+then
+    retract($addr);
+end
+rule "Retract customer_43"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_43")
+then
+    retract($cust);
+end
+rule "Retract account_43"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_43")
+then
+    retract($acc);
+end
+rule "Retract transaction_43"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_43")
+then
+    retract($trans);
+end
+rule "Retract credit card_43"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_43")
+then
+    retract($card);
+end
+
+rule "Retract address_42"
+when
+    $addr : Address(city != null, uuid == "retractAddress_42")
+then
+    retract($addr);
+end
+rule "Retract customer_42"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_42")
+then
+    retract($cust);
+end
+rule "Retract account_42"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_42")
+then
+    retract($acc);
+end
+rule "Retract transaction_42"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_42")
+then
+    retract($trans);
+end
+rule "Retract credit card_42"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_42")
+then
+    retract($card);
+end
+
+rule "Retract address_41"
+when
+    $addr : Address(city != null, uuid == "retractAddress_41")
+then
+    retract($addr);
+end
+rule "Retract customer_41"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_41")
+then
+    retract($cust);
+end
+rule "Retract account_41"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_41")
+then
+    retract($acc);
+end
+rule "Retract transaction_41"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_41")
+then
+    retract($trans);
+end
+rule "Retract credit card_41"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_41")
+then
+    retract($card);
+end
+
+rule "Retract address_40"
+when
+    $addr : Address(city != null, uuid == "retractAddress_40")
+then
+    retract($addr);
+end
+rule "Retract customer_40"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_40")
+then
+    retract($cust);
+end
+rule "Retract account_40"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_40")
+then
+    retract($acc);
+end
+rule "Retract transaction_40"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_40")
+then
+    retract($trans);
+end
+rule "Retract credit card_40"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_40")
+then
+    retract($card);
+end
+
+rule "Retract address_39"
+when
+    $addr : Address(city != null, uuid == "retractAddress_39")
+then
+    retract($addr);
+end
+rule "Retract customer_39"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_39")
+then
+    retract($cust);
+end
+rule "Retract account_39"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_39")
+then
+    retract($acc);
+end
+rule "Retract transaction_39"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_39")
+then
+    retract($trans);
+end
+rule "Retract credit card_39"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_39")
+then
+    retract($card);
+end
+
+rule "Retract address_38"
+when
+    $addr : Address(city != null, uuid == "retractAddress_38")
+then
+    retract($addr);
+end
+rule "Retract customer_38"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_38")
+then
+    retract($cust);
+end
+rule "Retract account_38"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_38")
+then
+    retract($acc);
+end
+rule "Retract transaction_38"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_38")
+then
+    retract($trans);
+end
+rule "Retract credit card_38"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_38")
+then
+    retract($card);
+end
+
+rule "Retract address_37"
+when
+    $addr : Address(city != null, uuid == "retractAddress_37")
+then
+    retract($addr);
+end
+rule "Retract customer_37"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_37")
+then
+    retract($cust);
+end
+rule "Retract account_37"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_37")
+then
+    retract($acc);
+end
+rule "Retract transaction_37"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_37")
+then
+    retract($trans);
+end
+rule "Retract credit card_37"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_37")
+then
+    retract($card);
+end
+
+rule "Retract address_36"
+when
+    $addr : Address(city != null, uuid == "retractAddress_36")
+then
+    retract($addr);
+end
+rule "Retract customer_36"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_36")
+then
+    retract($cust);
+end
+rule "Retract account_36"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_36")
+then
+    retract($acc);
+end
+rule "Retract transaction_36"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_36")
+then
+    retract($trans);
+end
+rule "Retract credit card_36"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_36")
+then
+    retract($card);
+end
+
+rule "Retract address_35"
+when
+    $addr : Address(city != null, uuid == "retractAddress_35")
+then
+    retract($addr);
+end
+rule "Retract customer_35"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_35")
+then
+    retract($cust);
+end
+rule "Retract account_35"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_35")
+then
+    retract($acc);
+end
+rule "Retract transaction_35"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_35")
+then
+    retract($trans);
+end
+rule "Retract credit card_35"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_35")
+then
+    retract($card);
+end
+
+rule "Retract address_34"
+when
+    $addr : Address(city != null, uuid == "retractAddress_34")
+then
+    retract($addr);
+end
+rule "Retract customer_34"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_34")
+then
+    retract($cust);
+end
+rule "Retract account_34"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_34")
+then
+    retract($acc);
+end
+rule "Retract transaction_34"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_34")
+then
+    retract($trans);
+end
+rule "Retract credit card_34"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_34")
+then
+    retract($card);
+end
+
+rule "Retract address_33"
+when
+    $addr : Address(city != null, uuid == "retractAddress_33")
+then
+    retract($addr);
+end
+rule "Retract customer_33"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_33")
+then
+    retract($cust);
+end
+rule "Retract account_33"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_33")
+then
+    retract($acc);
+end
+rule "Retract transaction_33"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_33")
+then
+    retract($trans);
+end
+rule "Retract credit card_33"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_33")
+then
+    retract($card);
+end
+
+rule "Retract address_32"
+when
+    $addr : Address(city != null, uuid == "retractAddress_32")
+then
+    retract($addr);
+end
+rule "Retract customer_32"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_32")
+then
+    retract($cust);
+end
+rule "Retract account_32"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_32")
+then
+    retract($acc);
+end
+rule "Retract transaction_32"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_32")
+then
+    retract($trans);
+end
+rule "Retract credit card_32"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_32")
+then
+    retract($card);
+end
+
+rule "Retract address_31"
+when
+    $addr : Address(city != null, uuid == "retractAddress_31")
+then
+    retract($addr);
+end
+rule "Retract customer_31"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_31")
+then
+    retract($cust);
+end
+rule "Retract account_31"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_31")
+then
+    retract($acc);
+end
+rule "Retract transaction_31"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_31")
+then
+    retract($trans);
+end
+rule "Retract credit card_31"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_31")
+then
+    retract($card);
+end
+
+rule "Retract address_30"
+when
+    $addr : Address(city != null, uuid == "retractAddress_30")
+then
+    retract($addr);
+end
+rule "Retract customer_30"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_30")
+then
+    retract($cust);
+end
+rule "Retract account_30"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_30")
+then
+    retract($acc);
+end
+rule "Retract transaction_30"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_30")
+then
+    retract($trans);
+end
+rule "Retract credit card_30"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_30")
+then
+    retract($card);
+end
+
+rule "Retract address_29"
+when
+    $addr : Address(city != null, uuid == "retractAddress_29")
+then
+    retract($addr);
+end
+rule "Retract customer_29"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_29")
+then
+    retract($cust);
+end
+rule "Retract account_29"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_29")
+then
+    retract($acc);
+end
+rule "Retract transaction_29"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_29")
+then
+    retract($trans);
+end
+rule "Retract credit card_29"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_29")
+then
+    retract($card);
+end
+
+rule "Retract address_28"
+when
+    $addr : Address(city != null, uuid == "retractAddress_28")
+then
+    retract($addr);
+end
+rule "Retract customer_28"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_28")
+then
+    retract($cust);
+end
+rule "Retract account_28"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_28")
+then
+    retract($acc);
+end
+rule "Retract transaction_28"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_28")
+then
+    retract($trans);
+end
+rule "Retract credit card_28"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_28")
+then
+    retract($card);
+end
+
+rule "Retract address_27"
+when
+    $addr : Address(city != null, uuid == "retractAddress_27")
+then
+    retract($addr);
+end
+rule "Retract customer_27"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_27")
+then
+    retract($cust);
+end
+rule "Retract account_27"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_27")
+then
+    retract($acc);
+end
+rule "Retract transaction_27"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_27")
+then
+    retract($trans);
+end
+rule "Retract credit card_27"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_27")
+then
+    retract($card);
+end
+
+rule "Retract address_26"
+when
+    $addr : Address(city != null, uuid == "retractAddress_26")
+then
+    retract($addr);
+end
+rule "Retract customer_26"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_26")
+then
+    retract($cust);
+end
+rule "Retract account_26"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_26")
+then
+    retract($acc);
+end
+rule "Retract transaction_26"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_26")
+then
+    retract($trans);
+end
+rule "Retract credit card_26"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_26")
+then
+    retract($card);
+end
+
+rule "Retract address_25"
+when
+    $addr : Address(city != null, uuid == "retractAddress_25")
+then
+    retract($addr);
+end
+rule "Retract customer_25"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_25")
+then
+    retract($cust);
+end
+rule "Retract account_25"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_25")
+then
+    retract($acc);
+end
+rule "Retract transaction_25"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_25")
+then
+    retract($trans);
+end
+rule "Retract credit card_25"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_25")
+then
+    retract($card);
+end
+
+rule "Retract address_24"
+when
+    $addr : Address(city != null, uuid == "retractAddress_24")
+then
+    retract($addr);
+end
+rule "Retract customer_24"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_24")
+then
+    retract($cust);
+end
+rule "Retract account_24"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_24")
+then
+    retract($acc);
+end
+rule "Retract transaction_24"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_24")
+then
+    retract($trans);
+end
+rule "Retract credit card_24"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_24")
+then
+    retract($card);
+end
+
+rule "Retract address_23"
+when
+    $addr : Address(city != null, uuid == "retractAddress_23")
+then
+    retract($addr);
+end
+rule "Retract customer_23"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_23")
+then
+    retract($cust);
+end
+rule "Retract account_23"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_23")
+then
+    retract($acc);
+end
+rule "Retract transaction_23"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_23")
+then
+    retract($trans);
+end
+rule "Retract credit card_23"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_23")
+then
+    retract($card);
+end
+
+rule "Retract address_22"
+when
+    $addr : Address(city != null, uuid == "retractAddress_22")
+then
+    retract($addr);
+end
+rule "Retract customer_22"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_22")
+then
+    retract($cust);
+end
+rule "Retract account_22"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_22")
+then
+    retract($acc);
+end
+rule "Retract transaction_22"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_22")
+then
+    retract($trans);
+end
+rule "Retract credit card_22"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_22")
+then
+    retract($card);
+end
+
+rule "Retract address_21"
+when
+    $addr : Address(city != null, uuid == "retractAddress_21")
+then
+    retract($addr);
+end
+rule "Retract customer_21"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_21")
+then
+    retract($cust);
+end
+rule "Retract account_21"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_21")
+then
+    retract($acc);
+end
+rule "Retract transaction_21"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_21")
+then
+    retract($trans);
+end
+rule "Retract credit card_21"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_21")
+then
+    retract($card);
+end
+
+rule "Retract address_20"
+when
+    $addr : Address(city != null, uuid == "retractAddress_20")
+then
+    retract($addr);
+end
+rule "Retract customer_20"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_20")
+then
+    retract($cust);
+end
+rule "Retract account_20"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_20")
+then
+    retract($acc);
+end
+rule "Retract transaction_20"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_20")
+then
+    retract($trans);
+end
+rule "Retract credit card_20"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_20")
+then
+    retract($card);
+end
+
+rule "Retract address_19"
+when
+    $addr : Address(city != null, uuid == "retractAddress_19")
+then
+    retract($addr);
+end
+rule "Retract customer_19"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_19")
+then
+    retract($cust);
+end
+rule "Retract account_19"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_19")
+then
+    retract($acc);
+end
+rule "Retract transaction_19"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_19")
+then
+    retract($trans);
+end
+rule "Retract credit card_19"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_19")
+then
+    retract($card);
+end
+
+rule "Retract address_18"
+when
+    $addr : Address(city != null, uuid == "retractAddress_18")
+then
+    retract($addr);
+end
+rule "Retract customer_18"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_18")
+then
+    retract($cust);
+end
+rule "Retract account_18"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_18")
+then
+    retract($acc);
+end
+rule "Retract transaction_18"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_18")
+then
+    retract($trans);
+end
+rule "Retract credit card_18"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_18")
+then
+    retract($card);
+end
+
+rule "Retract address_17"
+when
+    $addr : Address(city != null, uuid == "retractAddress_17")
+then
+    retract($addr);
+end
+rule "Retract customer_17"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_17")
+then
+    retract($cust);
+end
+rule "Retract account_17"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_17")
+then
+    retract($acc);
+end
+rule "Retract transaction_17"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_17")
+then
+    retract($trans);
+end
+rule "Retract credit card_17"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_17")
+then
+    retract($card);
+end
+
+rule "Retract address_16"
+when
+    $addr : Address(city != null, uuid == "retractAddress_16")
+then
+    retract($addr);
+end
+rule "Retract customer_16"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_16")
+then
+    retract($cust);
+end
+rule "Retract account_16"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_16")
+then
+    retract($acc);
+end
+rule "Retract transaction_16"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_16")
+then
+    retract($trans);
+end
+rule "Retract credit card_16"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_16")
+then
+    retract($card);
+end
+
+rule "Retract address_15"
+when
+    $addr : Address(city != null, uuid == "retractAddress_15")
+then
+    retract($addr);
+end
+rule "Retract customer_15"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_15")
+then
+    retract($cust);
+end
+rule "Retract account_15"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_15")
+then
+    retract($acc);
+end
+rule "Retract transaction_15"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_15")
+then
+    retract($trans);
+end
+rule "Retract credit card_15"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_15")
+then
+    retract($card);
+end
+
+rule "Retract address_14"
+when
+    $addr : Address(city != null, uuid == "retractAddress_14")
+then
+    retract($addr);
+end
+rule "Retract customer_14"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_14")
+then
+    retract($cust);
+end
+rule "Retract account_14"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_14")
+then
+    retract($acc);
+end
+rule "Retract transaction_14"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_14")
+then
+    retract($trans);
+end
+rule "Retract credit card_14"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_14")
+then
+    retract($card);
+end
+
+rule "Retract address_13"
+when
+    $addr : Address(city != null, uuid == "retractAddress_13")
+then
+    retract($addr);
+end
+rule "Retract customer_13"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_13")
+then
+    retract($cust);
+end
+rule "Retract account_13"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_13")
+then
+    retract($acc);
+end
+rule "Retract transaction_13"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_13")
+then
+    retract($trans);
+end
+rule "Retract credit card_13"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_13")
+then
+    retract($card);
+end
+
+rule "Retract address_12"
+when
+    $addr : Address(city != null, uuid == "retractAddress_12")
+then
+    retract($addr);
+end
+rule "Retract customer_12"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_12")
+then
+    retract($cust);
+end
+rule "Retract account_12"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_12")
+then
+    retract($acc);
+end
+rule "Retract transaction_12"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_12")
+then
+    retract($trans);
+end
+rule "Retract credit card_12"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_12")
+then
+    retract($card);
+end
+
+rule "Retract address_11"
+when
+    $addr : Address(city != null, uuid == "retractAddress_11")
+then
+    retract($addr);
+end
+rule "Retract customer_11"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_11")
+then
+    retract($cust);
+end
+rule "Retract account_11"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_11")
+then
+    retract($acc);
+end
+rule "Retract transaction_11"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_11")
+then
+    retract($trans);
+end
+rule "Retract credit card_11"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_11")
+then
+    retract($card);
+end
+
+rule "Retract address_10"
+when
+    $addr : Address(city != null, uuid == "retractAddress_10")
+then
+    retract($addr);
+end
+rule "Retract customer_10"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_10")
+then
+    retract($cust);
+end
+rule "Retract account_10"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_10")
+then
+    retract($acc);
+end
+rule "Retract transaction_10"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_10")
+then
+    retract($trans);
+end
+rule "Retract credit card_10"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_10")
+then
+    retract($card);
+end
+
+rule "Retract address_9"
+when
+    $addr : Address(city != null, uuid == "retractAddress_9")
+then
+    retract($addr);
+end
+rule "Retract customer_9"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_9")
+then
+    retract($cust);
+end
+rule "Retract account_9"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_9")
+then
+    retract($acc);
+end
+rule "Retract transaction_9"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_9")
+then
+    retract($trans);
+end
+rule "Retract credit card_9"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_9")
+then
+    retract($card);
+end
+
+rule "Retract address_8"
+when
+    $addr : Address(city != null, uuid == "retractAddress_8")
+then
+    retract($addr);
+end
+rule "Retract customer_8"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_8")
+then
+    retract($cust);
+end
+rule "Retract account_8"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_8")
+then
+    retract($acc);
+end
+rule "Retract transaction_8"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_8")
+then
+    retract($trans);
+end
+rule "Retract credit card_8"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_8")
+then
+    retract($card);
+end
+
+rule "Retract address_7"
+when
+    $addr : Address(city != null, uuid == "retractAddress_7")
+then
+    retract($addr);
+end
+rule "Retract customer_7"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_7")
+then
+    retract($cust);
+end
+rule "Retract account_7"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_7")
+then
+    retract($acc);
+end
+rule "Retract transaction_7"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_7")
+then
+    retract($trans);
+end
+rule "Retract credit card_7"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_7")
+then
+    retract($card);
+end
+
+rule "Retract address_6"
+when
+    $addr : Address(city != null, uuid == "retractAddress_6")
+then
+    retract($addr);
+end
+rule "Retract customer_6"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_6")
+then
+    retract($cust);
+end
+rule "Retract account_6"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_6")
+then
+    retract($acc);
+end
+rule "Retract transaction_6"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_6")
+then
+    retract($trans);
+end
+rule "Retract credit card_6"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_6")
+then
+    retract($card);
+end
+
+rule "Retract address_5"
+when
+    $addr : Address(city != null, uuid == "retractAddress_5")
+then
+    retract($addr);
+end
+rule "Retract customer_5"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_5")
+then
+    retract($cust);
+end
+rule "Retract account_5"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_5")
+then
+    retract($acc);
+end
+rule "Retract transaction_5"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_5")
+then
+    retract($trans);
+end
+rule "Retract credit card_5"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_5")
+then
+    retract($card);
+end
+
+rule "Retract address_4"
+when
+    $addr : Address(city != null, uuid == "retractAddress_4")
+then
+    retract($addr);
+end
+rule "Retract customer_4"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_4")
+then
+    retract($cust);
+end
+rule "Retract account_4"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_4")
+then
+    retract($acc);
+end
+rule "Retract transaction_4"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_4")
+then
+    retract($trans);
+end
+rule "Retract credit card_4"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_4")
+then
+    retract($card);
+end
+
+rule "Retract address_3"
+when
+    $addr : Address(city != null, uuid == "retractAddress_3")
+then
+    retract($addr);
+end
+rule "Retract customer_3"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_3")
+then
+    retract($cust);
+end
+rule "Retract account_3"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_3")
+then
+    retract($acc);
+end
+rule "Retract transaction_3"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_3")
+then
+    retract($trans);
+end
+rule "Retract credit card_3"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_3")
+then
+    retract($card);
+end
+
+rule "Retract address_2"
+when
+    $addr : Address(city != null, uuid == "retractAddress_2")
+then
+    retract($addr);
+end
+rule "Retract customer_2"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_2")
+then
+    retract($cust);
+end
+rule "Retract account_2"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_2")
+then
+    retract($acc);
+end
+rule "Retract transaction_2"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_2")
+then
+    retract($trans);
+end
+rule "Retract credit card_2"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_2")
+then
+    retract($card);
+end
+
+rule "Retract address_1"
+when
+    $addr : Address(city != null, uuid == "retractAddress_1")
+then
+    retract($addr);
+end
+rule "Retract customer_1"
+when
+    $cust : Customer(firstName != null, uuid == "retractCustomer_1")
+then
+    retract($cust);
+end
+rule "Retract account_1"
+when
+    $acc : Account(type == AccountType.SAVINGS, uuid == "retractAccount_1")
+then
+    retract($acc);
+end
+rule "Retract transaction_1"
+when
+    $trans : Transaction(accountFrom != null, uuid == "retractTransaction_1")
+then
+    retract($trans);
+end
+rule "Retract credit card_1"
+when
+    $card : CreditCard(owner != null, uuid == "retractCreditCard_1")
+then
+    retract($card);
+end
+
+

@@ -1,0 +1,665 @@
+package org.drools.benchmarks.bre
+// list any import classes here.
+import org.drools.benchmarks.domain.event.TransactionCreatedEvent
+import org.drools.benchmarks.domain.event.NewCustomerEvent
+// declarations and global variables
+declare TransactionCreatedEvent
+    @role(event)
+    @duration(duration)
+end
+declare NewCustomerEvent
+    @role(event)
+    @duration(duration)
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated147ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated147ms", this starts[147ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated147ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated147ms", this startedby[147ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated144ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated144ms", this starts[144ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated144ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated144ms", this startedby[144ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated141ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated141ms", this starts[141ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated141ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated141ms", this startedby[141ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated138ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated138ms", this starts[138ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated138ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated138ms", this startedby[138ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated135ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated135ms", this starts[135ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated135ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated135ms", this startedby[135ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated132ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated132ms", this starts[132ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated132ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated132ms", this startedby[132ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated129ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated129ms", this starts[129ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated129ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated129ms", this startedby[129ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated126ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated126ms", this starts[126ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated126ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated126ms", this startedby[126ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated123ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated123ms", this starts[123ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated123ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated123ms", this startedby[123ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated120ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated120ms", this starts[120ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated120ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated120ms", this startedby[120ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated117ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated117ms", this starts[117ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated117ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated117ms", this startedby[117ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated114ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated114ms", this starts[114ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated114ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated114ms", this startedby[114ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated111ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated111ms", this starts[111ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated111ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated111ms", this startedby[111ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated108ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated108ms", this starts[108ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated108ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated108ms", this startedby[108ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated105ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated105ms", this starts[105ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated105ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated105ms", this startedby[105ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated102ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated102ms", this starts[102ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated102ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated102ms", this startedby[102ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated99ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated99ms", this starts[99ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated99ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated99ms", this startedby[99ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated96ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated96ms", this starts[96ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated96ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated96ms", this startedby[96ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated93ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated93ms", this starts[93ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated93ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated93ms", this startedby[93ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated90ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated90ms", this starts[90ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated90ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated90ms", this startedby[90ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated87ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated87ms", this starts[87ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated87ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated87ms", this startedby[87ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated84ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated84ms", this starts[84ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated84ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated84ms", this startedby[84ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated81ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated81ms", this starts[81ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated81ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated81ms", this startedby[81ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated78ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated78ms", this starts[78ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated78ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated78ms", this startedby[78ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated75ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated75ms", this starts[75ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated75ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated75ms", this startedby[75ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated72ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated72ms", this starts[72ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated72ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated72ms", this startedby[72ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated69ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated69ms", this starts[69ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated69ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated69ms", this startedby[69ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated66ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated66ms", this starts[66ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated66ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated66ms", this startedby[66ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated63ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated63ms", this starts[63ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated63ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated63ms", this startedby[63ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated60ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated60ms", this starts[60ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated60ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated60ms", this startedby[60ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated57ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated57ms", this starts[57ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated57ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated57ms", this startedby[57ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated54ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated54ms", this starts[54ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated54ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated54ms", this startedby[54ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated51ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated51ms", this starts[51ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated51ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated51ms", this startedby[51ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated48ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated48ms", this starts[48ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated48ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated48ms", this startedby[48ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated45ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated45ms", this starts[45ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated45ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated45ms", this startedby[45ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated42ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated42ms", this starts[42ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated42ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated42ms", this startedby[42ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated39ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated39ms", this starts[39ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated39ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated39ms", this startedby[39ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated36ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated36ms", this starts[36ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated36ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated36ms", this startedby[36ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated33ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated33ms", this starts[33ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated33ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated33ms", this startedby[33ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated30ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated30ms", this starts[30ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated30ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated30ms", this startedby[30ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated27ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated27ms", this starts[27ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated27ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated27ms", this startedby[27ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated24ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated24ms", this starts[24ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated24ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated24ms", this startedby[24ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated21ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated21ms", this starts[21ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated21ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated21ms", this startedby[21ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated18ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated18ms", this starts[18ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated18ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated18ms", this startedby[18ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated15ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated15ms", this starts[15ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated15ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated15ms", this startedby[15ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated12ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated12ms", this starts[12ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated12ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated12ms", this startedby[12ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated9ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated9ms", this starts[9ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated9ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated9ms", this startedby[9ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated6ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated6ms", this starts[6ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated6ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated6ms", this startedby[6ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated3ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated3ms", this starts[3ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated3ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated3ms", this startedby[3ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "StartsStartedby_TransactionCreatedStartsNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated0ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartsNewCustomerCreated0ms", this starts[0ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated0ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == "StartsStartedby_TransactionCreatedStartedbyNewCustomerCreated0ms", this startedby[0ms] $nc) from entry-point "Master Stream"
+then
+end
+
+

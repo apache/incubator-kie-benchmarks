@@ -1,0 +1,665 @@
+package org.drools.benchmarks.bre
+// list any import classes here.
+import org.drools.benchmarks.domain.event.TransactionCreatedEvent
+import org.drools.benchmarks.domain.event.NewCustomerEvent
+// declarations and global variables
+declare TransactionCreatedEvent
+    @role(event)
+    @duration(duration)
+end
+declare NewCustomerEvent
+    @role(event)
+    @duration(duration)
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated149ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[149ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated149ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[149ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated147ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[147ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated147ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[147ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated144ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[144ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated144ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[144ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated141ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[141ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated141ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[141ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated138ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[138ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated138ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[138ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated135ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[135ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated135ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[135ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated132ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[132ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated132ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[132ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated129ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[129ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated129ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[129ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated126ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[126ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated126ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[126ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated123ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[123ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated123ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[123ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated120ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[120ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated120ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[120ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated117ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[117ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated117ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[117ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated114ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[114ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated114ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[114ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated111ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[111ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated111ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[111ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated108ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[108ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated108ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[108ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated105ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[105ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated105ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[105ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated102ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[102ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated102ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[102ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated99ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[99ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated99ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[99ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated96ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[96ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated96ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[96ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated93ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[93ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated93ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[93ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated90ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[90ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated90ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[90ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated87ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[87ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated87ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[87ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated84ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[84ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated84ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[84ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated81ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[81ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated81ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[81ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated78ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[78ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated78ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[78ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated75ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[75ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated75ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[75ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated72ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[72ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated72ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[72ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated69ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[69ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated69ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[69ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated66ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[66ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated66ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[66ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated63ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[63ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated63ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[63ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated60ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[60ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated60ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[60ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated57ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[57ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated57ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[57ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated54ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[54ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated54ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[54ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated51ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[51ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated51ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[51ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated48ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[48ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated48ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[48ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated45ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[45ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated45ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[45ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated42ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[42ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated42ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[42ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated39ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[39ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated39ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[39ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated36ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[36ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated36ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[36ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated33ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[33ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated33ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[33ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated30ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[30ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated30ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[30ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated27ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[27ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated27ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[27ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated24ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[24ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated24ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[24ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated21ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[21ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated21ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[21ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated18ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[18ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated18ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[18ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated15ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[15ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated15ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[15ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated12ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[12ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated12ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[12ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated9ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[9ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated9ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[9ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated6ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[6ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated6ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[6ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedCoincidesNewCustomerCreated3ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this coincides[3ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "CoincidesDuring_TransactionCreatedDuringNewCustomerCreated3ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this during[3ms] $nc) from entry-point "Master Stream"
+then
+end
+
+

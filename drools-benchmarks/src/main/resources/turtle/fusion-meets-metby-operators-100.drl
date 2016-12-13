@@ -1,0 +1,665 @@
+package org.drools.benchmarks.bre
+// list any import classes here.
+import org.drools.benchmarks.domain.event.TransactionCreatedEvent
+import org.drools.benchmarks.domain.event.NewCustomerEvent
+// declarations and global variables
+declare TransactionCreatedEvent
+    @role(event)
+    @duration(duration)
+end
+declare NewCustomerEvent
+    @role(event)
+    @duration(duration)
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated149ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[149ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_50"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated149ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[149ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated147ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[147ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_49"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated147ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[147ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated144ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[144ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_48"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated144ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[144ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated141ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[141ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_47"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated141ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[141ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated138ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[138ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_46"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated138ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[138ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated135ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[135ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_45"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated135ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[135ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated132ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[132ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_44"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated132ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[132ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated129ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[129ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_43"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated129ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[129ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated126ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[126ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_42"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated126ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[126ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated123ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[123ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_41"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated123ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[123ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated120ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[120ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_40"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated120ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[120ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated117ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[117ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_39"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated117ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[117ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated114ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[114ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_38"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated114ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[114ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated111ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[111ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_37"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated111ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[111ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated108ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[108ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_36"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated108ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[108ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated105ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[105ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_35"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated105ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[105ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated102ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[102ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_34"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated102ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[102ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated99ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[99ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_33"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated99ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[99ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated96ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[96ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_32"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated96ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[96ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated93ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[93ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_31"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated93ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[93ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated90ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[90ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_30"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated90ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[90ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated87ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[87ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_29"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated87ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[87ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated84ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[84ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_28"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated84ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[84ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated81ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[81ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_27"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated81ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[81ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated78ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[78ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_26"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated78ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[78ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated75ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[75ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_25"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated75ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[75ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated72ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[72ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_24"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated72ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[72ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated69ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[69ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_23"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated69ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[69ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated66ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[66ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_22"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated66ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[66ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated63ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[63ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_21"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated63ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[63ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated60ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[60ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_20"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated60ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[60ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated57ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[57ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_19"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated57ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[57ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated54ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[54ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_18"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated54ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[54ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated51ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[51ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_17"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated51ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[51ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated48ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[48ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_16"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated48ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[48ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated45ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[45ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_15"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated45ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[45ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated42ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[42ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_14"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated42ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[42ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated39ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[39ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_13"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated39ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[39ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated36ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[36ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_12"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated36ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[36ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated33ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[33ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_11"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated33ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[33ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated30ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[30ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_10"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated30ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[30ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated27ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[27ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_9"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated27ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[27ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated24ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[24ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_8"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated24ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[24ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated21ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[21ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_7"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated21ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[21ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated18ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[18ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_6"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated18ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[18ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated15ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[15ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_5"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated15ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[15ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated12ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[12ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_4"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated12ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[12ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated9ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[9ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_3"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated9ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[9ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated6ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[6ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_2"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated6ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[6ms] $nc) from entry-point "Master Stream"
+then
+end
+
+rule "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMeetsNewCustomerCreated3ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this meets[3ms] $nc) from entry-point "Master Stream"
+then
+end
+rule "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated_1"
+when
+    $nc : NewCustomerEvent(description == "MeetsMetby_TransactionCreatedMetbyNewCustomerCreated3ms") from entry-point "Master Stream"
+    $tc : TransactionCreatedEvent(id == $nc.id, description == $nc.description, this metby[3ms] $nc) from entry-point "Master Stream"
+then
+end
+
+

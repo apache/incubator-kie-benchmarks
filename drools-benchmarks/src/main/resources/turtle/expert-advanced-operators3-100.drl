@@ -1,0 +1,631 @@
+package org.drools.benchmarks.bre;
+import org.drools.benchmarks.domain.*;
+// Basic rule template which contains place holders started by @ (e.g. @{row.rowNumber})
+// that have to be replaced by actual values
+
+rule "theseIsNotSpecifiedSomeCustomer_25"
+when
+    not Customer (firstName == "Some10000", lastName == "Eidam10000", email == "Some10000@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_25"
+when
+    exists Address (city == "Brno10000", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_25"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 10000 && $acc.getNumber() <= 10100)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_25"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_24"
+when
+    not Customer (firstName == "Some9599", lastName == "Eidam9599", email == "Some9599@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_24"
+when
+    exists Address (city == "Brno9599", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_24"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 9599 && $acc.getNumber() <= 9699)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_24"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_23"
+when
+    not Customer (firstName == "Some9186", lastName == "Eidam9186", email == "Some9186@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_23"
+when
+    exists Address (city == "Brno9186", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_23"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 9186 && $acc.getNumber() <= 9286)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_23"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_22"
+when
+    not Customer (firstName == "Some8773", lastName == "Eidam8773", email == "Some8773@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_22"
+when
+    exists Address (city == "Brno8773", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_22"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 8773 && $acc.getNumber() <= 8873)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_22"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_21"
+when
+    not Customer (firstName == "Some8360", lastName == "Eidam8360", email == "Some8360@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_21"
+when
+    exists Address (city == "Brno8360", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_21"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 8360 && $acc.getNumber() <= 8460)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_21"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_20"
+when
+    not Customer (firstName == "Some7947", lastName == "Eidam7947", email == "Some7947@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_20"
+when
+    exists Address (city == "Brno7947", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_20"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 7947 && $acc.getNumber() <= 8047)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_20"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_19"
+when
+    not Customer (firstName == "Some7534", lastName == "Eidam7534", email == "Some7534@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_19"
+when
+    exists Address (city == "Brno7534", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_19"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 7534 && $acc.getNumber() <= 7634)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_19"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_18"
+when
+    not Customer (firstName == "Some7121", lastName == "Eidam7121", email == "Some7121@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_18"
+when
+    exists Address (city == "Brno7121", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_18"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 7121 && $acc.getNumber() <= 7221)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_18"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_17"
+when
+    not Customer (firstName == "Some6708", lastName == "Eidam6708", email == "Some6708@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_17"
+when
+    exists Address (city == "Brno6708", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_17"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 6708 && $acc.getNumber() <= 6808)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_17"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_16"
+when
+    not Customer (firstName == "Some6295", lastName == "Eidam6295", email == "Some6295@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_16"
+when
+    exists Address (city == "Brno6295", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_16"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 6295 && $acc.getNumber() <= 6395)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_16"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_15"
+when
+    not Customer (firstName == "Some5882", lastName == "Eidam5882", email == "Some5882@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_15"
+when
+    exists Address (city == "Brno5882", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_15"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 5882 && $acc.getNumber() <= 5982)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_15"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_14"
+when
+    not Customer (firstName == "Some5469", lastName == "Eidam5469", email == "Some5469@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_14"
+when
+    exists Address (city == "Brno5469", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_14"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 5469 && $acc.getNumber() <= 5569)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_14"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_13"
+when
+    not Customer (firstName == "Some5056", lastName == "Eidam5056", email == "Some5056@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_13"
+when
+    exists Address (city == "Brno5056", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_13"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 5056 && $acc.getNumber() <= 5156)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_13"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_12"
+when
+    not Customer (firstName == "Some4643", lastName == "Eidam4643", email == "Some4643@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_12"
+when
+    exists Address (city == "Brno4643", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_12"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 4643 && $acc.getNumber() <= 4743)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_12"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_11"
+when
+    not Customer (firstName == "Some4230", lastName == "Eidam4230", email == "Some4230@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_11"
+when
+    exists Address (city == "Brno4230", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_11"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 4230 && $acc.getNumber() <= 4330)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_11"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_10"
+when
+    not Customer (firstName == "Some3817", lastName == "Eidam3817", email == "Some3817@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_10"
+when
+    exists Address (city == "Brno3817", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_10"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 3817 && $acc.getNumber() <= 3917)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_10"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_9"
+when
+    not Customer (firstName == "Some3404", lastName == "Eidam3404", email == "Some3404@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_9"
+when
+    exists Address (city == "Brno3404", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_9"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 3404 && $acc.getNumber() <= 3504)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_9"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_8"
+when
+    not Customer (firstName == "Some2991", lastName == "Eidam2991", email == "Some2991@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_8"
+when
+    exists Address (city == "Brno2991", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_8"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 2991 && $acc.getNumber() <= 3091)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_8"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_7"
+when
+    not Customer (firstName == "Some2578", lastName == "Eidam2578", email == "Some2578@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_7"
+when
+    exists Address (city == "Brno2578", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_7"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 2578 && $acc.getNumber() <= 2678)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_7"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_6"
+when
+    not Customer (firstName == "Some2165", lastName == "Eidam2165", email == "Some2165@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_6"
+when
+    exists Address (city == "Brno2165", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_6"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 2165 && $acc.getNumber() <= 2265)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_6"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_5"
+when
+    not Customer (firstName == "Some1752", lastName == "Eidam1752", email == "Some1752@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_5"
+when
+    exists Address (city == "Brno1752", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_5"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 1752 && $acc.getNumber() <= 1852)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_5"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_4"
+when
+    not Customer (firstName == "Some1339", lastName == "Eidam1339", email == "Some1339@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_4"
+when
+    exists Address (city == "Brno1339", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_4"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 1339 && $acc.getNumber() <= 1439)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_4"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_3"
+when
+    not Customer (firstName == "Some926", lastName == "Eidam926", email == "Some926@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_3"
+when
+    exists Address (city == "Brno926", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_3"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 926 && $acc.getNumber() <= 1026)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_3"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_2"
+when
+    not Customer (firstName == "Some513", lastName == "Eidam513", email == "Some513@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_2"
+when
+    exists Address (city == "Brno513", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_2"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 513 && $acc.getNumber() <= 613)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_2"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+rule "theseIsNotSpecifiedSomeCustomer_1"
+when
+    not Customer (firstName == "Some100", lastName == "Eidam100", email == "Some100@cheese.galaxy",
+                  uuid == "theseIsNotVerySpecificCustomer")
+then
+end
+rule "existsVerySpecificAddress_1"
+when
+    exists Address (city == "Brno100", country == Address.Country.CZ, uuid == "existsVerySpecificAddress")
+then
+end
+rule "accountHasNumberFromSpecifiedRange_eval_1"
+when
+    $acc : Account(uuid == "accountHasNumberFromSpecifiedRange_eval")
+    eval($acc.getNumber() > 100 && $acc.getNumber() <= 200)
+then
+end
+rule "allTransactionWithStatusPendingHasAmount_forAll_1"
+when
+    forall ($tr : Transaction(status == Transaction.Status.PENDING, uuid == "allTransactionWithStatusPendingHasAmount_forAll")
+            Transaction(this == $tr, amount > 0)
+    )
+then
+end
+
+
