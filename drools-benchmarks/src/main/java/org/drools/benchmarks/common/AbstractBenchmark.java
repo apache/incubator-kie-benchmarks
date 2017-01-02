@@ -22,12 +22,14 @@ import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
 import org.kie.api.conf.KieBaseOption;
+import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.StatelessKieSession;
 import org.kie.api.runtime.conf.KieSessionOption;
 import org.kie.internal.KnowledgeBaseFactory;
+import org.kie.internal.builder.conf.RuleEngineOption;
 import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -88,28 +90,54 @@ public abstract class AbstractBenchmark {
         createKieBaseFromDrl(drl, getKieBaseConfiguration());
     }
 
+    protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
+        createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
+    }
+
     protected void createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
         if (TestUtil.dumpDrl()) {
             logDebug("Benchmark DRL", drl);
         }
         kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(kieBaseConfiguration);
+        dumpReteIfNeeded();
+    }
+
+    protected void createKieBaseFromResource(final Resource resource, final KieBaseOption... kieBaseOptions) {
+        createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
+    }
+
+    protected void createKieBaseFromResources(final Resource... resources) {
+        createKieBaseFromResources(getKieBaseConfiguration(), resources);
+    }
+
+    protected void createKieBaseFromResources(final KieBaseConfiguration kieBaseConfiguration, final Resource... resources) {
+        // TODO
+//        if (TestUtil.dumpDrl()) {
+//            logDebug("Benchmark DRL", drl);
+//        }
+        final KieHelper kieHelper = new KieHelper();
+        for (Resource resource : resources) {
+            kieHelper.addResource(resource);
+        }
+
+        kieBase = kieHelper.build(kieBaseConfiguration);
+        dumpReteIfNeeded();
+    }
+
+    private void dumpReteIfNeeded() {
         if (TestUtil.dumpRete()) {
             ReteDumper.dumpRete(kieBase);
         }
     }
 
-    protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
-        createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
-    }
-
     private KieBaseConfiguration getKieBaseConfiguration() {
         final KieBaseConfiguration kieBaseConfiguration = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
         // Uncomment this if you want to test with Reteoo. Also see pom.xml for drools-reteoo artifact.
-//        if (TestUtil.useReteoo()) {
-//            kieBaseConfiguration.setOption(RuleEngineOption.RETEOO);
-//        } else {
-//            kieBaseConfiguration.setOption(RuleEngineOption.PHREAK);
-//        }
+        if (TestUtil.useReteoo()) {
+            kieBaseConfiguration.setOption(RuleEngineOption.RETEOO);
+        } else {
+            kieBaseConfiguration.setOption(RuleEngineOption.PHREAK);
+        }
         return kieBaseConfiguration;
     }
 

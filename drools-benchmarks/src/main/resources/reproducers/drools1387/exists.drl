@@ -1,0 +1,111 @@
+package org.drools.benchmarks
+
+import org.drools.benchmarks.domain.*;
+
+rule "Rule1"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end
+
+rule "Rule2"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end
+
+rule "Rule3"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+    
+then 
+end
+
+rule "Rule4"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end
+
+rule "Rule5"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end
+
+rule "Rule6"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end
+
+rule "Rule7"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end
+
+rule "Rule8"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end
+
+rule "Rule9"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == $f1.value1, value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
+    $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
+
+    exists MyFact5((this.getId() != null && (this.getValue1().equals($f4.getValue1()))))
+
+then 
+end

@@ -190,10 +190,10 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
     }
 
     private void insertEventAsync(final AbstractBean event, final Blackhole eater) {
-        if (eater != null) {
-            eater.consume(((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event));
-        } else {
-            ((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event);
-        }
+//        if (eater != null) {
+//            eater.consume(((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event));
+//        } else {
+//            ((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event);
+//        }
     }
 }
