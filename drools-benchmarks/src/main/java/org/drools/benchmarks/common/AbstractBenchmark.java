@@ -22,6 +22,7 @@ import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
 import org.kie.api.conf.KieBaseOption;
+import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
@@ -88,18 +89,40 @@ public abstract class AbstractBenchmark {
         createKieBaseFromDrl(drl, getKieBaseConfiguration());
     }
 
+    protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
+        createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
+    }
+
     protected void createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
         if (TestUtil.dumpDrl()) {
             logDebug("Benchmark DRL", drl);
         }
         kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(kieBaseConfiguration);
+        dumpReteIfNeeded();
+    }
+
+    protected void createKieBaseFromResource(final Resource resource, final KieBaseOption... kieBaseOptions) {
+        createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
+    }
+
+    protected void createKieBaseFromResources(final Resource... resources) {
+        createKieBaseFromResources(getKieBaseConfiguration(), resources);
+    }
+
+    protected void createKieBaseFromResources(final KieBaseConfiguration kieBaseConfiguration, final Resource... resources) {
+        final KieHelper kieHelper = new KieHelper();
+        for (Resource resource : resources) {
+            kieHelper.addResource(resource);
+        }
+
+        kieBase = kieHelper.build(kieBaseConfiguration);
+        dumpReteIfNeeded();
+    }
+
+    private void dumpReteIfNeeded() {
         if (TestUtil.dumpRete()) {
             ReteDumper.dumpRete(kieBase);
         }
-    }
-
-    protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
-        createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
     }
 
     private KieBaseConfiguration getKieBaseConfiguration() {
