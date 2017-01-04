@@ -29,6 +29,7 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
@@ -48,7 +49,7 @@ public class AccumulateBenchmark extends AbstractBenchmark {
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
-        sb.append( "import org.drools.benchmarks.domain.*;\n" );
+        sb.append("import org.drools.benchmarks.domain.*;\n");
         int rulesNumber = rulesAndFactsNumber / 2;
         if (rulesNumber == 0) {
             rulesNumber = 1;
@@ -61,7 +62,7 @@ public class AccumulateBenchmark extends AbstractBenchmark {
                     "         $a0 : Account(balance > " + (i * 10000) + " || < " + ((i + 1) * 10000) + ", name == \"" + RULENAME_PREFIX + i + "\"), \n" +
                     "         count( $a0 )) \n" +
                     " then\n " +
-                    " end\n" );
+                    " end\n");
 
             sb.append(" rule AccountBalance" + (i + 1) + "\n" +
                     " when \n " +
@@ -69,7 +70,7 @@ public class AccumulateBenchmark extends AbstractBenchmark {
                     "         $a0 : Account(balance >= " + ((i + 1) * 10000) + " && <= " + ((i + 2) * 10000) + ", name == \"" + RULENAME_PREFIX + (i + 1) + "\"), \n" +
                     "         count( $a0 )) \n" +
                     " then\n " +
-                    " end\n" );
+                    " end\n");
         }
 
         createKieBaseFromDrl(sb.toString());
@@ -81,17 +82,25 @@ public class AccumulateBenchmark extends AbstractBenchmark {
         generateFacts();
     }
 
+    @Setup(Level.Invocation)
+    public void setupKieSession() {
+        createKieSession();
+    }
+
+    @TearDown(Level.Invocation)
+    public void tearDownSession() {
+        if (kieSession != null) {
+            kieSession.dispose();
+            kieSession = null;
+        }
+    }
+
     @Benchmark
     public int test(final Blackhole eater) {
-        createKieSession();
-        try {
-            for (Account account : accounts) {
-                eater.consume(kieSession.insert(account));
-            }
-            return kieSession.fireAllRules();
-        } finally {
-            kieSession.dispose();
+        for (Account account : accounts) {
+            eater.consume(kieSession.insert(account));
         }
+        return kieSession.fireAllRules();
     }
 
     private void generateFacts() {
