@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.domain.Account;
-import org.kie.internal.builder.conf.RuleEngineOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -42,7 +41,7 @@ public class EvalBenchmark extends AbstractBenchmark {
 
     private static final String RULENAME_PREFIX = "AccountBalance";
 
-    @Param({"32"})
+    @Param({"2", "8", "32"})
     private int rulesAndFactsNumber;
 
     private Set<Account> accounts;
@@ -60,7 +59,7 @@ public class EvalBenchmark extends AbstractBenchmark {
                     " end\n");
         }
 
-        createKieBaseFromDrl(sb.toString(), RuleEngineOption.PHREAK);
+        createKieBaseFromDrl(sb.toString());
     }
 
     @Setup(Level.Iteration)

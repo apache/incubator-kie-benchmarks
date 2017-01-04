@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.domain.Account;
-import org.kie.internal.builder.conf.RuleEngineOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -37,11 +36,11 @@ import org.openjdk.jmh.infra.Blackhole;
 @Warmup(iterations = 20, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 10, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class ExistsOperatorsBenchmark extends AbstractBenchmark {
+public class AccumulateBenchmark extends AbstractBenchmark {
 
     private static final String RULENAME_PREFIX = "AccountBalance";
 
-    @Param({"128"})
+    @Param({"2", "8", "32"})
     private int rulesAndFactsNumber;
 
     private Set<Account> accounts;
@@ -58,18 +57,22 @@ public class ExistsOperatorsBenchmark extends AbstractBenchmark {
 
             sb.append(" rule " + RULENAME_PREFIX + i + "\n" +
                     " when \n " +
-                    "     exists(Account(balance > " + (i * 10000) + " || < " + ((i + 1) * 10000) + ", name == \"" + RULENAME_PREFIX + i + "\"))\n " +
+                    "     $var0 : Long() from accumulate(\n" +
+                    "         $a0 : Account(balance > " + (i * 10000) + " || < " + ((i + 1) * 10000) + ", name == \"" + RULENAME_PREFIX + i + "\"), \n" +
+                    "         count( $a0 )) \n" +
                     " then\n " +
                     " end\n" );
 
             sb.append(" rule AccountBalance" + (i + 1) + "\n" +
                     " when \n " +
-                    "     exists(Account(balance >= " + ((i + 1) * 10000) + " && <= " + ((i + 2) * 10000) + ", name == \"" + RULENAME_PREFIX + (i + 1) + "\"))\n " +
+                    "     $var0 : Long() from accumulate(\n" +
+                    "         $a0 : Account(balance >= " + ((i + 1) * 10000) + " && <= " + ((i + 2) * 10000) + ", name == \"" + RULENAME_PREFIX + (i + 1) + "\"), \n" +
+                    "         count( $a0 )) \n" +
                     " then\n " +
                     " end\n" );
         }
 
-        createKieBaseFromDrl(sb.toString(), RuleEngineOption.PHREAK);
+        createKieBaseFromDrl(sb.toString());
     }
 
     @Setup(Level.Iteration)

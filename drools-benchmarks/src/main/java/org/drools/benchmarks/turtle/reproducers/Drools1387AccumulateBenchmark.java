@@ -25,7 +25,6 @@ import org.drools.benchmarks.domain.MyFact3;
 import org.drools.benchmarks.domain.MyFact4;
 import org.drools.benchmarks.domain.MyFact5;
 import org.kie.api.KieServices;
-import org.kie.internal.builder.conf.RuleEngineOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
@@ -47,8 +46,7 @@ public class Drools1387AccumulateBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() throws ProviderException {
-        createKieBaseFromResource(KieServices.Factory.get().getResources().newClassPathResource("reproducers/drools1387/accumulate.drl"),
-                RuleEngineOption.PHREAK);
+        createKieBaseFromResource(KieServices.Factory.get().getResources().newClassPathResource("reproducers/drools1387/accumulate.drl"));
     }
 
     @Benchmark
