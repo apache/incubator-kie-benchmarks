@@ -26,22 +26,18 @@ import org.drools.benchmarks.domain.MyFact4;
 import org.drools.benchmarks.domain.MyFact5;
 import org.kie.api.KieServices;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Benchmark reproducing DROOLS-1387
  */
-@BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 20, time = 500, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 10, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Warmup(iterations = 100000)
+@Measurement(iterations = 10000)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class Drools1387ExistsBenchmark extends AbstractBenchmark {
 
@@ -51,17 +47,9 @@ public class Drools1387ExistsBenchmark extends AbstractBenchmark {
         createKieBaseFromResource(KieServices.Factory.get().getResources().newClassPathResource("reproducers/drools1387/exists.drl"));
     }
 
-    @Setup(Level.Invocation)
+    @Setup(Level.Iteration)
     public void setupKieSession() {
         createKieSession();
-    }
-
-    @TearDown(Level.Invocation)
-    public void tearDownSession() {
-        if (kieSession != null) {
-            kieSession.dispose();
-            kieSession = null;
-        }
     }
 
     @Benchmark

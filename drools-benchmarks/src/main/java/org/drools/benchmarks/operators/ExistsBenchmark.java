@@ -16,35 +16,11 @@
 
 package org.drools.benchmarks.operators;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.domain.Account;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
-@BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 20, time = 500, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 10, time = 500, timeUnit = TimeUnit.MILLISECONDS)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class ExistsBenchmark extends AbstractBenchmark {
-
-    private static final String RULENAME_PREFIX = "AccountBalance";
-
-    @Param({"2", "8", "32"})
-    private int rulesAndFactsNumber;
-
-    private Set<Account> accounts;
+public class ExistsBenchmark extends AbstractOperatorsBenchmark {
 
     @Setup
     public void setupKieBase() {
@@ -72,40 +48,8 @@ public class ExistsBenchmark extends AbstractBenchmark {
         createKieBaseFromDrl(sb.toString());
     }
 
-    @Setup(Level.Iteration)
-    @Override
-    public void setup() {
-        generateFacts();
-    }
-
-    @Setup(Level.Invocation)
-    public void setupKieSession() {
-        createKieSession();
-    }
-
-    @TearDown(Level.Invocation)
-    public void tearDownSession() {
-        if (kieSession != null) {
-            kieSession.dispose();
-            kieSession = null;
-        }
-    }
-
     @Benchmark
     public int test(final Blackhole eater) {
-        for (Account account : accounts) {
-            eater.consume(kieSession.insert(account));
-        }
-        return kieSession.fireAllRules();
-    }
-
-    private void generateFacts() {
-        accounts = new HashSet<Account>();
-        for (int i = 1; i <= rulesAndFactsNumber; i++) {
-            final Account account = new Account();
-            account.setBalance(i * 10000);
-            account.setName(RULENAME_PREFIX + i);
-            accounts.add(account);
-        }
+        return runBenchmark(eater);
     }
 }

@@ -15,32 +15,11 @@
 
 package org.drools.benchmarks.operators;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.domain.Account;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
-@Warmup(iterations = 2000)
-@Measurement(iterations = 1000)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class BasicOperatorsBenchmark extends AbstractBenchmark {
-
-    private static final String RULENAME_PREFIX = "AccountBalance";
-
-    @Param({"2", "8", "32"})
-    private int rulesAndFactsNumber;
-
-    private Set<Account> accounts;
+public class BasicOperatorsBenchmark extends AbstractOperatorsBenchmark {
 
     @Setup
     public void setupKieBase() {
@@ -68,28 +47,8 @@ public class BasicOperatorsBenchmark extends AbstractBenchmark {
         createKieBaseFromDrl(sb.toString());
     }
 
-    @Setup(Level.Iteration)
-    @Override
-    public void setup() {
-        generateFacts();
-        createKieSession();
-    }
-
     @Benchmark
     public int test(final Blackhole eater) {
-        for (Account account : accounts) {
-            eater.consume(kieSession.insert(account));
-        }
-        return kieSession.fireAllRules();
-    }
-
-    private void generateFacts() {
-        accounts = new HashSet<Account>();
-        for (int i = 1; i <= rulesAndFactsNumber; i++) {
-            final Account account = new Account();
-            account.setBalance(i * 10000);
-            account.setName(RULENAME_PREFIX + i);
-            accounts.add(account);
-        }
+        return runBenchmark(eater);
     }
 }
