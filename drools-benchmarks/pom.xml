@@ -5,7 +5,7 @@
   <parent>
     <artifactId>kie-benchmarks</artifactId>
     <groupId>org.kie</groupId>
-    <version>7.0.0-SNAPSHOT</version>
+    <version>6.5.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -29,12 +29,10 @@
       <groupId>org.drools</groupId>
       <artifactId>drools-decisiontables</artifactId>
     </dependency>
-    <!-- Uncomment this if you want to test with ReteOO. This artifact is available in older versions of Drools. -->
-    <!-- Also see AbstractBenchmark class for ReteOO configuration. -->
-    <!--<dependency>-->
-      <!--<groupId>org.drools</groupId>-->
-      <!--<artifactId>drools-reteoo</artifactId>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-reteoo</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-api</artifactId>

@@ -43,9 +43,6 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
     private boolean multithread;
 
     @Param({"true", "false"})
-    private boolean async;
-
-    @Param({"true", "false"})
     private boolean cep;
 
     @Param({"1", "2", "3"})
@@ -65,28 +62,14 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
         createKieSession();
         StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
         A a = new A( rulesNr + 1 );
-        if (async) {
-            session.insertAsync( a );
-        } else {
-            session.insert( a );
-        }
+        session.insert( a );
         for ( int i = 0; i < factsNr; i++ ) {
-            if (async) {
-                session.insertAsync( new B( rulesNr + i + 3 ) );
-                if (joinsNr > 1) {
-                    session.insertAsync( new C( rulesNr + factsNr + i + 3 ) );
-                }
-                if (joinsNr > 2) {
-                    session.insertAsync( new D( rulesNr + factsNr * 2 + i + 3 ) );
-                }
-            } else {
-                session.insert( new B( rulesNr + i + 3 ) );
-                if (joinsNr > 1) {
-                    session.insert( new C( rulesNr + factsNr + i + 3 ) );
-                }
-                if (joinsNr > 2) {
-                    session.insert( new D( rulesNr + factsNr*2 + i + 3 ) );
-                }
+            session.insert( new B( rulesNr + i + 3 ) );
+            if (joinsNr > 1) {
+                session.insert( new C( rulesNr + factsNr + i + 3 ) );
+            }
+            if (joinsNr > 2) {
+                session.insert( new D( rulesNr + factsNr*2 + i + 3 ) );
             }
         }
     }

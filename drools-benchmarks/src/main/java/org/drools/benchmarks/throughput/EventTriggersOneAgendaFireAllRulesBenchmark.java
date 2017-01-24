@@ -58,7 +58,7 @@ public class EventTriggersOneAgendaFireAllRulesBenchmark extends AbstractEventTr
     @Override
     public void insertEventBenchmark(final Blackhole eater, final FiringsCounter resultFirings) {
         final long id = AbstractBean.getAndIncrementIdGeneratorValue();
-        insertJoinEvents(numberOfJoins, id,(int) (id % numberOfRules), async, eater);
+        insertJoinEvents(numberOfJoins, id,(int) (id % numberOfRules), eater);
         if (fireAllRulesCounter % fireAllRulesRatio == 0) {
             kieSession.fireAllRules();
         }
