@@ -18,11 +18,19 @@ package org.drools.benchmarks.turtle.runtime;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.turtle.runtime.generator.AdvancedOperators3FactsGenerator;
 import org.drools.benchmarks.turtle.runtime.generator.GeneratorConfiguration;
 import org.drools.benchmarks.turtle.runtime.generator.PlaceHolder;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * Test the Expert features (operators)
@@ -31,6 +39,11 @@ import org.openjdk.jmh.annotations.Benchmark;
  *  - forAll
  *  - eval
  */
+@BenchmarkMode(Mode.AverageTime)
+@State(Scope.Thread)
+@Warmup(iterations = 20, time = 5, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 20, time = 5, timeUnit = TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class AdvOperators3ExpertBenchmark extends AbstractSimpleRuntimeBenchmark {
 
     @Override

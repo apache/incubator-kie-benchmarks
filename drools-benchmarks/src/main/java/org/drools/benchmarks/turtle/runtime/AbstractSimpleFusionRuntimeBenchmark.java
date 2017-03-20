@@ -19,7 +19,6 @@ package org.drools.benchmarks.turtle.runtime;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.turtle.runtime.common.EventSender;
 import org.drools.benchmarks.turtle.runtime.common.SameJvmEventSender;
 import org.drools.benchmarks.turtle.runtime.generator.FactsGenerator;
@@ -28,22 +27,11 @@ import org.kie.api.conf.KieBaseOption;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.conf.ClockTypeOption;
-import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
 
-@BenchmarkMode(Mode.SingleShotTime)
-@State(Scope.Thread)
-@Warmup(iterations = 30)
-@Measurement(iterations = 20)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+
 public abstract class AbstractSimpleFusionRuntimeBenchmark extends AbstractSimpleRuntimeBenchmark {
 
     protected Map<EventSender, Integer> eventSenders;
