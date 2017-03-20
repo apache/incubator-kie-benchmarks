@@ -45,10 +45,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
-@BenchmarkMode(Mode.AverageTime)
+@BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
-@Warmup(iterations = 20, time = 5, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 20, time = 5, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 30)
+@Measurement(iterations = 20)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public abstract class AbstractSimpleRuntimeBenchmark {
 
