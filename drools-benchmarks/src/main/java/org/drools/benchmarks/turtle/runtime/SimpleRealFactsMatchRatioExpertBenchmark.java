@@ -44,7 +44,7 @@ public class SimpleRealFactsMatchRatioExpertBenchmark extends AbstractSimpleRunt
     }
 
     @Benchmark
-    public KieSession timeFactsInsertionAndRulesFiring() {
+    public KieSession timeFactsInsertionAndRulesFiringStateful() {
         return insertFactsAndFireAllRules();
     }
 
