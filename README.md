@@ -1,3 +1,9 @@
+Kie-benchmarks repository
+=========================
+This repository contains benchmarks from various areas of Kie group projects.  
+
+For more information about Drools benchmarks, see [Drools benchmarks README](https://github.com/kiegroup/kie-benchmarks/tree/master/drools-benchmarks).
+
 Developing Drools and jBPM
 ==========================
 
