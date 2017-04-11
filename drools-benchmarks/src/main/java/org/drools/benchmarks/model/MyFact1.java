@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.model;
 
 public class MyFact1 {
     private String id;

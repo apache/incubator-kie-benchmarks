@@ -18,9 +18,9 @@ package org.drools.benchmarks.turtle.runtime.generator;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.drools.benchmarks.domain.Account;
-import org.drools.benchmarks.domain.CreditCard;
-import org.drools.benchmarks.domain.Customer;
+import org.drools.benchmarks.model.Account;
+import org.drools.benchmarks.model.CreditCard;
+import org.drools.benchmarks.model.Customer;
 
 public class BasicWmManipulationFactsGenerator extends FactsGenerator {
 

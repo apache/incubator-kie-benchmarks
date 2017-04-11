@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.model;
 
-public class MyFact2 {
+public class MyFact3 {
     private String id;
     private String value1;
     private String value2;

@@ -14,28 +14,27 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain.event;
+package org.drools.benchmarks.model.event;
 
-public class EventB extends EventA {
-
-    public EventB() {
+public class NewCustomerEvent extends Event {
+    
+    public NewCustomerEvent() {
         super();
     }
 
-    public EventB(final int id) {
+    public NewCustomerEvent(int id) {
         super(id);
     }
 
-    public EventB(final int id, final long duration) {
+    public NewCustomerEvent(int id, long duration) {
         super(id, duration);
     }
 
-    @Override
-    public String toString() {
-        return "EventB{" +
-                "timeValue=" + getTimeValue() +
-                ", duration=" + getDuration() +
-                ", id=" + getId() +
-                '}';
+    public NewCustomerEvent(int id, String description) {
+        super(id, description);
+    }
+
+    public NewCustomerEvent(int id, long duration, String description) {
+        super(id, duration, description);
     }
 }

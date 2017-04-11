@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.model;
 
-public class MyFact5 {
+public class MyFact2 {
     private String id;
     private String value1;
     private String value2;
@@ -71,7 +71,6 @@ public class MyFact5 {
 
     public String getValue5() {
         return value5;
-        // throw new RuntimeException();
     }
 
     public void setValue5(String value5) {

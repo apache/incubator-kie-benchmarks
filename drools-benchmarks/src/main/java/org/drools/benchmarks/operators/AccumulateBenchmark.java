@@ -25,7 +25,7 @@ public class AccumulateBenchmark extends AbstractOperatorsBenchmark {
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
-        sb.append("import org.drools.benchmarks.domain.*;\n");
+        sb.append("import org.drools.benchmarks.model.*;\n");
         int rulesNumber = rulesAndFactsNumber / 2;
         if (rulesNumber == 0) {
             rulesNumber = 1;

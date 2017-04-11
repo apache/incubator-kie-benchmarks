@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.domain.Account;
+import org.drools.benchmarks.model.Account;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.OutputTimeUnit;

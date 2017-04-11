@@ -2,12 +2,12 @@ package org.drools.benchmarks.bre;
 
 import java.util.Date;
 
-import org.drools.benchmarks.domain.Account;
-import org.drools.benchmarks.domain.Address;
-import org.drools.benchmarks.domain.Customer;
-import org.drools.benchmarks.domain.event.NewCustomerEvent;
-import org.drools.benchmarks.domain.Transaction;
-import org.drools.benchmarks.domain.event.TransactionCreatedEvent;
+import org.drools.benchmarks.model.Account;
+import org.drools.benchmarks.model.Address;
+import org.drools.benchmarks.model.Customer;
+import org.drools.benchmarks.model.event.NewCustomerEvent;
+import org.drools.benchmarks.model.Transaction;
+import org.drools.benchmarks.model.event.TransactionCreatedEvent;
 
 global java.util.ArrayList list;
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

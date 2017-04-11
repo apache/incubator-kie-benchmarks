@@ -1,5 +1,5 @@
 package org.drools.benchmarks.bre;
-import org.drools.benchmarks.domain.*;
+import org.drools.benchmarks.model.*;
 declare LogicalFact
     desc : String @key
 end

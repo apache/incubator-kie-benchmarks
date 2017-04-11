@@ -17,11 +17,11 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.domain.A;
-import org.drools.benchmarks.domain.B;
-import org.drools.benchmarks.domain.C;
-import org.drools.benchmarks.domain.D;
-import org.drools.benchmarks.domain.E;
+import org.drools.benchmarks.model.A;
+import org.drools.benchmarks.model.B;
+import org.drools.benchmarks.model.C;
+import org.drools.benchmarks.model.D;
+import org.drools.benchmarks.model.E;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -54,7 +54,7 @@ public class SegmentPropagationBenchmark extends AbstractBenchmark {
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
-        sb.append( "import org.drools.benchmarks.domain.*;\n" );
+        sb.append( "import org.drools.benchmarks.model.*;\n" );
         for ( int i = 0; i < treesNr; i++ ) {
             sb.append( "rule R" + i + "C when\n" +
                        "  A( $a : value > " + i + ")\n" +

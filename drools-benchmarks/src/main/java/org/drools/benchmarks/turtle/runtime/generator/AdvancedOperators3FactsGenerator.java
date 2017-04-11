@@ -19,10 +19,10 @@ package org.drools.benchmarks.turtle.runtime.generator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.drools.benchmarks.domain.Account;
-import org.drools.benchmarks.domain.Address;
-import org.drools.benchmarks.domain.Customer;
-import org.drools.benchmarks.domain.Transaction;
+import org.drools.benchmarks.model.Account;
+import org.drools.benchmarks.model.Address;
+import org.drools.benchmarks.model.Customer;
+import org.drools.benchmarks.model.Transaction;
 
 public class AdvancedOperators3FactsGenerator extends FactsGenerator {
 

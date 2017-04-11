@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain.event;
+package org.drools.benchmarks.model.event;
 
 import java.util.Date;
-import org.drools.benchmarks.domain.Transaction;
+import org.drools.benchmarks.model.Transaction;
 
 public class TransactionCreatedEvent extends Event {
     protected Transaction transaction;

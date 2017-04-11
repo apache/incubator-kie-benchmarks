@@ -25,7 +25,7 @@ public class EvalBenchmark extends AbstractOperatorsBenchmark {
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
-        sb.append("import org.drools.benchmarks.domain.*;\n");
+        sb.append("import org.drools.benchmarks.model.*;\n");
         for (int i = 1; i <= rulesAndFactsNumber; i++) {
             sb.append(" rule " + RULENAME_PREFIX + i + "\n" +
                     " when \n " +

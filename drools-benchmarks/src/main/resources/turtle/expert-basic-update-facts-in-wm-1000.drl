@@ -1,8 +1,8 @@
 package org.drools.benchmarks.bre;
 import java.util.Date
-import org.drools.benchmarks.domain.*;
-import org.drools.benchmarks.domain.Address.Country
-import org.drools.benchmarks.domain.Account.AccountType
+import org.drools.benchmarks.model.*;
+import org.drools.benchmarks.model.Address.Country
+import org.drools.benchmarks.model.Account.AccountType
 dialect "mvel"
 
 rule "Update address_100"

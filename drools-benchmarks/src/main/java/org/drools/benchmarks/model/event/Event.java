@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain.event;
+package org.drools.benchmarks.model.event;
 
 public abstract class Event {
     protected int id;

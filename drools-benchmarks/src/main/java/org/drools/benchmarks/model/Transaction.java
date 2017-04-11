@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.model;
 
 import java.util.Currency;
 import java.util.Date;

@@ -19,9 +19,9 @@ package org.drools.benchmarks.turtle.runtime.generator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.domain.event.EventRecord;
-import org.drools.benchmarks.domain.event.NewCustomerEvent;
-import org.drools.benchmarks.domain.event.TransactionCreatedEvent;
+import org.drools.benchmarks.model.event.EventRecord;
+import org.drools.benchmarks.model.event.NewCustomerEvent;
+import org.drools.benchmarks.model.event.TransactionCreatedEvent;
 
 public class FinishesFinishedbyEventsGenerator extends FactsGenerator {
 

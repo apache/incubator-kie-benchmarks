@@ -1,6 +1,6 @@
 package org.drools.benchmarks
 
-import org.drools.benchmarks.domain.*;
+import org.drools.benchmarks.model.*;
 
 rule "Rule1"
 when

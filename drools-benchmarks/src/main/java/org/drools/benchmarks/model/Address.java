@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.domain;
+package org.drools.benchmarks.model;
 
 public class Address {
     public enum Country {
