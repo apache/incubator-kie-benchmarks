@@ -20,7 +20,12 @@ import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
 import org.drools.benchmarks.model.D;
 import org.drools.benchmarks.model.E;
+import org.drools.core.builder.conf.impl.DecisionTableConfigurationImpl;
+import org.kie.api.KieServices;
+import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieSession;
+import org.kie.internal.builder.DecisionTableConfiguration;
+import org.kie.internal.builder.DecisionTableInputType;
 
 public final class TestUtil {
 
@@ -68,6 +73,14 @@ public final class TestUtil {
             default:
                 throw new IllegalArgumentException("Unsupported number of joins (" + numberOfJoins + ")!");
         }
+    }
+
+    public static Resource getClassPathDTableResource(final String resourceName, final DecisionTableInputType dTableType) {
+        final Resource dTableResource = KieServices.Factory.get().getResources().newClassPathResource(resourceName);
+        final DecisionTableConfiguration resourceConfig = new DecisionTableConfigurationImpl();
+        resourceConfig.setInputType(dTableType);
+        dTableResource.setConfiguration(resourceConfig);
+        return dTableResource;
     }
 
     private TestUtil() {

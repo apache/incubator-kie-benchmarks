@@ -28,7 +28,6 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.StatelessKieSession;
 import org.kie.api.runtime.conf.KieSessionOption;
-import org.kie.internal.KnowledgeBaseFactory;
 import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -105,13 +104,9 @@ public abstract class AbstractBenchmark {
         createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
     }
 
-    protected void createKieBaseFromResources(final Resource... resources) {
-        createKieBaseFromResources(getKieBaseConfiguration(), resources);
-    }
-
     protected void createKieBaseFromResources(final KieBaseConfiguration kieBaseConfiguration, final Resource... resources) {
         final KieHelper kieHelper = new KieHelper();
-        for (Resource resource : resources) {
+        for (final Resource resource : resources) {
             kieHelper.addResource(resource);
         }
 
@@ -125,20 +120,9 @@ public abstract class AbstractBenchmark {
         }
     }
 
-    private KieBaseConfiguration getKieBaseConfiguration() {
-        final KieBaseConfiguration kieBaseConfiguration = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
-        // Uncomment this if you want to test with Reteoo. Also see pom.xml for drools-reteoo artifact.
-//        if (TestUtil.useReteoo()) {
-//            kieBaseConfiguration.setOption(RuleEngineOption.RETEOO);
-//        } else {
-//            kieBaseConfiguration.setOption(RuleEngineOption.PHREAK);
-//        }
-        return kieBaseConfiguration;
-    }
-
     private KieBaseConfiguration getKieBaseConfiguration(final KieBaseOption... kieBaseOptions) {
-        final KieBaseConfiguration kieBaseConfiguration = getKieBaseConfiguration();
-        for (KieBaseOption kieBaseOption : kieBaseOptions) {
+        final KieBaseConfiguration kieBaseConfiguration = KieServices.Factory.get().newKieBaseConfiguration();
+        for (final KieBaseOption kieBaseOption : kieBaseOptions) {
             kieBaseConfiguration.setOption(kieBaseOption);
         }
         return kieBaseConfiguration;
@@ -146,7 +130,7 @@ public abstract class AbstractBenchmark {
 
     private KieSessionConfiguration getKieSessionConfiguration(final KieSessionOption... kieSessionOptions) {
         final KieSessionConfiguration kieSessionConfiguration = KieServices.Factory.get().newKieSessionConfiguration();
-        for (KieSessionOption kieSessionOption : kieSessionOptions) {
+        for (final KieSessionOption kieSessionOption : kieSessionOptions) {
             kieSessionConfiguration.setOption(kieSessionOption);
         }
         return kieSessionConfiguration;
