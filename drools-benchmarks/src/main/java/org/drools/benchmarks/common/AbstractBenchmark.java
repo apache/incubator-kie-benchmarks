@@ -84,8 +84,9 @@ public abstract class AbstractBenchmark {
         kieBase = new KieHelper().build(getKieBaseConfiguration());
     }
 
-    protected void createKieBaseFromDrl(final String drl) {
+    protected KieBase createKieBaseFromDrl(final String drl) {
         createKieBaseFromDrl(drl, getKieBaseConfiguration());
+        return kieBase;
     }
 
     protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
@@ -100,8 +101,9 @@ public abstract class AbstractBenchmark {
         dumpReteIfNeeded();
     }
 
-    protected void createKieBaseFromResource(final Resource resource, final KieBaseOption... kieBaseOptions) {
+    protected KieBase createKieBaseFromResource(final Resource resource, final KieBaseOption... kieBaseOptions) {
         createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
+        return kieBase;
     }
 
     protected void createKieBaseFromResources(final KieBaseConfiguration kieBaseConfiguration, final Resource... resources) {

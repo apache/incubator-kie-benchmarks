@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.util.TestUtil;
+import org.kie.api.KieBase;
 import org.kie.api.io.Resource;
 import org.kie.internal.builder.DecisionTableInputType;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -44,7 +45,7 @@ public class OOPathBuildCSVBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void testBuildKieBase() {
-        createKieBaseFromResource(csvResource);
+    public KieBase testBuildKieBase() {
+        return createKieBaseFromResource(csvResource);
     }
 }

@@ -21,6 +21,7 @@ import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.util.TestUtil;
 import org.drools.core.builder.conf.impl.DecisionTableConfigurationImpl;
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.io.Resource;
 import org.kie.internal.builder.DecisionTableConfiguration;
@@ -47,7 +48,7 @@ public class OOPathBuildXLSXBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public void testBuildKieBase() {
-        createKieBaseFromResource(xlsxResource);
+    public KieBase testBuildKieBase() {
+        return createKieBaseFromResource(xlsxResource);
     }
 }
