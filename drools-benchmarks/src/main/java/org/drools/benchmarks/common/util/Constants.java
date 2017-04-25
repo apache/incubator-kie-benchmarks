@@ -18,7 +18,6 @@ package org.drools.benchmarks.common.util;
 public final class Constants {
 
     public static final String PROP_KEY_SMOKE_TESTS = "smoke.tests";
-    public static final String PROP_KEY_ENGINE_TYPE = "engine.type";
     public static final String PROP_KEY_DUMP_RETE = "dump.rete";
     public static final String PROP_KEY_DUMP_DRL = "dump.drl";
     public static final String PROP_KEY_DEBUG = "debug";
