@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.buildtime;
 
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.util.TestUtil;
-import org.drools.core.builder.conf.impl.DecisionTableConfigurationImpl;
 import org.kie.api.KieBase;
-import org.kie.api.KieServices;
 import org.kie.api.io.Resource;
-import org.kie.internal.builder.DecisionTableConfiguration;
 import org.kie.internal.builder.DecisionTableInputType;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -34,21 +31,21 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 60, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Warmup(iterations = 50, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 15, time = 500, timeUnit = TimeUnit.MILLISECONDS)
-public class OOPathBuildXLSXBenchmark extends AbstractBenchmark {
+public class OOPathBuildXLSBenchmark extends AbstractBenchmark {
 
-    private Resource xlsxResource;
+    private Resource xlsResource;
 
     @Setup
     @Override
     public void setup() throws ProviderException {
-        xlsxResource = TestUtil.getClassPathDTableResource("kbase-creation/oopath-kbase-creation.xlsx",
-                DecisionTableInputType.XLSX);
+        xlsResource = TestUtil.getClassPathDTableResource("kbase-creation/oopath-kbase-creation.xls",
+                DecisionTableInputType.XLS);
     }
 
     @Benchmark
     public KieBase testBuildKieBase() {
-        return createKieBaseFromResource(xlsxResource);
+        return createKieBaseFromResource(xlsResource);
     }
 }

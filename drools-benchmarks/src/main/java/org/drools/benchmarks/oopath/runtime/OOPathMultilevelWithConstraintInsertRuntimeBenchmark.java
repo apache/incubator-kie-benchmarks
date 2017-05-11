@@ -14,34 +14,20 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.oopath.runtime;
 
-import java.util.List;
-import org.drools.core.phreak.ReactiveList;
+import java.util.Collection;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
 
-public class Child extends Person {
+public class OOPathMultilevelWithConstraintInsertRuntimeBenchmark extends AbstractOOPathInsertRuntimeBenchmark {
 
-    private String mother;
-
-    private final List<Toy> toys = new ReactiveList<Toy>();
-
-    public Child(String name, int age) {
-        super(name, age);
+    @Override
+    protected Collection<Object> getFacts(final int numberOfFacts) {
+        return generateMenFacts(numberOfFacts, true, true);
     }
 
-    public List<Toy> getToys() {
-        return toys;
-    }
-
-    public void addToy(Toy toy) {
-        toys.add(toy);
-    }
-
-    public String getMother() {
-        return mother;
-    }
-
-    public void setMother(String mother) {
-        this.mother = mother;
+    @Override
+    protected String getDrl() {
+        return new SimpleRulesWithConstraintProvider("  Man( $child: /wife/children{age < (${i} + 100)} )").getDrl();
     }
 }

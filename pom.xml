@@ -21,7 +21,9 @@
   </description>
 
   <properties>
-    <version.jmh>1.17.3</version.jmh>
+    <version.jmh>1.19</version.jmh>
+    <!-- This is here so we can override the version from parent, i.e. benchmark other version -->
+    <drools.bom.version>${version.org.kie}</drools.bom.version>
   </properties>
 
   <dependencyManagement>
@@ -29,7 +31,7 @@
       <dependency>
         <groupId>org.drools</groupId>
         <artifactId>drools-bom</artifactId>
-        <version>${version.org.kie}</version>
+        <version>${drools.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

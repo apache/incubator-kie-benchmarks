@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.comparison;
 
 import java.util.List;
 import org.drools.core.common.InternalFactHandle;

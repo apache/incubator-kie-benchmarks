@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.oopath.runtime;
 
-import java.util.List;
-import org.drools.core.phreak.ReactiveList;
+import java.util.Collection;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
 
-public class Adult extends Person {
+public class OOPathBindWithConstraintFireRuntimeBenchmark extends AbstractOOPathFireRuntimeBenchmark {
 
-    private final List<Child> children = new ReactiveList<Child>();
-
-    public Adult(String name, int age) {
-        super(name, age);
+    @Override
+    protected Collection<Object> getFacts(final int numberOfFacts) {
+        return generateMenFacts(numberOfFacts, false, false);
     }
 
-    public List<Child> getChildren() {
-        return children;
-    }
-
-    public void addChild(Child child) {
-        children.add(child);
+    @Override
+    protected String getDrl() {
+        return new SimpleRulesWithConstraintProvider("  Man( $age: /age{this < (${i} + 100)} )").getDrl();
     }
 }

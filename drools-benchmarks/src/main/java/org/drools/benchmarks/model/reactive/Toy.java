@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.model.reactive;
 
 import org.drools.core.phreak.AbstractReactiveObject;
 

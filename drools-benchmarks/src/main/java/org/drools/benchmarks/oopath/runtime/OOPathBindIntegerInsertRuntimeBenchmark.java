@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.oopath.runtime;
 
-public class Woman extends Adult {
+import java.util.Collection;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
 
-    private String husband;
+public class OOPathBindIntegerInsertRuntimeBenchmark extends AbstractOOPathInsertRuntimeBenchmark {
 
-    public Woman(String name, int age) {
-        super(name, age);
+    @Override
+    protected Collection<Object> getFacts(final int numberOfFacts) {
+        return generateMenFacts(numberOfFacts, false, false);
     }
 
-    public String getHusband() {
-        return husband;
-    }
-
-    public void setHusband(String husband) {
-        this.husband = husband;
+    @Override
+    protected String getDrl() {
+        return new SimpleRulesWithConstraintProvider("  Man( $age: /age )").getDrl();
     }
 }

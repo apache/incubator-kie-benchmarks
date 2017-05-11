@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.comparison;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
-public class OOPathComparisonOOpathVariationUpdateBenchmark extends AbstractOOPathComparisonBenchmark {
+public class OOPathComparisonOOpathVariationInsertBenchmark extends AbstractOOPathComparisonBenchmark {
 
     @Setup
     @Override
@@ -36,16 +36,9 @@ public class OOPathComparisonOOpathVariationUpdateBenchmark extends AbstractOOPa
         createKieBaseFromDrl(drl);
     }
 
-    @Setup(Level.Iteration)
-    public void insertFacts() {
-        insertModel(kieSession, parentFacts);
-        kieSession.fireAllRules();
-        globalList.clear();
-    }
-
     @Benchmark
-    public int testUpdate() {
-        factsToBeModified.forEach(child -> child.setAge(11));
+    public int testInsert(final Blackhole eater) {
+        eater.consume(insertModel(kieSession, parentFacts));
         return kieSession.fireAllRules();
     }
 }
