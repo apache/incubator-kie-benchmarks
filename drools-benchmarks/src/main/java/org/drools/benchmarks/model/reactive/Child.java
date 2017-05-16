@@ -14,24 +14,34 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.model.reactive;
 
 import java.util.List;
 import org.drools.core.phreak.ReactiveList;
 
-public class Adult extends Person {
+public class Child extends Person {
 
-    private final List<Child> children = new ReactiveList<Child>();
+    private String mother;
 
-    public Adult(String name, int age) {
+    private final List<Toy> toys = new ReactiveList<Toy>();
+
+    public Child(String name, int age) {
         super(name, age);
     }
 
-    public List<Child> getChildren() {
-        return children;
+    public List<Toy> getToys() {
+        return toys;
     }
 
-    public void addChild(Child child) {
-        children.add(child);
+    public void addToy(Toy toy) {
+        toys.add(toy);
+    }
+
+    public String getMother() {
+        return mother;
+    }
+
+    public void setMother(String mother) {
+        this.mother = mother;
     }
 }

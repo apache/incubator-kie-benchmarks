@@ -15,6 +15,7 @@
 
 package org.drools.benchmarks.common;
 
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.util.ReteDumper;
 import org.drools.benchmarks.common.util.TestUtil;
@@ -38,6 +39,7 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,6 +116,10 @@ public abstract class AbstractBenchmark {
 
         kieBase = kieHelper.build(kieBaseConfiguration);
         dumpReteIfNeeded();
+    }
+
+    protected void insertFacts(final Collection<Object> facts, final Blackhole eater) {
+        facts.forEach(fact -> eater.consume(kieSession.insert(fact)));
     }
 
     private void dumpReteIfNeeded() {

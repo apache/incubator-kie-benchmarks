@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.comparison;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
-import org.drools.benchmarks.oopath.model.Child;
-import org.drools.benchmarks.oopath.model.Man;
-import org.drools.benchmarks.oopath.model.Toy;
-import org.drools.benchmarks.oopath.model.Woman;
+import org.drools.benchmarks.model.reactive.Child;
+import org.drools.benchmarks.model.reactive.Man;
+import org.drools.benchmarks.model.reactive.Toy;
+import org.drools.benchmarks.model.reactive.Woman;
 import org.drools.core.common.InternalFactHandle;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Level;
@@ -39,7 +39,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public abstract class AbstractOOPathComparisonBenchmark extends AbstractBenchmark {
 
-    protected static final String MODEL_PACKAGE_IMPORT = "import org.drools.benchmarks.oopath.model.*;";
+    protected static final String MODEL_PACKAGE_IMPORT = "import org.drools.benchmarks.model.reactive.*;";
 
     @Param({"10"})
     protected int numberOfParentFacts;

@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.buildtime;
 
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.DrlProvider;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
 import org.kie.api.KieBase;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -44,18 +46,8 @@ public class OOPathBuildDRLBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() throws ProviderException {
-        final StringBuilder drlBuilder = new StringBuilder();
-        for (int i = 0; i < numberOfRules; i++) {
-            drlBuilder.append("import org.drools.benchmarks.oopath.model.*;\n");
-            drlBuilder.append("global java.util.List list\n");
-            drlBuilder.append("\n");
-            drlBuilder.append("rule R" + i + " when\n");
-            drlBuilder.append("  Man( $toy: /wife/children{age > " + i + " }/toys )\n");
-            drlBuilder.append("then\n");
-            drlBuilder.append("  list.add( $toy.getName() );\n");
-            drlBuilder.append("end\n");
-        }
-        drl = drlBuilder.toString();
+        final DrlProvider drlProvider = new SimpleRulesWithConstraintProvider("  Man( $toy: /wife/children[age > ${i} ]/toys )\n");
+        drl = drlProvider.getDrl(numberOfRules);
     }
 
     @Benchmark

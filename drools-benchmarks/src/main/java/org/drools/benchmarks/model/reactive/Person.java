@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.model.reactive;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.buildtime;
 
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
@@ -31,21 +31,21 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 50, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Warmup(iterations = 60, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 15, time = 500, timeUnit = TimeUnit.MILLISECONDS)
-public class OOPathBuildXLSBenchmark extends AbstractBenchmark {
+public class OOPathBuildXLSXBenchmark extends AbstractBenchmark {
 
-    private Resource xlsResource;
+    private Resource xlsxResource;
 
     @Setup
     @Override
     public void setup() throws ProviderException {
-        xlsResource = TestUtil.getClassPathDTableResource("kbase-creation/oopath-kbase-creation.xls",
-                DecisionTableInputType.XLS);
+        xlsxResource = TestUtil.getClassPathDTableResource("kbase-creation/oopath-kbase-creation.xlsx",
+                DecisionTableInputType.XLSX);
     }
 
     @Benchmark
     public KieBase testBuildKieBase() {
-        return createKieBaseFromResource(xlsResource);
+        return createKieBaseFromResource(xlsxResource);
     }
 }

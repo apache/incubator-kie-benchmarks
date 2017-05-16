@@ -22,6 +22,51 @@ public final class Constants {
     public static final String PROP_KEY_DUMP_DRL = "dump.drl";
     public static final String PROP_KEY_DEBUG = "debug";
 
+    public enum AccumulateFunction {
+        AVERAGE {
+            @Override
+            public String toString() {
+                return "average";
+            }
+        },
+        MIN {
+            @Override
+            public String toString() {
+                return "min";
+            }
+        },
+        MAX {
+            @Override
+            public String toString() {
+                return "max";
+            }
+        },
+        COUNT {
+            @Override
+            public String toString() {
+                return "count";
+            }
+        },
+        SUM {
+            @Override
+            public String toString() {
+                return "sum";
+            }
+        },
+        COLLECT_LIST {
+            @Override
+            public String toString() {
+                return "collectList";
+            }
+        },
+        COLLECT_SET {
+            @Override
+            public String toString() {
+                return "collectSet";
+            }
+        }
+    }
+
     private Constants() {
         // Intentionally private - it should be not possible to instantiate util classes.
     }

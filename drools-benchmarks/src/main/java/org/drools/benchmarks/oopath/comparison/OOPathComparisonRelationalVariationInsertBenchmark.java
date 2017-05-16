@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.comparison;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
 
-public class OOPathComparisonFromVariationInsertBenchmark extends AbstractOOPathComparisonBenchmark {
+public class OOPathComparisonRelationalVariationInsertBenchmark extends AbstractOOPathComparisonBenchmark {
 
     @Setup
     @Override
@@ -29,9 +29,10 @@ public class OOPathComparisonFromVariationInsertBenchmark extends AbstractOOPath
                 "global java.util.List list\n" +
                 "\n" +
                 "rule R when\n" +
-                "    $man: Man( $wife: wife )\n" +
-                "    $child: Child( age > 10 ) from $wife.children\n" +
-                "    $toy: Toy() from $child.toys\n" +
+                "    $man : Man()\n" +
+                "    $wife : Woman( husband == $man.name )\n" +
+                "    $child : Child( mother == $wife.name, age > 10 )\n" +
+                "    $toy : Toy( owner == $child.name )\n" +
                 "then\n" +
                 "    list.add( $toy.getName() );\n" +
                 "end\n";
@@ -40,7 +41,7 @@ public class OOPathComparisonFromVariationInsertBenchmark extends AbstractOOPath
 
     @Benchmark
     public int testInsert(final Blackhole eater) {
-        eater.consume(insertModel(kieSession, parentFacts));
+        eater.consume(insertFullModel(kieSession, parentFacts));
         return kieSession.fireAllRules();
     }
 }

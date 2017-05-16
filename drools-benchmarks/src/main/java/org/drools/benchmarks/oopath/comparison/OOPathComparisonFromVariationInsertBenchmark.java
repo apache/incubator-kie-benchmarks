@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath;
+package org.drools.benchmarks.oopath.comparison;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import org.drools.core.common.InternalFactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
 
-public class OOPathComparisonFromVariationUpdateBenchmark extends AbstractOOPathComparisonBenchmark {
+public class OOPathComparisonFromVariationInsertBenchmark extends AbstractOOPathComparisonBenchmark {
 
     @Setup
     @Override
@@ -44,19 +38,9 @@ public class OOPathComparisonFromVariationUpdateBenchmark extends AbstractOOPath
         createKieBaseFromDrl(drl);
     }
 
-    private List<InternalFactHandle> factHandles;
-
-    @Setup(Level.Iteration)
-    public void insertFacts() {
-        factHandles = insertModel(kieSession, parentFacts);
-        kieSession.fireAllRules();
-        globalList.clear();
-    }
-
     @Benchmark
-    public int testUpdate() {
-        factsToBeModified.forEach(child -> child.setAge(11));
-        factHandles.forEach(factHandle -> kieSession.update(factHandle, factHandle.getObject()));
+    public int testInsert(final Blackhole eater) {
+        eater.consume(insertModel(kieSession, parentFacts));
         return kieSession.fireAllRules();
     }
 }

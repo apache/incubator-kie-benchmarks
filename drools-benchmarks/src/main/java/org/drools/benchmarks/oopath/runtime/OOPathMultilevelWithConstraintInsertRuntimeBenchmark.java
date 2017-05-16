@@ -14,9 +14,20 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.oopath.runtime;
 
-public enum BodyMeasurement {
-    RIGHT_FOREARM, LEFT_FOREARM, RIGHT_UPPERARM, LEFT_UPPERARM,
-    CHEST, WAIST, HIPS, RIGHT_THIGH, LEFT_HIGH, RIGHT_CALF, LEFT_CALF
+import java.util.Collection;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+
+public class OOPathMultilevelWithConstraintInsertRuntimeBenchmark extends AbstractOOPathInsertRuntimeBenchmark {
+
+    @Override
+    protected Collection<Object> getFacts(final int numberOfFacts) {
+        return generateMenFacts(numberOfFacts, true, true);
+    }
+
+    @Override
+    protected String getDrl() {
+        return new SimpleRulesWithConstraintProvider("  Man( $child: /wife/children[age < (${i} + 100)] )").getDrl();
+    }
 }

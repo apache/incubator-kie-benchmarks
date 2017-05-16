@@ -37,10 +37,6 @@ public final class TestUtil {
         return Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_DEBUG));
     }
 
-//    public static boolean useReteoo() {
-//        return RuleEngineOption.RETEOO.toString().equals(System.getProperty(Constants.PROP_KEY_ENGINE_TYPE));
-//    }
-
     public static boolean dumpDrl() {
         return isDebug() || Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_DUMP_DRL));
     }

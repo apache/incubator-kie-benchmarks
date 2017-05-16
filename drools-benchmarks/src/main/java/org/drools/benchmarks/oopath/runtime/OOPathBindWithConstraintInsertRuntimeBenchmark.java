@@ -14,30 +14,20 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.oopath.model;
+package org.drools.benchmarks.oopath.runtime;
 
+import java.util.Collection;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
 
-import org.drools.core.phreak.AbstractReactiveObject;
+public class OOPathBindWithConstraintInsertRuntimeBenchmark extends AbstractOOPathInsertRuntimeBenchmark {
 
-public class Disease extends AbstractReactiveObject {
-
-    private String name;
-
-    public Disease (final String name) {
-        this.name = name;
-    }
-
-    public void setName(final String name ) {
-        this.name = name;
-        notifyModification();
-    }
-
-    public String getName() {
-        return name;
+    @Override
+    protected Collection<Object> getFacts(final int numberOfFacts) {
+        return generateMenFacts(numberOfFacts, false, false);
     }
 
     @Override
-    public String toString() {
-        return ("Disease: " + name);
+    protected String getDrl() {
+        return new SimpleRulesWithConstraintProvider("  Man( $age: /age[this < (${i} + 100)] )").getDrl();
     }
 }

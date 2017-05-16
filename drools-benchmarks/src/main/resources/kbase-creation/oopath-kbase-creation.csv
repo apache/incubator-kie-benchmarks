@@ -1,12 +1,12 @@
 ,
 "RuleSet","org.drools.benchmarks.oopath"
-"Import","org.drools.benchmarks.oopath.model.*"
+"Import","org.drools.benchmarks.model.reactive.*"
 "Notes","Very simple decision table with several hundreds of lines"
 ,
 "RuleTable OOPathTest",
 "CONDITION","ACTION"
 "someMan: Man","someMan"
-"$toy: /wife/children{age > $param}/toys","setAge($param)"
+"$toy: /wife/children[age > $param]/toys","setAge($param)"
 "NUMBER","new NUMBER"
 1,10000
 2,10126
