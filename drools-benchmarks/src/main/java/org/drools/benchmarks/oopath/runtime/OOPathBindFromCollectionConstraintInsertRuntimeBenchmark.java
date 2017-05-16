@@ -28,6 +28,6 @@ public class OOPathBindFromCollectionConstraintInsertRuntimeBenchmark extends Ab
 
     @Override
     protected String getDrl() {
-        return new SimpleRulesWithConstraintProvider("  Man( $child: /children{age < (${i} + 100)} )").getDrl();
+        return new SimpleRulesWithConstraintProvider("  Man( $child: /children[age < (${i} + 100)] )").getDrl();
     }
 }

@@ -6,7 +6,7 @@
 "RuleTable OOPathTest",
 "CONDITION","ACTION"
 "someMan: Man","someMan"
-"$toy: /wife/children{age > $param}/toys","setAge($param)"
+"$toy: /wife/children[age > $param]/toys","setAge($param)"
 "NUMBER","new NUMBER"
 1,10000
 2,10126

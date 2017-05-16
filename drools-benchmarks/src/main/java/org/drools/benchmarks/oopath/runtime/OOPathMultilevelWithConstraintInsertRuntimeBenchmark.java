@@ -28,6 +28,6 @@ public class OOPathMultilevelWithConstraintInsertRuntimeBenchmark extends Abstra
 
     @Override
     protected String getDrl() {
-        return new SimpleRulesWithConstraintProvider("  Man( $child: /wife/children{age < (${i} + 100)} )").getDrl();
+        return new SimpleRulesWithConstraintProvider("  Man( $child: /wife/children[age < (${i} + 100)] )").getDrl();
     }
 }

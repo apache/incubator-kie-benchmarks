@@ -28,6 +28,6 @@ public class OOPathBindWithConstraintInsertRuntimeBenchmark extends AbstractOOPa
 
     @Override
     protected String getDrl() {
-        return new SimpleRulesWithConstraintProvider("  Man( $age: /age{this < (${i} + 100)} )").getDrl();
+        return new SimpleRulesWithConstraintProvider("  Man( $age: /age[this < (${i} + 100)] )").getDrl();
     }
 }

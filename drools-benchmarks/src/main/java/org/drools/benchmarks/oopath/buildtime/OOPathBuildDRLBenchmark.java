@@ -46,7 +46,7 @@ public class OOPathBuildDRLBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() throws ProviderException {
-        final DrlProvider drlProvider = new SimpleRulesWithConstraintProvider("  Man( $toy: /wife/children{age > ${i} }/toys )\n");
+        final DrlProvider drlProvider = new SimpleRulesWithConstraintProvider("  Man( $toy: /wife/children[age > ${i} ]/toys )\n");
         drl = drlProvider.getDrl(numberOfRules);
     }
 
