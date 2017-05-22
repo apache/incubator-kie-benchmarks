@@ -22,8 +22,8 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 4000)
-@Measurement(iterations = 2000)
+@Warmup(iterations = 200000)
+@Measurement(iterations = 100000)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public abstract class AbstractEmptySessionBenchmark extends AbstractBenchmark {
 
