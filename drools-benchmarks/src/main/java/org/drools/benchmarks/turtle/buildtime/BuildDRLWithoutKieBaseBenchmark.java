@@ -16,10 +16,10 @@
 
 package org.drools.benchmarks.turtle.buildtime;
 
-import org.kie.api.builder.KieBuilder;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Time how long it takes to create knowledge base from rules saved in DRL files.
@@ -36,8 +36,8 @@ public class BuildDRLWithoutKieBaseBenchmark extends AbstractBuildtimeBenchmark 
     }
 
     @Benchmark
-    public KieBuilder timeKBaseCreationFromDrl() {
-        return buildResourcesWithoutKieBase();
+    public void timeKBaseCreationFromDrl(final Blackhole eater) {
+        buildResourcesWithoutKieBase(eater);
     }
 
 }
