@@ -27,8 +27,7 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class KBaseCreationFromDrlBenchmark extends AbstractBuildtimeBenchmark {
 
-//    @Param({"1k", "5k", "10k"})
-    @Param({"5k", "10k"})
+    @Param({"1k", "5k", "10k"})
     private String nrOfRules;
 
     @Setup

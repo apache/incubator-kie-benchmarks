@@ -23,8 +23,6 @@ import org.openjdk.jmh.annotations.Setup;
 
 /**
  * Time how long it takes to create knowledge base from rules saved in DRL files.
- * <p/>
- * There are 3 separate tests using 1k, 5k and 10k rules.
  */
 public class BuildDRLWithoutKieBaseBenchmark extends AbstractBuildtimeBenchmark {
 
@@ -35,7 +33,6 @@ public class BuildDRLWithoutKieBaseBenchmark extends AbstractBuildtimeBenchmark 
     public void addResources() {
         addClassPathResource("kbase-creation/drl-kbase-creation-" + nrOfRules + ".drl");
         createKieFileSystemFromResources();
-
     }
 
     @Benchmark
