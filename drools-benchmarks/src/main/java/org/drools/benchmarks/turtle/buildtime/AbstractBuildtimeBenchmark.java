@@ -21,16 +21,16 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
+import org.kie.api.builder.KieBuilder;
+import org.kie.api.builder.KieFileSystem;
 import org.kie.api.io.KieResources;
 import org.kie.api.io.Resource;
 import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -45,18 +45,20 @@ public abstract class AbstractBuildtimeBenchmark {
 
     private Set<Resource> resources;
 
+    private KieFileSystem kieFileSystem;
+
     public AbstractBuildtimeBenchmark() {
         resources = new HashSet<>();
     }
 
-    // TODO - this must be removed! - results with this and without this must be compared.
-    @Setup(Level.Invocation)
-    public void callGc() {
-        System.gc();
-    }
-
     protected void addClassPathResource(String path) {
         resources.add(kieResources.newClassPathResource(path));
+    }
+
+    protected void createKieFileSystemFromResources() {
+        final KieServices kieServices = KieServices.get();
+        kieFileSystem = kieServices.newKieFileSystem();
+        resources.forEach(kieFileSystem::write);
     }
 
     /**
@@ -72,6 +74,13 @@ public abstract class AbstractBuildtimeBenchmark {
         KieBase kieBase = kieHelper.build();
         int nrOfPackages = kieBase.getKiePackages().size();
         return nrOfPackages;
+    }
+
+    /**
+     * Builds resources without creating the KieBase.
+     */
+    protected KieBuilder buildResourcesWithoutKieBase() {
+        return KieServices.get().newKieBuilder(kieFileSystem).buildAll();
     }
 
 }
