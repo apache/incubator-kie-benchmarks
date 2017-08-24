@@ -1,0 +1,225 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.jbpm</groupId>
+    <artifactId>jbpm-benchmarks</artifactId>
+    <version>7.2.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.jbpm</groupId>
+  <artifactId>kieserver-performance-tests</artifactId>
+
+  <name>KIE Server Performance Tests</name>
+
+  <properties>
+    <kit.version>7.3.0-SNAPSHOT</kit.version>
+    <metrics.version>3.1.0</metrics.version>
+
+    <!-- >>>>>>>>>>>>>>>> Performance configuration <<<<<<<<<<<<<<<<<<<< -->
+
+    <projectName>BPM Suite</projectName>
+    <suite>LoadSuite</suite>
+    <scenario></scenario>
+    <startScriptLocation>./run.sh</startScriptLocation>
+
+    <!-- Duration (in seconds), Iteration -->
+    <runType>Iteration</runType>
+    <duration>30</duration>
+    <iterations>1</iterations>
+
+    <warmUp>false</warmUp>
+    <warmUpCount>3</warmUpCount>
+    <auditLogging>true</auditLogging>
+
+    <!-- Properties applicable to concurrent testing -->
+    <threads>5</threads>
+
+    <!-- Reporting - Console, CSVSingle, PerfRepo, CSV, (periodicity in seconds) -->
+
+    <reporterType>Console</reporterType>
+    <periodicity>5</periodicity>
+    <reportDataLocation>reportData</reportDataLocation>
+    
+    <!-- PerfRepo configuration -->
+    <perfRepo.host>localhost</perfRepo.host>
+    <perfRepo.urlPath></perfRepo.urlPath>
+    <perfRepo.username></perfRepo.username>
+    <perfRepo.password></perfRepo.password>
+
+    <!-- Measure - MemoryUsage,FileDescriptors,ThreadStates -->
+    <measure>MemoryUsage,FileDescriptors,ThreadStates</measure>
+
+    <!-- >>>>>>>>>>>>>>>> Remote Workbench Test Configuration <<<<<<<<<<<<<<<<<<<< -->
+
+    <!-- REST, JMS -->
+    <remoteAPI>REST</remoteAPI>
+
+    <kieserver.username>perfUser</kieserver.username>
+    <kieserver.password>perfUser1234;</kieserver.password>
+    <kieserver.host>localhost</kieserver.host>
+    <kieserver.port>8080</kieserver.port>
+    <kieserver.name>kie-server</kieserver.name>
+
+    <property environment="env" />
+    
+    <jboss.home>${env.JBOSS_HOME}</jboss.home>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-performance-kit</artifactId>
+        <version>${kit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.dropwizard.metrics</groupId>
+        <artifactId>metrics-core</artifactId>
+        <version>${metrics.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.dropwizard.metrics</groupId>
+        <artifactId>metrics-jvm</artifactId>
+        <version>${metrics.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-internal</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-performance-kit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-jvm</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server-client</artifactId>
+    </dependency>
+    <dependency>
+	    <groupId>org.hornetq</groupId>
+	    <artifactId>hornetq-jms-client</artifactId>
+	</dependency>
+
+    <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jboss-remote-naming</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.xnio</groupId>
+      <artifactId>xnio-nio</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <configuration>
+          <executable>java</executable>
+          <arguments>
+            <argument>-DprojectName=${projectName}</argument>
+            <argument>-Dsuite=${suite}</argument>
+            <argument>-Dscenario=${scenario}</argument>
+            <argument>-DstartScriptLocation=${startScriptLocation}</argument>
+            <argument>-DrunType=${runType}</argument>
+            <argument>-Dduration=${duration}</argument>
+            <argument>-Diterations=${iterations}</argument>
+            <argument>-DwarmUp=${warmUp}</argument>
+            <argument>-DwarmUpCount=${warmUpCount}</argument>
+            <argument>-DauditLogging=${auditLogging}</argument>
+            <argument>-Dthreads=${threads}</argument>
+            <argument>-DreporterType=${reporterType}</argument>
+            <argument>-Dperiodicity=${periodicity}</argument>
+            <argument>-DreportDataLocation=${reportDataLocation}</argument>
+            <argument>-Dmeasure=${measure}</argument>
+            
+            <argument>-DperfRepo.host=${perfRepo.host}</argument>
+            <argument>-DperfRepo.urlPath=${perfRepo.urlPath}</argument>
+            <argument>-DperfRepo.username=${perfRepo.username}</argument>
+            <argument>-DperfRepo.password=${perfRepo.password}</argument>
+
+            <argument>-DremoteAPI=${remoteAPI}</argument>
+            <argument>-Dkieserver.username=${kieserver.username}</argument>
+            <argument>-Dkieserver.password=${kieserver.password}</argument>
+            <argument>-Dkieserver.host=${kieserver.host}</argument>
+            <argument>-Dkieserver.port=${kieserver.port}</argument>
+            <argument>-Dkieserver.name=${kieserver.name}</argument>
+
+            <argument>-classpath</argument>
+            <classpath />
+            <argument>org.kie.perf.Executor</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-user-config</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${jboss.home}/standalone/configuration</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/resources-eap-6/configuration</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <overwrite>true</overwrite>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <developers>
+    <developer>
+      <name>Ivo Bek</name>
+      <email>bekivo@gmail.com</email>
+    </developer>
+    <developer>
+      <name>Marián Macik</name>
+      <email>mmacik@redhat.com</email>
+    </developer>
+  </developers>
+
+</project>
