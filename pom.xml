@@ -23,15 +23,15 @@
   <properties>
     <version.jmh>1.19</version.jmh>
     <!-- This is here so we can override the version from parent, i.e. benchmark other version -->
-    <drools.bom.version>${version.org.kie}</drools.bom.version>
+    <kie.bom.version>${version.org.kie}</kie.bom.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.drools</groupId>
-        <artifactId>drools-bom</artifactId>
-        <version>${drools.bom.version}</version>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-platform-bom</artifactId>
+        <version>${kie.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -50,6 +50,7 @@
 
   <modules>
     <module>drools-benchmarks</module>
+    <module>jbpm-benchmarks</module>
   </modules>
 
   <repositories>
