@@ -32,6 +32,7 @@
 
     <warmUp>false</warmUp>
     <warmUpCount>1</warmUpCount>
+    <warmUpTime>30</warmUpTime>
     <auditLogging>true</auditLogging>
 
     <!-- Properties applicable for concurrent testing, when more than 1, enable 
@@ -220,6 +221,7 @@
             <argument>-DexpectedRate=${expectedRate}</argument>
             <argument>-DwarmUp=${warmUp}</argument>
             <argument>-DwarmUpCount=${warmUpCount}</argument>
+            <argument>-DwarmUpTime=${warmUpTime}</argument>
             <argument>-DauditLogging=${auditLogging}</argument>
             <argument>-Dthreads=${threads}</argument>
             <argument>-DreporterType=${reporterType}</argument>
