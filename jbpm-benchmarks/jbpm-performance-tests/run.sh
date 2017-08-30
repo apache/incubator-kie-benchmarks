@@ -50,6 +50,11 @@ then
   PARAMS="$PARAMS -DwarmUpCount=$warmUpCount"
 fi
 
+if [ -n "$warmUpTime" ]
+then
+  PARAMS="$PARAMS -DwarmUpTime=$warmUpTime"
+fi
+
 if [ -n "$auditLogging" ]
 then
   PARAMS="$PARAMS -DauditLogging=$auditLogging"
