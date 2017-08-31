@@ -14,7 +14,7 @@
   <name>jBPM Performance Tests</name>
 
   <properties>
-    <kit.version>${project.version}</kit.version>
+    <kit.version>${version.org.kie}</kit.version>
     <metrics.version>3.1.0</metrics.version>
 
     <!-- >>>>>>>>>>>>>>>> Performance configuration <<<<<<<<<<<<<<<<<<<< -->

@@ -2,6 +2,11 @@
 
 PARAMS=""
 
+if [ -n "$version" ]
+then
+  PARAMS="$PARAMS -Dversion.org.kie=$version"
+fi
+
 if [ -n "$suite" ]
 then
   PARAMS="$PARAMS -Dsuite=$suite"
