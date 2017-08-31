@@ -14,7 +14,7 @@
   <name>jBPM Performance Tests</name>
 
   <properties>
-    <kit.version>7.3.0-SNAPSHOT</kit.version>
+    <kit.version>${project.version}</kit.version>
     <metrics.version>3.1.0</metrics.version>
 
     <!-- >>>>>>>>>>>>>>>> Performance configuration <<<<<<<<<<<<<<<<<<<< -->
@@ -250,6 +250,27 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>perfdb</id>
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.1.0</version>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>ojdbc6</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 
   <developers>
     <developer>
