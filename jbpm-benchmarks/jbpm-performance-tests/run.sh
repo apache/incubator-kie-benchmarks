@@ -125,4 +125,4 @@ then
   PARAMS="$PARAMS -Djbpm.ht.eager=$jbpm_ht_eager"
 fi
 
-mvn clean install -Pperfdb exec:exec $PARAMS
+mvn clean install -s settings.xml -Pperfdb exec:exec $PARAMS
