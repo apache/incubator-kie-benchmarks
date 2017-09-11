@@ -255,10 +255,12 @@
     <profile>
       <id>perfdb</id>
       <properties>
-        <!-- Properties to properly filter persistence.xml, other maven.jdbc.* or maven.datasource.* properties are provided
-             in a custom datasource.properties file -->
+        <!-- Other maven.jdbc.* properties (user, password, etc.) are provided in a custom datasource.properties file -->
+        <maven.jdbc.db.name>perfdb</maven.jdbc.db.name>
         <maven.hibernate.hbm2ddl>none</maven.hibernate.hbm2ddl>
         <maven.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</maven.hibernate.dialect>
+        <maven.datasource.classname>oracle.jdbc.xa.client.OracleXADataSource</maven.datasource.classname>
+        <maven.jdbc.driver.class>oracle.jdbc.driver.OracleDriver</maven.jdbc.driver.class>
       </properties>
       <dependencyManagement>
         <dependencies>
