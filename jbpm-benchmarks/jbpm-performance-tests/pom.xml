@@ -254,6 +254,12 @@
   <profiles>
     <profile>
       <id>perfdb</id>
+      <properties>
+        <!-- Properties to properly filter persistence.xml, other maven.jdbc.* or maven.datasource.* properties are provided
+             in a custom datasource.properties file -->
+        <maven.hibernate.hbm2ddl>verify</maven.hibernate.hbm2ddl>
+        <maven.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</maven.hibernate.dialect>
+      </properties>
       <dependencyManagement>
         <dependencies>
           <dependency>
