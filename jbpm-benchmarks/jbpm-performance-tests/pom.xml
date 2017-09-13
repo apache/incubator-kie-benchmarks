@@ -79,7 +79,7 @@
     <maven.jdbc.db.port />
     <maven.jdbc.db.server />
     <maven.jdbc.url>jdbc:h2:mem:test;MVCC=true</maven.jdbc.url>
-    <maven.btm.maxPoolSize>5</maven.btm.maxPoolSize>
+    <maven.btm.maxPoolSize>16</maven.btm.maxPoolSize>
   </properties>
 
   <dependencyManagement>
