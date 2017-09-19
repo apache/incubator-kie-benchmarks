@@ -48,18 +48,23 @@
     <appender-ref ref="asyncWarnConsoleAppender" />
   </logger>
 
+  <logger name="org.kie">
+    <level value="info" />
+    <appender-ref ref="asyncWarnConsoleAppender" />
+  </logger>
+
   <logger name="org.drools">
-    <level value="debug" />
+    <level value="info" />
     <appender-ref ref="asyncWarnConsoleAppender" /> <!-- prints only warn and higher messages to console -->
   </logger>
 
   <logger name="org.jbpm">
-    <level value="debug" />
+    <level value="info" />
     <appender-ref ref="asyncWarnConsoleAppender" /> <!-- prints only warn and higher messages to console -->
   </logger>
 
-  <logger name="org.kie">
+  <logger name="org.perfrepo">
     <level value="debug" />
-    <appender-ref ref="asyncWarnConsoleAppender" /> <!-- prints only warn and higher messages to console -->
+    <appender-ref ref="asyncConsoleAppender" /> <!-- prints debug and higher messages to console -->
   </logger>
 </configuration>

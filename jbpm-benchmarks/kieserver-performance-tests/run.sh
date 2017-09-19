@@ -2,6 +2,11 @@
 
 PARAMS=""
 
+if [ -n "$version" ]
+then
+  PARAMS="$PARAMS -Dversion.org.kie=$version"
+fi
+
 if [ -n "$suite" ]
 then
   PARAMS="$PARAMS -Dsuite=$suite"
@@ -43,6 +48,11 @@ fi
 if [ -n "$warmUpCount" ]
 then
   PARAMS="$PARAMS -DwarmUpCount=$warmUpCount"
+fi
+
+if [ -n "$warmUpTime" ]
+then
+  PARAMS="$PARAMS -DwarmUpTime=$warmUpTime"
 fi
 
 if [ -n "$auditLogging" ]
@@ -120,4 +130,4 @@ then
   PARAMS="$PARAMS -Dkieserver.name=$workbench_name"
 fi
 
-mvn clean install exec:exec $PARAMS
+mvn clean install -s settings.xml exec:exec $PARAMS

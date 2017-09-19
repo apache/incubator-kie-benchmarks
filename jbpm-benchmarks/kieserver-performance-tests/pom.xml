@@ -14,8 +14,10 @@
   <name>KIE Server Performance Tests</name>
 
   <properties>
-    <kit.version>7.3.0-SNAPSHOT</kit.version>
+    <kit.version>${version.org.kie}</kit.version>
     <metrics.version>3.1.0</metrics.version>
+    <!-- WildFly version used for JMS BOM -->
+    <wildfly.version>10.1.0.Final</wildfly.version>
 
     <!-- >>>>>>>>>>>>>>>> Performance configuration <<<<<<<<<<<<<<<<<<<< -->
 
@@ -31,6 +33,7 @@
 
     <warmUp>false</warmUp>
     <warmUpCount>3</warmUpCount>
+    <warmUpTime>30</warmUpTime>
     <auditLogging>true</auditLogging>
 
     <!-- Properties applicable to concurrent testing -->
@@ -84,6 +87,12 @@
         <artifactId>metrics-jvm</artifactId>
         <version>${metrics.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.wildfly</groupId>
+        <artifactId>wildfly-jms-client-bom</artifactId>
+        <version>${wildfly.version}</version>
+        <type>pom</type>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -121,18 +130,11 @@
       <groupId>org.kie.server</groupId>
       <artifactId>kie-server-client</artifactId>
     </dependency>
-    <dependency>
-	    <groupId>org.hornetq</groupId>
-	    <artifactId>hornetq-jms-client</artifactId>
-	</dependency>
 
     <dependency>
-      <groupId>org.jboss</groupId>
-      <artifactId>jboss-remote-naming</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.xnio</groupId>
-      <artifactId>xnio-nio</artifactId>
+      <groupId>org.wildfly</groupId>
+      <artifactId>wildfly-jms-client-bom</artifactId>
+      <type>pom</type>
     </dependency>
   </dependencies>
 
@@ -161,6 +163,7 @@
             <argument>-Diterations=${iterations}</argument>
             <argument>-DwarmUp=${warmUp}</argument>
             <argument>-DwarmUpCount=${warmUpCount}</argument>
+            <argument>-DwarmUpTime=${warmUpTime}</argument>
             <argument>-DauditLogging=${auditLogging}</argument>
             <argument>-Dthreads=${threads}</argument>
             <argument>-DreporterType=${reporterType}</argument>

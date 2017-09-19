@@ -2,12 +2,12 @@ package org.jbpm.test.performance.kieserver;
 
 import java.util.Properties;
 
-import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.perf.TestConfig;
+import org.kie.server.client.KieServicesClient;
 
 public class KieServerTestConfig extends TestConfig {
 
-    protected String version = ProcessInstance.class.getPackage().getImplementationVersion();
+    protected String clientVersion = KieServicesClient.class.getPackage().getImplementationVersion();
 
     protected String username;
 
@@ -59,9 +59,9 @@ public class KieServerTestConfig extends TestConfig {
         remoteAPI = System.getProperty("remoteAPI");
         properties.put("remoteAPI", remoteAPI);
         addTag(remoteAPI);
-        
-        properties.put("suite.version", version);
-        addTag(version);
+
+        properties.put("client.version", clientVersion);
+        addTag(clientVersion);
 
         return properties;
     }

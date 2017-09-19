@@ -25,7 +25,7 @@ public class KieServerClient {
 	public static String containerId = "kieserver-assets";
 	
     private static ReleaseId releaseId = new ReleaseId("org.jbpm.test.performance", "kieserver-assets",
-            "1.0.0-SNAPSHOT");
+            "7.3.0-SNAPSHOT");
 
     private ProcessServicesClient processClient;
     private UserTaskServicesClient taskClient;
@@ -61,7 +61,7 @@ public class KieServerClient {
     	}
     	if (classes != null) {
     		Set<Class<?>> jaxbClasses = new HashSet<Class<?>>(Arrays.asList(classes));
-    		kconfig.addJaxbClasses(jaxbClasses);
+    		kconfig.addExtraClasses(jaxbClasses);
     	}
     	KieServicesClient client = KieServicesFactory.newKieServicesClient(kconfig);
     	// create container if not exist
@@ -83,7 +83,7 @@ public class KieServerClient {
             final Properties env = new Properties();
         	KieServerTestConfig config = KieServerTestConfig.getInstance();
             env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-            env.put(Context.PROVIDER_URL, "remote://" + config.getHost() + ":4447");
+            env.put(Context.PROVIDER_URL, String.format("http-remoting://%s:%s", config.getHost(), config.getPort()));
             env.put(Context.SECURITY_PRINCIPAL, config.getUsername());
             env.put(Context.SECURITY_CREDENTIALS, config.getPassword());
             context = new InitialContext(env);
