@@ -33,11 +33,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @BenchmarkMode(Mode.AverageTime)
 @Warmup(iterations = 40, time = 2, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
-public class DMNBuildDecisionBenchmark extends AbstractBenchmark {
+public class DMNBuildDecisionTableBenchmark extends AbstractBenchmark {
 
     private Resource dmnResource;
 
-    @Param({"dmn/decision-3000.dmn"})
+    @Param({"dmn/decision-table-3000.dmn"})
     private String resourceName;
 
     @Setup
