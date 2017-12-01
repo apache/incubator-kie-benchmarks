@@ -1,0 +1,725 @@
+package org.drools.benchmarks.bre;
+
+import org.drools.benchmarks.model.Account;
+import org.drools.benchmarks.model.Address;
+import org.drools.benchmarks.model.Customer;
+
+rule "accountBalance1"
+when 
+    $account : Account(balance == 1)
+then
+    modify ($account) { setBalance(-1) };
+end
+
+rule "postalCode1"
+when 
+    $address : Address(postCode != "1")
+then
+    modify ($address) { setPostCode("1") };
+end
+
+rule "accountOwner1"
+when 
+    $account : Account(balance == 1)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-1) };
+end
+
+rule "BrnoPrahaOstrava1"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "1"))
+then
+    modify ($address) { setCity("1") };
+end
+
+rule "exists1"
+when 
+    $customer: Customer(firstName == "Jake1")
+then
+    modify ($customer) {setFirstName("Jackie1")} 
+end
+
+rule "accountBalance2"
+when 
+    $account : Account(balance == 2)
+then
+    modify ($account) { setBalance(-2) };
+end
+
+rule "postalCode2"
+when 
+    $address : Address(postCode != "2")
+then
+    modify ($address) { setPostCode("2") };
+end
+
+rule "accountOwner2"
+when 
+    $account : Account(balance == 2)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-2) };
+end
+
+rule "BrnoPrahaOstrava2"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "2"))
+then
+    modify ($address) { setCity("2") };
+end
+
+rule "exists2"
+when 
+    $customer: Customer(firstName == "Jake2")
+then
+    modify ($customer) {setFirstName("Jackie2")} 
+end
+
+rule "accountBalance3"
+when 
+    $account : Account(balance == 3)
+then
+    modify ($account) { setBalance(-3) };
+end
+
+rule "postalCode3"
+when 
+    $address : Address(postCode != "3")
+then
+    modify ($address) { setPostCode("3") };
+end
+
+rule "accountOwner3"
+when 
+    $account : Account(balance == 3)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-3) };
+end
+
+rule "BrnoPrahaOstrava3"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "3"))
+then
+    modify ($address) { setCity("3") };
+end
+
+rule "exists3"
+when 
+    $customer: Customer(firstName == "Jake3")
+then
+    modify ($customer) {setFirstName("Jackie3")} 
+end
+
+rule "accountBalance4"
+when 
+    $account : Account(balance == 4)
+then
+    modify ($account) { setBalance(-4) };
+end
+
+rule "postalCode4"
+when 
+    $address : Address(postCode != "4")
+then
+    modify ($address) { setPostCode("4") };
+end
+
+rule "accountOwner4"
+when 
+    $account : Account(balance == 4)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-4) };
+end
+
+rule "BrnoPrahaOstrava4"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "4"))
+then
+    modify ($address) { setCity("4") };
+end
+
+rule "exists4"
+when 
+    $customer: Customer(firstName == "Jake4")
+then
+    modify ($customer) {setFirstName("Jackie4")} 
+end
+
+rule "accountBalance5"
+when 
+    $account : Account(balance == 5)
+then
+    modify ($account) { setBalance(-5) };
+end
+
+rule "postalCode5"
+when 
+    $address : Address(postCode != "5")
+then
+    modify ($address) { setPostCode("5") };
+end
+
+rule "accountOwner5"
+when 
+    $account : Account(balance == 5)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-5) };
+end
+
+rule "BrnoPrahaOstrava5"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "5"))
+then
+    modify ($address) { setCity("5") };
+end
+
+rule "exists5"
+when 
+    $customer: Customer(firstName == "Jake5")
+then
+    modify ($customer) {setFirstName("Jackie5")} 
+end
+
+rule "accountBalance6"
+when 
+    $account : Account(balance == 6)
+then
+    modify ($account) { setBalance(-6) };
+end
+
+rule "postalCode6"
+when 
+    $address : Address(postCode != "6")
+then
+    modify ($address) { setPostCode("6") };
+end
+
+rule "accountOwner6"
+when 
+    $account : Account(balance == 6)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-6) };
+end
+
+rule "BrnoPrahaOstrava6"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "6"))
+then
+    modify ($address) { setCity("6") };
+end
+
+rule "exists6"
+when 
+    $customer: Customer(firstName == "Jake6")
+then
+    modify ($customer) {setFirstName("Jackie6")} 
+end
+
+rule "accountBalance7"
+when 
+    $account : Account(balance == 7)
+then
+    modify ($account) { setBalance(-7) };
+end
+
+rule "postalCode7"
+when 
+    $address : Address(postCode != "7")
+then
+    modify ($address) { setPostCode("7") };
+end
+
+rule "accountOwner7"
+when 
+    $account : Account(balance == 7)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-7) };
+end
+
+rule "BrnoPrahaOstrava7"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "7"))
+then
+    modify ($address) { setCity("7") };
+end
+
+rule "exists7"
+when 
+    $customer: Customer(firstName == "Jake7")
+then
+    modify ($customer) {setFirstName("Jackie7")} 
+end
+
+rule "accountBalance8"
+when 
+    $account : Account(balance == 8)
+then
+    modify ($account) { setBalance(-8) };
+end
+
+rule "postalCode8"
+when 
+    $address : Address(postCode != "8")
+then
+    modify ($address) { setPostCode("8") };
+end
+
+rule "accountOwner8"
+when 
+    $account : Account(balance == 8)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-8) };
+end
+
+rule "BrnoPrahaOstrava8"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "8"))
+then
+    modify ($address) { setCity("8") };
+end
+
+rule "exists8"
+when 
+    $customer: Customer(firstName == "Jake8")
+then
+    modify ($customer) {setFirstName("Jackie8")} 
+end
+
+rule "accountBalance9"
+when 
+    $account : Account(balance == 9)
+then
+    modify ($account) { setBalance(-9) };
+end
+
+rule "postalCode9"
+when 
+    $address : Address(postCode != "9")
+then
+    modify ($address) { setPostCode("9") };
+end
+
+rule "accountOwner9"
+when 
+    $account : Account(balance == 9)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-9) };
+end
+
+rule "BrnoPrahaOstrava9"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "9"))
+then
+    modify ($address) { setCity("9") };
+end
+
+rule "exists9"
+when 
+    $customer: Customer(firstName == "Jake9")
+then
+    modify ($customer) {setFirstName("Jackie9")} 
+end
+
+rule "accountBalance10"
+when 
+    $account : Account(balance == 10)
+then
+    modify ($account) { setBalance(-10) };
+end
+
+rule "postalCode10"
+when 
+    $address : Address(postCode != "10")
+then
+    modify ($address) { setPostCode("10") };
+end
+
+rule "accountOwner10"
+when 
+    $account : Account(balance == 10)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-10) };
+end
+
+rule "BrnoPrahaOstrava10"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "10"))
+then
+    modify ($address) { setCity("10") };
+end
+
+rule "exists10"
+when 
+    $customer: Customer(firstName == "Jake10")
+then
+    modify ($customer) {setFirstName("Jackie10")} 
+end
+
+rule "accountBalance11"
+when 
+    $account : Account(balance == 11)
+then
+    modify ($account) { setBalance(-11) };
+end
+
+rule "postalCode11"
+when 
+    $address : Address(postCode != "11")
+then
+    modify ($address) { setPostCode("11") };
+end
+
+rule "accountOwner11"
+when 
+    $account : Account(balance == 11)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-11) };
+end
+
+rule "BrnoPrahaOstrava11"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "11"))
+then
+    modify ($address) { setCity("11") };
+end
+
+rule "exists11"
+when 
+    $customer: Customer(firstName == "Jake11")
+then
+    modify ($customer) {setFirstName("Jackie11")} 
+end
+
+rule "accountBalance12"
+when 
+    $account : Account(balance == 12)
+then
+    modify ($account) { setBalance(-12) };
+end
+
+rule "postalCode12"
+when 
+    $address : Address(postCode != "12")
+then
+    modify ($address) { setPostCode("12") };
+end
+
+rule "accountOwner12"
+when 
+    $account : Account(balance == 12)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-12) };
+end
+
+rule "BrnoPrahaOstrava12"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "12"))
+then
+    modify ($address) { setCity("12") };
+end
+
+rule "exists12"
+when 
+    $customer: Customer(firstName == "Jake12")
+then
+    modify ($customer) {setFirstName("Jackie12")} 
+end
+
+rule "accountBalance13"
+when 
+    $account : Account(balance == 13)
+then
+    modify ($account) { setBalance(-13) };
+end
+
+rule "postalCode13"
+when 
+    $address : Address(postCode != "13")
+then
+    modify ($address) { setPostCode("13") };
+end
+
+rule "accountOwner13"
+when 
+    $account : Account(balance == 13)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-13) };
+end
+
+rule "BrnoPrahaOstrava13"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "13"))
+then
+    modify ($address) { setCity("13") };
+end
+
+rule "exists13"
+when 
+    $customer: Customer(firstName == "Jake13")
+then
+    modify ($customer) {setFirstName("Jackie13")} 
+end
+
+rule "accountBalance14"
+when 
+    $account : Account(balance == 14)
+then
+    modify ($account) { setBalance(-14) };
+end
+
+rule "postalCode14"
+when 
+    $address : Address(postCode != "14")
+then
+    modify ($address) { setPostCode("14") };
+end
+
+rule "accountOwner14"
+when 
+    $account : Account(balance == 14)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-14) };
+end
+
+rule "BrnoPrahaOstrava14"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "14"))
+then
+    modify ($address) { setCity("14") };
+end
+
+rule "exists14"
+when 
+    $customer: Customer(firstName == "Jake14")
+then
+    modify ($customer) {setFirstName("Jackie14")} 
+end
+
+rule "accountBalance15"
+when 
+    $account : Account(balance == 15)
+then
+    modify ($account) { setBalance(-15) };
+end
+
+rule "postalCode15"
+when 
+    $address : Address(postCode != "15")
+then
+    modify ($address) { setPostCode("15") };
+end
+
+rule "accountOwner15"
+when 
+    $account : Account(balance == 15)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-15) };
+end
+
+rule "BrnoPrahaOstrava15"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "15"))
+then
+    modify ($address) { setCity("15") };
+end
+
+rule "exists15"
+when 
+    $customer: Customer(firstName == "Jake15")
+then
+    modify ($customer) {setFirstName("Jackie15")} 
+end
+
+rule "accountBalance16"
+when 
+    $account : Account(balance == 16)
+then
+    modify ($account) { setBalance(-16) };
+end
+
+rule "postalCode16"
+when 
+    $address : Address(postCode != "16")
+then
+    modify ($address) { setPostCode("16") };
+end
+
+rule "accountOwner16"
+when 
+    $account : Account(balance == 16)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-16) };
+end
+
+rule "BrnoPrahaOstrava16"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "16"))
+then
+    modify ($address) { setCity("16") };
+end
+
+rule "exists16"
+when 
+    $customer: Customer(firstName == "Jake16")
+then
+    modify ($customer) {setFirstName("Jackie16")} 
+end
+
+rule "accountBalance17"
+when 
+    $account : Account(balance == 17)
+then
+    modify ($account) { setBalance(-17) };
+end
+
+rule "postalCode17"
+when 
+    $address : Address(postCode != "17")
+then
+    modify ($address) { setPostCode("17") };
+end
+
+rule "accountOwner17"
+when 
+    $account : Account(balance == 17)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-17) };
+end
+
+rule "BrnoPrahaOstrava17"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "17"))
+then
+    modify ($address) { setCity("17") };
+end
+
+rule "exists17"
+when 
+    $customer: Customer(firstName == "Jake17")
+then
+    modify ($customer) {setFirstName("Jackie17")} 
+end
+
+rule "accountBalance18"
+when 
+    $account : Account(balance == 18)
+then
+    modify ($account) { setBalance(-18) };
+end
+
+rule "postalCode18"
+when 
+    $address : Address(postCode != "18")
+then
+    modify ($address) { setPostCode("18") };
+end
+
+rule "accountOwner18"
+when 
+    $account : Account(balance == 18)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-18) };
+end
+
+rule "BrnoPrahaOstrava18"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "18"))
+then
+    modify ($address) { setCity("18") };
+end
+
+rule "exists18"
+when 
+    $customer: Customer(firstName == "Jake18")
+then
+    modify ($customer) {setFirstName("Jackie18")} 
+end
+
+rule "accountBalance19"
+when 
+    $account : Account(balance == 19)
+then
+    modify ($account) { setBalance(-19) };
+end
+
+rule "postalCode19"
+when 
+    $address : Address(postCode != "19")
+then
+    modify ($address) { setPostCode("19") };
+end
+
+rule "accountOwner19"
+when 
+    $account : Account(balance == 19)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-19) };
+end
+
+rule "BrnoPrahaOstrava19"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "19"))
+then
+    modify ($address) { setCity("19") };
+end
+
+rule "exists19"
+when 
+    $customer: Customer(firstName == "Jake19")
+then
+    modify ($customer) {setFirstName("Jackie19")} 
+end
+
+rule "accountBalance20"
+when 
+    $account : Account(balance == 20)
+then
+    modify ($account) { setBalance(-20) };
+end
+
+rule "postalCode20"
+when 
+    $address : Address(postCode != "20")
+then
+    modify ($address) { setPostCode("20") };
+end
+
+rule "accountOwner20"
+when 
+    $account : Account(balance == 20)
+    $customer : Customer (this == $account.owner)
+then
+    modify ($account) { setBalance(-20) };
+end
+
+rule "BrnoPrahaOstrava20"
+when 
+    $address : Address(city in ("Brno", "Praha", "Ostrava", "20"))
+then
+    modify ($address) { setCity("20") };
+end
+
+rule "exists20"
+when 
+    $customer: Customer(firstName == "Jake20")
+then
+    modify ($customer) {setFirstName("Jackie20")} 
+end
