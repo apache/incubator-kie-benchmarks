@@ -32,7 +32,7 @@
     <iterations>1</iterations>
 
     <warmUp>false</warmUp>
-    <warmUpCount>3</warmUpCount>˚
+    <warmUpCount>3</warmUpCount>
     <warmUpTime>30</warmUpTime>
     <auditLogging>true</auditLogging>
 
