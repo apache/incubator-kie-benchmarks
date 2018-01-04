@@ -72,7 +72,7 @@ public final class TestUtil {
     }
 
     public static Resource getClassPathDTableResource(final String resourceName, final DecisionTableInputType dTableType) {
-        final Resource dTableResource = KieServices.Factory.get().getResources().newClassPathResource(resourceName);
+        final Resource dTableResource = KieServices.get().getResources().newClassPathResource(resourceName);
         final DecisionTableConfiguration resourceConfig = new DecisionTableConfigurationImpl();
         resourceConfig.setInputType(dTableType);
         dTableResource.setConfiguration(resourceConfig);
