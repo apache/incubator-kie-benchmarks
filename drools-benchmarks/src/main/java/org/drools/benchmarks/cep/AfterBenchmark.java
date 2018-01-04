@@ -17,7 +17,7 @@ package org.drools.benchmarks.cep;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.Event;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.TemporalOperator;
@@ -44,7 +44,7 @@ public class AfterBenchmark extends AbstractCEPBenchmark {
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new CepRulesProvider(EventA.class, EventB.class, TemporalOperator.AFTER, "1", "10");
+        final DRLProvider drlProvider = new CepRulesProvider(EventA.class, EventB.class, TemporalOperator.AFTER, "1", "10");
         createKieBaseFromDrl(drlProvider.getDrl(rulesAndEventsNumber), EventProcessingOption.STREAM);
     }
 

@@ -15,13 +15,13 @@
 
 package org.drools.benchmarks.common.providers;
 
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.model.A;
 
 /**
  * Provides rule(s) with simple JoinNodes. Can provide rules with JoinNodes also for event processing.
  */
-public class RulesWithJoinsProvider implements DrlProvider {
+public class RulesWithJoinsProvider implements DRLProvider {
 
     private final int numberOfJoins;
     private final boolean withCep;

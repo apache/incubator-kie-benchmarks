@@ -17,7 +17,7 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
@@ -39,7 +39,7 @@ public class InsertChainedFireBenchmark extends AbstractBenchmark {
     @Setup
     public void setupKieBase() {
         final String consequence = "modify($a) {setValue($a.getValue() + 1)};";
-        final DrlProvider drlProvider = new RulesWithJoinsProvider( 1, false, true, false, "", consequence, " == ", ">");
+        final DRLProvider drlProvider = new RulesWithJoinsProvider(1, false, true, false, "", consequence, " == ", ">");
         createKieBaseFromDrl(drlProvider.getDrl(rulesNr));
     }
 

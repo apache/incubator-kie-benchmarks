@@ -17,14 +17,14 @@ package org.drools.benchmarks.common;
 
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.common.util.ReteDumper;
+
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
 import org.kie.api.conf.KieBaseOption;
 import org.kie.api.io.Resource;
-import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.StatelessKieSession;
@@ -87,45 +87,21 @@ public abstract class AbstractBenchmark {
     }
 
     protected KieBase createKieBaseFromDrl(final String drl) {
-        createKieBaseFromDrl(drl, getKieBaseConfiguration());
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drl, getKieBaseConfiguration());
         return kieBase;
     }
 
     protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
-        createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
-    }
-
-    protected void createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
-        if (TestUtil.dumpDrl()) {
-            logDebug("Benchmark DRL", drl);
-        }
-        kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(kieBaseConfiguration);
-        dumpReteIfNeeded();
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
     }
 
     protected KieBase createKieBaseFromResource(final Resource resource, final KieBaseOption... kieBaseOptions) {
-        createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
+        kieBase = BuildtimeUtil.createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
         return kieBase;
-    }
-
-    protected void createKieBaseFromResources(final KieBaseConfiguration kieBaseConfiguration, final Resource... resources) {
-        final KieHelper kieHelper = new KieHelper();
-        for (final Resource resource : resources) {
-            kieHelper.addResource(resource);
-        }
-
-        kieBase = kieHelper.build(kieBaseConfiguration);
-        dumpReteIfNeeded();
     }
 
     protected void insertFacts(final Collection<Object> facts, final Blackhole eater) {
         facts.forEach(fact -> eater.consume(kieSession.insert(fact)));
-    }
-
-    private void dumpReteIfNeeded() {
-        if (TestUtil.dumpRete()) {
-            ReteDumper.dumpRete(kieBase);
-        }
     }
 
     private KieBaseConfiguration getKieBaseConfiguration(final KieBaseOption... kieBaseOptions) {
@@ -142,13 +118,5 @@ public abstract class AbstractBenchmark {
             kieSessionConfiguration.setOption(kieSessionOption);
         }
         return kieSessionConfiguration;
-    }
-
-    private void logDebug(final String caption, final String logContent) {
-        logger.info("--------------------------------------------");
-        logger.info(caption);
-        logger.info("--------------------------------------------");
-        logger.info(logContent);
-        logger.info("--------------------------------------------");
     }
 }

@@ -19,7 +19,7 @@ package org.drools.benchmarks.session;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
@@ -64,7 +64,7 @@ public class FireUntilHaltBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         int fireNr = rulesNr * factsNr;
         String consequence = CONSEQUENCE_1 + fireNr + CONSEQUENCE_2;
-        final DrlProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true, GLOBAL, consequence);
+        final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true, GLOBAL, consequence);
         createKieBaseFromDrl( drlProvider.getDrl(rulesNr),
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
                 cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );

@@ -25,6 +25,8 @@ import org.drools.compiler.kie.builder.impl.KieBuilderImpl;
 import org.drools.compiler.kie.builder.impl.ZipKieModule;
 import org.drools.modelcompiler.CanonicalKieModule;
 import org.drools.modelcompiler.builder.CanonicalModelKieProject;
+import org.kie.api.KieBase;
+import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.KieFileSystem;
@@ -34,9 +36,22 @@ import org.kie.api.builder.ReleaseId;
 import org.kie.api.builder.model.KieBaseModel;
 import org.kie.api.builder.model.KieModuleModel;
 import org.kie.api.io.Resource;
+import org.kie.api.io.ResourceType;
+import org.kie.api.runtime.KieContainer;
+import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.util.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class BuildtimeUtil {
+
+    private static Logger logger = LoggerFactory.getLogger(BuildtimeUtil.class);
+
+    public static KieContainer createKieContainerFromResources(final boolean useCanonicalModel,
+                                                               final Resource... resources) throws IOException {
+        final ReleaseId kJarReleaseId = createKJarFromResources(useCanonicalModel, resources);
+        return KieServices.get().newKieContainer(kJarReleaseId);
+    }
 
     public static ReleaseId createKJarFromResources(final boolean useCanonicalModel, final Resource... resources)
             throws IOException {
@@ -81,6 +96,27 @@ public final class BuildtimeUtil {
         return kbuilder;
     }
 
+    public static KieBase createKieBaseFromResources(final KieBaseConfiguration kieBaseConfiguration,
+                                                     final Resource... resources) {
+        final KieHelper kieHelper = new KieHelper();
+        for (final Resource resource : resources) {
+            kieHelper.addResource(resource);
+        }
+
+        final KieBase kieBase = kieHelper.build(kieBaseConfiguration);
+        dumpReteIfNeeded(kieBase);
+        return kieBase;
+    }
+
+    public static KieBase createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
+        if (TestUtil.dumpDrl()) {
+            logDebug("Benchmark DRL", drl);
+        }
+        final KieBase kieBase = new KieHelper().addContent(drl, ResourceType.DRL).build(kieBaseConfiguration);
+        dumpReteIfNeeded(kieBase);
+        return kieBase;
+    }
+
     public static KieModuleModel getDefaultKieModuleModel(final KieServices ks) {
         final KieModuleModel kproj = ks.newKieModuleModel();
         final KieBaseModel kieBaseModel1 = kproj.newKieBaseModel("kbase").setDefault(true);
@@ -95,6 +131,20 @@ public final class BuildtimeUtil {
             fos.write(bytes);
         }
         return file;
+    }
+
+    private static void dumpReteIfNeeded(final KieBase kieBase) {
+        if (TestUtil.dumpRete()) {
+            ReteDumper.dumpRete(kieBase);
+        }
+    }
+
+    private static void logDebug(final String caption, final String logContent) {
+        logger.info("--------------------------------------------");
+        logger.info(caption);
+        logger.info("--------------------------------------------");
+        logger.info(logContent);
+        logger.info("--------------------------------------------");
     }
 
     private BuildtimeUtil() {

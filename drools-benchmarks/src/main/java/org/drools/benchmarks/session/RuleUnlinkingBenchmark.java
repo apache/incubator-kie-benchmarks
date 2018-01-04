@@ -18,7 +18,7 @@ package org.drools.benchmarks.session;
 
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.common.util.TestUtil;
 import org.drools.benchmarks.model.A;
@@ -57,7 +57,7 @@ public class RuleUnlinkingBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new RulesWithJoinsProvider(joinsNr, false, true);
+        final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, false, true);
         createKieBaseFromDrl( drlProvider.getDrl(rulesNr) );
     }
 

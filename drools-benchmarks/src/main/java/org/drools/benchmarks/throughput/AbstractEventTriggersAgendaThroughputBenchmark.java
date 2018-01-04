@@ -17,7 +17,7 @@
 package org.drools.benchmarks.throughput;
 
 import java.util.concurrent.atomic.LongAdder;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.AbstractBean;
 import org.drools.benchmarks.model.B;
@@ -75,7 +75,7 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
     protected static LongAdder insertCounter;
     protected static LongAdder firingCounter;
 
-    protected abstract DrlProvider getDrlProvider(final long eventExpirationMs, final boolean logFirings);
+    protected abstract DRLProvider getDrlProvider(final long eventExpirationMs, final boolean logFirings);
     public abstract void insertEventBenchmark(final Blackhole eater, final FiringsCounter resultFirings );
     protected abstract long getStartingIdGeneratorValue();
 
@@ -84,7 +84,7 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
         final long eventExpirationMs = eventsExpiration ?
                 EVENT_EXPIRATION_BASE_MS * Math.max(1, numberOfJoinedEvents) * eventsExpirationRatio + 1L :
                 -1L;
-        final DrlProvider drlProvider = getDrlProvider(eventExpirationMs, LOG_FIRINGS);
+        final DRLProvider drlProvider = getDrlProvider(eventExpirationMs, LOG_FIRINGS);
         final String drl = drlProvider.getDrl(numberOfRules);
 
         createKieBaseFromDrl(

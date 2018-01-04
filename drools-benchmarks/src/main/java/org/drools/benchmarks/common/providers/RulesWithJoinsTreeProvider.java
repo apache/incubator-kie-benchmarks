@@ -17,13 +17,13 @@
 package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.ConstraintPattern;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.model.A;
 
 /**
  * Provides rule(s) with JoinNodes. Each join is of different type in different rules, so joins are not shared.
  */
-public class RulesWithJoinsTreeProvider implements DrlProvider {
+public class RulesWithJoinsTreeProvider implements DRLProvider {
 
     private final int numberOfJoins;
     private final boolean appendDrlHeader;

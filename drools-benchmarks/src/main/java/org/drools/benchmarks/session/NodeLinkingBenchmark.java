@@ -18,7 +18,7 @@ package org.drools.benchmarks.session;
 
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.model.B;
 import org.kie.api.runtime.rule.FactHandle;
@@ -52,7 +52,7 @@ public class NodeLinkingBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new RulesWithJoinsProvider(4, false, true);
+        final DRLProvider drlProvider = new RulesWithJoinsProvider(4, false, true);
         createKieBaseFromDrl( drlProvider.getDrl(rulesNr) );
     }
 
