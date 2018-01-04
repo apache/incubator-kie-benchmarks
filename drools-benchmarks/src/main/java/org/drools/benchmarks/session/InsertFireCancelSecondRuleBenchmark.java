@@ -17,7 +17,7 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsTreeProvider;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
@@ -45,8 +45,8 @@ public class InsertFireCancelSecondRuleBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new RulesWithJoinsTreeProvider(joinsNr, true, true,
-                "", "modify($a) {setValue(-1)};");
+        final DRLProvider drlProvider = new RulesWithJoinsTreeProvider(joinsNr, true, true,
+                                                                       "", "modify($a) {setValue(-1)};");
         createKieBaseFromDrl(drlProvider.getDrl(numberOfRules));
     }
 

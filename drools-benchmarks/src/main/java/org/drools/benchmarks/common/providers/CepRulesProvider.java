@@ -15,14 +15,14 @@
 
 package org.drools.benchmarks.common.providers;
 
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.Event;
 import org.drools.benchmarks.common.TemporalOperator;
 
 /**
  * Provides rule(s) with after operator.
  */
-public class CepRulesProvider implements DrlProvider {
+public class CepRulesProvider implements DRLProvider {
 
     private Class<? extends Event> firstEventClass;
     private Class<? extends Event> secondEventClass;

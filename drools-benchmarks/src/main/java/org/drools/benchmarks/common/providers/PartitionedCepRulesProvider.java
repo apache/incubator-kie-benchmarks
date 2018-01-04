@@ -16,7 +16,7 @@
 
 package org.drools.benchmarks.common.providers;
 
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.throughput.FireLogger;
 
@@ -25,7 +25,7 @@ import java.util.function.Function;
 /**
  * Provides rule(s) that are partitioned.
  */
-public class PartitionedCepRulesProvider implements DrlProvider {
+public class PartitionedCepRulesProvider implements DRLProvider {
 
     private final Function<Object, String> constraintBuilder;
     private final int numberOfJoins;

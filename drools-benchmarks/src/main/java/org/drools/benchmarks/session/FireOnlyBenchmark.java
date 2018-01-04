@@ -17,7 +17,7 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
@@ -53,7 +53,7 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        final DrlProvider drlProvider = new RulesWithJoinsProvider( joinsNr, cep, true);
+        final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true);
         createKieBaseFromDrl( drlProvider.getDrl(rulesNr),
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
                 cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );

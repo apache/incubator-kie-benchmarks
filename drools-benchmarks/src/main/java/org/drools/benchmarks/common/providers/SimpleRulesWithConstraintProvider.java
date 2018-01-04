@@ -16,9 +16,9 @@
 
 package org.drools.benchmarks.common.providers;
 
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 
-public class SimpleRulesWithConstraintProvider implements DrlProvider {
+public class SimpleRulesWithConstraintProvider implements DRLProvider {
 
     private final String constraint;
 

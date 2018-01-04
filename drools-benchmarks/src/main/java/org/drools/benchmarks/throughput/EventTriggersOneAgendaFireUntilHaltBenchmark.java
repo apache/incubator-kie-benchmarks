@@ -17,7 +17,7 @@
 package org.drools.benchmarks.throughput;
 
 import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.common.DrlProvider;
+import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
 import org.drools.benchmarks.model.AbstractBean;
 import org.drools.core.time.SessionPseudoClock;
@@ -31,7 +31,7 @@ public class EventTriggersOneAgendaFireUntilHaltBenchmark extends AbstractEventT
     private boolean hashed;
 
     @Override
-    protected DrlProvider getDrlProvider(long eventExpirationMs, boolean logFirings) {
+    protected DRLProvider getDrlProvider(long eventExpirationMs, boolean logFirings) {
         return new PartitionedCepRulesProvider(numberOfJoins,
                 numberOfJoinedEvents,
                 Long.MAX_VALUE,
