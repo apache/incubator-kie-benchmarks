@@ -10,9 +10,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.KieServiceResponse;
 import org.kie.server.api.model.ReleaseId;
 import org.kie.server.api.model.ServiceResponse;
-import org.kie.server.api.model.ServiceResponse.ResponseType;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
@@ -66,9 +66,9 @@ public class KieServerClient {
     	KieServicesClient client = KieServicesFactory.newKieServicesClient(kconfig);
     	// create container if not exist
     	ServiceResponse<KieContainerResource> container = client.getContainerInfo(containerId);
-    	if (container.getType() == ResponseType.FAILURE) {
+    	if (container.getType() == KieServiceResponse.ResponseType.FAILURE) {
     		container = client.createContainer(containerId, new KieContainerResource(containerId, releaseId));
-    		if (container.getType() == ResponseType.FAILURE) {
+    		if (container.getType() == KieServiceResponse.ResponseType.FAILURE) {
     			throw new RuntimeException(container.getMsg());
     		}
     	}
