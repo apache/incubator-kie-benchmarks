@@ -16,12 +16,17 @@
 
 package org.drools.benchmarks.dmn.buildtime;
 
+import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.DMNProvider;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.providers.dmn.ContextDMNProvider;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.io.Resource;
+import org.kie.api.io.ResourceType;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
@@ -37,13 +42,17 @@ public class DMNBuildContextBenchmark extends AbstractBenchmark {
 
     private Resource dmnResource;
 
-    @Param({"dmn/context-3000.dmn"})
-    private String resourceName;
+    @Param({"3000"})
+    private int numberOfDecisionsWithContext;
 
     @Setup
     @Override
     public void setup() throws ProviderException {
-        dmnResource = KieServices.Factory.get().getResources().newClassPathResource(resourceName);
+        final DMNProvider dmnProvider = new ContextDMNProvider();
+        dmnResource = KieServices.get().getResources()
+                .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisionsWithContext)))
+                .setResourceType(ResourceType.DMN)
+                .setSourcePath("dmnFile.dmn");
     }
 
     @Benchmark

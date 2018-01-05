@@ -52,7 +52,7 @@ public class DecisionDMNProvider implements DMNProvider {
         decisionBuilder.append("  <decision id=\"decision" + index + "\" name=\"decision" + index + "\">\n");
         decisionBuilder.append("    <variable name=\"variable" + index + "\" typeRef=\"feel:string\"/>\n");
         decisionBuilder.append("    <informationRequirement>\n");
-        decisionBuilder.append("    <requiredInput href=\"#i_FullName\"/>\n");
+        decisionBuilder.append("      <requiredInput href=\"#i_FullName\"/>\n");
         decisionBuilder.append("    </informationRequirement>\n");
         decisionBuilder.append("    <literalExpression>\n");
         decisionBuilder.append("      <text>\"Hello \" + Full Name + \"" + index + "\" </text>\n");
