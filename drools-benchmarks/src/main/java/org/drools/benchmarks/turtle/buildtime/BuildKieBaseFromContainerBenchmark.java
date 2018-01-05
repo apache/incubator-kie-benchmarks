@@ -42,7 +42,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BuildKieBaseFromContainerBenchmark {
 
-    @Param({"true", "false"})
+    // Temporarily commented out
+//    @Param({"true", "false"})
+    @Param({"false"})
     private boolean useCanonicalModel;
 
     private ReleaseId releaseId;
