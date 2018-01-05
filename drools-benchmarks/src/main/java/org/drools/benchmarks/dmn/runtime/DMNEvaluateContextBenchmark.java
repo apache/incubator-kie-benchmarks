@@ -17,32 +17,53 @@
 package org.drools.benchmarks.dmn.runtime;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.DMNProvider;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.providers.dmn.ContextDMNProvider;
 import org.drools.benchmarks.dmn.util.DMNUtil;
 import org.kie.api.KieServices;
 import org.kie.api.io.Resource;
+import org.kie.api.io.ResourceType;
 import org.kie.dmn.api.core.DMNContext;
 import org.kie.dmn.api.core.DMNModel;
 import org.kie.dmn.api.core.DMNResult;
 import org.kie.dmn.api.core.DMNRuntime;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 
+@Warmup(iterations = 100)
+@Measurement(iterations = 50)
 public class DMNEvaluateContextBenchmark extends AbstractBenchmark {
 
+    @Param({"1000"})
+    private int numberOfDecisionsWithContext;
+
+    private Resource dmnResource;
     private DMNRuntime dmnRuntime;
     private DMNModel dmnModel;
     private DMNContext dmnContext;
 
+    @Setup
+    public void setupResource() {
+        final DMNProvider dmnProvider = new ContextDMNProvider();
+        dmnResource = KieServices.get().getResources()
+                .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisionsWithContext)))
+                .setResourceType(ResourceType.DMN)
+                .setSourcePath("dmnFile.dmn");
+    }
+
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        final Resource resource = KieServices.get().getResources().newClassPathResource("dmn/context-3000.dmn");
         try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, resource);
+            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
             dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "dmn-context");
             dmnContext = dmnRuntime.newContext();
         } catch (IOException e) {
