@@ -37,14 +37,12 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 15, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 15, time = 5, timeUnit = TimeUnit.SECONDS)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@Warmup(iterations = 15, time = 5, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class BuildKieBaseFromContainerBenchmark {
 
-    // Temporarily commented out
-//    @Param({"true", "false"})
-    @Param({"false"})
+    @Param({"true", "false"})
     private boolean useCanonicalModel;
 
     private ReleaseId releaseId;
