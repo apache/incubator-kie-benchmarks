@@ -21,14 +21,23 @@
   </description>
 
   <properties>
-    <version.jmh>1.17.3</version.jmh>
+    <version.jmh>1.19</version.jmh>
     <!-- Override the parent java versions, benchmarks can be 1.8 -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <!-- This is here so we can override the version from parent, i.e. benchmark other version -->
+    <kie.bom.version>${version.org.kie}</kie.bom.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-platform-bom</artifactId>
+        <version>${kie.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
