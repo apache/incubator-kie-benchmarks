@@ -19,18 +19,17 @@ package org.drools.benchmarks.turtle.buildtime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.io.KieResources;
 import org.kie.api.io.Resource;
 import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -47,12 +46,6 @@ public abstract class AbstractBuildtimeBenchmark {
 
     public AbstractBuildtimeBenchmark() {
         resources = new HashSet<>();
-    }
-
-    // TODO - this must be removed! - results with this and without this must be compared.
-    @Setup(Level.Invocation)
-    public void callGc() {
-        System.gc();
     }
 
     protected void addClassPathResource(String path) {
