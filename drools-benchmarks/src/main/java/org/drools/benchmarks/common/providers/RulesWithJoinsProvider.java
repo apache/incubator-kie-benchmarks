@@ -23,6 +23,8 @@ import org.drools.benchmarks.model.A;
  */
 public class RulesWithJoinsProvider implements DRLProvider {
 
+    public static final String PROVIDER_ID = "RulesWithJoinsProvider";
+
     private final int numberOfJoins;
     private final boolean withCep;
     private final boolean appendDrlHeader;

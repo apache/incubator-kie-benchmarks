@@ -20,6 +20,8 @@ import org.drools.benchmarks.common.DRLProvider;
 
 public class SimpleRulesWithConstraintProvider implements DRLProvider {
 
+    public static final String PROVIDER_ID = "SimpleRulesWithConstraintProvider";
+
     private final String constraint;
 
     public SimpleRulesWithConstraintProvider(final String constraint) {

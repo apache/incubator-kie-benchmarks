@@ -1,11 +1,11 @@
 /*
- * Copyright 2017 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2018 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,11 +21,8 @@ import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.DRLProvider;
-import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
-import org.kie.api.KieBase;
-import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.io.Resource;
@@ -43,50 +40,32 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 10, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-public class BuildKieBaseFromContainerBenchmark {
+public class BuildKJarFromResourceBenchmark {
 
     @Param({"true", "false"})
     private boolean useCanonicalModel;
 
-    @Param({"1000", "3000"})
+    @Param({"1000", "2000"})
     private int numberOfRules;
 
-    @Param({SimpleRulesWithConstraintProvider.PROVIDER_ID, RulesWithJoinsProvider.PROVIDER_ID})
-    private String rulesProviderId;
-
-    private ReleaseId releaseId;
-    private KieServices kieServices;
-    private KieBaseConfiguration kieBaseConfiguration;
+    private Resource drlResource;
 
     @Setup
-    public void createKJar() throws IOException {
-        kieServices = KieServices.get();
-        kieBaseConfiguration = kieServices.newKieBaseConfiguration();
+    public void createResource() {
 
-        final DRLProvider drlProvider = getDRLProvider();
-        final Resource drlResource = KieServices.get().getResources()
+        final DRLProvider drlProvider = new SimpleRulesWithConstraintProvider("Integer(this == ${i})");
+        drlResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(drlProvider.getDrl(numberOfRules)))
                 .setResourceType(ResourceType.DRL)
                 .setSourcePath("drlFile.drl");
-        releaseId = BuildtimeUtil.createKJarFromResources(useCanonicalModel, drlResource);
     }
 
     @Benchmark
-    public KieBase getKieBaseFromContainer() {
-        return kieServices.newKieContainer(releaseId).newKieBase(kieBaseConfiguration);
+    public ReleaseId createKJarFromResource() throws IOException {
+        return BuildtimeUtil.createKJarFromResources(useCanonicalModel, drlResource);
     }
 
-    private DRLProvider getDRLProvider() {
-        switch (rulesProviderId) {
-            case SimpleRulesWithConstraintProvider.PROVIDER_ID:
-                return new SimpleRulesWithConstraintProvider("Integer(this == ${i})");
-            case RulesWithJoinsProvider.PROVIDER_ID:
-                return new RulesWithJoinsProvider(4, false, true);
-            default:
-                throw new IllegalArgumentException("Benchmark doesn't support rules provider with id: " + rulesProviderId + "!");
-        }
-    }
 }
