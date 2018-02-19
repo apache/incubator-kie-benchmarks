@@ -20,11 +20,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+
 import org.drools.compiler.kie.builder.impl.InternalKieModule;
 import org.drools.compiler.kie.builder.impl.KieBuilderImpl;
 import org.drools.compiler.kie.builder.impl.ZipKieModule;
 import org.drools.modelcompiler.CanonicalKieModule;
-import org.drools.modelcompiler.builder.CanonicalModelKieProject;
+import org.drools.modelcompiler.CanonicalModelProject;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
@@ -83,7 +84,7 @@ public final class BuildtimeUtil {
 
         final KieBuilderImpl kbuilder = (KieBuilderImpl) KieServices.Factory.get().newKieBuilder(kfs);
         if (useCanonicalModel) {
-            kbuilder.buildAll(CanonicalModelKieProject::new);
+            kbuilder.buildAll(CanonicalModelProject.class);
         } else {
             kbuilder.buildAll();
         }
