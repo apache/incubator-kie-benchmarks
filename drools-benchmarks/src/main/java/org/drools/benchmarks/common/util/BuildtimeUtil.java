@@ -25,7 +25,7 @@ import org.drools.compiler.kie.builder.impl.InternalKieModule;
 import org.drools.compiler.kie.builder.impl.KieBuilderImpl;
 import org.drools.compiler.kie.builder.impl.ZipKieModule;
 import org.drools.modelcompiler.CanonicalKieModule;
-import org.drools.modelcompiler.CanonicalModelProject;
+import org.drools.modelcompiler.CanonicalModelPatternProject;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
@@ -84,7 +84,7 @@ public final class BuildtimeUtil {
 
         final KieBuilderImpl kbuilder = (KieBuilderImpl) KieServices.Factory.get().newKieBuilder(kfs);
         if (useCanonicalModel) {
-            kbuilder.buildAll(CanonicalModelProject.class);
+            kbuilder.buildAll(CanonicalModelPatternProject.class);
         } else {
             kbuilder.buildAll();
         }
