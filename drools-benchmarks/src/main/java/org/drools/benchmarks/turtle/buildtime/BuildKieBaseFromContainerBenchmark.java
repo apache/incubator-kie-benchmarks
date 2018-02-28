@@ -51,7 +51,7 @@ public class BuildKieBaseFromContainerBenchmark {
     @Param({"true", "false"})
     private boolean useCanonicalModel;
 
-    @Param({"100", "500", "1000", "3000", "5000"})
+    @Param({"100", "500", "1000", "3000", "5000", "10000"})
     private int numberOfRules;
 
     @Param({SimpleRulesWithConstraintProvider.PROVIDER_ID, RulesWithJoinsProvider.PROVIDER_ID})
