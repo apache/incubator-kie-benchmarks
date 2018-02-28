@@ -16,14 +16,21 @@
 
 package org.drools.benchmarks.dmn.buildtime;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
+
+import org.drools.benchmarks.common.DMNProvider;
 import org.drools.benchmarks.common.ProviderException;
-import org.drools.compiler.kie.builder.impl.ZipKieModule;
+import org.drools.benchmarks.common.providers.dmn.BusinessKnowledgeModelDMNProvider;
+import org.drools.benchmarks.common.providers.dmn.ContextDMNProvider;
+import org.drools.benchmarks.common.providers.dmn.DecisionDMNProvider;
+import org.drools.benchmarks.common.providers.dmn.DecisionTableDMNProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
-import org.kie.api.builder.model.KieModuleModel;
+import org.kie.api.io.Resource;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.dmn.api.core.DMNRuntime;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -35,7 +42,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.util.FileUtils;
 
 @BenchmarkMode(Mode.AverageTime)
 @State(Scope.Thread)
@@ -50,8 +56,7 @@ public class DMNBuildKJarBenchmark {
     @Setup
     public void setup() throws ProviderException, IOException {
         kieServices = KieServices.Factory.get();
-        releaseId = kieServices.newReleaseId("org.drools", "test-dmn-project", "1.0");
-        prepareRepository();
+        releaseId = createKJar();
     }
 
     @Benchmark
@@ -60,20 +65,23 @@ public class DMNBuildKJarBenchmark {
         return container.newKieSession().getKieRuntime(DMNRuntime.class);
     }
 
-    private void prepareRepository() throws IOException {
-        final File kJarFile = FileUtils.extractFromResource("/dmn/test-dmn-project-1.0.jar");
-        final ZipKieModule zipKieModule = new ZipKieModule(releaseId, getKieModuleModel(), kJarFile);
-        kieServices.getRepository().addKieModule(zipKieModule);
+    private ReleaseId createKJar() throws IOException {
+
+        final Resource resource1 = kieServices.getResources().newClassPathResource("dmn/validation.dmn");
+        resource1.setResourceType(ResourceType.DMN);
+
+        return BuildtimeUtil.createKJarFromResources(false,
+                                                          resource1,
+                                                          getDMNResource(new BusinessKnowledgeModelDMNProvider(), "bkm.dmn"),
+                                                          getDMNResource(new DecisionTableDMNProvider(), "decisionTable.dmn"),
+                                                          getDMNResource(new DecisionDMNProvider(), "decision.dmn"),
+                                                          getDMNResource(new ContextDMNProvider(), "context.dmn"));
     }
 
-    private KieModuleModel getKieModuleModel() {
-        final KieModuleModel kieModuleModel = kieServices.newKieModuleModel();
-        kieModuleModel
-                .newKieBaseModel("default-kiebase")
-                .addPackage("*")
-                .setDefault(true)
-                .newKieSessionModel("default-kiesession")
-                .setDefault(true);
-        return kieModuleModel;
+    private Resource getDMNResource(final DMNProvider provider, final String sourcePath) {
+        return kieServices.getResources()
+                .newReaderResource(new StringReader(provider.getDMN(1000)))
+                .setResourceType(ResourceType.DMN)
+                .setSourcePath(sourcePath);
     }
 }
