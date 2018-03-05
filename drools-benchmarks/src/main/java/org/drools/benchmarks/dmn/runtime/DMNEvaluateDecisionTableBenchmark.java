@@ -39,7 +39,7 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 100000)
+@Warmup(iterations = 100)
 @Measurement(iterations = 50)
 public class DMNEvaluateDecisionTableBenchmark extends AbstractBenchmark {
 
