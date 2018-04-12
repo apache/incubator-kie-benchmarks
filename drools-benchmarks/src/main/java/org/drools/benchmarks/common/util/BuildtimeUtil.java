@@ -24,8 +24,6 @@ import java.util.List;
 import org.drools.compiler.kie.builder.impl.InternalKieModule;
 import org.drools.compiler.kie.builder.impl.KieBuilderImpl;
 import org.drools.compiler.kie.builder.impl.ZipKieModule;
-import org.drools.modelcompiler.CanonicalKieModule;
-import org.drools.modelcompiler.ExecutableModelProject;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
@@ -50,44 +48,35 @@ public final class BuildtimeUtil {
 
     public static KieContainer createKieContainerFromResources(final boolean useCanonicalModel,
                                                                final Resource... resources) throws IOException {
-        final ReleaseId kJarReleaseId = createKJarFromResources(useCanonicalModel, resources);
+        final ReleaseId kJarReleaseId = createKJarFromResources(resources);
         return KieServices.get().newKieContainer(kJarReleaseId);
     }
 
-    public static ReleaseId createKJarFromResources(final boolean useCanonicalModel, final Resource... resources)
+    public static ReleaseId createKJarFromResources(final Resource... resources)
             throws IOException {
         final KieServices kieServices = KieServices.get();
-        final KieBuilder kieBuilder = getKieBuilderFromResources(kieServices.newKieFileSystem(), useCanonicalModel, resources);
-        generateKJarFromKieBuilder(kieBuilder, useCanonicalModel);
+        final KieBuilder kieBuilder = getKieBuilderFromResources(kieServices.newKieFileSystem(), resources);
+        generateKJarFromKieBuilder(kieBuilder);
         return kieBuilder.getKieModule().getReleaseId();
     }
 
-    public static void generateKJarFromKieBuilder(final KieBuilder kieBuilder, final boolean useCanonicalModel)
+    public static void generateKJarFromKieBuilder(final KieBuilder kieBuilder)
             throws IOException {
         final ReleaseId releaseId = kieBuilder.getKieModule().getReleaseId();
         final InternalKieModule kieModule = (InternalKieModule) kieBuilder.getKieModule();
         final File kjarFile = bytesToTempFile(releaseId, kieModule.getBytes(), ".jar");
-        final KieModule zipKieModule;
-        if (useCanonicalModel) {
-            zipKieModule = new CanonicalKieModule(releaseId, kieModule.getKieModuleModel(), kjarFile);
-        } else {
-            zipKieModule = new ZipKieModule(releaseId, kieModule.getKieModuleModel(), kjarFile);
-        }
+        final KieModule zipKieModule = new ZipKieModule(releaseId, kieModule.getKieModuleModel(), kjarFile);
         KieServices.get().getRepository().addKieModule(zipKieModule);
     }
 
-    public static KieBuilder getKieBuilderFromResources(final KieFileSystem kfs, final boolean useCanonicalModel, final Resource... resources) {
+    public static KieBuilder getKieBuilderFromResources(final KieFileSystem kfs, final Resource... resources) {
         for (final Resource res : resources) {
             kfs.write(res);
         }
         kfs.writeKModuleXML(getDefaultKieModuleModel(KieServices.get()).toXML());
 
         final KieBuilderImpl kbuilder = (KieBuilderImpl) KieServices.Factory.get().newKieBuilder(kfs);
-        if (useCanonicalModel) {
-            kbuilder.buildAll(ExecutableModelProject.class);
-        } else {
-            kbuilder.buildAll();
-        }
+        kbuilder.buildAll();
 
         final List<Message> msgs = kbuilder.getResults().getMessages(Message.Level.ERROR);
         if (msgs.size() > 0) {

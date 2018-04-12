@@ -70,12 +70,12 @@ public class DMNBuildKJarBenchmark {
         final Resource resource1 = kieServices.getResources().newClassPathResource("dmn/validation.dmn");
         resource1.setResourceType(ResourceType.DMN);
 
-        return BuildtimeUtil.createKJarFromResources(false,
-                                                          resource1,
-                                                          getDMNResource(new BusinessKnowledgeModelDMNProvider(), "bkm.dmn"),
-                                                          getDMNResource(new DecisionTableDMNProvider(), "decisionTable.dmn"),
-                                                          getDMNResource(new DecisionDMNProvider(), "decision.dmn"),
-                                                          getDMNResource(new ContextDMNProvider(), "context.dmn"));
+        return BuildtimeUtil.createKJarFromResources(
+                resource1,
+                getDMNResource(new BusinessKnowledgeModelDMNProvider(), "bkm.dmn"),
+                getDMNResource(new DecisionTableDMNProvider(), "decisionTable.dmn"),
+                getDMNResource(new DecisionDMNProvider(), "decision.dmn"),
+                getDMNResource(new ContextDMNProvider(), "context.dmn"));
     }
 
     private Resource getDMNResource(final DMNProvider provider, final String sourcePath) {

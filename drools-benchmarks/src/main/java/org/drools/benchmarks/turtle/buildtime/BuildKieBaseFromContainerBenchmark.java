@@ -48,9 +48,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BuildKieBaseFromContainerBenchmark {
 
-    @Param({"true", "false"})
-    private boolean useCanonicalModel;
-
     @Param({"100", "500", "1000", "3000", "5000", "10000"})
     private int numberOfRules;
 
@@ -71,7 +68,7 @@ public class BuildKieBaseFromContainerBenchmark {
                 .newReaderResource(new StringReader(drlProvider.getDrl(numberOfRules)))
                 .setResourceType(ResourceType.DRL)
                 .setSourcePath("drlFile.drl");
-        releaseId = BuildtimeUtil.createKJarFromResources(useCanonicalModel, drlResource);
+        releaseId = BuildtimeUtil.createKJarFromResources(drlResource);
     }
 
     @Benchmark

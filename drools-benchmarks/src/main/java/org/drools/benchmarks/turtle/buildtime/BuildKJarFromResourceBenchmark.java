@@ -45,9 +45,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BuildKJarFromResourceBenchmark {
 
-    @Param({"true", "false"})
-    private boolean useCanonicalModel;
-
     @Param({"1000", "2000"})
     private int numberOfRules;
 
@@ -65,7 +62,7 @@ public class BuildKJarFromResourceBenchmark {
 
     @Benchmark
     public ReleaseId createKJarFromResource() throws IOException {
-        return BuildtimeUtil.createKJarFromResources(useCanonicalModel, drlResource);
+        return BuildtimeUtil.createKJarFromResources(drlResource);
     }
 
 }
