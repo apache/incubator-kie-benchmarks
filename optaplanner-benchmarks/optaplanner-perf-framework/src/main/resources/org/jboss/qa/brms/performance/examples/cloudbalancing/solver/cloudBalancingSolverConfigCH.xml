@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+
+  <solutionClass>org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance</solutionClass>
+  <entityClass>org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudProcess</entityClass>
+
+  <scoreDirectorFactory>
+    <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
+    <incrementalScoreCalculatorClass>org.jboss.qa.brms.performance.examples.cloudbalancing.solver.score.CloudBalancingIncrementalScoreCalculator</incrementalScoreCalculatorClass>
+    <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+  </scoreDirectorFactory>
+
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic>
+
+</solver>
