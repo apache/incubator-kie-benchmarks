@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+  <!--<environmentMode>FAST_ASSERT</environmentMode>-->
+  <solutionClass>org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution</solutionClass>
+  <entityClass>org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Standstill</entityClass>
+  <entityClass>org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Customer</entityClass>
+  <entityClass>org.jboss.qa.brms.performance.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer</entityClass>
+
+  <scoreDirectorFactory>
+    <scoreDefinitionType>HARD_SOFT_LONG</scoreDefinitionType>
+    <incrementalScoreCalculatorClass>org.jboss.qa.brms.performance.examples.vehiclerouting.solver.score.VehicleRoutingIncrementalScoreCalculator</incrementalScoreCalculatorClass>
+    <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+  </scoreDirectorFactory>
+
+  <termination>
+    <secondsSpentLimit>10</secondsSpentLimit>
+  </termination>
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic>
+  <localSearch>
+    <unionMoveSelector>
+      <changeMoveSelector/>
+      <swapMoveSelector/>
+      <subChainChangeMoveSelector>
+        <selectReversingMoveToo>true</selectReversingMoveToo>
+      </subChainChangeMoveSelector>
+      <subChainSwapMoveSelector>
+        <selectReversingMoveToo>true</selectReversingMoveToo>
+      </subChainSwapMoveSelector>
+    </unionMoveSelector>
+    <acceptor>
+      <lateAcceptanceSize>200</lateAcceptanceSize>
+    </acceptor>
+    <forager>
+      <acceptedCountLimit>1</acceptedCountLimit>
+    </forager>
+  </localSearch>
+</solver>

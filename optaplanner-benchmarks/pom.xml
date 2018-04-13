@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>kie-benchmarks</artifactId>
+    <groupId>org.kie</groupId>
+    <version>7.5.1-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.kie</groupId>
+  <artifactId>optaplanner-benchmarks</artifactId>
+  <packaging>pom</packaging>
+  <name>OptaPlanner Benchmarks Parent</name>
+  <description>This is the multi-module project top-level parent.</description>
+
+  <modules>
+    <module>optaplanner-perf-framework</module>
+    <module>optaplanner-perf-benchmark</module>
+  </modules>
+
+  <properties>
+    <version.jmh>1.20</version.jmh>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- KIE Platform BOM -->
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-platform-bom</artifactId>
+        <type>pom</type>
+        <version>${kie.bom.version}</version>
+        <scope>import</scope>
+      </dependency>
+      <!-- Modules -->
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>optaplanner-perf-framework</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>optaplanner-perf-benchmark</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <!-- JMH -->
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core</artifactId>
+        <version>${version.jmh}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-generator-annprocess</artifactId>
+        <version>${version.jmh}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
