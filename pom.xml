@@ -19,7 +19,7 @@
   </description>
 
   <properties>
-    <version.jmh>1.19</version.jmh>
+    <version.jmh>1.20</version.jmh>
     <!-- This is here so we can override the version from parent, i.e. benchmark other version -->
     <kie.bom.version>${version.org.kie}</kie.bom.version>
   </properties>
