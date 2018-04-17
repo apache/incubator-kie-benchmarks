@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>optaplanner-benchmarks</artifactId>
+    <groupId>org.kie</groupId>
+    <version>6.5.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>optaplanner-perf-framework</artifactId>
+
+  <dependencies>
+    <!-- OptaPlanner -->
+    <dependency>
+      <groupId>org.optaplanner</groupId>
+      <artifactId>optaplanner-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.optaplanner</groupId>
+      <artifactId>optaplanner-persistence-xstream</artifactId>
+    </dependency>
+    <!-- Common utils -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- XML -->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+    </dependency>
+  </dependencies>
+</project>

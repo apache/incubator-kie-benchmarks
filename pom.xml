@@ -53,6 +53,7 @@
 
   <modules>
     <module>drools-benchmarks</module>
+    <module>optaplanner-benchmarks</module>
   </modules>
 
   <repositories>
