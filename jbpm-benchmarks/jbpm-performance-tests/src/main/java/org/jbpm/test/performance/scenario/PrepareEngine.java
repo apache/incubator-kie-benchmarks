@@ -12,7 +12,7 @@ import org.kie.api.task.model.Task;
 public class PrepareEngine {
 
     public static List<Long> createNewTasks(boolean start, int count, TaskService taskService) {
-        String str = "(with (new Task()) { priority = 55, taskData = (with( new TaskData()) { } ), ";
+        String str = "(with (new Task()) { priority = 55, taskData = (with( new TaskData()) { deploymentId = 'default-singleton' } ), ";
         str += "peopleAssignments = (with ( new PeopleAssignments() ) { potentialOwners = [new User('" + UserStorage.PerfUser.getUserId()
                 + "')], businessAdministrators = [ new User('Administrator') ], }),";
         str += "names = [ new I18NText( 'en-UK', 'perf-sample-task')] })";
