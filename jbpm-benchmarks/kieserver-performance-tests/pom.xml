@@ -17,7 +17,7 @@
     <kit.version>${version.org.kie}</kit.version>
     <metrics.version>3.1.0</metrics.version>
     <!-- WildFly version used for JMS BOM -->
-    <wildfly.version>10.1.0.Final</wildfly.version>
+    <wildfly.version>11.0.0.Final</wildfly.version>
 
     <!-- >>>>>>>>>>>>>>>> Performance configuration <<<<<<<<<<<<<<<<<<<< -->
 
