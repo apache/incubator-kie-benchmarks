@@ -32,4 +32,11 @@ public interface DRLProvider {
      * @return String representation of DRL that contains specified number of rules.
      */
     String getDrl(int numberOfRules);
+
+    /**
+     * Returns DRL that contains specified number of rules.
+     * @param numberOfRules Required number of rules in resulting DRL.
+     * @return String representation of DRL that contains specified number of rules.
+     */
+    String getDrl(int numberOfRules, final String ruleNameBase);
 }

@@ -64,6 +64,11 @@ public class RulesWithJoinsTreeProvider implements DRLProvider {
 
     @Override
     public String getDrl(int numberOfRules) {
+        return getDrl(numberOfRules, "R");
+    }
+
+    @Override
+    public String getDrl(int numberOfRules, String ruleNameBase) {
         final StringBuilder drlBuilder = new StringBuilder();
 
         if (appendDrlHeader) {
@@ -71,7 +76,7 @@ public class RulesWithJoinsTreeProvider implements DRLProvider {
         }
         drlBuilder.append( global + "\n" );
         for ( int i = 0; i < numberOfRules; i++ ) {
-            drlBuilder.append( "rule R" + i + " \n");
+            drlBuilder.append( "rule \"" + ruleNameBase + i + "\" \n");
             drlBuilder.append( " when\n");
             appendJoins(drlBuilder, i);
             drlBuilder.append( "then\n" );

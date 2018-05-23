@@ -47,6 +47,11 @@ public class CepRulesProvider implements DRLProvider {
 
     @Override
     public String getDrl(final int numberOfRules) {
+        return getDrl(numberOfRules, "R");
+    }
+
+    @Override
+    public String getDrl(int numberOfRules, String ruleNameBase) {
         final StringBuilder drlBuilder = new StringBuilder();
 
         drlBuilder.append("import " + firstEventClass.getCanonicalName() + ";\n");
@@ -58,10 +63,10 @@ public class CepRulesProvider implements DRLProvider {
         final String temporalDistanceString = getTemporalDistanceString();
 
         for (int i = 1; i <= numberOfRules; i++) {
-            drlBuilder.append(" rule R" + i + " when\n");
+            drlBuilder.append(" rule \"" + ruleNameBase + i + "\" when\n");
             drlBuilder.append("   $event1: " + firstEventClass.getName() + "()\n");
             drlBuilder.append("   $event2: " + secondEventClass.getName()
-                    + "(this != $event1, this " + temporalOperator + " " + temporalDistanceString + " $event1)\n");
+                                      + "(this != $event1, this " + temporalOperator + " " + temporalDistanceString + " $event1)\n");
             drlBuilder.append( "then end\n" );
         }
 

@@ -79,6 +79,11 @@ public class RulesWithJoinsProvider implements DRLProvider {
 
     @Override
     public String getDrl(int numberOfRules) {
+        return getDrl(numberOfRules, "R");
+    }
+
+    @Override
+    public String getDrl(int numberOfRules, String ruleNameBase) {
         final StringBuilder drlBuilder = new StringBuilder();
 
         if (appendDrlHeader) {
@@ -89,7 +94,7 @@ public class RulesWithJoinsProvider implements DRLProvider {
             appendCepHeader(drlBuilder);
         }
         for ( int i = 0; i < numberOfRules; i++ ) {
-            drlBuilder.append( "rule R" + i + " \n");
+            drlBuilder.append( "rule \"" + ruleNameBase + i + "\" \n");
             if (prioritizedBySalience) {
                 drlBuilder.append("salience " + i + " \n");
             }

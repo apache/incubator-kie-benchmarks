@@ -16,11 +16,11 @@
 
 package org.drools.benchmarks.common.providers;
 
+import java.util.function.Function;
+
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.throughput.FireLogger;
-
-import java.util.function.Function;
 
 /**
  * Provides rule(s) that are partitioned.
@@ -53,6 +53,11 @@ public class PartitionedCepRulesProvider implements DRLProvider {
 
     @Override
     public String getDrl(final int numberOfRules) {
+        return getDrl(numberOfRules, "R");
+    }
+
+    @Override
+    public String getDrl(int numberOfRules, String ruleNameBase) {
         final StringBuilder drlBuilder = new StringBuilder();
 
         drlBuilder.append("import " + A.class.getPackage().getName() + ".*;\n");
@@ -66,7 +71,7 @@ public class PartitionedCepRulesProvider implements DRLProvider {
         }
 
         for (int partitionNumber = 0; partitionNumber < numberOfRules; partitionNumber++) {
-            drlBuilder.append(" rule R" + partitionNumber + " when\n");
+            drlBuilder.append(" rule \"" + ruleNameBase + partitionNumber + "\" when\n");
             addJoins(drlBuilder, partitionNumber);
             drlBuilder.append( "then\n" );
             if (countFirings) {
