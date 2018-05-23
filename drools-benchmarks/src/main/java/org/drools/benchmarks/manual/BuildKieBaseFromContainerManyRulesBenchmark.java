@@ -37,6 +37,7 @@ import org.kie.api.builder.ReleaseId;
 import org.kie.api.io.Resource;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -49,14 +50,13 @@ import org.openjdk.jmh.util.FileUtils;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.SingleShotTime)
-//@Warmup(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
-//@Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
-@Warmup(iterations = 500)
-@Measurement(iterations = 15)
+@Warmup(iterations = 10, time = 2, timeUnit = TimeUnit.MINUTES)
+@Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.MINUTES)
+@Fork(2)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BuildKieBaseFromContainerManyRulesBenchmark {
 
-    @Param({"false"})
+    @Param({"true", "false"})
     private boolean useCanonicalModel;
 
     @Param({"200"})
@@ -99,11 +99,6 @@ public class BuildKieBaseFromContainerManyRulesBenchmark {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//            final Resource drlResource = KieServices.get().getResources()
-//                    .newReaderResource(new StringReader(drlProvider.getDrl(numberOfRulesPerFile, "R" + ruleFileId + "-")))
-//                    .setResourceType(ResourceType.DRL)
-//                    .setSourcePath("drlFile" + ruleFileId + ".drl");
-//            resourcesMap.put(ruleFileId, drlResource);
         });
         return resourcesMap.values();
     }
