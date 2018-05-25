@@ -47,7 +47,7 @@ public class L1000HumanTasksComplete implements IPerfTest {
     @Override
     public void initMetrics() {
         taskId = 0;
-        taskIds = PrepareEngine.createNewTasks(true, 1000, taskService);
+        taskIds = PrepareEngine.createNewTasks(true, 1000, taskService, jc.getRuntimeManagerIdentifier());
         
         MetricRegistry metrics = SharedMetricRegistry.getInstance();
         taskCompleted = metrics.meter(MetricRegistry.name(L1000HumanTasksComplete.class, "scenario.task.completed"));

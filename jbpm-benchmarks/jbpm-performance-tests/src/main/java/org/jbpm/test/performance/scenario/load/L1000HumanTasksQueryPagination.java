@@ -35,7 +35,7 @@ public class L1000HumanTasksQueryPagination implements IPerfTest {
 
         taskService = jc.getRuntimeEngine().getTaskService();
 
-        PrepareEngine.createNewTasks(false, 1000, taskService);
+        PrepareEngine.createNewTasks(false, 1000, taskService, jc.getRuntimeManagerIdentifier());
     }
 
     @Override
