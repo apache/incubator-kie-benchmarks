@@ -11,8 +11,8 @@ import org.kie.api.task.model.Task;
 
 public class PrepareEngine {
 
-    public static List<Long> createNewTasks(boolean start, int count, TaskService taskService) {
-        String str = "(with (new Task()) { priority = 55, taskData = (with( new TaskData()) { deploymentId = 'default-singleton' } ), ";
+    public static List<Long> createNewTasks(boolean start, int count, TaskService taskService, String runtimeManagerIdentifier) {
+        String str = "(with (new Task()) { priority = 55, taskData = (with( new TaskData()) { deploymentId = '" + runtimeManagerIdentifier + "' } ), ";
         str += "peopleAssignments = (with ( new PeopleAssignments() ) { potentialOwners = [new User('" + UserStorage.PerfUser.getUserId()
                 + "')], businessAdministrators = [ new User('Administrator') ], }),";
         str += "names = [ new I18NText( 'en-UK', 'perf-sample-task')] })";
