@@ -16,11 +16,15 @@
 
 package org.drools.benchmarks.dmn.feel;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.kie.dmn.feel.FEEL;
+import org.kie.dmn.feel.lang.CompiledExpression;
+import org.kie.dmn.feel.parser.feel11.profiles.DoCompileFEELProfile;
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -36,14 +40,49 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public abstract class AbstractFEELBenchmark {
 
-    private FEEL feelInstance;
+    private FEEL feelInterpreted;
+    private FEEL feelCompiled;
+    private CompiledExpression compiledJavaExpression;
+    private CompiledExpression compiledButInterpretedExpression;
 
-    @Setup(Level.Iteration)
+    @Setup()
     public void setupFEEL() {
-        feelInstance = FEEL.newInstance();
+        feelInterpreted = FEEL.newInstance();
+        feelCompiled = FEEL.newInstance(Collections.singletonList(new DoCompileFEELProfile()));
+        compiledJavaExpression = compileExpression(getExpression());
+        compiledButInterpretedExpression = compileInterpretedExpression(getExpression());
     }
 
+    public abstract String getExpression();
+
     protected Object evaluateFEELExpression(final String expression) {
-        return feelInstance.evaluate(expression);
+        return feelInterpreted.evaluate(expression);
+    }
+
+    protected Object evaluateFEELExpression(final CompiledExpression expression) {
+        return feelCompiled.evaluate(expression, new HashMap<>());
+    }
+
+    protected CompiledExpression compileExpression(final String expression) {
+        return feelCompiled.compile(expression, feelCompiled.newCompilerContext());
+    }
+
+    protected CompiledExpression compileInterpretedExpression(String expression) {
+        return feelInterpreted.compile(expression, feelInterpreted.newCompilerContext());
+    }
+
+    @Benchmark
+    public Object evaluateExpressionBenchmark() {
+        return evaluateFEELExpression(getExpression());
+    }
+
+    @Benchmark
+    public Object evaluateCompiledJavaExpressionBenchmark() {
+        return evaluateFEELExpression(compiledJavaExpression);
+    }
+
+    @Benchmark
+    public Object evaluateCompiledButInterpretedExpression() {
+        return evaluateFEELExpression(compiledButInterpretedExpression);
     }
 }

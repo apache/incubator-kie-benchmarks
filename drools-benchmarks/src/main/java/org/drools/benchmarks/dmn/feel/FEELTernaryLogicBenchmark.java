@@ -18,7 +18,6 @@ package org.drools.benchmarks.dmn.feel;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -28,8 +27,8 @@ public class FEELTernaryLogicBenchmark extends AbstractFEELBenchmark {
     @Param({"true and true", "true and null", "false or true", "false and null", "false and false or true"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

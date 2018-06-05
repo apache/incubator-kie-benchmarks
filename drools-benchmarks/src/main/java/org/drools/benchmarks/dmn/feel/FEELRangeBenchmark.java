@@ -18,7 +18,6 @@ package org.drools.benchmarks.dmn.feel;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -28,8 +27,8 @@ public class FEELRangeBenchmark extends AbstractFEELBenchmark {
     @Param({"[1..2]", "[1..2)", "(1..2]", "(1..2)", "[\"a\"..\"z\"]", "[date(\"1978-09-12\")..date(\"1978-10-13\")]"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

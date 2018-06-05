@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.valuescomparison;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -29,8 +28,8 @@ public class FEELNumberComparisonBenchmark extends AbstractFEELBenchmark {
     @Param({"1 < 2", "10 > 20", "10.4 != 20.6", "15.25 = 15.25"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

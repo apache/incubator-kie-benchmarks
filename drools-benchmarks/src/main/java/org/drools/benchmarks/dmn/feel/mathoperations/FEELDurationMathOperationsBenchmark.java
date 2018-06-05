@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.mathoperations;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -34,8 +33,8 @@ public class FEELDurationMathOperationsBenchmark extends AbstractFEELBenchmark {
             "duration( \"P2Y2M\" ) / duration( \"P1Y1M\" )"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

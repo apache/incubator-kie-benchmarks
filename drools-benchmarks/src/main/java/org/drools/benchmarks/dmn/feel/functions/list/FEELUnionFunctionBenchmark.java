@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.functions.list;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -29,8 +28,8 @@ public class FEELUnionFunctionBenchmark extends AbstractFEELBenchmark {
     @Param({"union( [1, 2, 1], [2, 3], 2, 4 )"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

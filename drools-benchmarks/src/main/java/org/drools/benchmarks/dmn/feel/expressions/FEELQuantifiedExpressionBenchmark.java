@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.expressions;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELQuantifiedExpressionBenchmark extends AbstractFEELBenchmark {
@@ -26,8 +25,8 @@ public class FEELQuantifiedExpressionBenchmark extends AbstractFEELBenchmark {
             "every price in [ 80, 11, 90 ] satisfies price > 10"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

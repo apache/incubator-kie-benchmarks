@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.expressions;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELPathExpressionBenchmark extends AbstractFEELBenchmark {
@@ -25,8 +24,8 @@ public class FEELPathExpressionBenchmark extends AbstractFEELBenchmark {
     @Param({"{ full name: { first name: \"John\", last name: \"Doe\" } }.full name.last name"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.functions.list;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELInsertBeforeFunctionBenchmark extends AbstractFEELBenchmark {
@@ -25,8 +24,8 @@ public class FEELInsertBeforeFunctionBenchmark extends AbstractFEELBenchmark {
     @Param({"insert before( [1, 2, 3], 3, 4 )", "insert before( [1, 2, 3], -3, 4 )"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

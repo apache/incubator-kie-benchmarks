@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.operators;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELNotOperatorBenchmark extends AbstractFEELBenchmark {
@@ -27,8 +26,8 @@ public class FEELNotOperatorBenchmark extends AbstractFEELBenchmark {
             "not( \"foo\" )"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

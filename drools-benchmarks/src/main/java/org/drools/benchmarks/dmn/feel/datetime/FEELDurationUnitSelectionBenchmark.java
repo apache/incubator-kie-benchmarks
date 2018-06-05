@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.datetime;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELDurationUnitSelectionBenchmark extends AbstractFEELBenchmark {
@@ -30,8 +29,8 @@ public class FEELDurationUnitSelectionBenchmark extends AbstractFEELBenchmark {
             "years and months duration( date(\"2011-12-22\"), date(\"2013-08-24\") ).months"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

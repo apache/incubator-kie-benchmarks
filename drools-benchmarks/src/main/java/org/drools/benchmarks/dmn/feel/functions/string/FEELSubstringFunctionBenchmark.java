@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.functions.string;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -29,8 +28,8 @@ public class FEELSubstringFunctionBenchmark extends AbstractFEELBenchmark {
     @Param({"substring(\"foobar\", 3)", "substring(\"foobar\", 3, 3)"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

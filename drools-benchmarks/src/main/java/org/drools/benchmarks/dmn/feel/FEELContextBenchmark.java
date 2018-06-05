@@ -16,7 +16,6 @@
 
 package org.drools.benchmarks.dmn.feel;
 
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELContextBenchmark extends AbstractFEELBenchmark {
@@ -25,8 +24,8 @@ public class FEELContextBenchmark extends AbstractFEELBenchmark {
             "{ full name : { first name: \"Bob\", last name : \"Doe\" }, birthday : date(\"1978-09-12\"), salutation : \"Hello \"+full name.first name }"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

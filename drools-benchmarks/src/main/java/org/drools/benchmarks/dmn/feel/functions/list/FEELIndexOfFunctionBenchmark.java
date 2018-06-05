@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.functions.list;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -29,8 +28,8 @@ public class FEELIndexOfFunctionBenchmark extends AbstractFEELBenchmark {
     @Param({"index of( [1, 2, 3, 2], 2 )", "index of( [1, 2, null, null], null )"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }
