@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.lists;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -29,8 +28,8 @@ public class FEELListFilteringBenchmark extends AbstractFEELBenchmark {
     @Param({"[ 1, 2, 3][1]", "[\"a\", \"b\", \"c\"][item = \"a\"]"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.datetime;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELTimeBenchmark extends AbstractFEELBenchmark {
@@ -27,8 +26,8 @@ public class FEELTimeBenchmark extends AbstractFEELBenchmark {
             "time( date and time(\"2016-07-29T14:52:25-05:00\") )"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

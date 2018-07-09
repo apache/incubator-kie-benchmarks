@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.functions.string;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -30,8 +29,8 @@ public class FEELStringFunctionBenchmark extends AbstractFEELBenchmark {
             "string(date(\"2016-08-14\"))"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

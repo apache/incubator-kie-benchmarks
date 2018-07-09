@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.operators;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELBetweenOperatorBenchmark extends AbstractFEELBenchmark {
@@ -26,8 +25,8 @@ public class FEELBetweenOperatorBenchmark extends AbstractFEELBenchmark {
             "10 between 20 and 30"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

@@ -17,7 +17,6 @@
 package org.drools.benchmarks.dmn.feel.operators;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class FEELInOperatorBenchmark extends AbstractFEELBenchmark {
@@ -28,8 +27,8 @@ public class FEELInOperatorBenchmark extends AbstractFEELBenchmark {
             "10 in (5..10]"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }

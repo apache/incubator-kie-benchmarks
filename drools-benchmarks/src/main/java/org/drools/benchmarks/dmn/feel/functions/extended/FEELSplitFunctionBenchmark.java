@@ -19,7 +19,6 @@ package org.drools.benchmarks.dmn.feel.functions.extended;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.dmn.feel.AbstractFEELBenchmark;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -29,8 +28,8 @@ public class FEELSplitFunctionBenchmark extends AbstractFEELBenchmark {
     @Param({"split( \"foo;bar|baz\", \"[;|]\" )"})
     private String expression;
 
-    @Benchmark
-    public Object evaluateExpressionBenchmark() {
-        return evaluateFEELExpression(expression);
+    @Override
+    public String getExpression() {
+        return expression;
     }
 }
