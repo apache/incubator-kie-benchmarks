@@ -21,7 +21,9 @@ import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.UserTaskServicesClient;
 
 public class KieServerClient {
-	
+
+	private static final long DEFAULT_TIMEOUT = 30_000;
+
 	public static String containerId = "kieserver-assets";
 	
     private static ReleaseId releaseId = new ReleaseId("org.jbpm.test.performance", "kieserver-assets",
@@ -59,6 +61,8 @@ public class KieServerClient {
     	} else {
     		kconfig = KieServicesFactory.newRestConfiguration(config.getApplicationUrl(), username, password);
     	}
+
+    	kconfig.setTimeout(DEFAULT_TIMEOUT);
     	if (classes != null) {
     		Set<Class<?>> jaxbClasses = new HashSet<Class<?>>(Arrays.asList(classes));
     		kconfig.addExtraClasses(jaxbClasses);
