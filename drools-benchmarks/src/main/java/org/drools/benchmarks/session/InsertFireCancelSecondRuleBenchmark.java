@@ -26,13 +26,17 @@ import org.drools.benchmarks.model.D;
 import org.drools.benchmarks.model.E;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * Two rules, both match in the beginning. During fire, first rule modifies
  * knowledge so the second rule doesn't fire.
  */
+@Warmup(iterations = 10000)
+@Measurement(iterations = 5000)
 public class InsertFireCancelSecondRuleBenchmark extends AbstractBenchmark {
 
     @Param({"1", "2", "3", "4"})

@@ -23,14 +23,18 @@ import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * Inserts root fact and tip node fact only for first rule.
  * When firing, other rules are fired in a chain. First rule, modifies root
  * fact so next rule fires, which modifies root fact so next rule fires, etc.
  */
+@Warmup(iterations = 25000)
+@Measurement(iterations = 5000)
 public class InsertChainedFireBenchmark extends AbstractBenchmark {
 
     @Param({"12", "48", "192", "768"})

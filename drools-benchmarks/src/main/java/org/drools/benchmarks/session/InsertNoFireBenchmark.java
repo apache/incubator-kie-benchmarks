@@ -22,12 +22,16 @@ import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.model.A;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * Inserts root fact, but not tip node matching fact and fires.
  */
+@Warmup(iterations = 25000)
+@Measurement(iterations = 5000)
 public class InsertNoFireBenchmark extends AbstractBenchmark {
 
     @Param({"12", "48", "192", "768"})
