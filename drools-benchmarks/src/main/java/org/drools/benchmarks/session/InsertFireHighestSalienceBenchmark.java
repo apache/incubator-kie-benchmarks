@@ -24,14 +24,18 @@ import org.drools.benchmarks.model.B;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Generates rules ordered by salience with consequence that makes other rules not matched.
  * So only one rule fires, because during firing there's a change that cancels other rule activations.
  */
+@Warmup(iterations = 50000)
+@Measurement(iterations = 5000)
 public class InsertFireHighestSalienceBenchmark extends AbstractBenchmark {
 
     @Param({"12", "48", "192", "768"})
