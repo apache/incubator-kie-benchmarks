@@ -92,39 +92,8 @@ public class JBPMController {
         if (persistence) {
             ds = setupPoolingDataSource();
             emf = Persistence.createEntityManagerFactory(persistenceUnitName);
-            if (JBPMTestConfig.getInstance().getDatabaseName().equals("perfdb")) {
-                // clear tables in OracleDB
-                try {
-                    Connection conn = ds.getConnection();
-                    conn.setAutoCommit(false);
-
-                    Statement stmt = null;
-                    try {
-                        stmt = conn.createStatement();
-                        stmt.execute(
-                                "declare   begin  for c1 in (select table_name, constraint_name from user_constraints) loop     begin   "
-                                        + "execute immediate (\'alter table \'||c1.table_name||\' disable constraint \'||c1.constraint_name);   "
-                                        + "  end; end loop;  for t1 in (select table_name from user_tables) loop     begin         execute immediate "
-                                        + "(\'truncate table \'||t1.table_name);     end; end loop;  for c2 in (select table_name, constraint_name "
-                                        + "from user_constraints) loop     begin         execute immediate (\'alter table \'||c2.table_name||\' "
-                                        + "enable constraint \'||c2.constraint_name);     end; end loop;  end; ");
-                    } finally {
-                        if (stmt != null) {
-                            try {
-                                stmt.close();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                    conn.commit();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
         cleanupSingletonSessionId();
-
     }
     
     public void clear() {
@@ -194,7 +163,7 @@ public class JBPMController {
 
     protected PoolingDataSource setupPoolingDataSource() {
         Properties dsProps = getDatasourceProperties();
-        String jdbcUrl = dsProps.getProperty("url");
+        String jdbcUrl = dsProps.getProperty("connectionUrl");
         String driverClass = dsProps.getProperty("driverClassName");
 
         // Setup the datasource
@@ -214,7 +183,7 @@ public class JBPMController {
      */
     protected static Properties getDefaultProperties() {
         Properties defaultProperties;
-        String[] keyArr = { "serverName", "portNumber", "databaseName", "url", "user", "password", "driverClassName",
+        String[] keyArr = { "serverName", "portNumber", "databaseName", "connectionUrl", "user", "password", "driverClassName",
                 "className", "maxPoolSize", "allowLocalTransactions" };
         String[] defaultPropArr = { "", "", "", "jdbc:h2:mem:test;MVCC=true", "sa", "", "org.h2.Driver",
                 "bitronix.tm.resource.jdbc.lrc.LrcXADataSource", "16", "true" };
@@ -284,15 +253,14 @@ public class JBPMController {
 
         String driverClass = dsProps.getProperty("driverClassName");
         if (driverClass.startsWith("org.h2") || driverClass.startsWith("org.hsqldb")) {
-            for (String propertyName : new String[] { "url", "driverClassName" }) {
-                pds.getDriverProperties().put(propertyName, dsProps.getProperty(propertyName));
-            }
+                pds.getDriverProperties().put("url", dsProps.getProperty("connectionUrl"));
+                pds.getDriverProperties().put("driverClassName", dsProps.getProperty("driverClassName"));
         } else {
             pds.setClassName(dsProps.getProperty("className"));
 
             if (driverClass.startsWith("oracle")) {
                 pds.getDriverProperties().put("driverType", "thin");
-                pds.getDriverProperties().put("URL", dsProps.getProperty("url"));
+                pds.getDriverProperties().put("URL", dsProps.getProperty("connectionUrl"));
             } else if (driverClass.startsWith("com.ibm.db2")) {
                 // http://docs.codehaus.org/display/BTM/JdbcXaSupportEvaluation#JdbcXaSupportEvaluation-IBMDB2
                 pds.getDriverProperties().put("databaseName", dsProps.getProperty("databaseName"));
@@ -303,13 +271,14 @@ public class JBPMController {
                 for (String propertyName : new String[] { "serverName", "portNumber", "databaseName" }) {
                     pds.getDriverProperties().put(propertyName, dsProps.getProperty(propertyName));
                 }
-                pds.getDriverProperties().put("URL", dsProps.getProperty("url"));
+                pds.getDriverProperties().put("URL", dsProps.getProperty("connectionUrl"));
                 pds.getDriverProperties().put("selectMethod", "cursor");
                 pds.getDriverProperties().put("InstanceName", "MSSQL01");
             } else if (driverClass.startsWith("com.mysql")) {
-                for (String propertyName : new String[] { "databaseName", "serverName", "portNumber", "url" }) {
+                for (String propertyName : new String[] { "databaseName", "serverName", "portNumber"}) {
                     pds.getDriverProperties().put(propertyName, dsProps.getProperty(propertyName));
                 }
+                pds.getDriverProperties().put("url", dsProps.getProperty("connectionUrl"));
             } else if (driverClass.startsWith("com.sybase")) {
                 for (String propertyName : new String[] { "databaseName", "portNumber", "serverName" }) {
                     pds.getDriverProperties().put(propertyName, dsProps.getProperty(propertyName));

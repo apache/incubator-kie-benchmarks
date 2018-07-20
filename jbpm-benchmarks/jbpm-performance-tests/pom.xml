@@ -68,17 +68,7 @@
       queries but may introduce tx risks with getTask when jbpm manages tx itself -->
     <jbpm.ht.eager>true</jbpm.ht.eager>
 
-    <!-- Database configuration -->
-    <maven.jdbc.db.name>H2</maven.jdbc.db.name>
-    <maven.hibernate.hbm2ddl>create-drop</maven.hibernate.hbm2ddl>
-    <maven.hibernate.dialect>org.hibernate.dialect.H2Dialect</maven.hibernate.dialect>
-    <maven.datasource.classname>bitronix.tm.resource.jdbc.lrc.LrcXADataSource</maven.datasource.classname>
-    <maven.jdbc.driver.class>org.h2.Driver</maven.jdbc.driver.class>
-    <maven.jdbc.password />
-    <maven.jdbc.username>sa</maven.jdbc.username>
-    <maven.jdbc.db.port />
-    <maven.jdbc.db.server />
-    <maven.jdbc.url>jdbc:h2:mem:test;MVCC=true</maven.jdbc.url>
+    <!-- Bitronix configuration -->
     <maven.btm.maxPoolSize>16</maven.btm.maxPoolSize>
   </properties>
 
@@ -253,33 +243,25 @@
 
   <profiles>
     <profile>
-      <id>perfdb</id>
+      <id>h2</id>
+      <activation>
+        <property>
+          <name>!perfdb</name>
+        </property>
+      </activation>
+      <!-- H2 Database configuration -->
       <properties>
-        <!-- Properties to properly filter persistence.xml -->
-        <maven.hibernate.hbm2ddl>none</maven.hibernate.hbm2ddl>
-        <maven.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</maven.hibernate.dialect>
-
-        <!-- Properties to properly filter custom datasource.properties. Other maven.jdbc.* properties (user, password, etc.)
-             are provided in this custom datasource.properties file -->
-        <maven.jdbc.db.name>perfdb</maven.jdbc.db.name>
-        <maven.datasource.classname>oracle.jdbc.xa.client.OracleXADataSource</maven.datasource.classname>
-        <maven.jdbc.driver.class>oracle.jdbc.driver.OracleDriver</maven.jdbc.driver.class>
+        <maven.jdbc.db.name>H2</maven.jdbc.db.name>
+        <maven.hibernate.hbm2ddl>create-drop</maven.hibernate.hbm2ddl>
+        <maven.hibernate.dialect>org.hibernate.dialect.H2Dialect</maven.hibernate.dialect>
+        <maven.datasource.classname>bitronix.tm.resource.jdbc.lrc.LrcXADataSource</maven.datasource.classname>
+        <maven.jdbc.driver.class>org.h2.Driver</maven.jdbc.driver.class>
+        <maven.jdbc.password />
+        <maven.jdbc.username>sa</maven.jdbc.username>
+        <maven.jdbc.db.port />
+        <maven.jdbc.db.server />
+        <maven.jdbc.url>jdbc:h2:mem:test;MVCC=true</maven.jdbc.url>
       </properties>
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.1.0</version>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-      <dependencies>
-        <dependency>
-          <groupId>com.oracle</groupId>
-          <artifactId>ojdbc6</artifactId>
-        </dependency>
-      </dependencies>
     </profile>
   </profiles>
 

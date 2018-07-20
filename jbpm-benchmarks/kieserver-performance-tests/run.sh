@@ -130,4 +130,10 @@ then
   PARAMS="$PARAMS -Dkieserver.name=$workbench_name"
 fi
 
-mvn clean install -s settings.xml exec:exec $PARAMS
+# If we are running only one scenario (so we won't fork run for each scenario as we do when nothing is specified), we want to run also DB cleaning
+if [ -n "$scenario" ] || [ -n "$1" ]
+then
+  ACTIVATE_DB_PROFILE="-Dperfdb"
+fi
+
+mvn clean install -s settings.xml $ACTIVATE_DB_PROFILE exec:exec $PARAMS

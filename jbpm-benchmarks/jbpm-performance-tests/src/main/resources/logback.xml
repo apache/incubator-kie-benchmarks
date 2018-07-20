@@ -11,7 +11,7 @@
       <pattern>[%d] %-5p- %m%n</pattern>
     </encoder>
   </appender>
-  <appender name="asyncConsoleAppender" class="ch.qos.logback.classic.AsyncAppender">
+  <appender name="asyncDebugConsoleAppender" class="ch.qos.logback.classic.AsyncAppender">
     <queueSize>300</queueSize>
     <appender-ref ref="consoleAppender" />
   </appender>
@@ -26,7 +26,7 @@
       <pattern>[%d] %-5p- %m%n</pattern>
     </encoder>
   </appender>
-  <appender name="asyncWarnConsoleAppender" class="ch.qos.logback.classic.AsyncAppender">
+  <appender name="asyncInfoConsoleAppender" class="ch.qos.logback.classic.AsyncAppender">
     <queueSize>300</queueSize>
     <appender-ref ref="warnConsoleAppender" />
   </appender>
@@ -35,36 +35,36 @@
 
   <logger name="com.arjuna">
     <level value="error" />
-    <appender-ref ref="asyncWarnConsoleAppender" />
+    <appender-ref ref="asyncInfoConsoleAppender" />
   </logger>
 
   <logger name="bitronix.tm">
     <level value="error" />
-    <appender-ref ref="asyncWarnConsoleAppender" />
+    <appender-ref ref="asyncInfoConsoleAppender" />
   </logger>
 
   <logger name="org.hibernate">
     <level value="error" />
-    <appender-ref ref="asyncWarnConsoleAppender" />
+    <appender-ref ref="asyncInfoConsoleAppender" />
   </logger>
 
   <logger name="org.kie">
     <level value="info" />
-    <appender-ref ref="asyncWarnConsoleAppender" />
+    <appender-ref ref="asyncInfoConsoleAppender" />
   </logger>
 
   <logger name="org.drools">
     <level value="debug" />
-    <appender-ref ref="asyncWarnConsoleAppender" /> <!-- prints only warn and higher messages to console -->
+    <appender-ref ref="asyncInfoConsoleAppender" />
   </logger>
 
   <logger name="org.jbpm">
     <level value="debug" />
-    <appender-ref ref="asyncWarnConsoleAppender" /> <!-- prints only warn and higher messages to console -->
+    <appender-ref ref="asyncInfoConsoleAppender" />
   </logger>
 
   <logger name="org.perfrepo">
     <level value="debug" />
-    <appender-ref ref="asyncWarnConsoleAppender" /> <!-- prints only warn and higher messages to console -->
+    <appender-ref ref="asyncDebugConsoleAppender" />
   </logger>
 </configuration>

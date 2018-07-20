@@ -15,6 +15,10 @@
 
   <name>jBPM Performance Tests Parent</name>
 
+  <properties>
+    <version.com.oracle.ojdbc6>11.2.0.1.0</version.com.oracle.ojdbc6>
+  </properties>
+
   <modules>
     <module>jbpm-performance-tests</module>
     <module>kieserver-assets</module>
@@ -42,5 +46,136 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <profiles>
+    <profile>
+      <id>perfdb</id>
+      <!-- Use property activation so jbpm-performance-tests can run with H2 by default, i.e. when perfdb property
+           is not set. (h2 cannot be set as the default profile since then the perfdb profile from the parent won't
+           turn off the h2 profile from the child.) -->
+      <activation>
+        <property>
+          <name>perfdb</name>
+        </property>
+      </activation>
+      <properties>
+        <!-- Properties to properly filter persistence.xml -->
+        <maven.hibernate.hbm2ddl>none</maven.hibernate.hbm2ddl>
+        <maven.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</maven.hibernate.dialect>
+
+        <!-- Properties to properly filter custom datasource.properties. Other maven.jdbc.* properties (user, password, etc.)
+             are provided in this custom datasource.properties file -->
+        <maven.jdbc.db.name>perfdb</maven.jdbc.db.name>
+        <maven.datasource.classname>oracle.jdbc.xa.client.OracleXADataSource</maven.datasource.classname>
+        <maven.jdbc.driver.class>oracle.jdbc.driver.OracleDriver</maven.jdbc.driver.class>
+      </properties>
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${version.com.oracle.ojdbc6}</version>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>ojdbc6</artifactId>
+        </dependency>
+      </dependencies>
+
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>properties-maven-plugin</artifactId>
+              <version>1.0.0</version>
+              <executions>
+                <execution>
+                  <phase>initialize</phase>
+                  <goals>
+                    <goal>read-project-properties</goal>
+                  </goals>
+                  <configuration>
+                    <files>
+                      <!-- File with sensitive data like password, connectionUrl etc. -->
+                      <file>src/main/filtered-resources/datasource.properties</file>
+                    </files>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>sql-maven-plugin</artifactId>
+              <version>1.5</version>
+              <dependencies>
+                <!-- Driver we use for creating schema -->
+                <dependency>
+                  <groupId>com.oracle</groupId>
+                  <artifactId>ojdbc6</artifactId>
+                  <version>${version.com.oracle.ojdbc6}</version>
+                </dependency>
+              </dependencies>
+              <!-- common configuration shared by all executions -->
+              <configuration>
+                <driver>${maven.jdbc.driver.class}</driver>
+                <url>${connectionUrl}</url>
+                <username>${user}</username>
+                <password>${password}</password>
+                <skip>${skipTests}</skip>
+              </configuration>
+
+              <executions>
+                <execution>
+                  <id>drop-schema</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                    <goal>execute</goal>
+                  </goals>
+                  <configuration>
+                    <!-- By setting delimiterType to row it will parse SQL file until whole row matches delimiter or EOF,
+                     so we used / to force it to read until the very end -->
+                    <delimiterType>row</delimiterType>
+                    <delimiter>/</delimiter>
+                    <autocommit>true</autocommit>
+                    <srcFiles>
+                      <srcFile>src/main/resources/ddl-scripts/perf-drop-tables.sql</srcFile>
+                    </srcFiles>
+                  </configuration>
+                </execution>
+                <execution>
+                  <id>create-schema</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                    <goal>execute</goal>
+                  </goals>
+                  <configuration>
+                    <autocommit>true</autocommit>
+                    <srcFiles>
+                      <srcFile>src/main/resources/ddl-scripts/perf-create-jbpm-schema.sql</srcFile>
+                    </srcFiles>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sql-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
