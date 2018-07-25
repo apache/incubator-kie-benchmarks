@@ -17,6 +17,7 @@ package org.drools.benchmarks.cep;
 
 import java.util.SortedSet;
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.Event;
 import org.drools.core.time.SessionPseudoClock;
@@ -24,8 +25,8 @@ import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 2000)
-@Measurement(iterations = 1000)
+@Warmup(iterations = 30000)
+@Measurement(iterations = 5000)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public abstract class AbstractCEPBenchmark extends AbstractBenchmark {
 

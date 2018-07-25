@@ -18,6 +18,7 @@ package org.drools.benchmarks.cep;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
+
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.Event;
 import org.drools.benchmarks.common.ProviderException;
@@ -38,7 +39,7 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class BeforeBenchmark extends AbstractCEPBenchmark {
 
-    @Param({"2", "8", "32"})
+    @Param({"8", "16", "32"})
     private int rulesAndEventsNumber;
 
     private SortedSet<Event> events;
