@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.StatelessKieSession;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -42,7 +41,6 @@ public abstract class AbstractBenchmark {
 
     protected KieBase kieBase;
     protected KieSession kieSession;
-    protected StatelessKieSession statelessKieSession;
 
     protected boolean isSmokeTestsRun = TestUtil.isSmokeTestsRun();
 
@@ -55,7 +53,6 @@ public abstract class AbstractBenchmark {
             kieSession.dispose();
             kieSession = null;
         }
-        statelessKieSession = null;
     }
 
     protected void insertFacts(final Collection<Object> facts, final Blackhole eater) {

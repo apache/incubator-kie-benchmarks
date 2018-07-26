@@ -18,12 +18,16 @@ package org.drools.benchmarks.session;
 import java.util.Date;
 
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Benchmarks creation of a ksession from an empty kbase, insertion of 10 facts of 10 different classes
  * and firing. On 5.x this caused the creation of a new ObjectTypeNode for each insertion.
  */
+@Warmup(iterations = 100000)
+@Measurement(iterations = 10000)
 public class EmptySessionWithInsertionsAndFireBenchmark extends AbstractEmptySessionBenchmark {
 
     @Benchmark

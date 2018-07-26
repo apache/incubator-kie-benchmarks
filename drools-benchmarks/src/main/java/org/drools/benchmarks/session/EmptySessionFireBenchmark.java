@@ -25,14 +25,12 @@ import org.openjdk.jmh.annotations.Warmup;
 /**
  * Benchmarks firing on a ksession created from an empty kbase
  */
-@Warmup(iterations = 200000)
-@Measurement(iterations = 100000)
+@Warmup(iterations = 80000)
+@Measurement(iterations = 10000)
 public class EmptySessionFireBenchmark extends AbstractEmptySessionBenchmark {
 
     @Setup(Level.Iteration)
-    @Override
-    public void setup() {
-        super.setup();
+    public void setupSession() {
         kieSession = RuntimeUtil.createKieSession(kieBase);
     }
 
