@@ -18,7 +18,9 @@ package org.drools.benchmarks.oopath.runtime;
 
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -38,7 +40,7 @@ public class OOPathAccumulateInsertRuntimeBenchmark extends AbstractOOPathRuntim
 
     @Setup(Level.Iteration)
     public void setupKieSession() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
     }
 
     @Override

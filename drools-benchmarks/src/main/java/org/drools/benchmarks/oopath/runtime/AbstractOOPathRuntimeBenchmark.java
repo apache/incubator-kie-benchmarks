@@ -18,8 +18,10 @@ package org.drools.benchmarks.oopath.runtime;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.model.reactive.Child;
 import org.drools.benchmarks.model.reactive.Man;
 import org.drools.benchmarks.model.reactive.Woman;
@@ -34,7 +36,7 @@ public abstract class AbstractOOPathRuntimeBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() throws ProviderException {
-        createKieBaseFromDrl(getDrl());
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(getDrl());
     }
 
     protected Collection<Object> generateMenFacts(final int numberOfFacts, final boolean withWife,

@@ -15,20 +15,25 @@
 
 package org.drools.benchmarks.session;
 
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * Benchmarks firing on a ksession created from an empty kbase
  */
+@Warmup(iterations = 200000)
+@Measurement(iterations = 100000)
 public class EmptySessionFireBenchmark extends AbstractEmptySessionBenchmark {
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
         super.setup();
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
     }
 
     @Benchmark

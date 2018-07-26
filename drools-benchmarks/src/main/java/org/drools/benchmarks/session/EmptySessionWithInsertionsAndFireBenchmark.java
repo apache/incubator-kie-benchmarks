@@ -15,9 +15,9 @@
 
 package org.drools.benchmarks.session;
 
-import org.openjdk.jmh.annotations.Benchmark;
-
 import java.util.Date;
+
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
@@ -28,14 +28,14 @@ public class EmptySessionWithInsertionsAndFireBenchmark extends AbstractEmptySes
 
     @Benchmark
     public int testCreateEmptySession(final Blackhole eater) {
-        createKieSession();
+        kieSession = kieBase.newKieSession();
         eater.consume(kieSession.insert( "1" ));
-        eater.consume(kieSession.insert( new Integer(1) ));
-        eater.consume(kieSession.insert( new Long(1L) ));
-        eater.consume(kieSession.insert( new Short((short)1) ));
-        eater.consume(kieSession.insert( new Double(1.0) ));
-        eater.consume(kieSession.insert( new Float(1.0) ));
-        eater.consume(kieSession.insert( new Character('1') ));
+        eater.consume(kieSession.insert(1));
+        eater.consume(kieSession.insert(1L));
+        eater.consume(kieSession.insert((short) 1));
+        eater.consume(kieSession.insert(1.0));
+        eater.consume(kieSession.insert(1.0f));
+        eater.consume(kieSession.insert('1'));
         eater.consume(kieSession.insert( Boolean.TRUE ));
         eater.consume(kieSession.insert( String.class ));
         eater.consume(kieSession.insert( new Date() ));

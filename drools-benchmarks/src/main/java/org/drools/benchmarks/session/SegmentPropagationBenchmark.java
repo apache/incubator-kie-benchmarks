@@ -17,6 +17,8 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
@@ -76,13 +78,13 @@ public class SegmentPropagationBenchmark extends AbstractBenchmark {
                        "end\n" );
         }
 
-        createKieBaseFromDrl( sb.toString() );
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(sb.toString() );
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
 
         aFH = kieSession.insert( new A( treesNr + 1 ) );
         for ( int i = 0; i < factsNr; i++ ) {

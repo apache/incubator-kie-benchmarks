@@ -17,8 +17,10 @@
 package org.drools.benchmarks.oopath.buildtime;
 
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
 import org.kie.api.io.Resource;
@@ -46,6 +48,6 @@ public class OOPathBuildXLSBenchmark extends AbstractBenchmark {
 
     @Benchmark
     public KieBase testBuildKieBase() {
-        return createKieBaseFromResource(xlsResource);
+        return BuildtimeUtil.createKieBaseFromResource(xlsResource);
     }
 }

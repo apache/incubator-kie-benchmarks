@@ -18,6 +18,8 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
@@ -66,13 +68,13 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         final int numberOfJoins = isSmokeTestsRun ? 3 : 4;
         final DRLProvider drlProvider = new RulesWithJoinsProvider(numberOfJoins, false, true);
-        createKieBaseFromDrl(drlProvider.getDrl(rulesNr));
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr));
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
 
         as = new A[factsNr];
         bs = new B[factsNr];

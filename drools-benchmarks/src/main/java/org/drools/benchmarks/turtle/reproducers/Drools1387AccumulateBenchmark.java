@@ -17,8 +17,11 @@
 package org.drools.benchmarks.turtle.reproducers;
 
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.MyFact1;
 import org.drools.benchmarks.model.MyFact2;
 import org.drools.benchmarks.model.MyFact3;
@@ -44,12 +47,12 @@ public class Drools1387AccumulateBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() throws ProviderException {
-        createKieBaseFromResource(KieServices.Factory.get().getResources().newClassPathResource("reproducers/drools1387/accumulate.drl"));
+        kieBase = BuildtimeUtil.createKieBaseFromResource(KieServices.Factory.get().getResources().newClassPathResource("reproducers/drools1387/accumulate.drl"));
     }
 
     @Setup(Level.Iteration)
     public void setupKieSession() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
     }
 
     @Benchmark

@@ -18,9 +18,12 @@ package org.drools.benchmarks.session;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
@@ -65,15 +68,15 @@ public class FireUntilHaltBenchmark extends AbstractBenchmark {
         int fireNr = rulesNr * factsNr;
         String consequence = CONSEQUENCE_1 + fireNr + CONSEQUENCE_2;
         final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true, GLOBAL, consequence);
-        createKieBaseFromDrl( drlProvider.getDrl(rulesNr),
-                multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
-                cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
+                                                     multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
+                                                     cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
 
         done = new CountDownLatch(1);
         kieSession.setGlobal( "done", done );

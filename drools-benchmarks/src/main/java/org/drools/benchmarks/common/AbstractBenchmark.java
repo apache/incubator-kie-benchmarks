@@ -18,18 +18,10 @@ package org.drools.benchmarks.common;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
-import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
-import org.kie.api.KieBaseConfiguration;
-import org.kie.api.KieServices;
-import org.kie.api.conf.KieBaseOption;
-import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.StatelessKieSession;
-import org.kie.api.runtime.conf.KieSessionOption;
-import org.kie.internal.utils.KieHelper;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -40,8 +32,6 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
@@ -49,8 +39,6 @@ import org.slf4j.LoggerFactory;
 @Measurement(iterations = 20)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public abstract class AbstractBenchmark {
-
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     protected KieBase kieBase;
     protected KieSession kieSession;
@@ -70,53 +58,7 @@ public abstract class AbstractBenchmark {
         statelessKieSession = null;
     }
 
-    protected void createKieSession() {
-        kieSession = kieBase.newKieSession();
-    }
-
-    protected void createKieSession(final KieSessionOption... kieSessionOptions) {
-        kieSession = kieBase.newKieSession(getKieSessionConfiguration(kieSessionOptions), null);
-    }
-
-    protected void createStatelessKieSession() {
-        statelessKieSession = kieBase.newStatelessKieSession();
-    }
-
-    protected void createEmptyKieBase() {
-        kieBase = new KieHelper().build(getKieBaseConfiguration());
-    }
-
-    protected KieBase createKieBaseFromDrl(final String drl) {
-        kieBase = BuildtimeUtil.createKieBaseFromDrl(drl, getKieBaseConfiguration());
-        return kieBase;
-    }
-
-    protected void createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
-        kieBase = BuildtimeUtil.createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
-    }
-
-    protected KieBase createKieBaseFromResource(final Resource resource, final KieBaseOption... kieBaseOptions) {
-        kieBase = BuildtimeUtil.createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
-        return kieBase;
-    }
-
     protected void insertFacts(final Collection<Object> facts, final Blackhole eater) {
         facts.forEach(fact -> eater.consume(kieSession.insert(fact)));
-    }
-
-    private KieBaseConfiguration getKieBaseConfiguration(final KieBaseOption... kieBaseOptions) {
-        final KieBaseConfiguration kieBaseConfiguration = KieServices.Factory.get().newKieBaseConfiguration();
-        for (final KieBaseOption kieBaseOption : kieBaseOptions) {
-            kieBaseConfiguration.setOption(kieBaseOption);
-        }
-        return kieBaseConfiguration;
-    }
-
-    private KieSessionConfiguration getKieSessionConfiguration(final KieSessionOption... kieSessionOptions) {
-        final KieSessionConfiguration kieSessionConfiguration = KieServices.Factory.get().newKieSessionConfiguration();
-        for (final KieSessionOption kieSessionOption : kieSessionOptions) {
-            kieSessionConfiguration.setOption(kieSessionOption);
-        }
-        return kieSessionConfiguration;
     }
 }

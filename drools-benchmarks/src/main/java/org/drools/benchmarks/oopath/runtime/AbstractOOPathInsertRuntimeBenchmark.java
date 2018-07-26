@@ -17,6 +17,8 @@
 package org.drools.benchmarks.oopath.runtime;
 
 import java.util.concurrent.TimeUnit;
+
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -35,7 +37,7 @@ import org.openjdk.jmh.infra.Blackhole;
 
     @Setup(Level.Iteration)
     public void setupKieSession() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
     }
 
     @Benchmark

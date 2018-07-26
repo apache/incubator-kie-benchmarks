@@ -17,6 +17,8 @@
 package org.drools.benchmarks.oopath.comparison;
 
 import java.util.List;
+
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.core.common.InternalFactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -37,7 +39,7 @@ public class OOPathComparisonFromVariationUpdateBenchmark extends AbstractOOPath
                 "then\n" +
                 "    list.add( $toy.getName() );\n" +
                 "end\n";
-        createKieBaseFromDrl(drl);
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drl);
     }
 
     private List<InternalFactHandle> factHandles;

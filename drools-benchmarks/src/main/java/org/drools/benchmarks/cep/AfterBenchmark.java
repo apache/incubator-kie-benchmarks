@@ -24,6 +24,8 @@ import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.TemporalOperator;
 import org.drools.benchmarks.common.providers.BasicEventProvider;
 import org.drools.benchmarks.common.providers.CepRulesProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.event.EventA;
 import org.drools.benchmarks.model.event.EventB;
 import org.kie.api.conf.EventProcessingOption;
@@ -46,7 +48,7 @@ public class AfterBenchmark extends AbstractCEPBenchmark {
     @Setup
     public void setupKieBase() {
         final DRLProvider drlProvider = new CepRulesProvider(EventA.class, EventB.class, TemporalOperator.AFTER, "1", "10");
-        createKieBaseFromDrl(drlProvider.getDrl(rulesAndEventsNumber), EventProcessingOption.STREAM);
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesAndEventsNumber), EventProcessingOption.STREAM);
     }
 
     @Setup(Level.Iteration)
@@ -56,7 +58,7 @@ public class AfterBenchmark extends AbstractCEPBenchmark {
         events = new TreeSet<Event>();
         events.addAll(eventProvider.getEvents(EventA.class, rulesAndEventsNumber / 2, 2, 100, 0));
         events.addAll(eventProvider.getEvents(EventB.class, rulesAndEventsNumber / 2, 5, 100, 0));
-        createKieSession(ClockTypeOption.get("pseudo"));
+        kieSession = RuntimeUtil.createKieSession(kieBase, ClockTypeOption.get("pseudo"));
     }
 
     @Benchmark

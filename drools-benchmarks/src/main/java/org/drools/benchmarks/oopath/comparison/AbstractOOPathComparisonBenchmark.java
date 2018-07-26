@@ -19,8 +19,10 @@ package org.drools.benchmarks.oopath.comparison;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.reactive.Child;
 import org.drools.benchmarks.model.reactive.Man;
 import org.drools.benchmarks.model.reactive.Toy;
@@ -53,7 +55,7 @@ public abstract class AbstractOOPathComparisonBenchmark extends AbstractBenchmar
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
         globalList = new ArrayList<>();
         kieSession.setGlobal("list", globalList);
         prepareFacts();

@@ -36,6 +36,7 @@ import org.kie.api.builder.Message;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.builder.model.KieBaseModel;
 import org.kie.api.builder.model.KieModuleModel;
+import org.kie.api.conf.KieBaseOption;
 import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
@@ -62,7 +63,7 @@ public final class BuildtimeUtil {
         return kieBuilder.getKieModule().getReleaseId();
     }
 
-    public static void generateKJarFromKieBuilder(final KieBuilder kieBuilder, final boolean useCanonicalModel)
+    private static void generateKJarFromKieBuilder(final KieBuilder kieBuilder, final boolean useCanonicalModel)
             throws IOException {
         final ReleaseId releaseId = kieBuilder.getKieModule().getReleaseId();
         final InternalKieModule kieModule = (InternalKieModule) kieBuilder.getKieModule();
@@ -76,7 +77,7 @@ public final class BuildtimeUtil {
         KieServices.get().getRepository().addKieModule(zipKieModule);
     }
 
-    public static KieBuilder getKieBuilderFromResources(final KieFileSystem kfs, final boolean useCanonicalModel, final Resource... resources) {
+    private static KieBuilder getKieBuilderFromResources(final KieFileSystem kfs, final boolean useCanonicalModel, final Resource... resources) {
         for (final Resource res : resources) {
             kfs.write(res);
         }
@@ -97,6 +98,14 @@ public final class BuildtimeUtil {
         return kbuilder;
     }
 
+    public static KieBase createEmptyKieBase() {
+        return new KieHelper().build(getKieBaseConfiguration());
+    }
+
+    public static KieBase createKieBaseFromResource(final Resource resource, final KieBaseOption... kieBaseOptions) {
+        return createKieBaseFromResources(getKieBaseConfiguration(kieBaseOptions), resource);
+    }
+
     public static KieBase createKieBaseFromResources(final KieBaseConfiguration kieBaseConfiguration,
                                                      final Resource... resources) {
         final KieHelper kieHelper = new KieHelper();
@@ -109,6 +118,10 @@ public final class BuildtimeUtil {
         return kieBase;
     }
 
+    public static KieBase createKieBaseFromDrl(final String drl, final KieBaseOption... kieBaseOptions) {
+        return createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
+    }
+
     public static KieBase createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
         if (TestUtil.dumpDrl()) {
             logDebug("Benchmark DRL", drl);
@@ -118,14 +131,22 @@ public final class BuildtimeUtil {
         return kieBase;
     }
 
-    public static KieModuleModel getDefaultKieModuleModel(final KieServices ks) {
+    private static KieModuleModel getDefaultKieModuleModel(final KieServices ks) {
         final KieModuleModel kproj = ks.newKieModuleModel();
         final KieBaseModel kieBaseModel1 = kproj.newKieBaseModel("kbase").setDefault(true);
         kieBaseModel1.newKieSessionModel("ksession").setDefault(true);
         return kproj;
     }
 
-    public static File bytesToTempFile(final ReleaseId releaseId, final byte[] bytes, final String extension)
+    private static KieBaseConfiguration getKieBaseConfiguration(final KieBaseOption... kieBaseOptions) {
+        final KieBaseConfiguration kieBaseConfiguration = KieServices.Factory.get().newKieBaseConfiguration();
+        for (final KieBaseOption kieBaseOption : kieBaseOptions) {
+            kieBaseConfiguration.setOption(kieBaseOption);
+        }
+        return kieBaseConfiguration;
+    }
+
+    private static File bytesToTempFile(final ReleaseId releaseId, final byte[] bytes, final String extension)
             throws IOException {
         final File file = FileUtils.tempFile(extension);
         try (final FileOutputStream fos = new FileOutputStream(file, false)) {

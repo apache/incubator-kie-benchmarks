@@ -17,7 +17,10 @@
 package org.drools.benchmarks.throughput;
 
 import java.util.concurrent.atomic.LongAdder;
+
 import org.drools.benchmarks.common.DRLProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.AbstractBean;
 import org.drools.benchmarks.model.B;
@@ -87,7 +90,7 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
         final DRLProvider drlProvider = getDrlProvider(eventExpirationMs, LOG_FIRINGS);
         final String drl = drlProvider.getDrl(numberOfRules);
 
-        createKieBaseFromDrl(
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(
                 drl,
                 EventProcessingOption.STREAM,
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
@@ -101,9 +104,9 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
     @Override
     public void setup() {
         if (pseudoClock) {
-            createKieSession(ClockTypeOption.get("pseudo"));
+            kieSession = RuntimeUtil.createKieSession(kieBase, ClockTypeOption.get("pseudo"));
         } else {
-            createKieSession();
+            kieSession = RuntimeUtil.createKieSession(kieBase);
         }
         AbstractBean.setIdGeneratorValue(getStartingIdGeneratorValue());
         setupCounter();

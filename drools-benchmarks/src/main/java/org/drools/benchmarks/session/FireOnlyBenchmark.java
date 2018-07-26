@@ -19,6 +19,8 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
@@ -54,15 +56,15 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
     @Setup
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true);
-        createKieBaseFromDrl( drlProvider.getDrl(rulesNr),
-                multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
-                cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
+                                                     multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
+                                                     cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
         StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
         A a = new A( rulesNr + 1 );
         if (async) {

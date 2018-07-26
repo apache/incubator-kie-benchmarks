@@ -18,7 +18,9 @@ package org.drools.benchmarks.oopath.runtime;
 
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -49,7 +51,7 @@ public class OOPathAccumulateFireRuntimeBenchmark extends AbstractOOPathRuntimeB
 
     @Setup(Level.Iteration)
     public void setupSessionAndInsertFacts(final Blackhole eater) {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
         insertFacts(getFacts(128), eater);
     }
 

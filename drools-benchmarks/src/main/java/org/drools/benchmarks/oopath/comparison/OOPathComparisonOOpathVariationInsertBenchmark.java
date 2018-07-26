@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.oopath.comparison;
 
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
@@ -33,7 +34,7 @@ public class OOPathComparisonOOpathVariationInsertBenchmark extends AbstractOOPa
                 "then\n" +
                 "  list.add( $toy.getName() );\n" +
                 "end\n";
-        createKieBaseFromDrl(drl);
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drl);
     }
 
     @Benchmark

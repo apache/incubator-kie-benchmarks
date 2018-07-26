@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.operators;
 
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.infra.Blackhole;
@@ -45,7 +46,7 @@ public class ExistsBenchmark extends AbstractOperatorsBenchmark {
                     " end\n");
         }
 
-        createKieBaseFromDrl(sb.toString());
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(sb.toString());
     }
 
     @Benchmark

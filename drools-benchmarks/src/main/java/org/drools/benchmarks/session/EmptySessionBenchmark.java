@@ -15,6 +15,7 @@
 
 package org.drools.benchmarks.session;
 
+import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
 
 /**
@@ -23,7 +24,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 public class EmptySessionBenchmark extends AbstractEmptySessionBenchmark {
 
     @Benchmark
-    public void testCreateEmptySession() {
-        createKieSession();
+    public KieSession testCreateEmptySession() {
+        return kieBase.newKieSession();
     }
 }

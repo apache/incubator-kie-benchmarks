@@ -23,6 +23,7 @@ import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DMNProvider;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.providers.dmn.ContextDMNProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.io.Resource;
@@ -57,6 +58,6 @@ public class DMNBuildContextBenchmark extends AbstractBenchmark {
 
     @Benchmark
     public KieBase testBuildKieBase() {
-        return createKieBaseFromResource(dmnResource);
+        return BuildtimeUtil.createKieBaseFromResource(dmnResource);
     }
 }

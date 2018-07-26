@@ -16,7 +16,9 @@
 package org.drools.benchmarks.session;
 
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Setup;
@@ -30,6 +32,6 @@ public abstract class AbstractEmptySessionBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() {
-        createEmptyKieBase();
+        kieBase = BuildtimeUtil.createEmptyKieBase();
     }
 }

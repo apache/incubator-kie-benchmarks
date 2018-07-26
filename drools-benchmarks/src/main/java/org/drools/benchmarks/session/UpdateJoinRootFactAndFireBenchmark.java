@@ -19,6 +19,8 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
@@ -71,13 +73,13 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
         final DRLProvider drlProvider = new RulesWithJoinsProvider(numberOfJoins, false, false);
         sb.append(drlProvider.getDrl(rulesNr - 1));
 
-        createKieBaseFromDrl(sb.toString());
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(sb.toString());
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
     }
 
     @Benchmark

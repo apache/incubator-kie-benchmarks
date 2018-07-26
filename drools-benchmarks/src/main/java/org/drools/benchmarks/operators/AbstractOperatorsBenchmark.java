@@ -19,7 +19,9 @@ package org.drools.benchmarks.operators;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.Account;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -55,7 +57,7 @@ public abstract class AbstractOperatorsBenchmark extends AbstractBenchmark {
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
     }
 
     protected int runBenchmark(final Blackhole eater) {

@@ -17,8 +17,10 @@
 package org.drools.benchmarks.dmn.buildtime;
 
 import java.util.concurrent.TimeUnit;
+
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.io.Resource;
@@ -48,6 +50,6 @@ public class DMNBuildComplexDMNModelBenchmark extends AbstractBenchmark {
 
     @Benchmark
     public KieBase testBuildKieBase() {
-        return createKieBaseFromResource(dmnResource);
+        return BuildtimeUtil.createKieBaseFromResource(dmnResource);
     }
 }

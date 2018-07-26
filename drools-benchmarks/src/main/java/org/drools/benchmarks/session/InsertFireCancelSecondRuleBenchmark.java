@@ -19,6 +19,8 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsTreeProvider;
+import org.drools.benchmarks.common.util.BuildtimeUtil;
+import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
@@ -51,13 +53,13 @@ public class InsertFireCancelSecondRuleBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsTreeProvider(joinsNr, true, true,
                                                                        "", "modify($a) {setValue(-1)};");
-        createKieBaseFromDrl(drlProvider.getDrl(numberOfRules));
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(numberOfRules));
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() {
-        createKieSession();
+        kieSession = RuntimeUtil.createKieSession(kieBase);
         kieSession.insert( new A( 0) );
         for ( int i = 0; i < factsNr; i++ ) {
             // All fact types must be inserted because each rule contains different type joined.
