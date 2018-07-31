@@ -75,7 +75,7 @@ public class DMNEvaluatePojoInputBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public DMNResult evaluateBusinessKnowledgeModel() {
+    public DMNResult evaluateModel() {
         return dmnRuntime.evaluateAll(dmnModel, dmnContext);
     }
 }
