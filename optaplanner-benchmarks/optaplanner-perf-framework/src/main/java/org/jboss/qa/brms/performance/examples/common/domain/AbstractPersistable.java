@@ -16,11 +16,13 @@
 package org.jboss.qa.brms.performance.examples.common.domain;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
+import org.optaplanner.core.api.domain.lookup.PlanningId;
 
 import java.io.Serializable;
 
 public abstract class AbstractPersistable implements Serializable, Comparable<AbstractPersistable> {
 
+    @PlanningId
     protected Long id;
 
     protected AbstractPersistable() {
