@@ -58,13 +58,15 @@ public class MemoryConsumptionProfiler implements InternalProfiler {
             logger.error("{0} deactivated due to error during metrics recording.", getClass().getSimpleName(), ex);
             return Collections.EMPTY_LIST;
         }
-        List<Result> results = new ArrayList<>();
-        double usedHeap = bytesToKB(usedMemory.usedHeapMemory);
-        double usedNonHeap = bytesToKB(usedMemory.usedNonHeapMemory);
-        double total = bytesToKB(usedMemory.totalCommittedMemory);
+        final List<Result> results = new ArrayList<>();
+        final double usedHeap = bytesToKB(usedMemory.usedHeapMemory);
+        final double usedNonHeap = bytesToKB(usedMemory.usedNonHeapMemory);
+        final double total = bytesToKB(usedMemory.totalCommittedMemory);
+        final double metaSpace = bytesToKB(usedMemory.metaSpaceMemory);
         results.add(new ScalarResult("mem.used.heap", usedHeap, "kB", AggregationPolicy.AVG));
         results.add(new ScalarResult("mem.used.nonheap", usedNonHeap, "kB", AggregationPolicy.AVG));
         results.add(new ScalarResult("mem.total", total, "kB", AggregationPolicy.AVG));
+        results.add(new ScalarResult("mem.used.metaspace", metaSpace, "kB", AggregationPolicy.AVG));
 
         return results;
     }
@@ -74,8 +76,8 @@ public class MemoryConsumptionProfiler implements InternalProfiler {
     }
 
     private UsedMemory getUsedMemoryAfterGc() {
-        long beforeGcCount = gcCounter.count();
-        long startMsec = System.currentTimeMillis();
+        final long beforeGcCount = gcCounter.count();
+        final long startMsec = System.currentTimeMillis();
 
         System.gc();
         while (System.currentTimeMillis() - startMsec < MAX_WAIT_MSEC) {
@@ -93,13 +95,19 @@ public class MemoryConsumptionProfiler implements InternalProfiler {
     }
 
     private UsedMemory getUsedMemorySimply() {
-        MemoryUsage heapUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
-        MemoryUsage nonHeapUsage = ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage();
+        final MemoryUsage heapUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+        final MemoryUsage nonHeapUsage = ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage();
+
+        final long metaSpaceUsage = ManagementFactory.getMemoryPoolMXBeans()
+                .stream()
+                .filter(memoryPoolMXBean -> "Metaspace".equals(memoryPoolMXBean.getName()))
+                .mapToLong(memoryPoolMXBean -> memoryPoolMXBean.getUsage().getUsed()).sum();
+
         final long total = heapUsage.getCommitted() + nonHeapUsage.getCommitted();
         final long usedHeap = heapUsage.getUsed();
         final long usedNonHeap = nonHeapUsage.getUsed();
 
-        return new UsedMemory(total, usedHeap, usedNonHeap);
+        return new UsedMemory(total, usedHeap, usedNonHeap, metaSpaceUsage);
     }
 
     private UsedMemory getUsedMemoryAfterSettling() {
@@ -123,18 +131,25 @@ public class MemoryConsumptionProfiler implements InternalProfiler {
     }
 
     private static class UsedMemory {
+
         final long totalCommittedMemory;
         final long usedHeapMemory;
         final long usedNonHeapMemory;
+        final long metaSpaceMemory;
 
-        UsedMemory(final long totalCommittedMemory, final long usedHeapMemory, final long usedNonHeapMemory) {
+        UsedMemory(final long totalCommittedMemory,
+                   final long usedHeapMemory,
+                   final long usedNonHeapMemory,
+                   final long metaSpaceMemory) {
             this.totalCommittedMemory = totalCommittedMemory;
             this.usedHeapMemory = usedHeapMemory;
             this.usedNonHeapMemory = usedNonHeapMemory;
+            this.metaSpaceMemory = metaSpaceMemory;
         }
     }
 
     private static class GcCounter {
+
         private final List<GarbageCollectorMXBean> enabledBeans = new ArrayList<>();
 
         private GcCounter() {
