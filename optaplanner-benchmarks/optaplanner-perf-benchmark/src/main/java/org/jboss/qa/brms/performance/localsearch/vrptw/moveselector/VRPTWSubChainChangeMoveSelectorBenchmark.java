@@ -1,6 +1,7 @@
 package org.jboss.qa.brms.performance.localsearch.vrptw.moveselector;
 
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 
@@ -15,7 +16,7 @@ public class VRPTWSubChainChangeMoveSelectorBenchmark extends AbstractVRPTWMoveS
 
     @Benchmark
     @Override
-    public void benchmark() {
-        super.benchmark();
+    public VehicleRoutingSolution benchmark() {
+        return super.benchmark();
     }
 }

@@ -50,8 +50,8 @@ public abstract class AbstractPlannerBenchmark<Solution_> {
     @Setup
     public abstract void initSolver();
 
-    public void benchmark() {
-        getSolver().solve(getSolution());
+    public Solution_ benchmark() {
+        return getSolver().solve(getSolution());
     }
 
 }

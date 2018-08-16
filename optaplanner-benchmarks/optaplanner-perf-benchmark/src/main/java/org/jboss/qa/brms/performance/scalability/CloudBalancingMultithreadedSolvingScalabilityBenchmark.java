@@ -76,8 +76,8 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
     }
 
     @Benchmark
-    public void benchmark() {
-        super.benchmark();
+    public CloudBalance benchmark() {
+        return super.benchmark();
     }
 
     public static void main(String... args) throws Exception {

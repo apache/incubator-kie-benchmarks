@@ -42,7 +42,7 @@ public class VRPConstructionBenchmark extends AbstractConstructionHeuristicPlann
 
     @Benchmark
     @Override
-    public void benchmark() {
-        super.benchmark();
+    public VehicleRoutingSolution benchmark() {
+        return super.benchmark();
     }
 }

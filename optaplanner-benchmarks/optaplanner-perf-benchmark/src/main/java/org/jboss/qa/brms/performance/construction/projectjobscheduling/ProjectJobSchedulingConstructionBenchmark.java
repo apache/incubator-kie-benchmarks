@@ -42,8 +42,8 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
 
     @Benchmark
     @Override
-    public void benchmark() {
-        super.benchmark();
+    public Schedule benchmark() {
+        return super.benchmark();
     }
 
 }

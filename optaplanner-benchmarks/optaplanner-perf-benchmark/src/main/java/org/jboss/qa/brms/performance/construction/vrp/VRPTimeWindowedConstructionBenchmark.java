@@ -46,7 +46,7 @@ public class VRPTimeWindowedConstructionBenchmark
 
     @Benchmark
     @Override
-    public void benchmark() {
-        super.benchmark();
+    public VehicleRoutingSolution benchmark() {
+        return super.benchmark();
     }
 }

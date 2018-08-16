@@ -75,8 +75,8 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
     }
 
     @Benchmark
-    public void benchmark() {
-        super.benchmark();
+    public VehicleRoutingSolution benchmark() {
+        return super.benchmark();
     }
 
     public static void main(String... args) throws Exception {

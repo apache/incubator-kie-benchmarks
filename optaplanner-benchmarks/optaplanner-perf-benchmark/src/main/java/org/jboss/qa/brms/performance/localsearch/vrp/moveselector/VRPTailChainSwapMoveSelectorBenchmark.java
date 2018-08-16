@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.localsearch.vrp.moveselector;
 
 import org.jboss.qa.brms.performance.calculatecounttermination.EasyVRPCalculateCountTermination;
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
@@ -24,7 +25,7 @@ public class VRPTailChainSwapMoveSelectorBenchmark extends AbstractVRPMoveSelect
 
     @Benchmark
     @Override
-    public void benchmark() {
-        super.benchmark();
+    public VehicleRoutingSolution benchmark() {
+        return super.benchmark();
     }
 }
