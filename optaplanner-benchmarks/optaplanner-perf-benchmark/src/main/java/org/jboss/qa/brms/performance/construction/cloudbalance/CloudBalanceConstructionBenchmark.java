@@ -42,8 +42,8 @@ public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuri
 
     @Benchmark
     @Override
-    public void benchmark() {
-        super.benchmark();
+    public CloudBalance benchmark() {
+        return super.benchmark();
     }
 
 }

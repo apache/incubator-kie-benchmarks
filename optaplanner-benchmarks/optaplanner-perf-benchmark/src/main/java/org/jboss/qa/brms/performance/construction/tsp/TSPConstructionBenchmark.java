@@ -42,8 +42,8 @@ public class TSPConstructionBenchmark extends AbstractConstructionHeuristicPlann
 
     @Benchmark
     @Override
-    public void benchmark() {
-        super.benchmark();
+    public TravelingSalesmanTour benchmark() {
+        return super.benchmark();
     }
 
 }
