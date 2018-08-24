@@ -32,19 +32,24 @@ import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.TearDown;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * Inserts facts and fires at each insertion causing the activation of all rules.
  */
+@Warmup(iterations = 3000)
+@Measurement(iterations = 1000)
 public class FireUntilHaltBenchmark extends AbstractBenchmark {
 
-    @Param({"12", "48", "192", "768"})
+    @Param({"64", "192", "768"})
     private int rulesNr;
 
-    @Param({"10", "100", "1000"})
+    @Param({"10", "100"})
     private int factsNr;
 
     @Param({"true", "false"})
@@ -53,7 +58,6 @@ public class FireUntilHaltBenchmark extends AbstractBenchmark {
     @Param({"true", "false"})
     private boolean cep;
 
-    //@Param({"1", "2", "3"})
     private int joinsNr = 1;
 
     private static final String GLOBAL = "global java.util.concurrent.atomic.AtomicInteger counter\n" +
@@ -87,6 +91,12 @@ public class FireUntilHaltBenchmark extends AbstractBenchmark {
         new Thread( () -> {
             kieSession.fireUntilHalt();
         } ).start();
+    }
+
+    @TearDown(Level.Iteration)
+    public void tearDown() {
+        kieSession.halt();
+        kieSession.dispose();
     }
 
     @Benchmark

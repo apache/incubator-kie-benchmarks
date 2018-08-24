@@ -39,7 +39,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5000)
 public class InsertChainedFireBenchmark extends AbstractBenchmark {
 
-    @Param({"12", "48", "192", "768"})
+    @Param({"12", "48", "192"})
     private int rulesNr;
 
     @Setup
