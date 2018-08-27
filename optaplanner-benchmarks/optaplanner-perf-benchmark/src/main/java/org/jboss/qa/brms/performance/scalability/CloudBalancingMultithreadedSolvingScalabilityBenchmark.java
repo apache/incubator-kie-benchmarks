@@ -79,12 +79,4 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
     public CloudBalance benchmark() {
         return super.benchmark();
     }
-
-    public static void main(String... args) throws Exception {
-        Options opts = new OptionsBuilder()
-                .addProfiler(MemoryConsumptionProfiler.class)
-                .include("CloudBalancingMultithreadedSolvingScalabilityBenchmark")
-                .build();
-        new Runner(opts).run();
-    }
 }
