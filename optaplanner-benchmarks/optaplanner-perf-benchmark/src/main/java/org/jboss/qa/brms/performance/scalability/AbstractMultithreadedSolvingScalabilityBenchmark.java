@@ -57,12 +57,4 @@ public abstract class AbstractMultithreadedSolvingScalabilityBenchmark<Solution_
 
         super.setSolver(solverFactory.buildSolver());
     }
-
-    public static void main(String... args) throws Exception {
-        Options opts = new OptionsBuilder()
-                .addProfiler(MemoryConsumptionProfiler.class)
-                .include(".+ScalabilityBenchmark")
-                .build();
-        new Runner(opts).run();
-    }
 }
