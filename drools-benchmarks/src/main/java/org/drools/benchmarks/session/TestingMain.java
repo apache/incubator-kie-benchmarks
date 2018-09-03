@@ -18,7 +18,7 @@ package org.drools.benchmarks.session;
 
 import org.openjdk.jmh.infra.Blackhole;
 
-public class Main {
+public class TestingMain {
     public static void main( String[] args ) {
         InsertFireLoopBenchmark benchmark = new InsertFireLoopBenchmark();
         System.out.println("setupKieBase");

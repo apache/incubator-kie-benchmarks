@@ -34,9 +34,6 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-/**
- *
- */
 @Warmup(iterations = 2000)
 @Measurement(iterations = 1000)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)

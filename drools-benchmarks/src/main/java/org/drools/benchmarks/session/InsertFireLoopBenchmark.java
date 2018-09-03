@@ -42,15 +42,15 @@ import org.openjdk.jmh.infra.Blackhole;
 /**
  * Inserts facts and fires at each insertion causing the activation of all rules.
  */
-@Warmup(iterations = 2000)
+@Warmup(iterations = 3000)
 @Measurement(iterations = 1000)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class InsertFireLoopBenchmark extends AbstractBenchmark {
 
-    @Param({"12", "48", "192", "768"})
+    @Param({"64", "192"})
     private int rulesNr;
 
-    @Param({"10", "100", "1000"})
+    @Param({"10", "50"})
     private int factsNr;
 
     @Param({"true", "false"})
@@ -62,7 +62,7 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
     @Param({"true", "false"})
     private boolean cep;
 
-    @Param({"1", "2", "3"})
+    @Param({"1"})
     private int joinsNr;
 
     @Param({"true", "false"})
@@ -97,7 +97,7 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
                     session.insertAsync( new C( rulesNr + factsNr + i + 3 ) );
                 }
                 if (joinsNr > 2) {
-                    session.insertAsync( new D( rulesNr + factsNr*2 + i + 3 ) );
+                    session.insertAsync( new D( rulesNr + factsNr * 2 + i + 3 ) );
                 }
             } else {
                 eater.consume(session.insert( new B( rulesNr + i + 3 ) ));
@@ -105,10 +105,9 @@ public class InsertFireLoopBenchmark extends AbstractBenchmark {
                     eater.consume(session.insert( new C( rulesNr + factsNr + i + 3 ) ));
                 }
                 if (joinsNr > 2) {
-                    eater.consume(session.insert( new D( rulesNr + factsNr*2 + i + 3 ) ));
+                    eater.consume(session.insert( new D( rulesNr + factsNr * 2 + i + 3 ) ));
                 }
             }
-            eater.consume(kieSession.fireAllRules());
 
             if (!batchFire) {
                 eater.consume(kieSession.fireAllRules());

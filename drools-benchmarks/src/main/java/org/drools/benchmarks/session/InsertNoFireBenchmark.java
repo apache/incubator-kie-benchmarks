@@ -36,7 +36,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5000)
 public class InsertNoFireBenchmark extends AbstractBenchmark {
 
-    @Param({"12", "48", "192", "768"})
+    @Param({"48", "192", "768"})
     private int rulesNr;
 
     @Setup

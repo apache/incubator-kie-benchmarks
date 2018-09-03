@@ -1,11 +1,11 @@
 /*
- * Copyright 2016 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2018 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,8 @@
  */
 
 package org.drools.benchmarks.session;
+
+import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DRLProvider;
@@ -31,19 +33,24 @@ import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
-@Warmup(iterations = 3000)
+/**
+ * Inserts facts and fires at each insertion causing the activation of all rules.
+ */
+@Warmup(iterations = 2000)
 @Measurement(iterations = 1000)
-public class InsertOnlyBenchmark extends AbstractBenchmark {
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
 
-    @Param({"12", "48", "192", "768"})
+    @Param({"16"})
     private int rulesNr;
 
-    @Param({"10", "100", "1000"})
+    @Param({"10", "15"})
     private int factsNr;
 
     @Param({"true", "false"})
@@ -55,8 +62,11 @@ public class InsertOnlyBenchmark extends AbstractBenchmark {
     @Param({"true", "false"})
     private boolean cep;
 
-    @Param({"1", "2", "3"})
+    @Param({"2", "3"})
     private int joinsNr;
+
+    @Param({"true", "false"})
+    private boolean batchFire;
 
     @Setup
     public void setupKieBase() {
@@ -95,9 +105,17 @@ public class InsertOnlyBenchmark extends AbstractBenchmark {
                     eater.consume(session.insert( new C( rulesNr + factsNr + i + 3 ) ));
                 }
                 if (joinsNr > 2) {
-                    eater.consume(session.insert( new D( rulesNr + factsNr*2 + i + 3 ) ));
+                    eater.consume(session.insert( new D( rulesNr + factsNr * 2 + i + 3 ) ));
                 }
             }
+
+            if (!batchFire) {
+                eater.consume(kieSession.fireAllRules());
+            }
+        }
+
+        if (batchFire) {
+            eater.consume(kieSession.fireAllRules());
         }
     }
 }
