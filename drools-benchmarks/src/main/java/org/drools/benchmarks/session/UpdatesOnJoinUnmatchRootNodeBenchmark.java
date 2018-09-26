@@ -1,10 +1,11 @@
 /*
- * Copyright 2015 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2018 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,9 +37,9 @@ import org.openjdk.jmh.annotations.Warmup;
  * This benchmark updates multiple times all the facts of a long join chain, but fires
  * only at the end of the update loop.
  */
-@Warmup(iterations = 300)
-@Measurement(iterations = 50)
-public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
+@Warmup(iterations = 3000)
+@Measurement(iterations = 500)
+public class UpdatesOnJoinUnmatchRootNodeBenchmark extends AbstractBenchmark {
 
     @Param({"10", "20", "50"})
     private int loopCount;
@@ -105,6 +106,11 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
                 ds[j].setValue(ds[j].getValue() + 1);
                 kieSession.update(dFHs[j], ds[j]);
+            }
+            // Unmatches all As, so no rule fires.
+            for (int j = 0; j < factsNr; j++) {
+                as[j].setValue(-1);
+                kieSession.update(aFHs[j], as[j]);
             }
         }
 
