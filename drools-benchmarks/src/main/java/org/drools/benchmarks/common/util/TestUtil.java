@@ -29,10 +29,6 @@ import org.kie.internal.builder.DecisionTableInputType;
 
 public final class TestUtil {
 
-    public static boolean isSmokeTestsRun() {
-        return Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_SMOKE_TESTS));
-    }
-
     public static boolean isDebug() {
         return Boolean.TRUE.toString().equals(System.getProperty(Constants.PROP_KEY_DEBUG));
     }

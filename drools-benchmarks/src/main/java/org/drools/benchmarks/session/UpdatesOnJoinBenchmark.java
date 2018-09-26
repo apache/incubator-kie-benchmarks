@@ -66,8 +66,7 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
 
     @Setup
     public void setupKieBase() {
-        final int numberOfJoins = isSmokeTestsRun ? 3 : 4;
-        final DRLProvider drlProvider = new RulesWithJoinsProvider(numberOfJoins, false, true);
+        final DRLProvider drlProvider = new RulesWithJoinsProvider(4, false, true);
         kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr));
     }
 
@@ -80,70 +79,52 @@ public class UpdatesOnJoinBenchmark extends AbstractBenchmark {
         bs = new B[factsNr];
         cs = new C[factsNr];
         ds = new D[factsNr];
+        es = new E[factsNr];
 
         aFHs = new FactHandle[factsNr];
         bFHs = new FactHandle[factsNr];
         cFHs = new FactHandle[factsNr];
         dFHs = new FactHandle[factsNr];
-
-        if (!isSmokeTestsRun) {
-            es = new E[factsNr];
-            eFHs = new FactHandle[factsNr];
-        }
+        eFHs = new FactHandle[factsNr];
     }
 
     @Benchmark
     public int test() {
         for (int i = 0; i < factsNr; i++) {
-            as[i] = new A( rulesNr + 1 );
-            aFHs[i] = kieSession.insert( as[i] );
-            bs[i] = new B( rulesNr + 3 );
-            bFHs[i] = kieSession.insert( bs[i] );
-            cs[i] = new C( rulesNr + 5 );
-            cFHs[i] = kieSession.insert( cs[i] );
-
-            if (isSmokeTestsRun) {
-                if (insertLastJoinItem) {
-                    ds[i] = new D( rulesNr + 7 );
-                    dFHs[i] = kieSession.insert( ds[i] );
-                }
-            } else {
-                ds[i] = new D( rulesNr + 7 );
-                dFHs[i] = kieSession.insert( ds[i] );
-                if (insertLastJoinItem) {
-                    es[i] = new E( rulesNr + 9 );
-                    eFHs[i] = kieSession.insert( es[i] );
-                }
+            as[i] = new A(rulesNr + 1);
+            aFHs[i] = kieSession.insert(as[i]);
+            bs[i] = new B(rulesNr + 3);
+            bFHs[i] = kieSession.insert(bs[i]);
+            cs[i] = new C(rulesNr + 5);
+            cFHs[i] = kieSession.insert(cs[i]);
+            ds[i] = new D(rulesNr + 7);
+            dFHs[i] = kieSession.insert(ds[i]);
+            if (insertLastJoinItem) {
+                es[i] = new E(rulesNr + 9);
+                eFHs[i] = kieSession.insert(es[i]);
             }
         }
 
         for (int i = 0; i < loopCount; i++) {
             for (int j = 0; j < factsNr; j++) {
-                as[j].setValue( as[j].getValue() + 1 );
-                kieSession.update( aFHs[j], as[j] );
-                bs[j].setValue( bs[j].getValue() + 1 );
-                kieSession.update( bFHs[j], bs[j] );
-                cs[j].setValue( cs[j].getValue() + 1 );
-                kieSession.update( cFHs[j], cs[j] );
+                as[j].setValue(as[j].getValue() + 1);
+                kieSession.update(aFHs[j], as[j]);
+                bs[j].setValue(bs[j].getValue() + 1);
+                kieSession.update(bFHs[j], bs[j]);
+                cs[j].setValue(cs[j].getValue() + 1);
+                kieSession.update(cFHs[j], cs[j]);
 
-                if (isSmokeTestsRun) {
-                    if (insertLastJoinItem) {
-                        ds[j].setValue( ds[j].getValue() + 1 );
-                        kieSession.update( dFHs[j], ds[j] );
-                    }
-                } else {
-                    ds[j].setValue( ds[j].getValue() + 1 );
-                    kieSession.update( dFHs[j], ds[j] );
-                    if (insertLastJoinItem) {
-                        es[j].setValue( es[j].getValue() + 1 );
-                        kieSession.update( eFHs[j], es[j] );
-                    }
+                ds[j].setValue(ds[j].getValue() + 1);
+                kieSession.update(dFHs[j], ds[j]);
+                if (insertLastJoinItem) {
+                    es[j].setValue(es[j].getValue() + 1);
+                    kieSession.update(eFHs[j], es[j]);
                 }
             }
             for (int j = 0; j < factsNr; j++) {
-                if ( resetA ) {
-                    as[j].setValue( -1 );
-                    kieSession.update( aFHs[j], as[j] );
+                if (resetA) {
+                    as[j].setValue(-1);
+                    kieSession.update(aFHs[j], as[j]);
                 }
             }
         }

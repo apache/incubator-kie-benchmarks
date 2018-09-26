@@ -18,7 +18,6 @@ package org.drools.benchmarks.common;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
-import org.drools.benchmarks.common.util.TestUtil;
 import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -41,8 +40,6 @@ public abstract class AbstractBenchmark {
 
     protected KieBase kieBase;
     protected KieSession kieSession;
-
-    protected boolean isSmokeTestsRun = TestUtil.isSmokeTestsRun();
 
     public abstract void setup() throws ProviderException;
 

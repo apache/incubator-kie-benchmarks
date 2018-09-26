@@ -29,8 +29,10 @@ import org.drools.benchmarks.model.E;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
@@ -39,41 +41,35 @@ import org.openjdk.jmh.infra.Blackhole;
  * This benchmark is then intended to show the advantages of phreak's laziness that completely
  * avoids the evaluation of rules that cannot fire.
  */
+@Warmup(iterations = 500)
+@Measurement(iterations = 50)
 public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
 
-    @Param({"1", "10", "100"})
+    @Param({"10", "20", "50"})
     private int loopCount;
 
     @Param({"1", "4", "16"})
     private int rulesNr;
 
-    @Param({"1", "4", "16"})
+    @Param({"4", "6", "8"})
     private int factsNr;
-
-    @Param({"true", "false"})
-    private boolean insertLastJoinItem;
 
     @Setup
     public void setupKieBase() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append( "import org.drools.benchmarks.model.*;\n" );
-        sb.append( "rule R salience 10 when\n" +
+        final DRLProvider drlProvider = new RulesWithJoinsProvider(4, false, false);
+
+        String sb = "import org.drools.benchmarks.model.*;\n" +
+                "rule R salience 10 when\n" +
                 "  $factA : A( $a : value > 0)\n" +
                 "  B( $b : value > $a)\n" +
                 "  C( $c : value > $b)\n" +
-                "  D( $d : value > $c)\n");
-        if (!isSmokeTestsRun) {
-            sb.append("  E( $e : value > $d)\n");
-        }
-        sb.append(" then\n" +
+                "  D( $d : value > $c)\n" +
+                "  E( $e : value > $d)\n" +
+                " then\n" +
                 "  modify( $factA ) { setValue(-1) }; \n" +
-                " end\n" );
-
-        final int numberOfJoins = isSmokeTestsRun ? 3 : 4;
-        final DRLProvider drlProvider = new RulesWithJoinsProvider(numberOfJoins, false, false);
-        sb.append(drlProvider.getDrl(rulesNr - 1));
-
-        kieBase = BuildtimeUtil.createKieBaseFromDrl(sb.toString());
+                " end\n" +
+                drlProvider.getDrl(rulesNr - 1);
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(sb);
     }
 
     @Setup(Level.Iteration)
@@ -84,27 +80,18 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
 
     @Benchmark
     public void test(final Blackhole eater) {
-        A a = new A( -1 );
-        FactHandle aFH = kieSession.insert( a );
+        A a = new A(-1);
+        FactHandle aFH = kieSession.insert(a);
         for (int i = 0; i < factsNr; i++) {
-            eater.consume(kieSession.insert( new B( rulesNr + 3 ) ));
-            eater.consume(kieSession.insert( new C( rulesNr + 5 ) ));
-
-            if (isSmokeTestsRun) {
-                if (insertLastJoinItem) {
-                    eater.consume(kieSession.insert( new D( rulesNr + 7 ) ));
-                }
-            } else {
-                kieSession.insert( new D( rulesNr + 7 ) );
-                if (insertLastJoinItem) {
-                    eater.consume(kieSession.insert( new E( rulesNr + 9 ) ));
-                }
-            }
+            eater.consume(kieSession.insert(new B(rulesNr + 3)));
+            eater.consume(kieSession.insert(new C(rulesNr + 5)));
+            eater.consume(kieSession.insert(new D(rulesNr + 7)));
+            eater.consume(kieSession.insert(new E(rulesNr + 9)));
         }
 
         for (int i = 0; i < loopCount; i++) {
-            a.setValue( 1 );
-            kieSession.update( aFH, a );
+            a.setValue(1);
+            kieSession.update(aFH, a);
             eater.consume(kieSession.fireAllRules());
         }
     }
