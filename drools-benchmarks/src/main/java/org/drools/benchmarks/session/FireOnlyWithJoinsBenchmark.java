@@ -49,7 +49,7 @@ public class FireOnlyWithJoinsBenchmark extends AbstractBenchmark {
     private boolean multithread;
 
     @Param({"true", "false"})
-    private boolean async;
+    private boolean asyncInserts;
 
     @Param({"true", "false"})
     private boolean cep;
@@ -71,13 +71,13 @@ public class FireOnlyWithJoinsBenchmark extends AbstractBenchmark {
         kieSession = RuntimeUtil.createKieSession(kieBase);
         StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
         A a = new A( rulesNr + 1 );
-        if (async) {
+        if (asyncInserts) {
             session.insertAsync( a );
         } else {
             session.insert( a );
         }
         for ( int i = 0; i < factsNr; i++ ) {
-            if (async) {
+            if (asyncInserts) {
                 session.insertAsync( new B( rulesNr + i + 3 ) );
                 if (joinsNr > 1) {
                     session.insertAsync( new C( rulesNr + factsNr + i + 3 ) );

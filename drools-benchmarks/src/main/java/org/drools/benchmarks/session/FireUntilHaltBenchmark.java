@@ -46,7 +46,7 @@ import org.openjdk.jmh.infra.Blackhole;
 @Measurement(iterations = 1000)
 public class FireUntilHaltBenchmark extends AbstractBenchmark {
 
-    @Param({"64", "192", "768"})
+    @Param({"64", "192", "384"})
     private int rulesNr;
 
     @Param({"10", "100"})
