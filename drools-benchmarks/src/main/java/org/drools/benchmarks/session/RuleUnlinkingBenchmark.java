@@ -44,13 +44,13 @@ import org.openjdk.jmh.infra.Blackhole;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class RuleUnlinkingBenchmark extends AbstractBenchmark {
 
-    @Param({"1", "10", "100"})
+    @Param({"1", "10", "50"})
     private int loopCount;
 
     @Param({"1", "4", "16"})
     private int rulesNr;
 
-    @Param({"1", "4", "16"})
+    @Param({"1", "4", "8"})
     private int factsNr;
 
     @Param({"1", "2", "3"})
