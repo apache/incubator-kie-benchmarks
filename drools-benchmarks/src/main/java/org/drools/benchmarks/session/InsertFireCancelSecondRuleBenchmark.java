@@ -44,7 +44,7 @@ public class InsertFireCancelSecondRuleBenchmark extends AbstractBenchmark {
     @Param({"1", "2", "3", "4"})
     private int joinsNr;
 
-    @Param({"1", "4", "12"})
+    @Param({"1", "4", "8"})
     private int factsNr;
 
     private int numberOfRules = 2;

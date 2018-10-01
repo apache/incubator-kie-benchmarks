@@ -50,7 +50,7 @@ public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
     @Param({"16"})
     private int rulesNr;
 
-    @Param({"10", "15"})
+    @Param({"5", "10"})
     private int factsNr;
 
     @Param({"true", "false"})
