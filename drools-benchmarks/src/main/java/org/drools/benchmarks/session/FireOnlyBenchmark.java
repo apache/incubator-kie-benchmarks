@@ -37,7 +37,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 1000)
 public class FireOnlyBenchmark extends AbstractBenchmark {
 
-    @Param({"64", "192", "384"})
+    @Param({"32", "64", "192"})
     private int rulesNr;
 
     @Param({"10", "100"})
