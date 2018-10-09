@@ -18,13 +18,13 @@ package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.DRLProvider;
 
-public class SimpleRulesWithConstraintProvider implements DRLProvider {
+public class SimpleRulesWithConstraintsProvider implements DRLProvider {
 
-    public static final String PROVIDER_ID = "SimpleRulesWithConstraintProvider";
+    public static final String PROVIDER_ID = "SimpleRulesWithConstraintsProvider";
 
     private final String constraint;
 
-    public SimpleRulesWithConstraintProvider(final String constraint) {
+    public SimpleRulesWithConstraintsProvider(final String constraint) {
         this.constraint = constraint;
     }
 

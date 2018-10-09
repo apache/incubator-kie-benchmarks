@@ -17,7 +17,8 @@
 package org.drools.benchmarks.oopath.runtime;
 
 import java.util.Collection;
-import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintsProvider;
 
 public class OOPathBindIntegerInsertRuntimeBenchmark extends AbstractOOPathInsertRuntimeBenchmark {
 
@@ -28,6 +29,6 @@ public class OOPathBindIntegerInsertRuntimeBenchmark extends AbstractOOPathInser
 
     @Override
     protected String getDrl() {
-        return new SimpleRulesWithConstraintProvider("  Man( $age: /age )").getDrl();
+        return new SimpleRulesWithConstraintsProvider("  Man( $age: /age )").getDrl();
     }
 }

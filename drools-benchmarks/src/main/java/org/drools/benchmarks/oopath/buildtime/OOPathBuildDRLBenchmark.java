@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.ProviderException;
-import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintsProvider;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.kie.api.KieBase;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -48,7 +48,7 @@ public class OOPathBuildDRLBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() throws ProviderException {
-        final DRLProvider drlProvider = new SimpleRulesWithConstraintProvider("  Man( $toy: /wife/children[age > ${i} ]/toys )\n");
+        final DRLProvider drlProvider = new SimpleRulesWithConstraintsProvider("  Man( $toy: /wife/children[age > ${i} ]/toys )\n");
         drl = drlProvider.getDrl(numberOfRules);
     }
 
