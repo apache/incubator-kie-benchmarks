@@ -16,15 +16,18 @@
 
 package org.drools.benchmarks.session.sessionpool;
 
+import java.util.concurrent.TimeUnit;
+
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Warmup;
 
-public class GetSessionBenchmark extends AbstractSessionsPoolBenchmark {
-
-    @Benchmark
-    public KieSession getKieSessionFromPool() {
-        return sessionsPool.newKieSession();
-    }
+@Warmup(iterations = 3000, time = 1000, timeUnit = TimeUnit.MICROSECONDS)
+@Measurement(iterations = 100, time = 1000, timeUnit = TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+public class GetSessionFromContainerBenchmark extends AbstractSessionsPoolBenchmark {
 
     @Benchmark
     public KieSession getKieSessionFromContainer() {
