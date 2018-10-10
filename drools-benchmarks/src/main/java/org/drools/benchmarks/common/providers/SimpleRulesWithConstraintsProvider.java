@@ -22,10 +22,10 @@ public class SimpleRulesWithConstraintsProvider implements DRLProvider {
 
     public static final String PROVIDER_ID = "SimpleRulesWithConstraintsProvider";
 
-    private final String constraint;
+    private final String constraints;
 
-    public SimpleRulesWithConstraintsProvider(final String constraint) {
-        this.constraint = constraint;
+    public SimpleRulesWithConstraintsProvider(final String constraints) {
+        this.constraints = constraints;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SimpleRulesWithConstraintsProvider implements DRLProvider {
         drlBuilder.append("\n");
         for (int i = 0; i < numberOfRules; i++) {
             drlBuilder.append("rule \"" + ruleNameBase + i + "\" when\n");
-            drlBuilder.append(constraint.replace("${i}", String.valueOf(i)));
+            drlBuilder.append(constraints.replace("${i}", String.valueOf(i)));
             drlBuilder.append("\n");
             drlBuilder.append("then\n");
             drlBuilder.append("end\n");
