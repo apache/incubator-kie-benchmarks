@@ -47,7 +47,8 @@ public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
     public void setupKieSessions() {
         kieSessionFromPool = sessionsPool.newKieSession();
         kieSessionFromContainer = kieContainer.newKieSession();
-        doSomethingWithSessions();
+        doSomethingWithSessions(kieSessionFromPool, factsForSession);
+        doSomethingWithSessions(kieSessionFromContainer, factsForSession);
     }
 
     @Benchmark
@@ -58,13 +59,5 @@ public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
     @Benchmark
     public void getKieSessionFromContainer() {
         kieSessionFromContainer.dispose();
-    }
-
-    private void doSomethingWithSessions() {
-        insertFactsIntoSession(kieSessionFromPool, factsForSession, null);
-        kieSessionFromPool.fireAllRules();
-
-        insertFactsIntoSession(kieSessionFromContainer, factsForSession, null);
-        kieSessionFromContainer.fireAllRules();
     }
 }

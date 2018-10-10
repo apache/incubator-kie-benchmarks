@@ -16,21 +16,43 @@
 
 package org.drools.benchmarks.session.sessionpool;
 
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 3000, time = 1000, timeUnit = TimeUnit.MICROSECONDS)
-@Measurement(iterations = 100, time = 1000, timeUnit = TimeUnit.MICROSECONDS)
+@Warmup(iterations = 3000, time = 200, timeUnit = TimeUnit.MICROSECONDS)
+@Measurement(iterations = 20, time = 200, timeUnit = TimeUnit.MICROSECONDS)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class GetSessionFromContainerBenchmark extends AbstractSessionsPoolBenchmark {
+public class GetSessionBenchmark extends AbstractSessionsPoolBenchmark {
+
+    @Param({"true", "false"})
+    private boolean usePool;
+
+    @Param({"true", "false"})
+    private boolean exerciseSession;
+
+    private Collection<Object> factsForSession;
+
+    @Setup
+    public void generateFactsForSessions() {
+        if (exerciseSession) {
+            factsForSession = generateFacts();
+        }
+    }
 
     @Benchmark
-    public KieSession getKieSessionFromContainer() {
-        return kieContainer.newKieSession();
+    public KieSession getKieSessionFromPool() {
+        KieSession ksession = usePool ? sessionsPool.newKieSession() : kieContainer.newKieSession();
+        if (exerciseSession) {
+            doSomethingWithSessions(ksession, factsForSession);
+        }
+        return ksession;
     }
 }
