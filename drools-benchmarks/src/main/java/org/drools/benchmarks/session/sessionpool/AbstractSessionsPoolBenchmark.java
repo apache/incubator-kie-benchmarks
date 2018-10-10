@@ -37,22 +37,18 @@ import org.kie.api.runtime.KieContainerSessionsPool;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
-@BenchmarkMode(Mode.AverageTime)
+@BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
-@Warmup(iterations = 20, time = 50, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 10, time = 50, timeUnit = TimeUnit.MILLISECONDS)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Fork(5)
 public abstract class AbstractSessionsPoolBenchmark {
 
@@ -69,17 +65,19 @@ public abstract class AbstractSessionsPoolBenchmark {
     protected KieContainerSessionsPool sessionsPool;
 
     @Setup
-    public void setupKieContainer() throws IOException {
+    public void setupContainerAndPool() throws IOException {
         final Resource drlResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(getDRLProvider().getDrl(numberOfRules)))
                 .setResourceType(ResourceType.DRL)
                 .setSourcePath("drlFile.drl");
         kieContainer = BuildtimeUtil.createKieContainerFromResources(false, drlResource);
+        sessionsPool = kieContainer.newKieSessionsPool(initialSessionPoolSize);
     }
 
-    @Setup(Level.Iteration)
-    public void setupSessionsPool() {
-        sessionsPool = kieContainer.newKieSessionsPool(initialSessionPoolSize);
+    @TearDown
+    public void disposeContainer() {
+        sessionsPool.shutdown();
+        kieContainer.dispose();
     }
 
     private DRLProvider getDRLProvider() {
@@ -102,15 +100,11 @@ public abstract class AbstractSessionsPoolBenchmark {
     }
 
     protected void insertFactsIntoSession(final KieSession kieSession, final Collection<Object> facts, final Blackhole eater) {
-        if (eater == null) {
-            facts.forEach(kieSession::insert);
-        } else {
-            facts.forEach(fact -> eater.consume(kieSession.insert(fact)));
-        }
+        facts.forEach(fact -> eater.consume(kieSession.insert(fact)));
     }
 
-    protected void doSomethingWithSessions(KieSession ksession, Collection<Object> factsForSession) {
-        insertFactsIntoSession( ksession, factsForSession, null );
-        ksession.fireAllRules();
+    protected void exerciseSession(final KieSession ksession, final Collection<Object> factsForSession, final Blackhole eater) {
+        insertFactsIntoSession( ksession, factsForSession, eater );
+        eater.consume(ksession.fireAllRules());
     }
 }

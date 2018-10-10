@@ -20,22 +20,21 @@ import java.util.Collection;
 
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
 
-// TODO - warmup and measurement iteration count
-@BenchmarkMode(Mode.SingleShotTime)
-@Warmup(iterations = 1000000)
-@Measurement(iterations = 10000)
+@Warmup(iterations = 30000)
+@Measurement(iterations = 5000)
 public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
 
-    private KieSession kieSessionFromPool;
-    private KieSession kieSessionFromContainer;
+    @Param({"true", "false"})
+    private boolean usePool;
 
+    private KieSession kieSession;
     private Collection<Object> factsForSession;
 
     @Setup
@@ -44,20 +43,13 @@ public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
     }
 
     @Setup(Level.Iteration)
-    public void setupKieSessions() {
-        kieSessionFromPool = sessionsPool.newKieSession();
-        kieSessionFromContainer = kieContainer.newKieSession();
-        doSomethingWithSessions(kieSessionFromPool, factsForSession);
-        doSomethingWithSessions(kieSessionFromContainer, factsForSession);
+    public void setupKieSessions(final Blackhole eater) {
+        kieSession = usePool ? sessionsPool.newKieSession() : kieContainer.newKieSession();
+        exerciseSession(kieSession, factsForSession, eater);
     }
-
-//    @Benchmark
-//    public void getKieSessionFromPool() {
-//        kieSessionFromPool.dispose();
-//    }
 
     @Benchmark
     public void getKieSessionFromContainer() {
-        kieSessionFromContainer.dispose();
+        kieSession.dispose();
     }
 }
