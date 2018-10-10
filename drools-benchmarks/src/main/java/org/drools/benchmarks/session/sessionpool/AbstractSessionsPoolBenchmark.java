@@ -91,7 +91,7 @@ public abstract class AbstractSessionsPoolBenchmark {
         return new SimpleRulesWithConstraintsProvider(constraints);
     }
 
-    Collection<Object> generateFacts() {
+    protected Collection<Object> generateFacts() {
         final List<Object> facts = new ArrayList<>();
         facts.add(new A(0));
         facts.add(new B(1));
@@ -101,11 +101,16 @@ public abstract class AbstractSessionsPoolBenchmark {
         return facts;
     }
 
-    void insertFactsIntoSession(final KieSession kieSession, final Collection<Object> facts, final Blackhole eater) {
+    protected void insertFactsIntoSession(final KieSession kieSession, final Collection<Object> facts, final Blackhole eater) {
         if (eater == null) {
             facts.forEach(kieSession::insert);
         } else {
             facts.forEach(fact -> eater.consume(kieSession.insert(fact)));
         }
+    }
+
+    protected void doSomethingWithSessions(KieSession ksession, Collection<Object> factsForSession) {
+        insertFactsIntoSession( ksession, factsForSession, null );
+        ksession.fireAllRules();
     }
 }
