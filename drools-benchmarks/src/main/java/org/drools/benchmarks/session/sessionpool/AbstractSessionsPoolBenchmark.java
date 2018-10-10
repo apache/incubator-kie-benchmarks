@@ -68,8 +68,6 @@ public abstract class AbstractSessionsPoolBenchmark {
 
     @Setup
     public void setupKieContainer() throws IOException {
-        System.out.println(KieServices.get());
-        System.out.println(KieServices.get().getResources());
         final Resource drlResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(getDRLProvider().getDrl(numberOfRules)))
                 .setResourceType(ResourceType.DRL)
