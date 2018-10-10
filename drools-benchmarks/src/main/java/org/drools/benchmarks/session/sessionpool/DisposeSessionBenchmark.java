@@ -29,7 +29,7 @@ import org.openjdk.jmh.annotations.Warmup;
 
 // TODO - warmup and measurement iteration count
 @BenchmarkMode(Mode.SingleShotTime)
-@Warmup(iterations = 50000)
+@Warmup(iterations = 1000000)
 @Measurement(iterations = 10000)
 public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
 
@@ -51,10 +51,10 @@ public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
         doSomethingWithSessions(kieSessionFromContainer, factsForSession);
     }
 
-    @Benchmark
-    public void getKieSessionFromPool() {
-        kieSessionFromPool.dispose();
-    }
+//    @Benchmark
+//    public void getKieSessionFromPool() {
+//        kieSessionFromPool.dispose();
+//    }
 
     @Benchmark
     public void getKieSessionFromContainer() {

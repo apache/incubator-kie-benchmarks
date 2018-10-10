@@ -65,8 +65,8 @@ public abstract class AbstractSessionsPoolBenchmark {
     @Param({"10"})
     private int numberOfFacts;
 
-    KieContainer kieContainer;
-    KieContainerSessionsPool sessionsPool;
+    protected KieContainer kieContainer;
+    protected KieContainerSessionsPool sessionsPool;
 
     @Setup
     public void setupKieContainer() throws IOException {
