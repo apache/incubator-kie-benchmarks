@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
-import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintsProvider;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
@@ -54,7 +54,7 @@ public class BuildKieBaseFromContainerBenchmark {
     @Param({"100", "500", "1000", "3000", "5000", "10000"})
     private int numberOfRules;
 
-    @Param({SimpleRulesWithConstraintProvider.PROVIDER_ID, RulesWithJoinsProvider.PROVIDER_ID})
+    @Param({SimpleRulesWithConstraintsProvider.PROVIDER_ID, RulesWithJoinsProvider.PROVIDER_ID})
     private String rulesProviderId;
 
     private ReleaseId releaseId;
@@ -81,8 +81,8 @@ public class BuildKieBaseFromContainerBenchmark {
 
     private DRLProvider getDRLProvider() {
         switch (rulesProviderId) {
-            case SimpleRulesWithConstraintProvider.PROVIDER_ID:
-                return new SimpleRulesWithConstraintProvider("Integer(this == ${i})");
+            case SimpleRulesWithConstraintsProvider.PROVIDER_ID:
+                return new SimpleRulesWithConstraintsProvider("Integer(this == ${i})");
             case RulesWithJoinsProvider.PROVIDER_ID:
                 return new RulesWithJoinsProvider(4, false, true);
             default:

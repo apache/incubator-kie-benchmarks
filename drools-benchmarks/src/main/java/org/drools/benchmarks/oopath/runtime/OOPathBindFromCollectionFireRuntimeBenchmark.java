@@ -17,7 +17,8 @@
 package org.drools.benchmarks.oopath.runtime;
 
 import java.util.Collection;
-import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintsProvider;
 
 public class OOPathBindFromCollectionFireRuntimeBenchmark extends AbstractOOPathFireRuntimeBenchmark {
 
@@ -28,6 +29,6 @@ public class OOPathBindFromCollectionFireRuntimeBenchmark extends AbstractOOPath
 
     @Override
     protected String getDrl() {
-        return new SimpleRulesWithConstraintProvider("  Man( $child: /children )").getDrl();
+        return new SimpleRulesWithConstraintsProvider("  Man( $child: /children )").getDrl();
     }
 }

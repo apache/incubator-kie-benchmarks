@@ -17,7 +17,8 @@
 package org.drools.benchmarks.oopath.runtime;
 
 import java.util.Collection;
-import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintsProvider;
 
 public class OOPathMultilevelInsertRuntimeBenchmark extends AbstractOOPathInsertRuntimeBenchmark {
 
@@ -28,6 +29,6 @@ public class OOPathMultilevelInsertRuntimeBenchmark extends AbstractOOPathInsert
 
     @Override
     protected String getDrl() {
-        return new SimpleRulesWithConstraintProvider("  Man( $child: /wife/children )").getDrl();
+        return new SimpleRulesWithConstraintsProvider("  Man( $child: /wife/children )").getDrl();
     }
 }

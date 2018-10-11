@@ -19,7 +19,7 @@ package org.drools.benchmarks.oopath.runtime;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
-import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintsProvider;
 import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -50,7 +50,7 @@ public class OOPathAccumulateInsertRuntimeBenchmark extends AbstractOOPathRuntim
 
     @Override
     protected String getDrl() {
-        return new SimpleRulesWithConstraintProvider(
+        return new SimpleRulesWithConstraintsProvider(
                 "  accumulate ( Adult( $child: /children ) ; $accumulateResult: " + accumulateFunction + "($child.getAge()) )").getDrl();
     }
 

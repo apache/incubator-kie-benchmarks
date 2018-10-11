@@ -21,7 +21,7 @@ import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.DRLProvider;
-import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintProvider;
+import org.drools.benchmarks.common.providers.SimpleRulesWithConstraintsProvider;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
@@ -56,7 +56,7 @@ public class BuildKJarFromResourceBenchmark {
     @Setup
     public void createResource() {
 
-        final DRLProvider drlProvider = new SimpleRulesWithConstraintProvider("Integer(this == ${i})");
+        final DRLProvider drlProvider = new SimpleRulesWithConstraintsProvider("Integer(this == ${i})");
         drlResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(drlProvider.getDrl(numberOfRules)))
                 .setResourceType(ResourceType.DRL)
