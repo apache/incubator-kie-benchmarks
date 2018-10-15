@@ -19,7 +19,7 @@
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
         <extensions>true</extensions>
-        <version>6.3.0.Final</version>
+        <version>${project.version}</version>
       </plugin>         
     </plugins> 
     <extensions>
@@ -41,5 +41,21 @@
       <!--<url>http://localhost:8081/nexus/content/repositories/releases</url>-->
     </repository>
   </distributionManagement>
-  
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
