@@ -38,8 +38,8 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 50)
-@Measurement(iterations = 20)
+@Warmup(iterations = 30)
+@Measurement(iterations = 15)
 @Fork(3)
 public class DMNEvaluateDecisionNameLengthBenchmark extends AbstractBenchmark {
 
