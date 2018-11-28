@@ -124,6 +124,7 @@ public class JBPMController {
                     RecoveryManager.manager().terminate();
                 } catch (IllegalStateException e) {
                     log.info("RecoveryManager is already closed.");
+                    log.debug("Exception thrown when terminating RecoveryManager", e);
                 }
             }
         }
