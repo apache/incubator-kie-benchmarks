@@ -52,21 +52,16 @@ public class DMNEvaluateDecisionNameLengthBenchmark extends AbstractBenchmark {
     private DMNContext dmnContext;
 
     @Setup
-    public void setupResource() {
+    public void setupResource() throws IOException {
         dmnResource = KieServices.get().getResources().newClassPathResource("dmn/" + dmnFileName).setResourceType(ResourceType.DMN);
+        dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-            dmnModel = dmnRuntime.getModels().get(0);
-            dmnContext = getTestContext();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        dmnModel = dmnRuntime.getModels().get(0);
+        dmnContext = getTestContext();
     }
 
     private DMNContext getTestContext() {
