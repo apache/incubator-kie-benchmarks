@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.dmn.runtime;
+package org.drools.benchmarks.turtle.reproducers;
 
 import java.io.IOException;
 
