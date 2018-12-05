@@ -16,6 +16,9 @@ import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
+    private static final String CLOUD_BALANCING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.cloudbalancing";
+    private static final String CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE = "org/jboss/qa/brms/performance/examples/cloudbalancing/solver/cloudBalancingScoreRules.drl";
+
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
     private CloudBalancing.DataSet dataset;
 
@@ -30,12 +33,11 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
         SolverConfig config = solverFactory.getSolverConfig();
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList("org.jboss.qa.brms.performance.examples.cloudbalancing"));
+        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(CLOUD_BALANCING_DOMAIN_PACKAGE));
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
-        scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList("org/jboss/qa/brms/performance/examples/" +
-                                                                                     "cloudbalancing/solver/cloudBalancingScoreRules.drl"));
+        scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList(CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE));
         config.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
         config.setTerminationConfig(new TerminationConfig().withTerminationClass(CloudBalanceCalculateCountTermination.class));
         config.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
