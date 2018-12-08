@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.session.sessionpool;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 
 import org.kie.api.runtime.KieSession;
@@ -45,6 +46,7 @@ public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
     @Setup(Level.Iteration)
     public void setupKieSessions(final Blackhole eater) {
         kieSession = usePool ? sessionsPool.newKieSession() : kieContainer.newKieSession();
+        kieSession.getProcessInstance(0); // Force the creation of a process instance
         exerciseSession(kieSession, factsForSession, eater);
     }
 

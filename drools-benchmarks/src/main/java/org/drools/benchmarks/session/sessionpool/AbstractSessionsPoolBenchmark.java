@@ -21,6 +21,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.DRLProvider;
@@ -29,12 +30,22 @@ import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
+import org.drools.core.common.InternalWorkingMemory;
+import org.drools.core.event.DefaultAgendaEventListener;
+import org.drools.core.event.ProcessEventSupport;
+import org.drools.core.runtime.process.InternalProcessRuntime;
+import org.drools.core.runtime.process.ProcessRuntimeFactory;
 import org.kie.api.KieServices;
+import org.kie.api.event.process.ProcessEventListener;
+import org.kie.api.event.rule.RuleFlowGroupDeactivatedEvent;
 import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieContainerSessionsPool;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.process.ProcessInstance;
+import org.kie.api.runtime.process.WorkItemManager;
+import org.kie.internal.process.CorrelationKey;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Mode;
@@ -66,6 +77,7 @@ public abstract class AbstractSessionsPoolBenchmark {
 
     @Setup
     public void setupContainerAndPool() throws IOException {
+        ProcessRuntimeFactory.setProcessRuntimeFactoryService((wm) -> new DummyListeningProcessRuntime(wm));
         final Resource drlResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(getDRLProvider().getDrl(numberOfRules)))
                 .setResourceType(ResourceType.DRL)
@@ -106,5 +118,120 @@ public abstract class AbstractSessionsPoolBenchmark {
     protected void exerciseSession(final KieSession ksession, final Collection<Object> factsForSession, final Blackhole eater) {
         insertFactsIntoSession( ksession, factsForSession, eater );
         eater.consume(ksession.fireAllRules());
+    }
+
+    /**
+     * Simple simulation of how a JBPM ProcessRuntimeImpl registers an event listener.
+     * Session pooling should then make sure that no multiple process runtimes are generated
+     * which would lead to a multiplication of event listeners.
+     */
+    private static class DummyListeningProcessRuntime implements InternalProcessRuntime {
+
+        public DummyListeningProcessRuntime(InternalWorkingMemory workingMemory) {
+            workingMemory.addEventListener(new DefaultAgendaEventListener());
+        }
+
+        @Override
+        public void dispose() { }
+
+        @Override
+        public void setProcessEventSupport( ProcessEventSupport processEventSupport ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public void clearProcessInstances() {
+            // do nothing.
+        }
+
+        @Override
+        public void clearProcessInstancesState() {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance startProcess( String processId, CorrelationKey correlationKey, Map<String, Object> parameters ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance createProcessInstance( String processId, CorrelationKey correlationKey, Map<String, Object> parameters ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance getProcessInstance( CorrelationKey correlationKey ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public void addEventListener( ProcessEventListener listener ) {
+            // do nothing.
+        }
+
+        @Override
+        public void removeEventListener( ProcessEventListener listener ) {
+            // do nothing.
+        }
+
+        @Override
+        public Collection<ProcessEventListener> getProcessEventListeners() {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance startProcess( String processId ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance startProcess( String processId, Map<String, Object> parameters ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance createProcessInstance( String processId, Map<String, Object> parameters ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance startProcessInstance( long processInstanceId ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public void signalEvent( String type, Object event ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public void signalEvent( String type, Object event, long processInstanceId ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public Collection<ProcessInstance> getProcessInstances() {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public ProcessInstance getProcessInstance( long processInstanceId ) {
+            return null;
+        }
+
+        @Override
+        public ProcessInstance getProcessInstance( long processInstanceId, boolean readonly ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public void abortProcessInstance( long processInstanceId ) {
+            throw new UnsupportedOperationException( );
+        }
+
+        @Override
+        public WorkItemManager getWorkItemManager() {
+            throw new UnsupportedOperationException( );
+        }
     }
 }
