@@ -37,6 +37,7 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 @Warmup(iterations = 30)
@@ -62,6 +63,11 @@ public class DMNEvaluateDecisionNameLengthJITCompilationBenchmark extends Abstra
         System.setProperty("org.kie.dmn.compiler.execmodel", execModelProperty);
         dmnResource = KieServices.get().getResources().newClassPathResource("dmn/" + dmnFileName).setResourceType(ResourceType.DMN);
         dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
+    }
+
+    @TearDown
+    public void tearDown() {
+        System.clearProperty("org.kie.dmn.compiler.execmodel");
     }
 
     @Setup(Level.Iteration)
