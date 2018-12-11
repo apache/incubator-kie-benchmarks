@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.optaplanner.examples.cloudbalancing.solver;
+package org.jboss.qa.brms.performance.examples.cloudbalancing.solver;
     dialect "java"
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
