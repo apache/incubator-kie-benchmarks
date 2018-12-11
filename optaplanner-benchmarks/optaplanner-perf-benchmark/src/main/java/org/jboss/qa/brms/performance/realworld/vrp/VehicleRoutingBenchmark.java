@@ -14,6 +14,7 @@ import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
 import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
+import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.SwapMoveSelectorConfig;
@@ -31,6 +32,8 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
 
     private static final String VEHCILE_ROUTING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.vehiclerouting";
     private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE = "org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingScoreRules.drl";
+    private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 1;
+    private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
     @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
     private VehicleRouting.DataSet dataset;
@@ -77,17 +80,18 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
         SubChainSwapMoveSelectorConfig subChainSwapMoveSelectorConfig = new SubChainSwapMoveSelectorConfig();
         subChainSwapMoveSelectorConfig.setSelectReversingMoveToo(true);
 
-        localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig(Arrays.asList(new ChangeMoveSelectorConfig(),
-                                                                                               new SwapMoveSelectorConfig(),
-                                                                                               subChainChangeMoveSelectorConfig,
-                                                                                               subChainSwapMoveSelectorConfig)));
-
-        localSearchPhaseConfig.setAcceptorConfig(new AcceptorConfig().withLateAcceptanceSize(200));
+        List<MoveSelectorConfig> moveSelectorConfigList = Arrays.asList(new ChangeMoveSelectorConfig(),
+                                                                        new SwapMoveSelectorConfig(),
+                                                                        subChainChangeMoveSelectorConfig,
+                                                                        subChainSwapMoveSelectorConfig);
+        UnionMoveSelectorConfig selectorConfig = new UnionMoveSelectorConfig(moveSelectorConfigList);
 
         LocalSearchForagerConfig foragerConfig = new LocalSearchForagerConfig();
-        foragerConfig.setAcceptedCountLimit(1);
+        foragerConfig.setAcceptedCountLimit(FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT);
 
         localSearchPhaseConfig.setForagerConfig(foragerConfig);
+        localSearchPhaseConfig.setMoveSelectorConfig(selectorConfig);
+        localSearchPhaseConfig.setAcceptorConfig(new AcceptorConfig().withLateAcceptanceSize(ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE));
 
         return Arrays.asList(constructionHeuristicPhaseConfig, localSearchPhaseConfig);
     }
