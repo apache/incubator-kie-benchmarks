@@ -18,35 +18,33 @@ package org.drools.benchmarks.session.sessionpool;
 
 import java.util.Collection;
 
-import org.drools.core.event.DefaultAgendaEventListener;
+import org.drools.benchmarks.common.util.DummyProcessRuntime;
+import org.drools.core.runtime.process.ProcessRuntimeFactory;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 @Warmup(iterations = 30000)
 @Measurement(iterations = 5000)
-public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
-
-    @Param({"true", "false"})
-    private boolean usePool;
+public class DisposeSessionWithProcessRuntimeBenchmark extends AbstractSessionsPoolBenchmark {
 
     private KieSession kieSession;
     private Collection<Object> factsForSession;
 
     @Setup
     public void generateFactsForSessions() {
+        ProcessRuntimeFactory.setProcessRuntimeFactoryService((wm) -> new DummyProcessRuntime());
         factsForSession = generateFacts();
     }
 
     @Setup(Level.Iteration)
     public void setupKieSessions(final Blackhole eater) {
-        kieSession = usePool ? sessionsPool.newKieSession() : kieContainer.newKieSession();
-        kieSession.addEventListener(new DefaultAgendaEventListener());
+        kieSession = sessionsPool.newKieSession();
+        kieSession.getProcessInstance(0); // Force the creation of a process runtime
         exerciseSession(kieSession, factsForSession, eater);
     }
 
