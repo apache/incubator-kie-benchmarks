@@ -15,13 +15,8 @@ public class NurseRostering extends AbstractExample<NurseRoster> {
 
     public enum DataSet {
         LONG("long01.xml"),
-        LONG_HINT("long_hint01.xml"),
         MEDIUM("medium01.xml"),
-        MEDIUM_HINT("medium_hint01.xml"),
-        MEDIUM_LATE_INITIALIZED("medium_late01_initialized.xml"),
-        MEDIUM_LATE("medium_late02.xml"),
-        SPRINT("sprint01.xml"),
-        SPRINT_HINT("sprint_hint01.xml");
+        SPRINT("sprint01.xml");
 
         private String filename;
 
