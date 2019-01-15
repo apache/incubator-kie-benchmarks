@@ -236,9 +236,4 @@ public class NurseRoster extends AbstractPersistable {
     public void setScore(HardSoftScore score) {
         this.score = score;
     }
-
-    // ************************************************************************
-    // Complex methods
-    // ************************************************************************
-
 }

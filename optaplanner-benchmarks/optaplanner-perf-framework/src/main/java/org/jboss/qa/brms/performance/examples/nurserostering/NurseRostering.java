@@ -29,8 +29,12 @@ public class NurseRostering extends AbstractExample<NurseRoster> {
         }
     }
 
-    private static final String PATH_TO_SOLVER_CONFIG = "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
-    private static final String PATH_TO_DRL_FILE = "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+    private static final String PATH_TO_SOLVER_CONFIG =
+            "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
+
+    private static final String PATH_TO_DRL_FILE =
+            "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+
     private NurseRosteringDao dao = new NurseRosteringDao();
 
     public NurseRoster loadSolvingProblem(DataSet dataset) {

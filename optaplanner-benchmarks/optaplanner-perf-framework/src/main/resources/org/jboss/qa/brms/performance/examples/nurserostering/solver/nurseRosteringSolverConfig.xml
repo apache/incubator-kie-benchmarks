@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
-  <!--<environmentMode>FULL_ASSERT</environmentMode>--><!-- To slowly prove there are no bugs in this code -->
-  <!--<moveThreadCount>AUTO</moveThreadCount>--><!-- To solve faster by saturating multiple CPU cores -->
 
   <solutionClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster</solutionClass>
   <entityClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.ShiftAssignment</entityClass>
@@ -30,14 +28,6 @@
         <cacheType>STEP</cacheType>
         <moveListFactoryClass>org.jboss.qa.brms.performance.examples.nurserostering.solver.move.factory.ShiftAssignmentPillarPartSwapMoveFactory</moveListFactoryClass>
       </moveListFactory>
-      <!--<moveListFactory>-->
-        <!--<cacheType>STEP</cacheType>-->
-        <!--<moveListFactoryClass>org.jboss.qa.brms.performance.examples.nurserostering.solver.move.factory.ShiftAssignmentSequenceSwitchLength2MoveFactory</moveListFactoryClass>-->
-      <!--</moveListFactory>-->
-      <!--<moveListFactory>-->
-        <!--<cacheType>STEP</cacheType>-->
-        <!--<moveListFactoryClass>org.jboss.qa.brms.performance.examples.nurserostering.solver.move.factory.ShiftAssignmentSequenceSwitchLength3MoveFactory</moveListFactoryClass>-->
-      <!--</moveListFactory>-->
     </unionMoveSelector>
     <acceptor>
       <entityTabuSize>7</entityTabuSize>
