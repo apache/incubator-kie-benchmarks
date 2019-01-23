@@ -52,6 +52,24 @@
         <artifactId>jmh-generator-annprocess</artifactId>
         <version>${version.jmh}</version>
       </dependency>
+      <!-- XLSX -->
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>${version.org.apache.poi}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>${version.org.apache.poi}</version>
+      </dependency>
+      <!-- JSON -->
+      <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.json</artifactId>
+        <!-- Old version until this issue is resolved: https://github.com/ImmobilienScout24/illegal-transitive-dependency-check/issues/30 -->
+        <version>1.0.4</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 </project>
