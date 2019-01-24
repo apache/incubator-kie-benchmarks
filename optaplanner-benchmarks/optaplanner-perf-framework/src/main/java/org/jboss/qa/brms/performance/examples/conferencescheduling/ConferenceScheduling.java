@@ -70,7 +70,7 @@ public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
 
     @Override
     public ConferenceSolution loadSolvingProblem(File file) {
-        return new ConferenceSolution();
+        throw new UnsupportedOperationException("Unsupported data set loading from file");
     }
 
     @Override
