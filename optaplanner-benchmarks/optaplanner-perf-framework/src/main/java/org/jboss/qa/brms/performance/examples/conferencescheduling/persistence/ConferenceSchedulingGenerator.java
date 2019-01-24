@@ -16,7 +16,6 @@
 
 package org.jboss.qa.brms.performance.examples.conferencescheduling.persistence;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
