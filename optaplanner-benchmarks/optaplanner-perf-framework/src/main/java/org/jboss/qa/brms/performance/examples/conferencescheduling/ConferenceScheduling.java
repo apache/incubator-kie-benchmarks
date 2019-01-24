@@ -15,8 +15,11 @@ import org.optaplanner.core.config.solver.SolverConfig;
 
 public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
 
-    private static final String PATH_TO_DRL_FILE = "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
-    private static final String PATH_TO_SOLVE_CONFIG = "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
+    private static final String PATH_TO_DRL_FILE =
+            "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
+
+    private static final String PATH_TO_SOLVE_CONFIG =
+            "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
 
     public enum DataSet {
         TALKS_36_TIMESLOTS_12_ROOMS_5("TIME_12;ROOM_5;SPEAKER_26;TALK_36"),
@@ -64,8 +67,10 @@ public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
     }
 
     public ConferenceSolution loadSolvingProblem(ConferenceScheduling.DataSet dataset) {
-        return new ConferenceSchedulingGenerator().createConferenceSolution(dataset.timeslotListSize, dataset.roomListSize,
-                                                                            dataset.speakerListSize, dataset.talkListSize);
+        return new ConferenceSchedulingGenerator().createConferenceSolution(dataset.timeslotListSize, 
+                                                                            dataset.roomListSize,
+                                                                            dataset.speakerListSize,
+                                                                            dataset.talkListSize);
     }
 
     @Override
