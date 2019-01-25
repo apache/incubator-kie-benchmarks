@@ -18,6 +18,7 @@ package org.drools.benchmarks.session.sessionpool;
 
 import java.util.Collection;
 
+import org.drools.core.event.DefaultAgendaEventListener;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -45,6 +46,7 @@ public class DisposeSessionBenchmark extends AbstractSessionsPoolBenchmark {
     @Setup(Level.Iteration)
     public void setupKieSessions(final Blackhole eater) {
         kieSession = usePool ? sessionsPool.newKieSession() : kieContainer.newKieSession();
+        kieSession.addEventListener(new DefaultAgendaEventListener());
         exerciseSession(kieSession, factsForSession, eater);
     }
 
