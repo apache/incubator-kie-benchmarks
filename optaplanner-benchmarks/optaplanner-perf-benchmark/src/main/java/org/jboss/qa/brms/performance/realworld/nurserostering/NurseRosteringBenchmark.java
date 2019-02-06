@@ -10,9 +10,9 @@ import org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster;
 import org.jboss.qa.brms.performance.examples.nurserostering.solver.move.factory.EmployeeChangeMoveFactory;
 import org.jboss.qa.brms.performance.examples.nurserostering.solver.move.factory.ShiftAssignmentPillarPartSwapMoveFactory;
 import org.jboss.qa.brms.performance.examples.nurserostering.solver.move.factory.ShiftAssignmentSwapMoveFactory;
-import org.openjdk.jmh.Main;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Warmup;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
@@ -27,10 +27,15 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
+@Warmup(iterations = 25)
 public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoster> {
 
-    private static final String NURSE_ROSTERING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.nurserostering";
-    private static final String NURSE_ROSTERING_PATH_TO_SCORE_RULES_FILE = "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+    private static final String NURSE_ROSTERING_DOMAIN_PACKAGE =
+            "org.jboss.qa.brms.performance.examples.nurserostering";
+
+    private static final String NURSE_ROSTERING_PATH_TO_SCORE_RULES_FILE =
+            "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+
     private static final int ACCEPTOR_CONFIG_ENTITY_TABU_SIZE = 7;
     private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 700;
     @Param({"SPRINT", "MEDIUM", "LONG"})
@@ -52,7 +57,8 @@ public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoste
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList(NURSE_ROSTERING_PATH_TO_SCORE_RULES_FILE));
 
-        solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(NurseRosterHardSoftCalculateCountTermination.class));
+        solverConfig.setTerminationConfig(new TerminationConfig().
+                withTerminationClass(NurseRosterHardSoftCalculateCountTermination.class));
 
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig = new ConstructionHeuristicPhaseConfig();
         constructionHeuristicPhaseConfig.setConstructionHeuristicType(ConstructionHeuristicType.WEAKEST_FIT);
@@ -81,7 +87,8 @@ public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoste
 
         MoveListFactoryConfig shiftAssignmentPillarPartSwapMoveFactoryConfig = new MoveListFactoryConfig();
         shiftAssignmentPillarPartSwapMoveFactoryConfig.setCacheType(SelectionCacheType.STEP);
-        shiftAssignmentPillarPartSwapMoveFactoryConfig.setMoveListFactoryClass(ShiftAssignmentPillarPartSwapMoveFactory.class);
+        shiftAssignmentPillarPartSwapMoveFactoryConfig.
+                setMoveListFactoryClass(ShiftAssignmentPillarPartSwapMoveFactory.class);
 
         moveSelectorConfig.setMoveSelectorConfigList(Arrays.asList(employeeChangeMoveFactoryConfig,
                                                                    shiftAssignmentSwapMoveFactoryConfig,
@@ -91,7 +98,8 @@ public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoste
         foragerConfig.setAcceptedCountLimit(FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT);
 
         localSearchPhaseConfig.setMoveSelectorConfig(moveSelectorConfig);
-        localSearchPhaseConfig.setAcceptorConfig(new AcceptorConfig().withEntityTabuSize(ACCEPTOR_CONFIG_ENTITY_TABU_SIZE));
+        localSearchPhaseConfig.setAcceptorConfig(new AcceptorConfig().
+                withEntityTabuSize(ACCEPTOR_CONFIG_ENTITY_TABU_SIZE));
         localSearchPhaseConfig.setForagerConfig(foragerConfig);
         return localSearchPhaseConfig;
     }
