@@ -20,8 +20,11 @@ import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
 
-    private static final String CONFERENCE_SCHEDULING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.conferencescheduling";
-    private static final String CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE = "org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
+    private static final String CONFERENCE_SCHEDULING_DOMAIN_PACKAGE =
+            "org.jboss.qa.brms.performance.examples.conferencescheduling";
+
+    private static final String CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE =
+            "org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
 
     @Param({"TALKS_36_TIMESLOTS_12_ROOMS_5", "TALKS_108_TIMESLOTS_18_ROOMS_10", "TALKS_216_TIMESLOTS_18_ROOMS_20"})
     private ConferenceScheduling.DataSet dataSet;
@@ -37,10 +40,12 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
         SolverConfig solverConfig = solverFactory.getSolverConfig();
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(CONFERENCE_SCHEDULING_DOMAIN_PACKAGE));
+        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.
+                singletonList(CONFERENCE_SCHEDULING_DOMAIN_PACKAGE));
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
-        scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList(CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE));
+        scoreDirectorFactoryConfig.setScoreDrlList(Collections.
+                singletonList(CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE));
 
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setLocalSearchType(LocalSearchType.TABU_SEARCH);
@@ -48,7 +53,8 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
         solverConfig.setPhaseConfigList(Arrays.asList(new ConstructionHeuristicPhaseConfig(), localSearchPhaseConfig));
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
         solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
-        solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(ConferenceSchedulingTermination.class));
+        solverConfig.setTerminationConfig(new TerminationConfig().
+                withTerminationClass(ConferenceSchedulingTermination.class));
 
         super.setSolver(solverFactory.buildSolver());
     }
