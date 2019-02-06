@@ -116,7 +116,7 @@ public class ConferenceConstraintConfiguration extends AbstractPersistable {
     @ConstraintWeight(AUDIENCE_TYPE_DIVERSITY)
     private HardMediumSoftScore audienceTypeDiversity = HardMediumSoftScore.ofSoft(1);
     @ConstraintWeight(AUDIENCE_TYPE_THEME_TRACK_CONFLICT)
-    private HardMediumSoftScore audienceTypeThemeTrackConflict = HardMediumSoftScore.ofSoft(0);
+    private HardMediumSoftScore audienceTypeThemeTrackConflict = HardMediumSoftScore.ofSoft(1);
     @ConstraintWeight(AUDIENCE_LEVEL_DIVERSITY)
     private HardMediumSoftScore audienceLevelDiversity = HardMediumSoftScore.ofSoft(1);
     @ConstraintWeight(CONTENT_AUDIENCE_LEVEL_FLOW_VIOLATION)
