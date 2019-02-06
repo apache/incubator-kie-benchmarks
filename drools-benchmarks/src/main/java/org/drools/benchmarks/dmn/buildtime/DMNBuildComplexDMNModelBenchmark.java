@@ -33,13 +33,13 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 40, time = 2, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
 public class DMNBuildComplexDMNModelBenchmark extends AbstractBenchmark {
 
     private Resource dmnResource;
 
-    @Param({"dmn/validation.dmn"})
+    @Param({"dmn/ch11MODIFIED.dmn"})
     private String resourceName;
 
     @Setup

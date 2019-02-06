@@ -67,7 +67,7 @@ public class DMNBuildKJarBenchmark {
 
     private ReleaseId createKJar() throws IOException {
 
-        final Resource resource1 = kieServices.getResources().newClassPathResource("dmn/validation.dmn");
+        final Resource resource1 = kieServices.getResources().newClassPathResource("dmn/ch11MODIFIED.dmn");
         resource1.setResourceType(ResourceType.DMN);
 
         return BuildtimeUtil.createKJarFromResources(false,
