@@ -27,7 +27,7 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
-@Warmup(iterations = 25)
+@Warmup(iterations = 15)
 public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoster> {
 
     private static final String NURSE_ROSTERING_DOMAIN_PACKAGE =
