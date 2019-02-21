@@ -9,6 +9,7 @@ import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceSch
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Warmup;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
@@ -18,6 +19,7 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
+@Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
 
     private static final String CONFERENCE_SCHEDULING_DOMAIN_PACKAGE =
