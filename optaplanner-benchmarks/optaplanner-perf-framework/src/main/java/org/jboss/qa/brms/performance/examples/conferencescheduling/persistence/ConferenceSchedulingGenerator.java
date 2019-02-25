@@ -16,6 +16,7 @@
 
 package org.jboss.qa.brms.performance.examples.conferencescheduling.persistence;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -204,7 +205,21 @@ public class ConferenceSchedulingGenerator {
     protected int labTalkCount;
     protected Random random;
 
-    public ConferenceSolution createConferenceSolution(int timeslotListSize, int roomListSize,
+    public ConferenceSolution buildConferenceSolution(int dayListSize, int roomListSize) {
+        int labTimeslotCount = (int) timeslotOptions.stream()
+                .filter(pair -> Duration.between(pair.getLeft(), pair.getRight()).toMinutes() >= 120).count();
+        int labRoomCount = roomListSize / 5;
+        labTalkCount = (dayListSize * labTimeslotCount) * labRoomCount;
+
+        int timeslotListSize = dayListSize * timeslotOptions.size();
+        int talkListSize = (dayListSize * (timeslotOptions.size() - labTimeslotCount)) * (roomListSize - labRoomCount)
+                + labTalkCount;
+        int speakerListSize = talkListSize * 2 / 3;
+
+        return createConferenceSolution(timeslotListSize, roomListSize, speakerListSize, talkListSize);
+    }
+
+    private ConferenceSolution createConferenceSolution(int timeslotListSize, int roomListSize,
                                                        int speakerListSize, int talkListSize) {
         random = new Random(37);
         ConferenceSolution solution = new ConferenceSolution();

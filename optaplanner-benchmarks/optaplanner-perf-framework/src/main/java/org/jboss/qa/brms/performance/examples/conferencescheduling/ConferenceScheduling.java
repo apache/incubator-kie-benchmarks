@@ -34,59 +34,44 @@ public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
     private static final String PATH_TO_DRL_FILE =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
 
-    private static final String PATH_TO_SOLVE_CONFIG =
+    private static final String PATH_TO_SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
 
     public enum DataSet {
-        TALKS_36_TIMESLOTS_12_ROOMS_5("TIME_12;ROOM_5;SPEAKER_26;TALK_36"),
-        TALKS_108_TIMESLOTS_18_ROOMS_10("TIME_18;ROOM_10;SPEAKER_74;TALK_108"),
-        TALKS_216_TIMESLOTS_18_ROOMS_20("TIME_18;ROOM_20;SPEAKER_146;TALK_216");
+        DAY_2_ROOM_5("DAY_2;ROOM_5"),   //12 time slots, 36 talks, 24 speakers
+        DAY_3_ROOM_10("DAY_3;ROOM_10"), //18 time slots, 108 talks, 72 speakers
+        DAY_3_ROOM_20("DAY_3;ROOM_20"); //18 time slots, 216 talks, 144 speakers
 
-        private int timeslotListSize;
+        private int dayListSize;
         private int roomListSize;
-        private int speakerListSize;
-        private int talkListSize;
 
         DataSet(String generatorParameters) {
-            Stream<String> parameters = Arrays.stream(generatorParameters.split(";", 4));
+            Stream<String> parameters = Arrays.stream(generatorParameters.split(";", 2));
 
             parameters.forEach(s -> {
-                if (s.startsWith("TIME")) {
-                    timeslotListSize = Integer.parseInt(s.split("_")[1]);
-                } else if (s.startsWith("ROOM")) {
+                if (s.startsWith("DAY")) {
+                    dayListSize = Integer.parseInt(s.split("_")[1]);
+                } else {
                     roomListSize = Integer.parseInt(s.split("_")[1]);
-                } else if (s.startsWith("SPEAKER")) {
-                    speakerListSize = Integer.parseInt(s.split("_")[1]);
-                } else if (s.startsWith("TALK")) {
-                    talkListSize = Integer.parseInt(s.split("_")[1]);
                 }
             });
 
             parameters.close();
         }
 
-        public int getTimeslotListSize() {
-            return timeslotListSize;
+        public int getDayListSize() {
+            return dayListSize;
         }
 
         public int getRoomListSize() {
             return roomListSize;
         }
 
-        public int getSpeakerListSize() {
-            return speakerListSize;
-        }
-
-        public int getTalkListSize() {
-            return talkListSize;
-        }
     }
 
     public ConferenceSolution loadSolvingProblem(ConferenceScheduling.DataSet dataset) {
-        return new ConferenceSchedulingGenerator().createConferenceSolution(dataset.timeslotListSize,
-                                                                            dataset.roomListSize,
-                                                                            dataset.speakerListSize,
-                                                                            dataset.talkListSize);
+        return new ConferenceSchedulingGenerator().buildConferenceSolution(dataset.dayListSize,
+                                                                           dataset.roomListSize);
     }
 
     @Override
@@ -96,7 +81,7 @@ public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
 
     @Override
     public SolverFactory<ConferenceSolution> getDefaultSolverFactory() {
-        return SolverFactory.createFromXmlInputStream(this.getClass().getResourceAsStream(PATH_TO_SOLVE_CONFIG));
+        return SolverFactory.createFromXmlInputStream(this.getClass().getResourceAsStream(PATH_TO_SOLVER_CONFIG));
     }
 
     @Override

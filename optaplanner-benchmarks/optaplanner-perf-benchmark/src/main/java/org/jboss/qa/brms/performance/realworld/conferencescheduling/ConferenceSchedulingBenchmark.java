@@ -28,7 +28,7 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
     private static final String CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE =
             "org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
 
-    @Param({"TALKS_36_TIMESLOTS_12_ROOMS_5", "TALKS_108_TIMESLOTS_18_ROOMS_10", "TALKS_216_TIMESLOTS_18_ROOMS_20"})
+    @Param({"DAY_2_ROOM_5", "DAY_3_ROOM_10", "DAY_3_ROOM_20"})
     private ConferenceScheduling.DataSet dataSet;
 
     @Override
