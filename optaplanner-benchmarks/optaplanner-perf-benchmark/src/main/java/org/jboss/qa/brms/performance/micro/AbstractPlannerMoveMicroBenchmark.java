@@ -3,16 +3,23 @@ package org.jboss.qa.brms.performance.micro;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Warmup;
 import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
 @State(Scope.Thread)
-@BenchmarkMode(Mode.SampleTime)
+@BenchmarkMode(Mode.AverageTime)
+@Warmup(iterations = 10, time = 1)
+@Measurement(iterations = 10, time = 1)
+@Fork(value = 5)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 public abstract class AbstractPlannerMoveMicroBenchmark<Solution> {
 
@@ -35,11 +42,18 @@ public abstract class AbstractPlannerMoveMicroBenchmark<Solution> {
         this.move = move;
     }
 
-    @Setup
-    public abstract void initScoreDirector();
+    protected abstract void initScoreDirector();
 
-    @Setup
-    public abstract void initMove();
+    protected abstract void initMove();
+
+    protected abstract void initEntities();
+
+    @Setup(Level.Invocation)
+    public void initBenchmark() {
+        initEntities();
+        initMove();
+        initScoreDirector();
+    }
 
     public Move<Solution> benchmarkDoMove() {
         return getMove().doMove(getScoreDirector());

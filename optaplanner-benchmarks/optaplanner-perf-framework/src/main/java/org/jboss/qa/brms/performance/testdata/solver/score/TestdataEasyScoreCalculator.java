@@ -9,17 +9,6 @@ public class TestdataEasyScoreCalculator implements EasyScoreCalculator<Testdata
 
     @Override
     public Score calculateScore(TestdataSolution testdataSolution) {
-        SimpleScore score = SimpleScore.of(0);
-        if (!testdataSolution.getEntityList().isEmpty()) {
-            score.add(SimpleScore.of(1));
-        } else {
-            score.add(SimpleScore.of(-1));
-        }
-        if (!testdataSolution.getValueList().isEmpty()) {
-            score.add(SimpleScore.of(1));
-        } else {
-            score.add(SimpleScore.of(-1));
-        }
-        return score;
+        return SimpleScore.of(0);
     }
 }

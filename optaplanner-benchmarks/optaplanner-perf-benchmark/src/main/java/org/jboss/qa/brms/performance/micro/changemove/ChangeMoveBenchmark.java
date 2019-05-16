@@ -19,9 +19,8 @@ import org.optaplanner.core.impl.score.director.easy.EasyScoreDirectorFactory;
 public class ChangeMoveBenchmark extends AbstractPlannerMoveMicroBenchmark<TestdataSolution> {
 
     private TestdataValue testdataValue = new TestdataValue("v1");
-    private TestdataEntity testdataEntity = new TestdataEntity("e1");
-    private SolutionDescriptor<TestdataSolution> solutionDescriptor = SolutionDescriptor.
-            buildSolutionDescriptor(TestdataSolution.class, TestdataEntity.class);
+    private TestdataEntity testdataEntity;
+    private SolutionDescriptor<TestdataSolution> solutionDescriptor;
 
     @Override
     public void initMove() {
@@ -32,6 +31,12 @@ public class ChangeMoveBenchmark extends AbstractPlannerMoveMicroBenchmark<Testd
         ChangeMove<TestdataSolution> testdataSolutionChangeMove =
                 new ChangeMove<>(testdataEntity, genuineVariableDescriptor, testdataValue);
         super.setMove(testdataSolutionChangeMove);
+    }
+
+    @Override
+    protected void initEntities() {
+        testdataEntity = new TestdataEntity("e1");
+        solutionDescriptor = SolutionDescriptor.buildSolutionDescriptor(TestdataSolution.class, TestdataEntity.class);
     }
 
     @Override
