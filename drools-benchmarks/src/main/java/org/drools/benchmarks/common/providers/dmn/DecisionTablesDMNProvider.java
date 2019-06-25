@@ -118,7 +118,18 @@ public class DecisionTablesDMNProvider implements DMNProvider {
             dmnBuilder.append("                </annotationEntry>\n");
             dmnBuilder.append("            </rule>\n");
             dmnBuilder.append("        </decisionTable>\n");
+            dmnBuilder.append("    </decision>\n");
+
+            dmnBuilder.append("    <decision id=\"layer_myDecision_" + i + "\" name=\"layer_myDecision_" + i + "\">\n");
+            dmnBuilder.append("        <variable name=\"layer_myDecision_" + i + "\" id=\"layer_myDecision_" + i + "var\" typeRef=\"string\"/>\n");
+            dmnBuilder.append("        <informationRequirement >\n");
+            dmnBuilder.append("            <requiredDecision href=\"#myDecision_" + i + "\"/>\n");
+            dmnBuilder.append("        </informationRequirement>\n");
+            dmnBuilder.append("        <literalExpression typeRef=\"string\" >\n");
+            dmnBuilder.append("            <text>\"decision was: \" + myDecision_" + i + "</text>\n");
+            dmnBuilder.append("        </literalExpression>\n");
             dmnBuilder.append("    </decision>");
+
         }
         dmnBuilder.append("</definitions>");
 
