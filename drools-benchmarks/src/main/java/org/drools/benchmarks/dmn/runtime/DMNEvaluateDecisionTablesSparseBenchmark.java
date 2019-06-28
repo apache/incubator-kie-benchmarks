@@ -47,9 +47,9 @@ public class DMNEvaluateDecisionTablesSparseBenchmark extends AbstractBenchmark 
 
     private static final Logger LOG = LoggerFactory.getLogger(DMNEvaluateDecisionTablesSparseBenchmark.class);
 
-    @Param({"100"})
+    @Param({"500"})
     private int numberOfElements;
-    @Param({"10"})
+    @Param({"1", "2", "50"})
     private int sparseness;
 
     private Resource dmnResource;
@@ -60,8 +60,8 @@ public class DMNEvaluateDecisionTablesSparseBenchmark extends AbstractBenchmark 
     public static void main(String[] args) throws Exception {
         try (Scanner scanner = new Scanner(System.in)) {
             DMNEvaluateDecisionTablesSparseBenchmark instance = new DMNEvaluateDecisionTablesSparseBenchmark();
-            instance.numberOfElements = 100;
-            instance.sparseness = 10;
+            instance.numberOfElements = 500;
+            instance.sparseness = 50;
             instance.setupResource();
             instance.setup();
             System.out.println("Press ENTER to continue... ");
