@@ -16,7 +16,7 @@
   <name>jBPM Performance Tests Parent</name>
 
   <properties>
-    <version.com.oracle.ojdbc6>11.2.0.1.0</version.com.oracle.ojdbc6>
+    <version.org.postgresql.postgresql>42.2.6</version.org.postgresql.postgresql>
   </properties>
 
   <modules>
@@ -61,27 +61,27 @@
       <properties>
         <!-- Properties to properly filter persistence.xml -->
         <maven.hibernate.hbm2ddl>none</maven.hibernate.hbm2ddl>
-        <maven.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</maven.hibernate.dialect>
+        <maven.hibernate.dialect>org.hibernate.dialect.PostgreSQL82Dialect</maven.hibernate.dialect>
 
         <!-- Properties to properly filter custom datasource.properties. Other maven.jdbc.* properties (user, password, etc.)
              are provided in this custom datasource.properties file -->
         <maven.jdbc.db.name>perfdb</maven.jdbc.db.name>
-        <maven.datasource.classname>oracle.jdbc.xa.client.OracleXADataSource</maven.datasource.classname>
-        <maven.jdbc.driver.class>oracle.jdbc.driver.OracleDriver</maven.jdbc.driver.class>
+        <maven.datasource.classname>org.postgresql.xa.PGXADataSource</maven.datasource.classname>
+        <maven.jdbc.driver.class>org.postgresql.Driver</maven.jdbc.driver.class>
       </properties>
       <dependencyManagement>
         <dependencies>
           <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>${version.com.oracle.ojdbc6}</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${version.org.postgresql.postgresql}</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
       <dependencies>
         <dependency>
-          <groupId>com.oracle</groupId>
-          <artifactId>ojdbc6</artifactId>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
         </dependency>
       </dependencies>
 
@@ -115,9 +115,9 @@
               <dependencies>
                 <!-- Driver we use for creating schema -->
                 <dependency>
-                  <groupId>com.oracle</groupId>
-                  <artifactId>ojdbc6</artifactId>
-                  <version>${version.com.oracle.ojdbc6}</version>
+                  <groupId>org.postgresql</groupId>
+                  <artifactId>postgresql</artifactId>
+                  <version>${version.org.postgresql.postgresql}</version>
                 </dependency>
               </dependencies>
               <!-- common configuration shared by all executions -->
@@ -137,10 +137,6 @@
                     <goal>execute</goal>
                   </goals>
                   <configuration>
-                    <!-- By setting delimiterType to row it will parse SQL file until whole row matches delimiter or EOF,
-                     so we used / to force it to read until the very end -->
-                    <delimiterType>row</delimiterType>
-                    <delimiter>/</delimiter>
                     <autocommit>true</autocommit>
                     <srcFiles>
                       <srcFile>src/main/resources/ddl-scripts/perf-drop-tables.sql</srcFile>
