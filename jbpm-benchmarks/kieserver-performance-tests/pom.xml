@@ -16,8 +16,6 @@
   <properties>
     <kit.version>${version.org.kie}</kit.version>
     <metrics.version>3.1.0</metrics.version>
-    <!-- WildFly version used for JMS BOM -->
-    <wildfly.version>11.0.0.Final</wildfly.version>
 
     <!-- >>>>>>>>>>>>>>>> Performance configuration <<<<<<<<<<<<<<<<<<<< -->
 
@@ -90,7 +88,7 @@
       <dependency>
         <groupId>org.wildfly</groupId>
         <artifactId>wildfly-jms-client-bom</artifactId>
-        <version>${wildfly.version}</version>
+        <version>${version.org.wildfly}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
