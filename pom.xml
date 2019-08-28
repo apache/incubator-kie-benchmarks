@@ -30,7 +30,7 @@
     <dependencies>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>kie-parent</artifactId>
+        <artifactId>kie-platform-bom</artifactId>
         <version>${kie.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>

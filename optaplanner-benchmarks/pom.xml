@@ -22,14 +22,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- KIE Platform BOM -->
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>kie-parent</artifactId>
-        <type>pom</type>
-        <version>${kie.bom.version}</version>
-        <scope>import</scope>
-      </dependency>
       <!-- Modules -->
       <dependency>
         <groupId>org.kie</groupId>
