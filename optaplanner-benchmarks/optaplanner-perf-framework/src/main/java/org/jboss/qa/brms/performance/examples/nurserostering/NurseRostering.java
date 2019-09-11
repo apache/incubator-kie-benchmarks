@@ -33,7 +33,7 @@ public class NurseRostering extends AbstractExample<NurseRoster> {
             "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
 
     private static final String PATH_TO_DRL_FILE =
-            "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+            "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
 
     private NurseRosteringDao dao = new NurseRosteringDao();
 
