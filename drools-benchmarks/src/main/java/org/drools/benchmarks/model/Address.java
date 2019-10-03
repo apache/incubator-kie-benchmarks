@@ -17,7 +17,7 @@ package org.drools.benchmarks.model;
 
 public class Address {
     public enum Country {
-        US, CZ, SK
+        US, CZ, SK, BR, IT
     }
 
     private String street;
@@ -86,3 +86,6 @@ public class Address {
                 + uuid + "]";
     }
 }
+
+
+
