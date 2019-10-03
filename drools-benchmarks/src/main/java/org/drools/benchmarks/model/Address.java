@@ -17,7 +17,7 @@ package org.drools.benchmarks.model;
 
 public class Address {
     public enum Country {
-        US, CZ, SK, BR, IT
+        US, CZ, SK
     }
 
     private String street;
@@ -25,6 +25,7 @@ public class Address {
     private String postCode;
     private Country country;
     private String uuid;
+    private String planet;
 
     public Address() {}
 
@@ -72,6 +73,10 @@ public class Address {
         this.country = country;
     }
 
+    public String getPlanet() { return planet; }
+
+    public void setPlanet(String planet) { this.planet = planet; }
+
     public String getUuid() {
         return uuid;
     }
@@ -82,7 +87,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address [street=" + street + ", city=" + city + ", postCode=" + postCode + ", country=" + country + ", uuid="
+        return "Address [street=" + street + ", city=" + city + ", postCode=" + postCode + ", country=" + country + ", planet=" + planet + ", uuid="
                 + uuid + "]";
     }
 }

@@ -36,7 +36,7 @@ public class KBaseCreationFromDTable1Benchmark extends AbstractSimpleRuntimeBenc
         for (Object fact : facts) {
             ksession.insert(fact);
         }
-
+        ksession.fireAllRules();
         return ksession;
     }
 

@@ -9,9 +9,6 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class KBaseCreationFromDTable2Benchmark extends AbstractSimpleRuntimeBenchmark {
 
     @Setup
@@ -34,13 +31,13 @@ public class KBaseCreationFromDTable2Benchmark extends AbstractSimpleRuntimeBenc
         for (Object fact : facts) {
             ksession.insert(fact);
         }
-
+        ksession.fireAllRules();
         return ksession;
     }
 
     @Override
     protected void addFactsGenerators() {
-        addFactsGenerator(new KBaseCreationFromDTable2Generator(getGeneratorConfiguration()),1490);
+        addFactsGenerator(new KBaseCreationFromDTable2Generator(getGeneratorConfiguration()),20000);
     }
 
     @Benchmark
