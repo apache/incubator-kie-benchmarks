@@ -10,16 +10,11 @@ import org.openjdk.jmh.annotations.Benchmark;
 
 @Warmup(iterations = 2000)
 @Measurement(iterations = 200)
-public class KBaseCreationFromDTable2Benchmark extends AbstractSimpleRuntimeBenchmark {
+public class DTable2Benchmark extends AbstractSimpleRuntimeBenchmark {
 
     @Setup
     public void addResources() {
         addClassPathResource("kbase-creation/dtable2-kbase-creation.xls");
-    }
-
-    @Benchmark
-    public KieSession timeKBaseCreationFromOneBigAndOneSmallDTable() {
-        return insertFactsAndFireAllRules();
     }
 
     @Override

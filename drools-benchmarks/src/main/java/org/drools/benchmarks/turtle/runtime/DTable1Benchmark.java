@@ -12,7 +12,7 @@ import java.util.List;
 
 @Warmup(iterations = 100000)
 @Measurement(iterations = 10000)
-public class KBaseCreationFromDTable1Benchmark extends AbstractSimpleRuntimeBenchmark {
+public class DTable1Benchmark extends AbstractSimpleRuntimeBenchmark {
 
     private static int from = 999;
     private static int to = 3102;
@@ -23,7 +23,7 @@ public class KBaseCreationFromDTable1Benchmark extends AbstractSimpleRuntimeBenc
     }
 
     @Benchmark
-    public KieSession timeKBaseCreationFromOneBigAndOneSmallDTable() {
+    public KieSession timeFactsInsertionAndRulesFiring() {
         return insertFactsAndFireAllRules();
     }
 
