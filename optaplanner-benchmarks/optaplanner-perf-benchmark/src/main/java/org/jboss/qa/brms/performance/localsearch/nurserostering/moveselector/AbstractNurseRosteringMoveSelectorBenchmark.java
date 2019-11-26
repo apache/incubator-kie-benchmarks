@@ -3,8 +3,8 @@ package org.jboss.qa.brms.performance.localsearch.nurserostering.moveselector;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
+import org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;

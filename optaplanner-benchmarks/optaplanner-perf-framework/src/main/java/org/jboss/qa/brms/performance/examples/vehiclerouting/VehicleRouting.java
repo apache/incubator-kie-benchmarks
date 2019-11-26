@@ -1,11 +1,11 @@
 package org.jboss.qa.brms.performance.examples.vehiclerouting;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Customer;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Standstill;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.Customer;
+import org.optaplanner.examples.vehiclerouting.domain.Standstill;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.persistence.VehicleRoutingDao;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.solver.score.VehicleRoutingIncrementalScoreCalculator;
+import org.optaplanner.examples.vehiclerouting.solver.score.VehicleRoutingIncrementalScoreCalculator;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.EnvironmentMode;

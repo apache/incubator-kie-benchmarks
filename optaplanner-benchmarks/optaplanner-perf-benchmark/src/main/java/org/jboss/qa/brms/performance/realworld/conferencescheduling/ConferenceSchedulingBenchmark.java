@@ -6,7 +6,6 @@ import java.util.Collections;
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.calculatecounttermination.ConferenceSchedulingTermination;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceScheduling;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
@@ -18,6 +17,7 @@ import org.optaplanner.core.config.localsearch.LocalSearchType;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {

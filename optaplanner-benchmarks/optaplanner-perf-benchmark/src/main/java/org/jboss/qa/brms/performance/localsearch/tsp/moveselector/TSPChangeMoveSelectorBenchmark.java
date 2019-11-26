@@ -1,7 +1,7 @@
 package org.jboss.qa.brms.performance.localsearch.tsp.moveselector;
 
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
-import org.jboss.qa.brms.performance.examples.tsp.domain.TravelingSalesmanTour;
+import org.optaplanner.examples.tsp.domain.TspSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 
@@ -16,7 +16,7 @@ public class TSPChangeMoveSelectorBenchmark extends AbstractTSPMoveSelectorBench
 
     @Benchmark
     @Override
-    public TravelingSalesmanTour benchmark() {
+    public TspSolution benchmark() {
         return super.benchmark();
     }
 

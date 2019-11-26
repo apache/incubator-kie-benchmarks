@@ -4,14 +4,10 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.solver.phase.CloudBalanceSolutionInitializer;
-import org.jboss.qa.brms.performance.profiler.MemoryConsumptionProfiler;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
+import org.jboss.qa.brms.performance.examples.cloudbalancing.solution.CloudBalanceSolutionInitializer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;

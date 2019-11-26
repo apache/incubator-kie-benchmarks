@@ -2,7 +2,7 @@ package org.jboss.qa.brms.performance.construction.cloudbalance;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.SolverFactory;

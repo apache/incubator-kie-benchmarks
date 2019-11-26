@@ -2,8 +2,8 @@ package org.jboss.qa.brms.performance.construction.vrp;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.SolverFactory;

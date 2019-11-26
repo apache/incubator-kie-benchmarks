@@ -2,7 +2,7 @@ package org.jboss.qa.brms.performance.construction.projectjobscheduling;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.domain.Schedule;
+import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.SolverFactory;

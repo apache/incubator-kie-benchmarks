@@ -30,7 +30,7 @@ public abstract class XStreamSolutionDao<Solution_> extends AbstractSolutionDao<
 
     @Override
     public String getFileExtension() {
-        return xStreamSolutionFileIO.getOutputFileExtension();
+        return xStreamSolutionFileIO.getInputFileExtension();
     }
 
     @Override

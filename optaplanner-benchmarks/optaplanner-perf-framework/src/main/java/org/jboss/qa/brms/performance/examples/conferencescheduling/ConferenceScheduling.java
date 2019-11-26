@@ -22,12 +22,12 @@ import java.util.Collections;
 import java.util.stream.Stream;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceSolution;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Talk;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.persistence.ConferenceSchedulingGenerator;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
+import org.optaplanner.examples.conferencescheduling.domain.Talk;
+import org.optaplanner.examples.conferencescheduling.persistence.ConferenceSchedulingGenerator;
 
 public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
 
@@ -83,10 +83,12 @@ public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
     }
 
     public ConferenceSolution loadSolvingProblem(ConferenceScheduling.DataSet dataset) {
-        return new ConferenceSchedulingGenerator().createConferenceSolution(dataset.timeslotListSize,
-                                                                            dataset.roomListSize,
-                                                                            dataset.speakerListSize,
-                                                                            dataset.talkListSize);
+        return new ConferenceSchedulingGenerator().createConferenceSolution(
+                dataset.name(),
+                dataset.timeslotListSize,
+                dataset.roomListSize,
+                dataset.speakerListSize,
+                dataset.talkListSize);
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.Collections;
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.calculatecounttermination.CloudBalanceCalculateCountTermination;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.SolverFactory;

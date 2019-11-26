@@ -1,14 +1,15 @@
 package org.jboss.qa.brms.performance.examples.cloudbalancing;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudProcess;
+
 import org.jboss.qa.brms.performance.examples.cloudbalancing.persistence.CloudBalancingDao;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.solver.score.CloudBalancingIncrementalScoreCalculator;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
+import org.optaplanner.examples.cloudbalancing.optional.score.CloudBalancingIncrementalScoreCalculator;
 
 import java.io.File;
 import java.util.Collections;

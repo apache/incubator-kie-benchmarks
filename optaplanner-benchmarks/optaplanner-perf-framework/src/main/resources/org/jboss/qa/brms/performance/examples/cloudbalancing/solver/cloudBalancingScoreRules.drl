@@ -18,9 +18,9 @@ package org.jboss.qa.brms.performance.examples.cloudbalancing.solver;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudComputer;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudProcess;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudComputer;
+import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
 
 global HardSoftScoreHolder scoreHolder;
 

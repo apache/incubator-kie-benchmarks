@@ -1,8 +1,8 @@
 package org.jboss.qa.brms.performance.localsearch.tsp;
 
 import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanProblem;
-import org.jboss.qa.brms.performance.examples.tsp.domain.TravelingSalesmanTour;
-import org.jboss.qa.brms.performance.examples.tsp.solver.phase.TSPSolutionInitializer;
+import org.optaplanner.examples.tsp.domain.TspSolution;
+import org.jboss.qa.brms.performance.examples.tsp.solution.TSPSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
@@ -17,29 +17,29 @@ import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
 import java.util.Collections;
 
 public abstract class AbstractTSPLocalSearchBenchmark
-        extends AbstractLocalSearchPlannerBenchmark<TravelingSalesmanTour> {
+        extends AbstractLocalSearchPlannerBenchmark<TspSolution> {
 
     @Param({"LU_980", "USA_CA_2716", "GREECE_9882"})
     private TravelingSalesmanProblem.DataSet dataset;
 
     @Override
-    protected TravelingSalesmanTour createInitialSolution() {
+    protected TspSolution createInitialSolution() {
         TravelingSalesmanProblem travelingSalesmanProblem = new TravelingSalesmanProblem();
-        TravelingSalesmanTour solution = travelingSalesmanProblem.loadSolvingProblem(dataset);
-        SolverFactory<TravelingSalesmanTour> defaultConstruction = travelingSalesmanProblem.getBaseSolverFactory();
+        TspSolution solution = travelingSalesmanProblem.loadSolvingProblem(dataset);
+        SolverFactory<TspSolution> defaultConstruction = travelingSalesmanProblem.getBaseSolverFactory();
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
                 Collections.<Class<? extends CustomPhaseCommand>>singletonList(TSPSolutionInitializer.class));
         defaultConstruction.getSolverConfig()
                 .setPhaseConfigList(Collections.singletonList((PhaseConfig) customPhaseConfig));
-        Solver<TravelingSalesmanTour> constructionSolver = defaultConstruction.buildSolver();
+        Solver<TspSolution> constructionSolver = defaultConstruction.buildSolver();
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
 
     @Override
     public void initSolver() {
-        SolverFactory<TravelingSalesmanTour> solverFactory = new TravelingSalesmanProblem().getBaseSolverFactory();
+        SolverFactory<TspSolution> solverFactory = new TravelingSalesmanProblem().getBaseSolverFactory();
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())

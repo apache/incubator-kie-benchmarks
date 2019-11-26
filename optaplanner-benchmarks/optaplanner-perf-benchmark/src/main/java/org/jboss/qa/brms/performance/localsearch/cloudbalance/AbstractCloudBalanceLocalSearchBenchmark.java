@@ -1,8 +1,8 @@
 package org.jboss.qa.brms.performance.localsearch.cloudbalance;
 
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.solver.phase.CloudBalanceSolutionInitializer;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
+import org.jboss.qa.brms.performance.examples.cloudbalancing.solution.CloudBalanceSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;

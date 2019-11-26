@@ -1,10 +1,10 @@
 package org.jboss.qa.brms.performance.examples.projectjobscheduling;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.domain.Allocation;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.domain.Schedule;
+import org.optaplanner.examples.projectjobscheduling.domain.Allocation;
+import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.persistence.ProjectJobSchedulingDao;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.solver.score.ProjectJobSchedulingIncrementalScoreCalculator;
+import org.optaplanner.examples.projectjobscheduling.solver.score.ProjectJobSchedulingIncrementalScoreCalculator;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.EnvironmentMode;

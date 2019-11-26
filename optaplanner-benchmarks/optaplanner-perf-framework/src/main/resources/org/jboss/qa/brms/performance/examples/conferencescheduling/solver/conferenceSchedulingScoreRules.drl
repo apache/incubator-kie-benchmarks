@@ -19,11 +19,11 @@ package org.jboss.qa.brms.performance.examples.conferencescheduling.solver;
 
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScoreHolder;
 
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceConstraintConfiguration;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Room;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Speaker;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Talk;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Timeslot;
+import org.optaplanner.examples.conferencescheduling.domain.ConferenceConstraintConfiguration;
+import org.optaplanner.examples.conferencescheduling.domain.Room;
+import org.optaplanner.examples.conferencescheduling.domain.Speaker;
+import org.optaplanner.examples.conferencescheduling.domain.Talk;
+import org.optaplanner.examples.conferencescheduling.domain.Timeslot;
 
 global HardMediumSoftScoreHolder scoreHolder;
 

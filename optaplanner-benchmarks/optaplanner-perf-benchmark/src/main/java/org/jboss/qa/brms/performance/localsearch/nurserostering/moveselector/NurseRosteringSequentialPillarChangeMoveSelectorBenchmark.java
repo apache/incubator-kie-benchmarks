@@ -4,8 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.ShiftAssignmentComparator;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.PillarChangeMoveSelectorConfig;
@@ -24,7 +23,6 @@ public class NurseRosteringSequentialPillarChangeMoveSelectorBenchmark
     public List<MoveSelectorConfig> createMoveSelectorConfigList() {
         PillarChangeMoveSelectorConfig pillarChangeMoveSelectorConfig = new PillarChangeMoveSelectorConfig();
         pillarChangeMoveSelectorConfig.setSubPillarType(SubPillarType.SEQUENCE);
-        pillarChangeMoveSelectorConfig.setSubPillarSequenceComparatorClass(ShiftAssignmentComparator.class);
         pillarChangeMoveSelectorConfig.setPillarSelectorConfig(createPillarSelectorConfig());
         return Collections.singletonList(pillarChangeMoveSelectorConfig);
     }

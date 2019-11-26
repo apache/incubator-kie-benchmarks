@@ -2,7 +2,7 @@ package org.jboss.qa.brms.performance.realworld.nurserostering;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;

@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.ShiftAssignment;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
+import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 import org.jboss.qa.brms.performance.examples.nurserostering.persistence.NurseRosteringDao;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;

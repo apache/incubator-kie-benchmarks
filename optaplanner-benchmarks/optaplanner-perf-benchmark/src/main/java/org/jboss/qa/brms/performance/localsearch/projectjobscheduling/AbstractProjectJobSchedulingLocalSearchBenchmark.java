@@ -1,7 +1,7 @@
 package org.jboss.qa.brms.performance.localsearch.projectjobscheduling;
 
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.domain.Schedule;
+import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;

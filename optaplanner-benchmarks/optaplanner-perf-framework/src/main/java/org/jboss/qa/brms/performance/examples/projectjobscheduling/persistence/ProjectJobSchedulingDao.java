@@ -16,7 +16,7 @@
 package org.jboss.qa.brms.performance.examples.projectjobscheduling.persistence;
 
 import org.jboss.qa.brms.performance.examples.common.persistence.XStreamSolutionDao;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.domain.Schedule;
+import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 
 public class ProjectJobSchedulingDao extends XStreamSolutionDao<Schedule> {
 

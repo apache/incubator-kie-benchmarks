@@ -1,9 +1,9 @@
 package org.jboss.qa.brms.performance.localsearch.vrptw;
 
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.solver.phase.VehicleRoutingSolutionInitializer;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.solution.VehicleRoutingSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;

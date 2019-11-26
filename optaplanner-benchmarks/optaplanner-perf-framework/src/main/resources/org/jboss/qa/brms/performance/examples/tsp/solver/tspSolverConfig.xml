@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
   <!--<environmentMode>FULL_ASSERT</environmentMode>-->
-  <solutionClass>org.jboss.qa.brms.performance.examples.tsp.domain.TravelingSalesmanTour</solutionClass>
-  <entityClass>org.jboss.qa.brms.performance.examples.tsp.domain.Visit</entityClass>
+  <solutionClass>org.optaplanner.examples.tsp.domain.TspSolution</solutionClass>
+  <entityClass>org.optaplanner.examples.tsp.domain.Visit</entityClass>
 
   <scoreDirectorFactory>
     <scoreDefinitionType>SIMPLE_LONG</scoreDefinitionType>
-    <incrementalScoreCalculatorClass>org.jboss.qa.brms.performance.examples.tsp.solver.score.TspIncrementalScoreCalculator</incrementalScoreCalculatorClass>
+    <incrementalScoreCalculatorClass>org.optaplanner.examples.tsp.solver.score.TspIncrementalScoreCalculator</incrementalScoreCalculatorClass>
     <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
   </scoreDirectorFactory>
 

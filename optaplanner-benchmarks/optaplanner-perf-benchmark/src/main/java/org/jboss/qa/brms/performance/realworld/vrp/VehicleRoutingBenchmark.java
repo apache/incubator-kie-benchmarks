@@ -7,7 +7,7 @@ import java.util.List;
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.calculatecounttermination.HardVRPCalculateCountTermination;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.SolverFactory;
