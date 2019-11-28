@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
-import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.PillarSwapMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.SubPillarType;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 
 public class NurseRosteringSequentialPillarSwapMoveSelectorBenchmark
         extends AbstractNurseRosteringMoveSelectorBenchmark {

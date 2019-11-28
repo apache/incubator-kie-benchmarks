@@ -3,8 +3,6 @@ package org.jboss.qa.brms.performance.localsearch.nurserostering.moveselector;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
-import org.optaplanner.examples.nurserostering.domain.NurseRoster;
-import org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
@@ -19,6 +17,8 @@ import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
+import org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
 
 public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         extends AbstractLocalSearchPlannerBenchmark<NurseRoster> {
@@ -34,16 +34,16 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
 
     @Override
     protected NurseRoster createInitialSolution() {
-        NurseRoster nonInitializedSolution = NURSE_ROSTER_EXAMPLE.loadSolvingProblem(dataset);
-
-        SolverFactory<NurseRoster> solverFactory = NURSE_ROSTER_EXAMPLE.getBaseSolverFactory();
-        SolverConfig solverConfig = solverFactory.getSolverConfig();
-
         ConstructionHeuristicPhaseConfig chPhaseConfig = new ConstructionHeuristicPhaseConfig()
                 .withConstructionHeuristicType(ConstructionHeuristicType.WEAKEST_FIT);
+
+        SolverConfig solverConfig = NURSE_ROSTER_EXAMPLE.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(chPhaseConfig));
 
+        SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
         Solver<NurseRoster> constructionSolver = solverFactory.buildSolver();
+
+        NurseRoster nonInitializedSolution = NURSE_ROSTER_EXAMPLE.loadSolvingProblem(dataset);
         constructionSolver.solve(nonInitializedSolution);
         return constructionSolver.getBestSolution();
     }
@@ -74,20 +74,19 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
 
     @Override
     public void initSolver() {
-        SolverFactory<NurseRoster> solverFactory = NURSE_ROSTER_EXAMPLE.getBaseSolverFactory();
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
-
         UnionMoveSelectorConfig unionMoveSelectorConfig = new UnionMoveSelectorConfig();
         unionMoveSelectorConfig.setMoveSelectorConfigList(createMoveSelectorConfigList());
         localSearchPhaseConfig.setMoveSelectorConfig(unionMoveSelectorConfig);
-
         localSearchPhaseConfig.setAcceptorConfig(createAcceptorConfig());
-
         localSearchPhaseConfig.setForagerConfig(new LocalSearchForagerConfig());
         localSearchPhaseConfig.getForagerConfig().setAcceptedCountLimit(getAcceptedCountLimit());
-
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
-        solverFactory.getSolverConfig().setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
+
+        SolverConfig solverConfig = NURSE_ROSTER_EXAMPLE.getBaseSolverConfig();
+        solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
+
+        SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
         super.setSolver(solverFactory.buildSolver());
     }
 

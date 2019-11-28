@@ -1,7 +1,8 @@
 package org.jboss.qa.brms.performance.localsearch.projectjobscheduling;
 
+import java.util.Collections;
+
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
-import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
@@ -11,33 +12,34 @@ import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicTy
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
-import org.optaplanner.core.config.phase.PhaseConfig;
-
-import java.util.Collections;
+import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 
 public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<Schedule> {
+
+    private static final ProjectJobScheduling PROJECT_JOB_SCHEDULING = new ProjectJobScheduling();
 
     @Param({"A_4", "A_10", "B_9"})
     private ProjectJobScheduling.DataSet dataset;
 
     @Override
     protected Schedule createInitialSolution() {
-        ProjectJobScheduling projectJobScheduling = new ProjectJobScheduling();
-        Schedule solution = projectJobScheduling.loadSolvingProblem(dataset);
-        SolverFactory<Schedule> defaultConstruction = projectJobScheduling.getBaseSolverFactory();
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig = new ConstructionHeuristicPhaseConfig();
         constructionHeuristicPhaseConfig.setConstructionHeuristicType(ConstructionHeuristicType.FIRST_FIT);
-        defaultConstruction.getSolverConfig()
-                .setPhaseConfigList(Collections.singletonList(((PhaseConfig) constructionHeuristicPhaseConfig)));
-        Solver<Schedule> constructionSolver = defaultConstruction.buildSolver();
+
+        SolverConfig solverConfig = PROJECT_JOB_SCHEDULING.getBaseSolverConfig();
+        solverConfig.setPhaseConfigList(Collections.singletonList(constructionHeuristicPhaseConfig));
+        SolverFactory<Schedule> solverFactory = SolverFactory.create(solverConfig);
+        Solver<Schedule> constructionSolver = solverFactory.buildSolver();
+
+        Schedule solution = PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
 
     @Override
     public void initSolver() {
-        SolverFactory<Schedule> solverFactory = new ProjectJobScheduling().getBaseSolverFactory();
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())
@@ -49,9 +51,11 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         localSearchPhaseConfig.getForagerConfig().setAcceptedCountLimit(getAcceptedCountLimit());
 
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
-        solverFactory.getSolverConfig()
-                .setPhaseConfigList(Collections.<PhaseConfig>singletonList(localSearchPhaseConfig));
+
+        SolverConfig solverConfig = PROJECT_JOB_SCHEDULING.getBaseSolverConfig();
+        solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
+
+        SolverFactory<Schedule> solverFactory = SolverFactory.create(solverConfig);
         super.setSolver(solverFactory.buildSolver());
     }
-
 }

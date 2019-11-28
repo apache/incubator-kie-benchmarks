@@ -22,20 +22,50 @@ import java.util.Collections;
 import java.util.stream.Stream;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
-import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 import org.optaplanner.examples.conferencescheduling.domain.Talk;
 import org.optaplanner.examples.conferencescheduling.persistence.ConferenceSchedulingGenerator;
 
-public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
+public final class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
 
-    private static final String PATH_TO_DRL_FILE =
+    private static final String DRL_FILE =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
 
-    private static final String PATH_TO_SOLVE_CONFIG =
+    private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
+
+    public ConferenceSolution loadSolvingProblem(ConferenceScheduling.DataSet dataset) {
+        return new ConferenceSchedulingGenerator().createConferenceSolution(
+                dataset.name(),
+                dataset.timeslotListSize,
+                dataset.roomListSize,
+                dataset.speakerListSize,
+                dataset.talkListSize);
+    }
+
+    @Override
+    public ConferenceSolution loadSolvingProblem(File file) {
+        throw new UnsupportedOperationException("Unsupported data set loading from file");
+    }
+
+    @Override
+    public SolverConfig getBaseSolverConfig() {
+        SolverConfig solverConfig = new SolverConfig();
+        solverConfig.setSolutionClass(ConferenceSolution.class);
+        solverConfig.setEntityClassList(Collections.singletonList(Talk.class));
+        solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
+        solverConfig.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(DRL_FILE));
+        solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");
+
+        return solverConfig;
+    }
+
+    @Override
+    protected String getSolverConfigResource() {
+        return SOLVER_CONFIG;
+    }
 
     public enum DataSet {
         TALKS_36_TIMESLOTS_12_ROOMS_5("TIME_12;ROOM_5;SPEAKER_26;TALK_36"),
@@ -64,54 +94,5 @@ public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
 
             parameters.close();
         }
-
-        public int getTimeslotListSize() {
-            return timeslotListSize;
-        }
-
-        public int getRoomListSize() {
-            return roomListSize;
-        }
-
-        public int getSpeakerListSize() {
-            return speakerListSize;
-        }
-
-        public int getTalkListSize() {
-            return talkListSize;
-        }
-    }
-
-    public ConferenceSolution loadSolvingProblem(ConferenceScheduling.DataSet dataset) {
-        return new ConferenceSchedulingGenerator().createConferenceSolution(
-                dataset.name(),
-                dataset.timeslotListSize,
-                dataset.roomListSize,
-                dataset.speakerListSize,
-                dataset.talkListSize);
-    }
-
-    @Override
-    public ConferenceSolution loadSolvingProblem(File file) {
-        throw new UnsupportedOperationException("Unsupported data set loading from file");
-    }
-
-    @Override
-    public SolverFactory<ConferenceSolution> getDefaultSolverFactory() {
-        return SolverFactory.createFromXmlInputStream(this.getClass().getResourceAsStream(PATH_TO_SOLVE_CONFIG));
-    }
-
-    @Override
-    public SolverFactory<ConferenceSolution> getBaseSolverFactory() {
-        SolverFactory<ConferenceSolution> solverFactory = SolverFactory.createEmpty();
-        SolverConfig solverConfig = solverFactory.getSolverConfig();
-
-        solverConfig.setSolutionClass(ConferenceSolution.class);
-        solverConfig.setEntityClassList(Collections.singletonList(Talk.class));
-        solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
-        solverConfig.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(PATH_TO_DRL_FILE));
-        solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");
-
-        return solverFactory;
     }
 }

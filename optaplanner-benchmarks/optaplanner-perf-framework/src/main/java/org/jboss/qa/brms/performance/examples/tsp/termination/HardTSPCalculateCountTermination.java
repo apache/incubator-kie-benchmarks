@@ -1,15 +1,15 @@
-package org.jboss.qa.brms.performance.calculatecounttermination;
+package org.jboss.qa.brms.performance.examples.tsp.termination;
 
 import org.optaplanner.core.impl.phase.scope.AbstractPhaseScope;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.solver.termination.AbstractTermination;
 
-public class EasyVRPCalculateCountTermination extends AbstractTermination {
+public class HardTSPCalculateCountTermination extends AbstractTermination {
 
     protected long calculateCountLimit;
 
-    public EasyVRPCalculateCountTermination() {
+    public HardTSPCalculateCountTermination() {
         this.calculateCountLimit = 10000;
     }
 

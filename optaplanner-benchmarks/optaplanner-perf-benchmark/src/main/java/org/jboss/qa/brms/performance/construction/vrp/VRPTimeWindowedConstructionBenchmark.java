@@ -1,20 +1,24 @@
 package org.jboss.qa.brms.performance.construction.vrp;
 
-import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicPlannerBenchmark;
+import java.util.Collections;
+
+import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
-import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
-import org.optaplanner.core.config.phase.PhaseConfig;
-
-import java.util.Collections;
+import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
 
 public class VRPTimeWindowedConstructionBenchmark
-        extends AbstractConstructionHeuristicPlannerBenchmark<VehicleRoutingSolution> {
+        extends AbstractConstructionHeuristicBenchmark<VehicleRoutingSolution, VehicleRouting> {
+
+    public VRPTimeWindowedConstructionBenchmark() {
+        super(VehicleRouting.class);
+    }
 
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
     private ConstructionHeuristicType constructionHeuristicType;
@@ -24,19 +28,18 @@ public class VRPTimeWindowedConstructionBenchmark
 
     @Override
     public void initSolver() {
-        SolverFactory<VehicleRoutingSolution> solverFactory = new VehicleRouting().getBaseSolverFactory();
-        solverFactory.getSolverConfig()
-                .getEntityClassList().add(TimeWindowedCustomer.class); // diff between normal VRP and TimeWindowed
-        ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig = new ConstructionHeuristicPhaseConfig();
-        constructionHeuristicPhaseConfig.setConstructionHeuristicType(getConstructionHeuristicType());
-        solverFactory.getSolverConfig()
-                .setPhaseConfigList(Collections.singletonList(((PhaseConfig) constructionHeuristicPhaseConfig)));
+        SolverConfig solverConfig = example.getBaseSolverConfig();
+        ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig =
+                new ConstructionHeuristicPhaseConfig().withConstructionHeuristicType(getConstructionHeuristicType());
+        solverConfig.setPhaseConfigList(Collections.singletonList(constructionHeuristicPhaseConfig));
+        solverConfig.getEntityClassList().add(TimeWindowedCustomer.class); // diff between normal VRP and TimeWindowed
+        SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         super.setSolver(solverFactory.buildSolver());
     }
 
     @Override
     public void initSolution() {
-        super.setSolution(new VehicleRouting().loadSolvingProblem(dataset));
+        super.setSolution(example.loadSolvingProblem(dataset));
     }
 
     @Override

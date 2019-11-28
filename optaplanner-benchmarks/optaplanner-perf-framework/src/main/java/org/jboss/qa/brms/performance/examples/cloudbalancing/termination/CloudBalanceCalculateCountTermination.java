@@ -1,16 +1,16 @@
-package org.jboss.qa.brms.performance.calculatecounttermination;
+package org.jboss.qa.brms.performance.examples.cloudbalancing.termination;
 
 import org.optaplanner.core.impl.phase.scope.AbstractPhaseScope;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.solver.termination.AbstractTermination;
 
-public class HardVRPCalculateCountTermination extends AbstractTermination {
+public class CloudBalanceCalculateCountTermination extends AbstractTermination {
 
     protected long calculateCountLimit;
 
-    public HardVRPCalculateCountTermination() {
-        this.calculateCountLimit = 100000;
+    public CloudBalanceCalculateCountTermination() {
+        this.calculateCountLimit = 1000000;
     }
 
     // ************************************************************************

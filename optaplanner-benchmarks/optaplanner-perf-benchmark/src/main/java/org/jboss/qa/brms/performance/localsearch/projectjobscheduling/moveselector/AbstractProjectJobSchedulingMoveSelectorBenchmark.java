@@ -1,6 +1,6 @@
 package org.jboss.qa.brms.performance.localsearch.projectjobscheduling.moveselector;
 
-import org.jboss.qa.brms.performance.calculatecounttermination.ProjectJobSchedulingCalculateCountTermination;
+import org.jboss.qa.brms.performance.examples.projectjobscheduling.termination.ProjectJobSchedulingCalculateCountTermination;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.localsearch.projectjobscheduling.AbstractProjectJobSchedulingLocalSearchBenchmark;
 import org.optaplanner.core.config.heuristic.selector.value.ValueSelectorConfig;

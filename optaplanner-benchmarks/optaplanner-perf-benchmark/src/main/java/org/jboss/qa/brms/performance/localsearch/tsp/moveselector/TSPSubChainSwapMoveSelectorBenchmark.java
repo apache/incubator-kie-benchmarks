@@ -1,6 +1,6 @@
 package org.jboss.qa.brms.performance.localsearch.tsp.moveselector;
 
-import org.jboss.qa.brms.performance.calculatecounttermination.EasyTSPCalculateCountTermination;
+import org.jboss.qa.brms.performance.examples.tsp.termination.EasyTSPCalculateCountTermination;
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.optaplanner.examples.tsp.domain.TspSolution;
 import org.openjdk.jmh.annotations.Benchmark;

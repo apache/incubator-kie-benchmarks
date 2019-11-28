@@ -5,7 +5,6 @@ import java.util.Collections;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
-import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.solution.VehicleRoutingSolutionInitializer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -14,10 +13,10 @@ import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
-import org.optaplanner.core.config.phase.PhaseConfig;
 import org.optaplanner.core.config.phase.custom.CustomPhaseConfig;
+import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
-import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
 public class VRPMultithreadedSolvingScalabilityBenchmark
         extends AbstractMultithreadedSolvingScalabilityBenchmark<VehicleRoutingSolution> {
@@ -53,21 +52,24 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
 
     @Override
     protected VehicleRoutingSolution getInitialSolution() {
-        VehicleRoutingSolution solution = VEHICLE_ROUTING.loadSolvingProblem(dataset);
-        SolverFactory<VehicleRoutingSolution> defaultConstruction = VEHICLE_ROUTING.getBaseSolverFactory();
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
-                Collections.<Class<? extends CustomPhaseCommand>>singletonList(VehicleRoutingSolutionInitializer.class));
-        defaultConstruction.getSolverConfig()
-                .setPhaseConfigList(Collections.singletonList((PhaseConfig) customPhaseConfig));
-        Solver<VehicleRoutingSolution> constructionSolver = defaultConstruction.buildSolver();
+                Collections.singletonList(VehicleRoutingSolutionInitializer.class));
+
+        SolverConfig solverConfig = getBaseSolverConfig();
+        solverConfig.setPhaseConfigList(Collections.singletonList(customPhaseConfig));
+
+        SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
+        Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
+
+        VehicleRoutingSolution solution = VEHICLE_ROUTING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
 
     @Override
-    protected SolverFactory<VehicleRoutingSolution> getSolverFactory() {
-        return VEHICLE_ROUTING.getBaseSolverFactory();
+    protected SolverConfig getBaseSolverConfig() {
+        return VEHICLE_ROUTING.getBaseSolverConfig();
     }
 
     @Benchmark

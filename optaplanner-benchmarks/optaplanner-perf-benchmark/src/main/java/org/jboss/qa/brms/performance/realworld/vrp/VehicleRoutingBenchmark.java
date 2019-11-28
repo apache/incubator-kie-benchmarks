@@ -5,9 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
-import org.jboss.qa.brms.performance.calculatecounttermination.HardVRPCalculateCountTermination;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
-import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.termination.HardVRPCalculateCountTermination;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.SolverFactory;
@@ -27,11 +26,15 @@ import org.optaplanner.core.config.phase.PhaseConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
 public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRoutingSolution> {
 
+    private static final VehicleRouting VEHICLE_ROUTING = new VehicleRouting();
+
     private static final String VEHCILE_ROUTING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.vehiclerouting";
-    private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE = "org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingScoreRules.drl";
+    private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE =
+            "org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingScoreRules.drl";
     private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 1;
     private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
@@ -40,13 +43,13 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
 
     @Override
     public void initSolution() {
-        super.setSolution(new VehicleRouting().loadSolvingProblem(dataset));
+        super.setSolution(VEHICLE_ROUTING.loadSolvingProblem(dataset));
     }
 
     @Override
     public void initSolver() {
-        SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.createEmpty();
-        SolverConfig config = solverFactory.getSolverConfig();
+        // the pre-defined configuration in VehicleRouting cannot be used
+        SolverConfig solverConfig = new SolverConfig();
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
         scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(VEHCILE_ROUTING_DOMAIN_PACKAGE));
@@ -55,11 +58,12 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList(VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE));
 
-        config.setPhaseConfigList(getPhaseConfigList());
-        config.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
-        config.setTerminationConfig(new TerminationConfig().withTerminationClass(HardVRPCalculateCountTermination.class));
-        config.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
+        solverConfig.setPhaseConfigList(getPhaseConfigList());
+        solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
+        solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(HardVRPCalculateCountTermination.class));
+        solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
 
+        SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         super.setSolver(solverFactory.buildSolver());
     }
 

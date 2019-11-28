@@ -4,14 +4,46 @@ import java.io.File;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
-import org.optaplanner.examples.nurserostering.domain.NurseRoster;
-import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 import org.jboss.qa.brms.performance.examples.nurserostering.persistence.NurseRosteringDao;
-import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
+import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 
-public class NurseRostering extends AbstractExample<NurseRoster> {
+public final class NurseRostering extends AbstractExample<NurseRoster> {
+
+    private static final String SOLVER_CONFIG =
+            "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
+
+    private static final String DRL_FILE =
+            "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+
+    private final NurseRosteringDao dao = new NurseRosteringDao();
+
+    public NurseRoster loadSolvingProblem(DataSet dataset) {
+        return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
+    }
+
+    @Override
+    public NurseRoster loadSolvingProblem(File file) {
+        return dao.readSolution(file);
+    }
+
+    @Override
+    public SolverConfig getBaseSolverConfig() {
+        SolverConfig solverConfig = new SolverConfig();
+        solverConfig.setEntityClassList(Collections.singletonList(ShiftAssignment.class));
+        solverConfig.setSolutionClass(NurseRoster.class);
+        solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
+        solverConfig.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(DRL_FILE));
+        solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");
+        return solverConfig;
+    }
+
+    @Override
+    protected String getSolverConfigResource() {
+        return SOLVER_CONFIG;
+    }
 
     public enum DataSet {
         LONG("long01.xml"),
@@ -27,39 +59,5 @@ public class NurseRostering extends AbstractExample<NurseRoster> {
         public String getFilename() {
             return filename;
         }
-    }
-
-    private static final String PATH_TO_SOLVER_CONFIG =
-            "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
-
-    private static final String PATH_TO_DRL_FILE =
-            "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
-
-    private NurseRosteringDao dao = new NurseRosteringDao();
-
-    public NurseRoster loadSolvingProblem(DataSet dataset) {
-        return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
-    }
-
-    @Override
-    public NurseRoster loadSolvingProblem(File f) {
-        return dao.readSolution(f);
-    }
-
-    @Override
-    public SolverFactory<NurseRoster> getDefaultSolverFactory() {
-        return SolverFactory.createFromXmlInputStream(getClass().getResourceAsStream(PATH_TO_SOLVER_CONFIG));
-    }
-
-    @Override
-    public SolverFactory<NurseRoster> getBaseSolverFactory() {
-        SolverFactory<NurseRoster> solverFactory = SolverFactory.createEmpty();
-        SolverConfig config = solverFactory.getSolverConfig();
-        config.setEntityClassList(Collections.singletonList(ShiftAssignment.class));
-        config.setSolutionClass(NurseRoster.class);
-        config.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
-        config.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(PATH_TO_DRL_FILE));
-        config.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");
-        return solverFactory;
     }
 }

@@ -2,11 +2,12 @@ package org.jboss.qa.brms.performance.realworld.nurserostering;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
-import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 import org.optaplanner.core.api.solver.SolverFactory;
+import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 
 @Warmup(iterations = 15)
 public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoster> {
@@ -23,8 +24,9 @@ public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoste
 
     @Override
     public void initSolver() {
-        SolverFactory<NurseRoster> nurseRosterSolverFactory = NURSE_ROSTERING.getDefaultSolverFactory();
-        super.setSolver(nurseRosterSolverFactory.buildSolver());
+        SolverConfig solverConfig = NURSE_ROSTERING.getSolverConfigFromXml();
+        SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
+        super.setSolver(solverFactory.buildSolver());
     }
 
     @Benchmark

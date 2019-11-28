@@ -4,7 +4,6 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
-import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.solution.CloudBalanceSolutionInitializer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -13,10 +12,10 @@ import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
-import org.optaplanner.core.config.phase.PhaseConfig;
 import org.optaplanner.core.config.phase.custom.CustomPhaseConfig;
+import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
-import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 
 public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
         extends AbstractMultithreadedSolvingScalabilityBenchmark<CloudBalance> {
@@ -34,8 +33,8 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
     }
 
     @Override
-    protected SolverFactory<CloudBalance> getSolverFactory() {
-        return CLOUD_BALANCING.getBaseSolverFactory();
+    protected SolverConfig getBaseSolverConfig() {
+        return CLOUD_BALANCING.getBaseSolverConfig();
     }
 
     @Override
@@ -54,14 +53,17 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
 
     @Override
     protected CloudBalance getInitialSolution() {
-        CloudBalance solution = CLOUD_BALANCING.loadSolvingProblem(dataset);
-        SolverFactory<CloudBalance> defaultConstruction = CLOUD_BALANCING.getBaseSolverFactory();
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
-                Collections.<Class<? extends CustomPhaseCommand>>singletonList(CloudBalanceSolutionInitializer.class));
-        defaultConstruction.getSolverConfig()
-                .setPhaseConfigList(Collections.singletonList((PhaseConfig) customPhaseConfig));
-        Solver<CloudBalance> constructionSolver = defaultConstruction.buildSolver();
+                Collections.singletonList(CloudBalanceSolutionInitializer.class));
+
+        SolverConfig solverConfig = getBaseSolverConfig();
+        solverConfig.setPhaseConfigList(Collections.singletonList(customPhaseConfig));
+
+        SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);
+        Solver<CloudBalance> constructionSolver = solverFactory.buildSolver();
+
+        CloudBalance solution = CLOUD_BALANCING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }

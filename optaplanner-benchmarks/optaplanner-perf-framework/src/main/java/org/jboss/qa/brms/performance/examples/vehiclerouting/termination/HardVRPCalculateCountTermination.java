@@ -1,16 +1,16 @@
-package org.jboss.qa.brms.performance.calculatecounttermination;
+package org.jboss.qa.brms.performance.examples.vehiclerouting.termination;
 
 import org.optaplanner.core.impl.phase.scope.AbstractPhaseScope;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.solver.termination.AbstractTermination;
 
-public class EasyTSPCalculateCountTermination extends AbstractTermination {
+public class HardVRPCalculateCountTermination extends AbstractTermination {
 
     protected long calculateCountLimit;
 
-    public EasyTSPCalculateCountTermination() {
-        this.calculateCountLimit = 1000;
+    public HardVRPCalculateCountTermination() {
+        this.calculateCountLimit = 100000;
     }
 
     // ************************************************************************
@@ -51,4 +51,5 @@ public class EasyTSPCalculateCountTermination extends AbstractTermination {
         double timeGradient = ((double) calculateCount) / ((double) calculateCountLimit);
         return Math.min(timeGradient, 1.0);
     }
+
 }

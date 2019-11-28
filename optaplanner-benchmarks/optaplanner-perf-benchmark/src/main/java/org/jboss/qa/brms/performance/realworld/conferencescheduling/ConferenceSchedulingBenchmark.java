@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
-import org.jboss.qa.brms.performance.calculatecounttermination.ConferenceSchedulingTermination;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceScheduling;
+import org.jboss.qa.brms.performance.examples.conferencescheduling.termination.ConferenceSchedulingTermination;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
@@ -22,6 +22,8 @@ import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
 
+    private static final ConferenceScheduling CONFERENCE_SCHEDULING = new ConferenceScheduling();
+
     private static final String CONFERENCE_SCHEDULING_DOMAIN_PACKAGE =
             "org.jboss.qa.brms.performance.examples.conferencescheduling";
 
@@ -33,13 +35,13 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
 
     @Override
     public void initSolution() {
-        super.setSolution(new ConferenceScheduling().loadSolvingProblem(dataSet));
+        super.setSolution(CONFERENCE_SCHEDULING.loadSolvingProblem(dataSet));
     }
 
     @Override
     public void initSolver() {
-        SolverFactory<ConferenceSolution> solverFactory = SolverFactory.createEmpty();
-        SolverConfig solverConfig = solverFactory.getSolverConfig();
+        // the pre-defined configuration in ConferenceScheduling cannot be used
+        SolverConfig solverConfig = new SolverConfig();
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
         scanAnnotatedClassesConfig.setPackageIncludeList(Collections.
@@ -58,6 +60,7 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
         solverConfig.setTerminationConfig(new TerminationConfig().
                 withTerminationClass(ConferenceSchedulingTermination.class));
 
+        SolverFactory<ConferenceSolution> solverFactory = SolverFactory.create(solverConfig);
         super.setSolver(solverFactory.buildSolver());
     }
 

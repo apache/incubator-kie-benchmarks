@@ -1,6 +1,6 @@
 package org.jboss.qa.brms.performance.localsearch.vrp.moveselector;
 
-import org.jboss.qa.brms.performance.calculatecounttermination.EasyVRPCalculateCountTermination;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.termination.EasyVRPCalculateCountTermination;
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.openjdk.jmh.annotations.Benchmark;
