@@ -18,7 +18,6 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
-    private static final String CLOUD_BALANCING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.cloudbalancing";
     private static final String CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE =
             "org/jboss/qa/brms/performance/examples/cloudbalancing/solver/cloudBalancingScoreRules.drl";
 
@@ -36,7 +35,8 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
         SolverConfig solverConfig = new SolverConfig();
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(CLOUD_BALANCING_DOMAIN_PACKAGE));
+        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(
+                CloudBalance.class.getPackage().getName()));
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
@@ -53,5 +53,11 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
     @Benchmark
     public CloudBalance benchmark() {
         return runBenchmark();
+    }
+
+    public static void main(String[] args) {
+        CloudBalanceBenchmark benchmark = new CloudBalanceBenchmark();
+        Solver<CloudBalance> solver = benchmark.createSolver();
+        solver.solve(benchmark.createInitialSolution());
     }
 }
