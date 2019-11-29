@@ -3,7 +3,7 @@ package org.jboss.qa.brms.performance.localsearch.nurserostering.moveselector;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
+import org.jboss.qa.brms.performance.examples.nurserostering.NurseRosteringExample;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
@@ -29,7 +29,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
     private static final long CALCULATION_COUNT_LIMIT = 10_000L;
 
     @Param({"SPRINT", "MEDIUM", "LONG"})
-    private NurseRostering.DataSet dataset;
+    private NurseRosteringExample.DataSet dataset;
 
     @Override
     protected NurseRoster createInitialSolution() {
@@ -89,7 +89,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         return solverFactory.buildSolver();
     }
 
-    protected void setDataset(NurseRostering.DataSet dataset) {
+    protected void setDataset(NurseRosteringExample.DataSet dataset) {
         this.dataset = dataset;
     }
 }

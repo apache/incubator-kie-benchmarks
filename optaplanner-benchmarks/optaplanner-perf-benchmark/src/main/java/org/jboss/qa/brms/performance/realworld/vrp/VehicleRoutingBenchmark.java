@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRoutingExample;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.termination.HardVRPCalculateCountTermination;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -39,7 +39,7 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
     private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
     @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
-    private VehicleRouting.DataSet dataset;
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {

@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceScheduling;
+import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceSchedulingExample;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.termination.ConferenceSchedulingTermination;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -31,7 +31,7 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
             "org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
 
     @Param({"TALKS_36_TIMESLOTS_12_ROOMS_5", "TALKS_108_TIMESLOTS_18_ROOMS_10", "TALKS_216_TIMESLOTS_18_ROOMS_20"})
-    private ConferenceScheduling.DataSet dataSet;
+    private ConferenceSchedulingExample.DataSet dataSet;
 
     @Override
     protected ConferenceSolution createInitialSolution() {

@@ -12,7 +12,7 @@ import org.optaplanner.examples.projectjobscheduling.domain.Allocation;
 import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 import org.optaplanner.examples.projectjobscheduling.solver.score.ProjectJobSchedulingIncrementalScoreCalculator;
 
-public final class ProjectJobScheduling extends AbstractExample<Schedule> {
+public final class ProjectJobSchedulingExample extends AbstractExample<Schedule> {
 
     private final ProjectJobSchedulingDao dao = new ProjectJobSchedulingDao();
 

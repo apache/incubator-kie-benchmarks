@@ -3,7 +3,7 @@ package org.jboss.qa.brms.performance.localsearch.nurserostering.moveselector;
 import java.util.Collections;
 import java.util.List;
 
-import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
+import org.jboss.qa.brms.performance.examples.nurserostering.NurseRosteringExample;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.PillarChangeMoveSelectorConfig;
@@ -31,7 +31,7 @@ public class NurseRosteringSequentialPillarChangeMoveSelectorBenchmark
         NurseRosteringSequentialPillarChangeMoveSelectorBenchmark nurseRosteringBenchmark =
                 new NurseRosteringSequentialPillarChangeMoveSelectorBenchmark();
         nurseRosteringBenchmark.initSolver();
-        nurseRosteringBenchmark.setDataset(NurseRostering.DataSet.SPRINT);
+        nurseRosteringBenchmark.setDataset(NurseRosteringExample.DataSet.SPRINT);
         nurseRosteringBenchmark.initSolution();
         nurseRosteringBenchmark.benchmark();
     }

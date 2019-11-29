@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
+import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancingExample;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.solution.CloudBalanceSolutionInitializer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -22,7 +22,7 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
         extends AbstractMultithreadedSolvingScalabilityBenchmark<CloudBalance> {
 
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
-    private CloudBalancing.DataSet dataset;
+    private CloudBalancingExample.DataSet dataset;
 
     @Override
     protected TerminationConfig getTerminationConfig() {

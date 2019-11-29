@@ -2,7 +2,7 @@ package org.jboss.qa.brms.performance.construction.tsp;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanProblem;
+import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanExample;
 import org.optaplanner.examples.tsp.domain.TspSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -18,7 +18,7 @@ public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBench
     private ConstructionHeuristicType constructionHeuristicType;
 
     @Param({"LU_980", "USA_CA_2716", "GREECE_9882"})
-    private TravelingSalesmanProblem.DataSet dataset;
+    private TravelingSalesmanExample.DataSet dataset;
 
     @Override
     protected TspSolution createInitialSolution() {

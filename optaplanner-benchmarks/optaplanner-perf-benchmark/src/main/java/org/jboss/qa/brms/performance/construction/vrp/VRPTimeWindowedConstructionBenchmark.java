@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRoutingExample;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
@@ -26,7 +26,7 @@ public class VRPTimeWindowedConstructionBenchmark
     private ConstructionHeuristicType constructionHeuristicType;
 
     @Param({"BELGIUM_TW_50_10", "BELGIUM_TW_500_20", "BELGIUM_TW_2750_55"})
-    private VehicleRouting.DataSet dataset;
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected Solver<VehicleRoutingSolution> createSolver() {

@@ -12,7 +12,7 @@ import org.optaplanner.examples.cloudbalancing.optional.score.CloudBalancingIncr
 import java.io.File;
 import java.util.Collections;
 
-public final class CloudBalancing extends AbstractExample<CloudBalance> {
+public final class CloudBalancingExample extends AbstractExample<CloudBalance> {
 
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/cloudbalancing/solver/cloudBalancingSolverConfig.xml";

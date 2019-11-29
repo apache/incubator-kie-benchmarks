@@ -3,7 +3,7 @@ package org.jboss.qa.brms.performance.localsearch.vrptw;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRoutingExample;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.solution.VehicleRoutingSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -21,7 +21,7 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<VehicleRoutingSolution> {
 
     @Param({"BELGIUM_TW_50_10", "BELGIUM_TW_500_20", "BELGIUM_TW_2750_55"})
-    private VehicleRouting.DataSet dataset;
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {

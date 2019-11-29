@@ -2,7 +2,7 @@ package org.jboss.qa.brms.performance.construction.projectjobscheduling;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
+import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobSchedulingExample;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
@@ -18,7 +18,7 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
     private ConstructionHeuristicType constructionHeuristicType;
 
     @Param({"A_4", "A_10", "B_9"})
-    private ProjectJobScheduling.DataSet dataset;
+    private ProjectJobSchedulingExample.DataSet dataset;
 
     @Override
     protected Schedule createInitialSolution() {

@@ -12,7 +12,7 @@ import org.optaplanner.examples.tsp.domain.TspSolution;
 import org.optaplanner.examples.tsp.domain.Visit;
 import org.optaplanner.examples.tsp.solver.score.TspIncrementalScoreCalculator;
 
-public final class TravelingSalesmanProblem extends AbstractExample<TspSolution> {
+public final class TravelingSalesmanExample extends AbstractExample<TspSolution> {
 
     private static final String SOLVER_CONFIG = "/org/jboss/qa/brms/performance/examples/tsp/solver/tspSolverConfig.xml";
 

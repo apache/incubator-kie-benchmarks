@@ -3,7 +3,7 @@ package org.jboss.qa.brms.performance.localsearch.tsp;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanProblem;
+import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanExample;
 import org.jboss.qa.brms.performance.examples.tsp.solution.TSPSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -20,7 +20,7 @@ public abstract class AbstractTSPLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<TspSolution> {
 
     @Param({"LU_980", "USA_CA_2716", "GREECE_9882"})
-    private TravelingSalesmanProblem.DataSet dataset;
+    private TravelingSalesmanExample.DataSet dataset;
 
     @Override
     protected TspSolution createInitialSolution() {

@@ -3,7 +3,7 @@ package org.jboss.qa.brms.performance.localsearch.cloudbalance;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
+import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancingExample;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.solution.CloudBalanceSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -19,7 +19,7 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractLocalSearchPlannerBenchmark<CloudBalance> {
 
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
-    private CloudBalancing.DataSet dataset;
+    private CloudBalancingExample.DataSet dataset;
 
     @Override
     protected CloudBalance createInitialSolution() {

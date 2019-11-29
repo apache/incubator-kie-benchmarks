@@ -5,7 +5,7 @@ import java.util.Collections;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRoutingExample;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.solution.VehicleRoutingSolutionInitializer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -23,7 +23,7 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
         extends AbstractMultithreadedSolvingScalabilityBenchmark<VehicleRoutingSolution> {
 
     @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
-    private VehicleRouting.DataSet dataset;
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected TerminationConfig getTerminationConfig() {

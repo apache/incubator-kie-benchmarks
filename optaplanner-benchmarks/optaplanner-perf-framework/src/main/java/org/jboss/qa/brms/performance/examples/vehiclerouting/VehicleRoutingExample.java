@@ -13,7 +13,7 @@ import org.optaplanner.examples.vehiclerouting.domain.Standstill;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.optaplanner.examples.vehiclerouting.solver.score.VehicleRoutingIncrementalScoreCalculator;
 
-public final class VehicleRouting extends AbstractExample<VehicleRoutingSolution> {
+public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingSolution> {
 
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingSolverConfig.xml";

@@ -10,7 +10,7 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 
-public final class NurseRostering extends AbstractExample<NurseRoster> {
+public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
 
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";

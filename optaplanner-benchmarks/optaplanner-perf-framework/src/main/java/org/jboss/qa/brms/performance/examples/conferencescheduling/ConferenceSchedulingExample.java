@@ -28,7 +28,7 @@ import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 import org.optaplanner.examples.conferencescheduling.domain.Talk;
 import org.optaplanner.examples.conferencescheduling.persistence.ConferenceSchedulingGenerator;
 
-public final class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
+public final class ConferenceSchedulingExample extends AbstractExample<ConferenceSolution> {
 
     private static final String DRL_FILE =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
@@ -36,7 +36,7 @@ public final class ConferenceScheduling extends AbstractExample<ConferenceSoluti
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
 
-    public ConferenceSolution loadSolvingProblem(ConferenceScheduling.DataSet dataset) {
+    public ConferenceSolution loadSolvingProblem(ConferenceSchedulingExample.DataSet dataset) {
         return new ConferenceSchedulingGenerator().createConferenceSolution(
                 dataset.name(),
                 dataset.timeslotListSize,

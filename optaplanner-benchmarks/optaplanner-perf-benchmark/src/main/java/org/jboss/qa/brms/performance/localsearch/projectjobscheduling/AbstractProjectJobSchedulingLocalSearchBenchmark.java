@@ -3,7 +3,7 @@ package org.jboss.qa.brms.performance.localsearch.projectjobscheduling;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.Examples;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
+import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobSchedulingExample;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
@@ -20,7 +20,7 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<Schedule> {
 
     @Param({"A_4", "A_10", "B_9"})
-    private ProjectJobScheduling.DataSet dataset;
+    private ProjectJobSchedulingExample.DataSet dataset;
 
     @Override
     protected Schedule createInitialSolution() {
