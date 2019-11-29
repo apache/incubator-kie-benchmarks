@@ -32,9 +32,8 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
 public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRoutingSolution> {
 
-    private static final String VEHCILE_ROUTING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.vehiclerouting";
     private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE =
-            "org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingScoreRules.drl";
+            "org/optaplanner/examples/vehiclerouting/solver/vehicleRoutingScoreRules.drl";
     private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 1;
     private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
@@ -52,7 +51,8 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
         SolverConfig solverConfig = new SolverConfig();
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(VEHCILE_ROUTING_DOMAIN_PACKAGE));
+        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(
+                VehicleRoutingSolution.class.getPackage().getName()));
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");

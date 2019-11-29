@@ -24,12 +24,6 @@ import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
 
-    private static final String CONFERENCE_SCHEDULING_DOMAIN_PACKAGE =
-            "org.jboss.qa.brms.performance.examples.conferencescheduling";
-
-    private static final String CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE =
-            "org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
-
     @Param({"TALKS_36_TIMESLOTS_12_ROOMS_5", "TALKS_108_TIMESLOTS_18_ROOMS_10", "TALKS_216_TIMESLOTS_18_ROOMS_20"})
     private ConferenceSchedulingExample.DataSet dataSet;
 
@@ -45,11 +39,11 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
         scanAnnotatedClassesConfig.setPackageIncludeList(Collections.
-                singletonList(CONFERENCE_SCHEDULING_DOMAIN_PACKAGE));
+                singletonList(ConferenceSolution.class.getPackage().getName()));
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.
-                singletonList(CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE));
+                singletonList(ConferenceSchedulingExample.DRL_FILE));
 
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setLocalSearchType(LocalSearchType.TABU_SEARCH);

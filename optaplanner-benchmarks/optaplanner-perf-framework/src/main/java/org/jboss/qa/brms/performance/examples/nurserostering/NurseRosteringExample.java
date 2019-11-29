@@ -13,10 +13,10 @@ import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
 
     private static final String SOLVER_CONFIG =
-            "/org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
+            "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
 
     private static final String DRL_FILE =
-            "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+            "org/optaplanner/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
 
     private final NurseRosteringDao dao = new NurseRosteringDao();
 

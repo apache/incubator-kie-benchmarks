@@ -30,8 +30,8 @@ import org.optaplanner.examples.conferencescheduling.persistence.ConferenceSched
 
 public final class ConferenceSchedulingExample extends AbstractExample<ConferenceSolution> {
 
-    private static final String DRL_FILE =
-            "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
+    public static final String DRL_FILE =
+            "org/optaplanner/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
 
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
