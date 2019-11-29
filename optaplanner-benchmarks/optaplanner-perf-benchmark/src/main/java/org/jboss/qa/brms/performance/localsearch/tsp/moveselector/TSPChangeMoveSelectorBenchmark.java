@@ -15,9 +15,8 @@ public class TSPChangeMoveSelectorBenchmark extends AbstractTSPMoveSelectorBench
     }
 
     @Benchmark
-    @Override
     public TspSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 
 }

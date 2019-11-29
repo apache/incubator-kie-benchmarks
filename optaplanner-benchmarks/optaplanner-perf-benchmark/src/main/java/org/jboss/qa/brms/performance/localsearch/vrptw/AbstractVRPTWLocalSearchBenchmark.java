@@ -43,7 +43,7 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<VehicleRoutingSolution> createSolver() {
         SolverConfig solverConfig = VEHICLE_ROUTING.getBaseSolverConfig();
 
         solverConfig.getEntityClassList().add(TimeWindowedCustomer.class);
@@ -59,6 +59,6 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 }

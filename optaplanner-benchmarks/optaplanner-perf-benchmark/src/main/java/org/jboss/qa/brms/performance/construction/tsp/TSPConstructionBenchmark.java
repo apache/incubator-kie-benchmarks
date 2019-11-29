@@ -20,8 +20,8 @@ public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBench
     private TravelingSalesmanProblem.DataSet dataset;
 
     @Override
-    public void initSolution() {
-        super.setSolution(example.loadSolvingProblem(dataset));
+    protected TspSolution createInitialSolution() {
+        return example.loadSolvingProblem(dataset);
     }
 
     @Override
@@ -30,8 +30,7 @@ public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBench
     }
 
     @Benchmark
-    @Override
     public TspSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

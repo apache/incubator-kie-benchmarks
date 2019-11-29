@@ -6,6 +6,7 @@ import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicB
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
@@ -27,19 +28,19 @@ public class VRPTimeWindowedConstructionBenchmark
     private VehicleRouting.DataSet dataset;
 
     @Override
-    public void initSolver() {
+    protected Solver<VehicleRoutingSolution> createSolver() {
         SolverConfig solverConfig = example.getBaseSolverConfig();
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig =
                 new ConstructionHeuristicPhaseConfig().withConstructionHeuristicType(getConstructionHeuristicType());
         solverConfig.setPhaseConfigList(Collections.singletonList(constructionHeuristicPhaseConfig));
         solverConfig.getEntityClassList().add(TimeWindowedCustomer.class); // diff between normal VRP and TimeWindowed
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 
     @Override
-    public void initSolution() {
-        super.setSolution(example.loadSolvingProblem(dataset));
+    protected VehicleRoutingSolution createInitialSolution() {
+        return example.loadSolvingProblem(dataset);
     }
 
     @Override
@@ -48,8 +49,7 @@ public class VRPTimeWindowedConstructionBenchmark
     }
 
     @Benchmark
-    @Override
     public VehicleRoutingSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

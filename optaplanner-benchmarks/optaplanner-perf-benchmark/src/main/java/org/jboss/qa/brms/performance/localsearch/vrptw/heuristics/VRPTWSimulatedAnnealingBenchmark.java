@@ -13,8 +13,7 @@ public class VRPTWSimulatedAnnealingBenchmark extends AbstractVRPTWHeuristicBenc
     }
 
     @Benchmark
-    @Override
     public VehicleRoutingSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

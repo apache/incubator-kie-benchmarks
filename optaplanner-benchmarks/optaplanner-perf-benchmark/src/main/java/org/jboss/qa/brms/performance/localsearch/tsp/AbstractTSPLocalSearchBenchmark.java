@@ -40,7 +40,7 @@ public abstract class AbstractTSPLocalSearchBenchmark
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<TspSolution> createSolver() {
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())
@@ -54,6 +54,6 @@ public abstract class AbstractTSPLocalSearchBenchmark
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<TspSolution> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 }

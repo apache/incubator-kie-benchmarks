@@ -73,7 +73,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<NurseRoster> createSolver() {
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         UnionMoveSelectorConfig unionMoveSelectorConfig = new UnionMoveSelectorConfig();
         unionMoveSelectorConfig.setMoveSelectorConfigList(createMoveSelectorConfigList());
@@ -87,7 +87,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 
     protected void setDataset(NurseRostering.DataSet dataset) {

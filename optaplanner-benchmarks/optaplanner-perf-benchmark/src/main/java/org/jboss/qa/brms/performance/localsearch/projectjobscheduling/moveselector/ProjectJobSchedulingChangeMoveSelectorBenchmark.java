@@ -20,8 +20,7 @@ public class ProjectJobSchedulingChangeMoveSelectorBenchmark extends AbstractPro
     }
 
     @Benchmark
-    @Override
     public Schedule benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

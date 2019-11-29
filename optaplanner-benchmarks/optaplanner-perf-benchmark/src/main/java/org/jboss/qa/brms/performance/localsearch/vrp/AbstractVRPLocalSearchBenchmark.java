@@ -40,7 +40,7 @@ public abstract class AbstractVRPLocalSearchBenchmark
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<VehicleRoutingSolution> createSolver() {
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())
@@ -54,6 +54,6 @@ public abstract class AbstractVRPLocalSearchBenchmark
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 }

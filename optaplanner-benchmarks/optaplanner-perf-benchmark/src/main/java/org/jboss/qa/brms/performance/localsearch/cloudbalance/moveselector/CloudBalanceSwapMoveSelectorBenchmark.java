@@ -14,17 +14,8 @@ public class CloudBalanceSwapMoveSelectorBenchmark extends AbstractCloudBalanceM
         return MoveSelectorConfigurations.createSwapMoveSelectorList();
     }
 
-//    @Override
-//    public int getAcceptedCountLimit() {
-//        return 1000;
-//    }
-//    @Override
-//    public int getNumOfStepsTermination() {
-//        return 100;
-//    }
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

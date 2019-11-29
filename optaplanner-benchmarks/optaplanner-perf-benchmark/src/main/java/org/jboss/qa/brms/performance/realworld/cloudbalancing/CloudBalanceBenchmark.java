@@ -7,6 +7,7 @@ import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.termination.CloudBalanceCalculateCountTermination;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
@@ -26,12 +27,12 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
     private CloudBalancing.DataSet dataset;
 
     @Override
-    public void initSolution() {
-        super.setSolution(CLOUD_BALANCING.loadSolvingProblem(dataset));
+    protected CloudBalance createInitialSolution() {
+        return CLOUD_BALANCING.loadSolvingProblem(dataset);
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<CloudBalance> createSolver() {
         // the pre-defined configuration in CloudBalancing cannot be used
         SolverConfig solverConfig = new SolverConfig();
 
@@ -47,11 +48,11 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
         solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
 
         SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 
     @Benchmark
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

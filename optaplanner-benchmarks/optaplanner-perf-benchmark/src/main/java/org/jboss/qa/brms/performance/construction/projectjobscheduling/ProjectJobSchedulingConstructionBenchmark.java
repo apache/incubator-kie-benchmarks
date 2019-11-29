@@ -20,8 +20,8 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
     private ProjectJobScheduling.DataSet dataset;
 
     @Override
-    public void initSolution() {
-        super.setSolution(example.loadSolvingProblem(dataset));
+    protected Schedule createInitialSolution() {
+        return example.loadSolvingProblem(dataset);
     }
 
     @Override
@@ -30,8 +30,7 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
     }
 
     @Benchmark
-    @Override
     public Schedule benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

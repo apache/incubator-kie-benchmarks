@@ -20,8 +20,8 @@ public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBench
     private VehicleRouting.DataSet dataset;
 
     @Override
-    public void initSolution() {
-        super.setSolution(new VehicleRouting().loadSolvingProblem(dataset));
+    protected VehicleRoutingSolution createInitialSolution() {
+        return example.loadSolvingProblem(dataset);
     }
 
     @Override
@@ -30,8 +30,7 @@ public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBench
     }
 
     @Benchmark
-    @Override
     public VehicleRoutingSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

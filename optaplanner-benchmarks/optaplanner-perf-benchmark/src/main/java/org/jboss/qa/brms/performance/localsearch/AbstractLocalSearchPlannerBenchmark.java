@@ -9,15 +9,6 @@ import java.util.List;
 
 public abstract class AbstractLocalSearchPlannerBenchmark<Solution_> extends AbstractPlannerBenchmark<Solution_> {
 
-    @Override
-    public void initSolution() {
-        LOGGER.info("Creating initial solution");
-        super.setSolution(createInitialSolution());
-        LOGGER.info("Initial solution created");
-    }
-
-    protected abstract Solution_ createInitialSolution();
-
     public abstract AcceptorConfig createAcceptorConfig();
 
     public abstract List<MoveSelectorConfig> createMoveSelectorConfigList();

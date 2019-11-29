@@ -40,7 +40,7 @@ public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractL
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<CloudBalance> createSolver() {
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())
@@ -54,6 +54,6 @@ public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractL
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 }

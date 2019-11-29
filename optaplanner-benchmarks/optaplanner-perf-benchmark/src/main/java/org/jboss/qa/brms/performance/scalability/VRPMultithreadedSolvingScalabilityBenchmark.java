@@ -51,7 +51,7 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
     }
 
     @Override
-    protected VehicleRoutingSolution getInitialSolution() {
+    protected VehicleRoutingSolution createInitialSolution() {
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
                 Collections.singletonList(VehicleRoutingSolutionInitializer.class));
@@ -74,6 +74,6 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
 
     @Benchmark
     public VehicleRoutingSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

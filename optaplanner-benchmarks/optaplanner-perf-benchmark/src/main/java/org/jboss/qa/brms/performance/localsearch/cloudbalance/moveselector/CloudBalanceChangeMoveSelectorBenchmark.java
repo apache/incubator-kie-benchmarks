@@ -15,8 +15,7 @@ public class CloudBalanceChangeMoveSelectorBenchmark extends AbstractCloudBalanc
     }
 
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

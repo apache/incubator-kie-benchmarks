@@ -20,8 +20,8 @@ public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuri
     }
 
     @Override
-    public void initSolution() {
-        super.setSolution(example.loadSolvingProblem(dataset));
+    protected CloudBalance createInitialSolution() {
+        return example.loadSolvingProblem(dataset);
     }
 
     @Override
@@ -30,8 +30,7 @@ public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuri
     }
 
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

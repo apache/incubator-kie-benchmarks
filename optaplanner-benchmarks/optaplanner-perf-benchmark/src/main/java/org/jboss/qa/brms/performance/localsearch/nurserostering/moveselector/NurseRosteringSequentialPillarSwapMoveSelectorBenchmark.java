@@ -14,9 +14,8 @@ public class NurseRosteringSequentialPillarSwapMoveSelectorBenchmark
         extends AbstractNurseRosteringMoveSelectorBenchmark {
 
     @Benchmark
-    @Override
     public NurseRoster benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 
     @Override

@@ -20,8 +20,7 @@ public class ProjectJobSchedulingPillarChangeMoveSelectorBenchmark extends Abstr
     }
 
     @Benchmark
-    @Override
     public Schedule benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

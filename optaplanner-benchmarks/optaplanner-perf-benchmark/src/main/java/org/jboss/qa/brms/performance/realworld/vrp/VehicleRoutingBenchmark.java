@@ -9,6 +9,7 @@ import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.termination.HardVRPCalculateCountTermination;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
@@ -42,12 +43,12 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
     private VehicleRouting.DataSet dataset;
 
     @Override
-    public void initSolution() {
-        super.setSolution(VEHICLE_ROUTING.loadSolvingProblem(dataset));
+    protected VehicleRoutingSolution createInitialSolution() {
+        return VEHICLE_ROUTING.loadSolvingProblem(dataset);
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<VehicleRoutingSolution> createSolver() {
         // the pre-defined configuration in VehicleRouting cannot be used
         SolverConfig solverConfig = new SolverConfig();
 
@@ -64,12 +65,12 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
         solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
 
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 
     @Benchmark
     public VehicleRoutingSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 
     private List<PhaseConfig> getPhaseConfigList() {

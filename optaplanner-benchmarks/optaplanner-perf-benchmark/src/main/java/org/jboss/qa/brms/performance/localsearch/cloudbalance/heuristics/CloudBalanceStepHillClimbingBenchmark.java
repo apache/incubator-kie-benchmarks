@@ -13,8 +13,7 @@ public class CloudBalanceStepHillClimbingBenchmark extends AbstractCloudBalanceH
     }
 
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

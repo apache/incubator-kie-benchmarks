@@ -52,7 +52,7 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
     }
 
     @Override
-    protected CloudBalance getInitialSolution() {
+    protected CloudBalance createInitialSolution() {
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
                 Collections.singletonList(CloudBalanceSolutionInitializer.class));
@@ -75,6 +75,6 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
 
     @Benchmark
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

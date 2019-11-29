@@ -9,6 +9,7 @@ import org.jboss.qa.brms.performance.examples.conferencescheduling.termination.C
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
@@ -34,12 +35,12 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
     private ConferenceScheduling.DataSet dataSet;
 
     @Override
-    public void initSolution() {
-        super.setSolution(CONFERENCE_SCHEDULING.loadSolvingProblem(dataSet));
+    protected ConferenceSolution createInitialSolution() {
+        return CONFERENCE_SCHEDULING.loadSolvingProblem(dataSet);
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<ConferenceSolution> createSolver() {
         // the pre-defined configuration in ConferenceScheduling cannot be used
         SolverConfig solverConfig = new SolverConfig();
 
@@ -61,11 +62,11 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
                 withTerminationClass(ConferenceSchedulingTermination.class));
 
         SolverFactory<ConferenceSolution> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 
     @Benchmark
     public ConferenceSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

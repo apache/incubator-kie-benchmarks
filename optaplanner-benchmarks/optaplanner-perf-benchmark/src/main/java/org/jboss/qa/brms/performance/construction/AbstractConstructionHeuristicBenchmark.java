@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.AbstractExample;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
@@ -27,12 +28,13 @@ public abstract class AbstractConstructionHeuristicBenchmark<Solution_, E extend
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<Solution_> createSolver() {
         SolverConfig solverConfig = example.getBaseSolverConfig();
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig =
                 new ConstructionHeuristicPhaseConfig().withConstructionHeuristicType(getConstructionHeuristicType());
         solverConfig.setPhaseConfigList(Collections.singletonList(constructionHeuristicPhaseConfig));
+
         SolverFactory<Solution_> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 }

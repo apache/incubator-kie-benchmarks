@@ -14,17 +14,8 @@ public class CloudBalancePillarSwapMoveSelectorBenchmark extends AbstractCloudBa
         return MoveSelectorConfigurations.createPillarSwapMoveSelectorList();
     }
 
-//    @Override
-//    public int getAcceptedCountLimit() {
-//        return 100;
-//    }
-//    @Override
-//    public int getNumOfStepsTermination() {
-//        return 100;
-//    }
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

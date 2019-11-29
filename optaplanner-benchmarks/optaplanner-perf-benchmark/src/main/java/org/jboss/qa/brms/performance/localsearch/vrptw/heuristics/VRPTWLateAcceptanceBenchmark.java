@@ -13,8 +13,7 @@ public class VRPTWLateAcceptanceBenchmark extends AbstractVRPTWHeuristicBenchmar
     }
 
     @Benchmark
-    @Override
     public VehicleRoutingSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

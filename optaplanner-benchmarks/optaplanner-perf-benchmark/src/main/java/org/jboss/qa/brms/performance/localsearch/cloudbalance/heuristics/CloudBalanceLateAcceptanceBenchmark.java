@@ -13,8 +13,7 @@ public class CloudBalanceLateAcceptanceBenchmark extends AbstractCloudBalanceHeu
     }
 
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

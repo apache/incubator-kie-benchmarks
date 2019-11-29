@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
@@ -12,7 +13,8 @@ import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForage
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
-public abstract class AbstractMultithreadedSolvingScalabilityBenchmark<Solution_> extends AbstractPlannerBenchmark<Solution_> {
+public abstract class AbstractMultithreadedSolvingScalabilityBenchmark<Solution_>
+        extends AbstractPlannerBenchmark<Solution_> {
 
     @Param({"NONE", "2", "4", "8"})
     private String moveThreadCount;
@@ -27,15 +29,8 @@ public abstract class AbstractMultithreadedSolvingScalabilityBenchmark<Solution_
 
     protected abstract int getAcceptedCountLimit();
 
-    protected abstract Solution_ getInitialSolution();
-
     @Override
-    public void initSolution() {
-        super.setSolution(getInitialSolution());
-    }
-
-    @Override
-    public void initSolver() {
+    public Solver<Solution_> createSolver() {
         SolverConfig solverConfig = getBaseSolverConfig();
         solverConfig.setMoveThreadCount(moveThreadCount);
 
@@ -51,6 +46,6 @@ public abstract class AbstractMultithreadedSolvingScalabilityBenchmark<Solution_
 
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
         SolverFactory<Solution_> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 }

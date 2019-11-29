@@ -5,6 +5,7 @@ import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.nurserostering.domain.NurseRoster;
@@ -18,26 +19,26 @@ public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoste
     private NurseRostering.DataSet dataset;
 
     @Override
-    public void initSolution() {
-        super.setSolution(NURSE_ROSTERING.loadSolvingProblem(dataset));
+    protected NurseRoster createInitialSolution() {
+        return NURSE_ROSTERING.loadSolvingProblem(dataset);
     }
 
     @Override
-    public void initSolver() {
+    public Solver<NurseRoster> createSolver() {
         SolverConfig solverConfig = NURSE_ROSTERING.getSolverConfigFromXml();
         SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 
     @Benchmark
     public NurseRoster benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 
     // for debugging purposes
     public static void main(String[] args) {
         NurseRosteringBenchmark nurseRosteringBenchmark = new NurseRosteringBenchmark();
-        nurseRosteringBenchmark.initSolver();
-        nurseRosteringBenchmark.setSolution(NURSE_ROSTERING.loadSolvingProblem(NurseRostering.DataSet.SPRINT));
+        Solver<NurseRoster> solver = nurseRosteringBenchmark.createSolver();
+        solver.solve(NURSE_ROSTERING.loadSolvingProblem(NurseRostering.DataSet.SPRINT));
     }
 }

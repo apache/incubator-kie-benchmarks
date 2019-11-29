@@ -13,8 +13,7 @@ public class CloudBalanceHillClimbingSearchBenchmark extends AbstractCloudBalanc
     }
 
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

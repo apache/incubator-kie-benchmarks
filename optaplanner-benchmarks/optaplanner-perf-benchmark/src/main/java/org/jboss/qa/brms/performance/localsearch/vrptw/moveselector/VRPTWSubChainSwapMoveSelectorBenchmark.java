@@ -15,8 +15,7 @@ public class VRPTWSubChainSwapMoveSelectorBenchmark extends AbstractVRPTWMoveSel
     }
 
     @Benchmark
-    @Override
     public VehicleRoutingSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

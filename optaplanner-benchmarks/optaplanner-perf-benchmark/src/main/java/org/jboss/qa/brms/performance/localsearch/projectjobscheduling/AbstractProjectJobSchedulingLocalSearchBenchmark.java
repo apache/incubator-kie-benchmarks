@@ -39,7 +39,7 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
     }
 
     @Override
-    public void initSolver() {
+    protected Solver<Schedule> createSolver() {
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())
@@ -56,6 +56,6 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<Schedule> solverFactory = SolverFactory.create(solverConfig);
-        super.setSolver(solverFactory.buildSolver());
+        return solverFactory.buildSolver();
     }
 }
