@@ -3,6 +3,7 @@ package org.jboss.qa.brms.performance.construction.vrp;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -15,10 +16,10 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
 
 public class VRPTimeWindowedConstructionBenchmark
-        extends AbstractConstructionHeuristicBenchmark<VehicleRoutingSolution, VehicleRouting> {
+        extends AbstractConstructionHeuristicBenchmark<VehicleRoutingSolution> {
 
     public VRPTimeWindowedConstructionBenchmark() {
-        super(VehicleRouting.class);
+        super(Examples.VEHICLE_ROUTING);
     }
 
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
@@ -29,7 +30,7 @@ public class VRPTimeWindowedConstructionBenchmark
 
     @Override
     protected Solver<VehicleRoutingSolution> createSolver() {
-        SolverConfig solverConfig = example.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig =
                 new ConstructionHeuristicPhaseConfig().withConstructionHeuristicType(getConstructionHeuristicType());
         solverConfig.setPhaseConfigList(Collections.singletonList(constructionHeuristicPhaseConfig));
@@ -40,7 +41,7 @@ public class VRPTimeWindowedConstructionBenchmark
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        return example.loadSolvingProblem(dataset);
+        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
     }
 
     @Override

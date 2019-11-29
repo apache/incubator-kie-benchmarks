@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.termination.HardVRPCalculateCountTermination;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -31,8 +32,6 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
 public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRoutingSolution> {
 
-    private static final VehicleRouting VEHICLE_ROUTING = new VehicleRouting();
-
     private static final String VEHCILE_ROUTING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.vehiclerouting";
     private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE =
             "org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingScoreRules.drl";
@@ -44,7 +43,7 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        return VEHICLE_ROUTING.loadSolvingProblem(dataset);
+        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
     }
 
     @Override

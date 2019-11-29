@@ -1,16 +1,17 @@
 package org.jboss.qa.brms.performance.construction.vrp;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
-public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<VehicleRoutingSolution, VehicleRouting> {
+public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<VehicleRoutingSolution> {
 
     public VRPConstructionBenchmark() {
-        super(VehicleRouting.class);
+        super(Examples.VEHICLE_ROUTING);
     }
 
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
@@ -21,7 +22,7 @@ public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBench
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        return example.loadSolvingProblem(dataset);
+        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
     }
 
     @Override

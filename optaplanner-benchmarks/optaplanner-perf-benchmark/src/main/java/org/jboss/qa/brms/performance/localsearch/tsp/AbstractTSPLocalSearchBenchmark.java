@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.localsearch.tsp;
 
 import java.util.Collections;
 
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanProblem;
 import org.jboss.qa.brms.performance.examples.tsp.solution.TSPSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
@@ -18,8 +19,6 @@ import org.optaplanner.examples.tsp.domain.TspSolution;
 public abstract class AbstractTSPLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<TspSolution> {
 
-    private static final TravelingSalesmanProblem TRAVELING_SALESMAN_PROBLEM = new TravelingSalesmanProblem();
-
     @Param({"LU_980", "USA_CA_2716", "GREECE_9882"})
     private TravelingSalesmanProblem.DataSet dataset;
 
@@ -28,13 +27,13 @@ public abstract class AbstractTSPLocalSearchBenchmark
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(Collections.singletonList(TSPSolutionInitializer.class));
 
-        SolverConfig solverConfig = TRAVELING_SALESMAN_PROBLEM.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.TRAVELING_SALESMAN.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(customPhaseConfig));
 
         SolverFactory<TspSolution> solverFactory = SolverFactory.create(solverConfig);
         Solver<TspSolution> constructionSolver = solverFactory.buildSolver();
 
-        TspSolution solution = TRAVELING_SALESMAN_PROBLEM.loadSolvingProblem(dataset);
+        TspSolution solution = Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
@@ -50,7 +49,7 @@ public abstract class AbstractTSPLocalSearchBenchmark
         localSearchPhaseConfig.getForagerConfig().setAcceptedCountLimit(getAcceptedCountLimit());
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
 
-        SolverConfig solverConfig = TRAVELING_SALESMAN_PROBLEM.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.TRAVELING_SALESMAN.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<TspSolution> solverFactory = SolverFactory.create(solverConfig);

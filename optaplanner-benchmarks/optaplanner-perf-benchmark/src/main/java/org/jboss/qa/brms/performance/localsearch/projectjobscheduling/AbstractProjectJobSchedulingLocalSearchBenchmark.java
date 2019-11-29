@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.localsearch.projectjobscheduling;
 
 import java.util.Collections;
 
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -18,8 +19,6 @@ import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<Schedule> {
 
-    private static final ProjectJobScheduling PROJECT_JOB_SCHEDULING = new ProjectJobScheduling();
-
     @Param({"A_4", "A_10", "B_9"})
     private ProjectJobScheduling.DataSet dataset;
 
@@ -28,12 +27,12 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig = new ConstructionHeuristicPhaseConfig();
         constructionHeuristicPhaseConfig.setConstructionHeuristicType(ConstructionHeuristicType.FIRST_FIT);
 
-        SolverConfig solverConfig = PROJECT_JOB_SCHEDULING.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.PROJECT_JOB_SCHEDULING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(constructionHeuristicPhaseConfig));
         SolverFactory<Schedule> solverFactory = SolverFactory.create(solverConfig);
         Solver<Schedule> constructionSolver = solverFactory.buildSolver();
 
-        Schedule solution = PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
+        Schedule solution = Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
@@ -52,7 +51,7 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
 
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
 
-        SolverConfig solverConfig = PROJECT_JOB_SCHEDULING.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.PROJECT_JOB_SCHEDULING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<Schedule> solverFactory = SolverFactory.create(solverConfig);

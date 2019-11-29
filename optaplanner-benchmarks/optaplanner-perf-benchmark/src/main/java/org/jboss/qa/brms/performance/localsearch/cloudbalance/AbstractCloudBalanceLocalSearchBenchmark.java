@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.localsearch.cloudbalance;
 
 import java.util.Collections;
 
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.solution.CloudBalanceSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
@@ -17,8 +18,6 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 
 public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractLocalSearchPlannerBenchmark<CloudBalance> {
 
-    private static final CloudBalancing CLOUD_BALANCING = new CloudBalancing();
-
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
     private CloudBalancing.DataSet dataset;
 
@@ -28,13 +27,13 @@ public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractL
         customPhaseConfig.setCustomPhaseCommandClassList(
                 Collections.singletonList(CloudBalanceSolutionInitializer.class));
 
-        SolverConfig solverConfig = CLOUD_BALANCING.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.CLOUD_BALANCING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(customPhaseConfig));
 
         SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);
         Solver<CloudBalance> constructionSolver = solverFactory.buildSolver();
 
-        CloudBalance solution = CLOUD_BALANCING.loadSolvingProblem(dataset);
+        CloudBalance solution = Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
@@ -50,7 +49,7 @@ public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractL
         localSearchPhaseConfig.getForagerConfig().setAcceptedCountLimit(getAcceptedCountLimit());
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
 
-        SolverConfig solverConfig = CLOUD_BALANCING.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.CLOUD_BALANCING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);

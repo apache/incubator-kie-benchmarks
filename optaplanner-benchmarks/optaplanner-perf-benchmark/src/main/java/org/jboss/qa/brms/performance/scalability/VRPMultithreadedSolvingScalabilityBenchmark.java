@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.solution.VehicleRoutingSolutionInitializer;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -20,8 +21,6 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
 public class VRPMultithreadedSolvingScalabilityBenchmark
         extends AbstractMultithreadedSolvingScalabilityBenchmark<VehicleRoutingSolution> {
-
-    private static final VehicleRouting VEHICLE_ROUTING = new VehicleRouting();
 
     @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
     private VehicleRouting.DataSet dataset;
@@ -62,14 +61,14 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
-        VehicleRoutingSolution solution = VEHICLE_ROUTING.loadSolvingProblem(dataset);
+        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
 
     @Override
     protected SolverConfig getBaseSolverConfig() {
-        return VEHICLE_ROUTING.getBaseSolverConfig();
+        return Examples.VEHICLE_ROUTING.getBaseSolverConfig();
     }
 
     @Benchmark

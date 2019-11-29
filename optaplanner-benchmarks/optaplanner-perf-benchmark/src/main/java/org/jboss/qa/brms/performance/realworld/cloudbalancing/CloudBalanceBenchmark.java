@@ -3,6 +3,7 @@ package org.jboss.qa.brms.performance.realworld.cloudbalancing;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.termination.CloudBalanceCalculateCountTermination;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -17,8 +18,6 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
-    private static final CloudBalancing CLOUD_BALANCING = new CloudBalancing();
-
     private static final String CLOUD_BALANCING_DOMAIN_PACKAGE = "org.jboss.qa.brms.performance.examples.cloudbalancing";
     private static final String CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE =
             "org/jboss/qa/brms/performance/examples/cloudbalancing/solver/cloudBalancingScoreRules.drl";
@@ -28,7 +27,7 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
 
     @Override
     protected CloudBalance createInitialSolution() {
-        return CLOUD_BALANCING.loadSolvingProblem(dataset);
+        return Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
     }
 
     @Override

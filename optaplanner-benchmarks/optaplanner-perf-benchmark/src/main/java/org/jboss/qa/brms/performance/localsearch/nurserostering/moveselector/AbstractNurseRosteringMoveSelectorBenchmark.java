@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.localsearch.nurserostering.moveselector;
 
 import java.util.Collections;
 
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
@@ -27,8 +28,6 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
     private static final int ACCEPTED_COUNT_LIMIT = 800;
     private static final long CALCULATION_COUNT_LIMIT = 10_000L;
 
-    private static final NurseRostering NURSE_ROSTER_EXAMPLE = new NurseRostering();
-
     @Param({"SPRINT", "MEDIUM", "LONG"})
     private NurseRostering.DataSet dataset;
 
@@ -37,13 +36,13 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         ConstructionHeuristicPhaseConfig chPhaseConfig = new ConstructionHeuristicPhaseConfig()
                 .withConstructionHeuristicType(ConstructionHeuristicType.WEAKEST_FIT);
 
-        SolverConfig solverConfig = NURSE_ROSTER_EXAMPLE.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.NURSE_ROSTERING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(chPhaseConfig));
 
         SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
         Solver<NurseRoster> constructionSolver = solverFactory.buildSolver();
 
-        NurseRoster nonInitializedSolution = NURSE_ROSTER_EXAMPLE.loadSolvingProblem(dataset);
+        NurseRoster nonInitializedSolution = Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);
         constructionSolver.solve(nonInitializedSolution);
         return constructionSolver.getBestSolution();
     }
@@ -83,7 +82,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         localSearchPhaseConfig.getForagerConfig().setAcceptedCountLimit(getAcceptedCountLimit());
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
 
-        SolverConfig solverConfig = NURSE_ROSTER_EXAMPLE.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.NURSE_ROSTERING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);

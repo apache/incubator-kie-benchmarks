@@ -1,6 +1,5 @@
 package org.jboss.qa.brms.performance.construction;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
@@ -11,20 +10,14 @@ import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPh
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
 import org.optaplanner.core.config.solver.SolverConfig;
 
-public abstract class AbstractConstructionHeuristicBenchmark<Solution_, E extends AbstractExample>
-        extends AbstractPlannerBenchmark<Solution_> {
+public abstract class AbstractConstructionHeuristicBenchmark<Solution_> extends AbstractPlannerBenchmark<Solution_> {
 
     public abstract ConstructionHeuristicType getConstructionHeuristicType();
 
-    protected final E example;
+    private final AbstractExample<Solution_> example;
 
-    protected AbstractConstructionHeuristicBenchmark(Class<E> exampleClass) {
-        try {
-            this.example = exampleClass.getConstructor().newInstance();
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new IllegalStateException("The example class " + exampleClass +
-                "does not have a public no-arg constructor.", e);
-        }
+    protected AbstractConstructionHeuristicBenchmark(AbstractExample<Solution_> example) {
+        this.example = example;
     }
 
     @Override

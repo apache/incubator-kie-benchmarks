@@ -1,13 +1,14 @@
 package org.jboss.qa.brms.performance.construction.cloudbalance;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 
-public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<CloudBalance, CloudBalancing> {
+public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<CloudBalance> {
 
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
     private ConstructionHeuristicType constructionHeuristicType;
@@ -16,12 +17,12 @@ public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuri
     private CloudBalancing.DataSet dataset;
 
     public CloudBalanceConstructionBenchmark() {
-        super(CloudBalancing.class);
+        super(Examples.CLOUD_BALANCING);
     }
 
     @Override
     protected CloudBalance createInitialSolution() {
-        return example.loadSolvingProblem(dataset);
+        return Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
     }
 
     @Override

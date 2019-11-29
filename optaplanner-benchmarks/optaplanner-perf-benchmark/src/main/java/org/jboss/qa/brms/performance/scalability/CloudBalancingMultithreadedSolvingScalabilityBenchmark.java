@@ -3,6 +3,7 @@ package org.jboss.qa.brms.performance.scalability;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancing;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.solution.CloudBalanceSolutionInitializer;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -20,8 +21,6 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
         extends AbstractMultithreadedSolvingScalabilityBenchmark<CloudBalance> {
 
-    private final static CloudBalancing CLOUD_BALANCING = new CloudBalancing();
-
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
     private CloudBalancing.DataSet dataset;
 
@@ -34,7 +33,7 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
 
     @Override
     protected SolverConfig getBaseSolverConfig() {
-        return CLOUD_BALANCING.getBaseSolverConfig();
+        return Examples.CLOUD_BALANCING.getBaseSolverConfig();
     }
 
     @Override
@@ -63,7 +62,7 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
         SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);
         Solver<CloudBalance> constructionSolver = solverFactory.buildSolver();
 
-        CloudBalance solution = CLOUD_BALANCING.loadSolvingProblem(dataset);
+        CloudBalance solution = Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }

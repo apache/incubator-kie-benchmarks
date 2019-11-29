@@ -1,16 +1,17 @@
 package org.jboss.qa.brms.performance.construction.tsp;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanProblem;
 import org.optaplanner.examples.tsp.domain.TspSolution;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
 
-public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<TspSolution, TravelingSalesmanProblem> {
+public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<TspSolution> {
 
     public TSPConstructionBenchmark() {
-        super(TravelingSalesmanProblem.class);
+        super(Examples.TRAVELING_SALESMAN);
     }
 
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
@@ -21,7 +22,7 @@ public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBench
 
     @Override
     protected TspSolution createInitialSolution() {
-        return example.loadSolvingProblem(dataset);
+        return Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataset);
     }
 
     @Override

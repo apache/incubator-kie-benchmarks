@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceScheduling;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.termination.ConferenceSchedulingTermination;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -23,8 +24,6 @@ import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
 
-    private static final ConferenceScheduling CONFERENCE_SCHEDULING = new ConferenceScheduling();
-
     private static final String CONFERENCE_SCHEDULING_DOMAIN_PACKAGE =
             "org.jboss.qa.brms.performance.examples.conferencescheduling";
 
@@ -36,7 +35,7 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
 
     @Override
     protected ConferenceSolution createInitialSolution() {
-        return CONFERENCE_SCHEDULING.loadSolvingProblem(dataSet);
+        return Examples.CONFERENCE_SCHEDULING.loadSolvingProblem(dataSet);
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.localsearch.vrp;
 
 import java.util.Collections;
 
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRouting;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.solution.VehicleRoutingSolutionInitializer;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
@@ -18,8 +19,6 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 public abstract class AbstractVRPLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<VehicleRoutingSolution> {
 
-    private static final VehicleRouting VEHICLE_ROUTING = new VehicleRouting();
-
     @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
     private VehicleRouting.DataSet dataset;
 
@@ -28,13 +27,13 @@ public abstract class AbstractVRPLocalSearchBenchmark
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
                 Collections.singletonList(VehicleRoutingSolutionInitializer.class));
-        SolverConfig solverConfig = VEHICLE_ROUTING.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(customPhaseConfig));
 
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
-        VehicleRoutingSolution solution = VEHICLE_ROUTING.loadSolvingProblem(dataset);
+        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
         constructionSolver.solve(solution);
         return constructionSolver.getBestSolution();
     }
@@ -50,7 +49,7 @@ public abstract class AbstractVRPLocalSearchBenchmark
         localSearchPhaseConfig.getForagerConfig().setAcceptedCountLimit(getAcceptedCountLimit());
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
 
-        SolverConfig solverConfig = VEHICLE_ROUTING.getBaseSolverConfig();
+        SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
 
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);

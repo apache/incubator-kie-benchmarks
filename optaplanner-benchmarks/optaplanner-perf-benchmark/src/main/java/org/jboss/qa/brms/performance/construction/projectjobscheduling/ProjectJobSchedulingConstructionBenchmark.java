@@ -1,16 +1,17 @@
 package org.jboss.qa.brms.performance.construction.projectjobscheduling;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
 import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 
-public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<Schedule, ProjectJobScheduling> {
+public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<Schedule> {
 
     public ProjectJobSchedulingConstructionBenchmark() {
-        super(ProjectJobScheduling.class);
+        super(Examples.PROJECT_JOB_SCHEDULING);
     }
 
     @Param({"FIRST_FIT"})
@@ -21,7 +22,7 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
 
     @Override
     protected Schedule createInitialSolution() {
-        return example.loadSolvingProblem(dataset);
+        return Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
     }
 
     @Override
