@@ -22,11 +22,13 @@ import java.util.Collections;
 import java.util.stream.Stream;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
+import org.jboss.qa.brms.performance.examples.conferencescheduling.generator.ConferenceSchedulingGenerator;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.common.app.CommonApp;
 import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 import org.optaplanner.examples.conferencescheduling.domain.Talk;
-import org.optaplanner.examples.conferencescheduling.persistence.ConferenceSchedulingGenerator;
+
 
 public final class ConferenceSchedulingExample extends AbstractExample<ConferenceSolution> {
 
@@ -37,8 +39,11 @@ public final class ConferenceSchedulingExample extends AbstractExample<Conferenc
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
 
     public ConferenceSolution loadSolvingProblem(ConferenceSchedulingExample.DataSet dataset) {
+        File exampleDataDir = new File(System.getProperty("user.dir"), "target");
+        exampleDataDir.mkdirs();
+        System.setProperty(CommonApp.DATA_DIR_SYSTEM_PROPERTY, exampleDataDir.getAbsolutePath());
+        // TODO: refactor the ConferenceSchedulingGenerator in optaplanner-examples to reuse it
         return new ConferenceSchedulingGenerator().createConferenceSolution(
-                dataset.name(),
                 dataset.timeslotListSize,
                 dataset.roomListSize,
                 dataset.speakerListSize,
