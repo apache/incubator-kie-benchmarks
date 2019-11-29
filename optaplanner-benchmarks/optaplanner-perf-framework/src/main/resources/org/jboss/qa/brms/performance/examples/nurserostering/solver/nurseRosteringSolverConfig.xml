@@ -5,7 +5,7 @@
   <entityClass>org.optaplanner.examples.nurserostering.domain.ShiftAssignment</entityClass>
 
   <scoreDirectorFactory>
-    <scoreDrl>org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl</scoreDrl>
+    <scoreDrl>org/optaplanner/examples/nurserostering/solver/nurseRosteringScoreRules.drl</scoreDrl>
   </scoreDirectorFactory>
 
   <termination>
@@ -32,7 +32,6 @@
       </swapMoveSelector>
       <pillarChangeMoveSelector>
         <subPillarType>SEQUENCE</subPillarType>
-        <subPillarSequenceComparatorClass>org.optaplanner.examples.nurserostering.domain.ShiftAssignmentComparator</subPillarSequenceComparatorClass>
         <pillarSelector>
           <entitySelector>
             <filterClass>org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
@@ -41,7 +40,6 @@
       </pillarChangeMoveSelector>
       <pillarSwapMoveSelector>
         <subPillarType>SEQUENCE</subPillarType>
-        <subPillarSequenceComparatorClass>org.optaplanner.examples.nurserostering.domain.ShiftAssignmentComparator</subPillarSequenceComparatorClass>
         <pillarSelector>
           <entitySelector>
             <filterClass>org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
