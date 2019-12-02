@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
 
-  <solutionClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster</solutionClass>
-  <entityClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.ShiftAssignment</entityClass>
+  <solutionClass>org.optaplanner.examples.nurserostering.domain.NurseRoster</solutionClass>
+  <entityClass>org.optaplanner.examples.nurserostering.domain.ShiftAssignment</entityClass>
 
   <scoreDirectorFactory>
-    <scoreDrl>org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringScoreRules.drl</scoreDrl>
+    <scoreDrl>org/optaplanner/examples/nurserostering/solver/nurseRosteringScoreRules.drl</scoreDrl>
   </scoreDirectorFactory>
 
   <termination>
@@ -18,33 +18,31 @@
     <unionMoveSelector>
       <moveListFactory>
         <cacheType>STEP</cacheType>
-        <moveListFactoryClass>org.jboss.qa.brms.performance.examples.nurserostering.solver.move.factory.ShiftAssignmentPillarPartSwapMoveFactory</moveListFactoryClass>
+        <moveListFactoryClass>org.optaplanner.examples.nurserostering.solver.move.factory.ShiftAssignmentPillarPartSwapMoveFactory</moveListFactoryClass>
       </moveListFactory>
       <changeMoveSelector>
         <entitySelector>
-          <filterClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
+          <filterClass>org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
         </entitySelector>
       </changeMoveSelector>
       <swapMoveSelector>
         <entitySelector>
-          <filterClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
+          <filterClass>org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
         </entitySelector>
       </swapMoveSelector>
       <pillarChangeMoveSelector>
         <subPillarType>SEQUENCE</subPillarType>
-        <subPillarSequenceComparatorClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.ShiftAssignmentComparator</subPillarSequenceComparatorClass>
         <pillarSelector>
           <entitySelector>
-            <filterClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
+            <filterClass>org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
           </entitySelector>
         </pillarSelector>
       </pillarChangeMoveSelector>
       <pillarSwapMoveSelector>
         <subPillarType>SEQUENCE</subPillarType>
-        <subPillarSequenceComparatorClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.ShiftAssignmentComparator</subPillarSequenceComparatorClass>
         <pillarSelector>
           <entitySelector>
-            <filterClass>org.jboss.qa.brms.performance.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
+            <filterClass>org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter</filterClass>
           </entitySelector>
         </pillarSelector>
       </pillarSwapMoveSelector>

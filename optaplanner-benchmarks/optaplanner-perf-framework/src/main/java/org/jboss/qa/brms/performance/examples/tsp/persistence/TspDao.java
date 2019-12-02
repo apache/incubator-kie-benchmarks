@@ -15,13 +15,13 @@
  */
 package org.jboss.qa.brms.performance.examples.tsp.persistence;
 
-import org.jboss.qa.brms.performance.examples.common.persistence.XStreamSolutionDao;
-import org.jboss.qa.brms.performance.examples.tsp.domain.TravelingSalesmanTour;
+import org.jboss.qa.brms.performance.persistence.XStreamSolutionDao;
+import org.optaplanner.examples.tsp.domain.TspSolution;
 
-public class TspDao extends XStreamSolutionDao<TravelingSalesmanTour> {
+public class TspDao extends XStreamSolutionDao<TspSolution> {
 
     public TspDao() {
-        super("tsp", TravelingSalesmanTour.class);
+        super("tsp", TspSolution.class);
     }
 
 }

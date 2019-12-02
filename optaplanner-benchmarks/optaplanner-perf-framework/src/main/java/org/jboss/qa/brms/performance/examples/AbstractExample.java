@@ -1,22 +1,17 @@
 package org.jboss.qa.brms.performance.examples;
 
-import org.optaplanner.core.api.solver.SolverFactory;
-
 import java.io.File;
-import java.io.InputStream;
+import org.optaplanner.core.config.solver.SolverConfig;
 
-public abstract class AbstractExample<S> {
+public abstract class AbstractExample<Solution_> {
 
-    public abstract S loadSolvingProblem(File f);
+    public abstract Solution_ loadSolvingProblem(File file);
 
-    public abstract SolverFactory<S> getDefaultSolverFactory();
-
-    public abstract SolverFactory<S> getBaseSolverFactory();
-
-    @Deprecated
-    protected SolverFactory<S> getSolverFactory(String resource) {
-        InputStream configFileStream = getClass().getResourceAsStream(resource);
-        assert configFileStream != null;
-        return SolverFactory.createFromXmlInputStream(configFileStream);
+    public SolverConfig getSolverConfigFromXml() {
+        return SolverConfig.createFromXmlResource(getSolverConfigResource());
     }
+
+    public abstract SolverConfig getBaseSolverConfig();
+
+    protected abstract String getSolverConfigResource();
 }

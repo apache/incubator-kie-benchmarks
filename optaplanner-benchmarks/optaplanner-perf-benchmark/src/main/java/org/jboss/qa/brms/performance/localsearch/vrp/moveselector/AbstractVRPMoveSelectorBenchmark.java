@@ -1,6 +1,6 @@
 package org.jboss.qa.brms.performance.localsearch.vrp.moveselector;
 
-import org.jboss.qa.brms.performance.calculatecounttermination.HardVRPCalculateCountTermination;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.termination.HardVRPCalculateCountTermination;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.localsearch.vrp.AbstractVRPLocalSearchBenchmark;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
