@@ -21,6 +21,10 @@
     </dependency>
     <dependency>
       <groupId>org.optaplanner</groupId>
+      <artifactId>optaplanner-examples</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.optaplanner</groupId>
       <artifactId>optaplanner-persistence-xstream</artifactId>
     </dependency>
     <!-- Common utils -->

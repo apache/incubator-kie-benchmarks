@@ -1,38 +1,28 @@
 package org.jboss.qa.brms.performance.construction.projectjobscheduling;
 
-import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicPlannerBenchmark;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobScheduling;
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.domain.Schedule;
+import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
+import org.jboss.qa.brms.performance.examples.Examples;
+import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobSchedulingExample;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
-import org.optaplanner.core.api.solver.SolverFactory;
-import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
-import org.optaplanner.core.config.phase.PhaseConfig;
+import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 
-import java.util.Collections;
+public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstructionHeuristicBenchmark<Schedule> {
 
-public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstructionHeuristicPlannerBenchmark<Schedule> {
+    public ProjectJobSchedulingConstructionBenchmark() {
+        super(Examples.PROJECT_JOB_SCHEDULING);
+    }
 
     @Param({"FIRST_FIT"})
     private ConstructionHeuristicType constructionHeuristicType;
 
     @Param({"A_4", "A_10", "B_9"})
-    private ProjectJobScheduling.DataSet dataset;
+    private ProjectJobSchedulingExample.DataSet dataset;
 
     @Override
-    public void initSolver() {
-        SolverFactory<Schedule> solverFactory = new ProjectJobScheduling().getBaseSolverFactory();
-        ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig = new ConstructionHeuristicPhaseConfig();
-        constructionHeuristicPhaseConfig.setConstructionHeuristicType(getConstructionHeuristicType());
-        solverFactory.getSolverConfig()
-                .setPhaseConfigList(Collections.singletonList(((PhaseConfig) constructionHeuristicPhaseConfig)));
-        super.setSolver(solverFactory.buildSolver());
-    }
-
-    @Override
-    public void initSolution() {
-        super.setSolution(new ProjectJobScheduling().loadSolvingProblem(dataset));
+    protected Schedule createInitialSolution() {
+        return Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
     }
 
     @Override
@@ -41,9 +31,7 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
     }
 
     @Benchmark
-    @Override
     public Schedule benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
-
 }

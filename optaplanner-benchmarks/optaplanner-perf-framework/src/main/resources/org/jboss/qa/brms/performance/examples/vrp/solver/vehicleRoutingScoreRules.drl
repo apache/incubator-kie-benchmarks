@@ -19,15 +19,15 @@ package org.jboss.qa.brms.performance.examples.vrp.solver;
 
 import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScoreHolder;
 
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Depot;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.location.Location;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Vehicle;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Customer;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.timewindowed.TimeWindowedDepot;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.timewindowed.TimeWindowedVehicleRoutingSolution;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.Vehicle;
+import org.optaplanner.examples.vehiclerouting.domain.Depot;
+import org.optaplanner.examples.vehiclerouting.domain.location.Location;
+import org.optaplanner.examples.vehiclerouting.domain.Vehicle;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.Customer;
+import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedDepot;
+import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedVehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer
+import org.optaplanner.examples.vehiclerouting.domain.Vehicle;
 
 global HardSoftLongScoreHolder scoreHolder;
 

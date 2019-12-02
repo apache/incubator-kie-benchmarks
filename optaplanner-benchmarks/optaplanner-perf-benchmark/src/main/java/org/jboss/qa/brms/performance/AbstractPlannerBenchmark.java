@@ -1,5 +1,7 @@
 package org.jboss.qa.brms.performance;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
@@ -12,8 +14,6 @@ import org.openjdk.jmh.annotations.Warmup;
 import org.optaplanner.core.api.solver.Solver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.TimeUnit;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.SingleShotTime)
@@ -28,30 +28,21 @@ public abstract class AbstractPlannerBenchmark<Solution_> {
     private Solution_ solution;
     private Solver<Solution_> solver;
 
-    public Solution_ getSolution() {
-        return solution;
+    @Setup
+    public void initSolution() {
+        this.solution = createInitialSolution();
     }
 
-    public void setSolution(Solution_ solution) {
-        this.solution = solution;
-    }
-
-    public Solver<Solution_> getSolver() {
-        return solver;
-    }
-
-    public void setSolver(Solver<Solution_> solver) {
-        this.solver = solver;
-    }
+    protected abstract Solution_ createInitialSolution();
 
     @Setup
-    public abstract void initSolution();
-
-    @Setup
-    public abstract void initSolver();
-
-    public Solution_ benchmark() {
-        return getSolver().solve(getSolution());
+    public void initSolver() {
+        this.solver = createSolver();
     }
 
+    protected abstract Solver<Solution_> createSolver();
+
+    public Solution_ runBenchmark() {
+        return solver.solve(solution);
+    }
 }

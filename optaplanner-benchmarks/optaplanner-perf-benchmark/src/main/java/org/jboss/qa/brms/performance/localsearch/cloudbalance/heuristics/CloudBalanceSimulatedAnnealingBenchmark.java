@@ -1,7 +1,7 @@
 package org.jboss.qa.brms.performance.localsearch.cloudbalance.heuristics;
 
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
 
@@ -13,9 +13,8 @@ public class CloudBalanceSimulatedAnnealingBenchmark extends AbstractCloudBalanc
     }
 
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 
 }

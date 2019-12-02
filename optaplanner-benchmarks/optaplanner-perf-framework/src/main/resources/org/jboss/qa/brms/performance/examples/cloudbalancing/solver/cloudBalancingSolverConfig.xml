@@ -2,13 +2,13 @@
 <solver>
   <!--<environmentMode>FAST_ASSERT</environmentMode>-->
 
-  <solutionClass>org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance</solutionClass>
-  <entityClass>org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudProcess</entityClass>
+  <solutionClass>org.optaplanner.examples.cloudbalancing.domain.CloudBalance</solutionClass>
+  <entityClass>org.optaplanner.examples.cloudbalancing.domain.CloudProcess</entityClass>
 
   <!-- Score configuration -->
   <scoreDirectorFactory>
     <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
-    <incrementalScoreCalculatorClass>org.jboss.qa.brms.performance.examples.cloudbalancing.solver.score.CloudBalancingIncrementalScoreCalculator</incrementalScoreCalculatorClass>
+    <incrementalScoreCalculatorClass>org.optaplanner.examples.cloudbalancing.optional.score</incrementalScoreCalculatorClass>
     <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
   </scoreDirectorFactory>
 

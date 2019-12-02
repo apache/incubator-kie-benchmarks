@@ -1,6 +1,6 @@
 package org.jboss.qa.brms.performance.localsearch.projectjobscheduling.moveselector;
 
-import org.jboss.qa.brms.performance.examples.projectjobscheduling.domain.Schedule;
+import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.PillarChangeMoveSelectorConfig;
@@ -20,8 +20,7 @@ public class ProjectJobSchedulingPillarChangeMoveSelectorBenchmark extends Abstr
     }
 
     @Benchmark
-    @Override
     public Schedule benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }
