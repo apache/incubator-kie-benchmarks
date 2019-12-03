@@ -24,18 +24,7 @@ public abstract class AbstractVRPLocalSearchBenchmark
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
-        customPhaseConfig.setCustomPhaseCommandClassList(
-                Collections.singletonList(VehicleRoutingSolutionInitializer.class));
-        SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
-        solverConfig.setPhaseConfigList(Collections.singletonList(customPhaseConfig));
-
-        SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
-        Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
-
-        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return Examples.VEHICLE_ROUTING.createInitialSolution(dataset);
     }
 
     @Override

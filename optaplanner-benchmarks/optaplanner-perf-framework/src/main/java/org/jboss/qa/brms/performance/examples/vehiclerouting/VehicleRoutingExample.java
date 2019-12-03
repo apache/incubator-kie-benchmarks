@@ -2,9 +2,15 @@ package org.jboss.qa.brms.performance.examples.vehiclerouting;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
+import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.persistence.VehicleRoutingDao;
+import org.jboss.qa.brms.performance.examples.vehiclerouting.solution.VehicleRoutingSolutionInitializer;
+import org.optaplanner.core.api.solver.Solver;
+import org.optaplanner.core.api.solver.SolverFactory;
+import org.optaplanner.core.config.phase.custom.CustomPhaseConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
@@ -16,12 +22,27 @@ import org.optaplanner.examples.vehiclerouting.solver.score.VehicleRoutingIncrem
 public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingSolution> {
 
     private static final String SOLVER_CONFIG =
-            "/org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingSolverConfig.xml";
+            "org/jboss/qa/brms/performance/examples/vrp/solver/vehicleRoutingSolverConfig.xml";
 
     private final VehicleRoutingDao dao = new VehicleRoutingDao();
 
     public VehicleRoutingSolution loadSolvingProblem(DataSet dataset) {
         return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
+    }
+
+    public VehicleRoutingSolution createInitialSolution(DataSet dataSet) {
+        CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
+        customPhaseConfig.setCustomPhaseCommandClassList(
+                Collections.singletonList(VehicleRoutingSolutionInitializer.class));
+        SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
+        solverConfig.setPhaseConfigList(Collections.singletonList(customPhaseConfig));
+
+        SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
+        Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
+
+        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
+        constructionSolver.solve(solution);
+        return constructionSolver.getBestSolution();
     }
 
     @Override
