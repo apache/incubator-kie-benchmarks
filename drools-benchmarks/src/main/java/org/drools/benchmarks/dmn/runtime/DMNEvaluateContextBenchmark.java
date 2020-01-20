@@ -51,25 +51,20 @@ public class DMNEvaluateContextBenchmark extends AbstractBenchmark {
     private DMNContext dmnContext;
 
     @Setup
-    public void setupResource() {
+    public void setupResource() throws IOException {
         final DMNProvider dmnProvider = new ContextDMNProvider();
         dmnResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisionsWithContext)))
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
+        dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "dmn-context");
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-            dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "dmn-context");
-            dmnContext = dmnRuntime.newContext();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        dmnContext = dmnRuntime.newContext();
     }
 
     @Benchmark

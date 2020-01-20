@@ -73,32 +73,27 @@ public class DMNEvaluateDecisionTablesSparseBenchmark extends AbstractBenchmark 
     }
 
     @Setup
-    public void setupResource() {
+    public void setupResource() throws IOException {
         final DMNProvider dmnProvider = new DecisionTablesDMNProvider();
         String dmnContent = dmnProvider.getDMN(numberOfElements);
         LOG.debug("{}", dmnContent);
         dmnResource = KieServices.get().getResources()
-                                 .newReaderResource(new StringReader(dmnContent))
-                                 .setResourceType(ResourceType.DMN)
-                                 .setSourcePath("dmnFile.dmn");
+                .newReaderResource(new StringReader(dmnContent))
+                .setResourceType(ResourceType.DMN)
+                .setSourcePath("dmnFile.dmn");
+        dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "decision-table-name");
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-            dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "decision-table-name");
-            dmnContext = dmnRuntime.newContext();
-            for (int i = 0; i < numberOfElements; i++) {
-                if (i % sparseness == 0) {
-                    dmnContext.set("leftInput_" + i, "a");
-                    dmnContext.set("rightInput_" + i, "x");
-                }
+        dmnContext = dmnRuntime.newContext();
+        for (int i = 0; i < numberOfElements; i++) {
+            if (i % sparseness == 0) {
+                dmnContext.set("leftInput_" + i, "a");
+                dmnContext.set("rightInput_" + i, "x");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
         }
     }
 
