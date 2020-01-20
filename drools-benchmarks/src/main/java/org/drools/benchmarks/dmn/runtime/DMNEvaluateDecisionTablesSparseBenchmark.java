@@ -41,7 +41,7 @@ import org.openjdk.jmh.annotations.Warmup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Warmup(iterations = 100)
+@Warmup(iterations = 200)
 @Measurement(iterations = 50)
 public class DMNEvaluateDecisionTablesSparseBenchmark extends AbstractBenchmark {
 
