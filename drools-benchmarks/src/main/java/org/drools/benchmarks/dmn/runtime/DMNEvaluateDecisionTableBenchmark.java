@@ -39,8 +39,8 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 100)
-@Measurement(iterations = 50)
+@Warmup(iterations = 40000)
+@Measurement(iterations = 5000)
 public class DMNEvaluateDecisionTableBenchmark extends AbstractBenchmark {
 
     @Param({"1000"})
@@ -52,35 +52,27 @@ public class DMNEvaluateDecisionTableBenchmark extends AbstractBenchmark {
     private DMNContext dmnContext;
 
     @Setup
-    public void setupResource() {
+    public void setupResource() throws IOException {
         final DMNProvider dmnProvider = new DecisionTableDMNProvider();
         dmnResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisionTableRules)))
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
+        dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "decision-table-name");
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-            dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "decision-table-name");
-            dmnContext = dmnRuntime.newContext();
-            dmnContext.set("Age", BigDecimal.valueOf(18));
-            dmnContext.set("RiskCategory", "Medium");
-            dmnContext.set("isAffordable", true);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        dmnContext = dmnRuntime.newContext();
+        dmnContext.set("Age", BigDecimal.valueOf(18));
+        dmnContext.set("RiskCategory", "Medium");
+        dmnContext.set("isAffordable", true);
     }
 
     @Benchmark
     public DMNResult evaluateDecisionTable() {
-        final DMNResult dmnResult = dmnRuntime.evaluateAll(dmnModel, dmnContext);
-        dmnResult.getDecisionResults().forEach(result -> System.out.println("Result " + result.getDecisionName() + "," + result.getResult()));
-        return dmnResult;
-//        return dmnRuntime.evaluateAll(dmnModel, dmnContext);
+        return dmnRuntime.evaluateAll(dmnModel, dmnContext);
     }
 }

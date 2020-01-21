@@ -38,8 +38,8 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 250)
-@Measurement(iterations = 100)
+@Warmup(iterations = 50000)
+@Measurement(iterations = 10000)
 public class DMNEvaluateTriangularNumHardBenchmark extends AbstractBenchmark {
 
     @Param({"20", "50"})
@@ -51,25 +51,20 @@ public class DMNEvaluateTriangularNumHardBenchmark extends AbstractBenchmark {
     private DMNContext dmnContext;
 
     @Setup
-    public void setupResource() {
+    public void setupResource() throws IOException {
         final DMNProvider dmnProvider = new TriangularNumHardDMNProvider();
         dmnResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisionsWithContext)))
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
+        dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "dmn-triangular");
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-            dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "dmn-triangular");
-            dmnContext = dmnRuntime.newContext();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        dmnContext = dmnRuntime.newContext();
     }
 
     @Benchmark
