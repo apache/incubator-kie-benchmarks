@@ -2,9 +2,8 @@ package org.jboss.qa.brms.performance.localsearch.nurserostering.moveselector;
 
 import java.util.Collections;
 
-import org.jboss.qa.brms.performance.examples.nurserostering.NurseRostering;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.NurseRoster;
-import org.jboss.qa.brms.performance.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
+import org.jboss.qa.brms.performance.examples.Examples;
+import org.jboss.qa.brms.performance.examples.nurserostering.NurseRosteringExample;
 import org.jboss.qa.brms.performance.localsearch.AbstractLocalSearchPlannerBenchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
@@ -19,6 +18,8 @@ import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import org.optaplanner.examples.nurserostering.domain.NurseRoster;
+import org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
 
 public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         extends AbstractLocalSearchPlannerBenchmark<NurseRoster> {
@@ -27,23 +28,21 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
     private static final int ACCEPTED_COUNT_LIMIT = 800;
     private static final long CALCULATION_COUNT_LIMIT = 10_000L;
 
-    private static final NurseRostering NURSE_ROSTER_EXAMPLE = new NurseRostering();
-
     @Param({"SPRINT", "MEDIUM", "LONG"})
-    private NurseRostering.DataSet dataset;
+    private NurseRosteringExample.DataSet dataset;
 
     @Override
     protected NurseRoster createInitialSolution() {
-        NurseRoster nonInitializedSolution = NURSE_ROSTER_EXAMPLE.loadSolvingProblem(dataset);
-
-        SolverFactory<NurseRoster> solverFactory = NURSE_ROSTER_EXAMPLE.getBaseSolverFactory();
-        SolverConfig solverConfig = solverFactory.getSolverConfig();
-
         ConstructionHeuristicPhaseConfig chPhaseConfig = new ConstructionHeuristicPhaseConfig()
                 .withConstructionHeuristicType(ConstructionHeuristicType.WEAKEST_FIT);
+
+        SolverConfig solverConfig = Examples.NURSE_ROSTERING.getBaseSolverConfig();
         solverConfig.setPhaseConfigList(Collections.singletonList(chPhaseConfig));
 
+        SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
         Solver<NurseRoster> constructionSolver = solverFactory.buildSolver();
+
+        NurseRoster nonInitializedSolution = Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);
         constructionSolver.solve(nonInitializedSolution);
         return constructionSolver.getBestSolution();
     }
@@ -73,25 +72,24 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
     }
 
     @Override
-    public void initSolver() {
-        SolverFactory<NurseRoster> solverFactory = NURSE_ROSTER_EXAMPLE.getBaseSolverFactory();
+    protected Solver<NurseRoster> createSolver() {
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
-
         UnionMoveSelectorConfig unionMoveSelectorConfig = new UnionMoveSelectorConfig();
         unionMoveSelectorConfig.setMoveSelectorConfigList(createMoveSelectorConfigList());
         localSearchPhaseConfig.setMoveSelectorConfig(unionMoveSelectorConfig);
-
         localSearchPhaseConfig.setAcceptorConfig(createAcceptorConfig());
-
         localSearchPhaseConfig.setForagerConfig(new LocalSearchForagerConfig());
         localSearchPhaseConfig.getForagerConfig().setAcceptedCountLimit(getAcceptedCountLimit());
-
         localSearchPhaseConfig.setTerminationConfig(getTerminationConfig());
-        solverFactory.getSolverConfig().setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
-        super.setSolver(solverFactory.buildSolver());
+
+        SolverConfig solverConfig = Examples.NURSE_ROSTERING.getBaseSolverConfig();
+        solverConfig.setPhaseConfigList(Collections.singletonList(localSearchPhaseConfig));
+
+        SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
+        return solverFactory.buildSolver();
     }
 
-    protected void setDataset(NurseRostering.DataSet dataset) {
+    protected void setDataset(NurseRosteringExample.DataSet dataset) {
         this.dataset = dataset;
     }
 }

@@ -38,7 +38,7 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 100)
+@Warmup(iterations = 300)
 @Measurement(iterations = 50)
 public class DMNEvaluateDecisionBenchmark extends AbstractBenchmark {
 
@@ -51,26 +51,21 @@ public class DMNEvaluateDecisionBenchmark extends AbstractBenchmark {
     private DMNContext dmnContext;
 
     @Setup
-    public void setupResource() {
+    public void setupResource() throws IOException {
         final DMNProvider dmnProvider = new DecisionDMNProvider();
         dmnResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisions)))
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
+        dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/drools/kie-dmn", "decision");
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-            dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/drools/kie-dmn", "decision");
-            dmnContext = dmnRuntime.newContext();
-            dmnContext.set("Full Name", "John Doe");
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        dmnContext = dmnRuntime.newContext();
+        dmnContext.set("Full Name", "John Doe");
     }
 
     @Benchmark

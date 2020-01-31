@@ -15,8 +15,8 @@
  */
 package org.jboss.qa.brms.performance.examples.vehiclerouting.persistence;
 
-import org.jboss.qa.brms.performance.examples.common.persistence.XStreamSolutionDao;
-import org.jboss.qa.brms.performance.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.jboss.qa.brms.performance.persistence.XStreamSolutionDao;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
 public class VehicleRoutingDao extends XStreamSolutionDao<VehicleRoutingSolution> {
 

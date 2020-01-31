@@ -4,12 +4,13 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
-import org.jboss.qa.brms.performance.calculatecounttermination.ConferenceSchedulingTermination;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceScheduling;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceSolution;
+import org.jboss.qa.brms.performance.examples.Examples;
+import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceSchedulingExample;
+import org.jboss.qa.brms.performance.examples.conferencescheduling.termination.ConferenceSchedulingTermination;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
+import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
@@ -18,36 +19,31 @@ import org.optaplanner.core.config.localsearch.LocalSearchType;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
 
-    private static final String CONFERENCE_SCHEDULING_DOMAIN_PACKAGE =
-            "org.jboss.qa.brms.performance.examples.conferencescheduling";
-
-    private static final String CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE =
-            "org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingScoreRules.drl";
-
     @Param({"TALKS_36_TIMESLOTS_12_ROOMS_5", "TALKS_108_TIMESLOTS_18_ROOMS_10", "TALKS_216_TIMESLOTS_18_ROOMS_20"})
-    private ConferenceScheduling.DataSet dataSet;
+    private ConferenceSchedulingExample.DataSet dataSet;
 
     @Override
-    public void initSolution() {
-        super.setSolution(new ConferenceScheduling().loadSolvingProblem(dataSet));
+    protected ConferenceSolution createInitialSolution() {
+        return Examples.CONFERENCE_SCHEDULING.loadSolvingProblem(dataSet);
     }
 
     @Override
-    public void initSolver() {
-        SolverFactory<ConferenceSolution> solverFactory = SolverFactory.createEmpty();
-        SolverConfig solverConfig = solverFactory.getSolverConfig();
+    protected Solver<ConferenceSolution> createSolver() {
+        // the pre-defined configuration in ConferenceScheduling cannot be used
+        SolverConfig solverConfig = new SolverConfig();
 
         ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
         scanAnnotatedClassesConfig.setPackageIncludeList(Collections.
-                singletonList(CONFERENCE_SCHEDULING_DOMAIN_PACKAGE));
+                singletonList(ConferenceSolution.class.getPackage().getName()));
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.
-                singletonList(CONFERENCE_SCHEDULING_DROOLS_SCORE_RULES_FILE));
+                singletonList(ConferenceSchedulingExample.DRL_FILE));
 
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setLocalSearchType(LocalSearchType.TABU_SEARCH);
@@ -58,11 +54,12 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
         solverConfig.setTerminationConfig(new TerminationConfig().
                 withTerminationClass(ConferenceSchedulingTermination.class));
 
-        super.setSolver(solverFactory.buildSolver());
+        SolverFactory<ConferenceSolution> solverFactory = SolverFactory.create(solverConfig);
+        return solverFactory.buildSolver();
     }
 
     @Benchmark
     public ConferenceSolution benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

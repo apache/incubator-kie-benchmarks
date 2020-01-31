@@ -1,7 +1,7 @@
 package org.jboss.qa.brms.performance.localsearch.cloudbalance.moveselector;
 
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 
@@ -14,17 +14,8 @@ public class CloudBalanceSwapMoveSelectorBenchmark extends AbstractCloudBalanceM
         return MoveSelectorConfigurations.createSwapMoveSelectorList();
     }
 
-//    @Override
-//    public int getAcceptedCountLimit() {
-//        return 1000;
-//    }
-//    @Override
-//    public int getNumOfStepsTermination() {
-//        return 100;
-//    }
     @Benchmark
-    @Override
     public CloudBalance benchmark() {
-        return super.benchmark();
+        return runBenchmark();
     }
 }

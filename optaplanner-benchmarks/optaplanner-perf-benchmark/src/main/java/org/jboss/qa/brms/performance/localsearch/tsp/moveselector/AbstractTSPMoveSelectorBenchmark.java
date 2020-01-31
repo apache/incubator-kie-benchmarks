@@ -1,6 +1,6 @@
 package org.jboss.qa.brms.performance.localsearch.tsp.moveselector;
 
-import org.jboss.qa.brms.performance.calculatecounttermination.HardTSPCalculateCountTermination;
+import org.jboss.qa.brms.performance.examples.tsp.termination.HardTSPCalculateCountTermination;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.localsearch.tsp.AbstractTSPLocalSearchBenchmark;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;

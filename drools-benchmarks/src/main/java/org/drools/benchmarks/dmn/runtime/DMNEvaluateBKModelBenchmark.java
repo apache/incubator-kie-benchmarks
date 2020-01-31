@@ -51,25 +51,20 @@ public class DMNEvaluateBKModelBenchmark extends AbstractBenchmark {
     private DMNContext dmnContext;
 
     @Setup
-    public void setupResource() {
+    public void setupResource() throws IOException {
         final DMNProvider dmnProvider = new BusinessKnowledgeModelDMNProvider();
         dmnResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisionsWithBKM)))
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
+        dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "business-knowledge-model");
     }
 
     @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        try {
-            dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-            dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "business-knowledge-model");
-            dmnContext = dmnRuntime.newContext();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        dmnContext = dmnRuntime.newContext();
     }
 
     @Benchmark

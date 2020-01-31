@@ -41,8 +41,8 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 20, time = 3, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 3, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(4)
 public class BuildKJarFromResourceBenchmark {

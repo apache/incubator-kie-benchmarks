@@ -40,7 +40,7 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 10, time = 10, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 15, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BuildKJarFromResourceBenchmark {

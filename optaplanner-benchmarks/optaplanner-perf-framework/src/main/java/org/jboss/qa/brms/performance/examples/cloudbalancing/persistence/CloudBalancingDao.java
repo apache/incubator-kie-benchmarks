@@ -15,8 +15,8 @@
  */
 package org.jboss.qa.brms.performance.examples.cloudbalancing.persistence;
 
-import org.jboss.qa.brms.performance.examples.cloudbalancing.domain.CloudBalance;
-import org.jboss.qa.brms.performance.examples.common.persistence.XStreamSolutionDao;
+import org.jboss.qa.brms.performance.persistence.XStreamSolutionDao;
+import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 
 public class CloudBalancingDao extends XStreamSolutionDao<CloudBalance> {
 
