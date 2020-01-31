@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.drools.compiler.kie.builder.impl.DrlProject;
 import org.drools.compiler.kie.builder.impl.InternalKieModule;
 import org.drools.compiler.kie.builder.impl.KieBuilderImpl;
 import org.drools.compiler.kie.builder.impl.ZipKieModule;
@@ -87,7 +88,7 @@ public final class BuildtimeUtil {
         if (useCanonicalModel) {
             kbuilder.buildAll(ExecutableModelProject.class);
         } else {
-            kbuilder.buildAll();
+            kbuilder.buildAll(DrlProject.class);
         }
 
         final List<Message> msgs = kbuilder.getResults().getMessages(Message.Level.ERROR);
