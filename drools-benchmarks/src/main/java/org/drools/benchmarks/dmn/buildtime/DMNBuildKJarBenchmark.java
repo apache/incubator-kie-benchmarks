@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
 
-import org.drools.benchmarks.common.DMNProvider;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.providers.dmn.BusinessKnowledgeModelDMNProvider;
 import org.drools.benchmarks.common.providers.dmn.ContextDMNProvider;
@@ -50,37 +49,45 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class DMNBuildKJarBenchmark {
 
-    private KieServices kieServices;
+    private final KieServices kieServices = KieServices.Factory.get();
+
     private ReleaseId releaseId;
+
+    private Resource resource1;
+
+    private String dmn1;
+    private String dmn2;
+    private String dmn3;
+    private String dmn4;
 
     @Setup
     public void setup() throws ProviderException, IOException {
-        kieServices = KieServices.Factory.get();
-        releaseId = createKJar();
+        resource1 = kieServices.getResources().newClassPathResource("dmn/ch11MODIFIED.dmn");
+        resource1.setResourceType(ResourceType.DMN);
+
+        dmn1 = new BusinessKnowledgeModelDMNProvider().getDMN(1000);
+        dmn2 = new DecisionTableDMNProvider().getDMN(1000);
+        dmn3 = new DecisionDMNProvider().getDMN(1000);
+        dmn4 = new ContextDMNProvider().getDMN(1000);
     }
 
     @Benchmark
-    public DMNRuntime createDMNRuntime() {
+    public DMNRuntime createDMNRuntime() throws IOException {
+        ReleaseId releaseId = BuildtimeUtil.getKieBuilderFromResources( false,
+                                                                        resource1,
+                                                                        getDMNResource(dmn1, "bkm.dmn"),
+                                                                        getDMNResource(dmn2, "decisionTable.dmn"),
+                                                                        getDMNResource(dmn3, "decision.dmn"),
+                                                                        getDMNResource(dmn4, "context.dmn") )
+                .getKieModule().getReleaseId();
+
         KieContainer container = kieServices.newKieContainer(releaseId);
         return container.newKieSession().getKieRuntime(DMNRuntime.class);
     }
 
-    private ReleaseId createKJar() throws IOException {
-
-        final Resource resource1 = kieServices.getResources().newClassPathResource("dmn/ch11MODIFIED.dmn");
-        resource1.setResourceType(ResourceType.DMN);
-
-        return BuildtimeUtil.createKJarFromResources(false,
-                                                          resource1,
-                                                          getDMNResource(new BusinessKnowledgeModelDMNProvider(), "bkm.dmn"),
-                                                          getDMNResource(new DecisionTableDMNProvider(), "decisionTable.dmn"),
-                                                          getDMNResource(new DecisionDMNProvider(), "decision.dmn"),
-                                                          getDMNResource(new ContextDMNProvider(), "context.dmn"));
-    }
-
-    private Resource getDMNResource(final DMNProvider provider, final String sourcePath) {
+    private Resource getDMNResource(String dmn, final String sourcePath) {
         return kieServices.getResources()
-                .newReaderResource(new StringReader(provider.getDMN(1000)))
+                .newReaderResource(new StringReader(dmn))
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath(sourcePath);
     }

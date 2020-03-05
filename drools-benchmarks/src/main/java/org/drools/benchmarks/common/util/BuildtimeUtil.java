@@ -58,8 +58,7 @@ public final class BuildtimeUtil {
 
     public static ReleaseId createKJarFromResources(final boolean useCanonicalModel, final Resource... resources)
             throws IOException {
-        final KieServices kieServices = KieServices.get();
-        final KieBuilder kieBuilder = getKieBuilderFromResources(kieServices.newKieFileSystem(), useCanonicalModel, resources);
+        final KieBuilder kieBuilder = getKieBuilderFromResources(useCanonicalModel, resources);
         generateKJarFromKieBuilder(kieBuilder, useCanonicalModel);
         return kieBuilder.getKieModule().getReleaseId();
     }
@@ -76,6 +75,10 @@ public final class BuildtimeUtil {
             zipKieModule = new ZipKieModule(releaseId, kieModule.getKieModuleModel(), kjarFile);
         }
         KieServices.get().getRepository().addKieModule(zipKieModule);
+    }
+
+    public static KieBuilder getKieBuilderFromResources(final boolean useCanonicalModel, final Resource... resources) {
+        return getKieBuilderFromResources(KieServices.get().newKieFileSystem(), useCanonicalModel, resources);
     }
 
     private static KieBuilder getKieBuilderFromResources(final KieFileSystem kfs, final boolean useCanonicalModel, final Resource... resources) {
