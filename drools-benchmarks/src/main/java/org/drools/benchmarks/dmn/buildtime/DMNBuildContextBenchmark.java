@@ -41,7 +41,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
 public class DMNBuildContextBenchmark extends AbstractBenchmark {
 
-    private Resource dmnResource;
+    private String dmn;
 
     @Param({"3000"})
     private int numberOfDecisionsWithContext;
@@ -49,15 +49,16 @@ public class DMNBuildContextBenchmark extends AbstractBenchmark {
     @Setup
     @Override
     public void setup() throws ProviderException {
-        final DMNProvider dmnProvider = new ContextDMNProvider();
-        dmnResource = KieServices.get().getResources()
-                .newReaderResource(new StringReader(dmnProvider.getDMN(numberOfDecisionsWithContext)))
-                .setResourceType(ResourceType.DMN)
-                .setSourcePath("dmnFile.dmn");
+        DMNProvider dmnProvider = new ContextDMNProvider();
+        dmn = dmnProvider.getDMN(numberOfDecisionsWithContext);
     }
 
     @Benchmark
     public KieBase testBuildKieBase() {
+        Resource dmnResource = KieServices.get().getResources()
+                .newReaderResource(new StringReader(dmn))
+                .setResourceType(ResourceType.DMN)
+                .setSourcePath("dmnFile.dmn");
         return BuildtimeUtil.createKieBaseFromResource(dmnResource);
     }
 }
