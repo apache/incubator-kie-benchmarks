@@ -52,7 +52,7 @@ public final class BuildtimeUtil {
 
     public static KieContainer createKieContainerFromResources(final boolean useCanonicalModel,
                                                                final Resource... resources) throws IOException {
-        final ReleaseId kJarReleaseId = createKJarFromResources(useCanonicalModel, resources);
+        final ReleaseId kJarReleaseId = getKieBuilderFromResources(useCanonicalModel, resources).getKieModule().getReleaseId();
         return KieServices.get().newKieContainer(kJarReleaseId);
     }
 
