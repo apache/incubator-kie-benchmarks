@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"org.jbpm.test.performance.scenario.load.LHumanTaskProcess.Throughput","thrpt",8,1,284.512026,NaN,"ops/s"
+"org.jbpm.test.performance.scenario.load.LParallelGatewayTwoTimesProcess.Throughput","thrpt",8,1,642.395273,NaN,"ops/s"
+"org.jbpm.test.performance.scenario.load.LHumanTaskProcess.averageTime","avgt",8,1,22.404008,NaN,"ms/op"
+"org.jbpm.test.performance.scenario.load.LParallelGatewayTwoTimesProcess.averageTime","avgt",8,1,13.765968,NaN,"ms/op"
