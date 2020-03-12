@@ -34,7 +34,8 @@ public class L1000HumanTasksQueryPagination {
         jc.createRuntimeManager();
 
         taskService = jc.getRuntimeEngine().getTaskService();
-        PrepareEngine.createNewTasks(false, 10000, taskService, jc.getRuntimeManagerIdentifier());
+
+        PrepareEngine.createNewTasks(false, 5000, taskService, jc.getRuntimeManagerIdentifier());
     }
 
     @BenchmarkMode(Mode.Throughput)
