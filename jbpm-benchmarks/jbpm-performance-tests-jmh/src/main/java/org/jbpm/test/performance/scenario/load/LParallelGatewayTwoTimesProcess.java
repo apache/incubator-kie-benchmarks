@@ -11,22 +11,16 @@ import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 @Fork(value = 1, jvmArgs = {"-Xms2G", "-Xmx2G"})
-@Warmup(iterations = 1, time = 1)
-@Measurement(iterations = 1, time = 1)
+@Warmup(iterations = 1, time = 30)
+@Measurement(iterations = 1, time = 30)
 @Threads(1)
 
 public class LParallelGatewayTwoTimesProcess {
 
     private JBPMController jc;
 
-    // ! Must be overridden using -p from command line
-    @Param("")
-    public String runtimeManagerStrategy;
-
     @Setup
     public void init() {
-        // Sets jvm argument to runtimeManagerStrategy
-        System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
         jc = JBPMController.getInstance();
         jc.addWorkItemHandler("Manual Task", new ManualTaskWorkItemHandler());
         jc.createRuntimeManager(ProcessStorage.ParallelGatewayTwoTimes.getPath());

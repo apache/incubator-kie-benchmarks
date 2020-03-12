@@ -15,21 +15,16 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 @Fork(value = 1, jvmArgs = {"-Xms2G", "-Xmx2G"})
 @Warmup(iterations = 1, time = 1)
-@Measurement(iterations = 1, time = 1)
+@Measurement(iterations = 1, time = 300)
 @Threads(1)
 
 public class LGroupHumanTaskProcess {
 
     private JBPMController jc;
 
-    // ! Must be overridden using -p from command line
-    @Param("")
-    public String runtimeManagerStrategy;
-
     @Setup
     public void init() {
-        // Sets jvm argument to runtimeManagerStrategy
-        System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
+
         jc = JBPMController.getInstance();
         jc.createRuntimeManager(ProcessStorage.GroupHumanTask.getPath());
     }
