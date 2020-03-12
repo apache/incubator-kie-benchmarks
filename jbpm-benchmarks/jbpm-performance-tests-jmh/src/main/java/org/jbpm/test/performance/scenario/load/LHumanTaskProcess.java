@@ -26,8 +26,6 @@ public class LHumanTaskProcess {
     public void init() {
         jc = JBPMController.getInstance();
         jc.createRuntimeManager(ProcessStorage.HumanTask.getPath());
-
-        // Used to set up H2 db in single thread.
         execute();
     }
 
