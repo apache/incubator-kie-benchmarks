@@ -33,10 +33,10 @@ public class LIntermediateSignalProcess {
         execute();
     }
 
-    @BenchmarkMode(Mode.SampleTime)
+    @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void sampleTime() {
+    public void averageTime() {
         execute();
     }
 

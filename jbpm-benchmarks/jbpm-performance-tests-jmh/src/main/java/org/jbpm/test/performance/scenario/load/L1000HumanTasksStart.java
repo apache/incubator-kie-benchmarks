@@ -33,7 +33,7 @@ public class L1000HumanTasksStart {
         taskService = jc.getRuntimeEngine().getTaskService();
 
         taskId = 0;
-        taskIds = PrepareEngine.createNewTasks(false, 2000, taskService, jc.getRuntimeManagerIdentifier());
+        taskIds = PrepareEngine.createNewTasks(false, 5000, taskService, jc.getRuntimeManagerIdentifier());
     }
 
 
@@ -47,10 +47,10 @@ public class L1000HumanTasksStart {
         execute();
     }
 
-    @BenchmarkMode(Mode.SampleTime)
+    @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void sampleTime() {
+    public void averageTime() {
         execute();
     }
 
