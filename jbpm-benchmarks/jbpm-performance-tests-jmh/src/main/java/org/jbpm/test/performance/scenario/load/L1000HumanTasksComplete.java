@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 @Fork(value = 1, jvmArgs = {"-Xms2G", "-Xmx2G"})
-@Warmup(iterations = 1, time = 5)
-@Measurement(iterations = 5, time = 5)
+@Warmup(iterations = 1, time = 1)
+@Measurement(iterations = 1, time = 5)
 @Threads(1)
 
 public class L1000HumanTasksComplete {
@@ -32,7 +32,7 @@ public class L1000HumanTasksComplete {
         taskService = jc.getRuntimeEngine().getTaskService();
 
         taskId = 0;
-        taskIds = PrepareEngine.createNewTasks(true, 10000, taskService, jc.getRuntimeManagerIdentifier());
+        taskIds = PrepareEngine.createNewTasks(true, 5000, taskService, jc.getRuntimeManagerIdentifier());
     }
 
     static int taskId = 0;
