@@ -63,6 +63,11 @@
     <appender-ref ref="asyncInfoConsoleAppender" />
   </logger>
 
+  <logger name="org.jbpm.test.performance">
+    <level value="trace" />
+    <appender-ref ref="asyncDebugConsoleAppender" />
+  </logger>
+
   <logger name="org.perfrepo">
     <level value="debug" />
     <appender-ref ref="asyncDebugConsoleAppender" />

@@ -22,6 +22,7 @@
     <projectName>BPM Suite</projectName>
     <suite>LoadSuite</suite>
     <scenario></scenario>
+    <org.kie.perf.suite.test-package></org.kie.perf.suite.test-package>
     <startScriptLocation>./run.sh</startScriptLocation>
 
     <!-- Duration (in seconds), Iteration -->
@@ -51,6 +52,9 @@
 
     <!-- Measure - MemoryUsage,FileDescriptors,ThreadStates -->
     <measure>MemoryUsage,FileDescriptors,ThreadStates</measure>
+
+    <!-- KIE Server data source JNDI -->
+    <datasource.jndi></datasource.jndi>
 
     <!-- >>>>>>>>>>>>>>>> Remote Workbench Test Configuration <<<<<<<<<<<<<<<<<<<< -->
 
@@ -181,6 +185,9 @@
             <argument>-Dkieserver.host=${kieserver.host}</argument>
             <argument>-Dkieserver.port=${kieserver.port}</argument>
             <argument>-Dkieserver.name=${kieserver.name}</argument>
+
+            <argument>-Ddatasource.jndi=${datasource.jndi}</argument>
+            <argument>-Dorg.kie.perf.suite.test-package=${org.kie.perf.suite.test-package}</argument>
 
             <argument>-classpath</argument>
             <classpath />

@@ -131,7 +131,18 @@ then
   ACTIVATE_DB_PROFILE="-Dperfdb"
 fi
 
+if [ -n "${datasource_jndi}" ]
+then
+  PARAMS="${PARAMS} -Ddatasource.jndi=${datasource_jndi}"
+fi
+
+if [ -n "${test_package}" ]
+then
+  PARAMS="${PARAMS} -Dorg.kie.perf.suite.test-package=${test_package}"
+fi
+
 # Provide Nexus location, group and Maven local repository directory to settings.xml
 PARAMS="$PARAMS -Dnexus.host=$LOCAL_NEXUS_IP -Dnexus.group=$NEXUS_GROUP -Dlocal.repo.dir=$WORKSPACE/maven-repo"
-
+echo "Running performance tests with following parameters:"
+echo $PARAMS
 mvn clean install -s settings.xml $ACTIVATE_DB_PROFILE exec:exec $PARAMS
