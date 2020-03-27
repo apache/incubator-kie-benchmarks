@@ -1,66 +1,43 @@
 package org.jbpm.test.performance.taskassigning;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
-import org.jbpm.test.performance.kieserver.KieServerClient;
-import org.jbpm.test.performance.kieserver.KieServerTestConfig;
 import org.kie.perf.SharedMetricRegistry;
 import org.kie.perf.scenario.IPerfTest;
-import org.kie.server.api.model.definition.QueryDefinition;
 import org.kie.server.api.model.definition.TaskQueryFilterSpec;
-import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.TaskInstance;
-import org.kie.server.client.ProcessServicesClient;
-import org.kie.server.client.QueryServicesClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * This scenario simulates a batch task assignment. The measured metric is a delay between a moment when all tasks have
  * been created and all of them have been assigned to users.
- *
- * Assumptions:
- * <li>
- *      Two KIE servers are configured; the first one hosts a task planning extension and the second one task assignment
- *      and jBPM extensions. However, the scenario communicates only with the jBPM extension via KIE server remote API.
- * </li>
- * <li>
- *     KIE server task planning extension is configured to optimize for a planning window that can contain all tasks
- *     created in this scenario.
- * </li>
- * */
-abstract class TaskAssigningBatch implements IPerfTest {
+ */
+abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskAssigningBatch.class);
 
-    private static final String DATA_SOURCE_JNDI = KieServerTestConfig.getInstance().getDataSourceJndi();
-    private static final String CONTAINER_ID = "kieserver-assets";
-    private static final String PROCESS_ID = "test-jbpm-assignment.testTaskAssignment";
     private static final String UNASSIGNED_TASKS_QUERY_NAME = "unassignedTasksQuery";
     private static final String ASSIGNED_TASKS_QUERY_NAME = "assignedTasksQuery";
     private static final String UNASSIGNED_TASKS_QUERY =
             "select ti.taskId from AuditTaskImpl ti where ti.actualOwner = '' and ti.status != 'Exited'";
     private static final String ASSIGNED_TASKS_QUERY =
             "select ti.taskId from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
-
-    private final KieServerClient client = new KieServerClient();
-    private final ProcessServicesClient processClient = client.getProcessClient();
-    private final QueryServicesClient queryClient = client.getQueryClient();
-
-    private ScheduledExecutorService scheduledExecutorService;
-    private CountDownLatch allAssignedLatch;
+    private static final int START_PROCESS_THREADS = 10;
 
     private final int processCount;
 
+    private ScheduledExecutorService scheduledExecutorService;
+    private CountDownLatch allAssignedLatch;
     private Meter completedScenario;
     private Timer startProcessesDuration;
     private Timer taskAssignmentDuration;
@@ -73,23 +50,6 @@ abstract class TaskAssigningBatch implements IPerfTest {
     public void init() {
         registerQuery(UNASSIGNED_TASKS_QUERY_NAME, UNASSIGNED_TASKS_QUERY);
         registerQuery(ASSIGNED_TASKS_QUERY_NAME, ASSIGNED_TASKS_QUERY);
-    }
-
-    private void abortAllProcesses() {
-        List<ProcessInstance> processInstanceList = processClient.findProcessInstances(CONTAINER_ID, 0, Integer.MAX_VALUE);
-        List<Long> processInstanceIdList = processInstanceList.stream()
-                .map(processInstance -> processInstance.getId())
-                .collect(Collectors.toList());
-        processClient.abortProcessInstances(CONTAINER_ID, processInstanceIdList);
-    }
-
-    private void registerQuery(String queryName, String queryCode) {
-        QueryDefinition query = new QueryDefinition();
-        query.setName(queryName);
-        query.setSource(DATA_SOURCE_JNDI);
-        query.setExpression(queryCode);
-        query.setTarget("CUSTOM");
-        queryClient.replaceQuery(query);
     }
 
     @Override
@@ -112,13 +72,13 @@ abstract class TaskAssigningBatch implements IPerfTest {
 
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             TaskQueryFilterSpec filterSpec = new TaskQueryFilterSpec();
-            List<TaskInstance> unassignedTasks = queryClient.findHumanTasksWithFilters(UNASSIGNED_TASKS_QUERY_NAME,
+            List<TaskInstance> unassignedTasks = getQueryClient().findHumanTasksWithFilters(UNASSIGNED_TASKS_QUERY_NAME,
                     filterSpec, 0, 100);
             if (LOGGER.isTraceEnabled()) {
                 LOGGER.trace("Unassigned tasks present: " + unassignedTasks.size());
             }
             if (unassignedTasks.isEmpty()) {
-                List<TaskInstance> assignedTasks = queryClient.findHumanTasksWithFilters(ASSIGNED_TASKS_QUERY_NAME,
+                List<TaskInstance> assignedTasks = getQueryClient().findHumanTasksWithFilters(ASSIGNED_TASKS_QUERY_NAME,
                         filterSpec, 0, Integer.MAX_VALUE);
                 if (assignedTasks.size() == 3 * processCount) {
                     LOGGER.debug("No more unassigned tasks found.");
@@ -130,9 +90,17 @@ abstract class TaskAssigningBatch implements IPerfTest {
         LOGGER.debug("Creating processes ...");
         Timer.Context startProcessDurationContext = startProcessesDuration.time();
         Timer.Context taskAssignmentDurationContext = taskAssignmentDuration.time();
-        for (int i = 0; i < processCount; i++) {
-            processClient.startProcess(CONTAINER_ID, PROCESS_ID);
-        }
+
+        // Start processes in multiple threads and wait for all of them to be started.
+        startProcessesAsync(processCount, START_PROCESS_THREADS).forEach(completableFuture -> {
+            try {
+                completableFuture.get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Interrupted during waiting for a processes to start.", e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException("Exception during an asynchronous task start and completion.", e.getCause());
+            }
+        });
         startProcessDurationContext.stop();
         LOGGER.debug("All processes have been started");
 
@@ -149,19 +117,8 @@ abstract class TaskAssigningBatch implements IPerfTest {
         afterScenario();
     }
 
-    private void shutdownExecutor() {
-        scheduledExecutorService.shutdown();
-        try {
-            if (!scheduledExecutorService.awaitTermination(1, TimeUnit.SECONDS)) {
-                scheduledExecutorService.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            scheduledExecutorService.shutdownNow();
-        }
-    }
-
     private void afterScenario() {
-        shutdownExecutor();
+        shutdownExecutorService(scheduledExecutorService);
         abortAllProcesses();
     }
 
