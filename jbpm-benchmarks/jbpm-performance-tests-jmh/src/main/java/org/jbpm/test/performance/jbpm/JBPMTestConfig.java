@@ -47,6 +47,7 @@ public class JBPMTestConfig extends TestConfig {
         properties.put("jbpm.persistence", persistence);
 
         String locking = System.getProperty("jbpm.locking");
+        System.out.println(locking);
         pessimisticLocking = locking.toLowerCase().equals("pessimistic");
         properties.put("jbpm.pessimisticLocking", pessimisticLocking);
 
