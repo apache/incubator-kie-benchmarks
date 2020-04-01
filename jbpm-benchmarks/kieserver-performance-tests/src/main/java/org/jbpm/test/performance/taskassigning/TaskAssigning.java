@@ -44,7 +44,7 @@ import org.kie.server.client.UserTaskServicesClient;
  *     created in this scenario.
  * </li>
  */
-abstract class TaskAssigning {
+public abstract class TaskAssigning {
     protected static final String CONTAINER_ID = "kieserver-assets";
     protected static final String PROCESS_ID = "test-jbpm-assignment.testTaskAssignment";
 

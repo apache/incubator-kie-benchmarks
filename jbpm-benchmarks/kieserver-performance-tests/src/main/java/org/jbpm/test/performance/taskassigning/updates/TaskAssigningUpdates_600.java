@@ -1,3 +1,4 @@
+
 /*
  *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
@@ -14,17 +15,17 @@
  *  limitations under the License.
  */
 
-package org.jbpm.test.performance.taskassigning;
+package org.jbpm.test.performance.taskassigning.updates;
 
 import org.kie.perf.scenario.IPerfTest;
 
 /**
- * This scenario simulates a batch task assignment of 30.000 tasks. To achieve this, 10.000 processes,
- * that contain 3 user tasks each, are started. {@link TaskAssigningBatch} for more details.
+ * This scenario simulates a frequent updates to task assigning of 600 tasks. To achieve this, 200 processes,
+ * that contain 3 user tasks each, are started. {@link TaskAssigningUpdates} for more details.
  */
-public class TaskAssigningBatch_30000 extends TaskAssigningBatch implements IPerfTest {
+public class TaskAssigningUpdates_600 extends TaskAssigningUpdates implements IPerfTest {
 
-    public TaskAssigningBatch_30000() {
-        super(10_000);
+    public TaskAssigningUpdates_600() {
+        super(200, 300);
     }
 }

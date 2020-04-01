@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.jbpm.test.performance.taskassigning;
+package org.jbpm.test.performance.taskassigning.updates;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,6 +36,7 @@ import java.util.stream.Collectors;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
+import org.jbpm.test.performance.taskassigning.TaskAssigning;
 import org.kie.perf.SharedMetricRegistry;
 import org.kie.perf.scenario.IPerfTest;
 import org.kie.server.api.model.definition.TaskQueryFilterSpec;
@@ -123,7 +124,6 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                 sleep(500L);
                 continue;
             }
-
             LOGGER.debug(String.format("Completing %d tasks. Already finished %d tasks of %d.",
                     assignedTasks.size(), completedTasks.size(), taskCount));
             CompletableFuture[] completableFutures = new CompletableFuture[userCount];
