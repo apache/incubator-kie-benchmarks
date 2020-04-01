@@ -74,7 +74,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     private final int taskCount;
     private final int userCount;
 
-    private Set<Long> taskIdSet;
+    private Set<Long> completedTasks;
     private ExecutorService threadPoolExecutor;
     private Timer taskAssignmentDuration;
 
@@ -91,7 +91,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     private void beforeScenario() {
         abortAllProcesses();
-        taskIdSet = new ConcurrentHashMap<>().newKeySet();
+        completedTasks = new ConcurrentHashMap<>().newKeySet();
         threadPoolExecutor = Executors.newFixedThreadPool(userCount);
     }
 
@@ -113,8 +113,9 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         // Create tasks by starting new processes.
         startProcessesAsync(processCount, START_PROCESS_THREADS);
 
+        Set<Long> tasksInProgress = new ConcurrentHashMap<>().newKeySet();
         // Keep completing tasks to introduce changes and trigger incremental re-planning.
-        while (taskIdSet.size() < taskCount) {
+        while (completedTasks.size() < taskCount) {
             TaskQueryFilterSpec filterSpec = new TaskQueryFilterSpec();
             List<TaskInstance> assignedTasks = getQueryClient()
                     .findHumanTasksWithFilters(ASSIGNED_TASKS_QUERY_NAME, filterSpec, 0, userCount);
@@ -124,17 +125,20 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
             }
 
             LOGGER.debug(String.format("Completing %d tasks. Already finished %d tasks of %d.",
-                    assignedTasks.size(), taskIdSet.size(), taskCount));
+                    assignedTasks.size(), completedTasks.size(), taskCount));
             CompletableFuture[] completableFutures = new CompletableFuture[userCount];
             int i = 0;
             for (TaskInstance task : assignedTasks) { // Run each task in a separate thread.
-                completableFutures[i++] = CompletableFuture.runAsync(() -> {
-                    getTaskClient().startTask(CONTAINER_ID, task.getId(), task.getActualOwner());
-                    sleep(TASK_COMPLETION_DELAY_MILLIS);
-                    getTaskClient().completeTask(CONTAINER_ID, task.getId(), task.getActualOwner(), new HashMap<>());
-                    LOGGER.debug(String.format("Completed task ID %d", task.getId()));
-                    taskIdSet.add(task.getId());
-                }, threadPoolExecutor);
+                if (!tasksInProgress.contains(task.getId())) { // avoid
+                    tasksInProgress.add(task.getId());
+                    completableFutures[i++] = CompletableFuture.runAsync(() -> {
+                        getTaskClient().startTask(CONTAINER_ID, task.getId(), task.getActualOwner());
+                        sleep(TASK_COMPLETION_DELAY_MILLIS);
+                        getTaskClient().completeTask(CONTAINER_ID, task.getId(), task.getActualOwner(), new HashMap<>());
+                        completedTasks.add(task.getId());
+                        tasksInProgress.remove(task.getId());
+                    }, threadPoolExecutor);
+                }
             }
         }
 
@@ -180,7 +184,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = new HashMap<>();
         Comparator<TaskEventInstance> taskEventInstanceComparator =
                 Comparator.comparing(taskEventInstance -> taskEventInstance.getLogTime().getTime());
-        for (Long taskId : taskIdSet) {
+        for (Long taskId : completedTasks) {
             List<TaskEventInstance> taskEvents = getTaskClient().findTaskEvents(taskId, 0, Integer.MAX_VALUE);
             for (TaskEventInstance taskEvent : taskEvents) {
                 String userId = taskEvent.getUserId();
