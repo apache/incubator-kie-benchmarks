@@ -126,12 +126,12 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
             }
             LOGGER.debug(String.format("Completing %d tasks. Already finished %d tasks of %d.",
                     assignedTasks.size(), completedTasks.size(), taskCount));
-            CompletableFuture[] completableFutures = new CompletableFuture[userCount];
-            int i = 0;
-            for (TaskInstance task : assignedTasks) { // Run each task in a separate thread.
-                if (!tasksInProgress.contains(task.getId())) { // avoid
+            // Run each task in a separate thread.
+            for (TaskInstance task : assignedTasks) {
+                // Avoid submitting task some other thread already takes care of
+                if (!tasksInProgress.contains(task.getId())) {
                     tasksInProgress.add(task.getId());
-                    completableFutures[i++] = CompletableFuture.runAsync(() -> {
+                    CompletableFuture.runAsync(() -> {
                         getTaskClient().startTask(CONTAINER_ID, task.getId(), task.getActualOwner());
                         sleep(TASK_COMPLETION_DELAY_MILLIS);
                         getTaskClient().completeTask(CONTAINER_ID, task.getId(), task.getActualOwner(), new HashMap<>());
