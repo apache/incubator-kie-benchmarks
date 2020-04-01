@@ -168,7 +168,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         for (TaskEventInstance taskEventInstance : events) {
             if (TASK_COMPLETED.equals(taskEventInstance.getType())) {
                 previous = taskEventInstance;
-            } else if (previous != null) { // it must be STARTED event
+            } else if (previous != null && TASK_STARTED.equals(previous.getType())) {
                 delays.add(taskEventInstance.getLogTime().getTime() - previous.getLogTime().getTime());
                 previous = null;
             }
