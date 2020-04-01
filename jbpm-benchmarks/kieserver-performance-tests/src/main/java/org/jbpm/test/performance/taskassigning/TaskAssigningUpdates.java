@@ -62,10 +62,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskAssigningUpdates.class);
 
-    private static final String UNASSIGNED_TASKS_QUERY_NAME = "unassignedTasksQuery";
     private static final String ASSIGNED_TASKS_QUERY_NAME = "assignedTasksQuery";
-    private static final String UNASSIGNED_TASKS_QUERY =
-            "select ti.taskId from AuditTaskImpl ti where ti.actualOwner = '' and ti.status != 'Exited'";
     private static final String ASSIGNED_TASKS_QUERY =
             "select ti.taskId,ti.actualOwner from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
     private static final String TASK_STARTED = "STARTED";
@@ -100,7 +97,6 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     @Override
     public void init() {
-        registerQuery(UNASSIGNED_TASKS_QUERY_NAME, UNASSIGNED_TASKS_QUERY);
         registerQuery(ASSIGNED_TASKS_QUERY_NAME, ASSIGNED_TASKS_QUERY);
     }
 
@@ -127,7 +123,8 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                 continue;
             }
 
-            LOGGER.debug(String.format("Completing %d tasks.", assignedTasks.size()));
+            LOGGER.debug(String.format("Completing %d tasks. Already finished %d tasks of %d.",
+                    assignedTasks.size(), taskIdSet.size(), taskCount));
             CompletableFuture[] completableFutures = new CompletableFuture[userCount];
             int i = 0;
             for (TaskInstance task : assignedTasks) { // Run each task in a separate thread.
@@ -135,6 +132,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                     getTaskClient().startTask(CONTAINER_ID, task.getId(), task.getActualOwner());
                     sleep(TASK_COMPLETION_DELAY_MILLIS);
                     getTaskClient().completeTask(CONTAINER_ID, task.getId(), task.getActualOwner(), new HashMap<>());
+                    LOGGER.debug(String.format("Completed task ID %d", task.getId()));
                     taskIdSet.add(task.getId());
                 }, threadPoolExecutor);
             }
