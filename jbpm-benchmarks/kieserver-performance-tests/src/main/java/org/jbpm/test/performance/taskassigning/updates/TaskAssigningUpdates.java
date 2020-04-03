@@ -68,7 +68,6 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
             "select ti.taskId,ti.actualOwner from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
     private static final String TASK_STARTED = "STARTED";
     private static final String TASK_COMPLETED = "COMPLETED";
-    private static final int START_PROCESS_THREADS = 10;
     private static final long TASK_COMPLETION_DELAY_MILLIS = 5000L;
 
     private final int processCount;
@@ -112,7 +111,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         beforeScenario();
 
         // Create tasks by starting new processes.
-        startProcessesAsync(processCount, START_PROCESS_THREADS);
+        startProcesses(processCount);
 
         Set<Long> tasksInProgress = new ConcurrentHashMap<>().newKeySet();
         // Keep completing tasks to introduce changes and trigger incremental re-planning.

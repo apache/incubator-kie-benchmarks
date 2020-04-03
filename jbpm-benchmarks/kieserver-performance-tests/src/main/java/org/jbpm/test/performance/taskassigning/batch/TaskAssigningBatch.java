@@ -48,7 +48,6 @@ abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
             "select ti.taskId from AuditTaskImpl ti where ti.actualOwner = '' and ti.status != 'Exited'";
     private static final String ASSIGNED_TASKS_QUERY =
             "select ti.taskId from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
-    private static final int START_PROCESS_THREADS = 10;
 
     private final int processCount;
 
@@ -108,15 +107,7 @@ abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
         Timer.Context taskAssignmentDurationContext = taskAssignmentDuration.time();
 
         // Start processes in multiple threads and wait for all of them to be started.
-        startProcessesAsync(processCount, START_PROCESS_THREADS).forEach(completableFuture -> {
-            try {
-                completableFuture.get();
-            } catch (InterruptedException e) {
-                throw new RuntimeException("Interrupted during waiting for a processes to start.", e);
-            } catch (ExecutionException e) {
-                throw new RuntimeException("Exception during an asynchronous task start and completion.", e.getCause());
-            }
-        });
+        startProcesses(processCount);
         startProcessDurationContext.stop();
         LOGGER.debug("All processes have been started");
 
