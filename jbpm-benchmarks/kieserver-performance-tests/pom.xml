@@ -224,6 +224,37 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>task-assignment</id>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>sql-maven-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>create-task-assignment-schema</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                    <goal>execute</goal>
+                  </goals>
+                  <configuration>
+                    <autocommit>true</autocommit>
+                    <srcFiles>
+                      <srcFile>src/main/resources/ddl-scripts/task-assignment-schema.sql</srcFile>
+                    </srcFiles>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
+
   <developers>
     <developer>
       <name>Ivo Bek</name>

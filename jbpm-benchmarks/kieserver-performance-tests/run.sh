@@ -141,6 +141,11 @@ then
   PARAMS="${PARAMS} -Dorg.kie.perf.suite.test-package=${test_package}"
 fi
 
+if [ -n "${maven_profiles}" ]
+then
+  MAVEN_PROFILES_LINE="-P${maven_profiles}"
+fi
+
 # Provide Nexus location, group and Maven local repository directory to settings.xml
 PARAMS="$PARAMS -Dnexus.host=$LOCAL_NEXUS_IP -Dnexus.group=$NEXUS_GROUP -Dlocal.repo.dir=$WORKSPACE/maven-repo"
-mvn -B clean install -s settings.xml $ACTIVATE_DB_PROFILE exec:exec $PARAMS
+mvn -B clean install -s settings.xml "$MAVEN_PROFILES_LINE" $ACTIVATE_DB_PROFILE exec:exec $PARAMS
