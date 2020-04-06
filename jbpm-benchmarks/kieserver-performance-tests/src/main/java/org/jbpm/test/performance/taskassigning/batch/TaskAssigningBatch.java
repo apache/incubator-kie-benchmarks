@@ -88,7 +88,7 @@ abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             TaskQueryFilterSpec filterSpec = new TaskQueryFilterSpec();
             List<TaskInstance> unassignedTasks = getQueryClient().findHumanTasksWithFilters(UNASSIGNED_TASKS_QUERY_NAME,
-                    filterSpec, 0, 100);
+                    filterSpec, 0, 1);
             if (LOGGER.isTraceEnabled()) {
                 LOGGER.trace("Unassigned tasks present: " + unassignedTasks.size());
             }
