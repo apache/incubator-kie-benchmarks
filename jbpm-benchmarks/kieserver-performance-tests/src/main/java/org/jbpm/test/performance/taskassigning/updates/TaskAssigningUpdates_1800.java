@@ -1,4 +1,3 @@
-
 /*
  *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
