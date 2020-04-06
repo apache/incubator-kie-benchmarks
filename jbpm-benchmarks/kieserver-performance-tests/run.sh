@@ -125,12 +125,6 @@ then
   PARAMS="$PARAMS -Dkieserver.name=$workbench_name"
 fi
 
-# If we are running only one scenario (so we won't fork run for each scenario as we do when nothing is specified), we want to run also DB cleaning
-if [ -n "$scenario" ] || [ -n "$1" ]
-then
-  ACTIVATE_DB_PROFILE="-Dperfdb"
-fi
-
 if [ -n "${datasource_jndi}" ]
 then
   PARAMS="${PARAMS} -Ddatasource.jndi=${datasource_jndi}"
@@ -148,4 +142,4 @@ fi
 
 # Provide Nexus location, group and Maven local repository directory to settings.xml
 PARAMS="$PARAMS -Dnexus.host=$LOCAL_NEXUS_IP -Dnexus.group=$NEXUS_GROUP -Dlocal.repo.dir=$WORKSPACE/maven-repo"
-mvn -B clean install -s settings.xml "$MAVEN_PROFILES_LINE" $ACTIVATE_DB_PROFILE exec:exec $PARAMS
+mvn -B clean install -s settings.xml $MAVEN_PROFILES_LINE exec:exec $PARAMS
