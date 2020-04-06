@@ -16,16 +16,13 @@
 
 package org.jbpm.test.performance.taskassigning.updates;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableSet;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,6 +34,7 @@ import java.util.stream.Collectors;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import org.jbpm.test.performance.taskassigning.TaskAssigning;
+import org.jbpm.test.performance.taskassigning.TaskStatisticsUtil;
 import org.kie.perf.SharedMetricRegistry;
 import org.kie.perf.scenario.IPerfTest;
 import org.kie.server.api.model.definition.TaskQueryFilterSpec;
@@ -143,11 +141,11 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
         List<Long> allDelaysBetweenCompleteAndStartEvents = taskEventsPerUser.entrySet().stream()
-                .map((entry) -> delaysBetweenCompleteAndStartEvents(entry.getValue()))
+                .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
-        long median = median(allDelaysBetweenCompleteAndStartEvents);
+        long median = TaskStatisticsUtil.median(allDelaysBetweenCompleteAndStartEvents);
         taskAssignmentDuration.update(median, TimeUnit.MILLISECONDS);
 
         afterScenario();
@@ -156,23 +154,6 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     private void afterScenario() {
         shutdownExecutorService(threadPoolExecutor);
         abortAllProcesses();
-    }
-
-    /**
-     * Computes delays between completing and starting consecutive tasks.
-     */
-    private List<Long> delaysBetweenCompleteAndStartEvents(SortedSet<TaskEventInstance> events) {
-        List<Long> delays = new ArrayList<>();
-        TaskEventInstance previous = null;
-        for (TaskEventInstance taskEventInstance : events) {
-            if (TASK_COMPLETED.equals(taskEventInstance.getType())) {
-                previous = taskEventInstance;
-            } else if (previous != null && TASK_STARTED.equals(previous.getType())) {
-                delays.add(taskEventInstance.getLogTime().getTime() - previous.getLogTime().getTime());
-                previous = null;
-            }
-        }
-        return delays;
     }
 
     /**
@@ -195,21 +176,6 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
             }
         }
         return taskEventsPerUser;
-    }
-
-    private long median(List<Long> numbers) {
-        if (numbers == null || numbers.isEmpty()) {
-            throw new IllegalArgumentException("The list of numbers cannot be empty nor null.");
-        }
-        Collections.sort(numbers);
-        int length = numbers.size();
-        if (length % 2 == 1) {
-            return numbers.get(length / 2);
-        } else {
-            long leftMiddle = numbers.get(length / 2 - 1);
-            long rightMiddle = numbers.get(length / 2);
-            return Math.round(((double) (leftMiddle + rightMiddle)) / 2);
-        }
     }
 
     private void sleep(long millis) {
