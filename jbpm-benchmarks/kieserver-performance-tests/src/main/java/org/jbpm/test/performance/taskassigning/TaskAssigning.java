@@ -81,15 +81,6 @@ public abstract class TaskAssigning {
         processClient.abortProcessInstances(CONTAINER_ID, processInstanceIdList);
     }
 
-    protected Collection<CompletableFuture<Void>> startProcessesAsync(int processCount, int numberOfThreads) {
-        Collection<CompletableFuture<Void>> completableFutures = new ArrayList<>(numberOfThreads);
-        int batchSize = processCount / numberOfThreads;
-        for (int i = 0; i < numberOfThreads; i++) {
-            completableFutures.add(CompletableFuture.runAsync(() -> startProcesses(batchSize)));
-        }
-        return completableFutures;
-    }
-
     protected void startProcesses(int count) {
         for (int i = 0; i < count; i++) {
             getProcessClient().startProcess(CONTAINER_ID, PROCESS_ID);
