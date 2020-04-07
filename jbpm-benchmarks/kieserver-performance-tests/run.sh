@@ -135,6 +135,15 @@ then
   PARAMS="${PARAMS} -Dorg.kie.perf.suite.test-package=${test_package}"
 fi
 
+if [ "$clean_db_between_scenarios" = true ]
+then
+  # If we are running only one scenario (so we won't fork run for each scenario as we do when nothing is specified), we want to run also DB cleaning
+  if [ -n "$scenario" ] || [ -n "$1" ]
+  then
+    PARAMS="$PARAMS -Dperfdb"
+  fi
+fi
+
 if [ -n "${maven_profiles}" ]
 then
   MAVEN_PROFILES_LINE="-P${maven_profiles}"
