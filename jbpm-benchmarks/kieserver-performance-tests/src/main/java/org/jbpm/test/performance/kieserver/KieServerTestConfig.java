@@ -21,6 +21,8 @@ public class KieServerTestConfig extends TestConfig {
 
     protected String remoteAPI;
 
+    protected String dataSourceJndi;
+
     protected KieServerTestConfig() {
 
     }
@@ -62,6 +64,9 @@ public class KieServerTestConfig extends TestConfig {
 
         properties.put("client.version", clientVersion);
         addTag(clientVersion);
+
+        dataSourceJndi = System.getProperty("datasource.jndi");
+        properties.put("datasource.jndi", dataSourceJndi);
 
         return properties;
     }
@@ -118,4 +123,7 @@ public class KieServerTestConfig extends TestConfig {
         return "http://" + host + ":" + port + "/" + name + "/services/rest/server";
     }
 
+    public String getDataSourceJndi() {
+        return dataSourceJndi;
+    }
 }
