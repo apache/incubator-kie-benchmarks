@@ -25,9 +25,10 @@ public class KieServerClient {
 	private static final long DEFAULT_TIMEOUT = 30_000;
 
 	public static String containerId = "kieserver-assets";
-	
+
+	// assuming the version of kieserver-assets is kept in sync with KIE version
     private static ReleaseId releaseId = new ReleaseId("org.jbpm.test.performance", "kieserver-assets",
-            "7.36.0-SNAPSHOT");
+			KieServicesClient.class.getPackage().getImplementationVersion());
 
     private ProcessServicesClient processClient;
     private UserTaskServicesClient taskClient;
