@@ -16,12 +16,10 @@
 
 package org.jbpm.test.performance.taskassigning;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import org.jbpm.test.performance.kieserver.KieServerClient;
@@ -49,6 +47,7 @@ public abstract class TaskAssigning {
     protected static final String PROCESS_ID = "test-jbpm-assignment.testTaskAssignment";
 
     private static final String DATA_SOURCE_JNDI = KieServerTestConfig.getInstance().getDataSourceJndi();
+    private static final int ABORT_PROCESS_BATCH_SIZE = 100;
 
     private final KieServerClient client;
     private final ProcessServicesClient processClient;
@@ -78,7 +77,15 @@ public abstract class TaskAssigning {
         List<Long> processInstanceIdList = processInstanceList.stream()
                 .map(processInstance -> processInstance.getId())
                 .collect(Collectors.toList());
-        processClient.abortProcessInstances(CONTAINER_ID, processInstanceIdList);
+        abortAllProcessesInBatch(processInstanceIdList, ABORT_PROCESS_BATCH_SIZE);
+    }
+
+    protected void abortAllProcessesInBatch(List<Long> processInstanceIdList, int batchSize) {
+        AtomicInteger counter = new AtomicInteger();
+        processInstanceIdList.stream()
+                .collect(Collectors.groupingBy(__ -> counter.incrementAndGet() / batchSize))
+                .values()
+                .forEach(batch -> processClient.abortProcessInstances(CONTAINER_ID, batch));
     }
 
     protected void startProcesses(int count) {
