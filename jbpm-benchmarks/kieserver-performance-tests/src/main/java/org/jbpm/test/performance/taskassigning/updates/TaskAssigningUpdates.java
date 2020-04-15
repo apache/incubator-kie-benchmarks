@@ -107,10 +107,19 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     @Override
     public void execute() {
         beforeScenario();
+        LOGGER.debug(String.format("Scenario %s started.", getClass().getSimpleName()));
+        try {
+            scenario();
+            LOGGER.debug(String.format("Scenario %s finished.", getClass().getSimpleName()));
+        } finally {
+            afterScenario();
+        }
+    }
 
+    private void scenario() {
         // Create tasks by starting new processes.
         startProcesses(processCount);
-
+        LOGGER.debug("All process instances have been started.");
         Set<Long> tasksInProgress = new ConcurrentHashMap<>().newKeySet();
         // Keep completing tasks to introduce changes and trigger incremental re-planning.
         while (completedTasks.size() < taskCount) {
@@ -121,7 +130,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                 sleep(500L);
                 continue;
             }
-            LOGGER.debug(String.format("Completing %d tasks. Already finished %d tasks of %d.",
+            LOGGER.trace(String.format("Completing %d tasks. Already finished %d tasks of %d.",
                     assignedTasks.size(), completedTasks.size(), taskCount));
             // Run each task in a separate thread.
             for (TaskInstance task : assignedTasks) {
@@ -138,17 +147,19 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                 }
             }
         }
+        LOGGER.debug("All tasks have been completed.");
 
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
+        LOGGER.debug(String.format("Computing delays between tasks for %d users", taskEventsPerUser.size()));
         List<Long> allDelaysBetweenCompleteAndStartEvents = taskEventsPerUser.entrySet().stream()
                 .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
         long median = TaskStatisticsUtil.median(allDelaysBetweenCompleteAndStartEvents);
+        LOGGER.debug(String.format(
+                "Median of delay between completing one task and starting another per a user is %d milliseconds", median));
         taskAssignmentDuration.update(median, TimeUnit.MILLISECONDS);
-
-        afterScenario();
     }
 
     private void afterScenario() {
