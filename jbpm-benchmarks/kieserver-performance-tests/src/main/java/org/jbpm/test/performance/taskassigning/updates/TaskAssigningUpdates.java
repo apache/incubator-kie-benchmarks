@@ -156,6 +156,15 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
+        String delaysCsvString = taskEventsPerUser.entrySet().stream()
+                .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
+                .map(delaysPerUser -> delaysPerUser.stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(",")))
+                .collect(Collectors.joining(System.lineSeparator()));
+
+        LOGGER.debug(delaysCsvString);
+
         long median = TaskStatisticsUtil.median(allDelaysBetweenCompleteAndStartEvents);
         LOGGER.debug(String.format(
                 "Median of delay between completing one task and starting another per a user is %d milliseconds", median));
