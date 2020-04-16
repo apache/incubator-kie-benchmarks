@@ -44,7 +44,6 @@ import org.kie.server.client.UserTaskServicesClient;
  */
 public abstract class TaskAssigning {
     protected static final String CONTAINER_ID = "kieserver-assets";
-    protected static final String PROCESS_ID = "test-jbpm-assignment.testTaskAssignment";
 
     private static final String DATA_SOURCE_JNDI = KieServerTestConfig.getInstance().getDataSourceJndi();
     private static final int ABORT_PROCESS_BATCH_SIZE = 100;
@@ -88,9 +87,9 @@ public abstract class TaskAssigning {
                 .forEach(batch -> processClient.abortProcessInstances(CONTAINER_ID, batch));
     }
 
-    protected void startProcesses(int count) {
+    protected void startProcesses(String processId, int count) {
         for (int i = 0; i < count; i++) {
-            getProcessClient().startProcess(CONTAINER_ID, PROCESS_ID);
+            getProcessClient().startProcess(CONTAINER_ID, processId);
         }
     }
 

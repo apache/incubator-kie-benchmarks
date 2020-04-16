@@ -29,6 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.LongFunction;
 import java.util.stream.Collectors;
 
 import com.codahale.metrics.MetricRegistry;
@@ -61,6 +63,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskAssigningUpdates.class);
 
+    private static final String PROCESS_ID = "test-jbpm-assignment.testContinuousTaskAssignment";
     private static final String ASSIGNED_TASKS_QUERY_NAME = "assignedTasksQuery";
     private static final String ASSIGNED_TASKS_QUERY =
             "select ti.taskId,ti.actualOwner from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
@@ -78,7 +81,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     public TaskAssigningUpdates(int processCount, int userCount) {
         this.processCount = processCount;
-        this.taskCount = processCount * 3;
+        this.taskCount = processCount * 9;
         this.userCount = userCount;
         if (taskCount < 2 * userCount) {
             throw new IllegalArgumentException("For a relevance of the measured metric the number of tasks must be " +
@@ -118,7 +121,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     private void scenario() {
         // Create tasks by starting new processes.
-        startProcesses(processCount);
+        startProcesses(PROCESS_ID, processCount);
         LOGGER.debug("All process instances have been started.");
         Set<Long> tasksInProgress = new ConcurrentHashMap<>().newKeySet();
         // Keep completing tasks to introduce changes and trigger incremental re-planning.
@@ -151,11 +154,13 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
         LOGGER.debug(String.format("Computing delays between tasks for %d users", taskEventsPerUser.size()));
-        List<Long> allDelaysBetweenCompleteAndStartEvents = taskEventsPerUser.entrySet().stream()
-                .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
-                .flatMap(Collection::stream)
+        List<Long> sumOfDelaysBetweenCompleteAndStartEventsPerUser = taskEventsPerUser.entrySet().stream()
+                .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()).stream()
+                        .collect(Collectors.summingLong(number -> number))
+                )
                 .collect(Collectors.toList());
 
+        // TODO remove after the debugging is over
         String delaysCsvString = taskEventsPerUser.entrySet().stream()
                 .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
                 .map(delaysPerUser -> delaysPerUser.stream()
@@ -165,7 +170,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
         LOGGER.debug(delaysCsvString);
 
-        long median = TaskStatisticsUtil.median(allDelaysBetweenCompleteAndStartEvents);
+        long median = TaskStatisticsUtil.median(sumOfDelaysBetweenCompleteAndStartEventsPerUser);
         LOGGER.debug(String.format(
                 "Median of delay between completing one task and starting another per a user is %d milliseconds", median));
         taskAssignmentDuration.update(median, TimeUnit.MILLISECONDS);
