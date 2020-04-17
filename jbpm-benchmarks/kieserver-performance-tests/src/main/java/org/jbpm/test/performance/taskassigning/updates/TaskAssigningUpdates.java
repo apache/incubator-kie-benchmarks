@@ -29,8 +29,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.function.LongFunction;
 import java.util.stream.Collectors;
 
 import com.codahale.metrics.MetricRegistry;
@@ -155,20 +153,9 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
         LOGGER.debug(String.format("Computing delays between tasks for %d users", taskEventsPerUser.size()));
         List<Long> sumOfDelaysBetweenCompleteAndStartEventsPerUser = taskEventsPerUser.entrySet().stream()
-                .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()).stream()
-                        .collect(Collectors.summingLong(number -> number))
-                )
-                .collect(Collectors.toList());
-
-        // TODO remove after the debugging is over
-        String delaysCsvString = taskEventsPerUser.entrySet().stream()
                 .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
-                .map(delaysPerUser -> delaysPerUser.stream()
-                        .map(Object::toString)
-                        .collect(Collectors.joining(",")))
-                .collect(Collectors.joining(System.lineSeparator()));
-
-        LOGGER.debug(delaysCsvString);
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
 
         long median = TaskStatisticsUtil.median(sumOfDelaysBetweenCompleteAndStartEventsPerUser);
         LOGGER.debug(String.format(
