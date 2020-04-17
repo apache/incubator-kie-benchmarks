@@ -29,6 +29,8 @@ import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.UserTaskServicesClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A Common ground for task assigning load test scenarios. Before running any of these scenarios, following
@@ -43,6 +45,7 @@ import org.kie.server.client.UserTaskServicesClient;
  * </li>
  */
 public abstract class TaskAssigning {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskAssigning.class);
     protected static final String CONTAINER_ID = "kieserver-assets";
 
     private static final String DATA_SOURCE_JNDI = KieServerTestConfig.getInstance().getDataSourceJndi();
@@ -52,6 +55,7 @@ public abstract class TaskAssigning {
     private final ProcessServicesClient processClient;
     private final UserTaskServicesClient taskClient;
     private final QueryServicesClient queryClient;
+    private AtomicInteger iterationCounter = new AtomicInteger(1);
 
     public TaskAssigning() {
         // Must be set before the KIE Server client is created.
@@ -61,6 +65,24 @@ public abstract class TaskAssigning {
         taskClient = client.getTaskClient();
         queryClient = client.getQueryClient();
     }
+
+    public void execute() {
+        beforeScenario();
+        LOGGER.debug(String.format("Starting a scenario %s iteration %d.", getClass().getSimpleName(), iterationCounter.get()));
+        try {
+            scenario();
+            LOGGER.debug(String.format("Finished a scenario %s iteration %d.",
+                    getClass().getSimpleName(), iterationCounter.getAndIncrement()));
+        } finally {
+            afterScenario();
+        }
+    }
+
+    protected abstract void beforeScenario();
+
+    protected abstract void scenario();
+
+    protected abstract void afterScenario();
 
     protected void registerQuery(String queryName, String queryCode) {
         QueryDefinition query = new QueryDefinition();

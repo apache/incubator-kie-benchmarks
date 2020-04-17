@@ -88,12 +88,6 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         }
     }
 
-    private void beforeScenario() {
-        abortAllProcesses();
-        completedTasks = new ConcurrentHashMap<>().newKeySet();
-        threadPoolExecutor = Executors.newFixedThreadPool(userCount);
-    }
-
     @Override
     public void init() {
         registerQuery(ASSIGNED_TASKS_QUERY_NAME, ASSIGNED_TASKS_QUERY);
@@ -105,19 +99,13 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         taskAssignmentDuration = metrics.timer(MetricRegistry.name(getClass(), "taskassigning.update.task_assigned.duration"));
     }
 
-    @Override
-    public void execute() {
-        beforeScenario();
-        LOGGER.debug(String.format("Scenario %s started.", getClass().getSimpleName()));
-        try {
-            scenario();
-            LOGGER.debug(String.format("Scenario %s finished.", getClass().getSimpleName()));
-        } finally {
-            afterScenario();
-        }
+    protected void beforeScenario() {
+        abortAllProcesses();
+        completedTasks = new ConcurrentHashMap<>().newKeySet();
+        threadPoolExecutor = Executors.newFixedThreadPool(userCount);
     }
 
-    private void scenario() {
+    protected void scenario() {
         // Create tasks by starting new processes.
         startProcesses(PROCESS_ID, processCount);
         LOGGER.debug("All process instances have been started.");
@@ -163,7 +151,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         taskAssignmentDuration.update(median, TimeUnit.MILLISECONDS);
     }
 
-    private void afterScenario() {
+    protected void afterScenario() {
         shutdownExecutorService(threadPoolExecutor);
         abortAllProcesses();
     }
