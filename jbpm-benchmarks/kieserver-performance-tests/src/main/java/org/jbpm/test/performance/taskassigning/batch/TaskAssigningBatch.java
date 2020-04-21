@@ -18,7 +18,6 @@ package org.jbpm.test.performance.taskassigning.batch;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -42,6 +41,7 @@ abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskAssigningBatch.class);
 
+    private static final String PROCESS_ID = "test-jbpm-assignment.testTaskAssignment";
     private static final String UNASSIGNED_TASKS_QUERY_NAME = "unassignedTasksQuery";
     private static final String ASSIGNED_TASKS_QUERY_NAME = "assignedTasksQuery";
     private static final String UNASSIGNED_TASKS_QUERY =
@@ -75,16 +75,13 @@ abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
         taskAssignmentDuration = metrics.timer(MetricRegistry.name(getClass(), "taskassigning.batch.tasks_assigned.duration"));
     }
 
-    private void beforeScenario() {
+    protected void beforeScenario() {
         abortAllProcesses();
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         allAssignedLatch = new CountDownLatch(1);
     }
 
-    @Override
-    public void execute() {
-        beforeScenario();
-
+    protected void scenario() {
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             TaskQueryFilterSpec filterSpec = new TaskQueryFilterSpec();
             List<TaskInstance> unassignedTasks = getQueryClient().findHumanTasksWithFilters(UNASSIGNED_TASKS_QUERY_NAME,
@@ -107,7 +104,7 @@ abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
         Timer.Context taskAssignmentDurationContext = taskAssignmentDuration.time();
 
         // Start processes in multiple threads and wait for all of them to be started.
-        startProcesses(processCount);
+        startProcesses(PROCESS_ID, processCount);
         startProcessDurationContext.stop();
         LOGGER.debug("All processes have been started");
 
@@ -120,11 +117,9 @@ abstract class TaskAssigningBatch extends TaskAssigning implements IPerfTest {
             throw new RuntimeException("Interrupted waiting during test.", e);
         }
         completedScenario.mark();
-
-        afterScenario();
     }
 
-    private void afterScenario() {
+    protected void afterScenario() {
         shutdownExecutorService(scheduledExecutorService);
         abortAllProcesses();
     }

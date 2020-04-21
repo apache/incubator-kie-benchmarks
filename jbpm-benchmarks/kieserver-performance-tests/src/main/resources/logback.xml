@@ -67,4 +67,9 @@
     <level value="debug" />
     <appender-ref ref="asyncDebugConsoleAppender" />
   </logger>
+
+  <logger name="org.jbpm.test.performance.taskassigning">
+    <level value="debug" />
+    <appender-ref ref="asyncDebugConsoleAppender" />
+  </logger>
 </configuration>

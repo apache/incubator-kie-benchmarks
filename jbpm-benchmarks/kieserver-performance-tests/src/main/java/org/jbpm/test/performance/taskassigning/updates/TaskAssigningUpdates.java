@@ -61,6 +61,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskAssigningUpdates.class);
 
+    private static final String PROCESS_ID = "test-jbpm-assignment.testContinuousTaskAssignment";
     private static final String ASSIGNED_TASKS_QUERY_NAME = "assignedTasksQuery";
     private static final String ASSIGNED_TASKS_QUERY =
             "select ti.taskId,ti.actualOwner from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
@@ -78,19 +79,13 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     public TaskAssigningUpdates(int processCount, int userCount) {
         this.processCount = processCount;
-        this.taskCount = processCount * 3;
+        this.taskCount = processCount * 9;
         this.userCount = userCount;
         if (taskCount < 2 * userCount) {
             throw new IllegalArgumentException("For a relevance of the measured metric the number of tasks must be " +
                     "at least 2 * number of users. Please note that the same number of users must be configured on " +
                     "the KIE server before running this scenario");
         }
-    }
-
-    private void beforeScenario() {
-        abortAllProcesses();
-        completedTasks = new ConcurrentHashMap<>().newKeySet();
-        threadPoolExecutor = Executors.newFixedThreadPool(userCount);
     }
 
     @Override
@@ -104,13 +99,16 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         taskAssignmentDuration = metrics.timer(MetricRegistry.name(getClass(), "taskassigning.update.task_assigned.duration"));
     }
 
-    @Override
-    public void execute() {
-        beforeScenario();
+    protected void beforeScenario() {
+        abortAllProcesses();
+        completedTasks = new ConcurrentHashMap<>().newKeySet();
+        threadPoolExecutor = Executors.newFixedThreadPool(userCount);
+    }
 
+    protected void scenario() {
         // Create tasks by starting new processes.
-        startProcesses(processCount);
-
+        startProcesses(PROCESS_ID, processCount);
+        LOGGER.debug("All process instances have been started.");
         Set<Long> tasksInProgress = new ConcurrentHashMap<>().newKeySet();
         // Keep completing tasks to introduce changes and trigger incremental re-planning.
         while (completedTasks.size() < taskCount) {
@@ -121,7 +119,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                 sleep(500L);
                 continue;
             }
-            LOGGER.debug(String.format("Completing %d tasks. Already finished %d tasks of %d.",
+            LOGGER.trace(String.format("Completing %d tasks. Already finished %d tasks of %d.",
                     assignedTasks.size(), completedTasks.size(), taskCount));
             // Run each task in a separate thread.
             for (TaskInstance task : assignedTasks) {
@@ -138,20 +136,22 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
                 }
             }
         }
+        LOGGER.debug("All tasks have been completed.");
 
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
-        List<Long> allDelaysBetweenCompleteAndStartEvents = taskEventsPerUser.entrySet().stream()
+        LOGGER.debug(String.format("Computing delays between tasks for %d users", taskEventsPerUser.size()));
+        List<Long> delaysBetweenCompleteAndStartEventsPerUser = taskEventsPerUser.entrySet().stream()
                 .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
-        long median = TaskStatisticsUtil.median(allDelaysBetweenCompleteAndStartEvents);
+        long median = TaskStatisticsUtil.median(delaysBetweenCompleteAndStartEventsPerUser);
+        LOGGER.debug(String.format(
+                "Median of delay between completing one task and starting another per a user is %d milliseconds", median));
         taskAssignmentDuration.update(median, TimeUnit.MILLISECONDS);
-
-        afterScenario();
     }
 
-    private void afterScenario() {
+    protected void afterScenario() {
         shutdownExecutorService(threadPoolExecutor);
         abortAllProcesses();
     }
