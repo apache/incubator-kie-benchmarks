@@ -75,6 +75,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
 
     private Set<Long> completedTasks;
     private ExecutorService threadPoolExecutor;
+    private Timer completedScenario;
     private Timer taskAssignmentDuration;
 
     public TaskAssigningUpdates(int processCount, int userCount) {
@@ -96,6 +97,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     @Override
     public void initMetrics() {
         MetricRegistry metrics = SharedMetricRegistry.getInstance();
+        completedScenario = metrics.timer(MetricRegistry.name(getClass(), "taskassigning.update.completed"));
         taskAssignmentDuration = metrics.timer(MetricRegistry.name(getClass(), "taskassigning.update.task_assigned.duration"));
     }
 
@@ -106,6 +108,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     }
 
     protected void scenario() {
+        Timer.Context completedScenarioContext = completedScenario.time();
         // Create tasks by starting new processes.
         startProcesses(PROCESS_ID, processCount);
         LOGGER.debug("All process instances have been started.");
@@ -137,6 +140,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
             }
         }
         LOGGER.debug("All tasks have been completed.");
+        completedScenarioContext.stop();
 
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
         LOGGER.debug(String.format("Computing delays between tasks for %d users", taskEventsPerUser.size()));
