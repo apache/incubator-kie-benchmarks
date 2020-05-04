@@ -16,7 +16,7 @@ public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
             "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
 
     private static final String DRL_FILE =
-            "org/optaplanner/examples/nurserostering/solver/nurseRosteringScoreRules.drl";
+            "org/optaplanner/examples/nurserostering/solver/nurseRosteringConstraints.drl";
 
     private final NurseRosteringDao dao = new NurseRosteringDao();
 
