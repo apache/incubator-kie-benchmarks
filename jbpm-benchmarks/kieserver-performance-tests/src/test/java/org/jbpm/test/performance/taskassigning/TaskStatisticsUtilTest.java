@@ -19,11 +19,10 @@ package org.jbpm.test.performance.taskassigning;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -32,43 +31,56 @@ import org.kie.server.api.model.instance.TaskEventInstance;
 public class TaskStatisticsUtilTest {
 
     @Test
-    public void delaysBetweenCompleteAndStartEvents_worksAsExpected_forVariousEvents() {
+    public void delaysBetweenAddedAndDelegatedEvents_worksAsExpected_forVariousEvents() {
         Instant now = Instant.now();
-        TaskEventInstance task1Completed = new TaskEventInstance();
-        task1Completed.setType("COMPLETED");
-        task1Completed.setLogTime(Date.from(now));
+        TaskEventInstance task1Added = new TaskEventInstance();
+        task1Added.setTaskId(1L);
+        task1Added.setType("ADDED");
+        task1Added.setLogTime(Date.from(now));
 
-        TaskEventInstance task2Started = new TaskEventInstance();
-        task2Started.setType("STARTED");
-        task2Started.setLogTime(Date.from(now.plus(5, ChronoUnit.SECONDS)));
+        TaskEventInstance task1Delegated = new TaskEventInstance();
+        task1Delegated.setTaskId(1L);
+        task1Delegated.setType("DELEGATED");
+        task1Delegated.setLogTime(Date.from(now.plus(10, ChronoUnit.SECONDS)));
 
-        TaskEventInstance task2Completed = new TaskEventInstance();
-        task2Completed.setType("COMPLETED");
-        task2Completed.setLogTime(Date.from(now.plus(10, ChronoUnit.SECONDS)));
+        TaskEventInstance task2Added = new TaskEventInstance();
+        task2Added.setTaskId(2L);
+        task2Added.setType("ADDED");
+        task2Added.setLogTime(Date.from(now.plus(20, ChronoUnit.SECONDS)));
+
+        TaskEventInstance task2Delegated = new TaskEventInstance();
+        task2Delegated.setTaskId(2L);
+        task2Delegated.setType("DELEGATED");
+        task2Delegated.setLogTime(Date.from(now.plus(30, ChronoUnit.SECONDS)));
 
         TaskEventInstance task3OtherEvent = new TaskEventInstance();
+        task3OtherEvent.setTaskId(3L);
         task3OtherEvent.setType("SOME_OTHER_EVENT_TYPE");
-        task3OtherEvent.setLogTime(Date.from(now.plus(15, ChronoUnit.SECONDS)));
+        task3OtherEvent.setLogTime(Date.from(now.plus(40, ChronoUnit.SECONDS)));
 
-        TaskEventInstance task3Started = new TaskEventInstance();
-        task3Started.setType("STARTED");
-        task3Started.setLogTime(Date.from(now.plus(20, ChronoUnit.SECONDS)));
+        TaskEventInstance task3Added = new TaskEventInstance();
+        task3Added.setTaskId(3L);
+        task3Added.setType("ADDED");
+        task3Added.setLogTime(Date.from(now.plus(50, ChronoUnit.SECONDS)));
 
         TaskEventInstance task3Completed = new TaskEventInstance();
+        task3Completed.setTaskId(3L);
         task3Completed.setType("COMPLETED");
-        task3Completed.setLogTime(Date.from(now.plus(25, ChronoUnit.SECONDS)));
+        task3Completed.setLogTime(Date.from(now.plus(60, ChronoUnit.SECONDS)));
 
-        SortedSet<TaskEventInstance> events =
-                new TreeSet<>(Comparator.comparing(taskEventInstance -> taskEventInstance.getLogTime().getTime()));
-        events.add(task1Completed);
-        events.add(task2Started);
-        events.add(task2Completed);
+        Collection<TaskEventInstance> events = new ArrayList<>();
+        events.add(task1Added);
+        events.add(task1Delegated);
+        events.add(task2Added);
+        events.add(task2Delegated);
         events.add(task3OtherEvent);
-        events.add(task3Started);
+        events.add(task3Added);
         events.add(task3Completed);
-        List<Long> delays = TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(events);
+        List<Long> delays = TaskStatisticsUtil.delaysBetweenEvents(events,
+                (taskEvent) -> "ADDED".equals(taskEvent.getType()),
+                (taskEvent) -> "DELEGATED".equals(taskEvent.getType()));
 
-        Assertions.assertThat(delays).containsExactly(5_000L, 10_000L);
+        Assertions.assertThat(delays).containsExactly(10_000L, 10_000L);
     }
 
     @Test

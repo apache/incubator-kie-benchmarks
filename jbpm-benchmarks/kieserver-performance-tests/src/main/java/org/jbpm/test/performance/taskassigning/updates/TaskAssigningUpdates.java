@@ -17,21 +17,15 @@
 package org.jbpm.test.performance.taskassigning.updates;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.NavigableSet;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
@@ -50,9 +44,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This scenario tests impact of frequent changes to task assigning. After being created by starting processes, tasks
- * are retrieved, started and completed. Together with a delay between starting and completing a task, this scenario
- * simulates users working on their tasks, while each completion of a task represents a problem fact change for the
- * planning extension.
+ * are retrieved, started and completed. Together with a delay between completing a task and assigning a next one,
+ * this scenario simulates users working on their tasks, while each completion of a task represents a problem fact change
+ * for the planning extension.
  * <p>
  * The scenario assumes that there are at least twice as many tasks as users. The publish windows size, system property
  * org.kie.server.taskAssigning.publishWindowSize, must be set to 1 on the KIE server.
@@ -71,12 +65,12 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     private static final String ASSIGNED_TASKS_QUERY =
             "select ti.taskId,ti.actualOwner from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
 
-    private static final String TASK_STARTED = "STARTED";
-    private static final String TASK_COMPLETED = "COMPLETED";
+    private static final String TASK_DELEGATED = "DELEGATED";
+    private static final String TASK_ADDED = "ADDED";
 
     private static final String TASK_EVENTS_QUERY_NAME = "taskEventsQuery";
-    private static final String TASK_EVENTS_QUERY = "select taskId, logTime, type, userId from TaskEvent " +
-            "where type in ('" + TASK_STARTED + "', '" + TASK_COMPLETED + "') order by taskId";
+    private static final String TASK_EVENTS_QUERY = "select taskId, logTime, type from TaskEvent " +
+            "where type in ('" + TASK_DELEGATED + "', '" + TASK_ADDED + "') order by taskId, logTime";
 
     private static final long TASK_COMPLETION_DELAY_MILLIS = 5000L;
 
@@ -155,15 +149,9 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         completedScenarioContext.stop();
 
         LOGGER.debug("Fetching information about task events.");
-        Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
+        List<Long> taskAssignmentDelays = getTaskAssignmentDelays();
 
-        LOGGER.debug(String.format("Computing delays between tasks for %d users", taskEventsPerUser.size()));
-        List<Long> delaysBetweenCompleteAndStartEventsPerUser = taskEventsPerUser.entrySet().stream()
-                .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-
-        long median = TaskStatisticsUtil.median(delaysBetweenCompleteAndStartEventsPerUser);
+        long median = TaskStatisticsUtil.median(taskAssignmentDelays);
         LOGGER.debug(String.format(
                 "Median of delay between completing one task and starting another per a user is %d milliseconds", median));
         taskAssignmentDuration.update(median, TimeUnit.MILLISECONDS);
@@ -175,10 +163,10 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     }
 
     /**
-     * Filters STARTED and COMPLETED {@link TaskEventInstance} and groups them by users working on corresponding tasks.
-     * The events are ordered chronologically.
+     * Computes delays between ADDED and DELEGATED events for each task.
+     * @return a list of delays in milliseconds
      */
-    private Map<String, NavigableSet<TaskEventInstance>> getTaskEventsPerUser() {
+    private List<Long> getTaskAssignmentDelays() {
         final long minTaskId = completedTasks.stream()
                 .min(Long::compareTo)
                 .orElseThrow(() -> new IllegalStateException("Impossible state: there should be always a minimal task ID."));
@@ -197,25 +185,12 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
             taskEvents.add(mapTaskEventFromRawList(rawTaskEvent));
         }
 
-        Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = new HashMap<>();
-        Comparator<TaskEventInstance> taskEventInstanceComparator =
-                Comparator.comparing(taskEventInstance -> taskEventInstance.getLogTime().getTime());
-
-        for (TaskEventInstance taskEvent : taskEvents) {
-            String userId = taskEvent.getUserId();
-            NavigableSet<TaskEventInstance> taskEventSet =
-                    taskEventsPerUser.computeIfAbsent(userId, (__) -> new TreeSet<>(taskEventInstanceComparator));
-            if (TASK_STARTED.equals(taskEvent.getType()) || TASK_COMPLETED.equals(taskEvent.getType())) {
-                taskEventSet.add(taskEvent);
-            }
-        }
-
-        return taskEventsPerUser;
+        return TaskStatisticsUtil.delaysBetweenEvents(taskEvents, (taskEvent) -> TASK_ADDED.equals(taskEvent.getType()),
+                (taskEvent) -> TASK_DELEGATED.equals(taskEvent.getType()));
     }
 
     private TaskEventInstance mapTaskEventFromRawList(List<Object> taskEventRaw) {
-
-        final int expectedColumnsCount = 4;
+        final int expectedColumnsCount = 3;
         if (taskEventRaw.size() != expectedColumnsCount) {
             throw new IllegalArgumentException("The raw task even record is supposed to consist of " + expectedColumnsCount +
                     " columns.");
@@ -224,13 +199,11 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         long taskId = ((Double) taskEventRaw.get(0)).longValue();
         Date logTime = (Date) taskEventRaw.get(1);
         String type = (String) taskEventRaw.get(2);
-        String userId = (String) taskEventRaw.get(3);
 
         return TaskEventInstance.builder()
                 .taskId(taskId)
                 .date(logTime)
                 .type(type)
-                .user(userId)
                 .build();
     }
 
