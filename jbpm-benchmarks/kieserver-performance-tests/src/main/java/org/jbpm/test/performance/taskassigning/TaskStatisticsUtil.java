@@ -17,24 +17,31 @@
 package org.jbpm.test.performance.taskassigning;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.SortedSet;
+import java.util.function.Predicate;
 
 import org.kie.server.api.model.instance.TaskEventInstance;
 
 public class TaskStatisticsUtil {
 
     /**
-     * Computes delays between completing and starting consecutive tasks.
+     * Computes delays between pairs of two consecutive task events.
+     * @param events a pre-sorted collection of events to search in.
+     * @param firstEventMatcher {@link Predicate} that picks the first event in the pair
+     * @param secondEventMatcher {@link Predicate} that picks the second event in the pair
      */
-    public static List<Long> delaysBetweenCompleteAndStartEvents(SortedSet<TaskEventInstance> events) {
+    public static List<Long> delaysBetweenEvents(Collection<TaskEventInstance> events,
+            Predicate<TaskEventInstance> firstEventMatcher, Predicate<TaskEventInstance> secondEventMatcher) {
         List<Long> delays = new ArrayList<>();
         TaskEventInstance previous = null;
         for (TaskEventInstance taskEventInstance : events) {
-            if ("COMPLETED".equals(taskEventInstance.getType())) {
+            if (firstEventMatcher.test(taskEventInstance)) {
                 previous = taskEventInstance;
-            } else if (previous != null && "STARTED".equals(taskEventInstance.getType())) {
+            } else if (previous != null
+                    && taskEventInstance.getTaskId().equals(previous.getTaskId())
+                    && secondEventMatcher.test(taskEventInstance)) {
                 delays.add(taskEventInstance.getLogTime().getTime() - previous.getLogTime().getTime());
                 previous = null;
             }
