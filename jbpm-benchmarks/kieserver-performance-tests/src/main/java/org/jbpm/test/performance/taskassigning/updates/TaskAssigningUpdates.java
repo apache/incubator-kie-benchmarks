@@ -16,8 +16,10 @@
 
 package org.jbpm.test.performance.taskassigning.updates;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,9 +39,12 @@ import org.jbpm.test.performance.taskassigning.TaskAssigning;
 import org.jbpm.test.performance.taskassigning.TaskStatisticsUtil;
 import org.kie.perf.SharedMetricRegistry;
 import org.kie.perf.scenario.IPerfTest;
+import org.kie.server.api.model.definition.QueryFilterSpec;
 import org.kie.server.api.model.definition.TaskQueryFilterSpec;
 import org.kie.server.api.model.instance.TaskEventInstance;
 import org.kie.server.api.model.instance.TaskInstance;
+import org.kie.server.api.util.QueryFilterSpecBuilder;
+import org.kie.server.client.QueryServicesClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,8 +70,14 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     private static final String ASSIGNED_TASKS_QUERY_NAME = "assignedTasksQuery";
     private static final String ASSIGNED_TASKS_QUERY =
             "select ti.taskId,ti.actualOwner from AuditTaskImpl ti where ti.actualOwner != '' and ti.status = 'Reserved'";
+
     private static final String TASK_STARTED = "STARTED";
     private static final String TASK_COMPLETED = "COMPLETED";
+
+    private static final String TASK_EVENTS_QUERY_NAME = "taskEventsQuery";
+    private static final String TASK_EVENTS_QUERY = "select taskId, logTime, type, userId from TaskEvent " +
+            "where type in ('" + TASK_STARTED + "', '" + TASK_COMPLETED + "') order by taskId";
+
     private static final long TASK_COMPLETION_DELAY_MILLIS = 5000L;
 
     private final int processCount;
@@ -92,6 +103,7 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
     @Override
     public void init() {
         registerQuery(ASSIGNED_TASKS_QUERY_NAME, ASSIGNED_TASKS_QUERY);
+        registerQuery(TASK_EVENTS_QUERY_NAME, TASK_EVENTS_QUERY);
     }
 
     @Override
@@ -142,7 +154,9 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
         LOGGER.debug("All tasks have been completed.");
         completedScenarioContext.stop();
 
+        LOGGER.debug("Fetching information about task events.");
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = getTaskEventsPerUser();
+
         LOGGER.debug(String.format("Computing delays between tasks for %d users", taskEventsPerUser.size()));
         List<Long> delaysBetweenCompleteAndStartEventsPerUser = taskEventsPerUser.entrySet().stream()
                 .map((entry) -> TaskStatisticsUtil.delaysBetweenCompleteAndStartEvents(entry.getValue()))
@@ -165,21 +179,59 @@ abstract class TaskAssigningUpdates extends TaskAssigning implements IPerfTest {
      * The events are ordered chronologically.
      */
     private Map<String, NavigableSet<TaskEventInstance>> getTaskEventsPerUser() {
+        final long minTaskId = completedTasks.stream()
+                .min(Long::compareTo)
+                .orElseThrow(() -> new IllegalStateException("Impossible state: there should be always a minimal task ID."));
+        final long maxTaskId = completedTasks.stream()
+                .max(Long::compareTo)
+                .orElseThrow(() -> new IllegalStateException("Impossible state: there should be always a maximal task ID."));
+
+        QueryFilterSpec filterSpec = new QueryFilterSpecBuilder()
+                .between("taskId", minTaskId, maxTaskId)
+                .get();
+        List<List> taskEventRawList = getQueryClient()
+                .query(TASK_EVENTS_QUERY_NAME, QueryServicesClient.QUERY_MAP_RAW, filterSpec, 0, Integer.MAX_VALUE, List.class);
+
+        List<TaskEventInstance> taskEvents = new ArrayList<>(taskEventRawList.size());
+        for (List<Object> rawTaskEvent : taskEventRawList) {
+            taskEvents.add(mapTaskEventFromRawList(rawTaskEvent));
+        }
+
         Map<String, NavigableSet<TaskEventInstance>> taskEventsPerUser = new HashMap<>();
         Comparator<TaskEventInstance> taskEventInstanceComparator =
                 Comparator.comparing(taskEventInstance -> taskEventInstance.getLogTime().getTime());
-        for (Long taskId : completedTasks) {
-            List<TaskEventInstance> taskEvents = getTaskClient().findTaskEvents(taskId, 0, Integer.MAX_VALUE);
-            for (TaskEventInstance taskEvent : taskEvents) {
-                String userId = taskEvent.getUserId();
-                NavigableSet<TaskEventInstance> taskEventSet =
-                        taskEventsPerUser.computeIfAbsent(userId, (__) -> new TreeSet<>(taskEventInstanceComparator));
-                if (TASK_STARTED.equals(taskEvent.getType()) || TASK_COMPLETED.equals(taskEvent.getType())) {
-                    taskEventSet.add(taskEvent);
-                }
+
+        for (TaskEventInstance taskEvent : taskEvents) {
+            String userId = taskEvent.getUserId();
+            NavigableSet<TaskEventInstance> taskEventSet =
+                    taskEventsPerUser.computeIfAbsent(userId, (__) -> new TreeSet<>(taskEventInstanceComparator));
+            if (TASK_STARTED.equals(taskEvent.getType()) || TASK_COMPLETED.equals(taskEvent.getType())) {
+                taskEventSet.add(taskEvent);
             }
         }
+
         return taskEventsPerUser;
+    }
+
+    private TaskEventInstance mapTaskEventFromRawList(List<Object> taskEventRaw) {
+
+        final int expectedColumnsCount = 4;
+        if (taskEventRaw.size() != expectedColumnsCount) {
+            throw new IllegalArgumentException("The raw task even record is supposed to consist of " + expectedColumnsCount +
+                    " columns.");
+        }
+
+        long taskId = ((Double) taskEventRaw.get(0)).longValue();
+        Date logTime = (Date) taskEventRaw.get(1);
+        String type = (String) taskEventRaw.get(2);
+        String userId = (String) taskEventRaw.get(3);
+
+        return TaskEventInstance.builder()
+                .taskId(taskId)
+                .date(logTime)
+                .type(type)
+                .user(userId)
+                .build();
     }
 
     private void sleep(long millis) {
