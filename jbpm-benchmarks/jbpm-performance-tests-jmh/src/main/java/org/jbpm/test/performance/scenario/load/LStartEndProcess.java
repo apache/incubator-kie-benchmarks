@@ -4,7 +4,6 @@ import org.jbpm.test.performance.jbpm.JBPMController;
 import org.jbpm.test.performance.jbpm.constant.ProcessStorage;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
-
 import org.openjdk.jmh.annotations.*;
 
 import java.util.concurrent.TimeUnit;
@@ -19,8 +18,14 @@ public class LStartEndProcess {
 
     private static JBPMController jc;
 
+    // ! Must be overridden using -p from command line
+    @Param("")
+    public String runtimeManagerStrategy;
+
     @Setup
     public void init() {
+        // Sets jvm argument to runtimeManagerStrategy
+        System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
         jc = JBPMController.getInstance();
         jc.createRuntimeManager(ProcessStorage.StartEnd.getPath());
 
@@ -30,7 +35,7 @@ public class LStartEndProcess {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.SECONDS)
     @Benchmark
-    public void Throughput(){
+    public void Throughput() {
         execute();
     }
 
