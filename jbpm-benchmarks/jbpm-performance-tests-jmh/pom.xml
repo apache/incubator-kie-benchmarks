@@ -214,8 +214,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
                     <name>!perfdb</name>
                 </property>
             </activation>
-            <!-- H2 Database configuration -->
             <properties>
+                <!-- H2 Database configuration -->
                 <maven.jdbc.db.name>H2</maven.jdbc.db.name>
                 <maven.hibernate.hbm2ddl>create-drop</maven.hibernate.hbm2ddl>
                 <maven.hibernate.dialect>org.hibernate.dialect.H2Dialect</maven.hibernate.dialect>
@@ -226,6 +226,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
                 <maven.jdbc.db.port />
                 <maven.jdbc.db.server />
                 <maven.jdbc.url>jdbc:h2:mem:test;MVCC=true</maven.jdbc.url>
+
             </properties>
         </profile>
     </profiles>

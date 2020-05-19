@@ -24,8 +24,14 @@ public class LRuleTaskProcess {
 
     private JBPMController jc;
 
+    // ! Must be overridden using -p from command line
+    @Param("")
+    public String runtimeManagerStrategy;
+
     @Setup
     public void init() {
+        // Sets jvm argument to runtimeManagerStrategy
+        System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
         jc = JBPMController.getInstance();
 
         Map<String, ResourceType> res = new HashMap<String, ResourceType>();

@@ -25,9 +25,14 @@ public class L1000HumanTasksStart {
 
     private List<Long> taskIds;
 
+    // ! Must be overridden using -p from command line
+    @Param("")
+    public String runtimeManagerStrategy;
+
     @Setup
     public void init() {
-        jc = JBPMController.getInstance();
+        // Sets jvm argument to runtimeManagerStrategy
+        System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
         jc.createRuntimeManager();
 
         taskService = jc.getRuntimeEngine().getTaskService();
