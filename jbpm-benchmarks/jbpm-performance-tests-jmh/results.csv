@@ -1,3 +1,11 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.Throughput","thrpt",1,2,636.216702,NaN,"ops/s"
-"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.averageTime","avgt",1,2,1.590770,NaN,"ms/op"
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: runtimeManagerStrategy"
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.Throughput","thrpt",1,1,947.846935,NaN,"ops/s",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime","sample",1,948,1.065848,0.024624,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p0.00","sample",1,1,0.799744,NaN,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p0.50","sample",1,1,0.996352,NaN,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p0.90","sample",1,1,1.345741,NaN,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p0.95","sample",1,1,1.578086,NaN,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p0.99","sample",1,1,1.924731,NaN,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p0.999","sample",1,1,2.654208,NaN,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p0.9999","sample",1,1,2.654208,NaN,"ms/op",Singleton
+"org.jbpm.test.performance.scenario.load.L1000HumanTasksComplete.sampleTime:sampleTime·p1.00","sample",1,1,2.654208,NaN,"ms/op",Singleton

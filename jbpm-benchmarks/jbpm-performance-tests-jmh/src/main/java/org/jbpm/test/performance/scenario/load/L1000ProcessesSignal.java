@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 @Fork(value = 1, jvmArgs = {"-Xms2G", "-Xmx2G"})
 @Warmup(iterations = 1, time = 1)
-@Measurement(iterations = 1, time = 300)
+@Measurement(iterations = 1, time = 1)
 @Threads(1)
 
 public class L1000ProcessesSignal {
