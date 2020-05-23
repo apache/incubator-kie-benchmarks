@@ -18,11 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class L1000HumanTasksStart {
-
     private JBPMController jc;
-
     private TaskService taskService;
-
     private List<Long> taskIds;
 
     // ! Must be overridden using -p from command line
@@ -33,6 +30,7 @@ public class L1000HumanTasksStart {
     public void init() {
         // Sets jvm argument to runtimeManagerStrategy
         System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
+        jc = JBPMController.getInstance();
         jc.createRuntimeManager();
 
         taskService = jc.getRuntimeEngine().getTaskService();
