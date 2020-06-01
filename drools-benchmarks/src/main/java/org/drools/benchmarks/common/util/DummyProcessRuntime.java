@@ -73,6 +73,10 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
         return null;
     }
 
+    @Override public ProcessInstance startProcessFromNodeIds(String s, Map<String, Object> map, String... strings) {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public ProcessInstance createProcessInstance(final String s, final Map<String, Object> map) {
         return null;
@@ -126,6 +130,11 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
     @Override
     public ProcessInstance createProcessInstance(final String s, final CorrelationKey correlationKey, final Map<String, Object> map) {
         return null;
+    }
+
+    @Override public ProcessInstance startProcessFromNodeIds(String s, CorrelationKey correlationKey, Map<String, Object> map,
+            String... strings) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
