@@ -18,8 +18,6 @@ package org.drools.benchmarks.session.sessionpool;
 
 import java.util.Collection;
 
-import org.drools.benchmarks.common.util.DummyProcessRuntime;
-import org.drools.core.runtime.process.ProcessRuntimeFactory;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -37,7 +35,6 @@ public class DisposeSessionWithProcessRuntimeBenchmark extends AbstractSessionsP
 
     @Setup
     public void generateFactsForSessions() {
-        ProcessRuntimeFactory.setProcessRuntimeFactoryService((wm) -> new DummyProcessRuntime());
         factsForSession = generateFacts();
     }
 
