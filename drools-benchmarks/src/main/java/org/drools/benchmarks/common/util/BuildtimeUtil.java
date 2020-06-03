@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.drools.compiler.kie.builder.impl.DrlProject;
 import org.drools.compiler.kie.builder.impl.InternalKieModule;
 import org.drools.compiler.kie.builder.impl.KieBuilderImpl;
 import org.drools.compiler.kie.builder.impl.ZipKieModule;
@@ -51,14 +52,13 @@ public final class BuildtimeUtil {
 
     public static KieContainer createKieContainerFromResources(final boolean useCanonicalModel,
                                                                final Resource... resources) throws IOException {
-        final ReleaseId kJarReleaseId = createKJarFromResources(useCanonicalModel, resources);
+        final ReleaseId kJarReleaseId = getKieBuilderFromResources(useCanonicalModel, resources).getKieModule().getReleaseId();
         return KieServices.get().newKieContainer(kJarReleaseId);
     }
 
     public static ReleaseId createKJarFromResources(final boolean useCanonicalModel, final Resource... resources)
             throws IOException {
-        final KieServices kieServices = KieServices.get();
-        final KieBuilder kieBuilder = getKieBuilderFromResources(kieServices.newKieFileSystem(), useCanonicalModel, resources);
+        final KieBuilder kieBuilder = getKieBuilderFromResources(useCanonicalModel, resources);
         generateKJarFromKieBuilder(kieBuilder, useCanonicalModel);
         return kieBuilder.getKieModule().getReleaseId();
     }
@@ -77,6 +77,10 @@ public final class BuildtimeUtil {
         KieServices.get().getRepository().addKieModule(zipKieModule);
     }
 
+    public static KieBuilder getKieBuilderFromResources(final boolean useCanonicalModel, final Resource... resources) {
+        return getKieBuilderFromResources(KieServices.get().newKieFileSystem(), useCanonicalModel, resources);
+    }
+
     private static KieBuilder getKieBuilderFromResources(final KieFileSystem kfs, final boolean useCanonicalModel, final Resource... resources) {
         for (final Resource res : resources) {
             kfs.write(res);
@@ -87,7 +91,7 @@ public final class BuildtimeUtil {
         if (useCanonicalModel) {
             kbuilder.buildAll(ExecutableModelProject.class);
         } else {
-            kbuilder.buildAll();
+            kbuilder.buildAll(DrlProject.class);
         }
 
         final List<Message> msgs = kbuilder.getResults().getMessages(Message.Level.ERROR);

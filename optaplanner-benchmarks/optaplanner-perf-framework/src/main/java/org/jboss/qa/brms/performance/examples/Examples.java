@@ -5,6 +5,7 @@ import org.jboss.qa.brms.performance.examples.conferencescheduling.ConferenceSch
 import org.jboss.qa.brms.performance.examples.flightcrewscheduling.FlightCrewSchedulingExample;
 import org.jboss.qa.brms.performance.examples.nurserostering.NurseRosteringExample;
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.ProjectJobSchedulingExample;
+import org.jboss.qa.brms.performance.examples.travelingtournament.TravelingTournamentExample;
 import org.jboss.qa.brms.performance.examples.tsp.TravelingSalesmanExample;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRoutingExample;
 
@@ -15,5 +16,6 @@ public class Examples {
     public static final NurseRosteringExample NURSE_ROSTERING = new NurseRosteringExample();
     public static final ProjectJobSchedulingExample PROJECT_JOB_SCHEDULING = new ProjectJobSchedulingExample();
     public static final TravelingSalesmanExample TRAVELING_SALESMAN = new TravelingSalesmanExample();
+    public static final TravelingTournamentExample TRAVELING_TOURNAMENT = new TravelingTournamentExample();
     public static final VehicleRoutingExample VEHICLE_ROUTING = new VehicleRoutingExample();
 }
