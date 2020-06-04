@@ -15,10 +15,6 @@
 
   <name>jBPM Performance Tests Parent</name>
 
-  <properties>
-    <version.org.postgresql.postgresql>42.2.6</version.org.postgresql.postgresql>
-  </properties>
-
   <modules>
     <module>jbpm-performance-tests</module>
     <module>kieserver-assets</module>
@@ -61,7 +57,7 @@
       <properties>
         <!-- Properties to properly filter persistence.xml -->
         <maven.hibernate.hbm2ddl>none</maven.hibernate.hbm2ddl>
-        <maven.hibernate.dialect>org.hibernate.dialect.PostgreSQL82Dialect</maven.hibernate.dialect>
+        <maven.hibernate.dialect>org.hibernate.dialect.PostgreSQL95Dialect</maven.hibernate.dialect>
 
         <!-- Properties to properly filter custom datasource.properties. Other maven.jdbc.* properties (user, password, etc.)
              are provided in this custom datasource.properties file -->
@@ -69,15 +65,7 @@
         <maven.datasource.classname>org.postgresql.xa.PGXADataSource</maven.datasource.classname>
         <maven.jdbc.driver.class>org.postgresql.Driver</maven.jdbc.driver.class>
       </properties>
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${version.org.postgresql.postgresql}</version>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
+
       <dependencies>
         <dependency>
           <groupId>org.postgresql</groupId>
@@ -117,7 +105,6 @@
                 <dependency>
                   <groupId>org.postgresql</groupId>
                   <artifactId>postgresql</artifactId>
-                  <version>${version.org.postgresql.postgresql}</version>
                 </dependency>
               </dependencies>
               <!-- common configuration shared by all executions -->
