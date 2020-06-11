@@ -18,9 +18,12 @@ package org.drools.benchmarks.dmn.validation;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.DMNProvider;
@@ -32,6 +35,7 @@ import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
 import org.kie.dmn.api.core.DMNModel;
 import org.kie.dmn.api.core.DMNRuntime;
+import org.kie.dmn.validation.DMNValidator.Validation;
 import org.kie.dmn.validation.dtanalysis.DMNDTAnalyser;
 import org.kie.dmn.validation.dtanalysis.model.DTAnalysis;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -48,6 +52,7 @@ import org.slf4j.LoggerFactory;
 public class DTNoGapsNoOverlapsBenchmark extends AbstractBenchmark {
 
     private static final Logger LOG = LoggerFactory.getLogger(DTNoGapsNoOverlapsBenchmark.class);
+    private static final Set<Validation> FLAGS = new HashSet<>(Arrays.asList(Validation.ANALYZE_DECISION_TABLE));
 
     /**
      * DMN with param=9 means
@@ -96,7 +101,7 @@ public class DTNoGapsNoOverlapsBenchmark extends AbstractBenchmark {
 
     @Benchmark
     public List<DTAnalysis> performAnalysis() {
-        List<DTAnalysis> analyse = dmndtAnalyser.analyse(dmnModel);
+        List<DTAnalysis> analyse = dmndtAnalyser.analyse(dmnModel, FLAGS);
         if (LOG.isDebugEnabled()) {
             LOG.debug("{}", analyse.get(0).asDMNMessages()); // full analysis no gaps no overlaps, U policy: DMN: Decision Table Analysis of table 'decision' finished with no messages to be reported.
         }
