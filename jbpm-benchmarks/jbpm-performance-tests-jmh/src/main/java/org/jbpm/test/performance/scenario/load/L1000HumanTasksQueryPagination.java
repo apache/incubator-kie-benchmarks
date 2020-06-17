@@ -23,9 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class L1000HumanTasksQueryPagination {
 
     private JBPMController jc;
-
     private TaskService taskService;
-
     private List<AuditTask> tasks = new ArrayList<AuditTask>();
 
     // ! Must be overridden using -p from command line
@@ -51,10 +49,10 @@ public class L1000HumanTasksQueryPagination {
         execute();
     }
 
-    @BenchmarkMode(Mode.AverageTime)
+    @BenchmarkMode(Mode.SampleTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void averageTime() {
+    public void sampleTime() {
         execute();
     }
 

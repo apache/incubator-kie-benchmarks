@@ -38,10 +38,10 @@ public class L1000ProcessesSignal {
         execute();
     }
 
-    @BenchmarkMode(Mode.AverageTime)
+    @BenchmarkMode(Mode.SampleTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void averageTime() {
+    public void sampleTime() {
         execute();
     }
 

@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class L1000HumanTasksStart {
     private JBPMController jc;
     private TaskService taskService;
+
     private List<Long> taskIds;
 
     // ! Must be overridden using -p from command line
@@ -50,10 +51,10 @@ public class L1000HumanTasksStart {
         execute();
     }
 
-    @BenchmarkMode(Mode.AverageTime)
+    @BenchmarkMode(Mode.SampleTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void averageTime() {
+    public void sampleTime() {
         execute();
     }
 
