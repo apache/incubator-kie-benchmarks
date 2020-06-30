@@ -1,18 +1,16 @@
 package org.jbpm.test.performance.jbpm;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TestConfig {
 
-    protected final Logger log = LoggerFactory.getLogger(getClass());
-
     protected static TestConfig tc;
-
+    protected final Logger log = LoggerFactory.getLogger(getClass());
     protected Properties properties;
 
     protected String projectName;
@@ -41,12 +39,23 @@ public class TestConfig {
     protected String perfRepoUsername;
     protected String perfRepoPassword;
 
-
     protected List<Measure> measure;
     protected List<String> tags = new ArrayList<String>();
 
     protected TestConfig() {
 
+    }
+
+    public static TestConfig getInstance() {
+        if (tc == null) {
+            tc = new TestConfig();
+            try {
+                tc.loadProperties();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return tc;
     }
 
     public Properties loadProperties() throws Exception {
@@ -66,18 +75,14 @@ public class TestConfig {
 //        duration = Integer.valueOf(System.getProperty("duration"));
 //        iterations = Integer.valueOf(System.getProperty("iterations"));
 
-
 //        properties.put("duration", duration);
 //        properties.put("iterations", iterations);
-
 
 //        threads = Integer.valueOf(System.getProperty("threads"));
 //        properties.put("threads", threads);
 //        if (suite.equals(ConcurrentLoadSuite.class.getSimpleName())) {
 //            addTag("thread-" + threads);
 //        }
-
-
 
         perfRepoHost = System.getProperty("perfRepo.host");
         if (perfRepoHost != null) {
@@ -97,18 +102,6 @@ public class TestConfig {
         }
 
         return properties;
-    }
-
-    public static TestConfig getInstance() {
-        if (tc == null) {
-            tc = new TestConfig();
-            try {
-                tc.loadProperties();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return tc;
     }
 
     protected void addTag(String tag) {
@@ -206,11 +199,16 @@ public class TestConfig {
     }
 
     public static enum ReporterType {
-        CONSOLE, CSV, CSVSINGLE, PERFREPO
+        CONSOLE,
+        CSV,
+        CSVSINGLE,
+        PERFREPO
     }
 
     public static enum Measure {
-        MEMORYUSAGE, FILEDESCRIPTORS, THREADSTATES, CPUUSAGE
+        MEMORYUSAGE,
+        FILEDESCRIPTORS,
+        THREADSTATES,
+        CPUUSAGE
     }
-
 }

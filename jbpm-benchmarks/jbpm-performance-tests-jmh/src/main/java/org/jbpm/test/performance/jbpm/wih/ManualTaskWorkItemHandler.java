@@ -13,5 +13,4 @@ public class ManualTaskWorkItemHandler implements WorkItemHandler {
     public void abortWorkItem(WorkItem workItem, WorkItemManager manager) {
         manager.abortWorkItem(workItem.getId());
     }
-
 }
