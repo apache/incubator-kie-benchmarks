@@ -13,5 +13,4 @@ public enum GroupStorage {
     public String getGroupId() {
         return groupId;
     }
-
 }

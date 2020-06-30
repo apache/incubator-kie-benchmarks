@@ -1,13 +1,13 @@
 package org.jbpm.test.performance.scenario;
 
-import org.jbpm.test.performance.jbpm.constant.UserStorage;
-import org.jbpm.services.task.impl.factories.TaskFactory;
-import org.kie.api.task.TaskService;
-import org.kie.api.task.model.Task;
-
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jbpm.services.task.impl.factories.TaskFactory;
+import org.jbpm.test.performance.jbpm.constant.UserStorage;
+import org.kie.api.task.TaskService;
+import org.kie.api.task.model.Task;
 
 public class PrepareEngine {
 
@@ -28,5 +28,4 @@ public class PrepareEngine {
         }
         return taskIds;
     }
-
 }

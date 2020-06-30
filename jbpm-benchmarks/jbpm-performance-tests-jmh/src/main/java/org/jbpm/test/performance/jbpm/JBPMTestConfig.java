@@ -1,6 +1,5 @@
 package org.jbpm.test.performance.jbpm;
 
-
 import java.util.Properties;
 
 public class JBPMTestConfig extends TestConfig {
@@ -72,5 +71,4 @@ public class JBPMTestConfig extends TestConfig {
     public boolean isHumanTaskEager() {
         return humanTaskEager;
     }
-
 }

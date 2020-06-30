@@ -2,7 +2,8 @@ package org.jbpm.test.performance.jbpm.constant;
 
 public enum RuleStorage {
 
-    ValidationUserFact("ValidationUserFact.drl"), ;
+    ValidationUserFact("ValidationUserFact.drl"),
+    ;
 
     private String path;
 
@@ -13,5 +14,4 @@ public enum RuleStorage {
     public String getPath() {
         return path;
     }
-
 }

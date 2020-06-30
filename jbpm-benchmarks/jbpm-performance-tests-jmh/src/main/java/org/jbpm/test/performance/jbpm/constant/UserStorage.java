@@ -2,7 +2,8 @@ package org.jbpm.test.performance.jbpm.constant;
 
 public enum UserStorage {
 
-    PerfUser("perfUser"), EngUser("engUser");
+    PerfUser("perfUser"),
+    EngUser("engUser");
 
     private String userId;
 
@@ -13,5 +14,4 @@ public enum UserStorage {
     public String getUserId() {
         return userId;
     }
-
 }

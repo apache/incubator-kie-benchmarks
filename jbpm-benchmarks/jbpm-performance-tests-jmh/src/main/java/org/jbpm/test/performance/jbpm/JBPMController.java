@@ -1,5 +1,21 @@
 package org.jbpm.test.performance.jbpm;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+
+import javax.naming.InitialContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.transaction.Status;
+import javax.transaction.UserTransaction;
+
 import com.arjuna.ats.arjuna.recovery.RecoveryManager;
 import org.drools.persistence.jta.JtaTransactionManager;
 import org.jbpm.runtime.manager.impl.DefaultRegisterableItemsFactory;
@@ -9,7 +25,11 @@ import org.kie.api.event.process.ProcessEventListener;
 import org.kie.api.event.rule.AgendaEventListener;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.EnvironmentName;
-import org.kie.api.runtime.manager.*;
+import org.kie.api.runtime.manager.RuntimeEngine;
+import org.kie.api.runtime.manager.RuntimeEnvironment;
+import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
+import org.kie.api.runtime.manager.RuntimeManager;
+import org.kie.api.runtime.manager.RuntimeManagerFactory;
 import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.api.task.TaskLifeCycleEventListener;
 import org.kie.api.task.UserGroupCallback;
@@ -21,50 +41,24 @@ import org.kie.test.util.db.PoolingDataSourceWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.naming.InitialContext;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.transaction.Status;
-import javax.transaction.UserTransaction;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
 public class JBPMController {
 
-    public enum Strategy {
-        SINGLETON, PERREQUEST, PERPROCESSINSTANCE;
-    }
-
     protected static final Logger log = LoggerFactory.getLogger(JBPMController.class);
-
-    protected static boolean persistence = false;
     protected static final String DATASOURCE_PROPERTIES = "/datasource.properties";
-
-    private String persistenceUnitName = "org.jbpm.persistence.jpa";
-
-    private EntityManagerFactory emf;
-    private PoolingDataSourceWrapper ds;
-
-    private RuntimeManagerFactory managerFactory = RuntimeManagerFactory.Factory.get();
+    protected static boolean persistence = false;
+    private static JBPMController instance;
     protected RuntimeManager manager;
     protected Strategy strategy;
-
     protected UserGroupCallback userGroupCallback = new JBossUserGroupCallbackImpl("classpath:/usergroups.properties");
-
     protected Map<String, WorkItemHandler> customHandlers = new HashMap<String, WorkItemHandler>();
     protected ProcessEventListener customProcessListener;
     protected AgendaEventListener customAgendaListener;
     protected TaskLifeCycleEventListener customTaskListener;
     protected Map<String, Object> customEnvironmentEntries = new HashMap<String, Object>();
-
-    private static JBPMController instance;
+    private String persistenceUnitName = "org.jbpm.persistence.jpa";
+    private EntityManagerFactory emf;
+    private PoolingDataSourceWrapper ds;
+    private RuntimeManagerFactory managerFactory = RuntimeManagerFactory.Factory.get();
 
     private JBPMController() {
         persistence = JBPMTestConfig.getInstance().isPersistence();
@@ -76,6 +70,82 @@ public class JBPMController {
             instance.setUp();
         }
         return instance;
+    }
+
+    /**
+     * Return the default database/datasource properties - These properties use
+     * an in-memory H2 database
+     *
+     * @return Properties containing the default properties
+     */
+    protected static Properties getDefaultProperties() {
+        Properties defaultProperties;
+        String[] keyArr = {"serverName", "portNumber", "databaseName", "connectionUrl", "user", "password", "driverClassName",
+                "className", "initialSize", "minIdle", "maxTotal"};
+        String[] defaultPropArr = {"", "", "", "jdbc:h2:mem:test;MVCC=true", "sa", "", "org.h2.Driver",
+                "org.h2.jdbcx.JdbcDataSource", "16", "16", "16"};
+        if (keyArr.length != defaultPropArr.length) {
+            throw new RuntimeException("Unequal number of keys for default properties");
+        }
+        defaultProperties = new Properties();
+        for (int i = 0; i < keyArr.length; ++i) {
+            defaultProperties.put(keyArr[i], defaultPropArr[i]);
+        }
+
+        return defaultProperties;
+    }
+
+    /**
+     * This reads in the (maven filtered) datasource properties from the
+     * resource directory.
+     *
+     * @return Properties containing the datasource properties.
+     */
+    protected static Properties getDatasourceProperties() {
+        String propertiesNotFoundMessage = "Unable to load datasource properties [" + DATASOURCE_PROPERTIES + "]";
+        boolean propertiesNotLoaded = false;
+
+        // Central place to set additional H2 properties
+        System.setProperty("h2.lobInDatabase", "true");
+
+        InputStream propsInputStream = JBPMController.class.getResourceAsStream(DATASOURCE_PROPERTIES);
+        if (propsInputStream == null) {
+            throw new RuntimeException(propertiesNotFoundMessage);
+        }
+        Properties props = new Properties();
+        try {
+            props.load(propsInputStream);
+        } catch (IOException ioe) {
+            propertiesNotLoaded = true;
+            log.warn("Unable to load properties, using default H2 properties: {}", ioe.getMessage());
+            log.warn("Stacktrace:", ioe);
+        }
+
+        String password = props.getProperty("password");
+        if ("${maven.jdbc.password}".equals(password) || propertiesNotLoaded) {
+            props = getDefaultProperties();
+        }
+
+        return props;
+    }
+
+    protected static void cleanupSingletonSessionId() {
+        File tempDir = new File(System.getProperty("java.io.tmpdir"));
+        if (tempDir.exists()) {
+
+            String[] jbpmSerFiles = tempDir.list(new FilenameFilter() {
+
+                @Override
+                public boolean accept(File dir, String name) {
+
+                    return name.endsWith("-jbpmSessionId.ser");
+                }
+            });
+            for (String file : jbpmSerFiles) {
+
+                new File(tempDir, file).delete();
+            }
+        }
     }
 
     public void setUp() {
@@ -173,76 +243,18 @@ public class JBPMController {
     }
 
     /**
-     * Return the default database/datasource properties - These properties use
-     * an in-memory H2 database
-     *
-     * @return Properties containing the default properties
-     */
-    protected static Properties getDefaultProperties() {
-        Properties defaultProperties;
-        String[] keyArr = { "serverName", "portNumber", "databaseName", "connectionUrl", "user", "password", "driverClassName",
-                "className", "initialSize", "minIdle", "maxTotal" };
-        String[] defaultPropArr = { "", "", "", "jdbc:h2:mem:test;MVCC=true", "sa", "", "org.h2.Driver",
-                "org.h2.jdbcx.JdbcDataSource", "16", "16", "16" };
-        if (keyArr.length != defaultPropArr.length) {
-            throw new RuntimeException("Unequal number of keys for default properties");
-        }
-        defaultProperties = new Properties();
-        for (int i = 0; i < keyArr.length; ++i) {
-            defaultProperties.put(keyArr[i], defaultPropArr[i]);
-        }
-
-        return defaultProperties;
-    }
-
-    /**
-     * This reads in the (maven filtered) datasource properties from the
-     * resource directory.
-     *
-     * @return Properties containing the datasource properties.
-     */
-    protected static Properties getDatasourceProperties() {
-        String propertiesNotFoundMessage = "Unable to load datasource properties [" + DATASOURCE_PROPERTIES + "]";
-        boolean propertiesNotLoaded = false;
-
-        // Central place to set additional H2 properties
-        System.setProperty("h2.lobInDatabase", "true");
-
-        InputStream propsInputStream = JBPMController.class.getResourceAsStream(DATASOURCE_PROPERTIES);
-        if (propsInputStream == null) {
-            throw new RuntimeException(propertiesNotFoundMessage);
-        }
-        Properties props = new Properties();
-        try {
-            props.load(propsInputStream);
-        } catch (IOException ioe) {
-            propertiesNotLoaded = true;
-            log.warn("Unable to load properties, using default H2 properties: {}", ioe.getMessage());
-            log.warn("Stacktrace:", ioe);
-        }
-
-        String password = props.getProperty("password");
-        if ("${maven.jdbc.password}".equals(password) || propertiesNotLoaded) {
-            props = getDefaultProperties();
-        }
-
-        return props;
-    }
-
-    /**
      * Creates default configuration of <code>RuntimeManager</code> with
      * SINGLETON strategy and all <code>processes</code> being added to
      * knowledge base. <br/>
      * There should be only one <code>RuntimeManager</code> created during
      * single test.
      *
-     * @param process
-     *            - processes that shall be added to knowledge base
+     * @param process - processes that shall be added to knowledge base
      * @return new instance of RuntimeManager
      */
     public RuntimeManager createRuntimeManager(String... process) {
         return createRuntimeManager(Strategy.valueOf(JBPMTestConfig.getInstance().getRuntimeManagerStrategy()
-                .toUpperCase()), null, process);
+                                                             .toUpperCase()), null, process);
     }
 
     /**
@@ -252,12 +264,9 @@ public class JBPMController {
      * There should be only one <code>RuntimeManager</code> created during
      * single test.
      *
-     * @param strategy
-     *            - selected strategy of those that are supported
-     * @param identifier
-     *            - identifies the runtime manager
-     * @param process
-     *            - processes that shall be added to knowledge base
+     * @param strategy   - selected strategy of those that are supported
+     * @param identifier - identifies the runtime manager
+     * @param process    - processes that shall be added to knowledge base
      * @return new instance of RuntimeManager
      */
     public RuntimeManager createRuntimeManager(Strategy strategy, String identifier, String... process) {
@@ -275,14 +284,13 @@ public class JBPMController {
      * There should be only one <code>RuntimeManager</code> created during
      * single test.
      *
-     * @param resources
-     *            - resources (processes, rules, etc) that shall be added to
-     *            knowledge base
+     * @param resources - resources (processes, rules, etc) that shall be added to
+     *                  knowledge base
      * @return new instance of RuntimeManager
      */
     public RuntimeManager createRuntimeManager(Map<String, ResourceType> resources) {
         return createRuntimeManager(Strategy.valueOf(JBPMTestConfig.getInstance().getRuntimeManagerStrategy()
-                .toUpperCase()), resources, null);
+                                                             .toUpperCase()), resources, null);
     }
 
     /**
@@ -292,16 +300,14 @@ public class JBPMController {
      * There should be only one <code>RuntimeManager</code> created during
      * single test.
      *
-     * @param resources
-     *            - resources (processes, rules, etc) that shall be added to
-     *            knowledge base
-     * @param identifier
-     *            - identifies the runtime manager
+     * @param resources  - resources (processes, rules, etc) that shall be added to
+     *                   knowledge base
+     * @param identifier - identifies the runtime manager
      * @return new instance of RuntimeManager
      */
     protected RuntimeManager createRuntimeManager(Map<String, ResourceType> resources, String identifier) {
         return createRuntimeManager(Strategy.valueOf(JBPMTestConfig.getInstance().getRuntimeManagerStrategy()
-                .toUpperCase()), resources, identifier);
+                                                             .toUpperCase()), resources, identifier);
     }
 
     /**
@@ -311,10 +317,8 @@ public class JBPMController {
      * There should be only one <code>RuntimeManager</code> created during
      * single test.
      *
-     * @param strategy
-     *            - selected strategy of those that are supported
-     * @param resources
-     *            - resources that shall be added to knowledge base
+     * @param strategy  - selected strategy of those that are supported
+     * @param resources - resources that shall be added to knowledge base
      * @return new instance of RuntimeManager
      */
     protected RuntimeManager createRuntimeManager(Strategy strategy, Map<String, ResourceType> resources) {
@@ -328,16 +332,13 @@ public class JBPMController {
      * There should be only one <code>RuntimeManager</code> created during
      * single test.
      *
-     * @param strategy
-     *            - selected strategy of those that are supported
-     * @param resources
-     *            - resources that shall be added to knowledge base
-     * @param identifier
-     *            - identifies the runtime manager
+     * @param strategy   - selected strategy of those that are supported
+     * @param resources  - resources that shall be added to knowledge base
+     * @param identifier - identifies the runtime manager
      * @return new instance of RuntimeManager
      */
     protected RuntimeManager createRuntimeManager(Strategy strategy, Map<String, ResourceType> resources,
-            String identifier) {
+                                                  String identifier) {
         if (manager != null) {
             return manager;
         }
@@ -381,7 +382,6 @@ public class JBPMController {
                             }
                             return listeners;
                         }
-
                     });
         } else {
             builder = RuntimeEnvironmentBuilder.Factory.get().newDefaultInMemoryBuilder().registerableItemsFactory(
@@ -421,7 +421,6 @@ public class JBPMController {
                             }
                             return listeners;
                         }
-
                     });
         }
 
@@ -448,53 +447,49 @@ public class JBPMController {
      * <code>RuntimeManager</code>. <br/>
      * Use this only when you know what you do!
      *
-     * @param strategy
-     *            - selected strategy of those that are supported
-     * @param resources
-     *            - resources that shall be added to knowledge base
-     * @param environment
-     *            - runtime environment used for <code>RuntimeManager</code>
-     *            creation
-     * @param identifier
-     *            - identifies the runtime manager
+     * @param strategy    - selected strategy of those that are supported
+     * @param resources   - resources that shall be added to knowledge base
+     * @param environment - runtime environment used for <code>RuntimeManager</code>
+     *                    creation
+     * @param identifier  - identifies the runtime manager
      * @return new instance of RuntimeManager
      */
     protected RuntimeManager createRuntimeManager(Strategy strategy, Map<String, ResourceType> resources,
-            RuntimeEnvironment environment, String identifier) {
+                                                  RuntimeEnvironment environment, String identifier) {
         if (manager != null) {
             return manager;
         }
 
         this.strategy = strategy;
         switch (strategy) {
-        case SINGLETON:
-            if (identifier == null) {
-                manager = managerFactory.newSingletonRuntimeManager(environment);
-            } else {
-                manager = managerFactory.newSingletonRuntimeManager(environment, identifier);
-            }
-            break;
-        case PERREQUEST:
-            if (identifier == null) {
-                manager = managerFactory.newPerRequestRuntimeManager(environment);
-            } else {
-                manager = managerFactory.newPerRequestRuntimeManager(environment, identifier);
-            }
-            break;
-        case PERPROCESSINSTANCE:
-            if (identifier == null) {
-                manager = managerFactory.newPerProcessInstanceRuntimeManager(environment);
-            } else {
-                manager = managerFactory.newPerProcessInstanceRuntimeManager(environment, identifier);
-            }
-            break;
-        default:
-            if (identifier == null) {
-                manager = managerFactory.newSingletonRuntimeManager(environment);
-            } else {
-                manager = managerFactory.newSingletonRuntimeManager(environment, identifier);
-            }
-            break;
+            case SINGLETON:
+                if (identifier == null) {
+                    manager = managerFactory.newSingletonRuntimeManager(environment);
+                } else {
+                    manager = managerFactory.newSingletonRuntimeManager(environment, identifier);
+                }
+                break;
+            case PERREQUEST:
+                if (identifier == null) {
+                    manager = managerFactory.newPerRequestRuntimeManager(environment);
+                } else {
+                    manager = managerFactory.newPerRequestRuntimeManager(environment, identifier);
+                }
+                break;
+            case PERPROCESSINSTANCE:
+                if (identifier == null) {
+                    manager = managerFactory.newPerProcessInstanceRuntimeManager(environment);
+                } else {
+                    manager = managerFactory.newPerProcessInstanceRuntimeManager(environment, identifier);
+                }
+                break;
+            default:
+                if (identifier == null) {
+                    manager = managerFactory.newSingletonRuntimeManager(environment);
+                } else {
+                    manager = managerFactory.newSingletonRuntimeManager(environment, identifier);
+                }
+                break;
         }
 
         return manager;
@@ -529,23 +524,9 @@ public class JBPMController {
         }
     }
 
-    protected static void cleanupSingletonSessionId() {
-        File tempDir = new File(System.getProperty("java.io.tmpdir"));
-        if (tempDir.exists()) {
-
-            String[] jbpmSerFiles = tempDir.list(new FilenameFilter() {
-
-                @Override
-                public boolean accept(File dir, String name) {
-
-                    return name.endsWith("-jbpmSessionId.ser");
-                }
-            });
-            for (String file : jbpmSerFiles) {
-
-                new File(tempDir, file).delete();
-            }
-        }
+    public enum Strategy {
+        SINGLETON,
+        PERREQUEST,
+        PERPROCESSINSTANCE;
     }
-
 }

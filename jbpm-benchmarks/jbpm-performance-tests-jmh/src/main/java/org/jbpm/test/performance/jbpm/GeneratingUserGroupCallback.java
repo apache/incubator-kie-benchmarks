@@ -1,8 +1,12 @@
 package org.jbpm.test.performance.jbpm;
 
-import org.kie.api.task.UserGroupCallback;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
-import java.util.*;
+import org.kie.api.task.UserGroupCallback;
 
 public class GeneratingUserGroupCallback implements UserGroupCallback {
 

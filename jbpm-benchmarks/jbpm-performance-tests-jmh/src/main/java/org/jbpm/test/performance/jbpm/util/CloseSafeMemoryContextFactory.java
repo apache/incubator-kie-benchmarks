@@ -16,19 +16,20 @@
 
 package org.jbpm.test.performance.jbpm.util;
 
-import org.osjava.sj.memory.MemoryContext;
+import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.naming.spi.InitialContextFactory;
-import java.util.Hashtable;
+
+import org.osjava.sj.memory.MemoryContext;
 
 public class CloseSafeMemoryContextFactory implements InitialContextFactory {
-    
+
     @SuppressWarnings("rawtypes")
     public Context getInitialContext(Hashtable environment) throws NamingException {
-    
-        return new MemoryContext((Hashtable)environment.clone()) {
+
+        return new MemoryContext((Hashtable) environment.clone()) {
             @Override
             public Object lookup(String name) throws NamingException {
                 Object toReturn = super.lookup(name);

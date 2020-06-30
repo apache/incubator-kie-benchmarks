@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-  xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="2.0"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" xmlns="http://java.sun.com/xml/ns/persistence">
 
   <persistence-unit name="org.jbpm.persistence.jpa"
-    transaction-type="JTA">
+                    transaction-type="JTA">
 
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>jdbc/jbpm-ds</jta-data-source>
@@ -62,15 +62,15 @@
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
     <properties>
-      <property name="hibernate.max_fetch_depth" value="3" />
-      <property name="hibernate.hbm2ddl.auto" value="${maven.hibernate.hbm2ddl}" />
-      <property name="hibernate.show_sql" value="false" />
-      <property name="hibernate.dialect" value="${maven.hibernate.dialect}" />
-      <property name="hibernate.connection.CharSet" value="utf8" />
-      <property name="hibernate.connection.characterEncoding" value="utf8" />
-      <property name="hibernate.connection.useUnicode" value="true" />
-      <property name="hibernate.id.new_generator_mappings" value="false" />
-      <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform" />
+      <property name="hibernate.max_fetch_depth" value="3"/>
+      <property name="hibernate.hbm2ddl.auto" value="${maven.hibernate.hbm2ddl}"/>
+      <property name="hibernate.show_sql" value="false"/>
+      <property name="hibernate.dialect" value="${maven.hibernate.dialect}"/>
+      <property name="hibernate.connection.CharSet" value="utf8"/>
+      <property name="hibernate.connection.characterEncoding" value="utf8"/>
+      <property name="hibernate.connection.useUnicode" value="true"/>
+      <property name="hibernate.id.new_generator_mappings" value="false"/>
+      <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform"/>
       <property name="hibernate.connection.release_mode" value="after_transaction"/>
     </properties>
   </persistence-unit>
