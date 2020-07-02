@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 if [[ $# != 1 || $1 = -h || $1 = --help ]]
 then
