@@ -115,13 +115,6 @@
                 <username>${user}</username>
                 <password>${password}</password>
                 <skip>${skipTests}</skip>
-
-                <excludes>
-                  <exclude>META-INF/*.SF</exclude>
-                  <exclude>META-INF/*.DSA</exclude>
-                  <exclude>META-INF/*.RSA</exclude>
-                </excludes>
-
               </configuration>
 
               <executions>
