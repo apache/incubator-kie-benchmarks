@@ -66,6 +66,13 @@
         <maven.jdbc.driver.class>org.postgresql.Driver</maven.jdbc.driver.class>
       </properties>
 
+      <dependencies>
+        <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+        </dependency>
+      </dependencies>
+
       <build>
         <pluginManagement>
           <plugins>
