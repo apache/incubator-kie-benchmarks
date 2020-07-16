@@ -44,7 +44,7 @@ public class LHumanTaskProcess {
         jc.createRuntimeManager(ProcessStorage.HumanTask.getPath());
 
         // Used to set up H2 db in single thread. Otherwise there will be a primary key violation when running parallel.
-        //execute();
+        execute();
     }
 
     @BenchmarkMode(Mode.Throughput)
