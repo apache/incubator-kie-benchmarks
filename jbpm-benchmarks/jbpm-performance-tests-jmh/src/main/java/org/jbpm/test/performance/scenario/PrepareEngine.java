@@ -16,7 +16,7 @@ public class PrepareEngine {
         str += "peopleAssignments = (with ( new PeopleAssignments() ) { potentialOwners = [new User('" + UserStorage.PerfUser.getUserId()
                 + "')], businessAdministrators = [ new User('Administrator') ], }),";
         str += "names = [ new I18NText( 'en-UK', 'perf-sample-task')] })";
-        List<Long> taskIds = new ArrayList<Long>();
+        List<Long> taskIds = new ArrayList<>();
         while (count > 0) {
             Task task = TaskFactory.evalTask(new StringReader(str));
             long taskId = taskService.addTask(task, null);

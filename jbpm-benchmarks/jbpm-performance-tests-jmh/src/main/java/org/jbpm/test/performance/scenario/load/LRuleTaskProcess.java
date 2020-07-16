@@ -30,7 +30,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-
 public class LRuleTaskProcess {
 
     // ! Must be overridden using -p from command line
