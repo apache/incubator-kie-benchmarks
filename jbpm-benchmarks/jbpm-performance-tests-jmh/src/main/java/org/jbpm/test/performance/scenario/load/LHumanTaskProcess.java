@@ -29,7 +29,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-
 public class LHumanTaskProcess {
 
     // ! Must be overridden using -p from command line
@@ -44,8 +43,8 @@ public class LHumanTaskProcess {
         jc = JBPMController.getInstance();
         jc.createRuntimeManager(ProcessStorage.HumanTask.getPath());
 
-        // Used to set up H2 db in single thread.
-        execute();
+        // Used to set up H2 db in single thread. Otherwise there will be a primary key violation when running parallel.
+        //execute();
     }
 
     @BenchmarkMode(Mode.Throughput)

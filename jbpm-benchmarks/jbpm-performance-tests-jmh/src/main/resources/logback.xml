@@ -14,9 +14,7 @@
     <queueSize>300</queueSize>
     <appender-ref ref="fileAppender"/>
   </appender>
-
-  <!-- show only WARN messages on console, used for loggers that want to print 
-       info or debug messages to file, but only WARN (and higher) messages to console -->
+  
   <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <pattern>%d [%t] [%c] %-5p %m%n</pattern>

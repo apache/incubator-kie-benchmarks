@@ -47,6 +47,7 @@ public class JBPMController {
     protected static final String DATASOURCE_PROPERTIES = "/datasource.properties";
     protected static boolean persistence = false;
     private static JBPMController instance;
+
     protected RuntimeManager manager;
     protected Strategy strategy;
     protected UserGroupCallback userGroupCallback = new JBossUserGroupCallbackImpl("classpath:/usergroups.properties");
@@ -137,12 +138,10 @@ public class JBPMController {
 
                 @Override
                 public boolean accept(File dir, String name) {
-
                     return name.endsWith("-jbpmSessionId.ser");
                 }
             });
             for (String file : jbpmSerFiles) {
-
                 new File(tempDir, file).delete();
             }
         }

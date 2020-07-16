@@ -2,7 +2,7 @@
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_6M964MtNEeWFGc2OmJDzFA" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:itemDefinition id="_ssnItem" structureRef="Integer"/>
   <bpmn2:itemDefinition id="_downPaymentItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_applicationItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="_applicationItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:itemDefinition id="_financialReviewItem" structureRef="Boolean"/>
   <bpmn2:itemDefinition id="_borrowerQualifiedItem" structureRef="Boolean"/>
   <bpmn2:itemDefinition id="_brokerOverrideItem" structureRef="Boolean"/>
@@ -11,21 +11,21 @@
   <bpmn2:itemDefinition id="_wsErrorItem" structureRef="org.jbpm.bpmn2.handler.WorkItemHandlerRuntimeException"/>
   <bpmn2:itemDefinition id="_wsErrorStackItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__E8451731-3BAE-414A-82E1-F913124DB37A_GroupIdInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__E8451731-3BAE-414A-82E1-F913124DB37A_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="__E8451731-3BAE-414A-82E1-F913124DB37A_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:itemDefinition id="__E8451731-3BAE-414A-82E1-F913124DB37A_SkippableInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__E8451731-3BAE-414A-82E1-F913124DB37A_taskOutputApplicationOutputXItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="__E8451731-3BAE-414A-82E1-F913124DB37A_taskOutputApplicationOutputXItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:itemDefinition id="__876EB580-9313-42B2-88C9-93F5BF6B1E72_GroupIdInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__876EB580-9313-42B2-88C9-93F5BF6B1E72_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="__876EB580-9313-42B2-88C9-93F5BF6B1E72_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:itemDefinition id="__876EB580-9313-42B2-88C9-93F5BF6B1E72_SkippableInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__876EB580-9313-42B2-88C9-93F5BF6B1E72_brokerOverrideTaskOutputOutputXItem" structureRef="Boolean"/>
   <bpmn2:itemDefinition id="__D279073F-0496-4E5E-8296-73A229E3DCCC_GroupIdInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:itemDefinition id="__D279073F-0496-4E5E-8296-73A229E3DCCC_SkippableInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskOutputApplicationOutputXItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskOutputApplicationOutputXItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:itemDefinition id="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_GroupIdInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskInputApplicationInputXItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:itemDefinition id="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_SkippableInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskOutputApplicationOutputXItem" structureRef="com.redhat.bpms.examples.mortgage.Application"/>
+  <bpmn2:itemDefinition id="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskOutputApplicationOutputXItem" structureRef="com.redhat.bpms.examples.Application"/>
   <bpmn2:process id="com.redhat.bpms.examples.mortgage.MortgageApplication" drools:packageName="com.redhat.bpms.examples.mortgage" drools:version="1.0" name="MortgageApplication" isExecutable="true">
     <bpmn2:property id="ssn" itemSubjectRef="_ssnItem"/>
     <bpmn2:property id="downPayment" itemSubjectRef="_downPaymentItem"/>
@@ -261,9 +261,9 @@ kcontext.setVariable("borrowerQualified", Boolean.valueOf(qualified));]]></bpmn2
       <bpmn2:ioSpecification id="_6M-h88tNEeWFGc2OmJDzFA">
         <bpmn2:dataInput id="_E8451731-3BAE-414A-82E1-F913124DB37A_TaskNameInputX" name="TaskName"/>
         <bpmn2:dataInput id="_E8451731-3BAE-414A-82E1-F913124DB37A_GroupIdInputX" drools:dtype="Object" itemSubjectRef="__E8451731-3BAE-414A-82E1-F913124DB37A_GroupIdInputXItem" name="GroupId"/>
-        <bpmn2:dataInput id="_E8451731-3BAE-414A-82E1-F913124DB37A_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.mortgage.Application" itemSubjectRef="__E8451731-3BAE-414A-82E1-F913124DB37A_taskInputApplicationInputXItem" name="taskInputApplication"/>
+        <bpmn2:dataInput id="_E8451731-3BAE-414A-82E1-F913124DB37A_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.Application" itemSubjectRef="__E8451731-3BAE-414A-82E1-F913124DB37A_taskInputApplicationInputXItem" name="taskInputApplication"/>
         <bpmn2:dataInput id="_E8451731-3BAE-414A-82E1-F913124DB37A_SkippableInputX" drools:dtype="Object" itemSubjectRef="__E8451731-3BAE-414A-82E1-F913124DB37A_SkippableInputXItem" name="Skippable"/>
-        <bpmn2:dataOutput id="_E8451731-3BAE-414A-82E1-F913124DB37A_taskOutputApplicationOutputX" drools:dtype="com.redhat.bpms.examples.mortgage.Application" itemSubjectRef="__E8451731-3BAE-414A-82E1-F913124DB37A_taskOutputApplicationOutputXItem" name="taskOutputApplication"/>
+        <bpmn2:dataOutput id="_E8451731-3BAE-414A-82E1-F913124DB37A_taskOutputApplicationOutputX" drools:dtype="com.redhat.bpms.examples.Application" itemSubjectRef="__E8451731-3BAE-414A-82E1-F913124DB37A_taskOutputApplicationOutputXItem" name="taskOutputApplication"/>
         <bpmn2:inputSet id="_6M-h9MtNEeWFGc2OmJDzFA">
           <bpmn2:dataInputRefs>_E8451731-3BAE-414A-82E1-F913124DB37A_GroupIdInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_E8451731-3BAE-414A-82E1-F913124DB37A_taskInputApplicationInputX</bpmn2:dataInputRefs>
@@ -437,7 +437,7 @@ kcontext.setVariable("borrowerQualified", Boolean.valueOf(qualified));]]></bpmn2
       <bpmn2:ioSpecification id="_6M-iCctNEeWFGc2OmJDzFA">
         <bpmn2:dataInput id="_876EB580-9313-42B2-88C9-93F5BF6B1E72_TaskNameInputX" name="TaskName"/>
         <bpmn2:dataInput id="_876EB580-9313-42B2-88C9-93F5BF6B1E72_GroupIdInputX" drools:dtype="Object" itemSubjectRef="__876EB580-9313-42B2-88C9-93F5BF6B1E72_GroupIdInputXItem" name="GroupId"/>
-        <bpmn2:dataInput id="_876EB580-9313-42B2-88C9-93F5BF6B1E72_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.mortgage.Application" itemSubjectRef="__876EB580-9313-42B2-88C9-93F5BF6B1E72_taskInputApplicationInputXItem" name="taskInputApplication"/>
+        <bpmn2:dataInput id="_876EB580-9313-42B2-88C9-93F5BF6B1E72_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.Application" itemSubjectRef="__876EB580-9313-42B2-88C9-93F5BF6B1E72_taskInputApplicationInputXItem" name="taskInputApplication"/>
         <bpmn2:dataInput id="_876EB580-9313-42B2-88C9-93F5BF6B1E72_SkippableInputX" drools:dtype="Object" itemSubjectRef="__876EB580-9313-42B2-88C9-93F5BF6B1E72_SkippableInputXItem" name="Skippable"/>
         <bpmn2:dataOutput id="_876EB580-9313-42B2-88C9-93F5BF6B1E72_brokerOverrideTaskOutputOutputX" drools:dtype="Boolean" itemSubjectRef="__876EB580-9313-42B2-88C9-93F5BF6B1E72_brokerOverrideTaskOutputOutputXItem" name="brokerOverrideTaskOutput"/>
         <bpmn2:inputSet id="_6M_JAMtNEeWFGc2OmJDzFA">
@@ -491,9 +491,9 @@ kcontext.setVariable("borrowerQualified", Boolean.valueOf(qualified));]]></bpmn2
       <bpmn2:ioSpecification id="_6M_JEMtNEeWFGc2OmJDzFA">
         <bpmn2:dataInput id="_D279073F-0496-4E5E-8296-73A229E3DCCC_TaskNameInputX" name="TaskName"/>
         <bpmn2:dataInput id="_D279073F-0496-4E5E-8296-73A229E3DCCC_GroupIdInputX" drools:dtype="Object" itemSubjectRef="__D279073F-0496-4E5E-8296-73A229E3DCCC_GroupIdInputXItem" name="GroupId"/>
-        <bpmn2:dataInput id="_D279073F-0496-4E5E-8296-73A229E3DCCC_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.mortgage.Application" itemSubjectRef="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskInputApplicationInputXItem" name="taskInputApplication"/>
+        <bpmn2:dataInput id="_D279073F-0496-4E5E-8296-73A229E3DCCC_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.Application" itemSubjectRef="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskInputApplicationInputXItem" name="taskInputApplication"/>
         <bpmn2:dataInput id="_D279073F-0496-4E5E-8296-73A229E3DCCC_SkippableInputX" drools:dtype="Object" itemSubjectRef="__D279073F-0496-4E5E-8296-73A229E3DCCC_SkippableInputXItem" name="Skippable"/>
-        <bpmn2:dataOutput id="_D279073F-0496-4E5E-8296-73A229E3DCCC_taskOutputApplicationOutputX" drools:dtype="com.redhat.bpms.examples.mortgage.Application" itemSubjectRef="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskOutputApplicationOutputXItem" name="taskOutputApplication"/>
+        <bpmn2:dataOutput id="_D279073F-0496-4E5E-8296-73A229E3DCCC_taskOutputApplicationOutputX" drools:dtype="com.redhat.bpms.examples.Application" itemSubjectRef="__D279073F-0496-4E5E-8296-73A229E3DCCC_taskOutputApplicationOutputXItem" name="taskOutputApplication"/>
         <bpmn2:inputSet id="_6M_JEctNEeWFGc2OmJDzFA">
           <bpmn2:dataInputRefs>_D279073F-0496-4E5E-8296-73A229E3DCCC_GroupIdInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D279073F-0496-4E5E-8296-73A229E3DCCC_taskInputApplicationInputX</bpmn2:dataInputRefs>
@@ -551,9 +551,9 @@ kcontext.setVariable("borrowerQualified", Boolean.valueOf(qualified));]]></bpmn2
       <bpmn2:ioSpecification id="_6M_JIctNEeWFGc2OmJDzFA">
         <bpmn2:dataInput id="_3FC2B32E-BF4E-4705-BDCE-278131C78F88_TaskNameInputX" name="TaskName"/>
         <bpmn2:dataInput id="_3FC2B32E-BF4E-4705-BDCE-278131C78F88_GroupIdInputX" drools:dtype="Object" itemSubjectRef="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_GroupIdInputXItem" name="GroupId"/>
-        <bpmn2:dataInput id="_3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.mortgage.Application" itemSubjectRef="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskInputApplicationInputXItem" name="taskInputApplication"/>
+        <bpmn2:dataInput id="_3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskInputApplicationInputX" drools:dtype="com.redhat.bpms.examples.Application" itemSubjectRef="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskInputApplicationInputXItem" name="taskInputApplication"/>
         <bpmn2:dataInput id="_3FC2B32E-BF4E-4705-BDCE-278131C78F88_SkippableInputX" drools:dtype="Object" itemSubjectRef="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_SkippableInputXItem" name="Skippable"/>
-        <bpmn2:dataOutput id="_3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskOutputApplicationOutputX" drools:dtype="com.redhat.bpms.examples.mortgage.Application" itemSubjectRef="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskOutputApplicationOutputXItem" name="taskOutputApplication"/>
+        <bpmn2:dataOutput id="_3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskOutputApplicationOutputX" drools:dtype="com.redhat.bpms.examples.Application" itemSubjectRef="__3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskOutputApplicationOutputXItem" name="taskOutputApplication"/>
         <bpmn2:inputSet id="_6M_JIstNEeWFGc2OmJDzFA">
           <bpmn2:dataInputRefs>_3FC2B32E-BF4E-4705-BDCE-278131C78F88_GroupIdInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_3FC2B32E-BF4E-4705-BDCE-278131C78F88_taskInputApplicationInputX</bpmn2:dataInputRefs>

@@ -31,7 +31,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-
 public class L1000HumanTasksQueryPagination {
 
     // ! Must be overridden using -p from command line
