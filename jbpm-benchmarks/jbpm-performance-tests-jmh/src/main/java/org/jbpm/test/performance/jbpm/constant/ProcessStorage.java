@@ -7,6 +7,7 @@ public enum ProcessStorage {
     ParallelGateway("ParallelGateway.bpmn2", "org.kie.perf.ParallelGateway"),
     ParallelGatewayTenTimes("ParallelGatewayTenTimes.bpmn2", "org.kie.perf.ParallelGatewayTenTimes"),
     ParallelGatewayTwoTimes("ParallelGatewayTwoTimes.bpmn2", "org.kie.perf.ParallelGatewayTwoTimes"),
+    QueryProcessesAndTasksByVariables("QueryProcessesAndTasksByVariables.bpmn2", "org.kie.perf.QueryProcessesAndTasksByVariables"),
     RuleTask("RuleTask.bpmn2", "org.kie.perf.RuleTask"),
     ScriptTask("ScriptTask.bpmn2", "org.kie.perf.ScriptTask"),
     IntermediateSignal("IntermediateSignal.bpmn2", "org.kie.perf.IntermediateSignal"),
