@@ -7,7 +7,7 @@
   <parent>
     <artifactId>jbpm-benchmarks</artifactId>
     <groupId>org.jbpm</groupId>
-    <version>7.43.0-SNAPSHOT</version>
+    <version>7.44.0-SNAPSHOT</version>
   </parent>
   <artifactId>jbpm-performance-tests-jmh</artifactId>
   <name>jBPM Performance Tests (JMH)</name>
