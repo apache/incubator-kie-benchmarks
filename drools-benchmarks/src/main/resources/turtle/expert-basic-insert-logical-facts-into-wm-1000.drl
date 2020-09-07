@@ -1,5 +1,8 @@
 package org.drools.benchmarks.bre;
 import org.drools.benchmarks.model.*;
+
+// all update(); method calls invalidate previous rule and thus all the LogicalFacts should be retracted
+
 declare LogicalFact
     desc : String @key
 end
