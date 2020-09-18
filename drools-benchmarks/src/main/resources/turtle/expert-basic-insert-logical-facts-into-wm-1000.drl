@@ -21,7 +21,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_100")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_100"
 no-loop
@@ -39,7 +39,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_100")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_100"
 no-loop
@@ -57,7 +57,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_100")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_100"
 no-loop
@@ -75,7 +75,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_100")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_100"
 no-loop
@@ -93,7 +93,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_100")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_99"
@@ -112,7 +112,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_99")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_99"
 no-loop
@@ -130,7 +130,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_99")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_99"
 no-loop
@@ -148,7 +148,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_99")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_99"
 no-loop
@@ -166,7 +166,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_99")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_99"
 no-loop
@@ -184,7 +184,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_99")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_98"
@@ -203,7 +203,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_98")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_98"
 no-loop
@@ -221,7 +221,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_98")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_98"
 no-loop
@@ -239,7 +239,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_98")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_98"
 no-loop
@@ -257,7 +257,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_98")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_98"
 no-loop
@@ -275,7 +275,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_98")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_97"
@@ -294,7 +294,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_97")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_97"
 no-loop
@@ -312,7 +312,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_97")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_97"
 no-loop
@@ -330,7 +330,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_97")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_97"
 no-loop
@@ -348,7 +348,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_97")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_97"
 no-loop
@@ -366,7 +366,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_97")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_96"
@@ -385,7 +385,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_96")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_96"
 no-loop
@@ -403,7 +403,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_96")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_96"
 no-loop
@@ -421,7 +421,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_96")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_96"
 no-loop
@@ -439,7 +439,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_96")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_96"
 no-loop
@@ -457,7 +457,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_96")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_95"
@@ -476,7 +476,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_95")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_95"
 no-loop
@@ -494,7 +494,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_95")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_95"
 no-loop
@@ -512,7 +512,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_95")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_95"
 no-loop
@@ -530,7 +530,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_95")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_95"
 no-loop
@@ -548,7 +548,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_95")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_94"
@@ -567,7 +567,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_94")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_94"
 no-loop
@@ -585,7 +585,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_94")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_94"
 no-loop
@@ -603,7 +603,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_94")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_94"
 no-loop
@@ -621,7 +621,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_94")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_94"
 no-loop
@@ -639,7 +639,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_94")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_93"
@@ -658,7 +658,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_93")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_93"
 no-loop
@@ -676,7 +676,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_93")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_93"
 no-loop
@@ -694,7 +694,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_93")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_93"
 no-loop
@@ -712,7 +712,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_93")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_93"
 no-loop
@@ -730,7 +730,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_93")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_92"
@@ -749,7 +749,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_92")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_92"
 no-loop
@@ -767,7 +767,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_92")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_92"
 no-loop
@@ -785,7 +785,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_92")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_92"
 no-loop
@@ -803,7 +803,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_92")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_92"
 no-loop
@@ -821,7 +821,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_92")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_91"
@@ -840,7 +840,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_91")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_91"
 no-loop
@@ -858,7 +858,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_91")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_91"
 no-loop
@@ -876,7 +876,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_91")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_91"
 no-loop
@@ -894,7 +894,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_91")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_91"
 no-loop
@@ -912,7 +912,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_91")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_90"
@@ -931,7 +931,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_90")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_90"
 no-loop
@@ -949,7 +949,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_90")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_90"
 no-loop
@@ -967,7 +967,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_90")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_90"
 no-loop
@@ -985,7 +985,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_90")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_90"
 no-loop
@@ -1003,7 +1003,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_90")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_89"
@@ -1022,7 +1022,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_89")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_89"
 no-loop
@@ -1040,7 +1040,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_89")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_89"
 no-loop
@@ -1058,7 +1058,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_89")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_89"
 no-loop
@@ -1076,7 +1076,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_89")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_89"
 no-loop
@@ -1094,7 +1094,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_89")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_88"
@@ -1113,7 +1113,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_88")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_88"
 no-loop
@@ -1131,7 +1131,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_88")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_88"
 no-loop
@@ -1149,7 +1149,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_88")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_88"
 no-loop
@@ -1167,7 +1167,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_88")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_88"
 no-loop
@@ -1185,7 +1185,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_88")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_87"
@@ -1204,7 +1204,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_87")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_87"
 no-loop
@@ -1222,7 +1222,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_87")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_87"
 no-loop
@@ -1240,7 +1240,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_87")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_87"
 no-loop
@@ -1258,7 +1258,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_87")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_87"
 no-loop
@@ -1276,7 +1276,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_87")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_86"
@@ -1295,7 +1295,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_86")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_86"
 no-loop
@@ -1313,7 +1313,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_86")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_86"
 no-loop
@@ -1331,7 +1331,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_86")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_86"
 no-loop
@@ -1349,7 +1349,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_86")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_86"
 no-loop
@@ -1367,7 +1367,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_86")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_85"
@@ -1386,7 +1386,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_85")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_85"
 no-loop
@@ -1404,7 +1404,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_85")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_85"
 no-loop
@@ -1422,7 +1422,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_85")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_85"
 no-loop
@@ -1440,7 +1440,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_85")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_85"
 no-loop
@@ -1458,7 +1458,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_85")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_84"
@@ -1477,7 +1477,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_84")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_84"
 no-loop
@@ -1495,7 +1495,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_84")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_84"
 no-loop
@@ -1513,7 +1513,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_84")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_84"
 no-loop
@@ -1531,7 +1531,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_84")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_84"
 no-loop
@@ -1549,7 +1549,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_84")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_83"
@@ -1568,7 +1568,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_83")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_83"
 no-loop
@@ -1586,7 +1586,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_83")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_83"
 no-loop
@@ -1604,7 +1604,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_83")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_83"
 no-loop
@@ -1622,7 +1622,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_83")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_83"
 no-loop
@@ -1640,7 +1640,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_83")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_82"
@@ -1659,7 +1659,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_82")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_82"
 no-loop
@@ -1677,7 +1677,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_82")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_82"
 no-loop
@@ -1695,7 +1695,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_82")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_82"
 no-loop
@@ -1713,7 +1713,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_82")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_82"
 no-loop
@@ -1731,7 +1731,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_82")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_81"
@@ -1750,7 +1750,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_81")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_81"
 no-loop
@@ -1768,7 +1768,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_81")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_81"
 no-loop
@@ -1786,7 +1786,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_81")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_81"
 no-loop
@@ -1804,7 +1804,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_81")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_81"
 no-loop
@@ -1822,7 +1822,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_81")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_80"
@@ -1841,7 +1841,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_80")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_80"
 no-loop
@@ -1859,7 +1859,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_80")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_80"
 no-loop
@@ -1877,7 +1877,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_80")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_80"
 no-loop
@@ -1895,7 +1895,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_80")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_80"
 no-loop
@@ -1913,7 +1913,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_80")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_79"
@@ -1932,7 +1932,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_79")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_79"
 no-loop
@@ -1950,7 +1950,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_79")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_79"
 no-loop
@@ -1968,7 +1968,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_79")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_79"
 no-loop
@@ -1986,7 +1986,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_79")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_79"
 no-loop
@@ -2004,7 +2004,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_79")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_78"
@@ -2023,7 +2023,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_78")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_78"
 no-loop
@@ -2041,7 +2041,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_78")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_78"
 no-loop
@@ -2059,7 +2059,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_78")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_78"
 no-loop
@@ -2077,7 +2077,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_78")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_78"
 no-loop
@@ -2095,7 +2095,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_78")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_77"
@@ -2114,7 +2114,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_77")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_77"
 no-loop
@@ -2132,7 +2132,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_77")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_77"
 no-loop
@@ -2150,7 +2150,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_77")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_77"
 no-loop
@@ -2168,7 +2168,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_77")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_77"
 no-loop
@@ -2186,7 +2186,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_77")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_76"
@@ -2205,7 +2205,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_76")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_76"
 no-loop
@@ -2223,7 +2223,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_76")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_76"
 no-loop
@@ -2241,7 +2241,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_76")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_76"
 no-loop
@@ -2259,7 +2259,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_76")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_76"
 no-loop
@@ -2277,7 +2277,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_76")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_75"
@@ -2296,7 +2296,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_75")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_75"
 no-loop
@@ -2314,7 +2314,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_75")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_75"
 no-loop
@@ -2332,7 +2332,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_75")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_75"
 no-loop
@@ -2350,7 +2350,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_75")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_75"
 no-loop
@@ -2368,7 +2368,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_75")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_74"
@@ -2387,7 +2387,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_74")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_74"
 no-loop
@@ -2405,7 +2405,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_74")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_74"
 no-loop
@@ -2423,7 +2423,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_74")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_74"
 no-loop
@@ -2441,7 +2441,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_74")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_74"
 no-loop
@@ -2459,7 +2459,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_74")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_73"
@@ -2478,7 +2478,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_73")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_73"
 no-loop
@@ -2496,7 +2496,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_73")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_73"
 no-loop
@@ -2514,7 +2514,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_73")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_73"
 no-loop
@@ -2532,7 +2532,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_73")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_73"
 no-loop
@@ -2550,7 +2550,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_73")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_72"
@@ -2569,7 +2569,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_72")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_72"
 no-loop
@@ -2587,7 +2587,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_72")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_72"
 no-loop
@@ -2605,7 +2605,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_72")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_72"
 no-loop
@@ -2623,7 +2623,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_72")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_72"
 no-loop
@@ -2641,7 +2641,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_72")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_71"
@@ -2660,7 +2660,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_71")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_71"
 no-loop
@@ -2678,7 +2678,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_71")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_71"
 no-loop
@@ -2696,7 +2696,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_71")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_71"
 no-loop
@@ -2714,7 +2714,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_71")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_71"
 no-loop
@@ -2732,7 +2732,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_71")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_70"
@@ -2751,7 +2751,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_70")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_70"
 no-loop
@@ -2769,7 +2769,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_70")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_70"
 no-loop
@@ -2787,7 +2787,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_70")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_70"
 no-loop
@@ -2805,7 +2805,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_70")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_70"
 no-loop
@@ -2823,7 +2823,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_70")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_69"
@@ -2842,7 +2842,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_69")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_69"
 no-loop
@@ -2860,7 +2860,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_69")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_69"
 no-loop
@@ -2878,7 +2878,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_69")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_69"
 no-loop
@@ -2896,7 +2896,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_69")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_69"
 no-loop
@@ -2914,7 +2914,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_69")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_68"
@@ -2933,7 +2933,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_68")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_68"
 no-loop
@@ -2951,7 +2951,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_68")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_68"
 no-loop
@@ -2969,7 +2969,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_68")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_68"
 no-loop
@@ -2987,7 +2987,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_68")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_68"
 no-loop
@@ -3005,7 +3005,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_68")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_67"
@@ -3024,7 +3024,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_67")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_67"
 no-loop
@@ -3042,7 +3042,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_67")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_67"
 no-loop
@@ -3060,7 +3060,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_67")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_67"
 no-loop
@@ -3078,7 +3078,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_67")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_67"
 no-loop
@@ -3096,7 +3096,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_67")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_66"
@@ -3115,7 +3115,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_66")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_66"
 no-loop
@@ -3133,7 +3133,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_66")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_66"
 no-loop
@@ -3151,7 +3151,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_66")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_66"
 no-loop
@@ -3169,7 +3169,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_66")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_66"
 no-loop
@@ -3187,7 +3187,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_66")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_65"
@@ -3206,7 +3206,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_65")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_65"
 no-loop
@@ -3224,7 +3224,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_65")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_65"
 no-loop
@@ -3242,7 +3242,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_65")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_65"
 no-loop
@@ -3260,7 +3260,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_65")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_65"
 no-loop
@@ -3278,7 +3278,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_65")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_64"
@@ -3297,7 +3297,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_64")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_64"
 no-loop
@@ -3315,7 +3315,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_64")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_64"
 no-loop
@@ -3333,7 +3333,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_64")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_64"
 no-loop
@@ -3351,7 +3351,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_64")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_64"
 no-loop
@@ -3369,7 +3369,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_64")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_63"
@@ -3388,7 +3388,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_63")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_63"
 no-loop
@@ -3406,7 +3406,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_63")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_63"
 no-loop
@@ -3424,7 +3424,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_63")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_63"
 no-loop
@@ -3442,7 +3442,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_63")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_63"
 no-loop
@@ -3460,7 +3460,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_63")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_62"
@@ -3479,7 +3479,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_62")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_62"
 no-loop
@@ -3497,7 +3497,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_62")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_62"
 no-loop
@@ -3515,7 +3515,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_62")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_62"
 no-loop
@@ -3533,7 +3533,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_62")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_62"
 no-loop
@@ -3551,7 +3551,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_62")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_61"
@@ -3570,7 +3570,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_61")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_61"
 no-loop
@@ -3588,7 +3588,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_61")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_61"
 no-loop
@@ -3606,7 +3606,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_61")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_61"
 no-loop
@@ -3624,7 +3624,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_61")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_61"
 no-loop
@@ -3642,7 +3642,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_61")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_60"
@@ -3661,7 +3661,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_60")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_60"
 no-loop
@@ -3679,7 +3679,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_60")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_60"
 no-loop
@@ -3697,7 +3697,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_60")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_60"
 no-loop
@@ -3715,7 +3715,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_60")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_60"
 no-loop
@@ -3733,7 +3733,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_60")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_59"
@@ -3752,7 +3752,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_59")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_59"
 no-loop
@@ -3770,7 +3770,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_59")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_59"
 no-loop
@@ -3788,7 +3788,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_59")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_59"
 no-loop
@@ -3806,7 +3806,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_59")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_59"
 no-loop
@@ -3824,7 +3824,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_59")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_58"
@@ -3843,7 +3843,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_58")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_58"
 no-loop
@@ -3861,7 +3861,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_58")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_58"
 no-loop
@@ -3879,7 +3879,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_58")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_58"
 no-loop
@@ -3897,7 +3897,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_58")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_58"
 no-loop
@@ -3915,7 +3915,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_58")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_57"
@@ -3934,7 +3934,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_57")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_57"
 no-loop
@@ -3952,7 +3952,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_57")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_57"
 no-loop
@@ -3970,7 +3970,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_57")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_57"
 no-loop
@@ -3988,7 +3988,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_57")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_57"
 no-loop
@@ -4006,7 +4006,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_57")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_56"
@@ -4025,7 +4025,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_56")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_56"
 no-loop
@@ -4043,7 +4043,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_56")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_56"
 no-loop
@@ -4061,7 +4061,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_56")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_56"
 no-loop
@@ -4079,7 +4079,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_56")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_56"
 no-loop
@@ -4097,7 +4097,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_56")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_55"
@@ -4116,7 +4116,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_55")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_55"
 no-loop
@@ -4134,7 +4134,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_55")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_55"
 no-loop
@@ -4152,7 +4152,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_55")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_55"
 no-loop
@@ -4170,7 +4170,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_55")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_55"
 no-loop
@@ -4188,7 +4188,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_55")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_54"
@@ -4207,7 +4207,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_54")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_54"
 no-loop
@@ -4225,7 +4225,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_54")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_54"
 no-loop
@@ -4243,7 +4243,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_54")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_54"
 no-loop
@@ -4261,7 +4261,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_54")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_54"
 no-loop
@@ -4279,7 +4279,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_54")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_53"
@@ -4298,7 +4298,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_53")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_53"
 no-loop
@@ -4316,7 +4316,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_53")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_53"
 no-loop
@@ -4334,7 +4334,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_53")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_53"
 no-loop
@@ -4352,7 +4352,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_53")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_53"
 no-loop
@@ -4370,7 +4370,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_53")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_52"
@@ -4389,7 +4389,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_52")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_52"
 no-loop
@@ -4407,7 +4407,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_52")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_52"
 no-loop
@@ -4425,7 +4425,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_52")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_52"
 no-loop
@@ -4443,7 +4443,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_52")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_52"
 no-loop
@@ -4461,7 +4461,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_52")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_51"
@@ -4480,7 +4480,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_51")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_51"
 no-loop
@@ -4498,7 +4498,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_51")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_51"
 no-loop
@@ -4516,7 +4516,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_51")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_51"
 no-loop
@@ -4534,7 +4534,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_51")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_51"
 no-loop
@@ -4552,7 +4552,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_51")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_50"
@@ -4571,7 +4571,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_50")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_50"
 no-loop
@@ -4589,7 +4589,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_50")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_50"
 no-loop
@@ -4607,7 +4607,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_50")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_50"
 no-loop
@@ -4625,7 +4625,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_50")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_50"
 no-loop
@@ -4643,7 +4643,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_50")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_49"
@@ -4662,7 +4662,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_49")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_49"
 no-loop
@@ -4680,7 +4680,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_49")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_49"
 no-loop
@@ -4698,7 +4698,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_49")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_49"
 no-loop
@@ -4716,7 +4716,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_49")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_49"
 no-loop
@@ -4734,7 +4734,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_49")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_48"
@@ -4753,7 +4753,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_48")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_48"
 no-loop
@@ -4771,7 +4771,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_48")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_48"
 no-loop
@@ -4789,7 +4789,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_48")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_48"
 no-loop
@@ -4807,7 +4807,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_48")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_48"
 no-loop
@@ -4825,7 +4825,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_48")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_47"
@@ -4844,7 +4844,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_47")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_47"
 no-loop
@@ -4862,7 +4862,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_47")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_47"
 no-loop
@@ -4880,7 +4880,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_47")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_47"
 no-loop
@@ -4898,7 +4898,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_47")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_47"
 no-loop
@@ -4916,7 +4916,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_47")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_46"
@@ -4935,7 +4935,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_46")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_46"
 no-loop
@@ -4953,7 +4953,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_46")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_46"
 no-loop
@@ -4971,7 +4971,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_46")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_46"
 no-loop
@@ -4989,7 +4989,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_46")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_46"
 no-loop
@@ -5007,7 +5007,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_46")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_45"
@@ -5026,7 +5026,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_45")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_45"
 no-loop
@@ -5044,7 +5044,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_45")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_45"
 no-loop
@@ -5062,7 +5062,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_45")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_45"
 no-loop
@@ -5080,7 +5080,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_45")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_45"
 no-loop
@@ -5098,7 +5098,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_45")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_44"
@@ -5117,7 +5117,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_44")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_44"
 no-loop
@@ -5135,7 +5135,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_44")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_44"
 no-loop
@@ -5153,7 +5153,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_44")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_44"
 no-loop
@@ -5171,7 +5171,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_44")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_44"
 no-loop
@@ -5189,7 +5189,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_44")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_43"
@@ -5208,7 +5208,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_43")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_43"
 no-loop
@@ -5226,7 +5226,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_43")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_43"
 no-loop
@@ -5244,7 +5244,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_43")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_43"
 no-loop
@@ -5262,7 +5262,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_43")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_43"
 no-loop
@@ -5280,7 +5280,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_43")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_42"
@@ -5299,7 +5299,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_42")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_42"
 no-loop
@@ -5317,7 +5317,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_42")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_42"
 no-loop
@@ -5335,7 +5335,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_42")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_42"
 no-loop
@@ -5353,7 +5353,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_42")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_42"
 no-loop
@@ -5371,7 +5371,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_42")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_41"
@@ -5390,7 +5390,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_41")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_41"
 no-loop
@@ -5408,7 +5408,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_41")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_41"
 no-loop
@@ -5426,7 +5426,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_41")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_41"
 no-loop
@@ -5444,7 +5444,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_41")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_41"
 no-loop
@@ -5462,7 +5462,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_41")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_40"
@@ -5481,7 +5481,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_40")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_40"
 no-loop
@@ -5499,7 +5499,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_40")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_40"
 no-loop
@@ -5517,7 +5517,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_40")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_40"
 no-loop
@@ -5535,7 +5535,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_40")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_40"
 no-loop
@@ -5553,7 +5553,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_40")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_39"
@@ -5572,7 +5572,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_39")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_39"
 no-loop
@@ -5590,7 +5590,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_39")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_39"
 no-loop
@@ -5608,7 +5608,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_39")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_39"
 no-loop
@@ -5626,7 +5626,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_39")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_39"
 no-loop
@@ -5644,7 +5644,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_39")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_38"
@@ -5663,7 +5663,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_38")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_38"
 no-loop
@@ -5681,7 +5681,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_38")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_38"
 no-loop
@@ -5699,7 +5699,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_38")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_38"
 no-loop
@@ -5717,7 +5717,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_38")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_38"
 no-loop
@@ -5735,7 +5735,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_38")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_37"
@@ -5754,7 +5754,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_37")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_37"
 no-loop
@@ -5772,7 +5772,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_37")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_37"
 no-loop
@@ -5790,7 +5790,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_37")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_37"
 no-loop
@@ -5808,7 +5808,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_37")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_37"
 no-loop
@@ -5826,7 +5826,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_37")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_36"
@@ -5845,7 +5845,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_36")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_36"
 no-loop
@@ -5863,7 +5863,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_36")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_36"
 no-loop
@@ -5881,7 +5881,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_36")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_36"
 no-loop
@@ -5899,7 +5899,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_36")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_36"
 no-loop
@@ -5917,7 +5917,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_36")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_35"
@@ -5936,7 +5936,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_35")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_35"
 no-loop
@@ -5954,7 +5954,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_35")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_35"
 no-loop
@@ -5972,7 +5972,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_35")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_35"
 no-loop
@@ -5990,7 +5990,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_35")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_35"
 no-loop
@@ -6008,7 +6008,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_35")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_34"
@@ -6027,7 +6027,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_34")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_34"
 no-loop
@@ -6045,7 +6045,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_34")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_34"
 no-loop
@@ -6063,7 +6063,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_34")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_34"
 no-loop
@@ -6081,7 +6081,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_34")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_34"
 no-loop
@@ -6099,7 +6099,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_34")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_33"
@@ -6118,7 +6118,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_33")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_33"
 no-loop
@@ -6136,7 +6136,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_33")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_33"
 no-loop
@@ -6154,7 +6154,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_33")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_33"
 no-loop
@@ -6172,7 +6172,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_33")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_33"
 no-loop
@@ -6190,7 +6190,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_33")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_32"
@@ -6209,7 +6209,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_32")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_32"
 no-loop
@@ -6227,7 +6227,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_32")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_32"
 no-loop
@@ -6245,7 +6245,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_32")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_32"
 no-loop
@@ -6263,7 +6263,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_32")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_32"
 no-loop
@@ -6281,7 +6281,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_32")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_31"
@@ -6300,7 +6300,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_31")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_31"
 no-loop
@@ -6318,7 +6318,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_31")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_31"
 no-loop
@@ -6336,7 +6336,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_31")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_31"
 no-loop
@@ -6354,7 +6354,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_31")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_31"
 no-loop
@@ -6372,7 +6372,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_31")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_30"
@@ -6391,7 +6391,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_30")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_30"
 no-loop
@@ -6409,7 +6409,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_30")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_30"
 no-loop
@@ -6427,7 +6427,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_30")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_30"
 no-loop
@@ -6445,7 +6445,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_30")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_30"
 no-loop
@@ -6463,7 +6463,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_30")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_29"
@@ -6482,7 +6482,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_29")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_29"
 no-loop
@@ -6500,7 +6500,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_29")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_29"
 no-loop
@@ -6518,7 +6518,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_29")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_29"
 no-loop
@@ -6536,7 +6536,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_29")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_29"
 no-loop
@@ -6554,7 +6554,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_29")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_28"
@@ -6573,7 +6573,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_28")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_28"
 no-loop
@@ -6591,7 +6591,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_28")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_28"
 no-loop
@@ -6609,7 +6609,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_28")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_28"
 no-loop
@@ -6627,7 +6627,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_28")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_28"
 no-loop
@@ -6645,7 +6645,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_28")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_27"
@@ -6664,7 +6664,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_27")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_27"
 no-loop
@@ -6682,7 +6682,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_27")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_27"
 no-loop
@@ -6700,7 +6700,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_27")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_27"
 no-loop
@@ -6718,7 +6718,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_27")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_27"
 no-loop
@@ -6736,7 +6736,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_27")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_26"
@@ -6755,7 +6755,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_26")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_26"
 no-loop
@@ -6773,7 +6773,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_26")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_26"
 no-loop
@@ -6791,7 +6791,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_26")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_26"
 no-loop
@@ -6809,7 +6809,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_26")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_26"
 no-loop
@@ -6827,7 +6827,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_26")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_25"
@@ -6846,7 +6846,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_25")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_25"
 no-loop
@@ -6864,7 +6864,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_25")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_25"
 no-loop
@@ -6882,7 +6882,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_25")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_25"
 no-loop
@@ -6900,7 +6900,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_25")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_25"
 no-loop
@@ -6918,7 +6918,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_25")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_24"
@@ -6937,7 +6937,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_24")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_24"
 no-loop
@@ -6955,7 +6955,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_24")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_24"
 no-loop
@@ -6973,7 +6973,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_24")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_24"
 no-loop
@@ -6991,7 +6991,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_24")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_24"
 no-loop
@@ -7009,7 +7009,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_24")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_23"
@@ -7028,7 +7028,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_23")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_23"
 no-loop
@@ -7046,7 +7046,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_23")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_23"
 no-loop
@@ -7064,7 +7064,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_23")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_23"
 no-loop
@@ -7082,7 +7082,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_23")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_23"
 no-loop
@@ -7100,7 +7100,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_23")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_22"
@@ -7119,7 +7119,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_22")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_22"
 no-loop
@@ -7137,7 +7137,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_22")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_22"
 no-loop
@@ -7155,7 +7155,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_22")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_22"
 no-loop
@@ -7173,7 +7173,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_22")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_22"
 no-loop
@@ -7191,7 +7191,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_22")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_21"
@@ -7210,7 +7210,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_21")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_21"
 no-loop
@@ -7228,7 +7228,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_21")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_21"
 no-loop
@@ -7246,7 +7246,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_21")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_21"
 no-loop
@@ -7264,7 +7264,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_21")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_21"
 no-loop
@@ -7282,7 +7282,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_21")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_20"
@@ -7301,7 +7301,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_20")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_20"
 no-loop
@@ -7319,7 +7319,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_20")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_20"
 no-loop
@@ -7337,7 +7337,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_20")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_20"
 no-loop
@@ -7355,7 +7355,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_20")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_20"
 no-loop
@@ -7373,7 +7373,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_20")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_19"
@@ -7392,7 +7392,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_19")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_19"
 no-loop
@@ -7410,7 +7410,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_19")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_19"
 no-loop
@@ -7428,7 +7428,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_19")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_19"
 no-loop
@@ -7446,7 +7446,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_19")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_19"
 no-loop
@@ -7464,7 +7464,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_19")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_18"
@@ -7483,7 +7483,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_18")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_18"
 no-loop
@@ -7501,7 +7501,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_18")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_18"
 no-loop
@@ -7519,7 +7519,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_18")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_18"
 no-loop
@@ -7537,7 +7537,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_18")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_18"
 no-loop
@@ -7555,7 +7555,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_18")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_17"
@@ -7574,7 +7574,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_17")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_17"
 no-loop
@@ -7592,7 +7592,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_17")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_17"
 no-loop
@@ -7610,7 +7610,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_17")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_17"
 no-loop
@@ -7628,7 +7628,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_17")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_17"
 no-loop
@@ -7646,7 +7646,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_17")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_16"
@@ -7665,7 +7665,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_16")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_16"
 no-loop
@@ -7683,7 +7683,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_16")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_16"
 no-loop
@@ -7701,7 +7701,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_16")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_16"
 no-loop
@@ -7719,7 +7719,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_16")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_16"
 no-loop
@@ -7737,7 +7737,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_16")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_15"
@@ -7756,7 +7756,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_15")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_15"
 no-loop
@@ -7774,7 +7774,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_15")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_15"
 no-loop
@@ -7792,7 +7792,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_15")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_15"
 no-loop
@@ -7810,7 +7810,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_15")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_15"
 no-loop
@@ -7828,7 +7828,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_15")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_14"
@@ -7847,7 +7847,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_14")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_14"
 no-loop
@@ -7865,7 +7865,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_14")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_14"
 no-loop
@@ -7883,7 +7883,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_14")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_14"
 no-loop
@@ -7901,7 +7901,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_14")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_14"
 no-loop
@@ -7919,7 +7919,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_14")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_13"
@@ -7938,7 +7938,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_13")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_13"
 no-loop
@@ -7956,7 +7956,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_13")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_13"
 no-loop
@@ -7974,7 +7974,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_13")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_13"
 no-loop
@@ -7992,7 +7992,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_13")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_13"
 no-loop
@@ -8010,7 +8010,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_13")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_12"
@@ -8029,7 +8029,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_12")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_12"
 no-loop
@@ -8047,7 +8047,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_12")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_12"
 no-loop
@@ -8065,7 +8065,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_12")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_12"
 no-loop
@@ -8083,7 +8083,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_12")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_12"
 no-loop
@@ -8101,7 +8101,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_12")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_11"
@@ -8120,7 +8120,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_11")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_11"
 no-loop
@@ -8138,7 +8138,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_11")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_11"
 no-loop
@@ -8156,7 +8156,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_11")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_11"
 no-loop
@@ -8174,7 +8174,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_11")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_11"
 no-loop
@@ -8192,7 +8192,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_11")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_10"
@@ -8211,7 +8211,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_10")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_10"
 no-loop
@@ -8229,7 +8229,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_10")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_10"
 no-loop
@@ -8247,7 +8247,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_10")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_10"
 no-loop
@@ -8265,7 +8265,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_10")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_10"
 no-loop
@@ -8283,7 +8283,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_10")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_9"
@@ -8302,7 +8302,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_9")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_9"
 no-loop
@@ -8320,7 +8320,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_9")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_9"
 no-loop
@@ -8338,7 +8338,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_9")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_9"
 no-loop
@@ -8356,7 +8356,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_9")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_9"
 no-loop
@@ -8374,7 +8374,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_9")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_8"
@@ -8393,7 +8393,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_8")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_8"
 no-loop
@@ -8411,7 +8411,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_8")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_8"
 no-loop
@@ -8429,7 +8429,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_8")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_8"
 no-loop
@@ -8447,7 +8447,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_8")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_8"
 no-loop
@@ -8465,7 +8465,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_8")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_7"
@@ -8484,7 +8484,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_7")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_7"
 no-loop
@@ -8502,7 +8502,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_7")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_7"
 no-loop
@@ -8520,7 +8520,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_7")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_7"
 no-loop
@@ -8538,7 +8538,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_7")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_7"
 no-loop
@@ -8556,7 +8556,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_7")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_6"
@@ -8575,7 +8575,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_6")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_6"
 no-loop
@@ -8593,7 +8593,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_6")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_6"
 no-loop
@@ -8611,7 +8611,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_6")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_6"
 no-loop
@@ -8629,7 +8629,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_6")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_6"
 no-loop
@@ -8647,7 +8647,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_6")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_5"
@@ -8666,7 +8666,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_5")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_5"
 no-loop
@@ -8684,7 +8684,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_5")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_5"
 no-loop
@@ -8702,7 +8702,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_5")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_5"
 no-loop
@@ -8720,7 +8720,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_5")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_5"
 no-loop
@@ -8738,7 +8738,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_5")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_4"
@@ -8757,7 +8757,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_4")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_4"
 no-loop
@@ -8775,7 +8775,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_4")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_4"
 no-loop
@@ -8793,7 +8793,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_4")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_4"
 no-loop
@@ -8811,7 +8811,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_4")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_4"
 no-loop
@@ -8829,7 +8829,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_4")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_3"
@@ -8848,7 +8848,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_3")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_3"
 no-loop
@@ -8866,7 +8866,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_3")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_3"
 no-loop
@@ -8884,7 +8884,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_3")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_3"
 no-loop
@@ -8902,7 +8902,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_3")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_3"
 no-loop
@@ -8920,7 +8920,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_3")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_2"
@@ -8939,7 +8939,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_2")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_2"
 no-loop
@@ -8957,7 +8957,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_2")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_2"
 no-loop
@@ -8975,7 +8975,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_2")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_2"
 no-loop
@@ -8993,7 +8993,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_2")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_2"
 no-loop
@@ -9011,7 +9011,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_2")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 rule "Insert logical facts for each Customer_1"
@@ -9030,7 +9030,7 @@ when
     $cust : Customer(address == null, uuid == "insertLogicalFactsForEachCustomer_1")
 then
     $cust.address = new Address();
-    update($cust); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($cust);
 end
 rule "Insert logical facts for each Address_1"
 no-loop
@@ -9048,7 +9048,7 @@ when
     $addr : Address(city == null, uuid == "insertLogicalFactsForEachAddress_1")
 then
     $addr.city = "BrnoCity";
-    update($addr); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($addr);
 end
 rule "Insert logical facts for each Account_1"
 no-loop
@@ -9066,7 +9066,7 @@ when
     $acc : Account(type == null, uuid == "insertLogicalFactsForEachAccount_1")
 then
     $acc.type = Account.AccountType.SAVINGS;
-    update($acc); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($acc);
 end
 rule "Insert logical facts for each Transaction_1"
 no-loop
@@ -9084,7 +9084,7 @@ when
     $trans : Transaction(accountTo == null, uuid == "insertLogicalFactsForEachTransaction_1")
 then
     $trans.accountTo = new Account();
-    update($trans); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($trans);
 end
 rule "Insert logical facts for each Credit Card_1"
 no-loop
@@ -9102,7 +9102,7 @@ when
     $card : CreditCard(owner == null, uuid == "insertLogicalFactsForEachCreditCard_1")
 then
     $card.owner = new Customer();
-    update($card); // this invalidates previous rule and thus all the LogicalFacts should be retracted
+    update($card);
 end
 
 
