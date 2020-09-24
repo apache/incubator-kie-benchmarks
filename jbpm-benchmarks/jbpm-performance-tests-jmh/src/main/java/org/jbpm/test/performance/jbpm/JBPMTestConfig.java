@@ -1,7 +1,5 @@
 package org.jbpm.test.performance.jbpm;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class JBPMTestConfig {
@@ -23,16 +21,12 @@ public class JBPMTestConfig {
     public static JBPMTestConfig getInstance() {
         if (tc == null) {
             tc = new JBPMTestConfig();
-            try {
-                tc.loadProperties();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            tc.loadProperties();
         }
         return tc;
     }
 
-    public Properties loadProperties() throws Exception {
+    public Properties loadProperties() {
         properties = new Properties();
 
         projectName = System.getProperty("projectName");
@@ -56,7 +50,6 @@ public class JBPMTestConfig {
         properties.put("jbpm.persistence", persistence);
 
         String locking = System.getProperty("jbpm.locking");
-        System.out.println(locking);
         pessimisticLocking = locking.toLowerCase().equals("pessimistic");
         properties.put("jbpm.pessimisticLocking", pessimisticLocking);
 
