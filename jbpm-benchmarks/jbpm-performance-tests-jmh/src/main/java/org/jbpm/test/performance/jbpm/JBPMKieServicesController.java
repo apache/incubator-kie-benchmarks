@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import org.dashbuilder.DataSetCore;
 import org.jbpm.kie.services.impl.FormManagerServiceImpl;
+import org.jbpm.kie.services.impl.KModuleDeploymentService;
 import org.jbpm.kie.services.impl.KModuleDeploymentUnit;
 import org.jbpm.kie.services.impl.ProcessServiceImpl;
 import org.jbpm.kie.services.impl.RuntimeDataServiceImpl;
@@ -22,9 +23,9 @@ import org.jbpm.services.api.ProcessService;
 import org.jbpm.services.api.RuntimeDataService;
 import org.jbpm.services.api.UserTaskService;
 import org.jbpm.services.api.model.DeploymentUnit;
-import org.jbpm.test.performance.jbpm.services.CustomKModuleDeploymentService;
 import org.jbpm.test.services.AbstractKieServicesTest;
 import org.kie.api.runtime.EnvironmentName;
+import org.kie.internal.runtime.conf.NamedObjectModel;
 import org.kie.internal.runtime.conf.RuntimeStrategy;
 import org.kie.test.util.db.DataSourceFactory;
 import org.kie.test.util.db.PoolingDataSourceWrapper;
@@ -46,16 +47,21 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
 
     private static JBPMKieServicesController instance;
 
-    private JBPMKieServicesController(List<String> processes) throws Exception {
+    private JBPMKieServicesController(List<String> processes, String puName) throws Exception {
         processDefinitionFiles.addAll(processes);
+        setPuName(puName);
         super.setUp();
     }
 
-    public static JBPMKieServicesController getInstance(List<String> processes) throws Exception {
+    public static JBPMKieServicesController getInstance(List<String> processes, String puName) throws Exception {
         if (instance == null) {
-            instance = new JBPMKieServicesController(processes);
+            instance = new JBPMKieServicesController(processes, puName);
         }
         return instance;
+    }
+
+    public static JBPMKieServicesController getInstance(List<String> processes) throws Exception {
+        return getInstance(processes, null);
     }
 
     private RuntimeStrategy getRuntimeStrategy(JBPMController.Strategy strategy){
@@ -74,23 +80,20 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
     @Override
     protected void configureServices(){
         super.configureServices();
-        deploymentService = new CustomKModuleDeploymentService();
-        ((CustomKModuleDeploymentService) deploymentService).addEnvironmentEntry(EnvironmentName.USE_PESSIMISTIC_LOCKING, JBPMTestConfig.getInstance()
-                .isPessimisticLocking());
 
-        ((CustomKModuleDeploymentService) deploymentService).setBpmn2Service(bpmn2Service);
-        ((CustomKModuleDeploymentService) deploymentService).setEmf(emf);
-        ((CustomKModuleDeploymentService) deploymentService).setIdentityProvider(identityProvider);
-        ((CustomKModuleDeploymentService) deploymentService).setManagerFactory(new RuntimeManagerFactoryImpl());
-        ((CustomKModuleDeploymentService) deploymentService).setFormManagerService(new FormManagerServiceImpl());
+        ((KModuleDeploymentService) deploymentService).setBpmn2Service(bpmn2Service);
+        ((KModuleDeploymentService) deploymentService).setEmf(emf);
+        ((KModuleDeploymentService) deploymentService).setIdentityProvider(identityProvider);
+        ((KModuleDeploymentService) deploymentService).setManagerFactory(new RuntimeManagerFactoryImpl());
+        ((KModuleDeploymentService) deploymentService).setFormManagerService(new FormManagerServiceImpl());
 
         // build runtime data service
-        ((CustomKModuleDeploymentService) deploymentService).setRuntimeDataService(runtimeDataService);
+        ((KModuleDeploymentService) deploymentService).setRuntimeDataService(runtimeDataService);
 
         // set runtime data service as listener on deployment service
-        ((CustomKModuleDeploymentService) deploymentService).addListener(((RuntimeDataServiceImpl) runtimeDataService));
-        ((CustomKModuleDeploymentService) deploymentService).addListener(((BPMN2DataServiceImpl) bpmn2Service));
-        ((CustomKModuleDeploymentService) deploymentService).addListener(((QueryServiceImpl) queryService));
+        ((KModuleDeploymentService) deploymentService).addListener(((RuntimeDataServiceImpl) runtimeDataService));
+        ((KModuleDeploymentService) deploymentService).addListener(((BPMN2DataServiceImpl) bpmn2Service));
+        ((KModuleDeploymentService) deploymentService).addListener(((QueryServiceImpl) queryService));
 
         ((ProcessServiceImpl) processService).setDeploymentService(deploymentService);
 
@@ -100,8 +103,7 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
 
     @Override
     public DeploymentUnit prepareDeploymentUnit() throws Exception {
-        DeploymentUnit deploymentUnit = createAndDeployUnit(GROUP_ID, ARTIFACT_ID, VERSION);
-        return deploymentUnit;
+        return createAndDeployUnit(GROUP_ID, ARTIFACT_ID, VERSION);
     }
 
     @Override
@@ -203,6 +205,19 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
         ((KModuleDeploymentUnit) unit).setStrategy(
                 getRuntimeStrategy(JBPMController.Strategy.valueOf(JBPMTestConfig.getInstance().getRuntimeManagerStrategy().toUpperCase())));
         return unit;
+    }
+
+    @Override
+    protected boolean createDescriptor() {
+        return true;
+    }
+
+    @Override
+    protected List<NamedObjectModel> getEnvironmentEntries() {
+        List<NamedObjectModel> environmentEntries = super.getEnvironmentEntries();
+        environmentEntries.add(new NamedObjectModel(EnvironmentName.USE_PESSIMISTIC_LOCKING, "java.lang.Boolean", new Object[]{String.valueOf(JBPMTestConfig.getInstance()
+                .isPessimisticLocking())}));
+        return environmentEntries;
     }
 
     public ProcessService getProcessService(){
