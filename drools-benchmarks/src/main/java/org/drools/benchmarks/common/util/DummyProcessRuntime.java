@@ -24,6 +24,7 @@ import org.drools.core.runtime.process.InternalProcessRuntime;
 import org.kie.api.event.process.ProcessEventListener;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.runtime.process.WorkItemManager;
+import org.kie.api.runtime.rule.AgendaFilter;
 import org.kie.internal.process.CorrelationKey;
 
 public class DummyProcessRuntime implements InternalProcessRuntime {
@@ -72,6 +73,12 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
     public ProcessInstance startProcess(final String s, final Map<String, Object> map) {
         return null;
     }
+
+    @Override
+    public ProcessInstance startProcess(String s, AgendaFilter agendaFilter) { return null; }
+
+    @Override
+    public ProcessInstance startProcess(String s, Map<String, Object> map, AgendaFilter agendaFilter) { return null; }
 
     @Override public ProcessInstance startProcessFromNodeIds(String s, Map<String, Object> map, String... strings) {
         throw new UnsupportedOperationException();
