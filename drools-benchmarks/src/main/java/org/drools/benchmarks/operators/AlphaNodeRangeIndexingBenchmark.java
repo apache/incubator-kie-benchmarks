@@ -88,7 +88,7 @@ public class AlphaNodeRangeIndexingBenchmark extends AbstractBenchmark {
     @Benchmark
     public int test(final Blackhole eater) {
         for (Account account : accounts) {
-            eater.consume(kieSession.insert(account));
+            kieSession.insert(account);
         }
         return  kieSession.fireAllRules();
     }
