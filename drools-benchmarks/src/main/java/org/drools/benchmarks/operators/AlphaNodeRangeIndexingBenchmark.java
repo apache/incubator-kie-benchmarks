@@ -40,7 +40,7 @@ public class AlphaNodeRangeIndexingBenchmark extends AbstractBenchmark {
 
     protected static final String RULENAME_PREFIX = "AccountBalance";
 
-    @Param({"16", "32", "64"})
+    @Param({"12", "24", "48"})
     protected int rulesAndFactsNumber;
 
     @Param({"false", "true"})
