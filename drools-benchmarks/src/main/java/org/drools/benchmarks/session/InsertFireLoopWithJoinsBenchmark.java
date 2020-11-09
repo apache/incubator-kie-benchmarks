@@ -26,6 +26,7 @@ import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
+import org.drools.benchmarks.model.ConsequenceBlackhole;
 import org.drools.benchmarks.model.D;
 import org.drools.core.impl.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
@@ -68,10 +69,16 @@ public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
     @Param({"true", "false"})
     private boolean batchFire;
 
+    @Param({"true", "false"})
+    private boolean useCanonicalModel;
+
+    @Param({"true", "false"})
+    private boolean withConsequence;
+
     @Setup
     public void setupKieBase() {
-        final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true);
-        kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
+        final DRLProvider drlProvider = new RulesWithJoinsProvider().withNumberOfJoins( joinsNr ).withGeneratedConsequence( withConsequence );
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(useCanonicalModel, drlProvider.getDrl(rulesNr),
                                                      multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
                                                      cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
     }
@@ -84,6 +91,8 @@ public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
 
     @Benchmark
     public void test(final Blackhole eater) {
+        ConsequenceBlackhole.eater = eater;
+
         StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
         if (async) {
             session.insertAsync( new A( rulesNr + 1 ) );

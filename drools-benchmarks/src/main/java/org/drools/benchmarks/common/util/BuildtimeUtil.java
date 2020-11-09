@@ -126,6 +126,16 @@ public final class BuildtimeUtil {
         return createKieBaseFromDrl(drl, getKieBaseConfiguration(kieBaseOptions));
     }
 
+    public static KieBase createKieBaseFromDrl(final boolean useCanonicalModel, final String drl, final KieBaseOption... kieBaseOptions) {
+        if (TestUtil.dumpDrl()) {
+            logDebug("Benchmark DRL", drl);
+        }
+        final KieBase kieBase = new KieHelper().addContent(drl, ResourceType.DRL)
+                .build(useCanonicalModel ? ExecutableModelProject.class : DrlProject.class, kieBaseOptions);
+        dumpReteIfNeeded(kieBase);
+        return kieBase;
+    }
+
     public static KieBase createKieBaseFromDrl(final String drl, final KieBaseConfiguration kieBaseConfiguration) {
         if (TestUtil.dumpDrl()) {
             logDebug("Benchmark DRL", drl);

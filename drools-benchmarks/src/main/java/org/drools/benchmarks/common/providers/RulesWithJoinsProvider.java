@@ -17,6 +17,7 @@ package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.model.A;
+import org.drools.benchmarks.model.ConsequenceBlackhole;
 
 /**
  * Provides rule(s) with simple JoinNodes. Can provide rules with JoinNodes also for event processing.
@@ -25,21 +26,24 @@ public class RulesWithJoinsProvider implements DRLProvider {
 
     public static final String PROVIDER_ID = "RulesWithJoinsProvider";
 
-    private final int numberOfJoins;
-    private final boolean withCep;
-    private final boolean appendDrlHeader;
-    private final boolean prioritizedBySalience;
-    private final String global;
-    private final String consequence;
-    private final String rootConstraintValueOperator;
-    private final String joinConstraintValueOperator;
+    private int numberOfJoins = 0;
+    private boolean withCep = false;
+    private boolean withImports = true;
+    private boolean withGeneratedConsequence = true;
+    private boolean prioritizedBySalience = false;
+    private String global = "";
+    private String consequence = "";
+    private String rootConstraintValueOperator = ">";
+    private String joinConstraintValueOperator = ">";
 
-    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader) {
-        this(numberOfJoins, withCep, appendDrlHeader, "", "");
+    public RulesWithJoinsProvider() { }
+
+    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean withImports ) {
+        this(numberOfJoins, withCep, withImports, "", "");
     }
 
-    public RulesWithJoinsProvider(int numberOfJoins, boolean withCep, boolean appendDrlHeader, String global, String consequence) {
-        this(numberOfJoins, withCep, appendDrlHeader, false, global, consequence, ">", ">");
+    public RulesWithJoinsProvider( int numberOfJoins, boolean withCep, boolean withImports, String global, String consequence) {
+        this(numberOfJoins, withCep, withImports, false, global, consequence, ">", ">");
     }
 
     /**
@@ -47,7 +51,7 @@ public class RulesWithJoinsProvider implements DRLProvider {
      * @param numberOfJoins Required number of joins that each rule in provided DRL will contain.
      * This number is limited to maximum number of 4 joins in each rule.
      * @param withCep True, if rules for event processing should be generated, else false.
-     * @param appendDrlHeader True, if DRL header should be appended to provided DRL, else false.
+     * @param withImports True, if DRL header should be appended to provided DRL, else false.
      * @param prioritizedBySalience If true, the rules are generated with salience and ordered by it.
      * Each rule gets higher salience than previous one.
      * @param global DRL global.
@@ -55,7 +59,7 @@ public class RulesWithJoinsProvider implements DRLProvider {
      * @param rootConstraintValueOperator Operator for matching value in root constraint.
      * @param joinConstraintValueOperator Operator for matching value in join constraint.
      */
-    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean appendDrlHeader,
+    public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean withImports,
             final boolean prioritizedBySalience, final String global, final String consequence,
             final String rootConstraintValueOperator, final String joinConstraintValueOperator) {
         if (numberOfJoins > 4) {
@@ -64,12 +68,47 @@ public class RulesWithJoinsProvider implements DRLProvider {
         }
         this.numberOfJoins = numberOfJoins;
         this.withCep = withCep;
-        this.appendDrlHeader = appendDrlHeader;
+        this.withImports = withImports;
         this.prioritizedBySalience = prioritizedBySalience;
         this.global = global;
         this.consequence = consequence;
         this.rootConstraintValueOperator = rootConstraintValueOperator;
         this.joinConstraintValueOperator = joinConstraintValueOperator;
+    }
+
+    public RulesWithJoinsProvider withNumberOfJoins(int numberOfJoins) {
+        this.numberOfJoins = numberOfJoins;
+        return this;
+    }
+
+    public RulesWithJoinsProvider withCep(boolean withCep) {
+        this.withCep = withCep;
+        return this;
+    }
+
+    public RulesWithJoinsProvider withImports(boolean withImports) {
+        this.withImports = withImports;
+        return this;
+    }
+
+    public RulesWithJoinsProvider withGeneratedConsequence(boolean withGeneratedConsequence) {
+        this.withGeneratedConsequence = withGeneratedConsequence;
+        return this;
+    }
+
+    public RulesWithJoinsProvider withPrioritizedBySalience(boolean prioritizedBySalience) {
+        this.prioritizedBySalience = prioritizedBySalience;
+        return this;
+    }
+
+    public RulesWithJoinsProvider withGlobal(String global) {
+        this.global = global;
+        return this;
+    }
+
+    public RulesWithJoinsProvider withConsequence(String consequence) {
+        this.consequence = consequence;
+        return this;
     }
 
     @Override
@@ -84,9 +123,13 @@ public class RulesWithJoinsProvider implements DRLProvider {
 
     @Override
     public String getDrl(int numberOfRules, String ruleNameBase) {
+        if (withGeneratedConsequence) {
+            this.consequence = generateConsequence();
+        }
+
         final StringBuilder drlBuilder = new StringBuilder();
 
-        if (appendDrlHeader) {
+        if ( withImports ) {
             drlBuilder.append("import " + A.class.getPackage().getName() + ".*;\n");
         }
         drlBuilder.append( global + "\n" );
@@ -116,28 +159,27 @@ public class RulesWithJoinsProvider implements DRLProvider {
     }
 
     private void appendJoins(final StringBuilder drlBuilder, final int valueInConstraint) {
-        final String[] joinConstraints = withCep ? getJoinConstraintsCep() : getJoinConstraints();
         drlBuilder.append("  $a : A( value " + rootConstraintValueOperator + " " + valueInConstraint + ")\n");
         for (int i = 0; i < numberOfJoins; i++) {
-            drlBuilder.append(joinConstraints[i]);
+            drlBuilder.append(withCep ? getJoinConstraintsCep(i) : getJoinConstraints(i));
         }
     }
 
-    private String[] getJoinConstraintsCep() {
-        return new String[]{
-                "  $b : B( this after $a )\n",
-                "  $c : C( this after $b )\n",
-                "  $d : D( this after $c )\n",
-                "  $e : E( this after $d )\n"
-        };
+    private String getJoinConstraintsCep(int index) {
+        return "  $" + (char)('b'+index) + " : " + (char)('B'+index) + "( this after $" + (char)('a'+index) + " )\n";
     }
 
-    private String[] getJoinConstraints() {
-        return new String[] {
-                "  $b : B( value " + joinConstraintValueOperator + " $a.value )\n",
-                "  $c : C( value " + joinConstraintValueOperator + " $b.value )\n",
-                "  $d : D( value " + joinConstraintValueOperator + " $c.value )\n",
-                "  $e : E( value " + joinConstraintValueOperator + " $d.value )\n"
-        };
+    private String getJoinConstraints(int index) {
+        return "  $" + (char)('b'+index) + " : " + (char)('B'+index) + "( value " + joinConstraintValueOperator + " $" + (char)('a'+index) + ".value )\n";
+    }
+
+    private String generateConsequence() {
+        StringBuilder consequence = new StringBuilder("    long result = $a.getId()");
+        for (int i = 0; i < numberOfJoins; i++) {
+            consequence.append( " + $" ).append( (char)('b'+i) ).append( ".getId()" );
+        }
+        consequence.append( ";\n" );
+        consequence.append( "    " + ConsequenceBlackhole.class.getCanonicalName() + ".consume( result );" );
+        return consequence.toString();
     }
 }
