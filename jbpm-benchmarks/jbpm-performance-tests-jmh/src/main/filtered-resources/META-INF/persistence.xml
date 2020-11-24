@@ -148,12 +148,6 @@
       <property name="hibernate.connection.release_mode" value="after_transaction"/>
       <property name="hibernate.connection.handling_mode" value="DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION"/>
       <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.BTMTransactionManagerLookup" />
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <property name="javax.persistence.schema-generation.create-source" value="script"/>
-      <property name="javax.persistence.schema-generation.drop-source" value="script"/>
-      <property name="javax.persistence.schema-generation.create-script-source" value="ddl-scripts/perf-create-jbpm-schema.sql"/>
-      <property name="javax.persistence.schema-generation.drop-script-source" value="ddl-scripts/perf-drop-tables.sql"/>
-      <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />
     </properties>
   </persistence-unit>
 

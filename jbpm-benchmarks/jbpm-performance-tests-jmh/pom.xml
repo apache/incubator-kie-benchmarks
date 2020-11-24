@@ -13,8 +13,9 @@
   <name>jBPM Performance Tests (JMH)</name>
 
   <properties>
-    <!-- Tomcat DBCP 2 pool configuration -->
-    <maven.dbcp2.poolSize>16</maven.dbcp2.poolSize>
+    <!-- Don't run the tests by default as they take considerable amount
+    of time to complete. -->
+    <skipTests>true</skipTests>
   </properties>
 
   <dependencies>
@@ -117,6 +118,16 @@
         <filtering>true</filtering>
       </resource>
     </resources>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>false</filtering>
+      </testResource>
+      <testResource>
+        <directory>src/test/filtered-resources</directory>
+        <filtering>true</filtering>
+      </testResource>
+    </testResources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -180,6 +191,17 @@
         <maven.jdbc.db.port/>
         <maven.jdbc.db.server/>
         <maven.jdbc.url>jdbc:h2:mem:test;MVCC=true</maven.jdbc.url>
+        <maven.dbcp2.poolSize>16</maven.dbcp2.poolSize>
+        <maven.jmh.jbpm.processes>1</maven.jmh.jbpm.processes>
+        <maven.jmh.threads>1</maven.jmh.threads>
+        <maven.jmh.failOnError>true</maven.jmh.failOnError>
+        <maven.jmh.doGc>true</maven.jmh.doGc>
+        <maven.jmh.measurementIterations>1</maven.jmh.measurementIterations>
+        <maven.jmh.forks>1</maven.jmh.forks>
+        <maven.jmh.jvmArgsAppend>-Djbpm.runtimeManagerStrategy=PerProcessInstance -Dcom.arjuna.ats.arjuna.common.propertiesFile=jbossts-properties.xml -Djbpm.persistence=true -Djbpm.locking=optimistic -Djbpm.ht.eager=true</maven.jmh.jvmArgsAppend>
+        <maven.jmh.timeout>30</maven.jmh.timeout>
+        <maven.jmh.warmupTime>30</maven.jmh.warmupTime>
+        <maven.jmh.iterationTime>300</maven.jmh.iterationTime>
       </properties>
     </profile>
   </profiles>

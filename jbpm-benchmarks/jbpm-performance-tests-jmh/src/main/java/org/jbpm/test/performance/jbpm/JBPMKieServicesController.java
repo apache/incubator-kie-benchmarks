@@ -7,15 +7,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.dashbuilder.DataSetCore;
-import org.jbpm.kie.services.impl.FormManagerServiceImpl;
-import org.jbpm.kie.services.impl.KModuleDeploymentService;
 import org.jbpm.kie.services.impl.KModuleDeploymentUnit;
-import org.jbpm.kie.services.impl.ProcessServiceImpl;
-import org.jbpm.kie.services.impl.RuntimeDataServiceImpl;
-import org.jbpm.kie.services.impl.UserTaskServiceImpl;
-import org.jbpm.kie.services.impl.bpmn2.BPMN2DataServiceImpl;
-import org.jbpm.kie.services.impl.query.QueryServiceImpl;
-import org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl;
 import org.jbpm.services.api.AdvanceRuntimeDataService;
 import org.jbpm.services.api.DefinitionService;
 import org.jbpm.services.api.ProcessInstanceNotFoundException;
@@ -23,6 +15,8 @@ import org.jbpm.services.api.ProcessService;
 import org.jbpm.services.api.RuntimeDataService;
 import org.jbpm.services.api.UserTaskService;
 import org.jbpm.services.api.model.DeploymentUnit;
+import org.jbpm.test.performance.jbpm.services.CustomIdentityProvider;
+import org.jbpm.test.performance.jbpm.services.CustomUserGroupCallback;
 import org.jbpm.test.services.AbstractKieServicesTest;
 import org.kie.api.runtime.EnvironmentName;
 import org.kie.internal.runtime.conf.NamedObjectModel;
@@ -48,6 +42,7 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
     private static JBPMKieServicesController instance;
 
     private JBPMKieServicesController(List<String> processes, String puName) throws Exception {
+        super(new CustomIdentityProvider(), new CustomUserGroupCallback("classpath:/usergroups.properties"));
         processDefinitionFiles.addAll(processes);
         setPuName(puName);
         super.setUp();
@@ -78,30 +73,6 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
     }
 
     @Override
-    protected void configureServices(){
-        super.configureServices();
-
-        ((KModuleDeploymentService) deploymentService).setBpmn2Service(bpmn2Service);
-        ((KModuleDeploymentService) deploymentService).setEmf(emf);
-        ((KModuleDeploymentService) deploymentService).setIdentityProvider(identityProvider);
-        ((KModuleDeploymentService) deploymentService).setManagerFactory(new RuntimeManagerFactoryImpl());
-        ((KModuleDeploymentService) deploymentService).setFormManagerService(new FormManagerServiceImpl());
-
-        // build runtime data service
-        ((KModuleDeploymentService) deploymentService).setRuntimeDataService(runtimeDataService);
-
-        // set runtime data service as listener on deployment service
-        ((KModuleDeploymentService) deploymentService).addListener(((RuntimeDataServiceImpl) runtimeDataService));
-        ((KModuleDeploymentService) deploymentService).addListener(((BPMN2DataServiceImpl) bpmn2Service));
-        ((KModuleDeploymentService) deploymentService).addListener(((QueryServiceImpl) queryService));
-
-        ((ProcessServiceImpl) processService).setDeploymentService(deploymentService);
-
-        // build user task service
-        ((UserTaskServiceImpl) userTaskService).setDeploymentService(deploymentService);
-    }
-
-    @Override
     public DeploymentUnit prepareDeploymentUnit() throws Exception {
         return createAndDeployUnit(GROUP_ID, ARTIFACT_ID, VERSION);
     }
@@ -112,6 +83,11 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
     }
 
     public void tearDown(List<Long> processIds) {
+        abortProcessInstances(processIds);
+        undeployProcess();
+    }
+
+    public void abortProcessInstances(List<Long> processIds) {
         for (Long processInstanceId : processIds) {
             try {
                 // let's abort process instance to leave the system in clear state
@@ -120,6 +96,9 @@ public class JBPMKieServicesController extends AbstractKieServicesTest {
                 // ignore it as it was already completed/aborted
             }
         }
+    }
+
+    public void undeployProcess() {
         DataSetCore.set(null);
         super.tearDown();
     }
