@@ -14,12 +14,12 @@ import org.jbpm.services.api.ProcessService;
 import org.jbpm.services.api.RuntimeDataService;
 import org.jbpm.services.api.UserTaskService;
 import org.jbpm.services.api.model.DeploymentUnit;
-import org.jbpm.services.api.model.UserTaskInstanceDesc;
 import org.jbpm.services.api.query.model.QueryParam;
 import org.jbpm.test.performance.jbpm.JBPMKieServicesController;
 import org.jbpm.test.performance.jbpm.constant.ProcessStorage;
 import org.kie.api.task.model.Status;
 import org.kie.internal.query.QueryContext;
+import org.kie.internal.query.QueryFilter;
 import org.kie.internal.task.api.TaskVariable;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -75,12 +75,14 @@ public class QueryProcessesAndTasksByVariables {
     private DefinitionService definitionService;
     private DeploymentUnit deploymentUnit;
 
+    private static final String PU_NAME = "org.jbpm.domain.query-process-task-variables";
+
     String processDefinitionId = ProcessStorage.QueryProcessesAndTasksByVariables.getProcessDefinitionId();
 
     @Setup
     public void init() throws Exception {
         log.debug("init() - starting up jBPM processes...");
-        jc = JBPMKieServicesController.getInstance(singletonList(ProcessStorage.QueryProcessesAndTasksByVariables.getPath()));
+        jc = JBPMKieServicesController.getInstance(singletonList(ProcessStorage.QueryProcessesAndTasksByVariables.getPath()), PU_NAME);
 
         advanceRuntimeDataService = jc.getAdvanceRuntimeDataService();
         processService = jc.getProcessService();
@@ -101,58 +103,33 @@ public class QueryProcessesAndTasksByVariables {
             processIds.add(processService.startProcess(deploymentUnit.getIdentifier(), processDefinitionId, processVariables));
         }
 
-        // Get task variables
-        List<String> taskVarNames = definitionService.getTasksDefinitions(deploymentUnit.getIdentifier(), processDefinitionId).stream()
-                .flatMap( userTaskDefinition -> userTaskDefinition.getTaskInputMappings().entrySet().stream())
-                .filter(entry -> entry.getKey().contains("task_var_in") && entry.getValue().equalsIgnoreCase("Integer"))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+        taskVariables = definitionService.getTasksDefinitions(deploymentUnit.getIdentifier(), processDefinitionId).stream()
+                .flatMap( userTaskDefinition -> userTaskDefinition.getTaskOutputMappings().entrySet().stream())
+                .filter(entry -> entry.getKey().contains("task_var_out") && entry.getValue().equalsIgnoreCase("Integer"))
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                                          Map.Entry::getValue,
+                                          (a1, a2) -> a1));
 
-        runtimeDataService.getTasksByProcessInstanceId(processIds.get(0)).forEach( taskId -> {
-            taskVariables.putAll(userTaskService.getTaskInputContentByTaskId(taskId).entrySet().stream()
-                                         .filter( key-> taskVarNames.contains(key.getKey()))
-                                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-        });
+        // Update process and task variables twice
+        for (int i=0; i<2; i++) {
 
-        // Update process variables twice
-        processVariables.forEach( (k, v) -> processVariables.replace(k, counter.getAndIncrement()));
-        processIds.forEach( id -> {
-            processService.setProcessVariables(deploymentUnit.getIdentifier(), id, processVariables);
-        });
-
-        processVariables.forEach( (k, v) -> processVariables.replace(k, counter.getAndIncrement()));
-        processIds.forEach( id -> {
-            processService.setProcessVariables(deploymentUnit.getIdentifier(), id, processVariables);
-        });
-
-        // Update task variables twice
-        taskVariables.forEach( (k, v) -> taskVariables.replace(k, counter.getAndIncrement()));
-        processIds.forEach( id -> {
-            runtimeDataService.getTasksByProcessInstanceId(id).forEach( taskId -> {
-                UserTaskInstanceDesc task = runtimeDataService.getTaskById(taskId);
-                Map<String, Object> newInputTask = new HashMap<>();
-                userTaskService.getTaskInputContentByTaskId(taskId).keySet().stream()
-                        .filter(o -> o.contains("task_var_in"))
-                        .forEach( key -> {
-                            newInputTask.put(key, taskVariables.get(key));
-                            userTaskService.updateTask(taskId, "salaboy", task, newInputTask, null);
-                        });
+            processVariables.forEach( (k, v) -> processVariables.replace(k, counter.getAndIncrement()));
+            processIds.forEach( id -> {
+                processService.setProcessVariables(deploymentUnit.getIdentifier(), id, processVariables);
             });
-        });
 
-        taskVariables.forEach( (k, v) -> taskVariables.replace(k, counter.getAndIncrement()));
-        processIds.forEach( id -> {
-            runtimeDataService.getTasksByProcessInstanceId(id).forEach( taskId -> {
-                UserTaskInstanceDesc task = runtimeDataService.getTaskById(taskId);
-                Map<String, Object> newInputTask = new HashMap<>();
-                userTaskService.getTaskInputContentByTaskId(taskId).keySet().stream()
-                        .filter(o -> o.contains("task_var_in"))
-                        .forEach( key -> {
-                            newInputTask.put(key, taskVariables.get(key));
-                            userTaskService.updateTask(taskId, "salaboy", task, newInputTask, null);
-                        });
-            });
-        });
+            taskVariables.forEach( (k, v) -> taskVariables.replace(k, counter.getAndIncrement()));
+            runtimeDataService.getTasksAssignedAsPotentialOwner("salaboy", new QueryFilter())
+                    .forEach( taskSummary -> {
+                        Map<String, Object> newOutputTask = new HashMap<>();
+                        definitionService.getTaskOutputMappings(deploymentUnit.getIdentifier(), processDefinitionId, taskSummary.getName()).keySet().stream()
+                                .filter(s -> taskVariables.containsKey(s))
+                                .forEach(s -> {
+                                    newOutputTask.put(s, taskVariables.get(s));
+                                });
+                        userTaskService.saveContentFromUser(taskSummary.getId(), "salaboy", newOutputTask);
+                    });
+        }
 
         log.debug("init() - end up jBPM processes...");
     }
@@ -266,7 +243,7 @@ public class QueryProcessesAndTasksByVariables {
                 .limit(5)
                 .forEach( var -> {
                     taskVariables.add(equalsTo(var.getKey(), String.valueOf(var.getValue())));
-                    taskVariables.add(QueryParam.type(var.getKey(), TaskVariable.VariableType.INPUT.ordinal()));
+                    taskVariables.add(QueryParam.type(var.getKey(), TaskVariable.VariableType.OUTPUT.ordinal()));
                 });
         List<QueryParam> processVariables = new ArrayList<>();
         this.processVariables.entrySet().stream()
