@@ -182,14 +182,6 @@ public class JBPMController {
                 }
             } catch (Exception e) {
                 log.error("There has been an exception in the tearDown() method", e);
-            } finally {
-                // Terminate Narayana Recovery Manager
-                try {
-                    RecoveryManager.manager().terminate();
-                } catch (IllegalStateException e) {
-                    log.info("RecoveryManager is already closed.");
-                    log.debug("Exception thrown when terminating RecoveryManager", e);
-                }
             }
         }
         instance = null;

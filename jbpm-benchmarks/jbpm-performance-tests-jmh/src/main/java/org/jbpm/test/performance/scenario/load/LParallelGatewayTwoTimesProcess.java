@@ -7,9 +7,11 @@ import org.jbpm.test.performance.jbpm.constant.ProcessStorage;
 import org.jbpm.test.performance.jbpm.wih.ManualTaskWorkItemHandler;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
+import org.kie.api.runtime.manager.RuntimeManager;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -32,37 +34,49 @@ public class LParallelGatewayTwoTimesProcess {
     @Param("")
     public String runtimeManagerStrategy;
     private JBPMController jc;
+    private RuntimeManager manager;
 
-    @Setup
+    @State(Scope.Thread)
+    public static class ThreadScope {
+
+        private RuntimeEngine runtimeEngine;
+
+        @TearDown(Level.Invocation)
+        public void close(LParallelGatewayTwoTimesProcess lParallelGatewayTwoTimesProcess) {
+            lParallelGatewayTwoTimesProcess.manager.disposeRuntimeEngine(runtimeEngine);
+        }
+    }
+
+    @Setup(Level.Iteration)
     public void init() {
         // Sets jvm argument to runtimeManagerStrategy
         System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
         jc = JBPMController.getInstance();
         jc.addWorkItemHandler("Manual Task", new ManualTaskWorkItemHandler());
-        jc.createRuntimeManager(ProcessStorage.ParallelGatewayTwoTimes.getPath());
+        manager = jc.createRuntimeManager(ProcessStorage.ParallelGatewayTwoTimes.getPath());
     }
 
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.SECONDS)
     @Benchmark
-    public void Throughput() {
-        execute();
+    public void Throughput(ThreadScope threadScope) {
+        execute(threadScope);
     }
 
     @BenchmarkMode(Mode.SampleTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void sampleTime() {
-        execute();
+    public void sampleTime(ThreadScope threadScope) {
+        execute(threadScope);
     }
 
-    private void execute() {
-        RuntimeEngine runtimeEngine = jc.getRuntimeEngine();
-        KieSession ksession = runtimeEngine.getKieSession();
+    private void execute(ThreadScope threadScope) {
+        threadScope.runtimeEngine = jc.getRuntimeEngine();
+        KieSession ksession = threadScope.runtimeEngine.getKieSession();
         ksession.startProcess(ProcessStorage.ParallelGatewayTwoTimes.getProcessDefinitionId());
     }
 
-    @TearDown
+    @TearDown(Level.Iteration)
     public void close() {
         jc.tearDown();
     }
