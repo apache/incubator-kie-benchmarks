@@ -8,11 +8,13 @@ import org.jbpm.test.performance.jbpm.constant.ProcessStorage;
 import org.jbpm.test.performance.jbpm.constant.UserStorage;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
+import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.task.TaskService;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -35,13 +37,25 @@ public class LHumanTaskProcess {
     @Param("")
     public String runtimeManagerStrategy;
     private JBPMController jc;
+    private RuntimeManager manager;
 
-    @Setup
+    @State(Scope.Thread)
+    public static class ThreadScope {
+
+        private RuntimeEngine runtimeEngine;
+
+        @TearDown(Level.Invocation)
+        public void close(LHumanTaskProcess lHumanTaskProcess) {
+            lHumanTaskProcess.manager.disposeRuntimeEngine(runtimeEngine);
+        }
+    }
+
+    @Setup(Level.Iteration)
     public void init() {
         // Sets jvm argument to runtimeManagerStrategy
         System.setProperty("jbpm.runtimeManagerStrategy", runtimeManagerStrategy);
         jc = JBPMController.getInstance();
-        jc.createRuntimeManager(ProcessStorage.HumanTask.getPath());
+        manager = jc.createRuntimeManager(ProcessStorage.HumanTask.getPath());
 
         // Used to set up H2 db in single thread. Otherwise there will be a primary key violation when running parallel.
         execute();
@@ -50,17 +64,33 @@ public class LHumanTaskProcess {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.SECONDS)
     @Benchmark
-    public void Throughput() {
-        execute();
+    public void Throughput(ThreadScope threadScope) {
+        execute(threadScope);
     }
 
     @BenchmarkMode(Mode.SampleTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void sampleTime() {
-        execute();
+    public void sampleTime(ThreadScope threadScope) {
+        execute(threadScope);
     }
 
+    // Parallel in Throughput and sampleTime
+    private void execute(ThreadScope threadScope) {
+        threadScope.runtimeEngine = jc.getRuntimeEngine();
+        KieSession ksession = threadScope.runtimeEngine.getKieSession();
+        ProcessInstance pi = ksession.startProcess(ProcessStorage.HumanTask.getProcessDefinitionId());
+
+        TaskService taskService = threadScope.runtimeEngine.getTaskService();
+        List<Long> tasks = taskService.getTasksByProcessInstanceId(pi.getId());
+        Long taskSummaryId = tasks.get(0);
+
+        taskService.start(taskSummaryId, UserStorage.PerfUser.getUserId());
+
+        taskService.complete(taskSummaryId, UserStorage.PerfUser.getUserId(), null);
+    }
+
+    // For single thread use in init()
     private void execute() {
         RuntimeEngine runtimeEngine = jc.getRuntimeEngine();
         KieSession ksession = runtimeEngine.getKieSession();
@@ -75,7 +105,7 @@ public class LHumanTaskProcess {
         taskService.complete(taskSummaryId, UserStorage.PerfUser.getUserId(), null);
     }
 
-    @TearDown
+    @TearDown(Level.Iteration)
     public void close() {
         jc.tearDown();
     }
