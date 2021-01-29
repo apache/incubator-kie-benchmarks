@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package org.drools.benchmarks.dmn.alphanetwork;
+package org.drools.benchmarks.dmn.alphasupport;
 
 import java.io.StringWriter;
 import java.math.BigDecimal;
@@ -35,7 +35,6 @@ import org.kie.dmn.api.core.DMNModel;
 import org.kie.dmn.api.core.DMNResult;
 import org.kie.dmn.api.core.DMNRuntime;
 import org.kie.dmn.core.compiler.AlphaNetworkOption;
-import org.kie.dmn.core.compiler.ExecModelCompilerOption;
 import org.kie.dmn.core.util.KieHelper;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -76,7 +75,7 @@ public class DMNDecisionTableAlphaSupportingDraftBench {
         char[] az = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
         this.alphabet = Arrays.copyOf(az, alphalength);
         System.setProperty("alphalength", Integer.toString(alphalength));
-        
+
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_26);
         cfg.setClassForTemplateLoading(DMNDecisionTableAlphaSupportingDraftBench.class, "");
         cfg.setDefaultEncoding("UTF-8");
