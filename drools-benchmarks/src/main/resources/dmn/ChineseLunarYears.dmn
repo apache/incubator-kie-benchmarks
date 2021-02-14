@@ -1,0 +1,719 @@
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="xls2dmn_2049ac43-5bc2-4c2c-bd80-51ccb05d8b92" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" id="_58DC8DA7-8BC0-4F96-B159-46E82135A922" name="xls2dmn" expressionLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="xls2dmn_2049ac43-5bc2-4c2c-bd80-51ccb05d8b92">
+  <dmn:extensionElements/>
+  <dmn:inputData id="id_Date" name="Date">
+    <dmn:extensionElements/>
+    <dmn:variable id="idvar_Date" name="Date" typeRef="date"/>
+  </dmn:inputData>
+  <dmn:decision id="d_Chinese_32Year" name="Chinese Year">
+    <dmn:extensionElements/>
+    <dmn:variable id="dvar_Chinese_32Year" name="Chinese Year" typeRef="string"/>
+    <dmn:informationRequirement id="_19CFAA0C-3751-46AC-A0B6-FBA537035EDE">
+      <dmn:requiredInput href="#id_Date"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="ddt_Chinese_32Year" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row" outputLabel="Chinese Year">
+      <dmn:input id="_5E0EF5B0-A799-495C-AA8A-70A126DEBE22">
+        <dmn:inputExpression id="_CDE269C1-D1CC-4BCE-A6FA-A3490E04A0D3" typeRef="date">
+          <dmn:text>Date</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_72836544-A863-401A-A3BB-0D582325285A"/>
+      <dmn:annotation name=""/>
+      <dmn:rule id="_59120668-1923-40C3-89B9-00EE202CAE4C">
+        <dmn:inputEntry id="_102541B3-AF66-4738-BEC6-531FAAE6360B">
+          <dmn:text>[date("1984-02-02")..date("1985-02-20"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_9367C357-1BBB-45BF-AB29-9B515554915C">
+          <dmn:text>"Wood Rat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_1F8F8971-B951-4986-A670-35278B3EADEC">
+        <dmn:inputEntry id="_4B6868EA-E5F2-4001-A53F-318F8A3FC5F1">
+          <dmn:text>[date("1985-02-20")..date("1986-02-09"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_585B74A5-B344-4B1E-8F78-05EBFE678DD8">
+          <dmn:text>"Wood Ox"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_DD76DCE7-A5E0-4CB4-A4AA-7F1A360F1C5B">
+        <dmn:inputEntry id="_349E2442-902D-4AEB-824F-FFF99A6C4695">
+          <dmn:text>[date("1986-02-09")..date("1987-01-29"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E2C87F64-9E55-4785-BA91-CADF7011BE5A">
+          <dmn:text>"Fire Tiger"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_916B3FC1-C2DE-4245-B5B2-82876523EF48">
+        <dmn:inputEntry id="_45BEF19F-5E3C-4315-896C-B94FD829765F">
+          <dmn:text>[date("1987-01-29")..date("1988-02-17"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_4DB2808C-0CFA-4798-B8A0-40B33C593AE0">
+          <dmn:text>"Fire Rabbit"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_E1D4A4B5-4F2E-41A0-941A-F26BCB50B7CF">
+        <dmn:inputEntry id="_EEDA239D-9C95-4152-8C23-516467273F49">
+          <dmn:text>[date("1988-02-17")..date("1989-02-06"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_7647A4E7-1181-4B53-8516-0CCABF6A91E8">
+          <dmn:text>"Earth Dragon"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_E3C18660-CD36-478B-9DBA-F7A26874601E">
+        <dmn:inputEntry id="_B2476E89-E8F4-4C54-B8E7-920541F7692E">
+          <dmn:text>[date("1989-02-06")..date("1990-01-27"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_65607FB9-507C-4F42-83F9-6FDACB49633E">
+          <dmn:text>"Earth Snake"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_69936078-2C2E-4542-B3B8-891C0979B9EB">
+        <dmn:inputEntry id="_BF485B2B-ACDD-4DD4-A141-80423F2B2712">
+          <dmn:text>[date("1990-01-27")..date("1991-02-15"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0187AFCC-BAEB-4FFB-938B-815B5BF97021">
+          <dmn:text>"Golden Horse"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_6BEAC33C-A5F6-443F-B5C0-F7BF7BAC7F27">
+        <dmn:inputEntry id="_4D4FE686-9517-47A6-BE4A-6B302CC4B1C9">
+          <dmn:text>[date("1991-02-15")..date("1992-02-04"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_F4D39930-963D-4EA1-BC33-83DF9889D289">
+          <dmn:text>"Golden Goat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_85825777-AF57-473C-A246-787865DE697F">
+        <dmn:inputEntry id="_B43121E5-B97D-42F2-853F-BDD999A77AD0">
+          <dmn:text>[date("1992-02-04")..date("1993-01-23"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E7937533-6EA6-4265-9C8B-BD6955BA04DA">
+          <dmn:text>"Water Monkey"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_32EA561D-F2B1-4305-BF63-2B929A17ADA9">
+        <dmn:inputEntry id="_D58C8C1F-04DB-4A89-A175-8044B4FD0F58">
+          <dmn:text>[date("1993-01-23")..date("1994-02-09"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_232CEAC4-615C-4A5C-95E6-8D5DF77F6444">
+          <dmn:text>"Water Rooster"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_CAC72501-B1A5-4F56-9337-0DA7B250221C">
+        <dmn:inputEntry id="_8E03525E-E460-474C-8A36-79904A256ED6">
+          <dmn:text>[date("1994-02-09")..date("1995-01-31"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_6275D1B8-609D-4F5E-99EA-BDE095134193">
+          <dmn:text>"Wood Dog"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B1657642-2205-4DFF-85BF-2297D27020FD">
+        <dmn:inputEntry id="_776E010A-A2C3-4B25-8E03-B91694411D26">
+          <dmn:text>[date("1995-01-31")..date("1996-02-19"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_D077C6E5-ED29-49BF-8022-D262E7DEF6FF">
+          <dmn:text>"Wood Pig"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_630A1348-1465-496A-80F9-9AA2CA602AFF">
+        <dmn:inputEntry id="_A5FEA438-9EA6-47C2-982A-F8A71B7E3674">
+          <dmn:text>[date("1996-02-19")..date("1997-02-07"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B2616A05-D0CD-4288-87F0-1C1C2878B83B">
+          <dmn:text>"Fire Rat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_4BA4CA93-19C1-417F-97E0-FE9E36D49E7F">
+        <dmn:inputEntry id="_7E5663E9-5940-4C58-A1D5-1B0D5AD3B17E">
+          <dmn:text>[date("1997-02-07")..date("1998-01-28"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_AC28D282-DBEF-4F30-9073-0F9ECC3AF62C">
+          <dmn:text>"Fire Ox"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_8C38FD03-82B6-4ED8-A71A-D9AAD358BD57">
+        <dmn:inputEntry id="_72491B72-6773-430F-AD8A-249F1A42C6B5">
+          <dmn:text>[date("1998-01-28")..date("1999-02-16"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B78F552C-73D2-46EA-B73C-30A744BF1E84">
+          <dmn:text>"Earth Tiger"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_A052D075-01E9-4ACC-A414-67D9BCF096DD">
+        <dmn:inputEntry id="_6342EED6-A1EE-4735-9ABC-8081DA78323A">
+          <dmn:text>[date("1999-02-16")..date("2000-02-05"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_8CCD34AA-AEF2-41A0-A180-43A8EE752281">
+          <dmn:text>"Earth Rabbit"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_7F0117CD-7C45-4BB9-804D-3AF5AA68E0FF">
+        <dmn:inputEntry id="_E20BEB7E-1AD7-4EB7-85BE-11EF61847E16">
+          <dmn:text>[date("2000-02-05")..date("2001-01-24"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B1D33002-7A64-4E85-BBC5-FE8A3BBA5E1A">
+          <dmn:text>"Golden Dragon"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_275F0A6B-2581-4F32-90BC-18C2086976D1">
+        <dmn:inputEntry id="_8BE1FC50-BCF1-4611-A5C8-0BD7FBF6FC44">
+          <dmn:text>[date("2001-01-24")..date("2002-02-12"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FE6A68C7-1584-4136-8873-DA0A0C065DC1">
+          <dmn:text>"Golden Snake"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_EB60AD82-F6C3-4F76-AC24-8C65FF93947F">
+        <dmn:inputEntry id="_74C8E10B-CD6A-4A6F-BB74-730A2105FAA3">
+          <dmn:text>[date("2002-02-12")..date("2003-02-01"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_8D225B13-A0B2-4EBC-B60B-7B324D83EDB0">
+          <dmn:text>"Water Horse"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_352FF0C7-6AAD-4CBB-A421-BC851493C90D">
+        <dmn:inputEntry id="_2923E531-46E8-47EB-8244-538B22676283">
+          <dmn:text>[date("2003-02-01")..date("2004-01-22"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_566ADA65-55FB-4964-8A50-87D9B8D25753">
+          <dmn:text>"Water Goat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9574F007-B65A-4A1D-A255-32D6662F6D71">
+        <dmn:inputEntry id="_43D7C736-4999-48A0-BE0F-944DF057388A">
+          <dmn:text>[date("2004-01-22")..date("2005-02-09"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_A40194A0-1EE8-4BA1-BDDB-73883D53852E">
+          <dmn:text>"Wood Monkey"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_6132F8A7-6F63-4D22-88C4-976DACF260F3">
+        <dmn:inputEntry id="_FD9C32C5-B355-4CD0-BE43-B543C63C5006">
+          <dmn:text>[date("2005-02-09")..date("2006-01-29"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_469160A4-A26B-446B-A254-4FF7DCC08FDB">
+          <dmn:text>"Wood Rooster"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_D482C44E-A3F4-4136-9108-D114B0C4F1CF">
+        <dmn:inputEntry id="_C471AC5B-4445-422F-8D5B-CA777A2E987A">
+          <dmn:text>[date("2006-01-29")..date("2007-02-18"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_3FDD3378-1110-412E-839C-9B5AA544893A">
+          <dmn:text>"Fire Dog"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_E4BC8252-391E-4D87-AFC8-38BEAAB08986">
+        <dmn:inputEntry id="_9469E0B0-6E68-44ED-AC07-4E338803D075">
+          <dmn:text>[date("2007-02-18")..date("2008-02-07"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_834788DD-936D-4879-936C-8CC2A3C35147">
+          <dmn:text>"Fire Pig"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_EB78E99D-D8EB-4710-BD82-F91A5B7B44EE">
+        <dmn:inputEntry id="_A27DF900-ABF7-483F-8084-BE271E07E907">
+          <dmn:text>[date("2008-02-07")..date("2009-01-26"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_77CDFC6B-215D-4DFA-9415-7A3AB0AE828D">
+          <dmn:text>"Earth Rat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9542C156-9227-41EA-9775-AD6E389A216C">
+        <dmn:inputEntry id="_0BE5BBFD-97C1-42F6-A48E-C282672375EB">
+          <dmn:text>[date("2009-01-26")..date("2010-02-14"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_EE0A80DF-E72B-4761-9A70-42D99F429D47">
+          <dmn:text>"Earth Ox"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_A23DD84D-D8FE-4D2E-B06A-2AFCD4D5735A">
+        <dmn:inputEntry id="_36235D43-7140-4786-B378-B15A909B7E49">
+          <dmn:text>[date("2010-02-14")..date("2011-02-03"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B2EC2790-9CB1-4AE9-9564-51B4F1C45BD7">
+          <dmn:text>"Golden Tiger"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_446844B4-959B-44D5-8C35-D64C3A76F399">
+        <dmn:inputEntry id="_BC2A8649-4A88-4E76-AE8F-A5442A1B79AE">
+          <dmn:text>[date("2011-02-03")..date("2012-01-23"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_3EB8E619-E44E-45F9-8846-5848B564D4E1">
+          <dmn:text>"Golden Rabbit"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C4E5850B-4205-4959-9151-C759055C6731">
+        <dmn:inputEntry id="_4D546BF4-C310-43D6-8A94-074AF41107F9">
+          <dmn:text>[date("2012-01-23")..date("2013-02-10"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_D468E49F-832B-467A-A954-7F88E3906F73">
+          <dmn:text>"Water Dragon"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_6E81AA94-CDBD-425E-BA0B-E00EF809FE87">
+        <dmn:inputEntry id="_92ED5C56-B325-424A-8E05-AC30A80A2A29">
+          <dmn:text>[date("2013-02-10")..date("2014-01-31"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_266EA5B0-86F6-4A4A-B29E-9667140AAA22">
+          <dmn:text>"Water Snake"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_D9E3C046-5439-4BC1-BD34-7935EBAD6909">
+        <dmn:inputEntry id="_E4C11763-9EB8-4320-A2B1-889DACE3BA3F">
+          <dmn:text>[date("2014-01-31")..date("2015-02-19"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_BC7DD221-0DE1-422D-B6C1-8785669AE4FC">
+          <dmn:text>"Wood Horse"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_428CE06E-63F7-424E-824F-0735ADF3AE9D">
+        <dmn:inputEntry id="_1C5DDB2B-E968-4C5E-95AE-BB020D3E890E">
+          <dmn:text>[date("2015-02-19")..date("2016-02-08"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_21567303-A77A-4844-8662-24120AE5276B">
+          <dmn:text>"Wood Goat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_6EBBD602-7DC1-4BE4-BBEC-ECA2FCE4A342">
+        <dmn:inputEntry id="_0E9C313D-61D9-4D4E-AB7A-8CC3B0A4534A">
+          <dmn:text>[date("2016-02-08")..date("2017-01-28"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_BA3C9A4C-2A34-4EA2-9B55-F6DC2458BF04">
+          <dmn:text>"Fire Monkey"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_F42F41C8-6D45-42D8-8B35-C33F765E0349">
+        <dmn:inputEntry id="_95AAD6A0-42EE-4901-9B78-BF2A2027189B">
+          <dmn:text>[date("2017-01-28")..date("2018-02-16"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_745EC2F2-2D90-4671-AFEF-6A21C9D3110B">
+          <dmn:text>"Fire Rooster"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_24B00A47-5A77-4118-8FD1-3922CEA9DF87">
+        <dmn:inputEntry id="_D5C6F762-A399-4B8C-A871-DFF79001EBEF">
+          <dmn:text>[date("2018-02-16")..date("2019-02-05"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_740021C9-1773-4A5F-958A-177D465B1D79">
+          <dmn:text>"Earth Dog"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B5B67099-7FFB-4FFD-88FC-3CA05B96B1C6">
+        <dmn:inputEntry id="_DA40B021-9DCB-4707-834D-C72F790BC625">
+          <dmn:text>[date("2019-02-05")..date("2020-01-25"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_280C1562-F71C-4629-95E2-29C0A2413CB9">
+          <dmn:text>"Earth Pig"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_03EFB37D-7119-4F36-89BF-170F70E6CC38">
+        <dmn:inputEntry id="_01BC05D7-5FDB-465A-88F2-36BFC8811917">
+          <dmn:text>[date("2020-01-25")..date("2021-02-12"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_97A768BC-54AB-4F55-AF52-0265FBEF0A23">
+          <dmn:text>"Golden Rat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C3466A14-94AD-42C1-8A14-2A3BDC9F725B">
+        <dmn:inputEntry id="_9F758548-B607-4341-963F-6730BCDF33D3">
+          <dmn:text>[date("2021-02-12")..date("2022-02-01"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_8EBDAC05-5D12-41D8-996C-00C7FEF3A201">
+          <dmn:text>"Golden Ox"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_6FEDA3B3-BFEF-4E59-BE04-2407F8A6D735">
+        <dmn:inputEntry id="_D9305D98-7C57-4DE2-A502-07EF1A325116">
+          <dmn:text>[date("2022-02-01")..date("2023-01-22"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FD80F45F-ACFF-4604-A926-C9F115513A47">
+          <dmn:text>"Water Tiger"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_BC1D8E0B-1C07-49EB-ADA2-98A3AA6507AF">
+        <dmn:inputEntry id="_C5B2CB37-BB3F-4E6A-BAD9-27626E7713AD">
+          <dmn:text>[date("2023-01-22")..date("2024-02-10"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_83F3B8F5-D219-49C7-A78A-5295A9878066">
+          <dmn:text>"Water Rabbit"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_78AB74C3-74FD-48F8-BD80-8DB565ECCA36">
+        <dmn:inputEntry id="_1FC40664-D861-458C-8C81-2EE1EA0CB2FE">
+          <dmn:text>[date("2024-02-10")..date("2025-01-29"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C5119260-47D3-4147-99CB-B085A0CED225">
+          <dmn:text>"Wood Dragon"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_7740C890-A920-4030-9FF3-0FC1A24D99C8">
+        <dmn:inputEntry id="_40A2DE73-9A5B-4FEB-AABE-06C08C356BE7">
+          <dmn:text>[date("2025-01-29")..date("2026-02-17"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E8B61301-6EBE-4AA5-8DC3-064C1715AFDC">
+          <dmn:text>"Wood Snake"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_A77BEAED-A0FA-40BC-8A40-C3CCB5CD5198">
+        <dmn:inputEntry id="_F70B4D5E-29EC-4990-BF14-63B129FA90A2">
+          <dmn:text>[date("2026-02-17")..date("2027-02-06"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_70FE3245-5150-4978-8E94-514EC379C5B5">
+          <dmn:text>"Fire Horse"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5C9D74AE-F77B-4AD1-82F3-52FDDC82268C">
+        <dmn:inputEntry id="_0416DEB2-2ED5-4DBE-AC75-F81B0E65DAED">
+          <dmn:text>[date("2027-02-06")..date("2028-01-26"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_EF44D3E5-BA24-4080-A513-A137C268A73C">
+          <dmn:text>"Fire Goat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_7EFBE49F-3A2F-4818-A841-E90D7FF97AE0">
+        <dmn:inputEntry id="_976FF009-1E46-4034-A05D-F64B140336E7">
+          <dmn:text>[date("2028-01-26")..date("2029-02-13"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_177241A7-E9A8-45BA-A31E-33756F8837EF">
+          <dmn:text>"Earth Monkey"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B6D59A92-6A5A-4408-9344-2DD2456334FE">
+        <dmn:inputEntry id="_F51207D9-5ED4-4482-A1E6-48E4E8B6E618">
+          <dmn:text>[date("2029-02-13")..date("2030-02-03"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_AADC377C-AC68-4C73-95FA-7C1E46E53909">
+          <dmn:text>"Earth Rooster"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5BD55A71-4895-48E1-B5E1-783CD2084FB4">
+        <dmn:inputEntry id="_A3F44919-231B-498F-974D-3DEDFF13C5AE">
+          <dmn:text>[date("2030-02-03")..date("2031-01-23"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_898EE731-2A0C-4FB2-B0BD-7EFA1230BFB8">
+          <dmn:text>"Golden Dog"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5B0C6178-3244-425A-8328-FCB61B8F69B2">
+        <dmn:inputEntry id="_A448227C-99A6-49ED-8E21-974678DBE8DA">
+          <dmn:text>[date("2031-01-23")..date("2032-02-11"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_689CEAD2-C59D-4937-8717-6F17C68A6D86">
+          <dmn:text>"Golden Pig"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_245F15A0-CEE7-4637-B98D-4A9888AC8E40">
+        <dmn:inputEntry id="_60D5D53C-CDAB-451F-9E75-22A31422726E">
+          <dmn:text>[date("2032-02-11")..date("2033-01-31"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C6040F51-7A7A-4D4F-A07A-EF718E2D070A">
+          <dmn:text>"Water Rat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C378352C-50A3-408E-8AD3-94D43D9C4EB4">
+        <dmn:inputEntry id="_340D4305-12A4-416D-9397-ECE9F6A38DCE">
+          <dmn:text>[date("2033-01-31")..date("2034-02-19"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_CE4F1EDB-9666-4E6E-8BEE-AF368BB2B614">
+          <dmn:text>"Water Ox"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5F8B2736-974E-4B21-A659-ECB1335A517D">
+        <dmn:inputEntry id="_A0822E57-0110-4EBD-BEF2-241E265946A2">
+          <dmn:text>[date("2034-02-19")..date("2035-02-08"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_4B81F3BA-0D72-4726-BA78-ADE6B3E3A553">
+          <dmn:text>"Wood Tiger"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_DD303A1C-2EAA-4C0A-AA78-F11626E0383C">
+        <dmn:inputEntry id="_87E4BFEF-DCFB-45E0-9F7F-9681BE67D7CB">
+          <dmn:text>[date("2035-02-08")..date("2036-01-28"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_44CEFCC8-99D5-4A98-A99F-D62C475CB65A">
+          <dmn:text>"Wood Rabbit"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C045A345-63D5-4E15-B800-0BC0E74A35B0">
+        <dmn:inputEntry id="_EDA4CB6A-CE17-4C3A-ABB2-522FD7862CC5">
+          <dmn:text>[date("2036-01-28")..date("2037-02-15"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E08F0C36-B32B-407C-BD43-CE207D68E3D5">
+          <dmn:text>"Fire Dragon"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_29FE7AFF-1C95-4858-BABA-DB9D85837D4D">
+        <dmn:inputEntry id="_2D9E650F-5630-47F8-8551-9DDEFA21244F">
+          <dmn:text>[date("2037-02-15")..date("2038-02-04"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_DE44489C-1B41-4FE8-A90E-47E4418CC758">
+          <dmn:text>"Fire Snake"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_8C0E19BC-42E3-4AE7-90CD-A8378F1F82B1">
+        <dmn:inputEntry id="_17C3D07B-0754-457A-B0A7-BE9F79152848">
+          <dmn:text>[date("2038-02-04")..date("2039-01-24"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_6C1E3121-20A8-4AF1-B9A7-A3EF5260E4E8">
+          <dmn:text>"Earth Horse"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_09A58DC3-F5E1-4BFB-B507-8783D0DA2092">
+        <dmn:inputEntry id="_77688912-4530-4157-A975-C4A50849B6A5">
+          <dmn:text>[date("2039-01-24")..date("2040-02-12"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_73CADB7B-EA83-4261-B571-0E7D166F7E02">
+          <dmn:text>"Earth Goat"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_279A8293-84C7-467F-ADF1-2833F74CAF15">
+        <dmn:inputEntry id="_9BD8D49A-2778-4FB1-8370-ED2B88C5A9F4">
+          <dmn:text>[date("2040-02-12")..date("2041-02-01"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_93AAFD6D-5238-4762-9D48-D5FF9E0215D2">
+          <dmn:text>"Metal Monkey"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_7D793972-FF2E-4D30-AD6C-3F227AD2F1E1">
+        <dmn:inputEntry id="_E6664F23-86F0-4971-A505-3E5AD27D268B">
+          <dmn:text>[date("2041-02-01")..date("2042-01-22"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_1231A78B-607D-46AF-A96B-B14704E720FE">
+          <dmn:text>"Metal Rooster"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B85501DC-9DCA-412D-9FDE-4ED91FE8983D">
+        <dmn:inputEntry id="_476AD879-4BFA-4A0B-BC2C-B4E623FBEEA7">
+          <dmn:text>[date("2042-01-22")..date("2043-02-10"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_43D2FF35-378F-41C5-80F8-3B50255103F3">
+          <dmn:text>"Water Dog"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B17BF535-8326-481E-9486-BD01225A108F">
+        <dmn:inputEntry id="_54E26F41-CFF1-4EBC-AFAE-A226D8959CE4">
+          <dmn:text>[date("2043-02-10")..date("2044-01-30"))</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_30CC9B70-9D05-4F3F-9C65-2D77317BA21D">
+          <dmn:text>"Water Pig"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_A22D1007-FFE1-439D-8C3C-7DD383A0D682" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="ddt_Chinese_32Year">
+            <kie:width>50</kie:width>
+            <kie:width>349</kie:width>
+            <kie:width>137</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-id_Date" dmnElementRef="id_Date" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="50" y="225" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-d_Chinese_32Year" dmnElementRef="d_Chinese_32Year" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="208" y="66" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_19CFAA0C-3751-46AC-A0B6-FBA537035EDE" dmnElementRef="_19CFAA0C-3751-46AC-A0B6-FBA537035EDE">
+        <di:waypoint x="50" y="225"/>
+        <di:waypoint x="208" y="66"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
