@@ -15,7 +15,7 @@
 
   <properties>
     <kit.version>${version.org.kie}</kit.version>
-    <metrics.version>3.1.0</metrics.version>
+    <metrics.version>4.1.18</metrics.version>
 
     <!-- >>>>>>>>>>>>>>>> Performance configuration <<<<<<<<<<<<<<<<<<<< -->
 
@@ -49,6 +49,8 @@
     <perfRepo.urlPath></perfRepo.urlPath>
     <perfRepo.username></perfRepo.username>
     <perfRepo.password></perfRepo.password>
+
+    <testUIDSuffix></testUIDSuffix>
 
     <!-- Measure - MemoryUsage,FileDescriptors,ThreadStates -->
     <measure>MemoryUsage,FileDescriptors,ThreadStates</measure>
@@ -187,6 +189,8 @@
             <argument>-DperfRepo.urlPath=${perfRepo.urlPath}</argument>
             <argument>-DperfRepo.username=${perfRepo.username}</argument>
             <argument>-DperfRepo.password=${perfRepo.password}</argument>
+
+            <argument>-DtestUIDSuffix=${testUIDSuffix}</argument>
 
             <argument>-DremoteAPI=${remoteAPI}</argument>
             <argument>-Dkieserver.username=${kieserver.username}</argument>

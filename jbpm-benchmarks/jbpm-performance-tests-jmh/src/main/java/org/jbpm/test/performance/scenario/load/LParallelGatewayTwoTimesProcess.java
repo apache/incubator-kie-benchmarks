@@ -54,6 +54,11 @@ public class LParallelGatewayTwoTimesProcess {
         jc = JBPMController.getInstance();
         jc.addWorkItemHandler("Manual Task", new ManualTaskWorkItemHandler());
         manager = jc.createRuntimeManager(ProcessStorage.ParallelGatewayTwoTimes.getPath());
+
+        // It seems that something is not thread safe and this initialization helps to prevent null-pointer exception.
+        RuntimeEngine runtimeEngine = jc.getRuntimeEngine();
+        KieSession ksession = runtimeEngine.getKieSession();
+        manager.disposeRuntimeEngine(runtimeEngine);
     }
 
     @BenchmarkMode(Mode.Throughput)

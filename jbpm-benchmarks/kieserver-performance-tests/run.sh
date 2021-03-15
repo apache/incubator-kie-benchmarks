@@ -95,6 +95,11 @@ then
   PARAMS="$PARAMS -DperfRepo.password=$perfRepo_password"
 fi
 
+if [ -n "$testUIDSuffix" ]
+then
+  PARAMS="$PARAMS -DtestUIDSuffix=$testUIDSuffix"
+fi
+
 if [ -n "$remoteAPI" ]
 then
   PARAMS="$PARAMS -DremoteAPI=$remoteAPI"
