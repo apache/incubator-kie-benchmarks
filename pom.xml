@@ -13,7 +13,7 @@
   <artifactId>kie-benchmarks</artifactId>
   <packaging>pom</packaging>
 
-  <name>KIE Benchmarks</name>
+  <name>KIE Benchmarks  </name>
   <description>
     Various benchmarks related to KIE projects.
   </description>
