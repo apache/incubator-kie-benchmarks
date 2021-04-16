@@ -10,7 +10,7 @@ on:
     branches:
       - master
       - 7.[0-9]+.x
-
+# test
 jobs:
   pr-check:
     name: Java ${{ matrix.java }}
@@ -20,7 +20,7 @@ jobs:
         java: [8, 11]
       fail-fast: false
     steps:
-      - name: Check  out Git repository
+      - name: Check out Git repository
         uses: actions/checkout@v2
       - name: Set up JDK
         uses: actions/setup-java@v2
