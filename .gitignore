@@ -22,4 +22,4 @@ hs_err_pid*
 /*.ipr
 /*.iws
 /*.iml
-!/.travis.yml
+!/.github/
