@@ -27,6 +27,7 @@ import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
+import org.kie.internal.builder.conf.ExternaliseCanonicalModelLambdaOption;
 import org.kie.internal.builder.conf.ParallelLambdaExternalizationOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -40,6 +41,9 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+import static java.lang.String.valueOf;
+import static java.lang.System.setProperty;
+
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
 @Warmup(iterations = 20, time = 3, timeUnit = TimeUnit.SECONDS)
@@ -48,8 +52,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(4)
 public class ParallelLambdaExternalizationBenchmark {
 
-    @Param({"true", "false"})
-    private boolean parallelLambdaExternalization;
+    @Param({"disabled", "sequential", "parallel"})
+    private String parallelLambdaExternalization;
 
     @Param({"1000"})
     private int numberOfRules;
@@ -59,7 +63,21 @@ public class ParallelLambdaExternalizationBenchmark {
 
     @Setup
     public void createResource() {
-        System.setProperty(ParallelLambdaExternalizationOption.PROPERTY_NAME, String.valueOf(parallelLambdaExternalization));
+        switch(parallelLambdaExternalization){
+            case "disabled":
+                setProperty(ExternaliseCanonicalModelLambdaOption.PROPERTY_NAME, valueOf(false)); break;
+            case "sequential":
+                setProperty(ExternaliseCanonicalModelLambdaOption.PROPERTY_NAME, valueOf(true));
+                setProperty(ParallelLambdaExternalizationOption.PROPERTY_NAME, valueOf(false));
+                break;
+            case "parallel":
+                setProperty(ExternaliseCanonicalModelLambdaOption.PROPERTY_NAME, valueOf(true));
+                setProperty(ParallelLambdaExternalizationOption.PROPERTY_NAME, valueOf(true));
+                break;
+            default:
+                throw new RuntimeException("a run option is expected");
+        }
+
         final DRLProvider drlProvider = new SimpleRulesWithConstraintsProvider("Integer(this == ${i})");
         drlResource = KieServices.get().getResources()
                 .newReaderResource(new StringReader(drlProvider.getDrl(numberOfRules)))
