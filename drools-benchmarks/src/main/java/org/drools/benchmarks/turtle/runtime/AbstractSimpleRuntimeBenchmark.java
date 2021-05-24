@@ -17,6 +17,7 @@
 package org.drools.benchmarks.turtle.runtime;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,6 +32,7 @@ import org.kie.api.KieServices;
 import org.kie.api.conf.KieBaseOption;
 import org.kie.api.io.KieResources;
 import org.kie.api.io.Resource;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
 import org.kie.internal.utils.KieHelper;
@@ -128,6 +130,15 @@ public abstract class AbstractSimpleRuntimeBenchmark {
 
     protected void addClassPathResource(String path) {
         resources.add(kieResources.newClassPathResource(path));
+    }
+
+    protected void addDrlResource(String drl) {
+        resources.add(kieResources.newReaderResource(new StringReader(drl)).setSourcePath(generateResourceName(ResourceType.DRL)));
+    }
+
+    private int counter = 0;
+    private String generateResourceName(ResourceType type) {
+        return "src/main/resources/file" + counter++ + "." + type.getDefaultExtension();
     }
 
     protected void addFactsGenerator(ResourceGenerator generator, int nrOfFacts) {
