@@ -29,9 +29,11 @@ import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 
-public class SubNetworkBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
+public class SubNetworkBenchmark extends AbstractSimpleRuntimeBenchmark {
 
     @Param({"true", "false"})
     private boolean nestedAccumulates;
@@ -42,28 +44,33 @@ public class SubNetworkBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
     @Param({"3"})
     private int segmentCount;
 
-    @Param({"5"})
+    @Param({"5", "15"})
     private int objectsPerSegment;
 
     @Param({"true", "false"})
     private boolean perSegmentUpdate;
 
-    private TaskConfiguration config;
+    private List<List<Node>> nodes = new ArrayList<>();
 
     @Override
     public void addResources() {
         String body = nestedAccumulates ? nestedAccumulates(segmentCount) : sequentialAccumulates(segmentCount);
         String drl = getRules(segmentCount, body);
+        System.out.println(drl);
         addDrlResource(drl);
     }
 
     @Setup(Level.Iteration)
     public void setup() {
-        List<List<Node>> nodes = new ArrayList<>();
-
-        for(int i=0; i < segmentCount; i++) {
+        nodes.clear();
+        for (int i=0; i < segmentCount; i++) {
             nodes.add(createNodes(i, objectsPerSegment));
         }
+    }
+
+    @Benchmark
+    public int benchmark() {
+        ksession = kieBase.newKieSession();
 
         List<Integer> list = new ArrayList<>();
         ksession.setGlobal("list", list);
@@ -86,47 +93,28 @@ public class SubNetworkBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
             ids.add(idList);
         }
 
-        int[] segmentsToVisit = new int[] {0, 1, 2};
-        config = TaskConfiguration.configure(segmentsToVisit, list, handles, ids, perSegmentUpdate);
-    }
-
-    @Benchmark
-    public KieSession timeFactsInsertionAndRulesFiring() {
         ksession.fireAllRules();
-        iterate();
-        return ksession;
+
+        int[] segmentsToVisit = new int[] {0, 1, 2};
+        iterate(segmentsToVisit, list, handles, ids);
+        return list.size();
     }
 
-    private void iterate() {
-        int[] segmentsToVisit = config.segmentsToVisit;
-        List<Integer> list = config.list;
-        List<Map<Long, FactHandle>> handles = config.handles;
-        List<List<Long>> ids = config.ids;
-        boolean perSegmentUpdate = config.perSegmentUpdate;
-
+    private void iterate(int[] segmentsToVisit, List<Integer> list, List<Map<Long, FactHandle>> handles, List<List<Long>> ids) {
         for (int i = 0; i < segmentsToVisit.length; i++) {
-            iterate(new int[] {segmentsToVisit[i]},
-                    list, ksession,
-                    handles, ids, new RemoveAddTask(), perSegmentUpdate);
+            iterate(new int[] {segmentsToVisit[i]}, list, handles, ids, new RemoveAddTask());
         }
 
         for (int i = 0; i < segmentsToVisit.length; i++) {
-            iterate(new int[] {segmentsToVisit[i]},
-                    list, ksession,
-                    handles, ids, new UpdateTask(), perSegmentUpdate);
+            iterate(new int[] {segmentsToVisit[i]}, list, handles, ids, new UpdateTask());
         }
 
-        iterate(segmentsToVisit,
-                list, ksession,
-                handles, ids, new UpdateTask(), perSegmentUpdate);
+        iterate(segmentsToVisit, list, handles, ids, new UpdateTask());
 
-        iterate(segmentsToVisit,
-                list, ksession,
-                handles, ids, new RemoveAddTask(), perSegmentUpdate);
+        iterate(segmentsToVisit, list, handles, ids, new RemoveAddTask());
     }
 
-    private void iterate(int[] segmentsToVisit, List<Integer> list, KieSession ksession,
-                         List<Map<Long, FactHandle>> handles, List<List<Long>> ids, Task task, boolean perSegmentUpdate) {
+    private void iterate(int[] segmentsToVisit, List<Integer> list, List<Map<Long, FactHandle>> handles, List<List<Long>> ids, Task task) {
         int[] intPosArray = new int[segmentsToVisit.length];
         list.clear();
         for (int j = 0; j < segmentsToVisit.length; j++) {
@@ -163,8 +151,8 @@ public class SubNetworkBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
 
     private String getRules(int accCount, String acc) {
         String str =
-                "import " + Node.class.getCanonicalName() + ";" +
-                "import java.util.List;" +
+                "import " + Node.class.getCanonicalName() + ";\n" +
+                "import java.util.List;\n" +
                 "global List list;\n" +
                 "rule X when\n" +
                 generateNodes(0) +
@@ -283,12 +271,12 @@ public class SubNetworkBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
     }
 
     public interface Task {
-        void execute(KieSession ksession, Map<Long, FactHandle> handles, List<Long> ids, float pos);
+        void execute(KieSession ksession, Map<Long, FactHandle> handles, List<Long> ids, int pos);
     }
 
     public static class RemoveAddTask implements Task {
-        public void execute(KieSession ksession, Map<Long, FactHandle> handles, List<Long> ids, float pos) {
-            InternalFactHandle handle = (InternalFactHandle) handles.get(ids.get((int) pos)); // cast rounds it
+        public void execute(KieSession ksession, Map<Long, FactHandle> handles, List<Long> ids, int pos) {
+            InternalFactHandle handle = (InternalFactHandle) handles.get(ids.get(pos));
             Object o = handle.getObject();
 
             handles.remove(handle.getId());
@@ -296,77 +284,17 @@ public class SubNetworkBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
 
             handle = (InternalFactHandle) ksession.insert(o);
 
-            ids.set((int) pos, handle.getId()); // cast rounds it
+            ids.set(pos, handle.getId());
             handles.put(handle.getId(), handle);
         }
     }
 
     public static class UpdateTask implements Task {
-        public void execute(KieSession ksession, Map<Long, FactHandle> handles, List<Long> ids, float pos) {
-            InternalFactHandle handle = (InternalFactHandle) handles.get(ids.get((int) pos)); // cast rounds it
+        public void execute(KieSession ksession, Map<Long, FactHandle> handles, List<Long> ids, int pos) {
+            InternalFactHandle handle = (InternalFactHandle) handles.get(ids.get(pos));
             Object o = handle.getObject();
 
             ksession.update(handle, o);
         }
     }
-
-    public static class TaskConfiguration {
-        /** Number of segments to generate, this is effectively the number of accumulates */
-        private int[] segmentsToVisit;
-
-        /** The handles maps per segment */
-        private List<Map<Long, FactHandle>> handles;
-
-        /** Call fire per segment task, or per part iteration. */
-        private boolean perSegmentUpdate;
-
-        /** The ids per segment. Note this is not the facthandle ID.
-         * But uses the position of this list, to map to the FH ID, for look up in the map. */
-        private List<List<Long>> ids;
-
-        private List<Integer> list;
-
-        private TaskConfiguration() {
-
-        }
-
-        public static TaskConfiguration configure(int[] segmentsToVisit, List<Integer> list,
-                                                  List<Map<Long, FactHandle>> handles,
-                                                  List<List<Long>> ids, boolean perSegmentUpdate) {
-            TaskConfiguration t = new TaskConfiguration();
-            t.segmentsToVisit = segmentsToVisit;
-            t.list = list;
-            t.handles = handles;
-            t.ids = ids;
-            t.perSegmentUpdate = perSegmentUpdate;
-
-            return t;
-        }
-
-        public TaskConfiguration setSegmentsToVisit(int[] segmentsToVisit) {
-            this.segmentsToVisit = segmentsToVisit;
-            return this;
-        }
-
-        public TaskConfiguration setList(List<Integer> list) {
-            this.list = list;
-            return this;
-        }
-
-        public TaskConfiguration setHandles(List<Map<Long, FactHandle>> handles) {
-            this.handles = handles;
-            return this;
-        }
-
-        public TaskConfiguration setIds(List<List<Long>> ids) {
-            this.ids = ids;
-            return this;
-        }
-
-        public TaskConfiguration setPerSegmentUpdate(boolean perSegmentUpdate) {
-            this.perSegmentUpdate = perSegmentUpdate;
-            return this;
-        }
-    }
-
 }

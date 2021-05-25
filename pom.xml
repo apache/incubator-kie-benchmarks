@@ -21,7 +21,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <version.jmh>1.26</version.jmh>
+    <version.jmh>1.31</version.jmh>
     <!-- This is here so we can override the version from parent, i.e. benchmark other version -->
     <kie.bom.version>${version.org.kie}</kie.bom.version>
   </properties>
