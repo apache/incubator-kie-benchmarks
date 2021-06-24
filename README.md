@@ -1,4 +1,4 @@
-Kie-benchmarks repository
+Kie-benchmarks repository [![PR Check Status Badge](https://github.com/kiegroup/kie-benchmarks/actions/workflows/pull_request.yml/badge.svg)](https://github.com/kiegroup/kie-benchmarks/actions/workflows/pull_request.yml)
 =========================
 This repository contains benchmarks from various areas of Kie group projects.  
 

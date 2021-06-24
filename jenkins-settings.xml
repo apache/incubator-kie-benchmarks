@@ -1,0 +1,80 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+  http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <!-- servers
+          | This is a list of authentication profiles, keyed by the server-id used within the system.
+   | Authentication profiles can be used whenever maven must make a connection to a remote server.
+   |-->
+  <servers>
+    <server>
+      <id>jboss-releases-repository</id>
+      <username>kiereleaseuser</username>
+      <password>hJi8Zpa34gT</password>
+    </server>
+    <server>
+      <id>jboss-snapshots-repository</id>
+      <username>hudson-services</username>
+      <password>fiNi83Noauqw</password>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+        <id>mirror-central</id>
+        <mirrorOf>external:*</mirrorOf>
+        <url>https://bxms-qe.rhev-ci-vms.eng.rdu2.redhat.com:8443/nexus/content/groups/kie-all/</url>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>internal-npm-registry</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <npmRegistryURL>https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/</npmRegistryURL>
+        <yarnDownloadRoot>http://rcm-guest.app.eng.bos.redhat.com/rcm-guest/staging/rhba/dist/yarn/</yarnDownloadRoot>
+        <nodeDownloadRoot>http://rcm-guest.app.eng.bos.redhat.com/rcm-guest/staging/rhba/dist/node/</nodeDownloadRoot>
+        <npmDownloadRoot>http://rcm-guest.app.eng.bos.redhat.com/rcm-guest/staging/rhba/dist/npm/</npmDownloadRoot>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>repository-for-snapshots</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <!-- M2 Central repository with snapshots enabled - required to be able to resolve snapshots via mirror -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <name>Central Repository</name>
+          <url>https://repo.maven.apache.org/maven2</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <name>Central Repository</name>
+          <url>https://repo.maven.apache.org/maven2</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+</settings>
