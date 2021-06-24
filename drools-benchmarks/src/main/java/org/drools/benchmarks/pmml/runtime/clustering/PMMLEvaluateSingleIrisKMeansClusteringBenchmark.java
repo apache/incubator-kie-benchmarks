@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.pmml.runtime;
+package org.drools.benchmarks.pmml.runtime.clustering;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
@@ -32,12 +32,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@State(Scope.Benchmark)
 @Warmup(iterations = 300)
 @Measurement(iterations = 50)
-public class PMMLEvaluateRandomForestBenchmark extends AbstractBenchmark {
+public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBenchmark {
 
-    public static final String MODEL_NAME = "RandomForest";
-    public static final String FILE_NAME = "RandomForest.pmml";
+    public static final String MODEL_NAME = "SingleIrisKMeansClustering";
+    public static final String FILE_NAME = "SingleIrisKMeansClustering.pmml";
     public static final String FILE_PATH = "pmml/" + FILE_NAME;
 
     private Resource pmmlResource;
@@ -49,18 +50,16 @@ public class PMMLEvaluateRandomForestBenchmark extends AbstractBenchmark {
 
     static {
         INPUT_DATA = new HashMap<>();
-        INPUT_DATA.put("Age", 40.83);
-        INPUT_DATA.put("MonthlySalary", 3.5);
-        INPUT_DATA.put("TotalAsset", 0.04);
-        INPUT_DATA.put("TotalRequired", 10.04);
-        INPUT_DATA.put("NumberInstallments", 93.2);
+        INPUT_DATA.put("sepal_length", 4.4);
+        INPUT_DATA.put("sepal_width", 3.0);
+        INPUT_DATA.put("petal_length", 1.3);
+        INPUT_DATA.put("petal_width",  0.2);
     }
 
     @Setup
     public void setupResource() throws IOException {
         pmmlResource = KieServices.get().getResources()
                 .newClassPathResource(FILE_PATH);
-        System.out.println("pmmlResource " + pmmlResource.getSourcePath());
         pmmlRuntime = PMMLUtil.getPMMLRuntimeWithResources(true, pmmlResource);
     }
 
@@ -73,7 +72,7 @@ public class PMMLEvaluateRandomForestBenchmark extends AbstractBenchmark {
     }
 
     @Benchmark
-    public PMML4Result evaluateDecision() {
+    public PMML4Result evaluatePrediction() {
         return pmmlRuntime.evaluate(MODEL_NAME, pmmlContext);
     }
 }
