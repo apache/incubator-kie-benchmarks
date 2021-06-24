@@ -2,7 +2,7 @@ package org.jboss.qa.brms.performance.examples.projectjobscheduling.termination;
 
 import org.optaplanner.core.impl.phase.scope.AbstractPhaseScope;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
-import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
+import org.optaplanner.core.impl.solver.scope.SolverScope;
 import org.optaplanner.core.impl.solver.termination.AbstractTermination;
 
 public class ProjectJobSchedulingCalculateCountTermination extends AbstractTermination {
@@ -18,7 +18,7 @@ public class ProjectJobSchedulingCalculateCountTermination extends AbstractTermi
     // ************************************************************************
 
     @Override
-    public boolean isSolverTerminated(DefaultSolverScope solverScope) {
+    public boolean isSolverTerminated(SolverScope solverScope) {
         return isTerminated(solverScope.getScoreDirector());
     }
 
@@ -37,7 +37,7 @@ public class ProjectJobSchedulingCalculateCountTermination extends AbstractTermi
     // ************************************************************************
 
     @Override
-    public double calculateSolverTimeGradient(DefaultSolverScope solverScope) {
+    public double calculateSolverTimeGradient(SolverScope solverScope) {
         return calculateTimeGradient(solverScope.getScoreDirector());
     }
 

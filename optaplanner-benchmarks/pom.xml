@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>kie-benchmarks</artifactId>
-    <groupId>org.kie</groupId>
-    <version>7.57.0-SNAPSHOT</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.kie</groupId>
   <artifactId>optaplanner-benchmarks</artifactId>
   <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <modelVersion>4.0.0</modelVersion>
+
   <name>OptaPlanner Benchmarks Parent</name>
   <description>This is the multi-module project top-level parent.</description>
+
+  <properties>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+
+    <jmh.version>1.26</jmh.version>
+    <version.org.optaplanner>8.1.0.Final</version.org.optaplanner>
+  </properties>
 
   <modules>
     <module>optaplanner-perf-framework</module>
@@ -37,13 +44,42 @@
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
-        <version>${version.jmh}</version>
+        <version>${jmh.version}</version>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-generator-annprocess</artifactId>
-        <version>${version.jmh}</version>
+        <version>${jmh.version}</version>
+      </dependency>
+      <!-- Optaplanner -->
+      <dependency>
+        <groupId>org.optaplanner</groupId>
+        <artifactId>optaplanner-bom</artifactId>
+        <version>${version.org.optaplanner}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Logging -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.30</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.3</version>
+        <scope>runtime</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.compiler.plugin}</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>
