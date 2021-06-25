@@ -1,16 +1,16 @@
 package org.jboss.qa.brms.performance.examples.cloudbalancing.solution;
 
+import org.optaplanner.core.api.score.director.ScoreDirector;
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
-import org.optaplanner.core.impl.score.director.ScoreDirector;
 
 public class CloudBalanceSolutionInitializer implements CustomPhaseCommand<CloudBalance> {
 
     @Override
-    public void changeWorkingSolution(ScoreDirector scoreDirector) {
-        CloudBalance cb = (CloudBalance) scoreDirector.getWorkingSolution();
+    public void changeWorkingSolution(ScoreDirector<CloudBalance> scoreDirector) {
+        CloudBalance cb = scoreDirector.getWorkingSolution();
         int i = 0;
         for (CloudProcess p : cb.getProcessList()) {
             scoreDirector.beforeVariableChanged(p, "computer");
@@ -19,7 +19,7 @@ public class CloudBalanceSolutionInitializer implements CustomPhaseCommand<Cloud
             i++;
         }
         scoreDirector.triggerVariableListeners();
-        Score<?> score = scoreDirector.calculateScore();
+        Score<?> score = scoreDirector.getWorkingSolution().getScore();
 
         if (!score.isSolutionInitialized()) {
             throw new IllegalStateException(

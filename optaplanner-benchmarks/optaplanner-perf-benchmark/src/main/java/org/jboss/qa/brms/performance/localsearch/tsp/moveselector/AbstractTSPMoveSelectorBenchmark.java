@@ -3,13 +3,13 @@ package org.jboss.qa.brms.performance.localsearch.tsp.moveselector;
 import org.jboss.qa.brms.performance.examples.tsp.termination.HardTSPCalculateCountTermination;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.localsearch.tsp.AbstractTSPLocalSearchBenchmark;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 public abstract class AbstractTSPMoveSelectorBenchmark extends AbstractTSPLocalSearchBenchmark {
 
     @Override
-    public AcceptorConfig createAcceptorConfig() {
+    public LocalSearchAcceptorConfig createAcceptorConfig() {
         return AcceptorConfigurations.createTabuSearchAcceptor(0.1);
     }
 

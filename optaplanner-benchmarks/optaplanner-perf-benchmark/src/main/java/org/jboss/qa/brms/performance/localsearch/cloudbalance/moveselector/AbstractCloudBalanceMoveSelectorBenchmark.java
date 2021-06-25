@@ -3,13 +3,13 @@ package org.jboss.qa.brms.performance.localsearch.cloudbalance.moveselector;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.termination.CloudBalanceCalculateCountTermination;
 import org.jboss.qa.brms.performance.localsearch.cloudbalance.AbstractCloudBalanceLocalSearchBenchmark;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 public abstract class AbstractCloudBalanceMoveSelectorBenchmark extends AbstractCloudBalanceLocalSearchBenchmark {
 
     @Override
-    public AcceptorConfig createAcceptorConfig() {
+    public LocalSearchAcceptorConfig createAcceptorConfig() {
         return AcceptorConfigurations.createSimulatedAnnealingAcceptor("0hard/0soft");
     }
 

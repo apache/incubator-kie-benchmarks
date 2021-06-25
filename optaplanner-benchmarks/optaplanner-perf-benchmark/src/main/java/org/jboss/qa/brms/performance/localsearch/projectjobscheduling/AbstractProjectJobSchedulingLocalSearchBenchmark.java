@@ -33,8 +33,7 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         Solver<Schedule> constructionSolver = solverFactory.buildSolver();
 
         Schedule solution = Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override

@@ -34,8 +34,7 @@ public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractL
         Solver<CloudBalance> constructionSolver = solverFactory.buildSolver();
 
         CloudBalance solution = Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override

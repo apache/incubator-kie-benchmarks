@@ -13,7 +13,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.phase.custom.CustomPhaseConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
@@ -40,7 +40,7 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
     }
 
     @Override
-    protected AcceptorConfig getAcceptorConfig() {
+    protected LocalSearchAcceptorConfig getAcceptorConfig() {
         return AcceptorConfigurations.createLateAcceptanceAcceptor(50);
     }
 
@@ -62,8 +62,7 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
         VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override

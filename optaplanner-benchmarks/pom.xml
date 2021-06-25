@@ -14,12 +14,10 @@
   <description>This is the multi-module project top-level parent.</description>
 
   <properties>
-    <maven.compiler.release>11</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <version.compiler.plugin>3.8.1</version.compiler.plugin>
-
-    <jmh.version>1.26</jmh.version>
     <version.org.optaplanner>8.1.0.Final</version.org.optaplanner>
+    <maven.compiler.jdk.version>11</maven.compiler.jdk.version>
+    <jmh.version>1.26</jmh.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <modules>
@@ -59,17 +57,12 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- Logging -->
       <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.30</version>
-      </dependency>
-      <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.2.3</version>
-        <scope>runtime</scope>
+        <groupId>org.optaplanner</groupId>
+        <artifactId>optaplanner-build-parent</artifactId>
+        <version>${version.org.optaplanner}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -77,8 +70,12 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${version.compiler.plugin}</version>
+        <version>3.8.0</version>
+        <configuration>
+          <release>${maven.compiler.jdk.version}</release>
+        </configuration>
       </plugin>
     </plugins>
   </build>

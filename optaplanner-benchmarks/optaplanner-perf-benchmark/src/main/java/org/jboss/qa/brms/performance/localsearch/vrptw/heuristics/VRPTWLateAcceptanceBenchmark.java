@@ -3,12 +3,12 @@ package org.jboss.qa.brms.performance.localsearch.vrptw.heuristics;
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.openjdk.jmh.annotations.Benchmark;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 
 public class VRPTWLateAcceptanceBenchmark extends AbstractVRPTWHeuristicBenchmark {
 
     @Override
-    public AcceptorConfig createAcceptorConfig() {
+    public LocalSearchAcceptorConfig createAcceptorConfig() {
         return AcceptorConfigurations.createLateAcceptanceAcceptor(50);
     }
 

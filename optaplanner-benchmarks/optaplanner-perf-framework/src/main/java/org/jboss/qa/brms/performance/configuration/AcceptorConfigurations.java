@@ -8,33 +8,33 @@ import java.util.Collections;
 public class AcceptorConfigurations {
 
     public static LocalSearchAcceptorConfig createHillClimbingAcceptor() {
-        LocalSearchAcceptorConfig acceptorConfig = new LocalSearchAcceptorConfig();
-        acceptorConfig.setAcceptorTypeList(Collections.singletonList(AcceptorType.HILL_CLIMBING));
-        return acceptorConfig;
+        LocalSearchAcceptorConfig localSearchAcceptorConfig = new LocalSearchAcceptorConfig();
+        localSearchAcceptorConfig.setAcceptorTypeList(Collections.singletonList(AcceptorType.HILL_CLIMBING));
+        return localSearchAcceptorConfig;
     }
 
     public static LocalSearchAcceptorConfig createLateAcceptanceAcceptor(Integer lateAcceptanceSize) {
-        LocalSearchAcceptorConfig acceptorConfig = new LocalSearchAcceptorConfig();
-        acceptorConfig.setLateAcceptanceSize(lateAcceptanceSize);
-        return acceptorConfig;
+        LocalSearchAcceptorConfig localSearchAcceptorConfig = new LocalSearchAcceptorConfig();
+        localSearchAcceptorConfig.setLateAcceptanceSize(lateAcceptanceSize);
+        return localSearchAcceptorConfig;
     }
 
     public static LocalSearchAcceptorConfig createTabuSearchAcceptor(Double entityRatio) {
-        LocalSearchAcceptorConfig acceptorConfig = new LocalSearchAcceptorConfig();
-        acceptorConfig.setEntityTabuRatio(entityRatio);
-        return acceptorConfig;
+        LocalSearchAcceptorConfig localSearchAcceptorConfig = new LocalSearchAcceptorConfig();
+        localSearchAcceptorConfig.setEntityTabuRatio(entityRatio);
+        return localSearchAcceptorConfig;
     }
 
     public static LocalSearchAcceptorConfig createSimulatedAnnealingAcceptor(String startingTemperature) {
-        LocalSearchAcceptorConfig acceptorConfig = new LocalSearchAcceptorConfig();
-        acceptorConfig.setSimulatedAnnealingStartingTemperature(startingTemperature);
-        return acceptorConfig;
+        LocalSearchAcceptorConfig localSearchAcceptorConfig = new LocalSearchAcceptorConfig();
+        localSearchAcceptorConfig.setSimulatedAnnealingStartingTemperature(startingTemperature);
+        return localSearchAcceptorConfig;
     }
 
     public static LocalSearchAcceptorConfig createStepCountHillClimbingAcceptor(Integer stepCountHillClimbingSize) {
-        LocalSearchAcceptorConfig acceptorConfig = new LocalSearchAcceptorConfig();
-        acceptorConfig.setStepCountingHillClimbingSize(stepCountHillClimbingSize);
-        return acceptorConfig;
+        LocalSearchAcceptorConfig localSearchAcceptorConfig = new LocalSearchAcceptorConfig();
+        localSearchAcceptorConfig.setStepCountingHillClimbingSize(stepCountHillClimbingSize);
+        return localSearchAcceptorConfig;
     }
 
 }

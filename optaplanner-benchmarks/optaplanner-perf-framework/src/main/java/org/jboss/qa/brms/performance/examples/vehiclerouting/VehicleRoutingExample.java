@@ -17,7 +17,7 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.vehiclerouting.domain.Customer;
 import org.optaplanner.examples.vehiclerouting.domain.Standstill;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.optaplanner.examples.vehiclerouting.solver.score.VehicleRoutingIncrementalScoreCalculator;
+import org.optaplanner.examples.vehiclerouting.optional.score.VehicleRoutingIncrementalScoreCalculator;
 
 public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingSolution> {
 
@@ -41,8 +41,7 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
         VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override

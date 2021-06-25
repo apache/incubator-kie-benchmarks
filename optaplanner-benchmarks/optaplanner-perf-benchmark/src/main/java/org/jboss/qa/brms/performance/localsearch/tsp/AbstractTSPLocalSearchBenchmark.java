@@ -34,8 +34,7 @@ public abstract class AbstractTSPLocalSearchBenchmark
         Solver<TspSolution> constructionSolver = solverFactory.buildSolver();
 
         TspSolution solution = Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataset);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override

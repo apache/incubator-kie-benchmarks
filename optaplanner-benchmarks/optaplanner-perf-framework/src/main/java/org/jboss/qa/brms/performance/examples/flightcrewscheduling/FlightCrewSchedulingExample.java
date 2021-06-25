@@ -9,7 +9,6 @@ import org.jboss.qa.brms.performance.examples.flightcrewscheduling.persistence.F
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
-import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.flightcrewscheduling.domain.FlightCrewSolution;
@@ -32,8 +31,7 @@ public class FlightCrewSchedulingExample extends AbstractExample<FlightCrewSolut
         Solver<FlightCrewSolution> constructionSolver = solverFactory.buildSolver();
 
         FlightCrewSolution solution = Examples.FLIGHT_CREW_SCHEDULING.loadSolvingProblem(dataSet);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     public FlightCrewSolution loadSolvingProblem(DataSet dataSet) {
@@ -48,11 +46,7 @@ public class FlightCrewSchedulingExample extends AbstractExample<FlightCrewSolut
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-
-        ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(
-                Collections.singletonList(FlightCrewSolution.class.getPackage().getName()));
-        solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
+        solverConfig.setSolutionClass(FlightCrewSolution.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setConstraintProviderClass(FlightCrewSchedulingConstraintProvider.class);

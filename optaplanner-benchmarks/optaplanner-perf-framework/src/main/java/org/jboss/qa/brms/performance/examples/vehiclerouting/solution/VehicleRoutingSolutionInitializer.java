@@ -1,12 +1,12 @@
 package org.jboss.qa.brms.performance.examples.vehiclerouting.solution;
 
+import org.optaplanner.core.api.score.director.ScoreDirector;
 import org.optaplanner.examples.vehiclerouting.domain.Customer;
 import org.optaplanner.examples.vehiclerouting.domain.Standstill;
 import org.optaplanner.examples.vehiclerouting.domain.Vehicle;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
-import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 
 import java.util.List;
 
@@ -27,7 +27,8 @@ public class VehicleRoutingSolutionInitializer implements CustomPhaseCommand<Veh
             scoreDirector.afterVariableChanged(customer, "previousStandstill");
         }
         scoreDirector.triggerVariableListeners();
-        Score<?> score = scoreDirector.calculateScore();
+        Score<?> score = scoreDirector.getWorkingSolution().getScore();
+
 
         if (!score.isSolutionInitialized()) {
             throw new IllegalStateException(

@@ -1,10 +1,10 @@
 package org.jboss.qa.brms.performance.examples.tsp.solution;
 
+import org.optaplanner.core.api.score.director.ScoreDirector;
 import org.optaplanner.examples.tsp.domain.TspSolution;
 import org.optaplanner.examples.tsp.domain.Visit;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
-import org.optaplanner.core.impl.score.director.ScoreDirector;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class TSPSolutionInitializer implements CustomPhaseCommand<TspSolution> {
             scoreDirector.afterVariableChanged(visit, "previousStandstill");
         }
         scoreDirector.triggerVariableListeners();
-        Score<?> score = scoreDirector.calculateScore();
+        Score<?> score = scoreDirector.getWorkingSolution().getScore();
 
         if (!score.isSolutionInitialized()) {
             throw new IllegalStateException(

@@ -14,7 +14,6 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
-import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
@@ -22,7 +21,7 @@ import org.optaplanner.core.config.heuristic.selector.move.generic.SwapMoveSelec
 import org.optaplanner.core.config.heuristic.selector.move.generic.chained.SubChainChangeMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.chained.SubChainSwapMoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
 import org.optaplanner.core.config.phase.PhaseConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
@@ -50,9 +49,7 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
         // the pre-defined configuration in VehicleRouting cannot be used
         SolverConfig solverConfig = new SolverConfig();
 
-        ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(
-                VehicleRoutingSolution.class.getPackage().getName()));
+        solverConfig.setSolutionClass(VehicleRoutingSolution.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
@@ -61,7 +58,6 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
         solverConfig.setPhaseConfigList(getPhaseConfigList());
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
         solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(HardVRPCalculateCountTermination.class));
-        solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
 
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         return solverFactory.buildSolver();
@@ -95,7 +91,7 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
 
         localSearchPhaseConfig.setForagerConfig(foragerConfig);
         localSearchPhaseConfig.setMoveSelectorConfig(selectorConfig);
-        localSearchPhaseConfig.setAcceptorConfig(new AcceptorConfig().withLateAcceptanceSize(ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE));
+        localSearchPhaseConfig.setAcceptorConfig(new LocalSearchAcceptorConfig().withLateAcceptanceSize(ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE));
 
         return Arrays.asList(constructionHeuristicPhaseConfig, localSearchPhaseConfig);
     }

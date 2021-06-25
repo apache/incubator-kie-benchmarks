@@ -8,7 +8,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
@@ -25,7 +25,7 @@ public abstract class AbstractMultithreadedSolvingScalabilityBenchmark<Solution_
 
     protected abstract MoveSelectorConfig getMoveSelectorConfig();
 
-    protected abstract AcceptorConfig getAcceptorConfig();
+    protected abstract LocalSearchAcceptorConfig getAcceptorConfig();
 
     protected abstract int getAcceptedCountLimit();
 

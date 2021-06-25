@@ -13,7 +13,6 @@ import org.openjdk.jmh.annotations.Warmup;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
-import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchType;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
@@ -36,10 +35,7 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
     protected Solver<ConferenceSolution> createSolver() {
         // the pre-defined configuration in ConferenceScheduling cannot be used
         SolverConfig solverConfig = new SolverConfig();
-
-        ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.
-                singletonList(ConferenceSolution.class.getPackage().getName()));
+        solverConfig.setSolutionClass(ConferenceSolution.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.
@@ -50,7 +46,6 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
 
         solverConfig.setPhaseConfigList(Arrays.asList(new ConstructionHeuristicPhaseConfig(), localSearchPhaseConfig));
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
-        solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
         solverConfig.setTerminationConfig(new TerminationConfig().
                 withTerminationClass(ConferenceSchedulingTermination.class));
 

@@ -4,7 +4,7 @@ import org.jboss.qa.brms.performance.examples.projectjobscheduling.termination.P
 import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.localsearch.projectjobscheduling.AbstractProjectJobSchedulingLocalSearchBenchmark;
 import org.optaplanner.core.config.heuristic.selector.value.ValueSelectorConfig;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 public abstract class AbstractProjectJobSchedulingMoveSelectorBenchmark extends AbstractProjectJobSchedulingLocalSearchBenchmark {
@@ -22,7 +22,7 @@ public abstract class AbstractProjectJobSchedulingMoveSelectorBenchmark extends 
     }
 
     @Override
-    public AcceptorConfig createAcceptorConfig() {
+    public LocalSearchAcceptorConfig createAcceptorConfig() {
         return AcceptorConfigurations.createSimulatedAnnealingAcceptor("[0]hard/[0/0]soft");
     }
 

@@ -37,8 +37,7 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
         VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override

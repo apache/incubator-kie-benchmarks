@@ -14,7 +14,7 @@ import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfi
 import org.optaplanner.core.config.heuristic.selector.entity.pillar.PillarSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
@@ -43,22 +43,21 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         Solver<NurseRoster> constructionSolver = solverFactory.buildSolver();
 
         NurseRoster nonInitializedSolution = Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);
-        constructionSolver.solve(nonInitializedSolution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(nonInitializedSolution);
     }
 
     protected PillarSelectorConfig createPillarSelectorConfig() {
         PillarSelectorConfig pillarSelectorConfig = new PillarSelectorConfig();
         EntitySelectorConfig entitySelectorConfig = new EntitySelectorConfig();
-        entitySelectorConfig.setFilterClassList(Collections.singletonList(MovableShiftAssignmentSelectionFilter.class));
+        entitySelectorConfig.setFilterClass(MovableShiftAssignmentSelectionFilter.class);
         pillarSelectorConfig.setEntitySelectorConfig(entitySelectorConfig);
 
         return pillarSelectorConfig;
     }
 
     @Override
-    public AcceptorConfig createAcceptorConfig() {
-        return new AcceptorConfig().withEntityTabuSize(ENTITY_TABU_SIZE);
+    public LocalSearchAcceptorConfig createAcceptorConfig() {
+        return new LocalSearchAcceptorConfig().withEntityTabuSize(ENTITY_TABU_SIZE);
     }
 
     @Override

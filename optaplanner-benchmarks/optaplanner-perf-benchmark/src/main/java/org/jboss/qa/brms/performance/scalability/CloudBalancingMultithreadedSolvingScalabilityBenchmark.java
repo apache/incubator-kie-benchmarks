@@ -12,7 +12,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
-import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
+import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.phase.custom.CustomPhaseConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
@@ -44,10 +44,10 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
     }
 
     @Override
-    protected AcceptorConfig getAcceptorConfig() {
-        AcceptorConfig acceptorConfig = new AcceptorConfig();
-        acceptorConfig.setLateAcceptanceSize(100);
-        return acceptorConfig;
+    protected LocalSearchAcceptorConfig getAcceptorConfig() {
+        LocalSearchAcceptorConfig localSearchAcceptorConfig = new LocalSearchAcceptorConfig();
+        localSearchAcceptorConfig.setLateAcceptanceSize(100);
+        return localSearchAcceptorConfig;
     }
 
     @Override
@@ -63,8 +63,7 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
         Solver<CloudBalance> constructionSolver = solverFactory.buildSolver();
 
         CloudBalance solution = Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override
