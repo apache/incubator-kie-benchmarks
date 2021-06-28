@@ -43,10 +43,9 @@ public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBen
 
     private Resource pmmlResource;
     private PMMLRuntime pmmlRuntime;
-    private PMMLContext pmmlContext;
-    private PMMLRequestData pmmlRequestData;
 
     private static final Map<String, Object> INPUT_DATA;
+    private static final PMMLContext pmmlContext;
 
     static {
         INPUT_DATA = new HashMap<>();
@@ -54,6 +53,9 @@ public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBen
         INPUT_DATA.put("sepal_width", 3.0);
         INPUT_DATA.put("petal_length", 1.3);
         INPUT_DATA.put("petal_width",  0.2);
+        PMMLRequestData pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
+        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
+        pmmlContext = new PMMLContextImpl(pmmlRequestData);
     }
 
     @Setup
@@ -63,12 +65,9 @@ public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBen
         pmmlRuntime = PMMLUtil.getPMMLRuntimeWithResources(true, pmmlResource);
     }
 
-    @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
-        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
-        pmmlContext = new PMMLContextImpl(pmmlRequestData);
+        // noop
     }
 
     @Benchmark

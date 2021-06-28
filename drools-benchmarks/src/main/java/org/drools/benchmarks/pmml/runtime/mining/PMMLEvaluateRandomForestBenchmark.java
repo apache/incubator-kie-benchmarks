@@ -43,10 +43,9 @@ public class PMMLEvaluateRandomForestBenchmark extends AbstractBenchmark {
 
     private Resource pmmlResource;
     private PMMLRuntime pmmlRuntime;
-    private PMMLContext pmmlContext;
-    private PMMLRequestData pmmlRequestData;
 
     private static final Map<String, Object> INPUT_DATA;
+    private static final PMMLContext pmmlContext;
 
     static {
         INPUT_DATA = new HashMap<>();
@@ -55,6 +54,9 @@ public class PMMLEvaluateRandomForestBenchmark extends AbstractBenchmark {
         INPUT_DATA.put("TotalAsset", 0.04);
         INPUT_DATA.put("TotalRequired", 10.04);
         INPUT_DATA.put("NumberInstallments", 93.2);
+        PMMLRequestData pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
+        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
+        pmmlContext = new PMMLContextImpl(pmmlRequestData);
     }
 
     @Setup
@@ -64,12 +66,9 @@ public class PMMLEvaluateRandomForestBenchmark extends AbstractBenchmark {
         pmmlRuntime = PMMLUtil.getPMMLRuntimeWithResources(true, pmmlResource);
     }
 
-    @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
-        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
-        pmmlContext = new PMMLContextImpl(pmmlRequestData);
+        // noop
     }
 
     @Benchmark

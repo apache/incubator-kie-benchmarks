@@ -43,16 +43,18 @@ public class PMMLEvaluateLinearRegressionSampleWithTransformationsBenchmark exte
 
     private Resource pmmlResource;
     private PMMLRuntime pmmlRuntime;
-    private PMMLContext pmmlContext;
-    private PMMLRequestData pmmlRequestData;
 
     private static final Map<String, Object> INPUT_DATA;
+    private static final PMMLContext pmmlContext;
 
     static {
         INPUT_DATA = new HashMap<>();
         INPUT_DATA.put("age", 27.0);
         INPUT_DATA.put("salary", 34000.0);
         INPUT_DATA.put("car_location", "street");
+        PMMLRequestData pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
+        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
+        pmmlContext = new PMMLContextImpl(pmmlRequestData);
     }
 
     @Setup
@@ -62,12 +64,9 @@ public class PMMLEvaluateLinearRegressionSampleWithTransformationsBenchmark exte
         pmmlRuntime = PMMLUtil.getPMMLRuntimeWithResources(true, pmmlResource);
     }
 
-    @Setup(Level.Iteration)
     @Override
     public void setup() throws ProviderException {
-        pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
-        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
-        pmmlContext = new PMMLContextImpl(pmmlRequestData);
+        // noop
     }
 
     @Benchmark
