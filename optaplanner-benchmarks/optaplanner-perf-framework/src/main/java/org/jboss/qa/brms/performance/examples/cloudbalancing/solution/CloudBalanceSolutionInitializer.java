@@ -1,6 +1,7 @@
 package org.jboss.qa.brms.performance.examples.cloudbalancing.solution;
 
 import org.optaplanner.core.api.score.director.ScoreDirector;
+import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
 import org.optaplanner.core.api.score.Score;
@@ -19,7 +20,10 @@ public class CloudBalanceSolutionInitializer implements CustomPhaseCommand<Cloud
             i++;
         }
         scoreDirector.triggerVariableListeners();
-        Score<?> score = scoreDirector.getWorkingSolution().getScore();
+
+        InnerScoreDirector<CloudBalance, ?> innerScoreDirector =
+                (InnerScoreDirector<CloudBalance, ?>) scoreDirector;
+        Score<?> score = innerScoreDirector.calculateScore();
 
         if (!score.isSolutionInitialized()) {
             throw new IllegalStateException(

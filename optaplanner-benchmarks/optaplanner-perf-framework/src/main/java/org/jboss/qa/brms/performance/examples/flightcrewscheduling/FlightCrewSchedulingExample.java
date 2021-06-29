@@ -1,6 +1,7 @@
 package org.jboss.qa.brms.performance.examples.flightcrewscheduling;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
@@ -10,7 +11,10 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
+import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
+import org.optaplanner.examples.flightcrewscheduling.domain.Employee;
+import org.optaplanner.examples.flightcrewscheduling.domain.FlightAssignment;
 import org.optaplanner.examples.flightcrewscheduling.domain.FlightCrewSolution;
 import org.optaplanner.examples.flightcrewscheduling.optional.score.FlightCrewSchedulingConstraintProvider;
 
@@ -47,6 +51,12 @@ public class FlightCrewSchedulingExample extends AbstractExample<FlightCrewSolut
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
         solverConfig.setSolutionClass(FlightCrewSolution.class);
+        solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
+
+        ArrayList<Class<?>> classes = new ArrayList<>();
+        classes.add(FlightAssignment.class);
+        classes.add(Employee.class);
+        solverConfig.setEntityClassList(classes);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setConstraintProviderClass(FlightCrewSchedulingConstraintProvider.class);
