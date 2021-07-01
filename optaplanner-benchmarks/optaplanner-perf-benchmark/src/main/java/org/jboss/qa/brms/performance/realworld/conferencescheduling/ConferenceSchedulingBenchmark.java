@@ -19,6 +19,11 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
+import org.optaplanner.examples.conferencescheduling.domain.Talk;
+import org.optaplanner.examples.vehiclerouting.domain.Customer;
+import org.optaplanner.examples.vehiclerouting.domain.Standstill;
+import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
 
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
@@ -35,7 +40,8 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
     protected Solver<ConferenceSolution> createSolver() {
         // the pre-defined configuration in ConferenceScheduling cannot be used
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setSolutionClass(ConferenceSolution.class);
+        solverConfig.withSolutionClass(ConferenceSolution.class);
+        solverConfig.withEntityClasses(Talk.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.
