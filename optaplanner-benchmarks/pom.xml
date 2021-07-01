@@ -14,11 +14,12 @@
   <description>This is the multi-module project top-level parent.</description>
 
   <properties>
-    <version.org.optaplanner>8.1.0.Final</version.org.optaplanner>
-    <maven.compiler.jdk.version>11</maven.compiler.jdk.version>
+    <version.compiler>3.8.0</version.compiler>
     <version.jmh>1.26</version.jmh>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <version.org.optaplanner>8.1.0.Final</version.org.optaplanner>
+    <version.project.build>1.8</version.project.build>
     <version.shade.plugin>3.1.1</version.shade.plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <modules>
@@ -73,10 +74,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>${version.compiler}</version>
         <configuration>
-          <source>${maven.compiler.jdk.version}</source>
-          <target>${maven.compiler.jdk.version}</target>
+          <source>${version.project.build}</source>
+          <target>${version.project.build}</target>
         </configuration>
       </plugin>
     </plugins>
