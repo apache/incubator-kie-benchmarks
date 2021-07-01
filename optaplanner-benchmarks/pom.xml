@@ -51,7 +51,7 @@
         <artifactId>jmh-generator-annprocess</artifactId>
         <version>${version.jmh}</version>
       </dependency>
-      <!-- Optaplanner -->
+      <!-- OptaPlanner -->
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-bom</artifactId>
