@@ -16,7 +16,7 @@
   <properties>
     <version.org.optaplanner>8.1.0.Final</version.org.optaplanner>
     <maven.compiler.jdk.version>11</maven.compiler.jdk.version>
-    <jmh.version>1.26</jmh.version>
+    <version.jmh>1.26</version.jmh>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -42,12 +42,12 @@
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
-        <version>${jmh.version}</version>
+        <version>${version.jmh}</version>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-generator-annprocess</artifactId>
-        <version>${jmh.version}</version>
+        <version>${version.jmh}</version>
       </dependency>
       <!-- Optaplanner -->
       <dependency>
