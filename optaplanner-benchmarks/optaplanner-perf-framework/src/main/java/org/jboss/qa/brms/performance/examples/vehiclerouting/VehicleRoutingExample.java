@@ -52,12 +52,9 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setSolutionClass(VehicleRoutingSolution.class);
+        solverConfig.withEntityClasses(Standstill.class,Customer.class);
+        solverConfig.withSolutionClass(VehicleRoutingSolution.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
-        ArrayList<Class<?>> classes = new ArrayList<>();
-        classes.add(Standstill.class);
-        classes.add(Customer.class);
-        solverConfig.setEntityClassList(classes);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
         solverConfig.getScoreDirectorFactoryConfig().setIncrementalScoreCalculatorClass(VehicleRoutingIncrementalScoreCalculator.class);
         solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");

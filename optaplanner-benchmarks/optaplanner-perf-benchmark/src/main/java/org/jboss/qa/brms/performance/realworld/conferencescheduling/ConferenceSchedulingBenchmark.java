@@ -40,8 +40,8 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
     protected Solver<ConferenceSolution> createSolver() {
         // the pre-defined configuration in ConferenceScheduling cannot be used
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.withSolutionClass(ConferenceSolution.class);
         solverConfig.withEntityClasses(Talk.class);
+        solverConfig.withSolutionClass(ConferenceSolution.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.

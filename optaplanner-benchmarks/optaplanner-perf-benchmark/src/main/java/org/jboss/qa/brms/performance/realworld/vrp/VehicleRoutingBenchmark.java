@@ -51,9 +51,8 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
     protected Solver<VehicleRoutingSolution> createSolver() {
         // the pre-defined configuration in VehicleRouting cannot be used
         SolverConfig solverConfig = new SolverConfig();
-
-        solverConfig.withSolutionClass(VehicleRoutingSolution.class);
         solverConfig.withEntityClasses(Standstill.class, Customer.class,TimeWindowedCustomer.class);
+        solverConfig.withSolutionClass(VehicleRoutingSolution.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");

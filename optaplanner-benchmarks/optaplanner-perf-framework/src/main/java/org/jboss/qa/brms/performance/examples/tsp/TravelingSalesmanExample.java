@@ -31,8 +31,8 @@ public final class TravelingSalesmanExample extends AbstractExample<TspSolution>
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setSolutionClass(TspSolution.class);
-        solverConfig.setEntityClassList(Collections.singletonList(Visit.class));
+        solverConfig.withEntityClasses(Visit.class);
+        solverConfig.withSolutionClass(TspSolution.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
         solverConfig.getScoreDirectorFactoryConfig().setIncrementalScoreCalculatorClass(

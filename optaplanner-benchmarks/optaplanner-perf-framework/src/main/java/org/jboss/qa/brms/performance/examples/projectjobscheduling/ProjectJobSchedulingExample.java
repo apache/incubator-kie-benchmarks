@@ -28,9 +28,9 @@ public final class ProjectJobSchedulingExample extends AbstractExample<Schedule>
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setSolutionClass(Schedule.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
-        solverConfig.setEntityClassList(Collections.singletonList(Allocation.class));
+        solverConfig.withEntityClasses(Allocation.class);
+        solverConfig.withSolutionClass(Schedule.class);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
         solverConfig.getScoreDirectorFactoryConfig()
                 .setIncrementalScoreCalculatorClass(ProjectJobSchedulingIncrementalScoreCalculator.class);

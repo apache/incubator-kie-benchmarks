@@ -35,8 +35,8 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
     protected Solver<CloudBalance> createSolver() {
         // the pre-defined configuration in CloudBalancing cannot be used
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.withSolutionClass(CloudBalance.class);
         solverConfig.withEntityClasses(CloudProcess.class);
+        solverConfig.withSolutionClass(CloudBalance.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");

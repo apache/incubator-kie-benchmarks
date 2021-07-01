@@ -58,8 +58,8 @@ public final class ConferenceSchedulingExample extends AbstractExample<Conferenc
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setSolutionClass(ConferenceSolution.class);
-        solverConfig.setEntityClassList(Collections.singletonList(Talk.class));
+        solverConfig.withEntityClasses(Talk.class);
+        solverConfig.withSolutionClass(ConferenceSolution.class);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
         solverConfig.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(DRL_FILE));
         solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");

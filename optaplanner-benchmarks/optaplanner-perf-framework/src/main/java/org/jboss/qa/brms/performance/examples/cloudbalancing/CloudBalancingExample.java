@@ -32,8 +32,8 @@ public final class CloudBalancingExample extends AbstractExample<CloudBalance> {
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setEntityClassList(Collections.singletonList(CloudProcess.class));
-        solverConfig.setSolutionClass(CloudBalance.class);
+        solverConfig.withEntityClasses(CloudProcess.class);
+        solverConfig.withSolutionClass(CloudBalance.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
         solverConfig.getScoreDirectorFactoryConfig().setIncrementalScoreCalculatorClass(

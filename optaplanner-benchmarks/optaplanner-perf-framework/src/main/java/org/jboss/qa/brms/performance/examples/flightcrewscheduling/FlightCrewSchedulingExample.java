@@ -50,14 +50,9 @@ public class FlightCrewSchedulingExample extends AbstractExample<FlightCrewSolut
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setSolutionClass(FlightCrewSolution.class);
+        solverConfig.withEntityClasses(FlightAssignment.class,Employee.class);
+        solverConfig.withSolutionClass(FlightCrewSolution.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
-
-        ArrayList<Class<?>> classes = new ArrayList<>();
-        classes.add(FlightAssignment.class);
-        classes.add(Employee.class);
-        solverConfig.setEntityClassList(classes);
-
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setConstraintProviderClass(FlightCrewSchedulingConstraintProvider.class);
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
