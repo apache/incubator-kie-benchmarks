@@ -26,6 +26,7 @@ Testing planner's performance regression in various tests.
      - tested separately
        - some of them scale much worse than others on same dataset
          - different tuning for all tests is needed
+    - constraint streams 
 
 ## Goal
  - combination matrix of different datasets, different heuristics and different moves
@@ -49,13 +50,16 @@ Testing planner's performance regression in various tests.
 
      - to see what args mean, check https://mojo.redhat.com/docs/DOC-150055
 
-## Jenkins job
- - https://rhba-qe-jenkins.rhev-ci-vms.eng.rdu2.redhat.com/job/custom/job/jlocker/job/brms-optaplanner-perf-1.0/
+## Additional parameters
+- to run benchmarks on the certain version of OptaPlanner you need to provide version property e.g 
 
- - performance tests takes ~ 1.5 day to execute!
-   - if you can figure out this issue, you are welcome to make this process faster :)
-         https://stackoverflow.com/questions/33734266/is-it-possible-to-run-time-based-warmup-phase-using-jmh
-         
+```
+-Dversion.org.optaplanner=8.1.0.Final
+```
+
+## Idea users
+ - to prevent downloading the kie-parent dependencies of the root module, you need to open just optaplanner-benchmarks module
+
 ## Performance report
  - All results are uploaded to PerfRepo: http://perfrepo.mw.lab.eng.bos.redhat.com and can be referenced in any further 
  point in time.
