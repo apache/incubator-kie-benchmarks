@@ -1,5 +1,6 @@
 package org.jboss.qa.brms.performance.realworld.cloudbalancing;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
@@ -14,6 +15,8 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudComputer;
+import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
 
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
@@ -32,11 +35,13 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
     protected Solver<CloudBalance> createSolver() {
         // the pre-defined configuration in CloudBalancing cannot be used
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setSolutionClass(CloudBalance.class);
+        solverConfig.withSolutionClass(CloudBalance.class);
+        solverConfig.withEntityClasses(CloudProcess.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
         scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList(CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE));
+
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
         solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(
                 CloudBalanceCalculateCountTermination.class));
