@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.scalability;
 
 import java.util.Collections;
 
+import org.jboss.qa.brms.performance.configuration.AcceptorConfigurations;
 import org.jboss.qa.brms.performance.configuration.MoveSelectorConfigurations;
 import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.cloudbalancing.CloudBalancingExample;
@@ -45,9 +46,7 @@ public class CloudBalancingMultithreadedSolvingScalabilityBenchmark
 
     @Override
     protected LocalSearchAcceptorConfig getAcceptorConfig() {
-        LocalSearchAcceptorConfig localSearchAcceptorConfig = new LocalSearchAcceptorConfig();
-        localSearchAcceptorConfig.setLateAcceptanceSize(100);
-        return localSearchAcceptorConfig;
+        return AcceptorConfigurations.createLateAcceptanceAcceptor(100);
     }
 
     @Override
