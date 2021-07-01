@@ -18,6 +18,7 @@
     <maven.compiler.jdk.version>11</maven.compiler.jdk.version>
     <version.jmh>1.26</version.jmh>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <version.shade.plugin>3.1.1</version.shade.plugin>
   </properties>
 
   <modules>
@@ -74,7 +75,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <release>${maven.compiler.jdk.version}</release>
+          <source>${maven.compiler.jdk.version}</source>
+          <target>${maven.compiler.jdk.version}</target>
         </configuration>
       </plugin>
     </plugins>
