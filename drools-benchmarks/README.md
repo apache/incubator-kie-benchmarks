@@ -6,7 +6,7 @@ The benchmarks are written using [JMH](http://openjdk.java.net/projects/code-too
 To run the benchmarks you need to:  
 
 1. Build the project with `mvn clean install`
-2. Run the built project uberjar with `java -jar target/drools-benchmarks.jar
+2. Run the built project uberjar with `java -jar target/drools-benchmarks.jar`
 
 You can define several JMH parameters for executing the benchmarks:  
 `-jvm` - Custom JVM to use when forking (path to JVM executable). JMH can create new JVM fork for a set of benchmark iterations.  
