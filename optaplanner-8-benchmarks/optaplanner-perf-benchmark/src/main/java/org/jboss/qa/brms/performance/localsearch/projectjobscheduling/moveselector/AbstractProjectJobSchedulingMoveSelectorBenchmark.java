@@ -23,7 +23,7 @@ public abstract class AbstractProjectJobSchedulingMoveSelectorBenchmark extends 
 
     @Override
     public LocalSearchAcceptorConfig createAcceptorConfig() {
-        return AcceptorConfigurations.createSimulatedAnnealingAcceptor("[0]hard/[0/0]soft");
+        return AcceptorConfigurations.createSimulatedAnnealingAcceptor("0hard/0medium/0soft");
     }
 
     @Override
