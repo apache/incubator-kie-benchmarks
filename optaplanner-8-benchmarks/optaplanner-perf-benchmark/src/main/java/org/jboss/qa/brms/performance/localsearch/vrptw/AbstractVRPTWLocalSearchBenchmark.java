@@ -1,8 +1,6 @@
 package org.jboss.qa.brms.performance.localsearch.vrptw;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import org.jboss.qa.brms.performance.examples.Examples;
 import org.jboss.qa.brms.performance.examples.vehiclerouting.VehicleRoutingExample;
@@ -29,9 +27,7 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
     protected VehicleRoutingSolution createInitialSolution() {
         SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
         // different from simple VRP
-        List<Class<?>> classes = new ArrayList<>(solverConfig.getEntityClassList());
-        classes.add(TimeWindowedCustomer.class);
-        solverConfig.setEntityClassList(classes);
+        solverConfig.getEntityClassList().add(TimeWindowedCustomer.class);
 
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
@@ -48,10 +44,8 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
     @Override
     protected Solver<VehicleRoutingSolution> createSolver() {
         SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
+        solverConfig.getEntityClassList().add(TimeWindowedCustomer.class);
 
-        List<Class<?>> classes = new ArrayList<>(solverConfig.getEntityClassList());
-        classes.add(TimeWindowedCustomer.class);
-        solverConfig.setEntityClassList(classes);
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())

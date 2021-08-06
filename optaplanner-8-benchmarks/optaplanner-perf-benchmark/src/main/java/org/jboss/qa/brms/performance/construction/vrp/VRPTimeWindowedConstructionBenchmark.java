@@ -1,8 +1,6 @@
 package org.jboss.qa.brms.performance.construction.vrp;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import org.jboss.qa.brms.performance.construction.AbstractConstructionHeuristicBenchmark;
 import org.jboss.qa.brms.performance.examples.Examples;
@@ -36,10 +34,7 @@ public class VRPTimeWindowedConstructionBenchmark
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig =
                 new ConstructionHeuristicPhaseConfig().withConstructionHeuristicType(getConstructionHeuristicType());
         solverConfig.setPhaseConfigList(Collections.singletonList(constructionHeuristicPhaseConfig));
-
-        List<Class<?>> classes = new ArrayList<>(solverConfig.getEntityClassList());
-        classes.add(TimeWindowedCustomer.class);
-        solverConfig.setEntityClassList(classes);
+        solverConfig.getEntityClassList().add(TimeWindowedCustomer.class); // diff between normal VRP and TimeWindowed
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         return solverFactory.buildSolver();
     }

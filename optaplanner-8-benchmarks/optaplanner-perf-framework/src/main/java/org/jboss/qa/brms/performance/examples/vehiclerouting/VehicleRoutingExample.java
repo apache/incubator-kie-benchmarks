@@ -2,6 +2,7 @@ package org.jboss.qa.brms.performance.examples.vehiclerouting;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
@@ -52,7 +53,7 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.withEntityClasses(Standstill.class,Customer.class);
+        solverConfig.withEntityClassList(new ArrayList<>(Arrays.asList(Standstill.class, Customer.class)));
         solverConfig.withSolutionClass(VehicleRoutingSolution.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
