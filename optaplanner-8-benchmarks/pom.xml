@@ -20,6 +20,7 @@
     <version.project.build>1.8</version.project.build>
     <version.shade.plugin>3.1.1</version.shade.plugin>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.versions.plugin>2.8.1</maven.versions.plugin>
   </properties>
 
   <modules>
@@ -79,6 +80,11 @@
           <source>${version.project.build}</source>
           <target>${version.project.build}</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${maven.versions.plugin}</version>
       </plugin>
     </plugins>
   </build>
