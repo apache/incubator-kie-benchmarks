@@ -28,6 +28,7 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
         SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
         // different from simple VRP
         solverConfig.getEntityClassList().add(TimeWindowedCustomer.class);
+
         CustomPhaseConfig customPhaseConfig = new CustomPhaseConfig();
         customPhaseConfig.setCustomPhaseCommandClassList(
                 Collections.singletonList(VehicleRoutingSolutionInitializer.class));
@@ -43,8 +44,8 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
     @Override
     protected Solver<VehicleRoutingSolution> createSolver() {
         SolverConfig solverConfig = Examples.VEHICLE_ROUTING.getBaseSolverConfig();
-
         solverConfig.getEntityClassList().add(TimeWindowedCustomer.class);
+
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setMoveSelectorConfig(new UnionMoveSelectorConfig());
         ((UnionMoveSelectorConfig) localSearchPhaseConfig.getMoveSelectorConfig())
