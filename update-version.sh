@@ -25,7 +25,11 @@ function replace_in_poms() {
   fi
 }
 
-NEW_VERSION="$1"
-OLD_VERSION=$(grep "^    <version>" -h pom.xml | head -n1 | sed 's:[^/]*>\(.*\)</.*:\1:')
+NEW_KIE_VERSION="$1"
+NEW_OPTAPLANNER_VERSION="$2"
 
-replace_in_poms "$OLD_VERSION" "$NEW_VERSION"
+OLD_KIE_VERSION=$(grep "^    <version>" -h pom.xml | head -n1 | sed 's:[^/]*>\(.*\)</.*:\1:')
+OLD_OPTAPLANNER_VERSION=$(grep "^    <version.org.optaplanner>" -h ./optaplanner-8-benchmarks/pom.xml | head -n1 | sed 's:[^/]*>\(.*\)</.*:\1:')
+
+replace_in_poms "$OLD_KIE_VERSION" "$NEW_KIE_VERSION"
+replace_in_poms "$OLD_OPTAPLANNER_VERSION" "$NEW_OPTAPLANNER_VERSION"
