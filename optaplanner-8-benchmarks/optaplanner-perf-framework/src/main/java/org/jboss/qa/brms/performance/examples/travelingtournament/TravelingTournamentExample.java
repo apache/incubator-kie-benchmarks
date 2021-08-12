@@ -13,7 +13,7 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.examples.travelingtournament.domain.Match;
 import org.optaplanner.examples.travelingtournament.domain.TravelingTournament;
-import org.optaplanner.examples.travelingtournament.optional.score.TravelingTournamentConstraintProvider;
+import org.optaplanner.examples.travelingtournament.score.TravelingTournamentConstraintProvider;
 
 public final class TravelingTournamentExample extends AbstractExample<TravelingTournament> {
 
