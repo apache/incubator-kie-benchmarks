@@ -21,7 +21,7 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
     private static final String CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE =
-            "org/optaplanner/examples/cloudbalancing/solver/cloudBalancingConstraints.drl";
+            "org/optaplanner/examples/cloudbalancing/optional/score/cloudBalancingConstraints.drl";
 
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
     private CloudBalancingExample.DataSet dataset;
