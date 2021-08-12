@@ -16,7 +16,7 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.flightcrewscheduling.domain.Employee;
 import org.optaplanner.examples.flightcrewscheduling.domain.FlightAssignment;
 import org.optaplanner.examples.flightcrewscheduling.domain.FlightCrewSolution;
-import org.optaplanner.examples.flightcrewscheduling.optional.score.FlightCrewSchedulingConstraintProvider;
+import org.optaplanner.examples.flightcrewscheduling.score.FlightCrewSchedulingConstraintProvider;
 
 public class FlightCrewSchedulingExample extends AbstractExample<FlightCrewSolution> {
 
