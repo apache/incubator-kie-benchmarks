@@ -1,7 +1,6 @@
 package org.jboss.qa.brms.performance.realworld.conferencescheduling;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
 import org.jboss.qa.brms.performance.examples.Examples;
@@ -20,10 +19,7 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 import org.optaplanner.examples.conferencescheduling.domain.Talk;
-import org.optaplanner.examples.vehiclerouting.domain.Customer;
-import org.optaplanner.examples.vehiclerouting.domain.Standstill;
-import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
+import org.optaplanner.examples.conferencescheduling.score.ConferenceSchedulingConstraintProvider;
 
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
@@ -44,8 +40,7 @@ public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<Conf
         solverConfig.withSolutionClass(ConferenceSolution.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
-        scoreDirectorFactoryConfig.setScoreDrlList(Collections.
-                singletonList(ConferenceSchedulingExample.DRL_FILE));
+        scoreDirectorFactoryConfig.setConstraintProviderClass(ConferenceSchedulingConstraintProvider.class);
 
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
         localSearchPhaseConfig.setLocalSearchType(LocalSearchType.TABU_SEARCH);

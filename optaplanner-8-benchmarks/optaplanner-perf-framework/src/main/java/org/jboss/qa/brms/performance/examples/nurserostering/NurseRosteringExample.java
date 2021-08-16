@@ -1,7 +1,6 @@
 package org.jboss.qa.brms.performance.examples.nurserostering;
 
 import java.io.File;
-import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
 import org.jboss.qa.brms.performance.examples.nurserostering.persistence.NurseRosteringDao;
@@ -9,14 +8,12 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
+import org.optaplanner.examples.nurserostering.score.NurseRosteringConstraintProvider;
 
 public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
 
     private static final String SOLVER_CONFIG =
             "org/jboss/qa/brms/performance/examples/nurserostering/solver/nurseRosteringSolverConfig.xml";
-
-    private static final String DRL_FILE =
-            "org/optaplanner/examples/nurserostering/optional/score/nurseRosteringConstraints.drl";
 
     private final NurseRosteringDao dao = new NurseRosteringDao();
 
@@ -35,7 +32,7 @@ public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
         solverConfig.withEntityClasses(ShiftAssignment.class);
         solverConfig.withSolutionClass(NurseRoster.class);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
-        solverConfig.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(DRL_FILE));
+        solverConfig.getScoreDirectorFactoryConfig().setConstraintProviderClass(NurseRosteringConstraintProvider.class);
         solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");
         return solverConfig;
     }

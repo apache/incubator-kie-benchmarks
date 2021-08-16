@@ -18,7 +18,6 @@ package org.jboss.qa.brms.performance.examples.conferencescheduling;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.stream.Stream;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
@@ -28,12 +27,10 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.common.app.CommonApp;
 import org.optaplanner.examples.conferencescheduling.domain.ConferenceSolution;
 import org.optaplanner.examples.conferencescheduling.domain.Talk;
+import org.optaplanner.examples.conferencescheduling.score.ConferenceSchedulingConstraintProvider;
 
 
 public final class ConferenceSchedulingExample extends AbstractExample<ConferenceSolution> {
-
-    public static final String DRL_FILE =
-            "org/optaplanner/examples/conferencescheduling/optional/score/conferenceSchedulingConstraints.drl";
 
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
@@ -61,8 +58,8 @@ public final class ConferenceSchedulingExample extends AbstractExample<Conferenc
         solverConfig.withEntityClasses(Talk.class);
         solverConfig.withSolutionClass(ConferenceSolution.class);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
-        solverConfig.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(DRL_FILE));
         solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");
+        solverConfig.getScoreDirectorFactoryConfig().setConstraintProviderClass(ConferenceSchedulingConstraintProvider.class);
 
         return solverConfig;
     }

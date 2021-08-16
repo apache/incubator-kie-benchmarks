@@ -8,7 +8,7 @@
   <!-- Score configuration -->
   <scoreDirectorFactory>
     <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
-    <incrementalScoreCalculatorClass>org.optaplanner.examples.cloudbalancing.optional.score</incrementalScoreCalculatorClass>
+    <constraintProviderClass>org.optaplanner.examples.cloudbalancing.score.CloudBalancingConstraintProvider</constraintProviderClass>
     <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
   </scoreDirectorFactory>
 

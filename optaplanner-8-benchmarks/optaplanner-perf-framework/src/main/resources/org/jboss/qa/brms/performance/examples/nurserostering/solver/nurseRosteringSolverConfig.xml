@@ -5,7 +5,7 @@
   <entityClass>org.optaplanner.examples.nurserostering.domain.ShiftAssignment</entityClass>
 
   <scoreDirectorFactory>
-    <scoreDrl>org/optaplanner/examples/nurserostering/optional/score/nurseRosteringConstraints.drl</scoreDrl>
+    <constraintProviderClass>org.optaplanner.examples.nurserostering.score.NurseRosteringConstraintProvider</constraintProviderClass>
   </scoreDirectorFactory>
 
   <termination>

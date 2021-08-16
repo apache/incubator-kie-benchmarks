@@ -1,7 +1,6 @@
 package org.jboss.qa.brms.performance.realworld.vrp;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.jboss.qa.brms.performance.AbstractPlannerBenchmark;
@@ -31,11 +30,10 @@ import org.optaplanner.examples.vehiclerouting.domain.Customer;
 import org.optaplanner.examples.vehiclerouting.domain.Standstill;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
+import org.optaplanner.examples.vehiclerouting.score.VehicleRoutingConstraintProvider;
 
 public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRoutingSolution> {
 
-    private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE =
-            "org/optaplanner/examples/vehiclerouting/optional/score/vehicleRoutingConstraints.drl";
     private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 1;
     private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
@@ -56,7 +54,7 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
-        scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList(VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE));
+        scoreDirectorFactoryConfig.setConstraintProviderClass(VehicleRoutingConstraintProvider.class);
 
         solverConfig.setPhaseConfigList(getPhaseConfigList());
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
