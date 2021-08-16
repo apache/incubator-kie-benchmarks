@@ -15,13 +15,11 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
-import org.optaplanner.examples.cloudbalancing.domain.CloudComputer;
 import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
+import org.optaplanner.examples.cloudbalancing.score.CloudBalancingConstraintProvider;
 
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
-    private static final String CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE =
-            "org/optaplanner/examples/cloudbalancing/optional/score/cloudBalancingConstraints.drl";
 
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
     private CloudBalancingExample.DataSet dataset;
@@ -40,7 +38,7 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
-        scoreDirectorFactoryConfig.setScoreDrlList(Collections.singletonList(CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE));
+        scoreDirectorFactoryConfig.setConstraintProviderClass(CloudBalancingConstraintProvider.class);
 
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
         solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(
