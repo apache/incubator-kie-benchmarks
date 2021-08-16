@@ -5,7 +5,7 @@
   <entityClass>org.optaplanner.examples.flightcrewscheduling.domain.Employee</entityClass>
 
   <scoreDirectorFactory>
-    <constraintProviderClass>org.optaplanner.examples.flightcrewscheduling.optional.score.FlightCrewSchedulingConstraintProvider</constraintProviderClass>
+    <constraintProviderClass>org.optaplanner.examples.flightcrewscheduling.score.FlightCrewSchedulingConstraintProvider</constraintProviderClass>
   </scoreDirectorFactory>
 
   <termination>
