@@ -4,7 +4,7 @@
   <entityClass>org.optaplanner.examples.travelingtournament.domain.Match</entityClass>
 
   <scoreDirectorFactory>
-    <constraintProviderClass>org.optaplanner.examples.travelingtournament.optional.score.TravelingTournamentConstraintProvider</constraintProviderClass>
+    <constraintProviderClass>org.optaplanner.examples.travelingtournament.score.TravelingTournamentConstraintProvider</constraintProviderClass>
     <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
   </scoreDirectorFactory>
 

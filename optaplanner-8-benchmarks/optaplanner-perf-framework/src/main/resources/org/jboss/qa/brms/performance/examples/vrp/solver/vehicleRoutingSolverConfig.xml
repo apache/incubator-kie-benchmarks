@@ -6,7 +6,7 @@
   <entityClass>org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer</entityClass>
 
   <scoreDirectorFactory>
-    <constraintProviderClass>org.optaplanner.examples.vehiclerouting.optional.score.VehicleRoutingConstraintProvider</constraintProviderClass>
+    <constraintProviderClass>org.optaplanner.examples.vehiclerouting.score.VehicleRoutingConstraintProvider</constraintProviderClass>
     <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
   </scoreDirectorFactory>
 
