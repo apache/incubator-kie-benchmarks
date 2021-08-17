@@ -1,36 +1,27 @@
-name: PR Check
+name: PR Check 8.x series
 
 on:
   push:
-    branches:
-      - main
-      - 7.[0-9]+.x
-    paths-ignore:
-      - 'optaplanner-8-benchmarks/**'
+    paths:
+      - 'optaplanner-8-benchmarks'
 
   pull_request:
-    branches:
-      - main
-      - 7.[0-9]+.x
-    paths-ignore:
-      - 'optaplanner-8-benchmarks/**'
+    paths:
+      - 'optaplanner-8-benchmarks'
 
 jobs:
   pr-check:
-    name: Java ${{ matrix.java }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java: [8, 11]
-      fail-fast: false
+
     steps:
       - name: Check  out Git repository
         uses: actions/checkout@v2
+
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: ${{ matrix.java }}
-          distribution: adopt
+          java-version: 11
+
       # See https://docs.github.com/en/actions/guides/building-and-testing-java-with-maven#caching-dependencies
       - name: Cache Maven packages
         uses: actions/cache@v2
@@ -38,5 +29,10 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Maven Build using Java ${{ matrix.java-version }}
-        run: mvn -B --fail-at-end clean install
+
+      - name: Maven Build
+        run: mvn -B --fail-at-end clean install -f optaplanner-8-benchmarks
+
+      - name: Check runtime
+        run: java -jar ./optaplanner-8-benchmarks/optaplanner-perf-benchmark/target/optaplanner-8-benchmarks.jar -jvmArgs '-Xms6144m -Xmx6144m' -v NORMAL -foe false -gc true -wi 1 -i 1 -f 1
+
