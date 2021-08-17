@@ -3,11 +3,11 @@ name: PR Check 8.x series
 on:
   push:
     paths:
-      - 'optaplanner-8-benchmarks'
+      - 'optaplanner-8-benchmarks/**'
 
   pull_request:
     paths:
-      - 'optaplanner-8-benchmarks'
+      - 'optaplanner-8-benchmarks/**'
 
 jobs:
   pr-check:
