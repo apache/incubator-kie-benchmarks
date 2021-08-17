@@ -44,7 +44,7 @@ Testing planner's performance regression in various tests.
    ```
    $ mvn clean install
    $ java -Xms6144m -Xmx6144m -XX:PermSize=512m -XX:MaxPermSize=768m \
-   -jar optaplanner-perf-benchmark/target/optaplanner-benchmarks.jar \
+   -jar optaplanner-perf-benchmark/target/optaplanner-8-benchmarks.jar \
    -foe true -wi 5 -i 10 -f 10 -rf csv -rff results.csv
    ```
 
