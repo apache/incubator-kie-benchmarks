@@ -61,6 +61,14 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/kie.conf</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <finalName>optaplanner-7-benchmarks</finalName>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">

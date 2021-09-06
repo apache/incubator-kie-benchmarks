@@ -44,7 +44,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
 
         NurseRoster nonInitializedSolution = Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);
         constructionSolver.solve(nonInitializedSolution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(nonInitializedSolution);
     }
 
     protected PillarSelectorConfig createPillarSelectorConfig() {
