@@ -43,7 +43,6 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         Solver<NurseRoster> constructionSolver = solverFactory.buildSolver();
 
         NurseRoster nonInitializedSolution = Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);
-        constructionSolver.solve(nonInitializedSolution);
         return constructionSolver.solve(nonInitializedSolution);
     }
 
