@@ -33,7 +33,7 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRoutingSolution> {
 
     private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE =
-            "org/optaplanner/examples/vehiclerouting/optional/score/vehicleRoutingConstraints.drl";
+            "org/optaplanner/examples/vehiclerouting/solver/vehicleRoutingConstraints.drl";
     private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 1;
     private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
