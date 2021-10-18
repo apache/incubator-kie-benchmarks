@@ -17,6 +17,7 @@
     <module>jbpm-performance-tests</module>
     <module>kieserver-assets</module>
     <module>kieserver-performance-tests</module>
+    <module>kieserver-performance-tests-jmh</module>
     <module>jbpm-performance-tests-jmh</module>
   </modules>
 
