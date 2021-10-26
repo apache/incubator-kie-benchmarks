@@ -40,6 +40,7 @@ import org.kie.test.util.db.DataSourceFactory;
 import org.kie.test.util.db.PoolingDataSourceWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.jbpm.services.task.impl.TaskDeadlinesServiceImpl;
 
 public class JBPMController {
 
@@ -158,6 +159,7 @@ public class JBPMController {
     public void clear() {
         clearCustomEntries();
         disposeRuntimeManager();
+        TaskDeadlinesServiceImpl.dispose();
     }
 
     public void tearDown() {
