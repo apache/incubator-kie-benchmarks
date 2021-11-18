@@ -5700,7 +5700,7 @@
     <DayOffRequest reference="762"/>
     <DayOffRequest reference="764"/>
   </dayOffRequestList>
-  <dayOnRequestList class="empty-list"/>
+  <dayOnRequestList id="813"/>
   <shiftOffRequestList id="813">
     <ShiftOffRequest reference="130"/>
     <ShiftOffRequest reference="146"/>
@@ -6013,7 +6013,7 @@
     <ShiftOffRequest reference="772"/>
     <ShiftOffRequest reference="769"/>
   </shiftOffRequestList>
-  <shiftOnRequestList class="empty-list"/>
+  <shiftOnRequestList id="815"/>
   <shiftAssignmentList id="814">
     <ShiftAssignment id="815">
       <id>0</id>
