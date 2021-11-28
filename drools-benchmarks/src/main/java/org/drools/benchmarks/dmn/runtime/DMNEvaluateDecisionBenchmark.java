@@ -42,7 +42,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 50)
 public class DMNEvaluateDecisionBenchmark extends AbstractBenchmark {
 
-    @Param({"10", "50", "500", "1000"})
+    @Param({"1000"})
     private int numberOfDecisions;
 
     private Resource dmnResource;
