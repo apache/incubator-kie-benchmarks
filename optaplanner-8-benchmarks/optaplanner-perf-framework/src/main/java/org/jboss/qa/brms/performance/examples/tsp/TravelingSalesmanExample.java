@@ -10,11 +10,11 @@ import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.tsp.domain.TspSolution;
 import org.optaplanner.examples.tsp.domain.Visit;
-import org.optaplanner.examples.tsp.score.TspIncrementalScoreCalculator;
+import org.optaplanner.examples.tsp.optional.score.TspIncrementalScoreCalculator;
 
 public final class TravelingSalesmanExample extends AbstractExample<TspSolution> {
 
-    private static final String SOLVER_CONFIG = "/org/jboss/qa/brms/performance/examples/tsp/solver/tspSolverConfig.xml";
+    private static final String SOLVER_CONFIG = "/org/jboss/qa/brms/performance/examples/tsp/optional/score/tspSolverConfig.xml";
 
     private final TspDao dao = new TspDao();
 
