@@ -31,7 +31,7 @@ public class NurseRosteringSequentialPillarSwapMoveSelectorBenchmark
         NurseRosteringSequentialPillarSwapMoveSelectorBenchmark nurseRosteringBenchmark =
                 new NurseRosteringSequentialPillarSwapMoveSelectorBenchmark();
         nurseRosteringBenchmark.initSolver();
-        nurseRosteringBenchmark.setDataset(NurseRosteringExample.DataSet.SPRINT);
+        nurseRosteringBenchmark.setDataset(NurseRosteringExample.DataSet.SMALLEST);
         nurseRosteringBenchmark.initSolution();
         nurseRosteringBenchmark.benchmark();
     }

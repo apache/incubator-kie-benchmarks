@@ -22,8 +22,8 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 public class VRPMultithreadedSolvingScalabilityBenchmark
         extends AbstractMultithreadedSolvingScalabilityBenchmark<VehicleRoutingSolution> {
 
-    @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
-    private VehicleRoutingExample.DataSet dataset;
+    @Param({"SMALLEST", "VRP_USA_1000_20", "VRP_USA_10000_100"})
+    private VehicleRoutingExample.DataSet dataSet;
 
     @Override
     protected TerminationConfig getTerminationConfig() {
@@ -61,7 +61,7 @@ public class VRPMultithreadedSolvingScalabilityBenchmark
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
-        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
+        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
         return constructionSolver.solve(solution);
     }
 

@@ -14,12 +14,12 @@ import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 @Warmup(iterations = 15)
 public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoster> {
 
-    @Param({"SPRINT", "MEDIUM", "LONG"})
-    private NurseRosteringExample.DataSet dataset;
+    @Param({"SMALLEST", "MEDIUM", "LONG"})
+    private NurseRosteringExample.DataSet dataSet;
 
     @Override
     protected NurseRoster createInitialSolution() {
-        return Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);
+        return Examples.NURSE_ROSTERING.loadSolvingProblem(dataSet);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoste
     public static void main(String[] args) {
         NurseRosteringBenchmark nurseRosteringBenchmark = new NurseRosteringBenchmark();
         Solver<NurseRoster> solver = nurseRosteringBenchmark.createSolver();
-        solver.solve(Examples.NURSE_ROSTERING.loadSolvingProblem(NurseRosteringExample.DataSet.SPRINT));
+        solver.solve(Examples.NURSE_ROSTERING.loadSolvingProblem(NurseRosteringExample.DataSet.SMALLEST));
     }
 }

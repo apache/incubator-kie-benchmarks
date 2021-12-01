@@ -27,8 +27,8 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
 
     private final VehicleRoutingDao dao = new VehicleRoutingDao();
 
-    public VehicleRoutingSolution loadSolvingProblem(DataSet dataset) {
-        return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
+    public VehicleRoutingSolution loadSolvingProblem(DataSet dataSet) {
+        return loadSolvingProblem(new File(dao.getDataDir(), dataSet.getFilename()));
     }
 
     public VehicleRoutingSolution createInitialSolution(DataSet dataSet) {
@@ -73,7 +73,7 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
         VRP_ROAD_29("road-cvrp-29customers.xml"),
         VRP_TW_25("cvrptw-25customers.xml"),
         VRP_TW_100_B("cvrptw-100customers-B.xml"),
-        VRP_USA_100_10("usa-n100-k10.xml"),
+        SMALLEST("usa-n100-k10.xml"),
         VRP_USA_1000_20("usa-n1000-k20.xml"),
         VRP_USA_10000_100("usa-n10000-k100.xml"),
         BELGIUM_TW_50_10("belgium-tw-n50-k10.xml"),

@@ -35,16 +35,16 @@ public final class ConferenceSchedulingExample extends AbstractExample<Conferenc
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
 
-    public ConferenceSolution loadSolvingProblem(ConferenceSchedulingExample.DataSet dataset) {
+    public ConferenceSolution loadSolvingProblem(ConferenceSchedulingExample.DataSet dataSet) {
         File exampleDataDir = new File(System.getProperty("user.dir"), "target");
         exampleDataDir.mkdirs();
         System.setProperty(CommonApp.DATA_DIR_SYSTEM_PROPERTY, exampleDataDir.getAbsolutePath());
         // TODO: refactor the ConferenceSchedulingGenerator in optaplanner-examples to reuse it
         return new ConferenceSchedulingGenerator().createConferenceSolution(
-                dataset.timeslotListSize,
-                dataset.roomListSize,
-                dataset.speakerListSize,
-                dataset.talkListSize);
+                dataSet.timeslotListSize,
+                dataSet.roomListSize,
+                dataSet.speakerListSize,
+                dataSet.talkListSize);
     }
 
     @Override
@@ -72,7 +72,7 @@ public final class ConferenceSchedulingExample extends AbstractExample<Conferenc
     public enum DataSet {
         TALKS_36_TIMESLOTS_12_ROOMS_5("TIME_12;ROOM_5;SPEAKER_26;TALK_36"),
         TALKS_108_TIMESLOTS_18_ROOMS_10("TIME_18;ROOM_10;SPEAKER_74;TALK_108"),
-        TALKS_216_TIMESLOTS_18_ROOMS_20("TIME_18;ROOM_20;SPEAKER_146;TALK_216");
+        SMALLEST("TIME_18;ROOM_20;SPEAKER_146;TALK_216");
 
         private int timeslotListSize;
         private int roomListSize;

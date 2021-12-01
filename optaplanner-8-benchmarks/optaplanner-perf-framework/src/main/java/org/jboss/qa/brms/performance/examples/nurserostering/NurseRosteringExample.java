@@ -17,8 +17,8 @@ public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
 
     private final NurseRosteringDao dao = new NurseRosteringDao();
 
-    public NurseRoster loadSolvingProblem(DataSet dataset) {
-        return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
+    public NurseRoster loadSolvingProblem(DataSet dataSet) {
+        return loadSolvingProblem(new File(dao.getDataDir(), dataSet.getFilename()));
     }
 
     @Override
@@ -45,7 +45,7 @@ public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
     public enum DataSet {
         LONG("long01.xml"),
         MEDIUM("medium01.xml"),
-        SPRINT("sprint01.xml");
+        SMALLEST("sprint01.xml");
 
         private String filename;
 
