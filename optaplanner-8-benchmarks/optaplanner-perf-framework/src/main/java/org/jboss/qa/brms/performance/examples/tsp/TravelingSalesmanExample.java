@@ -18,8 +18,8 @@ public final class TravelingSalesmanExample extends AbstractExample<TspSolution>
 
     private final TspDao dao = new TspDao();
 
-    public TspSolution loadSolvingProblem(DataSet dataset) {
-        File dataFile = new File(dao.getDataDir(), dataset.getFilename());
+    public TspSolution loadSolvingProblem(DataSet dataSet) {
+        File dataFile = new File(dao.getDataDir(), dataSet.getFilename());
         return loadSolvingProblem(dataFile);
     }
 
@@ -52,7 +52,7 @@ public final class TravelingSalesmanExample extends AbstractExample<TspSolution>
         USA_TX_2743("usa_tx_2743.xml"),
         CHINA_71009("ch71009.xml"),
         GREECE_9882("gr9882.xml"),
-        LU_980("lu980.xml");
+        SMALLEST("lu980.xml");
 
         DataSet(String file) {
             this.filename = file;

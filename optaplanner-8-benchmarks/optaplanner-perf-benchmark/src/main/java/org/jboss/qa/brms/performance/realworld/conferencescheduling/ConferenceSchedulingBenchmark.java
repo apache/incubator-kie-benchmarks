@@ -24,7 +24,7 @@ import org.optaplanner.examples.conferencescheduling.score.ConferenceSchedulingC
 @Warmup(iterations = 15)
 public class ConferenceSchedulingBenchmark extends AbstractPlannerBenchmark<ConferenceSolution> {
 
-    @Param({"TALKS_36_TIMESLOTS_12_ROOMS_5", "TALKS_108_TIMESLOTS_18_ROOMS_10", "TALKS_216_TIMESLOTS_18_ROOMS_20"})
+    @Param({"SMALLEST", "TALKS_36_TIMESLOTS_12_ROOMS_5", "TALKS_108_TIMESLOTS_18_ROOMS_10"})
     private ConferenceSchedulingExample.DataSet dataSet;
 
     @Override

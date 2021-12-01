@@ -27,8 +27,8 @@ public final class TravelingTournamentExample extends AbstractExample<TravelingT
         return dao.readSolution(file);
     }
 
-    public TravelingTournament loadSolvingProblem(TravelingTournamentExample.DataSet dataset) {
-        return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
+    public TravelingTournament loadSolvingProblem(TravelingTournamentExample.DataSet dataSet) {
+        return loadSolvingProblem(new File(dao.getDataDir(), dataSet.getFilename()));
     }
 
     public TravelingTournament createInitialSolution(TravelingTournamentExample.DataSet dataSet) {
@@ -60,7 +60,7 @@ public final class TravelingTournamentExample extends AbstractExample<TravelingT
 
     public enum DataSet {
         SUPER_06("4-super06.xml"),
-        SUPER_10("4-super10.xml"),
+        SMALLEST("4-super10.xml"),
         SUPER_14("4-super14.xml");
 
         DataSet(String file) {
