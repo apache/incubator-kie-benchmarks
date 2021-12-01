@@ -24,7 +24,7 @@ Testing planner's performance regression in various tests.
      - can vary marginally from solution to solution
      - Change, Pillar Change, Swap, Pillar Swap, Sub Chain Change, Sub Chain Swap, Tail Chain Swap moves
      - tested separately
-       - some of them scale much worse than others on same dataSet
+       - some of them scale much worse than others on same dataset
          - different tuning for all tests is needed
     - constraint streams 
 
