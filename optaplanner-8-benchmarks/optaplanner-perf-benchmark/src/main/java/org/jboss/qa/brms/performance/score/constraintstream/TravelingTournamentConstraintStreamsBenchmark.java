@@ -19,8 +19,8 @@ import org.optaplanner.examples.travelingtournament.domain.TravelingTournament;
 @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 public class TravelingTournamentConstraintStreamsBenchmark extends AbstractPlannerBenchmark<TravelingTournament> {
 
-    @Param({"SUPER_06", "SMALLEST", "SUPER_14"})
-    private TravelingTournamentExample.DataSet dataSet;
+    @Param({"SUPER_06", "SUPER_10", "SUPER_14"})
+    private TravelingTournamentExample.DataSet dataset;
 
     @Override
     protected TravelingTournament createInitialSolution() {

@@ -24,8 +24,8 @@ public final class CloudBalancingExample extends AbstractExample<CloudBalance> {
         return dao.readSolution(file);
     }
 
-    public CloudBalance loadSolvingProblem(DataSet dataSet) {
-        File dataFile = new File(dao.getDataDir(), dataSet.getFilename());
+    public CloudBalance loadSolvingProblem(DataSet dataset) {
+        File dataFile = new File(dao.getDataDir(), dataset.getFilename());
         return loadSolvingProblem(dataFile);
     }
 
@@ -51,7 +51,7 @@ public final class CloudBalancingExample extends AbstractExample<CloudBalance> {
      * Predefined datasets.
      */
     public enum DataSet {
-        SMALLEST("400computers-1200processes.xml"), CB_800_2400("800computers-2400processes.xml"),
+        CB_400_1200("400computers-1200processes.xml"), CB_800_2400("800computers-2400processes.xml"),
         CB_1600_4800("1600computers-4800processes.xml"), CB_100_300("100computers-300processes.xml"),
         CB_10000_30000("10000computers-30000processes.xml");
 

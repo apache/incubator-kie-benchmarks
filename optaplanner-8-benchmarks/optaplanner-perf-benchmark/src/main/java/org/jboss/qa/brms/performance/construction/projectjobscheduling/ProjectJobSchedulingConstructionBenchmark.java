@@ -17,12 +17,12 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
     @Param({"FIRST_FIT"})
     private ConstructionHeuristicType constructionHeuristicType;
 
-    @Param({"SMALLEST", "A_10", "B_9"})
-    private ProjectJobSchedulingExample.DataSet dataSet;
+    @Param({"A_4", "A_10", "B_9"})
+    private ProjectJobSchedulingExample.DataSet dataset;
 
     @Override
     protected Schedule createInitialSolution() {
-        return Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataSet);
+        return Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
     }
 
     @Override

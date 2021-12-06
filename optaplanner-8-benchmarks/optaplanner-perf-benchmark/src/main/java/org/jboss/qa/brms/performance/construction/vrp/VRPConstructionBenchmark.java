@@ -17,12 +17,12 @@ public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBench
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
     private ConstructionHeuristicType constructionHeuristicType;
 
-    @Param({"SMALLEST", "VRP_USA_1000_20", "VRP_USA_10000_100"})
-    private VehicleRoutingExample.DataSet dataSet;
+    @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
+        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
     }
 
     @Override

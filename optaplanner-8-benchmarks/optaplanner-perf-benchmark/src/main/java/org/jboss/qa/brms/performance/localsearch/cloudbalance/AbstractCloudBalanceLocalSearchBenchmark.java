@@ -18,8 +18,8 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 
 public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractLocalSearchPlannerBenchmark<CloudBalance> {
 
-    @Param({"SMALLEST", "CB_1600_4800", "CB_10000_30000"})
-    private CloudBalancingExample.DataSet dataSet;
+    @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
+    private CloudBalancingExample.DataSet dataset;
 
     @Override
     protected CloudBalance createInitialSolution() {
@@ -33,7 +33,7 @@ public abstract class AbstractCloudBalanceLocalSearchBenchmark extends AbstractL
         SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);
         Solver<CloudBalance> constructionSolver = solverFactory.buildSolver();
 
-        CloudBalance solution = Examples.CLOUD_BALANCING.loadSolvingProblem(dataSet);
+        CloudBalance solution = Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
         return constructionSolver.solve(solution);
     }
 

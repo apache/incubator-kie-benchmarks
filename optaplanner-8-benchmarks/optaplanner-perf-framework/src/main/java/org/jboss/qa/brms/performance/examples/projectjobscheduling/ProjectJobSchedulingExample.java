@@ -16,8 +16,8 @@ public final class ProjectJobSchedulingExample extends AbstractExample<Schedule>
 
     private final ProjectJobSchedulingDao dao = new ProjectJobSchedulingDao();
 
-    public Schedule loadSolvingProblem(DataSet dataSet) {
-        return loadSolvingProblem(new File(dao.getDataDir(), dataSet.getFilename()));
+    public Schedule loadSolvingProblem(DataSet dataset) {
+        return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
     }
 
     @Override
@@ -45,7 +45,7 @@ public final class ProjectJobSchedulingExample extends AbstractExample<Schedule>
     }
 
     public enum DataSet {
-        SMALLEST("A-4.xml"),
+        A_4("A-4.xml"),
         A_10("A-10.xml"),
         B_9("B-9.xml");
 

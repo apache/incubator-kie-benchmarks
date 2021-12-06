@@ -25,8 +25,8 @@ public class VRPTimeWindowedConstructionBenchmark
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
     private ConstructionHeuristicType constructionHeuristicType;
 
-    @Param({"SMALLEST", "BELGIUM_TW_500_20", "BELGIUM_TW_2750_55"})
-    private VehicleRoutingExample.DataSet dataSet;
+    @Param({"BELGIUM_TW_50_10", "BELGIUM_TW_500_20", "BELGIUM_TW_2750_55"})
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected Solver<VehicleRoutingSolution> createSolver() {
@@ -41,7 +41,7 @@ public class VRPTimeWindowedConstructionBenchmark
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
+        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
     }
 
     @Override

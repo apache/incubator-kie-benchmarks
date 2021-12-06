@@ -17,12 +17,12 @@ public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBench
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
     private ConstructionHeuristicType constructionHeuristicType;
 
-    @Param({"SMALLEST", "USA_CA_2716", "GREECE_9882"})
-    private TravelingSalesmanExample.DataSet dataSet;
+    @Param({"LU_980", "USA_CA_2716", "GREECE_9882"})
+    private TravelingSalesmanExample.DataSet dataset;
 
     @Override
     protected TspSolution createInitialSolution() {
-        return Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataSet);
+        return Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataset);
     }
 
     @Override

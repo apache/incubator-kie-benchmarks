@@ -20,8 +20,8 @@ import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedC
 public abstract class AbstractVRPTWLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<VehicleRoutingSolution> {
 
-    @Param({"SMALLEST", "BELGIUM_TW_500_20", "BELGIUM_TW_2750_55"})
-    private VehicleRoutingExample.DataSet dataSet;
+    @Param({"BELGIUM_TW_50_10", "BELGIUM_TW_500_20", "BELGIUM_TW_2750_55"})
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
@@ -37,7 +37,7 @@ public abstract class AbstractVRPTWLocalSearchBenchmark
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
-        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
+        VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
         return constructionSolver.solve(solution);
     }
 

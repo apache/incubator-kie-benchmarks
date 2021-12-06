@@ -21,12 +21,12 @@ import org.optaplanner.examples.cloudbalancing.score.CloudBalancingConstraintPro
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
 
-    @Param({"SMALLEST", "CB_1600_4800", "CB_10000_30000"})
-    private CloudBalancingExample.DataSet dataSet;
+    @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
+    private CloudBalancingExample.DataSet dataset;
 
     @Override
     protected CloudBalance createInitialSolution() {
-        return Examples.CLOUD_BALANCING.loadSolvingProblem(dataSet);
+        return Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
     }
 
     @Override

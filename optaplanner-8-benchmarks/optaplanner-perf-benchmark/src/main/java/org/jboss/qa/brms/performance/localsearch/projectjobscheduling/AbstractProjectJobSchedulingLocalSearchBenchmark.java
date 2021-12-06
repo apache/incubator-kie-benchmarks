@@ -19,8 +19,8 @@ import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
 public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<Schedule> {
 
-    @Param({"SMALLEST", "A_10", "B_9"})
-    private ProjectJobSchedulingExample.DataSet dataSet;
+    @Param({"A_4", "A_10", "B_9"})
+    private ProjectJobSchedulingExample.DataSet dataset;
 
     @Override
     protected Schedule createInitialSolution() {
@@ -32,7 +32,7 @@ public abstract class AbstractProjectJobSchedulingLocalSearchBenchmark
         SolverFactory<Schedule> solverFactory = SolverFactory.create(solverConfig);
         Solver<Schedule> constructionSolver = solverFactory.buildSolver();
 
-        Schedule solution = Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataSet);
+        Schedule solution = Examples.PROJECT_JOB_SCHEDULING.loadSolvingProblem(dataset);
         return constructionSolver.solve(solution);
     }
 

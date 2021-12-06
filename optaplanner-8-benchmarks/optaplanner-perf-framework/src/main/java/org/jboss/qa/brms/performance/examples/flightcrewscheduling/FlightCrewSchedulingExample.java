@@ -67,7 +67,7 @@ public class FlightCrewSchedulingExample extends AbstractExample<FlightCrewSolut
     }
 
     public enum DataSet {
-        SMALLEST("175flights-7days-Europe.xlsx"),
+        EUROPE_175_FLIGHTS_7_DAYS("175flights-7days-Europe.xlsx"),
         EUROPE_700_FLIGHTS_28_DAYS("700flights-28days-Europe.xlsx");
 
         DataSet(String file) {

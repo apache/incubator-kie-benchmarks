@@ -11,7 +11,7 @@ import org.optaplanner.examples.flightcrewscheduling.domain.FlightCrewSolution;
 
 public class FlightCrewSchedulingConstraintStreamsBenchmark extends AbstractPlannerBenchmark<FlightCrewSolution> {
 
-    @Param({"SMALLEST", "EUROPE_700_FLIGHTS_28_DAYS"})
+    @Param({"EUROPE_175_FLIGHTS_7_DAYS", "EUROPE_700_FLIGHTS_28_DAYS"})
     private FlightCrewSchedulingExample.DataSet dataSet;
 
     @Override
@@ -35,7 +35,7 @@ public class FlightCrewSchedulingConstraintStreamsBenchmark extends AbstractPlan
         FlightCrewSchedulingConstraintStreamsBenchmark benchmark = new FlightCrewSchedulingConstraintStreamsBenchmark();
         Solver<FlightCrewSolution> solver = benchmark.createSolver();
         FlightCrewSolution initialSolution = Examples.FLIGHT_CREW_SCHEDULING.createInitialSolution(
-                FlightCrewSchedulingExample.DataSet.SMALLEST);
+                FlightCrewSchedulingExample.DataSet.EUROPE_175_FLIGHTS_7_DAYS);
         FlightCrewSolution solution = solver.solve(initialSolution);
     }
 }
