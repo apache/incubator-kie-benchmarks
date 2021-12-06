@@ -19,8 +19,8 @@ import org.optaplanner.examples.tsp.domain.TspSolution;
 public abstract class AbstractTSPLocalSearchBenchmark
         extends AbstractLocalSearchPlannerBenchmark<TspSolution> {
 
-    @Param({"SMALLEST", "USA_CA_2716", "GREECE_9882"})
-    private TravelingSalesmanExample.DataSet dataSet;
+    @Param({"LU_980", "USA_CA_2716", "GREECE_9882"})
+    private TravelingSalesmanExample.DataSet dataset;
 
     @Override
     protected TspSolution createInitialSolution() {
@@ -33,7 +33,7 @@ public abstract class AbstractTSPLocalSearchBenchmark
         SolverFactory<TspSolution> solverFactory = SolverFactory.create(solverConfig);
         Solver<TspSolution> constructionSolver = solverFactory.buildSolver();
 
-        TspSolution solution = Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataSet);
+        TspSolution solution = Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataset);
         return constructionSolver.solve(solution);
     }
 

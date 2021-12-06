@@ -28,8 +28,8 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
     private static final int ACCEPTED_COUNT_LIMIT = 800;
     private static final long CALCULATION_COUNT_LIMIT = 10_000L;
 
-    @Param({"SMALLEST", "MEDIUM", "LONG"})
-    private NurseRosteringExample.DataSet dataSet;
+    @Param({"SPRINT", "MEDIUM", "LONG"})
+    private NurseRosteringExample.DataSet dataset;
 
     @Override
     protected NurseRoster createInitialSolution() {
@@ -42,7 +42,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         SolverFactory<NurseRoster> solverFactory = SolverFactory.create(solverConfig);
         Solver<NurseRoster> constructionSolver = solverFactory.buildSolver();
 
-        NurseRoster nonInitializedSolution = Examples.NURSE_ROSTERING.loadSolvingProblem(dataSet);
+        NurseRoster nonInitializedSolution = Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);
         return constructionSolver.solve(nonInitializedSolution);
     }
 
@@ -88,7 +88,7 @@ public abstract class AbstractNurseRosteringMoveSelectorBenchmark
         return solverFactory.buildSolver();
     }
 
-    protected void setDataset(NurseRosteringExample.DataSet dataSet) {
-        this.dataSet = dataSet;
+    protected void setDataset(NurseRosteringExample.DataSet dataset) {
+        this.dataset = dataset;
     }
 }

@@ -11,12 +11,12 @@ import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 
 public class VehicleRoutingConstraintStreamsBenchmark extends AbstractPlannerBenchmark<VehicleRoutingSolution> {
 
-    @Param({"SMALLEST", "VRP_USA_1000_20", "VRP_USA_10000_100"})
-    private VehicleRoutingExample.DataSet dataSet;
+    @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        return Examples.VEHICLE_ROUTING.createInitialSolution(dataSet);
+        return Examples.VEHICLE_ROUTING.createInitialSolution(dataset);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class VehicleRoutingConstraintStreamsBenchmark extends AbstractPlannerBen
         VehicleRoutingConstraintStreamsBenchmark benchmark = new VehicleRoutingConstraintStreamsBenchmark();
         Solver<VehicleRoutingSolution> solver = benchmark.createSolver();
         VehicleRoutingSolution initialSolution = Examples.VEHICLE_ROUTING.createInitialSolution(
-                VehicleRoutingExample.DataSet.SMALLEST);
+                VehicleRoutingExample.DataSet.VRP_USA_100_10);
         VehicleRoutingSolution solution = solver.solve(initialSolution);
     }
 }

@@ -13,8 +13,8 @@ public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuri
     @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
     private ConstructionHeuristicType constructionHeuristicType;
 
-    @Param({"SMALLEST", "CB_1600_4800", "CB_10000_30000"})
-    private CloudBalancingExample.DataSet dataSet;
+    @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
+    private CloudBalancingExample.DataSet dataset;
 
     public CloudBalanceConstructionBenchmark() {
         super(Examples.CLOUD_BALANCING);
@@ -22,7 +22,7 @@ public class CloudBalanceConstructionBenchmark extends AbstractConstructionHeuri
 
     @Override
     protected CloudBalance createInitialSolution() {
-        return Examples.CLOUD_BALANCING.loadSolvingProblem(dataSet);
+        return Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);
     }
 
     @Override

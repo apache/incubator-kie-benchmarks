@@ -36,6 +36,5 @@ jobs:
 
       - name: Check runtime
         working-directory: ./optaplanner-8-benchmarks
-        run: java -jar ./optaplanner-perf-benchmark/target/optaplanner-8-benchmarks.jar -jvmArgs '-Xms6144m -Xmx6144m' -v NORMAL -foe false -gc true -wi 1 -i 1 -f 1 -p constructionHeuristicType=FIRST_FIT -p dataSet=SMALLEST 'org.jboss.qa.brms.performance.(?!.*scalability).*'
-
+        run: java -jar ./optaplanner-perf-benchmark/target/optaplanner-8-benchmarks.jar -jvmArgs '-Xms6144m -Xmx6144m' -v NORMAL -foe false -gc true -wi 1 -i 1 -f 1
 

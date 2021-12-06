@@ -37,12 +37,12 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
     private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 1;
     private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
-    @Param({"SMALLEST", "VRP_USA_1000_20", "VRP_USA_10000_100"})
-    private VehicleRoutingExample.DataSet dataSet;
+    @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
+    private VehicleRoutingExample.DataSet dataset;
 
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
-        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
+        return Examples.VEHICLE_ROUTING.loadSolvingProblem(dataset);
     }
 
     @Override
