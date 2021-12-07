@@ -6,7 +6,7 @@
 
   <scoreDirectorFactory>
     <scoreDefinitionType>SIMPLE_LONG</scoreDefinitionType>
-    <incrementalScoreCalculatorClass>org.optaplanner.examples.tsp.score.TspIncrementalScoreCalculator</incrementalScoreCalculatorClass>
+    <incrementalScoreCalculatorClass>org.optaplanner.examples.tsp.optional.score.TspIncrementalScoreCalculator</incrementalScoreCalculatorClass>
     <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
   </scoreDirectorFactory>
 
