@@ -49,7 +49,7 @@ class SolverConfigFromXmlTest {
         oneSecondTermination.setSecondsSpentLimit(1L);
     }
 
-    @Timeout(value = 5, unit = TimeUnit.SECONDS)
+    @Timeout(value = 10, unit = TimeUnit.SECONDS)
     @ParameterizedTest
     @MethodSource("problemSetAndSolverConfig")
     public void solverConfigFromXmlTest(AbstractPlannerBenchmark benchmark, SolverConfig solverConfig) {
