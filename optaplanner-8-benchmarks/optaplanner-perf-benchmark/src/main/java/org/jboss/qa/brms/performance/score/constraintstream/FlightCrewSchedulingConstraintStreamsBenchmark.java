@@ -12,11 +12,18 @@ import org.optaplanner.examples.flightcrewscheduling.domain.FlightCrewSolution;
 public class FlightCrewSchedulingConstraintStreamsBenchmark extends AbstractPlannerBenchmark<FlightCrewSolution> {
 
     @Param({"EUROPE_175_FLIGHTS_7_DAYS", "EUROPE_700_FLIGHTS_28_DAYS"})
-    private FlightCrewSchedulingExample.DataSet dataSet;
+    private FlightCrewSchedulingExample.DataSet dataset;
+
+    public FlightCrewSchedulingConstraintStreamsBenchmark() {
+    }
+
+    public FlightCrewSchedulingConstraintStreamsBenchmark(FlightCrewSchedulingExample.DataSet dataSet) {
+        this.dataset = dataSet;
+    }
 
     @Override
     protected FlightCrewSolution createInitialSolution() {
-        return Examples.FLIGHT_CREW_SCHEDULING.createInitialSolution(dataSet);
+        return Examples.FLIGHT_CREW_SCHEDULING.createInitialSolution(dataset);
     }
 
     @Override

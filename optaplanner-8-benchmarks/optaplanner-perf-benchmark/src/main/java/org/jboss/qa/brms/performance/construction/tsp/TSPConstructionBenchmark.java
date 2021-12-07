@@ -20,6 +20,12 @@ public class TSPConstructionBenchmark extends AbstractConstructionHeuristicBench
     @Param({"LU_980", "USA_CA_2716", "GREECE_9882"})
     private TravelingSalesmanExample.DataSet dataset;
 
+    public TSPConstructionBenchmark(ConstructionHeuristicType constructionHeuristicType, TravelingSalesmanExample.DataSet dataset) {
+        super(Examples.TRAVELING_SALESMAN);
+        this.constructionHeuristicType = constructionHeuristicType;
+        this.dataset = dataset;
+    }
+
     @Override
     protected TspSolution createInitialSolution() {
         return Examples.TRAVELING_SALESMAN.loadSolvingProblem(dataset);

@@ -33,7 +33,7 @@ import org.optaplanner.examples.conferencescheduling.score.ConferenceSchedulingC
 public final class ConferenceSchedulingExample extends AbstractExample<ConferenceSolution> {
 
     private static final String SOLVER_CONFIG =
-            "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
+            "org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
 
     public ConferenceSolution loadSolvingProblem(ConferenceSchedulingExample.DataSet dataset) {
         File exampleDataDir = new File(System.getProperty("user.dir"), "target");
