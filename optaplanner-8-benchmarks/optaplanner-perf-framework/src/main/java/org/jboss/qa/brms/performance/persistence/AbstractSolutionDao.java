@@ -35,8 +35,11 @@ public abstract class AbstractSolutionDao<Solution_> implements SolutionDao<Solu
                 ? new File("data/" + dirName)
                 : new File(MODULE_NAME + "/data/" + dirName);
         if (!dataDir.exists()) {
-            throw new IllegalStateException("The directory dataDir (" + dataDir.getAbsolutePath()
-                    + ") does not exist.\n");
+            dataDir = new File("../" + MODULE_NAME + "/data/" + dirName);
+            if (!dataDir.exists()) {
+                throw new IllegalStateException("The directory dataDir (" + dataDir.getAbsolutePath()
+                                                        + ") does not exist.\n");
+            }
         }
     }
 

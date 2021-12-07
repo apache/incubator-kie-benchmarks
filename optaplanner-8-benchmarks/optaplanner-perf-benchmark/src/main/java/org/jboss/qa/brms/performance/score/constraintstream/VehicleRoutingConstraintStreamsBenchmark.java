@@ -14,6 +14,13 @@ public class VehicleRoutingConstraintStreamsBenchmark extends AbstractPlannerBen
     @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
     private VehicleRoutingExample.DataSet dataset;
 
+    public VehicleRoutingConstraintStreamsBenchmark() {
+    }
+
+    public VehicleRoutingConstraintStreamsBenchmark(VehicleRoutingExample.DataSet dataset) {
+        this.dataset = dataset;
+    }
+
     @Override
     protected VehicleRoutingSolution createInitialSolution() {
         return Examples.VEHICLE_ROUTING.createInitialSolution(dataset);

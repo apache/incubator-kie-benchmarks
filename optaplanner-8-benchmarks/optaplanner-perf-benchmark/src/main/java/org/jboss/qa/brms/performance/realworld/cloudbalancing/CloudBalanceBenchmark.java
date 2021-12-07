@@ -24,6 +24,12 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
     private CloudBalancingExample.DataSet dataset;
 
+    public CloudBalanceBenchmark(){}
+
+    public CloudBalanceBenchmark(CloudBalancingExample.DataSet dataSet){
+        this.dataset = dataSet;
+    }
+
     @Override
     protected CloudBalance createInitialSolution() {
         return Examples.CLOUD_BALANCING.loadSolvingProblem(dataset);

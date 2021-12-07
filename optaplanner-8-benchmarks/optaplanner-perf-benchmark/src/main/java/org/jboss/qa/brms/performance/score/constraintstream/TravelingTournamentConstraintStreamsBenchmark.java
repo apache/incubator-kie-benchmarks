@@ -22,6 +22,13 @@ public class TravelingTournamentConstraintStreamsBenchmark extends AbstractPlann
     @Param({"SUPER_06", "SUPER_10", "SUPER_14"})
     private TravelingTournamentExample.DataSet dataset;
 
+    public TravelingTournamentConstraintStreamsBenchmark() {
+    }
+
+    public TravelingTournamentConstraintStreamsBenchmark(TravelingTournamentExample.DataSet dataset) {
+        this.dataset = dataset;
+    }
+
     @Override
     protected TravelingTournament createInitialSolution() {
         return Examples.TRAVELING_TOURNAMENT.loadSolvingProblem(TravelingTournamentExample.DataSet.SUPER_06);

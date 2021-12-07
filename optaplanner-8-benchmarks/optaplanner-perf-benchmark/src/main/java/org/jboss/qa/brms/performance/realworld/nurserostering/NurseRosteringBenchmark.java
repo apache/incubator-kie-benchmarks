@@ -17,6 +17,13 @@ public class NurseRosteringBenchmark extends AbstractPlannerBenchmark<NurseRoste
     @Param({"SPRINT", "MEDIUM", "LONG"})
     private NurseRosteringExample.DataSet dataset;
 
+    public NurseRosteringBenchmark() {
+    }
+
+    public NurseRosteringBenchmark(NurseRosteringExample.DataSet dataset) {
+        this.dataset = dataset;
+    }
+
     @Override
     protected NurseRoster createInitialSolution() {
         return Examples.NURSE_ROSTERING.loadSolvingProblem(dataset);

@@ -15,7 +15,7 @@ import java.util.Collections;
 public final class CloudBalancingExample extends AbstractExample<CloudBalance> {
 
     private static final String SOLVER_CONFIG =
-            "/org/jboss/qa/brms/performance/examples/cloudbalancing/solver/cloudBalancingSolverConfig.xml";
+            "org/jboss/qa/brms/performance/examples/cloudbalancing/solver/cloudBalancingSolverConfig.xml";
 
     private final CloudBalancingDao dao = new CloudBalancingDao();
 
