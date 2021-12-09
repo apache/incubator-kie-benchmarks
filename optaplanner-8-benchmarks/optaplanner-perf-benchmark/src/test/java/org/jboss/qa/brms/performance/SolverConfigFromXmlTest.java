@@ -18,7 +18,6 @@ import org.jboss.qa.brms.performance.realworld.nurserostering.NurseRosteringBenc
 import org.jboss.qa.brms.performance.score.constraintstream.FlightCrewSchedulingConstraintStreamsBenchmark;
 import org.jboss.qa.brms.performance.score.constraintstream.TravelingTournamentConstraintStreamsBenchmark;
 import org.jboss.qa.brms.performance.score.constraintstream.VehicleRoutingConstraintStreamsBenchmark;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
