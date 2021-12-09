@@ -31,8 +31,6 @@ import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 class SolverConfigFromXmlTest {
 
-    private static final TerminationConfig oneStep = new TerminationConfig();
-
     private static Stream<Arguments> problemSetAndSolverConfig() {
         return Stream.of(
                 Arguments.of(new CloudBalanceBenchmark(CloudBalancingExample.DataSet.CB_100_300), Examples.CLOUD_BALANCING.getSolverConfigFromXml()),
@@ -45,11 +43,6 @@ class SolverConfigFromXmlTest {
         );
     }
 
-    @BeforeAll
-    public static void setTermination() {
-        oneStep.setStepCountLimit(1);
-    }
-
     @Timeout(value = 10, unit = TimeUnit.SECONDS)
     @ParameterizedTest
     @MethodSource("problemSetAndSolverConfig")
@@ -57,7 +50,7 @@ class SolverConfigFromXmlTest {
 
         solverConfig.getPhaseConfigList().forEach(p -> {
             if (p instanceof LocalSearchPhaseConfig) {
-                p.setTerminationConfig(oneStep);
+                p.setTerminationConfig(new TerminationConfig().withStepCountLimit(1));
             }
         });
 
