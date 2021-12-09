@@ -25,12 +25,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
+import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 class SolverConfigFromXmlTest {
 
-    private static final TerminationConfig oneSecondTermination = new TerminationConfig();
+    private static final TerminationConfig oneStep = new TerminationConfig();
 
     private static Stream<Arguments> problemSetAndSolverConfig() {
         return Stream.of(
@@ -45,15 +46,21 @@ class SolverConfigFromXmlTest {
     }
 
     @BeforeAll
-    public static void terminationAndInitSolution() {
-        oneSecondTermination.setSecondsSpentLimit(1L);
+    public static void setTermination() {
+        oneStep.setStepCountLimit(1);
     }
 
     @Timeout(value = 10, unit = TimeUnit.SECONDS)
     @ParameterizedTest
     @MethodSource("problemSetAndSolverConfig")
     public void solverConfigFromXmlTest(AbstractPlannerBenchmark benchmark, SolverConfig solverConfig) {
-        solverConfig.setTerminationConfig(oneSecondTermination);
+
+        solverConfig.getPhaseConfigList().forEach(p -> {
+            if (p instanceof LocalSearchPhaseConfig) {
+                p.setTerminationConfig(oneStep);
+            }
+        });
+
         SolverFactory.create(solverConfig).buildSolver().solve(benchmark.createInitialSolution());
     }
 }
