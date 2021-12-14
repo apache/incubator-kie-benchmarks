@@ -10,16 +10,16 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
-import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
 
 public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance> {
 
     private static final String CLOUD_BALANCING_DROOLS_SCORE_RULES_FILE =
-            "org/optaplanner/examples/cloudbalancing/optional/score/cloudBalancingConstraints.drl";
+            "org/optaplanner/examples/cloudbalancing/solver/cloudBalancingConstraints.drl";
 
     @Param({"CB_100_300", "CB_1600_4800", "CB_10000_30000"})
     private CloudBalancingExample.DataSet dataset;
@@ -33,10 +33,9 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
     protected Solver<CloudBalance> createSolver() {
         // the pre-defined configuration in CloudBalancing cannot be used
         SolverConfig solverConfig = new SolverConfig();
-
-        ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
-        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(
-                CloudBalance.class.getPackage().getName()));
+        solverConfig.setSolutionClass(CloudBalance.class);
+        solverConfig.withSolutionClass(CloudBalance.class);
+        solverConfig.withEntityClasses(CloudProcess.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
@@ -44,7 +43,6 @@ public class CloudBalanceBenchmark extends AbstractPlannerBenchmark<CloudBalance
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
         solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(
                 CloudBalanceCalculateCountTermination.class));
-        solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
 
         SolverFactory<CloudBalance> solverFactory = SolverFactory.create(solverConfig);
         return solverFactory.buildSolver();

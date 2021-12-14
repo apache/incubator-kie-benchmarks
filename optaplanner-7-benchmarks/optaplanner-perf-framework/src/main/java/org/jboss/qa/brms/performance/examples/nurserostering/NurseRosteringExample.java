@@ -32,8 +32,8 @@ public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.setEntityClassList(Collections.singletonList(ShiftAssignment.class));
-        solverConfig.setSolutionClass(NurseRoster.class);
+        solverConfig.withEntityClasses(ShiftAssignment.class);
+        solverConfig.withSolutionClass(NurseRoster.class);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
         solverConfig.getScoreDirectorFactoryConfig().setScoreDrlList(Collections.singletonList(DRL_FILE));
         solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");

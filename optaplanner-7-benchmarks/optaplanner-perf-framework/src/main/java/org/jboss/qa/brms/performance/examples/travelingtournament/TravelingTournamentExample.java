@@ -38,8 +38,7 @@ public final class TravelingTournamentExample extends AbstractExample<TravelingT
         Solver<TravelingTournament> constructionSolver = solverFactory.buildSolver();
 
         TravelingTournament solution = Examples.TRAVELING_TOURNAMENT.loadSolvingProblem(dataSet);
-        constructionSolver.solve(solution);
-        return constructionSolver.getBestSolution();
+        return constructionSolver.solve(solution);
     }
 
     @Override
