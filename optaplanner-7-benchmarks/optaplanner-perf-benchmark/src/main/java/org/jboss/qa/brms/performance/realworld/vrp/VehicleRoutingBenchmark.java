@@ -14,6 +14,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
+import org.optaplanner.core.config.domain.ScanAnnotatedClassesConfig;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
@@ -27,15 +28,12 @@ import org.optaplanner.core.config.phase.PhaseConfig;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
-import org.optaplanner.examples.vehiclerouting.domain.Customer;
-import org.optaplanner.examples.vehiclerouting.domain.Standstill;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
 
 public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRoutingSolution> {
 
     private static final String VEHCILE_ROUTING_DROOLS_SCORE_RULES_FILE =
-            "org/optaplanner/examples/vehiclerouting/optional/score/vehicleRoutingConstraints.drl";
+            "org/optaplanner/examples/vehiclerouting/solver/vehicleRoutingConstraints.drl";
     private static final int FORAGER_CONFIG_ACCEPTED_COUNT_LIMIT = 1;
     private static final int ACCEPTOR_CONFIG_LATE_ACCEPTANCE_SIZE = 200;
 
@@ -51,8 +49,10 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
     protected Solver<VehicleRoutingSolution> createSolver() {
         // the pre-defined configuration in VehicleRouting cannot be used
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.withEntityClasses(Standstill.class, Customer.class, TimeWindowedCustomer.class);
-        solverConfig.withSolutionClass(VehicleRoutingSolution.class);
+
+        ScanAnnotatedClassesConfig scanAnnotatedClassesConfig = new ScanAnnotatedClassesConfig();
+        scanAnnotatedClassesConfig.setPackageIncludeList(Collections.singletonList(
+                VehicleRoutingSolution.class.getPackage().getName()));
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();
         scoreDirectorFactoryConfig.setInitializingScoreTrend("ONLY_DOWN");
@@ -61,6 +61,7 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
         solverConfig.setPhaseConfigList(getPhaseConfigList());
         solverConfig.setScoreDirectorFactoryConfig(scoreDirectorFactoryConfig);
         solverConfig.setTerminationConfig(new TerminationConfig().withTerminationClass(HardVRPCalculateCountTermination.class));
+        solverConfig.setScanAnnotatedClassesConfig(scanAnnotatedClassesConfig);
 
         SolverFactory<VehicleRoutingSolution> solverFactory = SolverFactory.create(solverConfig);
         return solverFactory.buildSolver();

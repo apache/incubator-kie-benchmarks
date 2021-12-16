@@ -2,7 +2,6 @@ package org.jboss.qa.brms.performance.examples.vehiclerouting;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
@@ -42,7 +41,8 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
         Solver<VehicleRoutingSolution> constructionSolver = solverFactory.buildSolver();
 
         VehicleRoutingSolution solution = Examples.VEHICLE_ROUTING.loadSolvingProblem(dataSet);
-        return constructionSolver.solve(solution);
+        constructionSolver.solve(solution);
+        return constructionSolver.getBestSolution();
     }
 
     @Override
@@ -53,9 +53,12 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.withEntityClassList(new ArrayList<>(Arrays.asList(Standstill.class, Customer.class)));
-        solverConfig.withSolutionClass(VehicleRoutingSolution.class);
+        solverConfig.setSolutionClass(VehicleRoutingSolution.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
+        ArrayList<Class<?>> classes = new ArrayList<>();
+        classes.add(Standstill.class);
+        classes.add(Customer.class);
+        solverConfig.setEntityClassList(classes);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
         solverConfig.getScoreDirectorFactoryConfig().setIncrementalScoreCalculatorClass(VehicleRoutingIncrementalScoreCalculator.class);
         solverConfig.getScoreDirectorFactoryConfig().setInitializingScoreTrend("ONLY_DOWN");

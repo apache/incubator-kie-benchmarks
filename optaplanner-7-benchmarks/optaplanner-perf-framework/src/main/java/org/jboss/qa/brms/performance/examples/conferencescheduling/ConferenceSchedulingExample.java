@@ -33,7 +33,7 @@ import org.optaplanner.examples.conferencescheduling.domain.Talk;
 public final class ConferenceSchedulingExample extends AbstractExample<ConferenceSolution> {
 
     public static final String DRL_FILE =
-            "org/optaplanner/examples/conferencescheduling/optional/score/conferenceSchedulingConstraints.drl";
+            "org/optaplanner/examples/conferencescheduling/solver/conferenceSchedulingConstraints.drl";
 
     private static final String SOLVER_CONFIG =
             "/org/jboss/qa/brms/performance/examples/conferencescheduling/solver/conferenceSchedulingSolverConfig.xml";
