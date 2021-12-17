@@ -9,6 +9,7 @@ import org.jbpm.services.task.audit.service.TaskAuditService;
 import org.jbpm.test.performance.jbpm.JBPMController;
 import org.jbpm.test.performance.jbpm.constant.UserStorage;
 import org.jbpm.test.performance.scenario.PrepareEngine;
+import org.jbpm.test.performance.test.common.AbstractJmhTest;
 import org.kie.api.task.TaskService;
 import org.kie.internal.query.QueryFilter;
 import org.kie.internal.task.api.AuditTask;
@@ -31,7 +32,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-public class L1000HumanTasksQueryPagination {
+public class L1000HumanTasksQueryPagination extends AbstractJmhTest {
 
     // ! Must be overridden using -p from command line
     @Param("")
