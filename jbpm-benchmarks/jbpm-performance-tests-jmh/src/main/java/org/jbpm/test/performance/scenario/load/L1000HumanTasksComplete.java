@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.jbpm.test.performance.jbpm.JBPMController;
 import org.jbpm.test.performance.jbpm.constant.UserStorage;
 import org.jbpm.test.performance.scenario.PrepareEngine;
+import org.jbpm.test.performance.test.common.AbstractJmhTest;
 import org.kie.api.task.TaskService;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -26,7 +27,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-public class L1000HumanTasksComplete {
+public class L1000HumanTasksComplete extends AbstractJmhTest {
 
     static int taskId = 0;
     // ! Must be overridden using -p from command line

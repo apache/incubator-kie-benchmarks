@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.jbpm.test.performance.jbpm.JBPMController;
 import org.jbpm.test.performance.jbpm.constant.ProcessStorage;
+import org.jbpm.test.performance.test.common.AbstractJmhTest;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -25,7 +26,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-public class L1000ProcessesSignal {
+public class L1000ProcessesSignal extends AbstractJmhTest {
 
     // ! Must be overridden using -p from command line
     @Param("")

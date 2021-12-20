@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.jbpm.test.performance.kieserver.KieServerClient;
 import org.jbpm.test.performance.kieserver.constant.ProcessStorage;
+import org.jbpm.test.performance.test.common.AbstractJmhTest;
 import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
@@ -27,7 +28,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-public class LServerStartEndProcess {
+public class LServerStartEndProcess extends AbstractJmhTest {
     // ! Must be overridden using -p from command line
     @Param("")
     public String remoteAPI;
