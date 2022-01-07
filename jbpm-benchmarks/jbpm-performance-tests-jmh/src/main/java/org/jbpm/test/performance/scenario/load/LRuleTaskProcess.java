@@ -8,6 +8,7 @@ import org.jbpm.test.performance.jbpm.JBPMController;
 import org.jbpm.test.performance.jbpm.constant.ProcessStorage;
 import org.jbpm.test.performance.jbpm.constant.RuleStorage;
 import org.jbpm.test.performance.jbpm.model.UserFact;
+import org.jbpm.test.performance.test.common.AbstractJmhTest;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
@@ -30,7 +31,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-public class LRuleTaskProcess {
+public class LRuleTaskProcess extends AbstractJmhTest {
 
     // ! Must be overridden using -p from command line
     @Param("")
