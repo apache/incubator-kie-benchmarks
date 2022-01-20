@@ -3,11 +3,11 @@ import org.jenkinsci.plugins.workflow.libs.Library
 import org.kie.jenkins.MavenCommand
 import org.kie.jenkins.MavenStagingHelper
 
-AGENT_LABEL="kie-rhel7-priority"
+AGENT_LABEL="kie-rhel7 && kie-mem4g"
 MVN_TOOL="kie-maven-3.8.1"
 JDK_TOOL="kie-jdk11"
 benchmarksRepo="kie-benchmarks"
-GIT_AUTHOR="mbiarnes"
+GIT_AUTHOR="kiegroup"
 TARGET_BRANCH="newBranch"
 
 pipeline {
