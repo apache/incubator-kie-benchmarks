@@ -1,0 +1,67 @@
+@Library('jenkins-pipeline-shared-libraries')_
+import org.jenkinsci.plugins.workflow.libs.Library
+import org.kie.jenkins.MavenCommand
+import org.kie.jenkins.MavenStagingHelper
+
+AGENT_LABEL="kie-rhel7-priority"
+MVN_TOOL="kie-maven-3.8.1"
+JDK_TOOL="kie-jdk11"
+benchmarksRepo="kie-benchmarks"
+GIT_AUTHOR="mbiarnes"
+TARGET_BRANCH="newBranch"
+
+pipeline {
+    agent {
+        label "$AGENT_LABEL"
+    }
+    options{
+        timestamps()
+    }
+    tools {
+        maven "$MVN_TOOL"
+        jdk "$JDK_TOOL"
+    }
+    stages {
+        stage('CleanWorkspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('clone kie-benchmarks') {
+            steps {
+                script {
+                    checkoutKieBenchmarksRepo()
+                }
+            }
+        }
+        stage('create new branch'){
+            steps{
+                dir("${WORKSPACE}/${benchmarksRepo}"){
+                    script{
+                        githubscm.createBranch(NEW_BRANCH)
+                    }
+                }
+            }
+        }
+        stage('push new branch'){
+            steps{
+                dir("${WORKSPACE}/${benchmarksRepo}"){
+                    script{
+                        githubscm.pushObject('origin', NEW_BRANCH)
+                    }
+                }
+            }
+        }
+    }
+    post{
+        always{
+            cleanWs()
+        }
+    }
+}
+
+void checkoutKieBenchmarksRepo() {
+    dir(benchmarksRepo) {
+        checkout(githubscm.resolveRepository(benchmarksRepo, GIT_AUTHOR, TARGET_BRANCH, false))
+    }
+}
