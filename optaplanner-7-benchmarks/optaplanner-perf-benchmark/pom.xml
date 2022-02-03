@@ -6,7 +6,7 @@
   <parent>
     <artifactId>optaplanner-7-benchmarks</artifactId>
     <groupId>org.kie</groupId>
-    <version>7.65.0-SNAPSHOT</version>
+    <version>7.66.0-SNAPHOT</version>
   </parent>
 
   <artifactId>optaplanner-perf-benchmark</artifactId>
