@@ -16,7 +16,7 @@
   <properties>
     <version.compiler>3.8.0</version.compiler>
     <version.jmh>1.26</version.jmh>
-    <version.org.optaplanner>8.16.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.19.0-SNAPSHOT</version.org.optaplanner>
     <version.project.build>1.8</version.project.build>
     <version.shade.plugin>3.1.1</version.shade.plugin>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
