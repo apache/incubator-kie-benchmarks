@@ -54,7 +54,6 @@
   </dependencyManagement>
 
   <modules>
-    <module>drools-benchmarks</module>
     <module>jbpm-benchmarks</module>
     <module>optaplanner-7-benchmarks</module>
   </modules>
