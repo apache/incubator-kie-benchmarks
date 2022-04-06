@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <groupId>org.kie</groupId>
-  <artifactId>drools-8-benchmarks</artifactId>
-  <packaging>pom</packaging>
+  <artifactId>drools-benchmarks</artifactId>
+  <packaging>jar</packaging>
   <version>8.20.0-SNAPSHOT</version>
   <modelVersion>4.0.0</modelVersion>
 
