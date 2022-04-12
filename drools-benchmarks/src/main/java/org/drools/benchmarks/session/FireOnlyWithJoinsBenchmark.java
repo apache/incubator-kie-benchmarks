@@ -25,7 +25,7 @@ import org.drools.benchmarks.model.A;
 import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
 import org.drools.benchmarks.model.D;
-import org.drools.core.impl.StatefulKnowledgeSessionImpl;
+import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
 import org.openjdk.jmh.annotations.Benchmark;
