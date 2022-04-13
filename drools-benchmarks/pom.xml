@@ -84,6 +84,10 @@
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
+      <artifactId>kie-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
       <artifactId>kie-pmml-dependencies</artifactId>
       <exclusions>
         <exclusion>
@@ -93,20 +97,6 @@
         <exclusion>
           <groupId>org.glassfish.jaxb</groupId>
           <artifactId>jaxb-runtime</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.server</groupId>
-      <artifactId>kie-server-api</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.optaplanner</groupId>
-          <artifactId>optaplanner-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.sun.xml.bind</groupId>
-          <artifactId>jaxb-impl</artifactId>
         </exclusion>
       </exclusions>
     </dependency>

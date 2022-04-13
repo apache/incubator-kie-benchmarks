@@ -10,7 +10,6 @@ on:
     branches:
       - main
       - 7.[0-9]+.x
-    paths-ignore:
 
 jobs:
   pr-check:
@@ -18,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [8, 11]
+        java: [11, 17]
       fail-fast: false
     steps:
       - name: Check  out Git repository
