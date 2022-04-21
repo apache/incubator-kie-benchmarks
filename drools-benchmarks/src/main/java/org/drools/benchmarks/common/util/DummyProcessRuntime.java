@@ -75,12 +75,17 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
     }
 
     @Override
-    public ProcessInstance startProcess(String s, AgendaFilter agendaFilter) { return null; }
+    public ProcessInstance startProcess(String s, AgendaFilter agendaFilter) {
+        return null;
+    }
 
     @Override
-    public ProcessInstance startProcess(String s, Map<String, Object> map, AgendaFilter agendaFilter) { return null; }
+    public ProcessInstance startProcess(String s, Map<String, Object> map, AgendaFilter agendaFilter) {
+        return null;
+    }
 
-    @Override public ProcessInstance startProcessFromNodeIds(String s, Map<String, Object> map, String... strings) {
+    @Override
+    public ProcessInstance startProcessFromNodeIds(String s, Map<String, Object> map, String... strings) {
         throw new UnsupportedOperationException();
     }
 
@@ -90,7 +95,7 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
     }
 
     @Override
-    public ProcessInstance startProcessInstance(final long l) {
+    public ProcessInstance startProcessInstance(String processInstanceId)  {
         return null;
     }
 
@@ -100,7 +105,9 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
     }
 
     @Override
-    public void signalEvent(final String s, final Object o, final long l) {
+    public void signalEvent(String type,
+                            Object event,
+                            String processInstanceId) {
         // Nothing to do here.
     }
 
@@ -110,17 +117,17 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
     }
 
     @Override
-    public ProcessInstance getProcessInstance(final long l) {
+    public ProcessInstance getProcessInstance(final String processInstanceId) {
         return null;
     }
 
     @Override
-    public ProcessInstance getProcessInstance(final long l, final boolean b) {
+    public ProcessInstance getProcessInstance(final String processInstanceId, final boolean readonly) {
         return null;
     }
 
     @Override
-    public void abortProcessInstance(final long l) {
+    public void abortProcessInstance(final String s) {
         // Nothing to do here.
     }
 
@@ -139,8 +146,9 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
         return null;
     }
 
-    @Override public ProcessInstance startProcessFromNodeIds(String s, CorrelationKey correlationKey, Map<String, Object> map,
-            String... strings) {
+    @Override
+    public ProcessInstance startProcessFromNodeIds(String s, CorrelationKey correlationKey, Map<String, Object> map,
+                                                   String... strings) {
         throw new UnsupportedOperationException();
     }
 

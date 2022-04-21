@@ -4,16 +4,12 @@ on:
   push:
     branches:
       - main
-      - 7.[0-9]+.x
-    paths-ignore:
-      - 'optaplanner-8-benchmarks/**'
+      - 8.[0-9]+.x
 
   pull_request:
     branches:
       - main
-      - 7.[0-9]+.x
-    paths-ignore:
-      - 'optaplanner-8-benchmarks/**'
+      - 8.[0-9]+.x
 
 jobs:
   pr-check:
@@ -21,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [8, 11]
+        java: [11, 17]
       fail-fast: false
     steps:
       - name: Check  out Git repository
