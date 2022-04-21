@@ -16,6 +16,7 @@
   <properties>
     <version.freemaker>2.3.31</version.freemaker>
     <version.jaxb-api>2.0</version.jaxb-api>
+    <version.org.drools>${project.version}</version.org.drools>
   </properties>
 
   <dependencyManagement>
@@ -23,14 +24,14 @@
         <dependency>
           <groupId>org.drools</groupId>
           <artifactId>drools-bom</artifactId>
-          <version>${project.version}</version>
+          <version>${version.org.drools}</version>
           <type>pom</type>
           <scope>import</scope>
         </dependency>
         <dependency>
           <groupId>org.kie</groupId>
           <artifactId>drools-build-parent</artifactId>
-          <version>${project.version}</version>
+          <version>${version.org.drools}</version>
           <type>pom</type>
           <scope>import</scope>
         </dependency>

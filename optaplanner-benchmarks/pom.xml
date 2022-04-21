@@ -18,6 +18,7 @@
   <properties>
     <version.compiler>3.8.0</version.compiler>
     <maven.versions.plugin>2.8.1</maven.versions.plugin>
+    <version.org.optaplanner>${project.version}</version.org.optaplanner>
   </properties>
 
   <modules>
@@ -31,12 +32,12 @@
       <dependency>
         <groupId>org.kie</groupId>
         <artifactId>optaplanner-perf-framework</artifactId>
-        <version>${project.version}</version>
+        <version>${version.org.optaplanner}</version>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
         <artifactId>optaplanner-perf-benchmark</artifactId>
-        <version>${project.version}</version>
+        <version>${version.org.optaplanner}</version>
       </dependency>
       <!-- JMH -->
       <dependency>
@@ -53,14 +54,14 @@
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-bom</artifactId>
-        <version>${project.version}</version>
+        <version>${version.org.optaplanner}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-build-parent</artifactId>
-        <version>${project.version}</version>
+        <version>${version.org.optaplanner}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
