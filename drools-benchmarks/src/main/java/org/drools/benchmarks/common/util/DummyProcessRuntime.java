@@ -19,7 +19,6 @@ package org.drools.benchmarks.common.util;
 import java.util.Collection;
 import java.util.Map;
 
-import org.drools.core.event.ProcessEventSupport;
 import org.drools.core.runtime.process.InternalProcessRuntime;
 import org.kie.api.event.process.ProcessEventListener;
 import org.kie.api.runtime.process.ProcessInstance;
@@ -31,11 +30,6 @@ public class DummyProcessRuntime implements InternalProcessRuntime {
 
     @Override
     public void dispose() {
-        // Nothing to do here.
-    }
-
-    @Override
-    public void setProcessEventSupport(final ProcessEventSupport processEventSupport) {
         // Nothing to do here.
     }
 

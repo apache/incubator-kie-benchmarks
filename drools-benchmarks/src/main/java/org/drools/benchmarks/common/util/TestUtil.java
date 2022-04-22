@@ -20,7 +20,7 @@ import org.drools.benchmarks.model.B;
 import org.drools.benchmarks.model.C;
 import org.drools.benchmarks.model.D;
 import org.drools.benchmarks.model.E;
-import org.drools.core.builder.conf.impl.DecisionTableConfigurationImpl;
+import org.drools.compiler.builder.conf.DecisionTableConfigurationImpl;
 import org.kie.api.KieServices;
 import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieSession;
