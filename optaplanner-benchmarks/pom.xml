@@ -32,12 +32,12 @@
       <dependency>
         <groupId>org.kie</groupId>
         <artifactId>optaplanner-perf-framework</artifactId>
-        <version>${version.org.optaplanner}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
         <artifactId>optaplanner-perf-benchmark</artifactId>
-        <version>${version.org.optaplanner}</version>
+        <version>${project.version}</version>
       </dependency>
       <!-- JMH -->
       <dependency>
