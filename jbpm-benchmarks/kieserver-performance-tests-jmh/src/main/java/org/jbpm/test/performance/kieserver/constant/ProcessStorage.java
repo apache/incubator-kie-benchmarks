@@ -2,7 +2,7 @@ package org.jbpm.test.performance.kieserver.constant;
 
 public enum ProcessStorage {
 
-    HumanTask("org.kie.perf.HumanTask"), GroupHumanTask("org.kie.perf.GroupHumanTask"), ParallelGatewayTwoTimes(
+    HumanTask("org.kie.perf.HumanTask"), HumanTaskTimer("org.kie.perf.HumanTaskTimer"), GroupHumanTask("org.kie.perf.GroupHumanTask"), ParallelGatewayTwoTimes(
             "org.kie.perf.ParallelGatewayTwoTimes"), RuleTask("org.kie.perf.RuleTask"), StartEnd("org.kie.perf.StartEnd"), IntermediateTimer(
             "org.kie.perf.IntermediateTimer");
 
