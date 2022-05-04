@@ -34,7 +34,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 1, time = 1)
 @Measurement(iterations = 1, time = 1)
 @Threads(1)
-public class HumanTaskTimerProcess {
+public class LServerHumanTaskTimerProcess {
     // ! Must be overridden using -p from command line
     @Param("")
     public String remoteAPI;
@@ -60,7 +60,7 @@ public class HumanTaskTimerProcess {
     private void execute() {
         // start process instance
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("timerDuration", new String("1d"));
+        params.put("timerDuration", new String("10m"));
         long pid = processClient.startProcess(KieServerClient.containerId, ProcessStorage.HumanTaskTimer.getProcessDefinitionId(), params);
 
         // complete task
