@@ -50,6 +50,9 @@ import org.openjdk.jmh.annotations.Warmup;
 public class BuildKieBaseFromContainerStoreFirstBenchmark {
 
     @Param({"true"})
+    private boolean anchor;
+
+    @Param({"true"})
     private boolean useCanonicalModel;
 
     @Param({"true", "false"})

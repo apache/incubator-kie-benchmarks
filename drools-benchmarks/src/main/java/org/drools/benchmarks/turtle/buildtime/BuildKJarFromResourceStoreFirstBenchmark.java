@@ -46,6 +46,9 @@ import org.openjdk.jmh.annotations.Warmup;
 public class BuildKJarFromResourceStoreFirstBenchmark {
 
     @Param({"true"})
+    private boolean anchor;
+
+    @Param({"true"})
     private boolean useCanonicalModel;
 
     @Param({"true", "false"})

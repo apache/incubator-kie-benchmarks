@@ -48,6 +48,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BuildKieBaseFromContainerBenchmark {
 
+    @Param({"true"})
+    private boolean anchor;
+
     @Param({"true", "false"})
     private boolean useCanonicalModel;
 

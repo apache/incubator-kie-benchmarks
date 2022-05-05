@@ -28,11 +28,15 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.conf.ClockTypeOption;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.TearDown;
 
 
 public abstract class AbstractSimpleFusionRuntimeBenchmark extends AbstractSimpleRuntimeBenchmark {
+
+    @Param({"true"})
+    private boolean anchor;
 
     protected Map<EventSender, Integer> eventSenders;
 

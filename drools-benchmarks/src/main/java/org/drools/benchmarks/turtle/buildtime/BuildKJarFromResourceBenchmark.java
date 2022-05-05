@@ -45,6 +45,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BuildKJarFromResourceBenchmark {
 
+    @Param({"true"})
+    private boolean anchor;
+
     @Param({"true", "false"})
     private boolean useCanonicalModel;
 

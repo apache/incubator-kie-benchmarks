@@ -29,6 +29,7 @@ import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
@@ -40,6 +41,9 @@ import org.openjdk.jmh.infra.Blackhole;
 @Measurement(iterations = 15, time = 5, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public abstract class AbstractBuildtimeBenchmark {
+
+    @Param({"true"})
+    private boolean anchor;
 
     protected KieResources kieResources = KieServices.Factory.get().getResources();
 
