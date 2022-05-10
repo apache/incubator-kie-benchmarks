@@ -42,6 +42,12 @@ import org.openjdk.jmh.infra.Blackhole;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public abstract class AbstractBuildtimeBenchmark {
 
+    /**
+     * The param "anchor" is necessary to upload the performance results to (<a href="https://horreum.corp.redhat.com">Horreum</a>).
+     * When one of the tests uses parameters, Horreum expects at least one parameter per test.
+     * When a test has no parameter, there will be the dummy "anchor" which will make the update possible.
+     */
+
     @Param({"true"})
     private boolean anchor;
 
