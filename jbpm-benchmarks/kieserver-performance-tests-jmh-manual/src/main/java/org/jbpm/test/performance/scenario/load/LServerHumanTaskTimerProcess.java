@@ -60,7 +60,7 @@ public class LServerHumanTaskTimerProcess {
     private void execute() {
         // start process instance
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("timerDuration", new String("10m"));
+        params.put("timerDuration", new String("10d"));
         long pid = processClient.startProcess(KieServerClient.containerId, ProcessStorage.HumanTaskTimer.getProcessDefinitionId(), params);
 
         // complete task
