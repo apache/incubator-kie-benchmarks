@@ -26,6 +26,7 @@ function replace_in_poms() {
 }
 
 NEW_VERSION="$1"
-OLD_VERSION=$(grep "^    <version>" -h pom.xml | head -n1 | sed 's:[^/]*>\(.*\)</.*:\1:')
+OLD_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.6.0:exec)
+
 
 replace_in_poms "$OLD_VERSION" "$NEW_VERSION"
