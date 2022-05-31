@@ -37,6 +37,7 @@ import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -48,6 +49,15 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 15, time = 2, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class DMNBuildKJarBenchmark {
+
+    /**
+     * The param "anchor" is necessary to upload the performance results to (<a href="https://horreum.corp.redhat.com">Horreum</a>).
+     * When one of the tests uses parameters, Horreum expects at least one parameter per test.
+     * When a test has no parameter, there will be the dummy "anchor" which will make the update possible.
+     */
+
+    @Param({"true"})
+    private boolean anchor;
 
     private final KieServices kieServices = KieServices.Factory.get();
 
