@@ -48,7 +48,7 @@ public class PMMLEvaluateSampleMineTreeModelWithTransformationsBenchmark extends
 
     static {
         // Retrieve pmmlFile
-        pmmlFile = getPMMLFile(FILE_PATH);
+        pmmlFile = getPMMLFile(FILE_PATH, FILE_NAME);
     }
 
     @Setup

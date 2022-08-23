@@ -54,7 +54,7 @@ public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBen
 
     static {
         // Retrieve pmmlFile
-        File pmmlFile = getPMMLFile(FILE_PATH);
+        File pmmlFile = getPMMLFile(FILE_PATH, FILE_NAME);
 
         // Compile model
         KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader = compileModel(pmmlFile);
@@ -86,4 +86,5 @@ public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBen
     public PMML4Result evaluatePrediction() {
         return pmmlRuntime.evaluate(MODEL_NAME, pmmlRuntimeContext);
     }
+
 }

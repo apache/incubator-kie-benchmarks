@@ -54,7 +54,7 @@ public class PMMLEvaluateRandomForestBenchmark extends AbstractBenchmark {
 
     static {
         // Retrieve pmmlFile
-        File pmmlFile = getPMMLFile(FILE_PATH);
+        File pmmlFile = getPMMLFile(FILE_PATH, FILE_NAME);
 
         // Compile model
         KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader = compileModel(pmmlFile);

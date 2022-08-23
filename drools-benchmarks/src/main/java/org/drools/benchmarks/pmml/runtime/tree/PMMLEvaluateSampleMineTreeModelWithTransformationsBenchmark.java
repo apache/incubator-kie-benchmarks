@@ -54,7 +54,7 @@ public class PMMLEvaluateSampleMineTreeModelWithTransformationsBenchmark extends
 
     static {
         // Retrieve pmmlFile
-        File pmmlFile = getPMMLFile(FILE_PATH);
+        File pmmlFile = getPMMLFile(FILE_PATH, FILE_NAME);
 
         // Compile model
         KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader = compileModel(pmmlFile);

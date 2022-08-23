@@ -39,6 +39,7 @@ import static org.drools.benchmarks.pmml.util.PMMLUtil.getPMMLFile;
 @State(Scope.Benchmark)
 @Warmup(iterations = 300)
 @Measurement(iterations = 50)
+@Fork(0)
 public class PMMLEvaluateLinearRegressionSampleWithTransformationsBenchmark extends AbstractBenchmark {
 
     public static final String MODEL_NAME = "LinearRegressionSampleWithTransformations";
@@ -53,7 +54,7 @@ public class PMMLEvaluateLinearRegressionSampleWithTransformationsBenchmark exte
 
     static {
         // Retrieve pmmlFile
-        File pmmlFile = getPMMLFile(FILE_PATH);
+        File pmmlFile = getPMMLFile(FILE_PATH, FILE_NAME);
 
         // Compile model
         KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader = compileModel(pmmlFile);
