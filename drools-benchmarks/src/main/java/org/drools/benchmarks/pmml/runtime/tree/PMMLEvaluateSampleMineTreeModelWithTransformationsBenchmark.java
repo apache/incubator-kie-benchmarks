@@ -18,19 +18,22 @@ package org.drools.benchmarks.pmml.runtime.tree;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
-import org.drools.benchmarks.pmml.util.PMMLUtil;
-import org.kie.api.KieServices;
-import org.kie.api.io.Resource;
 import org.kie.api.pmml.PMML4Result;
 import org.kie.api.pmml.PMMLRequestData;
-import org.kie.pmml.api.runtime.PMMLContext;
+import org.kie.memorycompiler.KieMemoryCompiler;
 import org.kie.pmml.api.runtime.PMMLRuntime;
-import org.kie.pmml.evaluator.core.PMMLContextImpl;
+import org.kie.pmml.api.runtime.PMMLRuntimeContext;
+import org.kie.pmml.evaluator.core.PMMLRuntimeContextImpl;
+import org.kie.pmml.evaluator.core.service.PMMLRuntimeInternalImpl;
 import org.openjdk.jmh.annotations.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.drools.benchmarks.pmml.util.PMMLUtil.compileModel;
+import static org.drools.benchmarks.pmml.util.PMMLUtil.getPMMLFile;
 
 @State(Scope.Benchmark)
 @Warmup(iterations = 300)
@@ -38,29 +41,38 @@ import java.util.Map;
 public class PMMLEvaluateSampleMineTreeModelWithTransformationsBenchmark extends AbstractBenchmark {
 
     public static final String MODEL_NAME = "SampleMineTreeModelWithTransformations";
-    public static final String FILE_NAME = "SampleMineTreeModelWithTransformations.pmml";
+    public static final String FILE_NAME_NO_SUFFIX = "SampleMineTreeModelWithTransformations";
+    public static final String FILE_NAME = FILE_NAME_NO_SUFFIX + ".pmml";
     public static final String FILE_PATH = "pmml/" + FILE_NAME;
 
-    private Resource pmmlResource;
     private PMMLRuntime pmmlRuntime;
 
     private static final Map<String, Object> INPUT_DATA;
-    private static final PMMLContext pmmlContext;
+
+    private static final PMMLRuntimeContext pmmlRuntimeContext;
+
 
     static {
+        // Retrieve pmmlFile
+        File pmmlFile = getPMMLFile(FILE_PATH);
+
+        // Compile model
+        KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader = compileModel(pmmlFile);
+
+        // Set input data
         INPUT_DATA = new HashMap<>();
         INPUT_DATA.put("temperature", 5.0);
         INPUT_DATA.put("humidity", 70.0);
         PMMLRequestData pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
         INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
-        pmmlContext = new PMMLContextImpl(pmmlRequestData);
+
+        // Instantiate pmmlRuntimeContext
+        pmmlRuntimeContext = new PMMLRuntimeContextImpl(pmmlRequestData, FILE_NAME_NO_SUFFIX, memoryCompilerClassLoader);
     }
 
     @Setup
     public void setupResource() throws IOException {
-        pmmlResource = KieServices.get().getResources()
-                .newClassPathResource(FILE_PATH);
-        pmmlRuntime = PMMLUtil.getPMMLRuntimeWithResources(true, pmmlResource);
+        pmmlRuntime = new PMMLRuntimeInternalImpl();
     }
 
     @Override
@@ -70,6 +82,6 @@ public class PMMLEvaluateSampleMineTreeModelWithTransformationsBenchmark extends
 
     @Benchmark
     public PMML4Result evaluatePrediction() {
-        return pmmlRuntime.evaluate(MODEL_NAME, pmmlContext);
+        return pmmlRuntime.evaluate(MODEL_NAME, pmmlRuntimeContext);
     }
 }

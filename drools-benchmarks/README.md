@@ -29,4 +29,15 @@ Running all benchmarks from `org.drools.benchmarks.cep` package and storing resu
 Running benchmark `org.drools.benchmarks.operators.EvalBenchmark` and storing results in file `results.csv`:  
   
 `java -jar target/drools-benchmarks.jar -jvmArgs "-Xms4g -Xmx4g" -foe true -rf csv -rff results.csv org.drools.benchmarks.operators.EvalBenchmark`  
+
+
+Tips
+====
+
+It is possible to debug the single benchmarks inside IntelliJ with the [JMH Java Microbenchmark Harness](https://plugins.jetbrains.com/plugin/7529-jmh-java-microbenchmark-harness) plugin. 
+There are a couple of detail to fullfill:
+1. Enable annotation processing (under Settings -> Build, Execution, Deployment -> Compiler -> Annotation Processors)
+2. set `@Fork(0)` annotation, at least during debug
+
+
   

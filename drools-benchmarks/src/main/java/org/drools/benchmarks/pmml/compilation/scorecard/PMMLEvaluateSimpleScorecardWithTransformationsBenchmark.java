@@ -14,23 +14,15 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.pmml.runtime.scorecard;
+package org.drools.benchmarks.pmml.compilation.scorecard;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
-import org.kie.api.pmml.PMML4Result;
-import org.kie.api.pmml.PMMLRequestData;
 import org.kie.memorycompiler.KieMemoryCompiler;
-import org.kie.pmml.api.runtime.PMMLRuntime;
-import org.kie.pmml.api.runtime.PMMLRuntimeContext;
-import org.kie.pmml.evaluator.core.PMMLRuntimeContextImpl;
-import org.kie.pmml.evaluator.core.service.PMMLRuntimeInternalImpl;
 import org.openjdk.jmh.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.drools.benchmarks.pmml.util.PMMLUtil.compileModel;
 import static org.drools.benchmarks.pmml.util.PMMLUtil.getPMMLFile;
@@ -40,38 +32,20 @@ import static org.drools.benchmarks.pmml.util.PMMLUtil.getPMMLFile;
 @Measurement(iterations = 50)
 public class PMMLEvaluateSimpleScorecardWithTransformationsBenchmark extends AbstractBenchmark {
 
-    public static final String MODEL_NAME = "SimpleScorecardWithTransformations";
     public static final String FILE_NAME_NO_SUFFIX = "SimpleScorecardWithTransformations";
     public static final String FILE_NAME = FILE_NAME_NO_SUFFIX + ".pmml";
     public static final String FILE_PATH = "pmml/" + FILE_NAME;
 
-    private PMMLRuntime pmmlRuntime;
-
-    private static final Map<String, Object> INPUT_DATA;
-
-    private static final PMMLRuntimeContext pmmlRuntimeContext;
+    private static final File pmmlFile;
 
     static {
         // Retrieve pmmlFile
-        File pmmlFile = getPMMLFile(FILE_PATH);
-
-        // Compile model
-        KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader = compileModel(pmmlFile);
-
-        // Set input data
-        INPUT_DATA = new HashMap<>();
-        INPUT_DATA.put("input1", 5.0);
-        INPUT_DATA.put("input2", -10.0);
-        PMMLRequestData pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
-        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
-
-        // Instantiate pmmlRuntimeContext
-        pmmlRuntimeContext = new PMMLRuntimeContextImpl(pmmlRequestData, FILE_NAME_NO_SUFFIX, memoryCompilerClassLoader);
+        pmmlFile = getPMMLFile(FILE_PATH);
     }
 
     @Setup
     public void setupResource() throws IOException {
-        pmmlRuntime = new PMMLRuntimeInternalImpl();
+        // noop
     }
 
     @Override
@@ -80,7 +54,7 @@ public class PMMLEvaluateSimpleScorecardWithTransformationsBenchmark extends Abs
     }
 
     @Benchmark
-    public PMML4Result evaluatePrediction() {
-        return pmmlRuntime.evaluate(MODEL_NAME, pmmlRuntimeContext);
+    public KieMemoryCompiler.MemoryCompilerClassLoader evaluatePrediction() {
+        return compileModel(pmmlFile);
     }
 }
