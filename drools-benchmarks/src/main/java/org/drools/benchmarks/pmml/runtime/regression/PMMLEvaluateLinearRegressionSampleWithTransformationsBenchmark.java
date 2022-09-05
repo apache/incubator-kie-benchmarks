@@ -19,11 +19,8 @@ package org.drools.benchmarks.pmml.runtime.regression;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
 import org.kie.api.pmml.PMML4Result;
-import org.kie.api.pmml.PMMLRequestData;
-import org.kie.memorycompiler.KieMemoryCompiler;
 import org.kie.pmml.api.runtime.PMMLRuntime;
 import org.kie.pmml.api.runtime.PMMLRuntimeContext;
-import org.kie.pmml.evaluator.core.PMMLRuntimeContextImpl;
 import org.kie.pmml.evaluator.core.service.PMMLRuntimeInternalImpl;
 import org.openjdk.jmh.annotations.*;
 
@@ -33,13 +30,11 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.drools.benchmarks.pmml.util.PMMLUtil.compileModel;
-import static org.drools.benchmarks.pmml.util.PMMLUtil.getPMMLFile;
+import static org.drools.benchmarks.pmml.util.PMMLUtil.*;
 
 @State(Scope.Benchmark)
 @Warmup(iterations = 300)
 @Measurement(iterations = 50)
-@Fork(0)
 public class PMMLEvaluateLinearRegressionSampleWithTransformationsBenchmark extends AbstractBenchmark {
 
     public static final String MODEL_NAME = "LinearRegressionSampleWithTransformations";
@@ -56,19 +51,14 @@ public class PMMLEvaluateLinearRegressionSampleWithTransformationsBenchmark exte
         // Retrieve pmmlFile
         File pmmlFile = getPMMLFile(FILE_PATH, FILE_NAME);
 
-        // Compile model
-        KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader = compileModel(pmmlFile);
-
         // Set input data
         INPUT_DATA = new HashMap<>();
         INPUT_DATA.put("age", 27.0);
         INPUT_DATA.put("salary", 34000.0);
         INPUT_DATA.put("car_location", "street");
-        PMMLRequestData pmmlRequestData = new PMMLRequestData("123", MODEL_NAME);
-        INPUT_DATA.forEach(pmmlRequestData::addRequestParam);
 
         // Instantiate pmmlRuntimeContext
-        pmmlRuntimeContext = new PMMLRuntimeContextImpl(pmmlRequestData, FILE_NAME_NO_SUFFIX, memoryCompilerClassLoader);
+        pmmlRuntimeContext = getPMMLRuntimeContext(INPUT_DATA, MODEL_NAME, FILE_NAME_NO_SUFFIX, pmmlFile);
     }
 
     @Setup
@@ -83,6 +73,6 @@ public class PMMLEvaluateLinearRegressionSampleWithTransformationsBenchmark exte
 
     @Benchmark
     public PMML4Result evaluatePrediction() {
-        return pmmlRuntime.evaluate(MODEL_NAME, pmmlRuntimeContext);
+        return evaluate(MODEL_NAME, pmmlRuntime, pmmlRuntimeContext);
     }
 }

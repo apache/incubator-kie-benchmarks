@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2022 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,15 @@ package org.drools.benchmarks.pmml.compilation.clustering;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
+import org.kie.efesto.common.api.model.GeneratedResources;
 import org.kie.memorycompiler.KieMemoryCompiler;
 import org.openjdk.jmh.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
-import static org.drools.benchmarks.pmml.util.PMMLUtil.compileModel;
-import static org.drools.benchmarks.pmml.util.PMMLUtil.getPMMLFile;
+import static org.drools.benchmarks.pmml.util.PMMLUtil.*;
 
 @State(Scope.Benchmark)
 @Warmup(iterations = 300)
@@ -38,10 +39,14 @@ public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBen
     public static final String FILE_PATH = "pmml/" + FILE_NAME;
 
     private static final File pmmlFile;
+    private static final KieMemoryCompiler.MemoryCompilerClassLoader memoryCompilerClassLoader;
 
     static {
         // Retrieve pmmlFile
         pmmlFile = getPMMLFile(FILE_PATH, FILE_NAME);
+
+        // retrieve classloader
+        memoryCompilerClassLoader = getMemoryCompilerClassLoader();
     }
 
     @Setup
@@ -55,7 +60,7 @@ public class PMMLEvaluateSingleIrisKMeansClusteringBenchmark extends AbstractBen
     }
 
     @Benchmark
-    public KieMemoryCompiler.MemoryCompilerClassLoader evaluatePrediction() {
-        return compileModel(pmmlFile);
+    public Map<String, GeneratedResources> evaluateCompilation() {
+        return compileModel(pmmlFile, memoryCompilerClassLoader);
     }
 }
