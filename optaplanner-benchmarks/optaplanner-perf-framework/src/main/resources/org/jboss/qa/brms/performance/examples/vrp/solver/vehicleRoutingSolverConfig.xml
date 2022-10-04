@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
   <solutionClass>org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution</solutionClass>
-  <entityClass>org.optaplanner.examples.vehiclerouting.domain.Standstill</entityClass>
+  <entityClass>org.optaplanner.examples.vehiclerouting.domain.Vehicle</entityClass>
   <entityClass>org.optaplanner.examples.vehiclerouting.domain.Customer</entityClass>
   <entityClass>org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer</entityClass>
 
@@ -18,12 +18,12 @@
     <unionMoveSelector>
       <changeMoveSelector/>
       <swapMoveSelector/>
-      <subChainChangeMoveSelector>
+      <subListChangeMoveSelector>
         <selectReversingMoveToo>true</selectReversingMoveToo>
-      </subChainChangeMoveSelector>
-      <subChainSwapMoveSelector>
+      </subListChangeMoveSelector>
+      <subListSwapMoveSelector>
         <selectReversingMoveToo>true</selectReversingMoveToo>
-      </subChainSwapMoveSelector>
+      </subListSwapMoveSelector>
     </unionMoveSelector>
     <acceptor>
       <lateAcceptanceSize>200</lateAcceptanceSize>

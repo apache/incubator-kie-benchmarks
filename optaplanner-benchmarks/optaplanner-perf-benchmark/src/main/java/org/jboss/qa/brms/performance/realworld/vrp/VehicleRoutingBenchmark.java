@@ -27,7 +27,7 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.examples.vehiclerouting.domain.Customer;
-import org.optaplanner.examples.vehiclerouting.domain.Standstill;
+import org.optaplanner.examples.vehiclerouting.domain.Vehicle;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.optaplanner.examples.vehiclerouting.domain.timewindowed.TimeWindowedCustomer;
 import org.optaplanner.examples.vehiclerouting.score.VehicleRoutingConstraintProvider;
@@ -49,7 +49,7 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
     protected Solver<VehicleRoutingSolution> createSolver() {
         // the pre-defined configuration in VehicleRouting cannot be used
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.withEntityClasses(Standstill.class, Customer.class,TimeWindowedCustomer.class);
+        solverConfig.withEntityClasses(Vehicle.class, Customer.class, TimeWindowedCustomer.class);
         solverConfig.withSolutionClass(VehicleRoutingSolution.class);
 
         ScoreDirectorFactoryConfig scoreDirectorFactoryConfig = new ScoreDirectorFactoryConfig();

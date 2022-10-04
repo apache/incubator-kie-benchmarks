@@ -16,7 +16,7 @@ import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
 import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.examples.vehiclerouting.domain.Customer;
-import org.optaplanner.examples.vehiclerouting.domain.Standstill;
+import org.optaplanner.examples.vehiclerouting.domain.Vehicle;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.optaplanner.examples.vehiclerouting.optional.score.VehicleRoutingIncrementalScoreCalculator;
 
@@ -53,7 +53,7 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
     @Override
     public SolverConfig getBaseSolverConfig() {
         SolverConfig solverConfig = new SolverConfig();
-        solverConfig.withEntityClassList(new ArrayList<>(Arrays.asList(Standstill.class, Customer.class)));
+        solverConfig.withEntityClassList(new ArrayList<>(Arrays.asList(Vehicle.class, Customer.class)));
         solverConfig.withSolutionClass(VehicleRoutingSolution.class);
         solverConfig.setEnvironmentMode(EnvironmentMode.REPRODUCIBLE);
         solverConfig.setScoreDirectorFactoryConfig(new ScoreDirectorFactoryConfig());
