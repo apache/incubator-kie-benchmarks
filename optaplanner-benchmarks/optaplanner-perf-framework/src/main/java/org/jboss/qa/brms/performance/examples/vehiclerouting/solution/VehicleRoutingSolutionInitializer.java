@@ -1,15 +1,12 @@
 package org.jboss.qa.brms.performance.examples.vehiclerouting.solution;
 
+import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.api.score.director.ScoreDirector;
+import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.examples.vehiclerouting.domain.Customer;
-import org.optaplanner.examples.vehiclerouting.domain.Standstill;
 import org.optaplanner.examples.vehiclerouting.domain.Vehicle;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
-import org.optaplanner.core.api.score.Score;
-import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
-
-import java.util.List;
 
 public class VehicleRoutingSolutionInitializer implements CustomPhaseCommand<VehicleRoutingSolution> {
 
@@ -17,16 +14,17 @@ public class VehicleRoutingSolutionInitializer implements CustomPhaseCommand<Veh
     public void changeWorkingSolution(ScoreDirector<VehicleRoutingSolution> scoreDirector) {
         VehicleRoutingSolution solution = scoreDirector.getWorkingSolution();
 
-        List<Customer> customers = solution.getCustomerList();
-        List<Vehicle> vehicles = solution.getVehicleList();
+        Vehicle vehicle = solution.getVehicleList().get(0);
 
-        for (int i = 0; i < customers.size(); i++) {
-            Customer customer = customers.get(i);
-            Standstill tmpAppearance = (i == 0) ? vehicles.get(0) : customers.get(i - 1);
-            scoreDirector.beforeVariableChanged(customer, "previousStandstill");
-            customer.setPreviousStandstill(tmpAppearance);
-            scoreDirector.afterVariableChanged(customer, "previousStandstill");
+        int i = 0;
+        scoreDirector.beforeListVariableChanged(vehicle, "customers", 0, 0);
+        for (Customer customer : solution.getCustomerList()) {
+            scoreDirector.beforeListVariableElementAssigned(vehicle, "customers", customer);
+            vehicle.getCustomers().add(customer);
+            scoreDirector.afterListVariableElementAssigned(vehicle, "customers", customer);
+            i++;
         }
+        scoreDirector.afterListVariableChanged(vehicle, "customers", 0, vehicle.getCustomers().size());
         scoreDirector.triggerVariableListeners();
 
         InnerScoreDirector<VehicleRoutingSolution, ?> innerScoreDirector =
