@@ -14,9 +14,6 @@ public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBench
         super(Examples.VEHICLE_ROUTING);
     }
 
-    @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
-    private ConstructionHeuristicType constructionHeuristicType;
-
     @Param({"VRP_USA_100_10", "VRP_USA_1000_20", "VRP_USA_10000_100"})
     private VehicleRoutingExample.DataSet dataset;
 
@@ -27,7 +24,7 @@ public class VRPConstructionBenchmark extends AbstractConstructionHeuristicBench
 
     @Override
     public ConstructionHeuristicType getConstructionHeuristicType() {
-        return constructionHeuristicType;
+        return null;
     }
 
     @Benchmark
