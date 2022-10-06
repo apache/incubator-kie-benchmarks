@@ -22,9 +22,6 @@ public class VRPTimeWindowedConstructionBenchmark
         super(Examples.VEHICLE_ROUTING);
     }
 
-    @Param({"FIRST_FIT", "FIRST_FIT_DECREASING"})
-    private ConstructionHeuristicType constructionHeuristicType;
-
     @Param({"BELGIUM_TW_50_10", "BELGIUM_TW_500_20", "BELGIUM_TW_2750_55"})
     private VehicleRoutingExample.DataSet dataset;
 
@@ -46,7 +43,7 @@ public class VRPTimeWindowedConstructionBenchmark
 
     @Override
     public ConstructionHeuristicType getConstructionHeuristicType() {
-        return constructionHeuristicType;
+        return null;
     }
 
     @Benchmark
