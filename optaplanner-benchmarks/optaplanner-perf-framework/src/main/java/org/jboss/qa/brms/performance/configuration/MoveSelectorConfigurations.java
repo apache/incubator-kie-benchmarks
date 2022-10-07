@@ -8,6 +8,8 @@ import org.optaplanner.core.config.heuristic.selector.move.generic.SwapMoveSelec
 import org.optaplanner.core.config.heuristic.selector.move.generic.chained.SubChainChangeMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.chained.SubChainSwapMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.chained.TailChainSwapMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.move.generic.list.SubListChangeMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.move.generic.list.SubListSwapMoveSelectorConfig;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,4 +64,11 @@ public class MoveSelectorConfigurations {
         return selectors;
     }
 
+    public static List<MoveSelectorConfig> createSubListChangeMoveSelectorList() {
+        return Collections.singletonList(new SubListChangeMoveSelectorConfig());
+    }
+
+    public static List<MoveSelectorConfig> createSubListSwapMoveSelectorList() {
+        return Collections.singletonList(new SubListSwapMoveSelectorConfig());
+    }
 }
