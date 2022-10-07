@@ -13,7 +13,7 @@ public class VRPSubChainSwapMoveSelectorBenchmark extends AbstractVRPMoveSelecto
 
     @Override
     public List<MoveSelectorConfig> createMoveSelectorConfigList() {
-        return MoveSelectorConfigurations.createSubChainSwapMoveSelectorList();
+        return MoveSelectorConfigurations.createSubListSwapMoveSelectorList();
     }
 
     @Override

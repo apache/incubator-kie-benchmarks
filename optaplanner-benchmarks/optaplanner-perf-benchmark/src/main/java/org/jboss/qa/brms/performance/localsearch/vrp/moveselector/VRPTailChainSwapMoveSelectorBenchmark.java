@@ -23,7 +23,8 @@ public class VRPTailChainSwapMoveSelectorBenchmark extends AbstractVRPMoveSelect
         return terminationConfig;
     }
 
-    @Benchmark
+    // FIXME enable this benchmark when the ListTailSwapMove is implemented.
+    // @Benchmark
     public VehicleRoutingSolution benchmark() {
         return runBenchmark();
     }

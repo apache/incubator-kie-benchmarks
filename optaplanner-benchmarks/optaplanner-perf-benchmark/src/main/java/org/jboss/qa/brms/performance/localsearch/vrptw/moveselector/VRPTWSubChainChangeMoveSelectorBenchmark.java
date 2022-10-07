@@ -11,7 +11,7 @@ public class VRPTWSubChainChangeMoveSelectorBenchmark extends AbstractVRPTWMoveS
 
     @Override
     public List<MoveSelectorConfig> createMoveSelectorConfigList() {
-        return MoveSelectorConfigurations.createSubChainChangeMoveSelectorList();
+        return MoveSelectorConfigurations.createSubListChangeMoveSelectorList();
     }
 
     @Benchmark
