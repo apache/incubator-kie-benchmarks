@@ -71,4 +71,14 @@ public class MoveSelectorConfigurations {
     public static List<MoveSelectorConfig> createSubListSwapMoveSelectorList() {
         return Collections.singletonList(new SubListSwapMoveSelectorConfig());
     }
+
+    public static List<MoveSelectorConfig> createAllListSelectorList() {
+        List<MoveSelectorConfig> selectors = new ArrayList<MoveSelectorConfig>();
+        selectors.add(new ChangeMoveSelectorConfig());
+        selectors.add(new SwapMoveSelectorConfig());
+        selectors.add(new SubListChangeMoveSelectorConfig());
+        selectors.add(new SubListSwapMoveSelectorConfig());
+        // TODO add ListTailSwapMoveSelectorConfig when it is implemented.
+        return selectors;
+    }
 }
