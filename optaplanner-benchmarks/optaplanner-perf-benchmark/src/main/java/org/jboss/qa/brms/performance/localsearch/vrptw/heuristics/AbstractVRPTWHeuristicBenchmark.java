@@ -11,7 +11,7 @@ public abstract class AbstractVRPTWHeuristicBenchmark extends AbstractVRPTWLocal
 
     @Override
     public List<MoveSelectorConfig> createMoveSelectorConfigList() {
-        return MoveSelectorConfigurations.createAllChainedSelectorList();
+        return MoveSelectorConfigurations.createAllListSelectorList();
     }
 
     @Override
