@@ -7,11 +7,11 @@ import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 
 import java.util.List;
 
-public class VRPTWSubChainChangeMoveSelectorBenchmark extends AbstractVRPTWMoveSelectorBenchmark {
+public class VRPTWSubListSwapMoveSelectorBenchmark extends AbstractVRPTWMoveSelectorBenchmark {
 
     @Override
     public List<MoveSelectorConfig> createMoveSelectorConfigList() {
-        return MoveSelectorConfigurations.createSubListChangeMoveSelectorList();
+        return MoveSelectorConfigurations.createSubListSwapMoveSelectorList();
     }
 
     @Benchmark

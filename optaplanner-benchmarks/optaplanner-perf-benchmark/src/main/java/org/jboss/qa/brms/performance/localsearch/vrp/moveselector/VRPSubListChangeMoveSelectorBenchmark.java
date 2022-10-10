@@ -9,11 +9,11 @@ import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
 import java.util.List;
 
-public class VRPSubChainSwapMoveSelectorBenchmark extends AbstractVRPMoveSelectorBenchmark {
+public class VRPSubListChangeMoveSelectorBenchmark extends AbstractVRPMoveSelectorBenchmark {
 
     @Override
     public List<MoveSelectorConfig> createMoveSelectorConfigList() {
-        return MoveSelectorConfigurations.createSubListSwapMoveSelectorList();
+        return MoveSelectorConfigurations.createSubListChangeMoveSelectorList();
     }
 
     @Override
