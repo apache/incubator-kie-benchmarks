@@ -12,13 +12,12 @@ import org.openjdk.jmh.annotations.Param;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
-import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.SwapMoveSelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.generic.chained.SubChainChangeMoveSelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.generic.chained.SubChainSwapMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.move.generic.list.SubListChangeMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.move.generic.list.SubListSwapMoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.localsearch.decider.acceptor.LocalSearchAcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
@@ -71,20 +70,19 @@ public class VehicleRoutingBenchmark extends AbstractPlannerBenchmark<VehicleRou
 
     private List<PhaseConfig> getPhaseConfigList() {
         ConstructionHeuristicPhaseConfig constructionHeuristicPhaseConfig = new ConstructionHeuristicPhaseConfig();
-        constructionHeuristicPhaseConfig.setConstructionHeuristicType(ConstructionHeuristicType.FIRST_FIT_DECREASING);
 
         LocalSearchPhaseConfig localSearchPhaseConfig = new LocalSearchPhaseConfig();
 
-        SubChainChangeMoveSelectorConfig subChainChangeMoveSelectorConfig = new SubChainChangeMoveSelectorConfig();
-        subChainChangeMoveSelectorConfig.setSelectReversingMoveToo(true);
+        SubListChangeMoveSelectorConfig subListChangeMoveSelectorConfig = new SubListChangeMoveSelectorConfig();
+        subListChangeMoveSelectorConfig.setSelectReversingMoveToo(true);
 
-        SubChainSwapMoveSelectorConfig subChainSwapMoveSelectorConfig = new SubChainSwapMoveSelectorConfig();
-        subChainSwapMoveSelectorConfig.setSelectReversingMoveToo(true);
+        SubListSwapMoveSelectorConfig subListSwapMoveSelectorConfig = new SubListSwapMoveSelectorConfig();
+        subListSwapMoveSelectorConfig.setSelectReversingMoveToo(true);
 
         List<MoveSelectorConfig> moveSelectorConfigList = Arrays.asList(new ChangeMoveSelectorConfig(),
                                                                         new SwapMoveSelectorConfig(),
-                                                                        subChainChangeMoveSelectorConfig,
-                                                                        subChainSwapMoveSelectorConfig);
+                                                                        subListChangeMoveSelectorConfig,
+                                                                        subListSwapMoveSelectorConfig);
         UnionMoveSelectorConfig selectorConfig = new UnionMoveSelectorConfig(moveSelectorConfigList);
 
         LocalSearchForagerConfig foragerConfig = new LocalSearchForagerConfig();
