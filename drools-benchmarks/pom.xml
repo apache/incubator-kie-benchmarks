@@ -16,7 +16,7 @@
   <properties>
     <version.freemaker>2.3.31</version.freemaker>
     <version.jaxb-api>2.0</version.jaxb-api>
-    <version.org.drools>8.29.0-SNAPSHOT</version.org.drools>
+    <version.org.drools>8.30.0-SNAPSHOT</version.org.drools>
   </properties>
 
   <dependencyManagement>
