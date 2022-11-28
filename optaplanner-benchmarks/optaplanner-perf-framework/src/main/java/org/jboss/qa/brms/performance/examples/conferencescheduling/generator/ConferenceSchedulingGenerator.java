@@ -213,12 +213,11 @@ public class ConferenceSchedulingGenerator {
         labTalkCount = (dayListSize * labTimeslotCount) * labRoomCount;
 
         random = new Random(37);
-        ConferenceSolution solution = new ConferenceSolution();
-        solution.setId(0L);
+        ConferenceSolution solution = new ConferenceSolution(0l);
+
         solution.setConferenceName(conferenceNameGenerator.generateNextValue());
-        ConferenceConstraintConfiguration constraintConfiguration = new ConferenceConstraintConfiguration();
+        ConferenceConstraintConfiguration constraintConfiguration = new ConferenceConstraintConfiguration(0l);
         constraintConfiguration.setMinimumConsecutiveTalksPauseInMinutes(15);
-        constraintConfiguration.setId(0L);
         solution.setConstraintConfiguration(constraintConfiguration);
 
         createTalkTypeList(solution);
@@ -254,8 +253,7 @@ public class ConferenceSchedulingGenerator {
         int timeslotOptionsIndex = 0;
         LocalDate day = timeslotFirstDay;
         for (int i = 0; i < timeslotListSize; i++) {
-            Timeslot timeslot = new Timeslot();
-            timeslot.setId((long) i);
+            Timeslot timeslot = new Timeslot(i);
             if (timeslotOptionsIndex >= timeslotOptions.size()) {
                 timeslotOptionsIndex = 0;
                 day = day.plusDays(1);
@@ -283,8 +281,7 @@ public class ConferenceSchedulingGenerator {
         final int roomsPerFloor = 12;
         List<Room> roomList = new ArrayList<>(roomListSize);
         for (int i = 0; i < roomListSize; i++) {
-            Room room = new Room();
-            room.setId((long) i);
+            Room room = new Room(i);
             room.setName("R " + ((i / roomsPerFloor * 100) + (i % roomsPerFloor) + 1));
             room.setCapacity((1 + random.nextInt(100)) * 10);
             TalkType talkType;
@@ -318,8 +315,7 @@ public class ConferenceSchedulingGenerator {
         List<Speaker> speakerList = new ArrayList<>(speakerListSize);
         speakerNameGenerator.predictMaximumSizeAndReset(speakerListSize);
         for (int i = 0; i < speakerListSize; i++) {
-            Speaker speaker = new Speaker();
-            speaker.setId((long) i);
+            Speaker speaker = new Speaker(i);
             speaker.setName(speakerNameGenerator.generateNextValue());
             Set<Timeslot> unavailableTimeslotSet;
             Set<String> preferredTimeslotTagSet = new LinkedHashSet<>();
@@ -379,8 +375,7 @@ public class ConferenceSchedulingGenerator {
         talkTitleGenerator.predictMaximumSizeAndReset(talkListSize);
         int speakerListIndex = 0;
         for (int i = 0; i < talkListSize; i++) {
-            Talk talk = new Talk();
-            talk.setId((long) i);
+            Talk talk = new Talk(i);
             talk.setCode(String.format("S%0" + ((String.valueOf(talkListSize).length()) + "d"), i));
             talk.setTitle(talkTitleGenerator.generateNextValue());
             double speakerRandomDouble = random.nextDouble();
