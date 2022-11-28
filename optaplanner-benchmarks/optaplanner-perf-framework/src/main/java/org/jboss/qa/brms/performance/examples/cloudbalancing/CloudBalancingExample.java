@@ -10,7 +10,6 @@ import org.optaplanner.examples.cloudbalancing.domain.CloudProcess;
 import org.optaplanner.examples.cloudbalancing.optional.score.CloudBalancingIncrementalScoreCalculator;
 
 import java.io.File;
-import java.util.Collections;
 
 public final class CloudBalancingExample extends AbstractExample<CloudBalance> {
 
@@ -51,9 +50,9 @@ public final class CloudBalancingExample extends AbstractExample<CloudBalance> {
      * Predefined datasets.
      */
     public enum DataSet {
-        CB_400_1200("400computers-1200processes.xml"), CB_800_2400("800computers-2400processes.xml"),
-        CB_1600_4800("1600computers-4800processes.xml"), CB_100_300("100computers-300processes.xml"),
-        CB_10000_30000("10000computers-30000processes.xml");
+        CB_400_1200("400computers-1200processes.json"), CB_800_2400("800computers-2400processes.json"),
+        CB_1600_4800("1600computers-4800processes.json"), CB_100_300("100computers-300processes.json"),
+        CB_10000_30000("10000computers-30000processes.json");
 
         DataSet(String file) {
             this.filename = file;
