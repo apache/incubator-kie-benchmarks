@@ -16,13 +16,13 @@
 package org.jboss.qa.brms.performance.examples.vehiclerouting.persistence;
 
 import org.jboss.qa.brms.performance.persistence.JacksonSolutionDao;
-import org.jboss.qa.brms.performance.persistence.XStreamSolutionDao;
 import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
+import org.optaplanner.examples.vehiclerouting.persistence.VehicleRoutingSolutionFileIO;
 
 public class VehicleRoutingDao extends JacksonSolutionDao<VehicleRoutingSolution> {
 
     public VehicleRoutingDao() {
-        super("vehiclerouting", VehicleRoutingSolution.class);
+        super("vehiclerouting", new VehicleRoutingSolutionFileIO());
     }
 
 }

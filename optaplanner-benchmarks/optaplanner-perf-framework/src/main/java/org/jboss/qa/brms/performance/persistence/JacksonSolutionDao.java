@@ -8,9 +8,9 @@ public class JacksonSolutionDao<Solution_>  extends AbstractSolutionDao<Solution
 
     JacksonSolutionFileIO<Solution_> jacksonSolutionFileIO;
 
-    public JacksonSolutionDao(String dirName, Class<Solution_> clazz) {
+    public JacksonSolutionDao(String dirName, JacksonSolutionFileIO<Solution_> solutionFileIO) {
         super(dirName);
-        jacksonSolutionFileIO = new JacksonSolutionFileIO<>(clazz);
+        jacksonSolutionFileIO = solutionFileIO;
     }
 
     @Override

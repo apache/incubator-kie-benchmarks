@@ -28,31 +28,30 @@ import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 
-class SolverConfigFromXmlTest {
+class BenchmarksTest {
 
     private static Stream<Arguments> problemSetAndSolverConfig() {
         return Stream.of(
-//                Arguments.of(new CloudBalanceBenchmark(CloudBalancingExample.DataSet.CB_100_300), Examples.CLOUD_BALANCING.getSolverConfigFromXml())
-//                , Arguments.of(new ConferenceSchedulingBenchmark(ConferenceSchedulingExample.DataSet.TALKS_36_TIMESLOTS_12_ROOMS_5), Examples.CONFERENCE_SCHEDULING.getSolverConfigFromXml())
-//                , Arguments.of(new FlightCrewSchedulingConstraintStreamsBenchmark(FlightCrewSchedulingExample.DataSet.EUROPE_175_FLIGHTS_7_DAYS), Examples.FLIGHT_CREW_SCHEDULING.getSolverConfigFromXml())
-//                , Arguments.of(new NurseRosteringBenchmark(NurseRosteringExample.DataSet.SPRINT), Examples.NURSE_ROSTERING.getSolverConfigFromXml())
-//                , Arguments.of(new TSPConstructionBenchmark(ConstructionHeuristicType.FIRST_FIT, TravelingSalesmanExample.DataSet.LU_980), Examples.TRAVELING_SALESMAN.getSolverConfigFromXml())
-//                , Arguments.of(new VehicleRoutingConstraintStreamsBenchmark(VehicleRoutingExample.DataSet.VRP_USA_100_10), Examples.VEHICLE_ROUTING.getSolverConfigFromXml())
-                 Arguments.of(new TravelingTournamentConstraintStreamsBenchmark(TravelingTournamentExample.DataSet.SUPER_06), Examples.TRAVELING_TOURNAMENT.getSolverConfigFromXml())
+                Arguments.of(new CloudBalanceBenchmark(CloudBalancingExample.DataSet.CB_100_300), Examples.CLOUD_BALANCING.getSolverConfigFromXml())
+                , Arguments.of(new ConferenceSchedulingBenchmark(ConferenceSchedulingExample.DataSet.TALKS_36_TIMESLOTS_12_ROOMS_5), Examples.CONFERENCE_SCHEDULING.getSolverConfigFromXml())
+                , Arguments.of(new FlightCrewSchedulingConstraintStreamsBenchmark(FlightCrewSchedulingExample.DataSet.EUROPE_175_FLIGHTS_7_DAYS), Examples.FLIGHT_CREW_SCHEDULING.getSolverConfigFromXml())
+                , Arguments.of(new NurseRosteringBenchmark(NurseRosteringExample.DataSet.SPRINT), Examples.NURSE_ROSTERING.getSolverConfigFromXml())
+                , Arguments.of(new TSPConstructionBenchmark(ConstructionHeuristicType.FIRST_FIT, TravelingSalesmanExample.DataSet.LU_980), Examples.TRAVELING_SALESMAN.getSolverConfigFromXml())
+                , Arguments.of(new TravelingTournamentConstraintStreamsBenchmark(TravelingTournamentExample.DataSet.SUPER_06), Examples.TRAVELING_TOURNAMENT.getSolverConfigFromXml())
+                , Arguments.of(new VehicleRoutingConstraintStreamsBenchmark(VehicleRoutingExample.DataSet.VRP_USA_100_10), Examples.VEHICLE_ROUTING.getSolverConfigFromXml())
         );
     }
 
-    @Timeout(value = 100, unit = TimeUnit.SECONDS)
+    @Timeout(value = 10, unit = TimeUnit.SECONDS)
     @ParameterizedTest
     @MethodSource("problemSetAndSolverConfig")
-    public void solverConfigFromXmlTest(AbstractPlannerBenchmark benchmark, SolverConfig solverConfig) {
+    public void benchmarksTest(AbstractPlannerBenchmark benchmark, SolverConfig solverConfig) {
 
         solverConfig.getPhaseConfigList().forEach(p -> {
             if (p instanceof LocalSearchPhaseConfig) {
                 p.setTerminationConfig(new TerminationConfig().withStepCountLimit(1));
             }
         });
-
         SolverFactory.create(solverConfig).buildSolver().solve(benchmark.createInitialSolution());
     }
 }

@@ -16,13 +16,13 @@
 package org.jboss.qa.brms.performance.examples.tsp.persistence;
 
 import org.jboss.qa.brms.performance.persistence.JacksonSolutionDao;
-import org.jboss.qa.brms.performance.persistence.XStreamSolutionDao;
 import org.optaplanner.examples.tsp.domain.TspSolution;
+import org.optaplanner.examples.tsp.persistence.TspSolutionFileIO;
 
 public class TspDao extends JacksonSolutionDao<TspSolution> {
 
     public TspDao() {
-        super("tsp", TspSolution.class);
+        super("tsp", new TspSolutionFileIO());
     }
 
 }
