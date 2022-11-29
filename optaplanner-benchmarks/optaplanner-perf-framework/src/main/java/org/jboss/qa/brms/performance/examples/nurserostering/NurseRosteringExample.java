@@ -43,9 +43,9 @@ public final class NurseRosteringExample extends AbstractExample<NurseRoster> {
     }
 
     public enum DataSet {
-        LONG("long01.xml"),
-        MEDIUM("medium01.xml"),
-        SPRINT("sprint01.xml");
+        LONG("long01.json"),
+        MEDIUM("medium01.json"),
+        SPRINT("sprint01.json");
 
         private String filename;
 

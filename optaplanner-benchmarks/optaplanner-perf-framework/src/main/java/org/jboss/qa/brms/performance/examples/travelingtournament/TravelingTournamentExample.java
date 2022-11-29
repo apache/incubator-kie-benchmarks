@@ -59,9 +59,9 @@ public final class TravelingTournamentExample extends AbstractExample<TravelingT
     }
 
     public enum DataSet {
-        SUPER_06("4-super06.xml"),
-        SUPER_10("4-super10.xml"),
-        SUPER_14("4-super14.xml");
+        SUPER_06("4-super06.json"),
+        SUPER_10("4-super10.json"),
+        SUPER_14("4-super14.json");
 
         DataSet(String file) {
             this.filename = file;
