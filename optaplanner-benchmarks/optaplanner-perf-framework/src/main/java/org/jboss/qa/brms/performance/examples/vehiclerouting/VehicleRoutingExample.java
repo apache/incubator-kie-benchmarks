@@ -69,16 +69,12 @@ public final class VehicleRoutingExample extends AbstractExample<VehicleRoutingS
     }
 
     public enum DataSet {
-        VRP_TW_400("cvrptw-400customers.xml"),
-        VRP_ROAD_29("road-cvrp-29customers.xml"),
-        VRP_TW_25("cvrptw-25customers.xml"),
-        VRP_TW_100_B("cvrptw-100customers-B.xml"),
-        VRP_USA_100_10("usa-n100-k10.xml"),
-        VRP_USA_1000_20("usa-n1000-k20.xml"),
-        VRP_USA_10000_100("usa-n10000-k100.xml"),
-        BELGIUM_TW_50_10("belgium-tw-n50-k10.xml"),
-        BELGIUM_TW_500_20("belgium-tw-n500-k20.xml"),
-        BELGIUM_TW_2750_55("belgium-tw-n2750-k55.xml");
+        VRP_USA_100_10("usa-n100-k10.json"),
+        VRP_USA_1000_20("usa-n1000-k20.json"),
+        VRP_USA_10000_100("usa-n10000-k100.json"),
+        BELGIUM_TW_50_10("belgium-tw-n50-k10.json"),
+        BELGIUM_TW_500_20("belgium-tw-n500-k20.json"),
+        BELGIUM_TW_2750_55("belgium-tw-n2750-k55.json");
 
         DataSet(String file) {
             this.filename = file;

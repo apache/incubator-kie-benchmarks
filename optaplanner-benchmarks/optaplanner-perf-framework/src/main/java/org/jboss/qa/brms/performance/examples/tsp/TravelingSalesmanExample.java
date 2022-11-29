@@ -47,12 +47,9 @@ public final class TravelingSalesmanExample extends AbstractExample<TspSolution>
     }
 
     public enum DataSet {
-        USA_CA_2716("usa_ca_2716.xml"),
-        USA_NY_2281("usa_ny_2281.xml"),
-        USA_TX_2743("usa_tx_2743.xml"),
-        CHINA_71009("ch71009.xml"),
-        GREECE_9882("gr9882.xml"),
-        LU_980("lu980.xml");
+        USA_CA_2716("usa_ca_2716.json"),
+        GREECE_9882("gr9882.json"),
+        LU_980("lu980.json");
 
         DataSet(String file) {
             this.filename = file;
