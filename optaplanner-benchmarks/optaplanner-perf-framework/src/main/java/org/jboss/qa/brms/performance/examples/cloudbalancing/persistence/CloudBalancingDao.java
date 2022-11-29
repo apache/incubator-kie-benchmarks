@@ -17,11 +17,12 @@ package org.jboss.qa.brms.performance.examples.cloudbalancing.persistence;
 
 import org.jboss.qa.brms.performance.persistence.JacksonSolutionDao;
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
+import org.optaplanner.examples.cloudbalancing.persistence.CloudBalanceSolutionFileIO;
 
 public class CloudBalancingDao extends JacksonSolutionDao<CloudBalance> {
 
     public CloudBalancingDao() {
-        super("cloudbalancing", CloudBalance.class);
+        super("cloudbalancing", new CloudBalanceSolutionFileIO());
     }
 
 }

@@ -19,16 +19,15 @@ public final class TravelingTournamentExample extends AbstractExample<TravelingT
 
     private static final String SOLVER_CONFIG =
             "org/jboss/qa/brms/performance/examples/travelingtournament/solver/travelingTournamentSolverConfig.xml";
-
-    private final TravelingTournamentDao dao = new TravelingTournamentDao();
+    private final TravelingTournamentDao travelingTournamentDao = new TravelingTournamentDao();
 
     @Override
     public TravelingTournament loadSolvingProblem(File file) {
-        return dao.readSolution(file);
+         return travelingTournamentDao.readSolution(file);
     }
 
     public TravelingTournament loadSolvingProblem(TravelingTournamentExample.DataSet dataset) {
-        return loadSolvingProblem(new File(dao.getDataDir(), dataset.getFilename()));
+        return loadSolvingProblem(new File(travelingTournamentDao.getDataDir(), dataset.getFilename()));
     }
 
     public TravelingTournament createInitialSolution(TravelingTournamentExample.DataSet dataSet) {
