@@ -213,7 +213,7 @@ public class ConferenceSchedulingGenerator {
         labTalkCount = (dayListSize * labTimeslotCount) * labRoomCount;
 
         random = new Random(37);
-        ConferenceSolution solution = new ConferenceSolution(0l);
+        ConferenceSolution solution = new ConferenceSolution(0L);
 
         solution.setConferenceName(conferenceNameGenerator.generateNextValue());
         ConferenceConstraintConfiguration constraintConfiguration = new ConferenceConstraintConfiguration(0l);
