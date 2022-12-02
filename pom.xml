@@ -48,7 +48,7 @@
   </dependencyManagement>
 
   <modules>
-    <module>drools-benchmarks</module>
+    <module>drools-benchmarks-parent</module>
     <module>optaplanner-benchmarks</module>
   </modules>
 
