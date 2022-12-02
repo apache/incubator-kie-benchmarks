@@ -3,15 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>kie-benchmarks</artifactId>
-    <groupId>org.kie</groupId>
+    <artifactId>drools-benchmarks-parent</artifactId>
+    <groupId>org.drools</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.drools</groupId>
-  <artifactId>drools-benchmarks</artifactId>
-  <name>Drools 8 Benchmarks</name>
+  <artifactId>drools-benchmarks-common</artifactId>
+  <name>Drools 8 Benchmarks Common Classes</name>
 
   <properties>
     <version.freemaker>2.3.31</version.freemaker>
