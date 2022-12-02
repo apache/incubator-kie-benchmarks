@@ -16,8 +16,8 @@
 
 package org.drools.benchmarks.turtle.runtime.common;
 
-import org.drools.benchmarks.model.event.Event;
+import org.drools.benchmarks.model.event.BasicEvent;
 
 public interface EventInsertedListener {
-    void eventWasInserted(Event event, long clockStartTime, long clockCurrentTime, long eventTime);
+    void eventWasInserted(BasicEvent event, long clockStartTime, long clockCurrentTime, long eventTime);
 }

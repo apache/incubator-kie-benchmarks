@@ -19,7 +19,7 @@ package org.drools.benchmarks.model.event;
 import java.util.Date;
 import org.drools.benchmarks.model.Transaction;
 
-public class TransactionCreatedEvent extends Event {
+public class TransactionCreatedEvent extends BasicEvent {
     protected Transaction transaction;
 
     public TransactionCreatedEvent() {

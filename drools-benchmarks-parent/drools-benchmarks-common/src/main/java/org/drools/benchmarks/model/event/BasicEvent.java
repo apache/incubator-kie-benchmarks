@@ -16,33 +16,33 @@
 
 package org.drools.benchmarks.model.event;
 
-public abstract class Event {
+public abstract class BasicEvent {
     protected int id;
     /** Duration of event in ms */
     protected long duration;
     /** Description of event */
     protected String description;
 
-    public Event() {
+    public BasicEvent() {
         duration = 0;
     }
 
-    public Event(int id) {
+    public BasicEvent(int id) {
         this();
         this.id = id;
     }
 
-    public Event(int id, long duration) {
+    public BasicEvent(int id, long duration) {
         this(id);
         this.duration = duration;
     }
 
-    public Event(int id, String description) {
+    public BasicEvent(int id, String description) {
         this(id);
         this.description = description;
     }
 
-    public Event(int id, long duration, String description) {
+    public BasicEvent(int id, long duration, String description) {
         this.id = id;
         this.duration = duration;
         this.description = description;

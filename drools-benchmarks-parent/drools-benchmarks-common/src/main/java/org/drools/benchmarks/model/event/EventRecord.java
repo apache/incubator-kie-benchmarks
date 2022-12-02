@@ -27,18 +27,18 @@ import java.util.concurrent.TimeUnit;
  */
 public class EventRecord implements Comparable<EventRecord>, Serializable {
     private static final long serialVersionUID = 5513090531481576167L;
-    private final Event event;
+    private final BasicEvent event;
     private final long timeValue;
     private final TimeUnit timeUnit;
 
-    public EventRecord(Event event, long time, TimeUnit unit) {
+    public EventRecord(BasicEvent event, long time, TimeUnit unit) {
         super();
         this.event = event;
         timeValue = time;
         timeUnit = unit;
     }
 
-    public Event getEvent() {
+    public BasicEvent getEvent() {
         return event;
     }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.drools.benchmarks.throughput;
+package org.drools.benchmarks.model;
 
 import java.io.FileWriter;
 import java.io.IOException;

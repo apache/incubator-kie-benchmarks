@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.model.A;
-import org.drools.benchmarks.throughput.FireLogger;
+import org.drools.benchmarks.model.FireLogger;
 
 /**
  * Provides rule(s) that are partitioned.
