@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.RuntimeUtil;
-import org.drools.benchmarks.model.Account;
+import org.drools.benchmarks.common.model.Account;
 import org.kie.internal.conf.AlphaRangeIndexThresholdOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;

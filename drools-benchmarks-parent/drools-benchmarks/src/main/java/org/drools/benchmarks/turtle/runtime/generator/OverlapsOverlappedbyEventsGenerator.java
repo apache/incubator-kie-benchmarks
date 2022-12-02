@@ -19,9 +19,9 @@ package org.drools.benchmarks.turtle.runtime.generator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.model.event.EventRecord;
-import org.drools.benchmarks.model.event.NewCustomerEvent;
-import org.drools.benchmarks.model.event.TransactionCreatedEvent;
+import org.drools.benchmarks.common.model.event.EventRecord;
+import org.drools.benchmarks.common.model.event.NewCustomerEvent;
+import org.drools.benchmarks.common.model.event.TransactionCreatedEvent;
 
 public class OverlapsOverlappedbyEventsGenerator extends FactsGenerator {
 

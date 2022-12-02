@@ -1,6 +1,6 @@
 package org.drools.benchmarks.turtle.runtime;
 
-import org.drools.benchmarks.model.Account;
+import org.drools.benchmarks.common.model.Account;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Warmup;

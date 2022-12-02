@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.util.RuntimeUtil;
-import org.drools.benchmarks.model.Account;
+import org.drools.benchmarks.common.model.Account;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.OutputTimeUnit;

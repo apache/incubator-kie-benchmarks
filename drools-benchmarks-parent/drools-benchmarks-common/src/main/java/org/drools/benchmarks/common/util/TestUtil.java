@@ -16,10 +16,10 @@
 
 package org.drools.benchmarks.common.util;
 
-import org.drools.benchmarks.model.B;
-import org.drools.benchmarks.model.C;
-import org.drools.benchmarks.model.D;
-import org.drools.benchmarks.model.E;
+import org.drools.benchmarks.common.model.B;
+import org.drools.benchmarks.common.model.C;
+import org.drools.benchmarks.common.model.D;
+import org.drools.benchmarks.common.model.E;
 import org.drools.compiler.builder.conf.DecisionTableConfigurationImpl;
 import org.kie.api.KieServices;
 import org.kie.api.io.Resource;

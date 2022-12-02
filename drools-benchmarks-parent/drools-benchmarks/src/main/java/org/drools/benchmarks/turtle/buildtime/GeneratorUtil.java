@@ -28,9 +28,9 @@ public class GeneratorUtil {
         final StringBuilder sb = new StringBuilder();
         sb.append("package org.drools.benchmarks.bre;\n");
         sb.append("\n");
-        sb.append("import org.drools.benchmarks.model.Account;\n");
-        sb.append("import org.drools.benchmarks.model.Address;\n");
-        sb.append("import org.drools.benchmarks.model.Customer;\n");
+        sb.append("import org.drools.benchmarks.common.model.Account;\n");
+        sb.append("import org.drools.benchmarks.common.model.Address;\n");
+        sb.append("import org.drools.benchmarks.common.model.Customer;\n");
         sb.append("\n");
 
         for (int i = 1; i <= 20; i++) {

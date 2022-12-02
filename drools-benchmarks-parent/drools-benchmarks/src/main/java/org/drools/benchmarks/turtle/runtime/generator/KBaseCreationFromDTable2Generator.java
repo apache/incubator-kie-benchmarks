@@ -1,8 +1,8 @@
 package org.drools.benchmarks.turtle.runtime.generator;
 
-import org.drools.benchmarks.model.Account;
-import org.drools.benchmarks.model.Address;
-import org.drools.benchmarks.model.Customer;
+import org.drools.benchmarks.common.model.Account;
+import org.drools.benchmarks.common.model.Address;
+import org.drools.benchmarks.common.model.Customer;
 
 import java.util.ArrayList;
 import java.util.List;

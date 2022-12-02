@@ -16,8 +16,8 @@
 package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.DRLProvider;
-import org.drools.benchmarks.model.A;
-import org.drools.benchmarks.model.ConsequenceBlackhole;
+import org.drools.benchmarks.common.model.A;
+import org.drools.benchmarks.common.model.ConsequenceBlackhole;
 
 /**
  * Provides rule(s) with simple JoinNodes. Can provide rules with JoinNodes also for event processing.
