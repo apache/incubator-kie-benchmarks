@@ -15,13 +15,14 @@
  */
 package org.jboss.qa.brms.performance.examples.projectjobscheduling.persistence;
 
-import org.jboss.qa.brms.performance.persistence.XStreamSolutionDao;
+import org.jboss.qa.brms.performance.persistence.JacksonSolutionDao;
 import org.optaplanner.examples.projectjobscheduling.domain.Schedule;
+import org.optaplanner.examples.projectjobscheduling.persistence.ProjectJobSchedulingSolutionFileIO;
 
-public class ProjectJobSchedulingDao extends XStreamSolutionDao<Schedule> {
+public class ProjectJobSchedulingDao extends JacksonSolutionDao<Schedule> {
 
     public ProjectJobSchedulingDao() {
-        super("projectjobscheduling", Schedule.class);
+        super("projectjobscheduling", new ProjectJobSchedulingSolutionFileIO());
     }
 
 }

@@ -14,6 +14,11 @@ public class ProjectJobSchedulingConstructionBenchmark extends AbstractConstruct
         super(Examples.PROJECT_JOB_SCHEDULING);
     }
 
+    public ProjectJobSchedulingConstructionBenchmark(ConstructionHeuristicType constructionHeuristicType,ProjectJobSchedulingExample.DataSet dataset) {
+        super(Examples.PROJECT_JOB_SCHEDULING);
+        this.constructionHeuristicType=constructionHeuristicType;
+        this.dataset = dataset;
+    }
     @Param({"FIRST_FIT"})
     private ConstructionHeuristicType constructionHeuristicType;
 

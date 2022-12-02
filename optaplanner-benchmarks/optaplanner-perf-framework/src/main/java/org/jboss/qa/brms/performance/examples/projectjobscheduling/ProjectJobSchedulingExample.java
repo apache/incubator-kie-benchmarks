@@ -1,7 +1,6 @@
 package org.jboss.qa.brms.performance.examples.projectjobscheduling;
 
 import java.io.File;
-import java.util.Collections;
 
 import org.jboss.qa.brms.performance.examples.AbstractExample;
 import org.jboss.qa.brms.performance.examples.projectjobscheduling.persistence.ProjectJobSchedulingDao;
@@ -45,9 +44,9 @@ public final class ProjectJobSchedulingExample extends AbstractExample<Schedule>
     }
 
     public enum DataSet {
-        A_4("A-4.xml"),
-        A_10("A-10.xml"),
-        B_9("B-9.xml");
+        A_4("A-4.json"),
+        A_10("A-10.json"),
+        B_9("B-9.json");
 
         DataSet(String file) {
             this.filename = file;
