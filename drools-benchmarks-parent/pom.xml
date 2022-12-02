@@ -22,7 +22,7 @@
 
   <modules>
     <module>drools-benchmarks-common</module>
-    <module>drools-benchmarks-smoke</module>
+    <module>drools-benchmarks-quick</module>
     <module>drools-benchmarks</module>
   </modules>
 
