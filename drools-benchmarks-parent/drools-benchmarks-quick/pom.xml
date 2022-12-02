@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>drools-benchmarks-smoke</artifactId>
+  <artifactId>drools-benchmarks-quick</artifactId>
   <name>Drools 8 Smoke Benchmarks</name>
 
   <properties>
@@ -65,102 +65,9 @@
   <dependencies>
     <dependency>
       <groupId>org.drools</groupId>
-      <artifactId>drools-core</artifactId>
+      <artifactId>drools-benchmarks-common</artifactId>
+      <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-compiler</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-model-compiler</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-ecj</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-decisiontables</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-internal</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-dmn-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-dmn-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-dmn-validation</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-dmn-feel</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-pmml-dependencies</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-generator-annprocess</artifactId>
-    </dependency>
-      <dependency>
-          <groupId>org.freemarker</groupId>
-          <artifactId>freemarker</artifactId>
-          <version>${version.freemaker}</version>
-      </dependency>
-      <dependency>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.drools</groupId>
-          <artifactId>drools-xml-support</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.drools</groupId>
-          <artifactId>drools-tms</artifactId>
-      </dependency>
-      <!-- Efesto -->
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-common-api</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-compilation-manager-api</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-compilation-manager-core</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-runtime-manager-api</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-runtime-manager-core</artifactId>
-      </dependency>
   </dependencies>
 
   <build>
@@ -175,7 +82,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <finalName>drools-benchmarks</finalName>
+              <finalName>drools-benchmarks-quick</finalName>
               <transformers>
                   <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                       <resource>META-INF/kie.conf</resource>
