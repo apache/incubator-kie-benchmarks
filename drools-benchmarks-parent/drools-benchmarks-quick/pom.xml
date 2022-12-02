@@ -12,56 +12,6 @@
   <artifactId>drools-benchmarks-quick</artifactId>
   <name>Drools 8 Smoke Benchmarks</name>
 
-  <properties>
-    <version.freemaker>2.3.31</version.freemaker>
-    <version.jaxb-api>2.0</version.jaxb-api>
-    <version.org.drools>8.32.0-SNAPSHOT</version.org.drools>
-  </properties>
-
-  <dependencyManagement>
-      <dependencies>
-          <dependency>
-              <groupId>org.drools</groupId>
-              <artifactId>drools-bom</artifactId>
-              <version>${version.org.drools}</version>
-              <type>pom</type>
-              <scope>import</scope>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>drools-build-parent</artifactId>
-              <version>${version.org.drools}</version>
-              <type>pom</type>
-              <scope>import</scope>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-common-api</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-compilation-manager-api</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-compilation-manager-core</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-runtime-manager-api</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-runtime-manager-core</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-      </dependencies>
-  </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>org.drools</groupId>
