@@ -16,7 +16,7 @@
 
 package org.drools.benchmarks.model.event;
 
-public class NewCustomerEvent extends Event {
+public class NewCustomerEvent extends BasicEvent {
     
     public NewCustomerEvent() {
         super();

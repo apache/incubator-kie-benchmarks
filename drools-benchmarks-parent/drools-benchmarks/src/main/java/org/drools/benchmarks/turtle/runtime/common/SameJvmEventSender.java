@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
-import org.drools.benchmarks.model.event.Event;
+import org.drools.benchmarks.model.event.BasicEvent;
 import org.drools.benchmarks.model.event.EventRecord;
 import org.drools.benchmarks.turtle.runtime.generator.FactsGenerator;
 import org.drools.core.time.SessionPseudoClock;
@@ -95,7 +95,7 @@ public class SameJvmEventSender implements EventSender {
             long currTime = clock.getCurrentTime();
             long nextEventTime = startTime + record.getTimeUnit().toMillis(record.getTimeValue());
             clock.advanceTime(nextEventTime - currTime, TimeUnit.MILLISECONDS);
-            final Event event = record.getEvent();
+            final BasicEvent event = record.getEvent();
             stream.insert(event);
             fireEventInsertedListeners(event, startTime, currTime, nextEventTime);
         }
@@ -124,7 +124,7 @@ public class SameJvmEventSender implements EventSender {
         eventInsertedListeners.add(listener);
     }
 
-    private void fireEventInsertedListeners(final Event event, final long startTime, final long currentTime,
+    private void fireEventInsertedListeners(final BasicEvent event, final long startTime, final long currentTime,
             final long eventTime) {
         if (eventInsertedListeners != null && !eventInsertedListeners.isEmpty()) {
             for (EventInsertedListener listener : eventInsertedListeners) {
