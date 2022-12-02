@@ -22,9 +22,9 @@ import java.util.Collection;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.ProviderException;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
-import org.drools.benchmarks.model.reactive.Child;
-import org.drools.benchmarks.model.reactive.Man;
-import org.drools.benchmarks.model.reactive.Woman;
+import org.drools.benchmarks.common.model.reactive.Child;
+import org.drools.benchmarks.common.model.reactive.Man;
+import org.drools.benchmarks.common.model.reactive.Woman;
 import org.openjdk.jmh.annotations.Setup;
 
 public abstract class AbstractOOPathRuntimeBenchmark extends AbstractBenchmark {

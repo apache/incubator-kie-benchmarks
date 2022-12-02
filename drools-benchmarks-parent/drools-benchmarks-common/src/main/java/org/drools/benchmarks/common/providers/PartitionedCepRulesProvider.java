@@ -19,8 +19,8 @@ package org.drools.benchmarks.common.providers;
 import java.util.function.Function;
 
 import org.drools.benchmarks.common.DRLProvider;
-import org.drools.benchmarks.model.A;
-import org.drools.benchmarks.model.FireLogger;
+import org.drools.benchmarks.common.model.A;
+import org.drools.benchmarks.common.model.FireLogger;
 
 /**
  * Provides rule(s) that are partitioned.

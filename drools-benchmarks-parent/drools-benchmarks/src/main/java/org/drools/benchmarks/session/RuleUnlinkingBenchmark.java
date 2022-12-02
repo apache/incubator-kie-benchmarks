@@ -24,7 +24,7 @@ import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.common.util.TestUtil;
-import org.drools.benchmarks.model.A;
+import org.drools.benchmarks.common.model.A;
 import org.kie.api.runtime.rule.FactHandle;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;

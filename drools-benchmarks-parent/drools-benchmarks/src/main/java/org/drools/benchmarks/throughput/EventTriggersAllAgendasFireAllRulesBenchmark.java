@@ -19,7 +19,7 @@ package org.drools.benchmarks.throughput;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.common.DRLProvider;
 import org.drools.benchmarks.common.providers.PartitionedCepRulesProvider;
-import org.drools.benchmarks.model.AbstractBean;
+import org.drools.benchmarks.common.model.AbstractBean;
 import org.drools.core.time.SessionPseudoClock;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;

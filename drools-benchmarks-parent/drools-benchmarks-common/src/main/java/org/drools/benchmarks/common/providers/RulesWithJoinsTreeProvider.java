@@ -18,7 +18,7 @@ package org.drools.benchmarks.common.providers;
 
 import org.drools.benchmarks.common.ConstraintPattern;
 import org.drools.benchmarks.common.DRLProvider;
-import org.drools.benchmarks.model.A;
+import org.drools.benchmarks.common.model.A;
 
 /**
  * Provides rule(s) with JoinNodes. Each join is of different type in different rules, so joins are not shared.

@@ -19,7 +19,7 @@ package org.drools.benchmarks.session;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.RuntimeUtil;
-import org.drools.benchmarks.model.A;
+import org.drools.benchmarks.common.model.A;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;

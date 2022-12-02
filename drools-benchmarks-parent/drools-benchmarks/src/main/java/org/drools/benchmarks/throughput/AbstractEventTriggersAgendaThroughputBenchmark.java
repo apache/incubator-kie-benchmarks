@@ -19,9 +19,15 @@ package org.drools.benchmarks.throughput;
 import java.util.concurrent.atomic.LongAdder;
 
 import org.drools.benchmarks.common.DRLProvider;
+import org.drools.benchmarks.common.model.A;
+import org.drools.benchmarks.common.model.AbstractBean;
+import org.drools.benchmarks.common.model.B;
+import org.drools.benchmarks.common.model.C;
+import org.drools.benchmarks.common.model.D;
+import org.drools.benchmarks.common.model.E;
+import org.drools.benchmarks.common.model.FireLogger;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.RuntimeUtil;
-import org.drools.benchmarks.model.*;
 import org.drools.kiesession.rulebase.InternalKnowledgeBase;
 import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;

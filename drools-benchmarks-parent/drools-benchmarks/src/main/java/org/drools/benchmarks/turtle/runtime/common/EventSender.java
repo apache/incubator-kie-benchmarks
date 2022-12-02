@@ -17,7 +17,7 @@
 package org.drools.benchmarks.turtle.runtime.common;
 
 import java.util.List;
-import org.drools.benchmarks.model.event.EventRecord;
+import org.drools.benchmarks.common.model.event.EventRecord;
 import org.drools.benchmarks.turtle.runtime.generator.FactsGenerator;
 import org.kie.api.runtime.KieSession;
 

@@ -1,8 +1,8 @@
 package org.drools.benchmarks.bre;
 import java.util.Date
 import org.drools.benchmarks.model.*;
-import org.drools.benchmarks.model.Address.Country
-import org.drools.benchmarks.model.Account.AccountType
+import org.drools.benchmarks.common.model.Address.Country
+import org.drools.benchmarks.common.model.Account.AccountType
 dialect "mvel"
 
 rule "Retract address_200"
