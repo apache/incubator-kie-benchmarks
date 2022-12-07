@@ -52,7 +52,7 @@ public class AlphaNodeRangeIndexingBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append( "import org.drools.benchmarks.model.*;\n" );
+        sb.append("import " + Account.class.getCanonicalName() + ";\n");
         for (int i = 1; i <= rulesAndFactsNumber; i++) {
             sb.append(" rule " + RULENAME_PREFIX + i + "\n" +
                     " when \n " +

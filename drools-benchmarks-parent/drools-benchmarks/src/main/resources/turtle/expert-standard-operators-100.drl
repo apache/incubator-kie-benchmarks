@@ -1,5 +1,5 @@
 package org.drools.benchmarks.bre;
-import org.drools.benchmarks.model.*;
+import org.drools.benchmarks.common.model.*;
 // Basic rule templates which contains place holders started by @ (e.g. @{row.rowNumber})
 // that have to be replaced by actual values
 

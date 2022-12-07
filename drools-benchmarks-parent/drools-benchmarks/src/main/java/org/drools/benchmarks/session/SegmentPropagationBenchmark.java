@@ -17,6 +17,7 @@
 package org.drools.benchmarks.session;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
+import org.drools.benchmarks.common.model.Account;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.benchmarks.common.model.A;
@@ -56,7 +57,11 @@ public class SegmentPropagationBenchmark extends AbstractBenchmark {
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
-        sb.append( "import org.drools.benchmarks.model.*;\n" );
+        sb.append("import " + A.class.getCanonicalName() + ";\n");
+        sb.append("import " + B.class.getCanonicalName() + ";\n");
+        sb.append("import " + C.class.getCanonicalName() + ";\n");
+        sb.append("import " + D.class.getCanonicalName() + ";\n");
+        sb.append("import " + E.class.getCanonicalName() + ";\n");
         for ( int i = 0; i < treesNr; i++ ) {
             sb.append( "rule R" + i + "C when\n" +
                        "  A( $a : value > " + i + ")\n" +
