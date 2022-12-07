@@ -41,8 +41,8 @@ public class SimpleRulesWithConstraintsProvider implements DRLProvider {
     @Override
     public String getDrl(int numberOfRules, String ruleNameBase) {
         final StringBuilder drlBuilder = new StringBuilder();
-        drlBuilder.append("import org.drools.benchmarks.model.reactive.*;\n");
-        drlBuilder.append("import org.drools.benchmarks.model.*;\n");
+        drlBuilder.append("import org.drools.benchmarks.common.model.reactive.*;\n");
+        drlBuilder.append("import org.drools.benchmarks.common.model.*;\n");
         drlBuilder.append("\n");
         for (int i = 0; i < numberOfRules; i++) {
             drlBuilder.append("rule \"" + ruleNameBase + i + "\" when\n");

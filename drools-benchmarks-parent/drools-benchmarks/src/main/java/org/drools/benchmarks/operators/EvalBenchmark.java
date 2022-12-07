@@ -16,6 +16,7 @@
 
 package org.drools.benchmarks.operators;
 
+import org.drools.benchmarks.common.model.Account;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
@@ -26,7 +27,7 @@ public class EvalBenchmark extends AbstractOperatorsBenchmark {
     @Setup
     public void setupKieBase() {
         StringBuilder sb = new StringBuilder();
-        sb.append("import org.drools.benchmarks.model.*;\n");
+        sb.append("import " + Account.class.getCanonicalName() + ";\n");
         for (int i = 1; i <= rulesAndFactsNumber; i++) {
             sb.append(" rule " + RULENAME_PREFIX + i + "\n" +
                     " when \n " +

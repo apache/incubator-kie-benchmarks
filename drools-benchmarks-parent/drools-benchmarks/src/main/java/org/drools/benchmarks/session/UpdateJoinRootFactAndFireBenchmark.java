@@ -58,7 +58,12 @@ public class UpdateJoinRootFactAndFireBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsProvider(4, false, false);
 
-        String sb = "import org.drools.benchmarks.model.*;\n" +
+        String sb =
+                "import " + A.class.getCanonicalName() + ";\n" +
+                "import " + B.class.getCanonicalName() + ";\n" +
+                "import " + C.class.getCanonicalName() + ";\n" +
+                "import " + D.class.getCanonicalName() + ";\n" +
+                "import " + E.class.getCanonicalName() + ";\n" +
                 "rule R salience 10 when\n" +
                 "  $factA : A( $a : value > 0)\n" +
                 "  B( $b : value > $a)\n" +
