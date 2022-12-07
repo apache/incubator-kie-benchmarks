@@ -24,6 +24,7 @@
     <module>drools-benchmarks-common</module>
     <module>drools-benchmarks-quick</module>
     <module>drools-benchmarks</module>
+    <module>drools-benchmarks-module</module>
   </modules>
 
   <dependencyManagement>
