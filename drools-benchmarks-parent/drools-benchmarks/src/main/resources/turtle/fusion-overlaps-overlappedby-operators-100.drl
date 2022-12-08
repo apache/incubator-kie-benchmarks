@@ -1,7 +1,7 @@
 package org.drools.benchmarks.bre
 // list any import classes here.
-import org.drools.benchmarks.event.model.TransactionCreatedEvent
-import org.drools.benchmarks.event.model.NewCustomerEvent
+import org.drools.benchmarks.common.model.event.TransactionCreatedEvent
+import org.drools.benchmarks.common.model.event.NewCustomerEvent
 // declarations and global variables
 declare TransactionCreatedEvent
     @role(event)
