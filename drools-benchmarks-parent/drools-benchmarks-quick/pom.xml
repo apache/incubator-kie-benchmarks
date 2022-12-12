@@ -23,11 +23,6 @@
       <artifactId>drools-benchmarks-module</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-ci</artifactId>
-      <version>${version.org.drools}</version>
-    </dependency>
   </dependencies>
 
   <build>

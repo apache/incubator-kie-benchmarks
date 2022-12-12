@@ -50,7 +50,7 @@ public class InstantiateKieContainerFromKJarBenchmark {
 
     @Benchmark
     public KieBase createKieContainerFromKjar()  {
-        KieContainer kieContainer = KieServices.get().newKieContainer(MODULE_RELEASEID, Thread.currentThread().getContextClassLoader());
+        KieContainer kieContainer = KieServices.get().newKieContainer(MODULE_RELEASEID);
         return kieContainer.getKieBase(MODULE_KIEBASE);
     }
 
