@@ -1,6 +1,6 @@
 package org.drools.benchmarks.bre;
 import java.util.Date
-import org.drools.benchmarks.model.*;
+import org.drools.benchmarks.common.model.*;
 import org.drools.benchmarks.common.model.Address.Country
 import org.drools.benchmarks.common.model.Account.AccountType
 dialect "mvel"

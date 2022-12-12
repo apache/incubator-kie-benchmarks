@@ -41,7 +41,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public abstract class AbstractOOPathComparisonBenchmark extends AbstractBenchmark {
 
-    protected static final String MODEL_PACKAGE_IMPORT = "import org.drools.benchmarks.model.reactive.*;";
+    protected static final String MODEL_PACKAGE_IMPORT = "import org.drools.benchmarks.common.model.reactive.*;";
 
     @Param({"10"})
     protected int numberOfParentFacts;

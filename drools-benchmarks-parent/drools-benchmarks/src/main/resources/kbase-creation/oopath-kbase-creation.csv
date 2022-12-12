@@ -1,6 +1,6 @@
 ,
 "RuleSet","org.drools.benchmarks.oopath"
-"Import","org.drools.benchmarks.model.reactive.*"
+"Import","org.drools.benchmarks.common.model.reactive.*"
 "Notes","Very simple decision table with several hundreds of lines"
 ,
 "RuleTable OOPathTest",
