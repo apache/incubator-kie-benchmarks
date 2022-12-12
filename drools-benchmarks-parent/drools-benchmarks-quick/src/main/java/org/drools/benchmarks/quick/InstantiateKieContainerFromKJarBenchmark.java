@@ -34,10 +34,10 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 20, time = 3)
-@Measurement(iterations = 20, time = 3)
+@Warmup(iterations = 10, time = 3)
+@Measurement(iterations = 10, time = 3)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Fork(4)
+@Fork(3)
 public class InstantiateKieContainerFromKJarBenchmark {
 
     private static final String MODULE_GROUPID ="org.drools";
