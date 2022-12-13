@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
-import org.kie.api.runtime.KieContainer;
 import org.kie.util.maven.support.ReleaseIdImpl;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -50,8 +49,7 @@ public class InstantiateKieContainerFromKJarBenchmark {
 
     @Benchmark
     public KieBase createKieContainerFromKjar()  {
-        KieContainer kieContainer = KieServices.get().newKieContainer(MODULE_RELEASEID);
-        return kieContainer.getKieBase(MODULE_KIEBASE);
+        return KieServices.get().newKieContainer(MODULE_RELEASEID).getKieBase(MODULE_KIEBASE);
     }
 
 
