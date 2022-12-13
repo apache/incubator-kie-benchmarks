@@ -32,16 +32,6 @@
   </dependencies>
 
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-maven-plugin</artifactId>
-          <version>${version.org.drools}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
