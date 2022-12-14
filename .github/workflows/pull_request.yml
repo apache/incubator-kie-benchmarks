@@ -27,12 +27,12 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: adopt
-#       # See https://docs.github.com/en/actions/guides/building-and-testing-java-with-maven#caching-dependencies
-#       - name: Cache Maven packages
-#         uses: actions/cache@v2
-#         with:
-#           path: ~/.m2
-#           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-#           restore-keys: ${{ runner.os }}-m2
+      # See https://docs.github.com/en/actions/guides/building-and-testing-java-with-maven#caching-dependencies
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
       - name: Maven Build using Java ${{ matrix.java-version }}
-        run: mvn -B -U --fail-at-end clean install
+        run: mvn -B --fail-at-end clean install
