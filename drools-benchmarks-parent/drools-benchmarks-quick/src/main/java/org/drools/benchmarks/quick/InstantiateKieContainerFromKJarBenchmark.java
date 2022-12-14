@@ -33,8 +33,8 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 10, time = 3)
-@Measurement(iterations = 10, time = 3)
+@Warmup(iterations = 15, time = 3)
+@Measurement(iterations = 5, time = 3)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(3)
 public class InstantiateKieContainerFromKJarBenchmark {
