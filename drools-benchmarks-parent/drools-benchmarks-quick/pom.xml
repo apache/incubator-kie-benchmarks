@@ -18,6 +18,11 @@
       <artifactId>drools-benchmarks-common</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-benchmarks-module</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
