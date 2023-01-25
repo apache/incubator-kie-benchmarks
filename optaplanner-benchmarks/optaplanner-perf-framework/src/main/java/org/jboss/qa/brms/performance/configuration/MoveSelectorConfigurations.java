@@ -14,6 +14,8 @@ import org.optaplanner.core.config.heuristic.selector.move.generic.list.SubListS
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MoveSelectorConfigurations {
 
@@ -35,6 +37,11 @@ public class MoveSelectorConfigurations {
 
     public static List<MoveSelectorConfig> createSubChainChangeMoveSelectorList() {
         return Collections.<MoveSelectorConfig>singletonList(new SubChainChangeMoveSelectorConfig());
+    }
+
+    public static List<MoveSelectorConfig> createMultiPilarSelectorList() {
+        return Stream.concat(MoveSelectorConfigurations.createPillarSwapMoveSelectorList().stream(),
+                MoveSelectorConfigurations.createPillarChangeMoveSelectorList().stream()).collect(Collectors.toList());
     }
 
     public static List<MoveSelectorConfig> createSubChainSwapMoveSelectorList() {
