@@ -60,15 +60,17 @@ Testing planner's performance regression in various tests.
 ## Idea users
  - to prevent downloading the kie-parent dependencies of the root module, you need to open just optaplanner-benchmarks module
 
-## Performance report
- - All results are uploaded to PerfRepo: http://perfrepo.mw.lab.eng.bos.redhat.com and can be referenced in any further 
- point in time.
- - Performance report templates as well as finished performance reports can be found 
- [here](https://drive.google.com/drive/folders/1EpbsD4fCmI0OBTZdFXXXyGODeQg3IZQJ). 
- - A new report can be created by following these steps:
-   1. copy both spreadsheet and document template into a new subfolder
-   2. upload CSV files with results for builds being compared from PerfRepo into the same subfolder
-   3. reference both files in the spreadsheet
-   4. open the document and refresh all the tables and charts
-   5. provide analysis and comments on results
-   6. convert the report into PDF and share it on Mojo to make it searcheable
+## Performance profiling with JMH
+
+You can run the profiling on jmh by adding -prof flag with the path to the profiler
+
+
+For Example to create a flame graph with asyncprofiler 
+Download async profiler lib and unzip it
+```
+wget https://github.com/jvm-profiling-tools/async-profiler/releases/download/v2.9/async-profiler-2.9-linux-x64.tar.gz
+tar -xvf async-profiler-2.9-linux-x64.tar.gz
+```
+Run tests with the profiler
+`java -jar optaplanner-benchmarks.jar -prof "async:output=flamegraph;event=cpu;libPath=./async-profiler-2.9-linux-x64/build/libasyncProfiler.so"`
+
