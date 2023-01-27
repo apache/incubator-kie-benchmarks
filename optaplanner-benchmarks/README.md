@@ -70,6 +70,6 @@ For Example to create a flame graph with the async profiler, download async prof
 wget https://github.com/jvm-profiling-tools/async-profiler/releases/download/v2.9/async-profiler-2.9-linux-x64.tar.gz
 tar -xvf async-profiler-2.9-linux-x64.tar.gz
 ```
-Run tests with the profiler
+Run tests with the profiler:
 `java -jar optaplanner-benchmarks.jar -prof "async:output=flamegraph;event=cpu;libPath=./async-profiler-2.9-linux-x64/build/libasyncProfiler.so"`
 
