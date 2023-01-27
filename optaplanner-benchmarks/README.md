@@ -65,8 +65,7 @@ Testing planner's performance regression in various tests.
 You can run the profiling on jmh by adding -prof flag with the path to the profiler
 
 
-For Example to create a flame graph with asyncprofiler 
-Download async profiler lib and unzip it
+For Example to create a flame graph with the async profiler, download async profiler lib and unzip it:
 ```
 wget https://github.com/jvm-profiling-tools/async-profiler/releases/download/v2.9/async-profiler-2.9-linux-x64.tar.gz
 tar -xvf async-profiler-2.9-linux-x64.tar.gz
