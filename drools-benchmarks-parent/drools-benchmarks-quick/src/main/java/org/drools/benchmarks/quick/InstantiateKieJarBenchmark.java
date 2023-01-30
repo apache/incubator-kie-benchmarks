@@ -15,17 +15,15 @@
  */
 package org.drools.benchmarks.quick;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.util.BuildtimeUtil;
-import org.drools.util.ResourceHelper;
 import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.io.KieResources;
@@ -34,6 +32,7 @@ import org.kie.api.io.ResourceType;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -45,8 +44,8 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 15, time = 3)
-@Measurement(iterations = 5, time = 3)
+@Warmup(iterations = 9, time = 3)
+@Measurement(iterations = 4, time = 3)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(3)
 public class InstantiateKieJarBenchmark {
@@ -55,26 +54,28 @@ public class InstantiateKieJarBenchmark {
     private boolean useCanonicalModel;
     private Resource[] resources;
 
-
-    @Setup
-    public void loadResources() throws IOException {
+    @Setup(Level.Trial)
+    public void loadResources() {
+        URL dmnResource = Thread.currentThread().getContextClassLoader().getResource("dmn/Traffic Violation.dmn");
+        if (dmnResource == null) {
+            throw new RuntimeException("Failed to find dmn file");
+        }
+        String dmnContent = readStringFromURL(dmnResource);
+        URL drlResource = Thread.currentThread().getContextClassLoader().getResource("drl/rules.drl");
+        if (drlResource == null) {
+            throw new RuntimeException("Failed to find drl file");
+        }
+        String drlContent = readStringFromURL(drlResource);
         KieResources kieResources = KieServices.get().getResources();
-        Collection<File> dmns = ResourceHelper.getFileResourcesByExtension("dmn");
-        Collection<File> drls = ResourceHelper.getFileResourcesByExtension("drl");
         List<Resource> resourceList  = new ArrayList<>();
-
-        for (File dmn : dmns) {
-            Resource toAdd = kieResources.newByteArrayResource(Files.readString(dmn.toPath()).getBytes(StandardCharsets.UTF_8))
-                    .setResourceType(ResourceType.DMN)
-                    .setSourcePath(dmn.getName());
-            resourceList.add(toAdd);
-        }
-        for (File drl : drls) {
-            Resource toAdd = kieResources.newByteArrayResource(Files.readString(drl.toPath()).getBytes(StandardCharsets.UTF_8))
-                    .setResourceType(ResourceType.DRL)
-                    .setSourcePath(drl.getName());
-            resourceList.add(toAdd);
-        }
+        Resource toAdd = kieResources.newByteArrayResource(dmnContent.getBytes())
+                .setResourceType(ResourceType.DMN)
+                .setSourcePath("Traffic Violation.dmn");
+        resourceList.add(toAdd);
+        toAdd = kieResources.newByteArrayResource(drlContent.getBytes())
+                .setResourceType(ResourceType.DRL)
+                .setSourcePath("rules.drl");
+        resourceList.add(toAdd);
         resources = resourceList.toArray(new Resource[0]);
     }
 
@@ -83,5 +84,15 @@ public class InstantiateKieJarBenchmark {
         return BuildtimeUtil.createKJarFromResources(useCanonicalModel, resources);
     }
 
+    private static String readStringFromURL(URL url) {
+        try (Scanner scanner = new Scanner(url.openStream(),
+                                           StandardCharsets.UTF_8.toString()))
+        {
+            scanner.useDelimiter("\\A");
+            return scanner.hasNext() ? scanner.next() : "";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
