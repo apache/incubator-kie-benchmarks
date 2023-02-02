@@ -48,7 +48,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 4, time = 3)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(3)
-public class InstantiateKieJarBenchmark {
+public class InstantiateKJarBenchmark {
 
     @Param({"true", "false"})
     private boolean useCanonicalModel;
