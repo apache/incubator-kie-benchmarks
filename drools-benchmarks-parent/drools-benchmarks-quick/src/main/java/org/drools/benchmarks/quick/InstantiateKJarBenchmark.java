@@ -16,11 +16,6 @@
 package org.drools.benchmarks.quick;
 
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.benchmarks.common.util.BuildtimeUtil;
@@ -56,43 +51,19 @@ public class InstantiateKJarBenchmark {
 
     @Setup(Level.Trial)
     public void loadResources() {
-        URL dmnResource = Thread.currentThread().getContextClassLoader().getResource("dmn/Traffic Violation.dmn");
-        if (dmnResource == null) {
-            throw new RuntimeException("Failed to find dmn file");
-        }
-        String dmnContent = readStringFromURL(dmnResource);
-        URL drlResource = Thread.currentThread().getContextClassLoader().getResource("drl/rules.drl");
-        if (drlResource == null) {
-            throw new RuntimeException("Failed to find drl file");
-        }
-        String drlContent = readStringFromURL(drlResource);
-        KieResources kieResources = KieServices.get().getResources();
-        List<Resource> resourceList  = new ArrayList<>();
-        Resource toAdd = kieResources.newByteArrayResource(dmnContent.getBytes())
+        KieResources kieResourcesresources = KieServices.get().getResources();
+        this.resources = new Resource[2];
+        resources[0] = kieResourcesresources.newClassPathResource("dmn/Traffic Violation.dmn")
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("Traffic Violation.dmn");
-        resourceList.add(toAdd);
-        toAdd = kieResources.newByteArrayResource(drlContent.getBytes())
+        resources[1] = kieResourcesresources.newClassPathResource("drl/rules.drl")
                 .setResourceType(ResourceType.DRL)
                 .setSourcePath("rules.drl");
-        resourceList.add(toAdd);
-        resources = resourceList.toArray(new Resource[0]);
     }
 
     @Benchmark
     public ReleaseId createKieJarFromResources() throws IOException {
         return BuildtimeUtil.createKJarFromResources(useCanonicalModel, resources);
-    }
-
-    private static String readStringFromURL(URL url) {
-        try (Scanner scanner = new Scanner(url.openStream(),
-                                           StandardCharsets.UTF_8.toString()))
-        {
-            scanner.useDelimiter("\\A");
-            return scanner.hasNext() ? scanner.next() : "";
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }
