@@ -51,12 +51,12 @@ public class InstantiateKJarBenchmark {
 
     @Setup(Level.Trial)
     public void loadResources() {
-        KieResources kieResourcesresources = KieServices.get().getResources();
+        KieResources kieResources = KieServices.get().getResources();
         this.resources = new Resource[2];
-        resources[0] = kieResourcesresources.newClassPathResource("dmn/Traffic Violation.dmn")
+        resources[0] = kieResources.newClassPathResource("dmn/Traffic Violation.dmn")
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("Traffic Violation.dmn");
-        resources[1] = kieResourcesresources.newClassPathResource("drl/rules.drl")
+        resources[1] = kieResources.newClassPathResource("drl/rules.drl")
                 .setResourceType(ResourceType.DRL)
                 .setSourcePath("rules.drl");
     }
