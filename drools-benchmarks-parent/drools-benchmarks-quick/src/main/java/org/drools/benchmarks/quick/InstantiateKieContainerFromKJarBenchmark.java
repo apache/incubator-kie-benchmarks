@@ -19,8 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
-import org.kie.api.builder.ReleaseId;
-import org.kie.util.maven.support.ReleaseIdImpl;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -31,6 +29,9 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+import static org.drools.benchmarks.quick.CommonProperties.MODULE_KIEBASE;
+import static org.drools.benchmarks.quick.CommonProperties.MODULE_RELEASEID;
+
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
 @Warmup(iterations = 15, time = 3)
@@ -39,13 +40,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(3)
 public class InstantiateKieContainerFromKJarBenchmark {
 
-    private static final String MODULE_GROUPID ="org.drools";
-    private static final String MODULE_ARTIFACTID ="drools-benchmarks-module";
-    private static final String MODULE_VERSION ="1.0-SNAPSHOT";
-
-    private static final String MODULE_KIEBASE ="benchmarks-module";
-
-    private static final ReleaseId MODULE_RELEASEID = new  ReleaseIdImpl(MODULE_GROUPID, MODULE_ARTIFACTID, MODULE_VERSION);
 
     @Benchmark
     public KieBase createKieContainerFromKjar()  {
