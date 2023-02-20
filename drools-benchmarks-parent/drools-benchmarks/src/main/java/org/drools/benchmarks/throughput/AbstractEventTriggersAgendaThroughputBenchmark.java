@@ -96,7 +96,7 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
                 EventProcessingOption.STREAM,
                 multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
 
-        if (((InternalKnowledgeBase) kieBase).getConfiguration().isMultithreadEvaluation() != multithread) {
+        if (((InternalKnowledgeBase) kieBase).getRuleBaseConfiguration().isMultithreadEvaluation() != multithread) {
             throw new IllegalStateException();
         }
     }
