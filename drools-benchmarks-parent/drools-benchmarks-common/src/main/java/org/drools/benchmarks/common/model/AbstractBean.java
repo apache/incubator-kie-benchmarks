@@ -15,9 +15,11 @@
 
 package org.drools.benchmarks.common.model;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class AbstractBean {
+public abstract class AbstractBean implements Serializable {
+
     private static final AtomicLong idGenerator = new AtomicLong( 0 );
 
     private final long id;
