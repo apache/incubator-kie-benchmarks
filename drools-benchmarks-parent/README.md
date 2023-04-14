@@ -10,6 +10,8 @@ This module contains multiple Maven modules. The instructions how to run individ
   - Quick benchmarks that are supposed to be used for initial sanity measurements. 
 - drools-benchmarks-common
   - Module that contains common classes shared between different Drools benchmark modules. 
+- drools-benchmarks-reliability
+  - Benchmarks for session reliability feature. 
 
 
   
