@@ -10,10 +10,11 @@
 
   <logger name="org.kie" level="ERROR"/>
   <logger name="org.drools.compiler.kie.builder.impl" level="ERROR" />
-  <logger name="org.drools" level="ERROR"/>
+  <logger name="org.drools" level="info"/>
 
+<!--  <root level="debug">-->
   <root level="info">
-    <appender-ref ref="STDOUT" />
+  <appender-ref ref="STDOUT" />
   </root>
 </configuration>
 

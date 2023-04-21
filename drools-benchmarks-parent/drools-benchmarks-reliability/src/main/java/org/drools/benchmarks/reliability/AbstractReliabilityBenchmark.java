@@ -34,17 +34,27 @@ import org.openjdk.jmh.annotations.TearDown;
 
 import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.NONE;
 import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.REMOTE;
+import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.REMOTE_FILE_STORE;
 
 public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
 
     // The enum names have to match CacheManagerFactory.RELIABILITY_CACHE_MODE values apart from "NONE"
     public enum Mode {
+
         NONE,
         EMBEDDED,
-        REMOTE
+        REMOTE,
+        REMOTE_FILE_STORE;
+
+        public boolean isRemote() {
+            return this == REMOTE || this == REMOTE_FILE_STORE;
+        }
     }
 
-    @Param({"NONE", "EMBEDDED", "REMOTE"})
+    //@Param({"NONE", "EMBEDDED", "REMOTE"})
+//    @Param({"REMOTE_FILE_STORE"})
+//    @Param({"REMOTE"})
+    @Param({"REMOTE_FILE_STORE", "REMOTE"})
     private Mode mode;
 
     private InfinispanContainer container;
@@ -57,8 +67,14 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
             System.setProperty(CacheManagerFactory.RELIABILITY_CACHE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
         }
 
-        if (mode == REMOTE) {
-            container = new InfinispanContainer();
+        if (mode.isRemote()) {
+            if (mode == REMOTE) {
+                container = new InfinispanContainer();
+            } else if (mode == REMOTE_FILE_STORE) {
+                container = new InfinispanContainer()
+                        .withFileSystemBind("infinispan-remote-config", "/user-config")
+                        .withCommand("-c /user-config/infinispan-file-store.xml");
+            }
             container.start();
             InfinispanCacheManager cacheManager = (InfinispanCacheManager) CacheManagerFactory.get().getCacheManager();
             RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(cacheManager.provideAdditionalRemoteConfigurationBuilder());
@@ -68,7 +84,7 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
 
     @TearDown
     public void tearDownEnvironment() {
-        if (mode == REMOTE) {
+        if (mode.isRemote()) {
             CacheManagerFactory.get().getCacheManager().close();
             container.stop();
         }

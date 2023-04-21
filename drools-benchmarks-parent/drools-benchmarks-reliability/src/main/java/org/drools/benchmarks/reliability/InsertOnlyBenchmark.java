@@ -41,6 +41,7 @@ public class InsertOnlyBenchmark extends AbstractReliabilityBenchmark {
     private int rulesNr;
 
     @Param({"10", "100", "1000"})
+    //@Param({"10"})
     private int factsNr;
 
     @Param({"3"})
