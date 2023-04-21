@@ -49,9 +49,9 @@ public class InsertOnlyBenchmark extends AbstractReliabilityBenchmark {
     @Setup
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, false, true);
-        kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
-                                                     MultithreadEvaluationOption.NO,
-                                                     EventProcessingOption.CLOUD);
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(true, drlProvider.getDrl(rulesNr),
+                MultithreadEvaluationOption.NO,
+                EventProcessingOption.CLOUD);
     }
 
     @Override
@@ -61,15 +61,14 @@ public class InsertOnlyBenchmark extends AbstractReliabilityBenchmark {
 
     @Benchmark
     public void test(final Blackhole eater) {
-        StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
-        eater.consume(session.insert(new A(rulesNr + 1)));
+        eater.consume(kieSession.insert(new A(rulesNr + 1)));
         for (int i = 0; i < factsNr; i++) {
-            eater.consume(session.insert(new B(rulesNr + i + 3)));
+            eater.consume(kieSession.insert(new B(rulesNr + i + 3)));
             if (joinsNr > 1) {
-                eater.consume(session.insert(new C(rulesNr + factsNr + i + 3)));
+                eater.consume(kieSession.insert(new C(rulesNr + factsNr + i + 3)));
             }
             if (joinsNr > 2) {
-                eater.consume(session.insert(new D(rulesNr + factsNr * 2 + i + 3)));
+                eater.consume(kieSession.insert(new D(rulesNr + factsNr * 2 + i + 3)));
             }
         }
     }
