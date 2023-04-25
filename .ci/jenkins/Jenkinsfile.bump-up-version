@@ -7,7 +7,7 @@ def repoName = 'kie-benchmarks'
 
 pipeline {
     agent {
-        label 'kie-rhel8 && !built-in'
+        label 'rhel8 && !built-in'
     }
     tools {
         maven env.BUILD_MAVEN_TOOL
