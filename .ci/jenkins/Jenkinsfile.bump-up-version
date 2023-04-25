@@ -30,6 +30,7 @@ pipeline {
                     cleanWs()
 
                     dir("${repoName}") {
+                        deleteDir()
                         checkoutRepo("${repoName}", "${getTargetBranch()}")
                     }
                 }
