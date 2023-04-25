@@ -31,7 +31,7 @@ pipeline {
 
                     dir("${repoName}") {
                         deleteDir()
-                        checkoutRepo("${repoName}", "${getTargetBranch()}")
+                        checkoutRepo(repoName, getTargetBranch())
                     }
                 }
             }
