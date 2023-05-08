@@ -21,7 +21,6 @@ import java.nio.file.Path;
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.reliability.core.StorageManagerFactory;
-import org.drools.reliability.infinispan.EmbeddedStorageManager;
 import org.drools.reliability.infinispan.InfinispanStorageManager;
 import org.drools.reliability.infinispan.InfinispanStorageManagerFactory;
 import org.drools.util.FileUtils;
@@ -33,32 +32,58 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.TearDown;
 
+import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.EMBEDDED;
 import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.NONE;
 import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.REMOTE;
+import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.REMOTEPROTO;
+import static org.drools.reliability.infinispan.EmbeddedStorageManager.GLOBAL_STATE_DIR;
+import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_ALLOWED_PACKAGES;
+import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MARSHALLER;
+import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MODE;
 
 public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
 
-    // The enum names have to match CacheManagerFactory.RELIABILITY_CACHE_MODE values apart from "NONE"
+    // infinispanStorageMode has to match InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MODE
     public enum Mode {
-        NONE,
-        EMBEDDED,
-        REMOTE
+        NONE(null),
+        EMBEDDED("EMBEDDED"),
+        REMOTE("REMOTE"),
+        REMOTEPROTO("REMOTE");
+
+        private String infinispanStorageMode;
+
+        private Mode(String infinispanStorageMode) {
+            this.infinispanStorageMode = infinispanStorageMode;
+        }
+
+        public String getInfinispanStorageMode() {
+            return infinispanStorageMode;
+        }
     }
 
-    @Param({"NONE", "EMBEDDED", "REMOTE"})
+    @Param({"NONE", "EMBEDDED", "REMOTE", "REMOTEPROTO"})
     private Mode mode;
 
     private InfinispanContainer container;
 
     @Setup
     public void setupEnvironment() {
+        FileUtils.deleteDirectory(Path.of(GLOBAL_STATE_DIR));
+
         if (mode != NONE) {
-            FileUtils.deleteDirectory(Path.of(EmbeddedStorageManager.GLOBAL_STATE_DIR));
-            System.setProperty(InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MODE, mode.name());
-            System.setProperty(InfinispanStorageManagerFactory.INFINISPAN_STORAGE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
+            System.setProperty(INFINISPAN_STORAGE_MODE, mode.getInfinispanStorageMode());
         }
 
-        if (mode == REMOTE) {
+        if (mode == EMBEDDED || mode == REMOTE) {
+            System.setProperty(INFINISPAN_STORAGE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
+        }
+
+        if (mode == REMOTEPROTO) {
+            System.setProperty(INFINISPAN_STORAGE_MARSHALLER, "PROTOSTREAM");
+            setupSerializationContext();
+        }
+
+        if (mode == REMOTE || mode == REMOTEPROTO) {
             container = new InfinispanContainer();
             container.start();
             InfinispanStorageManager storageManager = (InfinispanStorageManager) StorageManagerFactory.get().getStorageManager();
@@ -67,9 +92,15 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
         }
     }
 
+    protected void setupSerializationContext() {
+        // Default to marshall A, B, C and D
+        System.setProperty(InfinispanStorageManagerFactory.INFINISPAN_STORAGE_SERIALIZATION_CONTEXT_INITIALIZER,
+                           "org.drools.benchmarks.reliability.proto.ABCDProtoStreamSchemaImpl");
+    }
+
     @TearDown
     public void tearDownEnvironment() {
-        if (mode == REMOTE) {
+        if (mode == REMOTE || mode == REMOTEPROTO) {
             StorageManagerFactory.get().getStorageManager().close();
             container.stop();
         }
