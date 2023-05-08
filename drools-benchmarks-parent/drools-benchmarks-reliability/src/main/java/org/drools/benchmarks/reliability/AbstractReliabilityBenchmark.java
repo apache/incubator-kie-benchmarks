@@ -20,9 +20,10 @@ import java.nio.file.Path;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.util.RuntimeUtil;
-import org.drools.reliability.core.CacheManagerFactory;
-import org.drools.reliability.infinispan.EmbeddedCacheManager;
-import org.drools.reliability.infinispan.InfinispanCacheManager;
+import org.drools.reliability.core.StorageManagerFactory;
+import org.drools.reliability.infinispan.EmbeddedStorageManager;
+import org.drools.reliability.infinispan.InfinispanStorageManager;
+import org.drools.reliability.infinispan.InfinispanStorageManagerFactory;
 import org.drools.util.FileUtils;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.server.test.core.InfinispanContainer;
@@ -52,24 +53,24 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     @Setup
     public void setupEnvironment() {
         if (mode != NONE) {
-            FileUtils.deleteDirectory(Path.of(EmbeddedCacheManager.GLOBAL_STATE_DIR));
-            System.setProperty(CacheManagerFactory.RELIABILITY_CACHE_MODE, mode.name());
-            System.setProperty(CacheManagerFactory.RELIABILITY_CACHE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
+            FileUtils.deleteDirectory(Path.of(EmbeddedStorageManager.GLOBAL_STATE_DIR));
+            System.setProperty(InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MODE, mode.name());
+            System.setProperty(InfinispanStorageManagerFactory.INFINISPAN_STORAGE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
         }
 
         if (mode == REMOTE) {
             container = new InfinispanContainer();
             container.start();
-            InfinispanCacheManager cacheManager = (InfinispanCacheManager) CacheManagerFactory.get().getCacheManager();
-            RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(cacheManager.provideAdditionalRemoteConfigurationBuilder());
-            cacheManager.setRemoteCacheManager(remoteCacheManager);
+            InfinispanStorageManager storageManager = (InfinispanStorageManager) StorageManagerFactory.get().getStorageManager();
+            RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(storageManager.provideAdditionalRemoteConfigurationBuilder());
+            storageManager.setRemoteCacheManager(remoteCacheManager);
         }
     }
 
     @TearDown
     public void tearDownEnvironment() {
         if (mode == REMOTE) {
-            CacheManagerFactory.get().getCacheManager().close();
+            StorageManagerFactory.get().getStorageManager().close();
             container.stop();
         }
     }
