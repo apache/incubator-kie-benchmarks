@@ -10,7 +10,9 @@
 
   <logger name="org.kie" level="ERROR"/>
   <logger name="org.drools.compiler.kie.builder.impl" level="ERROR" />
-  <logger name="org.drools" level="ERROR"/>
+  <logger name="org.drools" level="INFO"/>
+
+  <logger name="org.infinispan.protostream" level="INFO"/>
 
   <root level="info">
     <appender-ref ref="STDOUT" />
