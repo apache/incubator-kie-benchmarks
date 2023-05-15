@@ -64,6 +64,9 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     @Param({"NONE", "EMBEDDED", "REMOTE", "REMOTEPROTO"})
     private Mode mode;
 
+    @Param({"true", "false"})
+    private boolean useSafepoints;
+
     private InfinispanContainer container;
 
     @Setup
@@ -110,7 +113,11 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     @Override
     public void setup() {
         if (mode != NONE) {
-            kieSession = RuntimeUtil.createKieSession(kieBase, PersistedSessionOption.newSession(PersistedSessionOption.Strategy.STORES_ONLY));
+            PersistedSessionOption option = PersistedSessionOption.newSession().withPersistenceStrategy(PersistedSessionOption.PersistenceStrategy.STORES_ONLY);
+            if (useSafepoints) {
+                option = option.withSafepointStrategy(PersistedSessionOption.SafepointStrategy.AFTER_FIRE);
+            }
+            kieSession = RuntimeUtil.createKieSession(kieBase, option);
         } else {
             kieSession = RuntimeUtil.createKieSession(kieBase);
         }
