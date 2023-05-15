@@ -115,7 +115,7 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
         if (mode != NONE) {
             PersistedSessionOption option = PersistedSessionOption.newSession().withPersistenceStrategy(PersistedSessionOption.PersistenceStrategy.STORES_ONLY);
             if (useSafepoints) {
-                option = option.withSafepointStrategy(PersistedSessionOption.SafepointStrategy.ON_FIRING);
+                option = option.withSafepointStrategy(PersistedSessionOption.SafepointStrategy.AFTER_FIRE);
             }
             kieSession = RuntimeUtil.createKieSession(kieBase, option);
         } else {
