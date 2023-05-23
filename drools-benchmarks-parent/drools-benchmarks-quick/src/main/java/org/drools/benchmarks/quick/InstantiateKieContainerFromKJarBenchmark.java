@@ -41,7 +41,7 @@ import static org.drools.benchmarks.quick.CommonProperties.MODULE_RELEASEID;
 @Fork(3)
 public class InstantiateKieContainerFromKJarBenchmark {
 
-    @Param({"instantiation"})
+    @Param({"dummyParam"})
     private String param;
 
     @Benchmark
