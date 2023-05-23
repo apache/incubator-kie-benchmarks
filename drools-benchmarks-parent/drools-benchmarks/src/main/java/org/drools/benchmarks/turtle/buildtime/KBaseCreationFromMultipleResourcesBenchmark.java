@@ -17,6 +17,7 @@
 package org.drools.benchmarks.turtle.buildtime;
 
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -27,6 +28,9 @@ import org.openjdk.jmh.annotations.State;
  */
 @State(Scope.Benchmark)
 public class KBaseCreationFromMultipleResourcesBenchmark extends AbstractBuildtimeBenchmark {
+
+    @Param({"1000drl"})
+    private String dataset;
 
     @Setup
     public void addResources() {

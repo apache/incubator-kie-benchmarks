@@ -25,6 +25,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
@@ -40,6 +41,8 @@ import static org.drools.benchmarks.quick.CommonProperties.MODULE_RELEASEID;
 @Fork(3)
 public class InstantiateKieContainerFromKJarBenchmark {
 
+    @Param({"instantiation"})
+    private String param;
 
     @Benchmark
     public KieBase createKieContainerFromKjar()  {

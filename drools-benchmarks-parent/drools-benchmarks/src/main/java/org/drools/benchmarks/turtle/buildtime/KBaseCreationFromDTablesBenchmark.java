@@ -17,6 +17,7 @@
 package org.drools.benchmarks.turtle.buildtime;
 
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
 /**
@@ -24,6 +25,10 @@ import org.openjdk.jmh.annotations.Setup;
  * (several thousands of rules) decision tables.
  */
 public class KBaseCreationFromDTablesBenchmark extends AbstractBuildtimeBenchmark {
+
+
+    @Param({"298r"})
+    private String dataset;
 
     @Setup
     public void addResources() {
