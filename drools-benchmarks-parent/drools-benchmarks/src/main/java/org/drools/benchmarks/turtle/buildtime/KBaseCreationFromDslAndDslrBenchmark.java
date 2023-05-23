@@ -17,12 +17,16 @@
 package org.drools.benchmarks.turtle.buildtime;
 
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 
 /**
  * Tests how long it takes to create knowledge base from DSL and DSLR files.
  */
 public class KBaseCreationFromDslAndDslrBenchmark extends AbstractBuildtimeBenchmark {
+
+    @Param({"5000dslr-3dsl"})
+    private String dataset;
 
     @Setup
     public void addResources() {
