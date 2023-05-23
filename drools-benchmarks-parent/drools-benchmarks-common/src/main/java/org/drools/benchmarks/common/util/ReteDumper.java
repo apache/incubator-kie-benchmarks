@@ -16,7 +16,7 @@
 package org.drools.benchmarks.common.util;
 
 import org.drools.core.common.BaseNode;
-import org.drools.core.common.NetworkNode;
+import org.drools.base.common.NetworkNode;
 import org.drools.kiesession.rulebase.InternalKnowledgeBase;
 import org.drools.core.reteoo.EntryPointNode;
 import org.drools.core.reteoo.LeftTupleSource;
