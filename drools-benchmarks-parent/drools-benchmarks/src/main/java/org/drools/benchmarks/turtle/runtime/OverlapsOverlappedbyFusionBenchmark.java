@@ -24,8 +24,12 @@ import org.drools.benchmarks.turtle.runtime.generator.OverlapsOverlappedbyEvents
 import org.drools.benchmarks.turtle.runtime.generator.PlaceHolder;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 
 public class OverlapsOverlappedbyFusionBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
+
+    @Param({"200000"})
+    int nrOfEvents;
 
     @Override
     public void addResources() {
@@ -34,7 +38,7 @@ public class OverlapsOverlappedbyFusionBenchmark extends AbstractSimpleFusionRun
 
     @Override
     public void addEventSenders() {
-        addEventSender(new OverlapsOverlappedbyEventsGenerator(getGeneratorConfiguration()),200000);
+        addEventSender(new OverlapsOverlappedbyEventsGenerator(getGeneratorConfiguration()),nrOfEvents);
     }
 
 

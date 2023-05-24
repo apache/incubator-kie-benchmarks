@@ -20,10 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 
 public class SimpleDummyFactsMatchRatioExpertBenchmark extends AbstractSimpleRuntimeBenchmark {
 
-    private int nrOfFacts = 400000;
+    @Param({"400000"})
+    private int nrOfFacts;
 
     @Override
     protected void addResources() {

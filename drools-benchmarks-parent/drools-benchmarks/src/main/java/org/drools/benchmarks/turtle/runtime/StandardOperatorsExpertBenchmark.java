@@ -23,11 +23,15 @@ import org.drools.benchmarks.turtle.runtime.generator.PlaceHolder;
 import org.drools.benchmarks.turtle.runtime.generator.StandardOperatorsFactsGenerator;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 
 /**
  * Test the standard Expert operators like <,>,<=,>=,&&,||
  */
 public class StandardOperatorsExpertBenchmark extends AbstractSimpleRuntimeBenchmark {
+
+    @Param({"200000"})
+    int nrOfFacts;
 
     @Override
     protected void addResources() {
@@ -36,7 +40,7 @@ public class StandardOperatorsExpertBenchmark extends AbstractSimpleRuntimeBench
 
     @Override
     protected void addFactsGenerators() {
-        addFactsGenerator(new StandardOperatorsFactsGenerator(getGeneratorConfiguration()),200000);
+        addFactsGenerator(new StandardOperatorsFactsGenerator(getGeneratorConfiguration()),nrOfFacts);
     }
 
     @Benchmark

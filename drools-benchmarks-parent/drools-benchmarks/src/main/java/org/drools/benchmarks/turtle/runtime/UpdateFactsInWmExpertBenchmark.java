@@ -23,8 +23,12 @@ import org.drools.benchmarks.turtle.runtime.generator.GeneratorConfiguration;
 import org.drools.benchmarks.turtle.runtime.generator.PlaceHolder;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 
 public class UpdateFactsInWmExpertBenchmark extends AbstractSimpleRuntimeBenchmark {
+
+    @Param({"400000"})
+    int nrOfFacts;
 
     @Override
     protected void addResources() {
@@ -33,7 +37,7 @@ public class UpdateFactsInWmExpertBenchmark extends AbstractSimpleRuntimeBenchma
 
     @Override
     protected void addFactsGenerators() {
-        addFactsGenerator(new BasicUpdateFactsInWmFactsGenerator(getGeneratorConfiguration()),400000);
+        addFactsGenerator(new BasicUpdateFactsInWmFactsGenerator(getGeneratorConfiguration()),nrOfFacts);
     }
 
     @Benchmark

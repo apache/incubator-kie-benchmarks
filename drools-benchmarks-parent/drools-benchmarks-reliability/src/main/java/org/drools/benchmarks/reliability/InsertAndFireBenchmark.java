@@ -73,4 +73,6 @@ public class InsertAndFireBenchmark extends AbstractReliabilityBenchmark {
         }
         return kieSession.fireAllRules();
     }
+
+
 }
