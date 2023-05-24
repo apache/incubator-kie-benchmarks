@@ -24,8 +24,12 @@ import org.drools.benchmarks.turtle.runtime.generator.MeetsMetbyEventsGenerator;
 import org.drools.benchmarks.turtle.runtime.generator.PlaceHolder;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 
 public class MeetsMetbyFusionBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
+
+    @Param({"50000"})
+    int nrOfEvents;
 
     @Override
     public void addResources() {
@@ -34,7 +38,7 @@ public class MeetsMetbyFusionBenchmark extends AbstractSimpleFusionRuntimeBenchm
 
     @Override
     public void addEventSenders() {
-        addEventSender(new MeetsMetbyEventsGenerator(getGeneratorConfiguration()),50000);
+        addEventSender(new MeetsMetbyEventsGenerator(getGeneratorConfiguration()),nrOfEvents);
     }
 
 

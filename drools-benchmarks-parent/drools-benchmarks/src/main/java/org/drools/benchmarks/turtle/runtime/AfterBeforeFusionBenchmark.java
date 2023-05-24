@@ -24,9 +24,12 @@ import org.drools.benchmarks.turtle.runtime.generator.GeneratorConfiguration;
 import org.drools.benchmarks.turtle.runtime.generator.PlaceHolder;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 
 public class AfterBeforeFusionBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
 
+    @Param({"200000"})
+    int nrOfFacts;
     @Override
     public void addResources() {
         addClassPathResource("turtle/fusion-after-before-operators-100.drl");
@@ -34,7 +37,7 @@ public class AfterBeforeFusionBenchmark extends AbstractSimpleFusionRuntimeBench
 
     @Override
     public void addEventSenders() {
-        addEventSender(new AfterBeforeEventsGenerator(getGeneratorConfiguration()),200000);
+        addEventSender(new AfterBeforeEventsGenerator(getGeneratorConfiguration()),nrOfFacts);
     }
 
     @Benchmark

@@ -27,6 +27,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
@@ -45,6 +46,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class AdvOperatorsExpertBenchmark extends AbstractSimpleRuntimeBenchmark {
 
+    @Param({"200000"})
+    int nrOfFacts;
+
     @Override
     protected void addResources() {
         addClassPathResource("turtle/expert-advanced-operators-100.drl");
@@ -52,7 +56,7 @@ public class AdvOperatorsExpertBenchmark extends AbstractSimpleRuntimeBenchmark 
 
     @Override
     protected void addFactsGenerators() {
-        addFactsGenerator(new AdvancedOperatorsFactsGenerator(getGeneratorConfiguration()),200000);
+        addFactsGenerator(new AdvancedOperatorsFactsGenerator(getGeneratorConfiguration()),nrOfFacts);
     }
 
     @Benchmark

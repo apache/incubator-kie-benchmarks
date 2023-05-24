@@ -4,6 +4,7 @@ import org.drools.benchmarks.turtle.runtime.generator.GeneratorConfiguration;
 import org.drools.benchmarks.turtle.runtime.generator.KBaseCreationFromDTable2Generator;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -12,6 +13,9 @@ import org.openjdk.jmh.annotations.Benchmark;
 @Measurement(iterations = 200)
 public class DTable2Benchmark extends AbstractSimpleRuntimeBenchmark {
 
+    @Param({"20000"})
+    int nrOfFacts;
+
     @Setup
     public void addResources() {
         addClassPathResource("kbase-creation/dtable2-kbase-creation.xls");
@@ -19,7 +23,7 @@ public class DTable2Benchmark extends AbstractSimpleRuntimeBenchmark {
 
     @Override
     protected void addFactsGenerators() {
-        addFactsGenerator(new KBaseCreationFromDTable2Generator(getGeneratorConfiguration()),20000);
+        addFactsGenerator(new KBaseCreationFromDTable2Generator(getGeneratorConfiguration()),nrOfFacts);
     }
 
     @Benchmark

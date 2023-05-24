@@ -24,9 +24,11 @@ import org.drools.benchmarks.turtle.runtime.generator.GeneratorConfiguration;
 import org.drools.benchmarks.turtle.runtime.generator.PlaceHolder;
 import org.kie.api.runtime.KieSession;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Param;
 
 public class CoincidesDuringFusionBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
-
+    @Param({"50000"})
+    int nrOfEvents;
     @Override
     public void addResources() {
         addClassPathResource("turtle/fusion-coincides-during-operators-100.drl");
@@ -34,7 +36,7 @@ public class CoincidesDuringFusionBenchmark extends AbstractSimpleFusionRuntimeB
 
     @Override
     public void addEventSenders() {
-        addEventSender(new CoincidesDuringEventsGenerator(getGeneratorConfiguration()),50000);
+        addEventSender(new CoincidesDuringEventsGenerator(getGeneratorConfiguration()), nrOfEvents);
     }
 
 
