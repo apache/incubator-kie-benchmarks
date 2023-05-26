@@ -39,7 +39,7 @@ public class DTable1Benchmark extends AbstractSimpleRuntimeBenchmark {
     }
 
     public enum DTableFactRange {
-        MEDIUM_DTABLE1("kbase-creation/dtable1-kbase-creation.xls", 999,3102);
+        FROM999_TO3102_DTABLE1("kbase-creation/dtable1-kbase-creation.xls", 999,3102);
 
         DTableFactRange(String file, int from, int to) {
             this.filename = file;
