@@ -29,6 +29,7 @@ import org.openjdk.jmh.annotations.Param;
 public class CoincidesDuringFusionBenchmark extends AbstractSimpleFusionRuntimeBenchmark {
     @Param({"50000"})
     int nrOfEvents;
+    
     @Override
     public void addResources() {
         addClassPathResource("turtle/fusion-coincides-during-operators-100.drl");
