@@ -30,6 +30,7 @@ public class AfterBeforeFusionBenchmark extends AbstractSimpleFusionRuntimeBench
 
     @Param({"200000"})
     int nrOfFacts;
+    
     @Override
     public void addResources() {
         addClassPathResource("turtle/fusion-after-before-operators-100.drl");
