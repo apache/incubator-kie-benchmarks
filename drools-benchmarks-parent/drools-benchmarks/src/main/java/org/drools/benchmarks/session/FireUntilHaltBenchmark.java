@@ -29,7 +29,7 @@ import org.drools.benchmarks.common.model.B;
 import org.drools.benchmarks.common.model.C;
 import org.drools.benchmarks.common.model.D;
 import org.kie.api.conf.EventProcessingOption;
-import org.kie.internal.conf.MultithreadEvaluationOption;
+import org.kie.internal.conf.ParallelExecutionOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -52,8 +52,8 @@ public class FireUntilHaltBenchmark extends AbstractBenchmark {
     @Param({"10", "100"})
     private int factsNr;
 
-    @Param({"true", "false"})
-    private boolean multithread;
+    @Param({"sequential", "parallel_evaluation", "fully_parallel"})
+    private String parallel;
 
     @Param({"true", "false"})
     private boolean cep;
@@ -73,7 +73,7 @@ public class FireUntilHaltBenchmark extends AbstractBenchmark {
         String consequence = CONSEQUENCE_1 + fireNr + CONSEQUENCE_2;
         final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, cep, true, GLOBAL, consequence);
         kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
-                                                     multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
+                                                     ParallelExecutionOption.determineParallelExecution(parallel),
                                                      cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
     }
 

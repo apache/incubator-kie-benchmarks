@@ -23,9 +23,8 @@ import org.drools.benchmarks.common.model.C;
 import org.drools.benchmarks.common.model.D;
 import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
-import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
-import org.kie.internal.conf.MultithreadEvaluationOption;
+import org.kie.internal.conf.ParallelExecutionOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
@@ -50,7 +49,7 @@ public class InsertOnlyBenchmark extends AbstractReliabilityBenchmark {
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsProvider(joinsNr, false, true);
         kieBase = BuildtimeUtil.createKieBaseFromDrl(true, drlProvider.getDrl(rulesNr),
-                MultithreadEvaluationOption.NO,
+                ParallelExecutionOption.SEQUENTIAL,
                 EventProcessingOption.CLOUD);
     }
 
