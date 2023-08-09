@@ -30,7 +30,7 @@ import org.drools.benchmarks.common.model.ConsequenceBlackhole;
 import org.drools.benchmarks.common.model.D;
 import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
-import org.kie.internal.conf.MultithreadEvaluationOption;
+import org.kie.internal.conf.ParallelExecutionOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -54,8 +54,8 @@ public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
     @Param({"5", "10"})
     private int factsNr;
 
-    @Param({"true", "false"})
-    private boolean multithread;
+    @Param({"sequential", "parallel_evaluation", "fully_parallel"})
+    private String parallel;
 
     @Param({"true", "false"})
     private boolean async;
@@ -79,7 +79,7 @@ public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsProvider().withNumberOfJoins( joinsNr ).withGeneratedConsequence( withConsequence );
         kieBase = BuildtimeUtil.createKieBaseFromDrl(useCanonicalModel, drlProvider.getDrl(rulesNr),
-                                                     multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
+                                                     ParallelExecutionOption.determineParallelExecution(parallel),
                                                      cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
     }
 

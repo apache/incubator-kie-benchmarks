@@ -16,31 +16,24 @@
 
 package org.drools.benchmarks.reliability;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.drools.benchmarks.common.DRLProvider;
-import org.drools.benchmarks.common.model.A;
-import org.drools.benchmarks.common.model.B;
-import org.drools.benchmarks.common.model.C;
-import org.drools.benchmarks.common.model.D;
-import org.drools.benchmarks.common.providers.RulesWithJoinsProvider;
 import org.drools.benchmarks.common.util.BuildtimeUtil;
 import org.drools.benchmarks.reliability.proto.complex.ComplexA;
 import org.drools.benchmarks.reliability.proto.complex.ComplexB;
 import org.drools.benchmarks.reliability.proto.complex.ComplexC;
 import org.drools.benchmarks.reliability.proto.complex.ComplexD;
-import org.drools.benchmarks.reliability.proto.complex.StringListContainer;
-import org.drools.benchmarks.reliability.proto.complex.StringListContainerUtils;
 import org.drools.benchmarks.reliability.providers.ComplexRulesWithJoinsProvider;
 import org.drools.reliability.infinispan.InfinispanStorageManagerFactory;
 import org.kie.api.conf.EventProcessingOption;
-import org.kie.internal.conf.MultithreadEvaluationOption;
+import org.kie.internal.conf.ParallelExecutionOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.drools.benchmarks.reliability.proto.complex.StringListContainerUtils.populateStringLists;
 
@@ -73,7 +66,7 @@ public class InsertAndFireComplexFactBenchmark extends AbstractReliabilityBenchm
     public void setupKieBase() {
         final DRLProvider drlProvider = new ComplexRulesWithJoinsProvider(joinsNr, false, true);
         kieBase = BuildtimeUtil.createKieBaseFromDrl(true, drlProvider.getDrl(rulesNr),
-                MultithreadEvaluationOption.NO,
+                ParallelExecutionOption.SEQUENTIAL,
                 EventProcessingOption.CLOUD);
     }
 

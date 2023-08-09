@@ -32,7 +32,7 @@ import org.drools.kiesession.rulebase.InternalKnowledgeBase;
 import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.conf.ClockTypeOption;
-import org.kie.internal.conf.MultithreadEvaluationOption;
+import org.kie.internal.conf.ParallelExecutionOption;
 import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
@@ -53,8 +53,8 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
     @Param({"true"})
     protected boolean pseudoClock = true;
 
-    @Param({"true", "false"})
-    protected boolean multithread = true;
+    @Param({"sequential", "parallel_evaluation", "fully_parallel"})
+    private String parallel;
 
     @Param({"false"})
     protected boolean async = false;
@@ -91,12 +91,14 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
         final DRLProvider drlProvider = getDrlProvider(eventExpirationMs, LOG_FIRINGS);
         final String drl = drlProvider.getDrl(numberOfRules);
 
+        ParallelExecutionOption parallelExecutionOption = ParallelExecutionOption.determineParallelExecution(parallel);
+
         kieBase = BuildtimeUtil.createKieBaseFromDrl(
                 drl,
                 EventProcessingOption.STREAM,
-                multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO);
+                parallelExecutionOption);
 
-        if (((InternalKnowledgeBase) kieBase).getRuleBaseConfiguration().isMultithreadEvaluation() != multithread) {
+        if (((InternalKnowledgeBase) kieBase).getRuleBaseConfiguration().isParallelEvaluation() != parallelExecutionOption.isParallel()) {
             throw new IllegalStateException();
         }
     }

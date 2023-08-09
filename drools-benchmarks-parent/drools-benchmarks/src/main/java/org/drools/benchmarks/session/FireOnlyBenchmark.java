@@ -25,7 +25,7 @@ import org.drools.benchmarks.common.model.A;
 import org.drools.benchmarks.common.model.B;
 import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
-import org.kie.internal.conf.MultithreadEvaluationOption;
+import org.kie.internal.conf.ParallelExecutionOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
@@ -43,8 +43,8 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
     @Param({"10", "100"})
     private int factsNr;
 
-    @Param({"true", "false"})
-    private boolean multithread;
+    @Param({"sequential", "parallel_evaluation", "fully_parallel"})
+    private String parallel;
 
     @Param({"true", "false"})
     private boolean asyncInserts;
@@ -56,7 +56,7 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsProvider(1, cep, true);
         kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
-                                                     multithread ? MultithreadEvaluationOption.YES : MultithreadEvaluationOption.NO,
+                                                     ParallelExecutionOption.determineParallelExecution(parallel),
                                                      cep ? EventProcessingOption.STREAM : EventProcessingOption.CLOUD );
     }
 
