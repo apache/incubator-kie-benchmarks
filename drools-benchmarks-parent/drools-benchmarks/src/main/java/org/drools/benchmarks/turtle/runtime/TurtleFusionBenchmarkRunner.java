@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class TurtleFusionBenchmarkRunner {
     /**
-     * When run, JVM option -Ddrools.multithreadEvaluation=true must be set.
+     * When run, JVM option -Ddrools.parallelExecution=fully_parallel must be set.
      *
      * @param args
      * @throws IOException
