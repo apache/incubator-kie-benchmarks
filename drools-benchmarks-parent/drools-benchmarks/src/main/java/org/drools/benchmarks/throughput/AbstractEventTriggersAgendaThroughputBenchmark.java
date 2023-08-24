@@ -56,9 +56,6 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
     @Param({"sequential", "parallel_evaluation", "fully_parallel"})
     private String parallel;
 
-    @Param({"false"})
-    protected boolean async = false;
-
     @Param({"8"})
     protected int numberOfRules = 8;
 
@@ -147,44 +144,40 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
     }
 
     protected void insertJoinEvents(final int numberOfJoins, final long eventId, final int eventValue,
-            final boolean async, final Blackhole eater) {
+            final Blackhole eater) {
         switch (numberOfJoins) {
             case 0:
-                insertJoinEvent(new A(eventId, eventValue), async, eater);
+                insertJoinEvent(new A(eventId, eventValue), eater);
                 break;
             case 1:
-                insertJoinEvent(new A(eventId, eventValue), async, eater);
-                insertJoinEvent(new B(eventId, eventValue), async, eater);
+                insertJoinEvent(new A(eventId, eventValue), eater);
+                insertJoinEvent(new B(eventId, eventValue), eater);
                 break;
             case 2:
-                insertJoinEvent(new A(eventId, eventValue), async, eater);
-                insertJoinEvent(new B(eventId, eventValue), async, eater);
-                insertJoinEvent(new C(eventId, eventValue), async, eater);
+                insertJoinEvent(new A(eventId, eventValue), eater);
+                insertJoinEvent(new B(eventId, eventValue), eater);
+                insertJoinEvent(new C(eventId, eventValue), eater);
                 break;
             case 3:
-                insertJoinEvent(new A(eventId, eventValue), async, eater);
-                insertJoinEvent(new B(eventId, eventValue), async, eater);
-                insertJoinEvent(new C(eventId, eventValue), async, eater);
-                insertJoinEvent(new D(eventId, eventValue), async, eater);
+                insertJoinEvent(new A(eventId, eventValue), eater);
+                insertJoinEvent(new B(eventId, eventValue), eater);
+                insertJoinEvent(new C(eventId, eventValue), eater);
+                insertJoinEvent(new D(eventId, eventValue), eater);
                 break;
             case 4:
-                insertJoinEvent(new A(eventId, eventValue), async, eater);
-                insertJoinEvent(new B(eventId, eventValue), async, eater);
-                insertJoinEvent(new C(eventId, eventValue), async, eater);
-                insertJoinEvent(new D(eventId, eventValue), async, eater);
-                insertJoinEvent(new E(eventId, eventValue), async, eater);
+                insertJoinEvent(new A(eventId, eventValue), eater);
+                insertJoinEvent(new B(eventId, eventValue), eater);
+                insertJoinEvent(new C(eventId, eventValue), eater);
+                insertJoinEvent(new D(eventId, eventValue), eater);
+                insertJoinEvent(new E(eventId, eventValue), eater);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported number of joins! Maximal number of joins is 4.");
         }
     }
 
-    private void insertJoinEvent(final AbstractBean event, final boolean async, final Blackhole eater) {
-        if (async) {
-            insertEventAsync(event, eater);
-        } else {
-            insertEvent(event, eater);
-        }
+    private void insertJoinEvent(final AbstractBean event, final Blackhole eater) {
+        insertEvent(event, eater);
     }
 
     private void insertEvent(final AbstractBean event, final Blackhole eater) {
@@ -192,14 +185,6 @@ public abstract class AbstractEventTriggersAgendaThroughputBenchmark extends Abs
             eater.consume(kieSession.insert(event));
         } else {
             kieSession.insert(event);
-        }
-    }
-
-    private void insertEventAsync(final AbstractBean event, final Blackhole eater) {
-        if (eater != null) {
-            eater.consume(((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event));
-        } else {
-            ((StatefulKnowledgeSessionImpl) kieSession).insertAsync(event);
         }
     }
 }

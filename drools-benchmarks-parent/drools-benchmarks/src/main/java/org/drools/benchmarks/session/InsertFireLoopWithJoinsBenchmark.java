@@ -58,9 +58,6 @@ public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
     private String parallel;
 
     @Param({"true", "false"})
-    private boolean async;
-
-    @Param({"true", "false"})
     private boolean cep;
 
     @Param({"2", "3"})
@@ -94,28 +91,14 @@ public class InsertFireLoopWithJoinsBenchmark extends AbstractBenchmark {
         ConsequenceBlackhole.eater = eater;
 
         StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
-        if (async) {
-            session.insertAsync( new A( rulesNr + 1 ) );
-        } else {
-            eater.consume(session.insert( new A( rulesNr + 1 ) ));
-        }
+        eater.consume(session.insert( new A( rulesNr + 1 ) ));
         for ( int i = 0; i < factsNr; i++ ) {
-            if (async) {
-                session.insertAsync( new B( rulesNr + i + 3 ) );
-                if (joinsNr > 1) {
-                    session.insertAsync( new C( rulesNr + factsNr + i + 3 ) );
-                }
-                if (joinsNr > 2) {
-                    session.insertAsync( new D( rulesNr + factsNr * 2 + i + 3 ) );
-                }
-            } else {
-                eater.consume(session.insert( new B( rulesNr + i + 3 ) ));
-                if (joinsNr > 1) {
-                    eater.consume(session.insert( new C( rulesNr + factsNr + i + 3 ) ));
-                }
-                if (joinsNr > 2) {
-                    eater.consume(session.insert( new D( rulesNr + factsNr * 2 + i + 3 ) ));
-                }
+            eater.consume(session.insert( new B( rulesNr + i + 3 ) ));
+            if (joinsNr > 1) {
+                eater.consume(session.insert( new C( rulesNr + factsNr + i + 3 ) ));
+            }
+            if (joinsNr > 2) {
+                eater.consume(session.insert( new D( rulesNr + factsNr * 2 + i + 3 ) ));
             }
 
             if (!batchFire) {

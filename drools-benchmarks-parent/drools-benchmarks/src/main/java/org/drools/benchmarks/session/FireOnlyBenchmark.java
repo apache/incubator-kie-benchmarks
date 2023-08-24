@@ -47,9 +47,6 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
     private String parallel;
 
     @Param({"true", "false"})
-    private boolean asyncInserts;
-
-    @Param({"true", "false"})
     private boolean cep;
 
     @Setup
@@ -66,17 +63,9 @@ public class FireOnlyBenchmark extends AbstractBenchmark {
         kieSession = RuntimeUtil.createKieSession(kieBase);
         StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
         A a = new A( rulesNr + 1 );
-        if (asyncInserts) {
-            session.insertAsync( a );
-        } else {
-            session.insert( a );
-        }
+        session.insert( a );
         for ( int i = 0; i < factsNr; i++ ) {
-            if (asyncInserts) {
-                session.insertAsync( new B( rulesNr + i + 3 ) );
-            } else {
-                session.insert( new B( rulesNr + i + 3 ) );
-            }
+            session.insert( new B( rulesNr + i + 3 ) );
         }
     }
 
