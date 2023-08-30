@@ -67,6 +67,9 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     @Param({"true", "false"})
     private boolean useSafepoints;
 
+    @Param({"true", "false"})
+    private boolean useObjectStoreWithReferences;
+
     private InfinispanContainer container;
 
     @Setup
@@ -116,6 +119,9 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
             PersistedSessionOption option = PersistedSessionOption.newSession().withPersistenceStrategy(PersistedSessionOption.PersistenceStrategy.STORES_ONLY);
             if (useSafepoints) {
                 option = option.withSafepointStrategy(PersistedSessionOption.SafepointStrategy.AFTER_FIRE);
+            }
+            if (useObjectStoreWithReferences){
+                option = option.withPersistenceObjectsStrategy(PersistedSessionOption.PersistenceObjectsStrategy.OBJECT_REFERENCES);
             }
             kieSession = RuntimeUtil.createKieSession(kieBase, option);
         } else {
