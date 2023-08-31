@@ -9,6 +9,7 @@ import org.drools.benchmarks.reliability.fireandalarm.Room;
 import org.drools.benchmarks.reliability.fireandalarm.Sprinkler;
 import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.conf.EventProcessingOption;
+import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.conf.ParallelExecutionOption;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Measurement;
@@ -16,37 +17,90 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 @Warmup(iterations = 2000)
 @Measurement(iterations = 1000)
 public class FireAndAlarmBenchmark extends AbstractReliabilityBenchmark{
 
+    private static final String FIRE_AND_ALARM =
+            "import " + Alarm.class.getCanonicalName() + ";" +
+                    "import " + Fire.class.getCanonicalName() + ";" +
+                    "import " + Sprinkler.class.getCanonicalName() + ";" +
+                    "import " + Room.class.getCanonicalName() + ";" +
+                    "rule 'When there is a fire turn on the sprinkler' when\n" +
+                    "  Fire($room : room) \n" +
+                    "  $sprinkler: Sprinkler( room == $room, on == false ) \n" +
+                    "then\n" +
+                    "  modify($sprinkler) { setOn(true); } \n" +
+                    "end\n" +
+                    "rule 'Raise the alarm when we have one or more firs' when\n" +
+                    "  exists Fire() \n" +
+                    "then\n" +
+                    "  insert( new Alarm() );\n" +
+                    "end\n" +
+                    "rule 'Cancel the alarm when all the fires have gone' when \n" +
+                    "   not Fire() \n" +
+                    "   $alarm : Alarm() \n" +
+                    "then\n" +
+                    "   delete ( $alarm ); \n" +
+                    "end\n" +
+                    "rule 'Status output when things are ok' when\n" +
+                    "   not Alarm() \n" +
+                    "   not Sprinkler ( on == true ) \n" +
+                    "then \n" +
+                    "   System.out.println(\"Everything is ok\"); \n" +
+                    "end";
+
     @Param({"100"})
     private int factsNr;
+
+    @Param({"EMBEDDED"})
+    private Mode mode;
 
     @Setup
     public void setupKieBase() {
         final DRLProvider drlProvider = new RulesWithJoinsProvider(1, false, true);
 
-        kieBase = BuildtimeUtil.createKieBaseFromDrl(true, drlProvider.getDrl(), //FIRE_AND_ALARM
+        kieBase = BuildtimeUtil.createKieBaseFromDrl(true, FIRE_AND_ALARM,
                 ParallelExecutionOption.SEQUENTIAL,
                 EventProcessingOption.CLOUD);
     }
 
     @Override
     protected void populateKieSessionPerIteration() {
-        StatefulKnowledgeSessionImpl session = (StatefulKnowledgeSessionImpl) kieSession;
-
-        for (int i = 0; i < factsNr; i++) {
-            Room room = new Room("room_" + i);
-            session.insert(room);
-            session.insert(new Fire(room));
-            session.insert(new Sprinkler(room));
-            session.insert(new Alarm());
-        }
+        // no-op
     }
 
     @Benchmark
     public int test() {
+
+        // phase 1
+        List<Room> rooms = new ArrayList<Room>();
+        List<FactHandle> fireFactHandles = new ArrayList<FactHandle>();
+        for (int i = 0; i < factsNr; i++) {
+            rooms.add(new Room("room_" + i));
+            kieSession.insert(rooms.get(i));
+            fireFactHandles.add(kieSession.insert(new Fire(rooms.get(i))));
+        }
+        kieSession.fireAllRules();
+
+        // phase 2
+        Sprinkler sprinkler;
+        for (int i = 0; i < factsNr; i++) {
+            sprinkler = new Sprinkler(rooms.get(i));
+            kieSession.insert(sprinkler);
+        }
+        kieSession.fireAllRules();
+
+        // phase 3
+        for (int i = 0; i < factsNr; i++) {
+            kieSession.delete(fireFactHandles.get(i));
+        }
         return kieSession.fireAllRules();
+
     }
 }
