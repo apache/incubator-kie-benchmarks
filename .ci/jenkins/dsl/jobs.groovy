@@ -25,7 +25,7 @@ setupUpdateDependencyJob('drools')
 
 void setupUpdateDependencyJob(String updateRepoName) {
     def jobParams = JobParamsUtils.getBasicJobParams(this, "kie-benchmarks-update-${updateRepoName}", JobType.TOOLS, "${jenkins_path}/Jenkinsfile.bump-up-version", "${updateRepoName} bump up version")
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    JobParamsUtils.setupJobParamsAgentDockerBuilderImageConfiguration(this, jobParams)
     jobParams.env.putAll([
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
 
