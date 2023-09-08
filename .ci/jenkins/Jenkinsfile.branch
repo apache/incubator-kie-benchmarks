@@ -7,7 +7,7 @@ AGENT_LABEL="ubuntu"
 MVN_TOOL="maven_3.8.6"
 JDK_TOOL="jdk_11_latest"
 benchmarksRepo="kie-benchmarks"
-GIT_AUTHOR="kiegroup"
+GIT_AUTHOR="apache"
 TARGET_BRANCH="newBranch"
 
 pipeline {
