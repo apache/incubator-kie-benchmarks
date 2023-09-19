@@ -3,15 +3,14 @@ import org.jenkinsci.plugins.workflow.libs.Library
 
 import org.kie.jenkins.MavenCommand
 
-def repoName = 'kie-benchmarks'
+def repoName = 'incubator-kie-benchmarks'
 
 pipeline {
     agent {
-        label 'rhel8 && !built-in'
-    }
-    tools {
-        maven env.BUILD_MAVEN_TOOL
-        jdk env.BUILD_JDK_TOOL
+        docker { 
+            image env.AGENT_DOCKER_BUILDER_IMAGE
+            args env.AGENT_DOCKER_BUILDER_ARGS
+        }
     }
 
     environment {
