@@ -75,6 +75,7 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityTestsBasics{
             PersistedSessionOption option = PersistedSessionOption.newSession().withPersistenceStrategy(PersistedSessionOption.PersistenceStrategy.STORES_ONLY);
             if (useSafepoints) {
                 option = option.withSafepointStrategy(PersistedSessionOption.SafepointStrategy.AFTER_FIRE);
+                safepointStrategy = PersistedSessionOption.SafepointStrategy.AFTER_FIRE;
             }
             if (useObjectStoreWithReferences){
                 option = option.withPersistenceObjectsStrategy(PersistedSessionOption.PersistenceObjectsStrategy.OBJECT_REFERENCES);

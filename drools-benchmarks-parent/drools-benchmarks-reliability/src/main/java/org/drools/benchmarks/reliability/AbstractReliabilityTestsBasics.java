@@ -151,7 +151,7 @@ public abstract class AbstractReliabilityTestsBasics extends AbstractBenchmark {
         KieSessionConfiguration conf = KieServices.get().newKieSessionConfiguration();
         if (persistedSessionOption != null) {
             conf.setOption(persistedSessionOption);
-            safepointStrategy = persistedSessionOption.getSafepointStrategy();
+            //safepointStrategy = persistedSessionOption.getSafepointStrategy();
         }
         Stream.of(optionsFilter.getKieSessionOption()).forEach(conf::setOption);
         KieSession session =  RuntimeUtil.createKieSession(kieBase, optionsFilter.getKieSessionOption());
@@ -165,6 +165,7 @@ public abstract class AbstractReliabilityTestsBasics extends AbstractBenchmark {
      */
 
     public void failover() {
+        // do we need lines 169-171, if useSafepoints then strategy is always PersistedSessionOption.SafepointStrategy.AFTER_FIRE
         if (safepointStrategy == PersistedSessionOption.SafepointStrategy.EXPLICIT) {
             this.sessions.stream().map(ReliableKieSession.class::cast).forEach(ReliableKieSession::safepoint);
         }
