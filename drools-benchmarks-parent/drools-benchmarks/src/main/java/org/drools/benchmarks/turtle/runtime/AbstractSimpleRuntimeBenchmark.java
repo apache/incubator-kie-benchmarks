@@ -30,7 +30,6 @@ import org.drools.benchmarks.turtle.runtime.generator.ResourceGenerator;
 import org.drools.model.codegen.ExecutableModelProject;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
-import org.kie.api.conf.KieBaseOption;
 import org.kie.api.io.KieResources;
 import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
@@ -84,10 +83,6 @@ public abstract class AbstractSimpleRuntimeBenchmark {
         }
         kieBase = new KieHelper()
                 .build(ExecutableModelProject.class);
-    }
-
-    protected KieBaseOption[] getKieBaseOptions() {
-        return new KieBaseOption[]{};
     }
 
     @Setup
