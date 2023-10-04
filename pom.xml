@@ -5,10 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.jboss</groupId>
-    <artifactId>jboss-parent</artifactId>
-    <!-- Keep in sync with jboss-parent version in kie-user-bom-parent/pom.xml -->
-    <version>36</version>
+    <groupId>org.apache</groupId>
+    <artifactId>apache</artifactId>
+    <version>30</version>
   </parent>
 
   <groupId>org.kie</groupId>
@@ -24,7 +23,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <version.jmh>1.35</version.jmh>
+    <version.jmh>1.37</version.jmh>
   </properties>
 
   <dependencyManagement>
