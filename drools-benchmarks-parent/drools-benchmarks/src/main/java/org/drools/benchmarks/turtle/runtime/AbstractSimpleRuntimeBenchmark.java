@@ -27,9 +27,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.drools.benchmarks.turtle.runtime.generator.FactsGenerator;
 import org.drools.benchmarks.turtle.runtime.generator.ResourceGenerator;
+import org.drools.model.codegen.ExecutableModelProject;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
-import org.kie.api.conf.KieBaseOption;
 import org.kie.api.io.KieResources;
 import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
@@ -81,11 +81,8 @@ public abstract class AbstractSimpleRuntimeBenchmark {
         for (Resource resource : resources) {
             kieHelper.addResource(resource);
         }
-        kieBase = kieHelper.build(getKieBaseOptions());
-    }
-
-    protected KieBaseOption[] getKieBaseOptions() {
-        return new KieBaseOption[]{};
+        kieBase = new KieHelper()
+                .build(ExecutableModelProject.class);
     }
 
     @Setup

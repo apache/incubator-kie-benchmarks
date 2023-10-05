@@ -29,6 +29,7 @@ public class TurtleFusionBenchmarkRunner {
         // Choose your benchmark here
         // Any benchmark that extends AbstractSimpleFusionRuntimeBenchmark can be put here
         final StartsStartedbyFusionBenchmark benchmark = new StartsStartedbyFusionBenchmark();
+        benchmark.nrOfEvents = 200000;
         benchmark.createKBase();
         benchmark.initFactsGenerators();
         benchmark.initEventSenders();
