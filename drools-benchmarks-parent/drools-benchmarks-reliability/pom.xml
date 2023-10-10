@@ -13,7 +13,7 @@
   <name>Drools 8 Benchmarks comparing reliability performance</name>
 
   <properties>
-    <version.infinispan>14.0.6.Final</version.infinispan>
+    <version.infinispan>14.0.13.Final</version.infinispan>
   </properties>
 
   <dependencyManagement>
