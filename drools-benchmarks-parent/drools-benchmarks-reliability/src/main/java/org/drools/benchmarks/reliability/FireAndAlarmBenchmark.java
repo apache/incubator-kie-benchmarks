@@ -30,7 +30,7 @@ import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mod
 @Measurement(iterations = 1000)
 public class FireAndAlarmBenchmark extends AbstractReliabilityBenchmark{
 
-    private static final String FIRE_AND_ALARM =
+    public static final String FIRE_AND_ALARM =
             "import " + Alarm.class.getCanonicalName() + ";" +
                     "import " + Fire.class.getCanonicalName() + ";" +
                     "import " + Sprinkler.class.getCanonicalName() + ";" +
