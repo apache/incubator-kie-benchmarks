@@ -103,7 +103,7 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
     @Benchmark
     public long test() {
         kieSession = restoreSession();
-        System.out.println("restored : facts size = " + kieSession.getFactHandles().size());
+        //System.out.println("restored : facts size = " + kieSession.getFactHandles().size());
         return kieSession.getIdentifier();
     }
 
