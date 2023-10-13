@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+
 package org.drools.benchmarks.reliability;
 
 import java.nio.file.Path;
@@ -62,12 +63,12 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     }
 
     @Param({"NONE", "EMBEDDED", "REMOTE", "REMOTEPROTO"})
-    private Mode mode;
+    protected Mode mode;
 
     @Param({"true", "false"})
-    private boolean useSafepoints;
+    protected boolean useSafepoints;
 
-    private InfinispanContainer container;
+    protected InfinispanContainer container;
 
     @Setup
     public void setupEnvironment() {

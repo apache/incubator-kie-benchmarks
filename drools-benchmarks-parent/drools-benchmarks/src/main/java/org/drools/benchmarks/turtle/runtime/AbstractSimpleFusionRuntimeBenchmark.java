@@ -60,7 +60,6 @@ public abstract class AbstractSimpleFusionRuntimeBenchmark extends AbstractSimpl
         eventSenders.put(eventSender, nrOfEvents);
     }
 
-    @Override
     protected KieBaseOption[] getKieBaseOptions() {
         return new KieBaseOption[]{EventProcessingOption.STREAM};
     }
