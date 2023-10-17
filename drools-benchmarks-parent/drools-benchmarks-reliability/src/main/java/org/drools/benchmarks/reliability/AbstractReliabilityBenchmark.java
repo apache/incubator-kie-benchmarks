@@ -21,7 +21,10 @@ import java.nio.file.Path;
 
 import org.drools.benchmarks.common.AbstractBenchmark;
 import org.drools.benchmarks.common.util.RuntimeUtil;
+import org.drools.reliability.core.ReliableGlobalResolverFactory;
+import org.drools.reliability.core.SimpleReliableObjectStoreFactory;
 import org.drools.reliability.core.StorageManagerFactory;
+import org.drools.reliability.h2mvstore.H2MVStoreStorageManager;
 import org.drools.reliability.infinispan.InfinispanStorageManager;
 import org.drools.reliability.infinispan.InfinispanStorageManagerFactory;
 import org.drools.util.FileUtils;
@@ -41,6 +44,7 @@ import static org.drools.reliability.infinispan.EmbeddedStorageManager.GLOBAL_ST
 import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_ALLOWED_PACKAGES;
 import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MARSHALLER;
 import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MODE;
+import static org.drools.util.Config.getConfig;
 
 public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
 
@@ -62,8 +66,18 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
         }
     }
 
+    public enum Module {
+        INFINISPAN,
+        H2MVSTORE
+    }
+
+    public static final String DROOLS_RELIABILITY_MODULE_TEST = "drools.reliability.module.test";
+
     @Param({"NONE", "EMBEDDED", "REMOTE", "REMOTEPROTO"})
     protected Mode mode;
+
+    @Param({"INFINISPAN", "H2MVSTORE"})
+    protected Module module;
 
     @Param({"true", "false"})
     protected boolean useSafepoints;
@@ -74,25 +88,33 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     public void setupEnvironment() {
         FileUtils.deleteDirectory(Path.of(GLOBAL_STATE_DIR));
 
-        if (mode != NONE) {
-            System.setProperty(INFINISPAN_STORAGE_MODE, mode.getInfinispanStorageMode());
-        }
+        if (module == Module.H2MVSTORE){
+            H2MVStoreStorageManager.cleanUpDatabase();
+            System.setProperty(DROOLS_RELIABILITY_MODULE_TEST, "H2MVSTORE");
+            configureServicePriorities();
+        }else { // assuming infinispan is the default module
+            System.setProperty(DROOLS_RELIABILITY_MODULE_TEST, "INFINISPAN");
+            configureServicePriorities();
+            if (mode != NONE) {
+                System.setProperty(INFINISPAN_STORAGE_MODE, mode.getInfinispanStorageMode());
+            }
 
-        if (mode == EMBEDDED || mode == REMOTE) {
-            System.setProperty(INFINISPAN_STORAGE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
-        }
+            if (mode == EMBEDDED || mode == REMOTE) {
+                System.setProperty(INFINISPAN_STORAGE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
+            }
 
-        if (mode == REMOTEPROTO) {
-            System.setProperty(INFINISPAN_STORAGE_MARSHALLER, "PROTOSTREAM");
-            setupSerializationContext();
-        }
+            if (mode == REMOTEPROTO) {
+                System.setProperty(INFINISPAN_STORAGE_MARSHALLER, "PROTOSTREAM");
+                setupSerializationContext();
+            }
 
-        if (mode == REMOTE || mode == REMOTEPROTO) {
-            container = new InfinispanContainer();
-            container.start();
-            InfinispanStorageManager storageManager = (InfinispanStorageManager) StorageManagerFactory.get().getStorageManager();
-            RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(storageManager.provideAdditionalRemoteConfigurationBuilder());
-            storageManager.setRemoteCacheManager(remoteCacheManager);
+            if (mode == REMOTE || mode == REMOTEPROTO) {
+                container = new InfinispanContainer();
+                container.start();
+                InfinispanStorageManager storageManager = (InfinispanStorageManager) StorageManagerFactory.get().getStorageManager();
+                RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(storageManager.provideAdditionalRemoteConfigurationBuilder());
+                storageManager.setRemoteCacheManager(remoteCacheManager);
+            }
         }
     }
 
@@ -127,4 +149,28 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     }
 
     protected abstract void populateKieSessionPerIteration();
+
+
+    public static void configureServicePriorities() {
+        Module module = Module.valueOf(getConfig(DROOLS_RELIABILITY_MODULE_TEST, Module.INFINISPAN.name()));
+        if (module == Module.INFINISPAN) {
+            prioritizeInfinispanServices();
+        } else if (module == Module.H2MVSTORE) {
+            prioritizeH2MVStoreServices();
+        } else {
+            throw new IllegalStateException("Unknown module: " + module);
+        }
+    }
+
+    private static void prioritizeInfinispanServices() {
+        ReliableGlobalResolverFactory.get("infinispan");
+        SimpleReliableObjectStoreFactory.get("infinispan");
+        StorageManagerFactory.get("infinispan");
+    }
+
+    private static void prioritizeH2MVStoreServices() {
+        ReliableGlobalResolverFactory.get("core");
+        SimpleReliableObjectStoreFactory.get("core");
+        StorageManagerFactory.get("h2mvstore");
+    }
 }

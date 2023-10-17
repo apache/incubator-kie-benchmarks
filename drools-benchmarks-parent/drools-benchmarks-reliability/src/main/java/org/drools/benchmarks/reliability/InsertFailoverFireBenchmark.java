@@ -46,6 +46,9 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
     @Param({"EMBEDDED"})
     private Mode mode;
 
+    @Param({"INFINISPAN", "H2MVSTORE"})
+    protected Module module;
+
     @Param({"true", "false"})
     private boolean useObjectStoreWithReferences;
 
@@ -63,7 +66,7 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
 
     @Setup(Level.Iteration)
     public void setupAndFailover() {
-        System.out.println("setupAndFailover!!");
+        //  System.out.println("setupAndFailover!!");
         if (mode != Mode.NONE) {
             persistenceStrategy = PersistedSessionOption.PersistenceStrategy.STORES_ONLY;
             safepointStrategy = useSafepoints ? PersistedSessionOption.SafepointStrategy.AFTER_FIRE : PersistedSessionOption.SafepointStrategy.ALWAYS;
@@ -103,25 +106,29 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
     @Benchmark
     public long test() {
         kieSession = restoreSession();
-        //System.out.println("restored : facts size = " + kieSession.getFactHandles().size());
+        // System.out.println("restored : facts size = " + kieSession.getFactHandles().size());
         return kieSession.getIdentifier();
     }
 
     public static void main(String[] args) {
         InsertFailoverFireBenchmark benchmark = new InsertFailoverFireBenchmark();
         benchmark.factsNr = 10;
+        benchmark.module = Module.H2MVSTORE;
         benchmark.mode = Mode.EMBEDDED;
         benchmark.useObjectStoreWithReferences = true;
         benchmark.useSafepoints = true;
 
-        benchmark.setupKieBase();
-        benchmark.setupAndFailover();
-        benchmark.test();
-        benchmark.tearDown();
-
+        benchmark.setupEnvironment(benchmark.module, benchmark.mode);
         benchmark.setupKieBase();
         benchmark.setupAndFailover();
         benchmark.test();
         benchmark.tearDown();
    }
+
+    //  this method is only used by main
+    protected void setupEnvironment(Module module, Mode mode) {
+        super.module = module;
+        super.mode = mode;
+        super.setupEnvironment();
+    }
 }
