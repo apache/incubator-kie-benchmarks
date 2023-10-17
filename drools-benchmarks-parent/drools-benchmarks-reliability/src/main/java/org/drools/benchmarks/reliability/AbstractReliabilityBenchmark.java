@@ -36,10 +36,11 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.TearDown;
 
-import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.EMBEDDED;
+import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.INFINISPAN_EMBEDDED;
 import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.NONE;
-import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.REMOTE;
-import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.REMOTEPROTO;
+import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.INFINISPAN_REMOTE;
+import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.INFINISPAN_REMOTEPROTO;
+import static org.drools.benchmarks.reliability.AbstractReliabilityBenchmark.Mode.H2MVSTORE;
 import static org.drools.reliability.infinispan.EmbeddedStorageManager.GLOBAL_STATE_DIR;
 import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_ALLOWED_PACKAGES;
 import static org.drools.reliability.infinispan.InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MARSHALLER;
@@ -51,9 +52,10 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     // infinispanStorageMode has to match InfinispanStorageManagerFactory.INFINISPAN_STORAGE_MODE
     public enum Mode {
         NONE(null),
-        EMBEDDED("EMBEDDED"),
-        REMOTE("REMOTE"),
-        REMOTEPROTO("REMOTE");
+        INFINISPAN_EMBEDDED("EMBEDDED"),
+        INFINISPAN_REMOTE("REMOTE"),
+        INFINISPAN_REMOTEPROTO("REMOTE"),
+        H2MVSTORE("H2MVSTORE");
 
         private String infinispanStorageMode;
 
@@ -73,11 +75,8 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
 
     public static final String DROOLS_RELIABILITY_MODULE_TEST = "drools.reliability.module.test";
 
-    @Param({"NONE", "EMBEDDED", "REMOTE", "REMOTEPROTO"})
+    @Param({"NONE", "INFINISPAN_EMBEDDED", "INFINISPAN_REMOTE", "INFINISPAN_REMOTEPROTO", "H2MVSTORE"})
     protected Mode mode;
-
-    @Param({"INFINISPAN", "H2MVSTORE"})
-    protected Module module;
 
     @Param({"true", "false"})
     protected boolean useSafepoints;
@@ -88,33 +87,33 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
     public void setupEnvironment() {
         FileUtils.deleteDirectory(Path.of(GLOBAL_STATE_DIR));
 
-        if (module == Module.H2MVSTORE){
+        if (mode == H2MVSTORE){
             H2MVStoreStorageManager.cleanUpDatabase();
             System.setProperty(DROOLS_RELIABILITY_MODULE_TEST, "H2MVSTORE");
             configureServicePriorities();
         }else { // assuming infinispan is the default module
             System.setProperty(DROOLS_RELIABILITY_MODULE_TEST, "INFINISPAN");
-            configureServicePriorities();
             if (mode != NONE) {
                 System.setProperty(INFINISPAN_STORAGE_MODE, mode.getInfinispanStorageMode());
             }
 
-            if (mode == EMBEDDED || mode == REMOTE) {
+            if (mode == INFINISPAN_EMBEDDED || mode == INFINISPAN_REMOTE) {
                 System.setProperty(INFINISPAN_STORAGE_ALLOWED_PACKAGES, "org.drools.benchmarks.common.model");
             }
 
-            if (mode == REMOTEPROTO) {
+            if (mode == INFINISPAN_REMOTEPROTO) {
                 System.setProperty(INFINISPAN_STORAGE_MARSHALLER, "PROTOSTREAM");
                 setupSerializationContext();
             }
 
-            if (mode == REMOTE || mode == REMOTEPROTO) {
+            if (mode == INFINISPAN_REMOTE || mode == INFINISPAN_REMOTEPROTO) {
                 container = new InfinispanContainer();
                 container.start();
                 InfinispanStorageManager storageManager = (InfinispanStorageManager) StorageManagerFactory.get().getStorageManager();
                 RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(storageManager.provideAdditionalRemoteConfigurationBuilder());
                 storageManager.setRemoteCacheManager(remoteCacheManager);
             }
+            configureServicePriorities();
         }
     }
 
@@ -126,7 +125,7 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
 
     @TearDown
     public void tearDownEnvironment() {
-        if (mode == REMOTE || mode == REMOTEPROTO) {
+        if (mode == Mode.INFINISPAN_REMOTE || mode == Mode.INFINISPAN_REMOTEPROTO) {
             StorageManagerFactory.get().getStorageManager().close();
             container.stop();
         }

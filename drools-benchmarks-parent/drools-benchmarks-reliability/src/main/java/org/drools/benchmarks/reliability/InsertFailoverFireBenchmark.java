@@ -43,11 +43,8 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
     @Param({"100"})
     private int factsNr;
 
-    @Param({"EMBEDDED"})
+    @Param({"INFINISPAN_EMBEDDED", "H2MVSTORE"})
     private Mode mode;
-
-    @Param({"INFINISPAN", "H2MVSTORE"})
-    protected Module module;
 
     @Param({"true", "false"})
     private boolean useObjectStoreWithReferences;
@@ -106,19 +103,18 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
     @Benchmark
     public long test() {
         kieSession = restoreSession();
-        // System.out.println("restored : facts size = " + kieSession.getFactHandles().size());
+        //System.out.println("restored : facts size = " + kieSession.getFactHandles().size());
         return kieSession.getIdentifier();
     }
 
     public static void main(String[] args) {
         InsertFailoverFireBenchmark benchmark = new InsertFailoverFireBenchmark();
         benchmark.factsNr = 10;
-        benchmark.module = Module.H2MVSTORE;
-        benchmark.mode = Mode.EMBEDDED;
+        benchmark.mode = Mode.H2MVSTORE;
         benchmark.useObjectStoreWithReferences = true;
         benchmark.useSafepoints = true;
 
-        benchmark.setupEnvironment(benchmark.module, benchmark.mode);
+        benchmark.setupEnvironment(benchmark.mode);
         benchmark.setupKieBase();
         benchmark.setupAndFailover();
         benchmark.test();
@@ -126,8 +122,7 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
    }
 
     //  this method is only used by main
-    protected void setupEnvironment(Module module, Mode mode) {
-        super.module = module;
+    protected void setupEnvironment(Mode mode) {
         super.mode = mode;
         super.setupEnvironment();
     }
