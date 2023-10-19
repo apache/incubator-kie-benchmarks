@@ -43,7 +43,7 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
     @Param({"100"})
     private int factsNr;
 
-    @Param({"EMBEDDED"})
+    @Param({"INFINISPAN_EMBEDDED", "H2MVSTORE"})
     private Mode mode;
 
     @Param({"true", "false"})
@@ -63,7 +63,7 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
 
     @Setup(Level.Iteration)
     public void setupAndFailover() {
-        System.out.println("setupAndFailover!!");
+        //  System.out.println("setupAndFailover!!");
         if (mode != Mode.NONE) {
             persistenceStrategy = PersistedSessionOption.PersistenceStrategy.STORES_ONLY;
             safepointStrategy = useSafepoints ? PersistedSessionOption.SafepointStrategy.AFTER_FIRE : PersistedSessionOption.SafepointStrategy.ALWAYS;
@@ -110,18 +110,20 @@ public class InsertFailoverFireBenchmark extends AbstractReliabilityBenchmarkFai
     public static void main(String[] args) {
         InsertFailoverFireBenchmark benchmark = new InsertFailoverFireBenchmark();
         benchmark.factsNr = 10;
-        benchmark.mode = Mode.EMBEDDED;
+        benchmark.mode = Mode.H2MVSTORE;
         benchmark.useObjectStoreWithReferences = true;
         benchmark.useSafepoints = true;
 
-        benchmark.setupKieBase();
-        benchmark.setupAndFailover();
-        benchmark.test();
-        benchmark.tearDown();
-
+        benchmark.setupEnvironment(benchmark.mode);
         benchmark.setupKieBase();
         benchmark.setupAndFailover();
         benchmark.test();
         benchmark.tearDown();
    }
+
+    //  this method is only used by main
+    protected void setupEnvironment(Mode mode) {
+        super.mode = mode;
+        super.setupEnvironment();
+    }
 }

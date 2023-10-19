@@ -48,6 +48,10 @@
       <artifactId>drools-reliability-infinispan</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-reliability-h2mvstore</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.infinispan</groupId>
       <artifactId>infinispan-server-testdriver-core</artifactId>
       <exclusions>

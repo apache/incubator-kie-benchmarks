@@ -62,7 +62,7 @@ public class FireAndAlarmBenchmark extends AbstractReliabilityBenchmark{
     @Param({"100"})
     private int factsNr;
 
-    @Param({"EMBEDDED"})
+    @Param({"INFINISPAN_EMBEDDED"})
     private Mode mode;
 
     @Param({"true", "false"})
