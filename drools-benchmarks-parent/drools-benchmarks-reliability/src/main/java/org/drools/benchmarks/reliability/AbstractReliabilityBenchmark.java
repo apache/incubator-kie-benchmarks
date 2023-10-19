@@ -91,7 +91,7 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
             H2MVStoreStorageManager.cleanUpDatabase();
             System.setProperty(DROOLS_RELIABILITY_MODULE_TEST, "H2MVSTORE");
             configureServicePriorities();
-        }else { // assuming infinispan is the default module
+        }else {
             System.setProperty(DROOLS_RELIABILITY_MODULE_TEST, "INFINISPAN");
             if (mode != NONE) {
                 System.setProperty(INFINISPAN_STORAGE_MODE, mode.getInfinispanStorageMode());
@@ -106,6 +106,8 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
                 setupSerializationContext();
             }
 
+            configureServicePriorities();
+
             if (mode == INFINISPAN_REMOTE || mode == INFINISPAN_REMOTEPROTO) {
                 container = new InfinispanContainer();
                 container.start();
@@ -113,7 +115,6 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
                 RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(storageManager.provideAdditionalRemoteConfigurationBuilder());
                 storageManager.setRemoteCacheManager(remoteCacheManager);
             }
-            configureServicePriorities();
         }
     }
 
