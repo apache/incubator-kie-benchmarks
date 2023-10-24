@@ -36,6 +36,8 @@ public class RulesWithJoinsProvider implements DRLProvider {
     private String rootConstraintValueOperator = ">";
     private String joinConstraintValueOperator = ">";
 
+    private boolean withNot = false;
+
     public RulesWithJoinsProvider() { }
 
     public RulesWithJoinsProvider(final int numberOfJoins, final boolean withCep, final boolean withImports ) {
@@ -93,6 +95,11 @@ public class RulesWithJoinsProvider implements DRLProvider {
 
     public RulesWithJoinsProvider withGeneratedConsequence(boolean withGeneratedConsequence) {
         this.withGeneratedConsequence = withGeneratedConsequence;
+        return this;
+    }
+
+    public RulesWithJoinsProvider withNot(boolean withNot) {
+        this.withNot = withNot;
         return this;
     }
 
@@ -170,7 +177,13 @@ public class RulesWithJoinsProvider implements DRLProvider {
     }
 
     private String getJoinConstraints(int index) {
-        return "  $" + (char)('b'+index) + " : " + (char)('B'+index) + "( value " + joinConstraintValueOperator + " $" + (char)('a'+index) + ".value )\n";
+        String pattern = "  $" + (char)('b'+index) + " : " + (char)('B'+index) + "( value " + joinConstraintValueOperator + " $" + (char)('a'+index) + ".value )\n";
+        if (withNot) {
+            String notPattern = "  not " + (char)('B'+index) + "( value < $" + (char)('a'+index) + ".value )\n";
+            return notPattern + pattern;
+        } else {
+            return pattern;
+        }
     }
 
     private String generateConsequence() {
