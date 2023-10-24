@@ -65,7 +65,7 @@ public class ConcurrentUpdateRightTupleBenchmark extends AbstractBenchmark {
                 .withNot(true)
                 .withGeneratedConsequence(false)
                 .withConsequence("    $b.setValue2($b.getValue2() + 1);\n" +
-                                         "    update($b);\n");
+                                         "    update($b);\n"); // this update triggers BetaNode.modifyObject -> RightTupleImpl.getTupleSink
         //System.out.println(drlProvider.getDrl(rulesNr));
         kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
                                                      ParallelExecutionOption.SEQUENTIAL,

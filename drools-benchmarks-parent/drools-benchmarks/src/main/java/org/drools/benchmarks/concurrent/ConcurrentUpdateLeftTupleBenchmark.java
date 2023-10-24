@@ -65,7 +65,7 @@ public class ConcurrentUpdateLeftTupleBenchmark extends AbstractBenchmark {
                 .withNot(true)
                 .withGeneratedConsequence(false)
                 .withConsequence("    $a.setValue2($a.getValue2() + 1);\n" +
-                                         "    update($a);\n");
+                                         "    update($a);\n"); // this update triggers LeftInputAdapterNode.modifyObject -> LeftTuple.getTupleSink
         //System.out.println(drlProvider.getDrl(rulesNr));
         kieBase = BuildtimeUtil.createKieBaseFromDrl(drlProvider.getDrl(rulesNr),
                                                      ParallelExecutionOption.SEQUENTIAL,
