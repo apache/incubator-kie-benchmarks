@@ -24,7 +24,7 @@ import org.drools.benchmarks.common.util.RuntimeUtil;
 import org.drools.reliability.core.ReliableGlobalResolverFactory;
 import org.drools.reliability.core.SimpleReliableObjectStoreFactory;
 import org.drools.reliability.core.StorageManagerFactory;
-//import org.drools.reliability.h2mvstore.H2MVStoreStorageManager;
+import org.drools.reliability.h2mvstore.H2MVStoreStorageManager;
 import org.drools.reliability.infinispan.InfinispanStorageManager;
 import org.drools.reliability.infinispan.InfinispanStorageManagerFactory;
 import org.drools.util.FileUtils;
@@ -88,7 +88,7 @@ public abstract class AbstractReliabilityBenchmark extends AbstractBenchmark {
         FileUtils.deleteDirectory(Path.of(GLOBAL_STATE_DIR));
 
         if (mode == H2MVSTORE){
-//            H2MVStoreStorageManager.cleanUpDatabase();
+            H2MVStoreStorageManager.cleanUpDatabase();
             System.setProperty(DROOLS_RELIABILITY_MODULE_TEST, "H2MVSTORE");
             configureServicePriorities();
         }else {

@@ -47,10 +47,10 @@
       <groupId>org.drools</groupId>
       <artifactId>drools-reliability-infinispan</artifactId>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.drools</groupId>-->
-<!--      <artifactId>drools-reliability-h2mvstore</artifactId>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-reliability-h2mvstore</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.infinispan</groupId>
       <artifactId>infinispan-server-testdriver-core</artifactId>
@@ -79,6 +79,24 @@
       <optional>true</optional>
     </dependency>
   </dependencies>
+
+  <repositories>
+    <!-- temporarily enabled -->
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <build>
     <plugins>
