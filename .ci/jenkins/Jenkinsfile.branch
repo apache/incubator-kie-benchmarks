@@ -14,7 +14,7 @@ pipeline {
     agent {
         label "$AGENT_LABEL"
     }
-    options{
+    options {
         timestamps()
     }
     tools {
@@ -24,7 +24,7 @@ pipeline {
     stages {
         stage('CleanWorkspace') {
             steps {
-                cleanWs()
+                cleanWs(disableDeferredWipeout: true)
             }
         }
         stage('clone kie-benchmarks') {
@@ -34,27 +34,27 @@ pipeline {
                 }
             }
         }
-        stage('create new branch'){
-            steps{
-                dir("${WORKSPACE}/${benchmarksRepo}"){
-                    script{
+        stage('create new branch') {
+            steps {
+                dir("${WORKSPACE}/${benchmarksRepo}") {
+                    script {
                         githubscm.createBranch(NEW_BRANCH)
                     }
                 }
             }
         }
-        stage('push new branch'){
-            steps{
-                dir("${WORKSPACE}/${benchmarksRepo}"){
-                    script{
+        stage('push new branch') {
+            steps {
+                dir("${WORKSPACE}/${benchmarksRepo}") {
+                    script {
                         githubscm.pushObject('origin', NEW_BRANCH)
                     }
                 }
             }
         }
     }
-    post{
-        always{
+    post {
+        cleanup {
             cleanWs()
         }
     }
