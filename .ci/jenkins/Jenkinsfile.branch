@@ -47,7 +47,7 @@ pipeline {
             steps {
                 dir("${WORKSPACE}/${benchmarksRepo}") {
                     script {
-                        githubscm.pushObject('origin', NEW_BRANCH)
+                        githubscm.pushObject('origin', NEW_BRANCH, getGitAuthorPushCredsId())
                     }
                 }
             }
@@ -62,6 +62,14 @@ pipeline {
 
 void checkoutKieBenchmarksRepo() {
     dir(benchmarksRepo) {
-        checkout(githubscm.resolveRepository(benchmarksRepo, GIT_AUTHOR, TARGET_BRANCH, false))
+        checkout(githubscm.resolveRepository(benchmarksRepo, GIT_AUTHOR, TARGET_BRANCH, false, getGitAuthorCredsId()))
     }
+}
+
+String getGitAuthorCredsId() {
+    return env.GIT_AUTHOR_CREDS_ID
+}
+
+String getGitAuthorPushCredsId() {
+    return env.GIT_AUTHOR_PUSH_CREDS_ID
 }
