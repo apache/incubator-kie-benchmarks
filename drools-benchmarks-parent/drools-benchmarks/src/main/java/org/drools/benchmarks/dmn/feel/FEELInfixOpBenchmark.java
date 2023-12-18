@@ -24,11 +24,12 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 30, time = 200, timeUnit = TimeUnit.MILLISECONDS)
 public class FEELInfixOpBenchmark extends AbstractFEELBenchmark {
 
-    @Param({"foo >= bar * 10", "y / 5 * ( x )", "y + 5 ** 3", "10 * x", "foo < 10 and bar = \"x\" or baz"})
+    @Param({"30 >= 20 * 10", "16 / 5 * ( 7 )", "9 + 5 ** 3", "10 * 32", "34 < 10 and 43 = \"32\" or 23"})
     private String expression;
 
     @Override
     public String getExpression() {
         return expression;
     }
+
 }
