@@ -24,10 +24,9 @@ import org.kie.dmn.feel.lang.impl.EvaluationContextImpl;
 import org.kie.dmn.feel.util.ClassLoaderUtil;
 import org.openjdk.jmh.annotations.*;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.drools.benchmarks.dmn.feel.infixexecutors.FEELInfixExecutorBenchmarkUtils.getBooleanMap;
+import static org.drools.benchmarks.dmn.feel.infixexecutors.FEELInfixExecutorBenchmarkUtils.getBooleanArray;
 
 @Warmup(iterations = 10)
 @Measurement(iterations = 50)
@@ -39,7 +38,7 @@ public class FEELAndExecutorBenchmark {
     private AndExecutor executor;
     private EvaluationContext ctx;
 
-    private Map<String, Object> map;
+    private Object[] values;
 
     @Param({"true true", "true false", "false true", "false false"})
     private String args;
@@ -49,11 +48,11 @@ public class FEELAndExecutorBenchmark {
     public void setup() {
         executor = AndExecutor.instance();
         ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
-        map = getBooleanMap(args);
+        values = getBooleanArray(args);
     }
 
     @Benchmark
     public Object evaluate() {
-        return executor.evaluate(map.get("a"), map.get("b"), ctx);
+        return executor.evaluate(values[0], values[1], ctx);
     }
 }

@@ -23,7 +23,6 @@ import java.time.OffsetDateTime;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.ChronoPeriod;
 import java.time.temporal.ChronoUnit;
-import java.util.Map;
 
 public class FEELInfixExecutorBenchmarkUtils {
 
@@ -31,18 +30,18 @@ public class FEELInfixExecutorBenchmarkUtils {
     private FEELInfixExecutorBenchmarkUtils() {
     }
 
-    static Map<String, Object> getMap(String types) {
+    static Object[] getObjectArray(String types) {
         String[] parsedTypes = types.split(" ");
         String leftType = parsedTypes[0];
         String rightType = parsedTypes[1];
-        return Map.of("a", getObject(leftType, 1), "b", getObject(rightType, 2));
+        return new Object[]{getObject(leftType, 1), getObject(rightType, 2)};
     }
 
-    static Map<String, Object> getBooleanMap(String args) {
+    static Object[] getBooleanArray(String args) {
         String[] parsedArgs = args.split(" ");
         String leftArg = parsedArgs[0];
         String rightArg = parsedArgs[1];
-        return Map.of("a", Boolean.valueOf(leftArg), "b", Boolean.valueOf(rightArg));
+        return new Object[]{Boolean.valueOf(leftArg), Boolean.valueOf(rightArg)};
     }
 
     private static Object getObject(String type, int value) {
