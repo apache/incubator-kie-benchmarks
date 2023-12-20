@@ -24,10 +24,9 @@ import org.kie.dmn.feel.lang.impl.EvaluationContextImpl;
 import org.kie.dmn.feel.util.ClassLoaderUtil;
 import org.openjdk.jmh.annotations.*;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.drools.benchmarks.dmn.feel.infixexecutors.FEELInfixExecutorBenchmarkUtils.getMap;
+import static org.drools.benchmarks.dmn.feel.infixexecutors.FEELInfixExecutorBenchmarkUtils.getObjectArray;
 
 @Warmup(iterations = 10)
 @Measurement(iterations = 50)
@@ -39,7 +38,7 @@ public class FEELSubExecutorBenchmark {
     private SubExecutor executor;
     private EvaluationContext ctx;
 
-    private Map<String, Object> map;
+    private Object[] values;
 
     @Param({"String String", "Duration Duration", "OffsetDateTime Duration", "int int"})
     private String argsType;
@@ -49,11 +48,11 @@ public class FEELSubExecutorBenchmark {
     public void setup() {
         executor = SubExecutor.instance();
         ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
-        map = getMap(argsType);
+        values = getObjectArray(argsType);
     }
 
     @Benchmark
     public Object evaluate() {
-        return executor.evaluate(map.get("b"), map.get("a"), ctx);
+        return executor.evaluate(values[1], values[0], ctx);
     }
 }
