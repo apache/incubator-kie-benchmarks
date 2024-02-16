@@ -12,7 +12,7 @@ TARGET_BRANCH="newBranch"
 
 pipeline {
     agent {
-        label "$AGENT_LABEL"
+        label util.avoidFaultyNodes(AGENT_LABEL)
     }
     options {
         timestamps()
