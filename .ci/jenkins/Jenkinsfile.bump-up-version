@@ -45,9 +45,7 @@ pipeline {
                         githubscm.createBranch(localBranch)
                         maven.mvnSetVersionProperty("version.org.${getUpdateRepoName()}", getVersion())
                         String prLink = commitAndCreatePR(commitMsg, localBranch, "${getTargetBranch()}")
-                        sh "git checkout ${getTargetBranch()}"
-                        mergeAndPush(prLink, "${getTargetBranch()}")
-                        githubscm.removeRemoteBranch('origin', localBranch, getGitAuthorPushCredsId())
+                        approveAndMergePR(prLink)
                     }
                 }
             }
@@ -96,13 +94,12 @@ String commitAndCreatePR(String commitMsg, String localBranch, String targetBran
     githubscm.setUserConfigFromCreds(getGitAuthorPushCredsId())
     githubscm.commitChanges(commitMsg)
     githubscm.pushObject('origin', localBranch, getGitAuthorPushCredsId())
-    return githubscm.createPR(commitMsg, prBody, targetBranch,getGitAuthorCredsId())
+    return githubscm.createPR(commitMsg, prBody, targetBranch, getGitAuthorCredsId())
 }
 
-void mergeAndPush(String prLink, String targetBranch) {
+void approveAndMergePR(String prLink) {
     if (prLink?.trim()) {
-        githubscm.mergePR(prLink, getGitAuthorCredsId())
-        githubscm.pushObject('origin', targetBranch, getGitAuthorPushCredsId())
+        githubscm.approvePR(prLink, getGitAuthorPushCredsId())
+        githubscm.mergePR(prLink, getGitAuthorPushCredsId())
     }
 }
-
