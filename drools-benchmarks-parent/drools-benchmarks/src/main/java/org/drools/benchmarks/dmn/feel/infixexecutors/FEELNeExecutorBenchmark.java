@@ -47,7 +47,7 @@ public class FEELNeExecutorBenchmark {
     @Setup
     public void setup() {
         executor = NeExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
         values = getBooleanArray(args);
     }
 

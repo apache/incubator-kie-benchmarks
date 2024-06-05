@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.kie.dmn.feel.FEEL;
 import org.kie.dmn.feel.lang.CompiledExpression;
+import org.kie.dmn.feel.lang.impl.FEELBuilder;
 import org.kie.dmn.feel.parser.feel11.profiles.DoCompileFEELProfile;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -50,8 +51,8 @@ public abstract class AbstractFEELBenchmark {
 
     @Setup()
     public void setupFEEL() {
-        feelInterpreted = FEEL.newInstance();
-        feelCompiled = FEEL.newInstance(Collections.singletonList(new DoCompileFEELProfile()));
+        feelInterpreted = FEELBuilder.builder().build();
+        feelCompiled = FEELBuilder.builder().withProfiles(Collections.singletonList(new DoCompileFEELProfile())).build();
         compiledJavaExpression = compileExpression(getExpression());
         compiledButInterpretedExpression = compileInterpretedExpression(getExpression());
     }

@@ -47,7 +47,7 @@ public class FEELAddExecutorBenchmark {
     @Setup
     public void setup() {
         executor = AddExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
         values = getObjectArray(argsType);
     }
 

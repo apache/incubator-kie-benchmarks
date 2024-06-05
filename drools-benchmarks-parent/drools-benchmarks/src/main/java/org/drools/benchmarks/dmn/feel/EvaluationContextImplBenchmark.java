@@ -44,7 +44,7 @@ public class EvaluationContextImplBenchmark {
 
     @Setup()
     public void setupFEEL() {
-        context = new EvaluationContextImpl(this.getClass().getClassLoader(), null);
+        context = new EvaluationContextImpl(this.getClass().getClassLoader(), null, null);
         context.enterFrame();
         context.enterFrame();
         context.enterFrame();

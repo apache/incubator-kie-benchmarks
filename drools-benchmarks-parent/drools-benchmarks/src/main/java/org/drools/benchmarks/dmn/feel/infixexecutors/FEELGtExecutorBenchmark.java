@@ -47,7 +47,7 @@ public class FEELGtExecutorBenchmark {
     @Setup
     public void setup() {
         executor = GtExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
         values = getBooleanArray(args);
     }
 

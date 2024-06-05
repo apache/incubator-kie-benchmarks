@@ -47,7 +47,7 @@ public class FEELDivExecutorBenchmark {
     @Setup
     public void setup() {
         executor = DivExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
         values = getObjectArray(args);
     }
 
