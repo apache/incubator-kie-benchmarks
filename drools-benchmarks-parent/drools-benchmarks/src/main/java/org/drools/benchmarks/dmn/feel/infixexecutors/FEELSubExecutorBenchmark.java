@@ -47,7 +47,7 @@ public class FEELSubExecutorBenchmark {
     @Setup
     public void setup() {
         executor = SubExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
         values = getObjectArray(argsType);
     }
 

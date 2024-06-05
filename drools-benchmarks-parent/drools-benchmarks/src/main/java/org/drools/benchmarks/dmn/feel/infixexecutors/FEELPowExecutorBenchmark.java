@@ -47,7 +47,7 @@ public class FEELPowExecutorBenchmark {
     @Setup
     public void setup() {
         executor = PowExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
         values = getObjectArray(argsType);
     }
 

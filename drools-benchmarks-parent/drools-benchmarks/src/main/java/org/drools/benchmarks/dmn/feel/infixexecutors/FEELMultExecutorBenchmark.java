@@ -47,7 +47,7 @@ public class FEELMultExecutorBenchmark {
     @Setup
     public void setup() {
         executor = MultExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
         values = getObjectArray(args);
     }
 
