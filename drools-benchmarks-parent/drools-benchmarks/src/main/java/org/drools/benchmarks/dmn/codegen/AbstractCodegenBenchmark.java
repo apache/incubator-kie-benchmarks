@@ -30,6 +30,7 @@ import org.kie.dmn.core.compiler.RuntimeTypeCheckOption;
 import org.kie.dmn.core.impl.DMNRuntimeImpl;
 import org.kie.dmn.core.internal.utils.DMNRuntimeBuilder;
 import org.kie.dmn.feel.parser.feel11.profiles.DoCompileFEELProfile;
+import org.kie.dmn.feel.util.Either;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
@@ -40,55 +41,59 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import static org.drools.benchmarks.dmn.util.DynamicTypeUtils.entry;
 import static org.drools.benchmarks.dmn.util.DynamicTypeUtils.prototype;
 
-@BenchmarkMode(Mode.AverageTime)
-@State(Scope.Thread)
-@Warmup(iterations = 100, time = 200, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 20, time = 200, timeUnit = TimeUnit.MILLISECONDS)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class CodegenBenchmark {
+public abstract class AbstractCodegenBenchmark {
 
     private DMNRuntime dmnRuntime;
     private DMNModel dmnModel;
     private DMNContext dmnContext;
 
-    @Setup()
-    public void setupModelAndContext() {
+    protected abstract String getResource();
+    protected abstract List<String> getAdditionalResources();
+    protected abstract String getNameSpace();
+    protected abstract String getModelName();
+    protected abstract Map<String, Object> getInputData();
+
+    protected void setupModelAndContext() {
         Function<DMNCompilerConfiguration, DMNCompiler> dmnCompilerFn = dmnCompilerConfiguration -> {
             ((DMNCompilerConfigurationImpl) dmnCompilerConfiguration).addFEELProfile(new DoCompileFEELProfile());
             return new DMNCompilerImpl(dmnCompilerConfiguration);
         };
-        dmnRuntime = DMNRuntimeBuilder.fromDefaults()
-                .buildConfigurationUsingCustomCompiler(dmnCompilerFn)
-                .fromClasspathResource("dmn/Prequalification.dmn", this.getClass())
+        DMNRuntimeBuilder.DMNRuntimeBuilderConfigured dmnRuntimeBuilderConfigured = DMNRuntimeBuilder.fromDefaults()
+                .buildConfigurationUsingCustomCompiler(dmnCompilerFn);
+        Either<Exception, DMNRuntime> exceptionDMNRuntimeEither;
+        if (getAdditionalResources() != null && !getAdditionalResources().isEmpty()) {
+            exceptionDMNRuntimeEither = dmnRuntimeBuilderConfigured
+                    .fromClasspathResources(getResource(), this.getClass(), getAdditionalResources().toArray(new String[0]));
+        } else {
+            exceptionDMNRuntimeEither = dmnRuntimeBuilderConfigured
+                    .fromClasspathResource(getResource(), this.getClass());
+        }
+        dmnRuntime = exceptionDMNRuntimeEither
                 .getOrElseThrow(e -> new RuntimeException("Error initializing DMNRuntime", e));
         ((DMNRuntimeImpl) dmnRuntime).setOption(new RuntimeTypeCheckOption(true));
         dmnModel = dmnRuntime.getModel(
-                "http://www.trisotech.com/definitions/_f31e1f8e-d4ce-4a3a-ac3b-747efa6b3401",
-                "Prequalification");
+                getNameSpace(),
+                getModelName());
+        if (dmnModel == null) {
+            throw new RuntimeException("Model " + getNameSpace() + "." + getModelName() + " not found");
+        }
         dmnContext = dmnRuntime.newContext();
-        dmnContext.set("Credit Score", 350);
-        dmnContext.set("Loan Amount", 15);
-        dmnContext.set("Appraised Value", 10);
-        dmnContext.set("Best Rate", 5);
-        dmnContext.set("Borrower", prototype(entry("Monthly Income", 100), entry("Monthly Other Debt", 20)));
+        getInputData().forEach((key, value) -> dmnContext.set(key, value));
     }
 
-    @Benchmark
-    public Object evaluateModelBenchmark() {
+    protected Object evaluateModelBenchmark() {
         return dmnRuntime.evaluateAll(dmnModel, dmnContext);
     }
 
-    public static void main(String[] args) throws Exception {
-        CodegenBenchmark a = new CodegenBenchmark();
-        a.setupModelAndContext();
-        System.out.println(a.evaluateModelBenchmark());
-    }
 
 
 }
