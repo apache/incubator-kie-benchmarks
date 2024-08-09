@@ -20,14 +20,11 @@
 package org.drools.benchmarks.dmn.ast;
 
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.kie.dmn.feel.FEEL;
-import org.kie.dmn.feel.lang.CompiledExpression;
 import org.kie.dmn.feel.lang.EvaluationContext;
 import org.kie.dmn.feel.lang.FEELDialect;
 import org.kie.dmn.feel.lang.Type;
 import org.kie.dmn.feel.lang.ast.BaseNode;
 import org.kie.dmn.feel.lang.impl.EvaluationContextImpl;
-import org.kie.dmn.feel.lang.impl.FEELBuilder;
 import org.kie.dmn.feel.parser.feel11.ASTBuilderVisitor;
 import org.kie.dmn.feel.parser.feel11.FEELParser;
 import org.kie.dmn.feel.parser.feel11.FEEL_1_1Parser;
