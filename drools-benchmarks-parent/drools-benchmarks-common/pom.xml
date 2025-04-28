@@ -10,6 +10,6 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>drools-benchmarks-common</artifactId>
-  <name>Drools 8 Benchmarks Common Classes</name>
+  <name>Drools Benchmarks Common Classes</name>
 
 </project>

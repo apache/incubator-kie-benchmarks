@@ -29,6 +29,13 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-core-bom</artifactId>
+        <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>org.drools</groupId>
         <artifactId>drools-bom</artifactId>
         <version>${version.org.drools}</version>
@@ -37,34 +44,28 @@
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>drools-build-parent</artifactId>
+        <artifactId>kie-efesto-bom</artifactId>
         <version>${version.org.drools}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>efesto-common-api</artifactId>
+        <artifactId>kie-dmn-bom</artifactId>
         <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>efesto-compilation-manager-api</artifactId>
+        <artifactId>kie-pmml-bom</artifactId>
         <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>efesto-compilation-manager-core</artifactId>
-        <version>${version.org.drools}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>efesto-runtime-manager-api</artifactId>
-        <version>${version.org.drools}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>efesto-runtime-manager-core</artifactId>
+        <artifactId>kie-pmml-dependencies</artifactId>
         <version>${version.org.drools}</version>
       </dependency>
     </dependencies>

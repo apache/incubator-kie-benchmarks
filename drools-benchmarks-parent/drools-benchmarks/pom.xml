@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>drools-benchmarks</artifactId>
-  <name>Drools 8 Benchmarks</name>
+  <name>Drools Benchmarks</name>
 
   <dependencies>
     <dependency>
@@ -19,43 +19,4 @@
       <version>${project.version}</version>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <finalName>drools-benchmarks</finalName>
-              <transformers>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                      <resource>META-INF/kie.conf</resource>
-                  </transformer>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                      <mainClass>org.openjdk.jmh.Main</mainClass>
-                  </transformer>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-              </transformers>
-              <filters> <!-- since shading ecj, erase signatures see https://docs.oracle.com/en-us/iaas/data-flow/data-flow-tutorial/develop-apps-locally/create-fat-jars.htm -->
-                <filter>
-                <artifact>*:*</artifact>
-                <excludes>
-                      <exclude>META-INF/*.SF</exclude>
-                      <exclude>META-INF/*.DSA</exclude>
-                      <exclude>META-INF/*.RSA</exclude>
-                </excludes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>

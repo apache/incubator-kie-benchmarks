@@ -11,23 +11,14 @@
   <packaging>kjar</packaging>
 
   <artifactId>drools-benchmarks-module</artifactId>
-  <name>Drools 8 Benchmarks Module</name>
+  <name>Drools Benchmarks Module</name>
   <description>Drools module to use for benchmarking purpose</description>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.drools</groupId>
-        <artifactId>drools-benchmarks-common</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-benchmarks-common</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 
