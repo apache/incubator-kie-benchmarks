@@ -12,7 +12,7 @@
 
   <groupId>org.drools</groupId>
   <artifactId>drools-benchmarks-parent</artifactId>
-  <name>Drools 10 Benchmarks Parent</name>
+  <name>Drools Benchmarks Parent</name>
 
   <properties>
     <version.org.drools>999-SNAPSHOT</version.org.drools>
