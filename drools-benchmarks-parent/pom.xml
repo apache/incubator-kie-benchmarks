@@ -14,10 +14,6 @@
   <artifactId>drools-benchmarks-parent</artifactId>
   <name>Drools Benchmarks Parent</name>
 
-  <properties>
-    <version.org.drools>999-SNAPSHOT</version.org.drools>
-  </properties>
-
   <modules>
     <module>drools-benchmarks-common</module>
     <module>drools-benchmarks-quick</module>

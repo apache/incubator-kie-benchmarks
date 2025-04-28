@@ -15,10 +15,6 @@
   <name>OptaPlanner Benchmarks Parent</name>
   <description>This is the multi-module project top-level parent.</description>
 
-  <properties>
-    <version.org.optaplanner>8.45.0-SNAPSHOT</version.org.optaplanner>
-  </properties>
-
   <modules>
     <module>optaplanner-perf-framework</module>
     <module>optaplanner-perf-benchmark</module>

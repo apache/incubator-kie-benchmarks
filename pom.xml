@@ -26,6 +26,8 @@
     <version.jmh>1.37</version.jmh>
     <version.logback>1.5.18</version.logback>
     <version.infinispan>15.0.14.Final</version.infinispan>
+    <version.org.drools>999-SNAPSHOT</version.org.drools>
+    <version.org.optaplanner>999-SNAPSHOT</version.org.optaplanner>
   </properties>
 
   <dependencyManagement>
