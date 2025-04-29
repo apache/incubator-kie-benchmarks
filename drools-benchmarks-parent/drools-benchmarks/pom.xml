@@ -12,11 +12,20 @@
   <artifactId>drools-benchmarks</artifactId>
   <name>Drools Benchmarks</name>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-benchmarks-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-benchmarks-common</artifactId>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>
