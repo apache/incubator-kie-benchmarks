@@ -11,7 +11,7 @@
   <packaging>kjar</packaging>
 
   <artifactId>drools-benchmarks-module</artifactId>
-  <name>Drools 8 Benchmarks Module</name>
+  <name>Drools Benchmarks Module</name>
   <description>Drools module to use for benchmarking purpose</description>
 
   <dependencyManagement>

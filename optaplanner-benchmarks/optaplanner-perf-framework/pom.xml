@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>optaplanner-perf-framework</artifactId>
-  <name>OptaPlanner 8 Performance Framework</name>
+  <name>OptaPlanner Performance Framework</name>
   <description>Contains domain examples used by benchmarks.</description>
 
   <dependencies>
