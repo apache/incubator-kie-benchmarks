@@ -12,13 +12,7 @@
 
   <groupId>org.drools</groupId>
   <artifactId>drools-benchmarks-parent</artifactId>
-  <name>Drools 8 Benchmarks Parent</name>
-
-  <properties>
-    <version.freemaker>2.3.31</version.freemaker>
-    <version.jaxb-api>2.0</version.jaxb-api>
-    <version.org.drools>999-SNAPSHOT</version.org.drools>
-  </properties>
+  <name>Drools Benchmarks Parent</name>
 
   <modules>
     <module>drools-benchmarks-common</module>
@@ -29,47 +23,48 @@
   </modules>
 
   <dependencyManagement>
-      <dependencies>
-          <dependency>
-              <groupId>org.drools</groupId>
-              <artifactId>drools-bom</artifactId>
-              <version>${version.org.drools}</version>
-              <type>pom</type>
-              <scope>import</scope>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>drools-build-parent</artifactId>
-              <version>${version.org.drools}</version>
-              <type>pom</type>
-              <scope>import</scope>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-common-api</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-compilation-manager-api</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-compilation-manager-core</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-runtime-manager-api</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-          <dependency>
-              <groupId>org.kie</groupId>
-              <artifactId>efesto-runtime-manager-core</artifactId>
-              <version>${version.org.drools}</version>
-          </dependency>
-      </dependencies>
+    <dependencies>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-core-bom</artifactId>
+        <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-bom</artifactId>
+        <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-efesto-bom</artifactId>
+        <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-dmn-bom</artifactId>
+        <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-bom</artifactId>
+        <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-dependencies</artifactId>
+        <version>${version.org.drools}</version>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
 
   <dependencies>
@@ -129,64 +124,59 @@
       <groupId>org.openjdk.jmh</groupId>
       <artifactId>jmh-generator-annprocess</artifactId>
     </dependency>
-      <dependency>
-          <groupId>org.freemarker</groupId>
-          <artifactId>freemarker</artifactId>
-          <version>${version.freemaker}</version>
-      </dependency>
-      <dependency>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.drools</groupId>
-          <artifactId>drools-xml-support</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.drools</groupId>
-          <artifactId>drools-tms</artifactId>
-      </dependency>
-      <!-- Efesto -->
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-common-api</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-compilation-manager-api</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-compilation-manager-core</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-runtime-manager-api</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>efesto-runtime-manager-core</artifactId>
-      </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-xml-support</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-tms</artifactId>
+    </dependency>
+    <!-- Efesto -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>efesto-common-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>efesto-compilation-manager-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>efesto-compilation-manager-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>efesto-runtime-manager-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>efesto-runtime-manager-core</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
-<!--        Copy jar of the drools-core to get the SCM version of the project under test-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>install</phase>
-                    <goals>
-                        <goal>copy-dependencies</goal>
-                    </goals>
-                    <configuration>
-                        <includeArtifactIds>drools-core</includeArtifactIds>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+      <!--        Copy jar of the drools-core to get the SCM version of the project under test-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeArtifactIds>drools-core</includeArtifactIds>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -199,22 +189,22 @@
             <configuration>
               <finalName>drools-benchmarks</finalName>
               <transformers>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                      <resource>META-INF/kie.conf</resource>
-                  </transformer>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                      <mainClass>org.openjdk.jmh.Main</mainClass>
-                  </transformer>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                  <resource>META-INF/kie.conf</resource>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>org.openjdk.jmh.Main</mainClass>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
               </transformers>
               <filters> <!-- since shading ecj, erase signatures see https://docs.oracle.com/en-us/iaas/data-flow/data-flow-tutorial/develop-apps-locally/create-fat-jars.htm -->
                 <filter>
-                <artifact>*:*</artifact>
-                <excludes>
-                      <exclude>META-INF/*.SF</exclude>
-                      <exclude>META-INF/*.DSA</exclude>
-                      <exclude>META-INF/*.RSA</exclude>
-                </excludes>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
                 </filter>
               </filters>
             </configuration>

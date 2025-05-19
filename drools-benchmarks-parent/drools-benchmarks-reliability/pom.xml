@@ -10,11 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>drools-benchmarks-reliability</artifactId>
-  <name>Drools 8 Benchmarks comparing reliability performance</name>
-
-  <properties>
-    <version.infinispan>14.0.13.Final</version.infinispan>
-  </properties>
+  <name>Drools Benchmarks comparing reliability performance</name>
 
   <dependencyManagement>
     <dependencies>
@@ -25,6 +21,16 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-benchmarks-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-benchmarks-module</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -32,12 +38,10 @@
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-benchmarks-common</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-benchmarks-module</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
