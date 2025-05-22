@@ -39,5 +39,39 @@ There are a couple of detail to fullfill:
 1. Enable annotation processing (under Settings -> Build, Execution, Deployment -> Compiler -> Annotation Processors)
 2. set `@Fork(0)` annotation, at least during debug
 
+Flamegraph Generation
+=====================
+[Flame-graphs](https://www.brendangregg.com/flamegraphs.html) is a visualization tool used to visualize stack traces of profiled software so that the most frequent code-paths can be identified quickly and accurately.
+
+[async-profiler](https://github.com/async-profiler/async-profiler) is a tool that, on the other side, create the flame-graphs files out of a running java process.
+
+The overall idea is to:
+1. start benchmarks
+2. attach async-profiler to running benchmarks to generate flamegraph file
+3. analyze flamegraphs file (that it is an html) inside a browser
+
+Steps (Unix machine):
+1. install async-profiler (OS-dependent)
+2. enable kernel sampling (linux -  superuser):
+´´´bash
+   echo 1 > /proc/sys/kernel/perf_event_paranoid
+   echo 0 > /proc/sys/kernel/kptr_restrict
+´´´
+3. start benchmark
+4. retrieve _**ForkedMain**_ PID with jps
+```bash
+jps | grep ForkedMain
+```
+5. connect profiler to running instance
+```bash
+asprof -d 30 -f flamegraph.html <PID>
+```
+6. profiler arguments
+   1. -d : timer duration in seconds
+   2. -j: stack sampling deep
+   3. -i: sampling interval; default to 10ms, but better to set it to 1ms
+
+
+
 
   
