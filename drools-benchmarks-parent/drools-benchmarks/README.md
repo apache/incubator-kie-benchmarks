@@ -45,6 +45,11 @@ Flamegraph Generation
 
 [async-profiler](https://github.com/async-profiler/async-profiler) is a tool that, on the other side, create the flame-graphs files out of a running java process.
 
+
+There are two possible approaches
+
+#### External connect of async profiler
+
 The overall idea is to:
 1. start benchmarks
 2. attach async-profiler to running benchmarks to generate flamegraph file
@@ -72,6 +77,14 @@ asprof -d 30 -f flamegraph.html <PID>
    3. -i: sampling interval; default to 10ms, but better to set it to 1ms
 
 
+#### Run JMH with async profiler
 
+A different approach could be to use the async profiler directly inside the benchmark execution.
+Command is simply something like:
 
+```bash
+java -jar target/drools-benchmarks.jar -jvmArgs "-Xms24g -Xmx24g" -foe true -rf csv -rff results.csv -prof async:output=flamegraph org.drools.benchmarks.dmn.runtime.DMNEvaluateDecisionTableBenchmark
+```
+
+Flamegraphs will be generated inside a folder whose name depends on the benchmark executed
   
