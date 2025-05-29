@@ -31,9 +31,19 @@ public interface DMNProvider {
     String getDMN();
 
     /**
+     *
+     * @return the model name of the generated model
+     */
+    String getModelName();
+
+    /**
      * Returns DMN that contains specified number of core elements (e.g. decisions, business knowledge model, etc.).
      * @param numberOfElements Required number of core elements in resulting DRL.
      * @return String representation of the generated DMN file.
      */
     String getDMN(int numberOfElements);
+
+    default String getFormattedDefinitions(String modelName) {
+        return String.format("<definitions id=\"%1$s\" name=\"%1$s\"\n", modelName);
+    }
 }

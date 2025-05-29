@@ -25,9 +25,16 @@ import org.drools.benchmarks.common.DMNProvider;
 
 public class DTNoGapsNoOverlapsDMNProvider implements DMNProvider {
 
+    private static final String MODEL_NAME = "dt-nogapsnooverlaps";
+
     @Override
     public String getDMN() {
         return getDMN(1);
+    }
+
+    @Override
+    public String getModelName() {
+        return MODEL_NAME;
     }
 
     @Override
@@ -35,7 +42,7 @@ public class DTNoGapsNoOverlapsDMNProvider implements DMNProvider {
         final StringBuilder dmnBuilder = new StringBuilder();
 
         dmnBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        dmnBuilder.append("<definitions id=\"dt-nogapsnooverlaps\" name=\"dt-nogapsnooverlaps\"\n");
+        dmnBuilder.append(getFormattedDefinitions(MODEL_NAME));
         dmnBuilder.append("             namespace=\"https://github.com/kiegroup/kie-dmn\"\n");
         dmnBuilder.append("             xmlns=\"http://www.omg.org/spec/DMN/20180521/MODEL/\"\n");
         dmnBuilder.append("             xmlns:feel=\"http://www.omg.org/spec/DMN/20180521/FEEL/\">\n");

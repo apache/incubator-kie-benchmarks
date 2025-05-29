@@ -85,7 +85,7 @@ public class DMNEvaluateDecisionTablesSparseBenchmark extends AbstractBenchmark 
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
         dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "decision-table-name");
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", dmnProvider.getModelName());
     }
 
     @Setup(Level.Iteration)

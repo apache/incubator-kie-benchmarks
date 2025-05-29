@@ -61,7 +61,7 @@ public class DMNEvaluateTriangularNumHardBenchmark extends AbstractBenchmark {
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
         dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", "dmn-triangular");
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/kie-dmn", dmnProvider.getModelName());
     }
 
     @Setup(Level.Iteration)

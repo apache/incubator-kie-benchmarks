@@ -61,7 +61,7 @@ public class DMNEvaluateFewLiteralDecisionBenchmark extends AbstractBenchmark {
                 .setResourceType(ResourceType.DMN)
                 .setSourcePath("dmnFile.dmn");
         dmnRuntime = DMNUtil.getDMNRuntimeWithResources(false, dmnResource);
-        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/drools/kie-dmn", "decision");
+        dmnModel = dmnRuntime.getModel("https://github.com/kiegroup/drools/kie-dmn", dmnProvider.getModelName());
     }
 
     @Setup(Level.Iteration)

@@ -23,9 +23,16 @@ import org.drools.benchmarks.common.DMNProvider;
 
 public class DecisionTablesDMNProvider implements DMNProvider {
 
+    private static final String MODEL_NAME = "decision-tables";
+
     @Override
     public String getDMN() {
         return getDMN(1);
+    }
+
+    @Override
+    public String getModelName() {
+        return MODEL_NAME;
     }
 
     @Override
@@ -33,7 +40,7 @@ public class DecisionTablesDMNProvider implements DMNProvider {
         final StringBuilder dmnBuilder = new StringBuilder();
 
         dmnBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        dmnBuilder.append("<definitions id=\"decision-table-id\" name=\"decision-table-name\"\n");
+        dmnBuilder.append(getFormattedDefinitions(MODEL_NAME));
         dmnBuilder.append("             namespace=\"https://github.com/kiegroup/kie-dmn\"\n");
         dmnBuilder.append("xmlns=\"http://www.omg.org/spec/DMN/20180521/MODEL/\"  ");
         dmnBuilder.append("xmlns:triso=\"http://www.trisotech.com/2015/triso/modeling\"  ");

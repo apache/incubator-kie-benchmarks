@@ -23,9 +23,16 @@ import org.drools.benchmarks.common.DMNProvider;
 
 public class ContextDMNProvider implements DMNProvider {
 
+    private static final String MODEL_NAME = "dmn-context";
+
     @Override
     public String getDMN() {
         return getDMN(1);
+    }
+
+    @Override
+    public String getModelName() {
+        return MODEL_NAME;
     }
 
     @Override
@@ -33,11 +40,12 @@ public class ContextDMNProvider implements DMNProvider {
         final StringBuilder dmnBuilder = new StringBuilder();
 
         dmnBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        dmnBuilder.append("<definitions id=\"dmn-context\" name=\"dmn-context\"\n");
+        dmnBuilder.append(getFormattedDefinitions(MODEL_NAME));
         dmnBuilder.append("             namespace=\"https://github.com/kiegroup/kie-dmn\"\n");
         dmnBuilder.append("             xmlns=\"http://www.omg.org/spec/DMN/20151101/dmn.xsd\"\n");
-        dmnBuilder.append("             xmlns:feel=\"http://www.omg.org/spec/FEEL/20140401\">\n");
-        dmnBuilder.append("             xsi:schemaLocation=\"http://www.omg.org/spec/DMN/20151101/dmn.xsd http://www.omg.org/spec/DMN/20151101/dmn.xsd \"\n");
+        dmnBuilder.append("             xmlns:feel=\"http://www.omg.org/spec/FEEL/20140401\"\n");
+        dmnBuilder.append("             xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n");
+        dmnBuilder.append("             xsi:schemaLocation=\"http://www.omg.org/spec/DMN/20151101/dmn.xsd http://www.omg.org/spec/DMN/20151101/dmn.xsd \"\n>");
 
         for (int i = 0; i < numberOfElements; i++) {
             dmnBuilder.append(getContext(i));
@@ -51,7 +59,7 @@ public class ContextDMNProvider implements DMNProvider {
     private String getContext(final int index) {
         final StringBuilder contextBuilder = new StringBuilder();
         contextBuilder.append("  <decision id=\"decision" + index + "\" name=\"decision" + index + "\">\n");
-        contextBuilder.append("    <variable name=\"DecisionVar" + index + "\" typeRef=\"feel:context\"/>\n");
+        contextBuilder.append("    <variable name=\"decision" + index + "\" typeRef=\"feel:context\"/>\n");
         contextBuilder.append("    <context>\n");
         contextBuilder.append("      <contextEntry>\n");
         contextBuilder.append("        <variable name=\"entry" + index + "-1\" typeRef=\"feel:string\"/>\n");
