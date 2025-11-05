@@ -20,11 +20,13 @@
 package org.drools.benchmarks.dmn.ast;
 
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.kie.dmn.api.core.DMNVersion;
 import org.kie.dmn.feel.lang.EvaluationContext;
 import org.kie.dmn.feel.lang.FEELDialect;
 import org.kie.dmn.feel.lang.Type;
 import org.kie.dmn.feel.lang.ast.BaseNode;
 import org.kie.dmn.feel.lang.impl.EvaluationContextImpl;
+import org.kie.dmn.feel.lang.impl.FEELEventListenersManager;
 import org.kie.dmn.feel.parser.feel11.ASTBuilderVisitor;
 import org.kie.dmn.feel.parser.feel11.FEELParser;
 import org.kie.dmn.feel.parser.feel11.FEEL_1_1Parser;
@@ -66,7 +68,7 @@ public abstract class AbstractASTBenchmark {
 
     private static EvaluationContext newEmptyEvaluationContext() {
         // Defaulting FEELDialect to FEEL
-        return new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, FEELDialect.FEEL);
+        return new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), new FEELEventListenersManager(), FEELDialect.FEEL, DMNVersion.V1_5);
     }
 
     private static BaseNode getBaseNode(String baseNodeExpression) {

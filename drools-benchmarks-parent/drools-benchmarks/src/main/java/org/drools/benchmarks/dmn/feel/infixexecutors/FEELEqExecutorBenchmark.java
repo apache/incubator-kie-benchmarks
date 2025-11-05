@@ -18,9 +18,12 @@
  */
 package org.drools.benchmarks.dmn.feel.infixexecutors;
 
+import org.kie.dmn.api.core.DMNVersion;
 import org.kie.dmn.feel.lang.EvaluationContext;
+import org.kie.dmn.feel.lang.FEELDialect;
 import org.kie.dmn.feel.lang.ast.infixexecutors.EqExecutor;
 import org.kie.dmn.feel.lang.impl.EvaluationContextImpl;
+import org.kie.dmn.feel.lang.impl.FEELEventListenersManager;
 import org.kie.dmn.feel.util.ClassLoaderUtil;
 import org.openjdk.jmh.annotations.*;
 
@@ -47,7 +50,7 @@ public class FEELEqExecutorBenchmark {
     @Setup
     public void setup() {
         executor = EqExecutor.instance();
-        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), null, null);
+        ctx = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), new FEELEventListenersManager(), FEELDialect.FEEL, DMNVersion.V1_5);
         values = getBooleanArray(args);
     }
 

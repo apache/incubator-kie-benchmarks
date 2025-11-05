@@ -21,8 +21,12 @@ package org.drools.benchmarks.dmn.feel;
 
 import java.util.concurrent.TimeUnit;
 
+import org.kie.dmn.api.core.DMNVersion;
 import org.kie.dmn.feel.lang.EvaluationContext;
+import org.kie.dmn.feel.lang.FEELDialect;
 import org.kie.dmn.feel.lang.impl.EvaluationContextImpl;
+import org.kie.dmn.feel.lang.impl.FEELEventListenersManager;
+import org.kie.dmn.feel.util.ClassLoaderUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
@@ -44,7 +48,7 @@ public class EvaluationContextImplBenchmark {
 
     @Setup()
     public void setupFEEL() {
-        context = new EvaluationContextImpl(this.getClass().getClassLoader(), null, null);
+        context = new EvaluationContextImpl(ClassLoaderUtil.findDefaultClassLoader(), new FEELEventListenersManager(), FEELDialect.FEEL, DMNVersion.V1_5);
         context.enterFrame();
         context.enterFrame();
         context.enterFrame();
