@@ -29,6 +29,9 @@ import org.openjdk.jmh.infra.Blackhole;
  */
 public class BuildDRLWithoutKieBaseBenchmark extends AbstractBuildtimeBenchmark {
 
+    @Param({"true", "false"})
+    private boolean useCanonicalModel;
+
     @Param({"5k", "10k"})
     private String nrOfRules;
 
@@ -40,7 +43,7 @@ public class BuildDRLWithoutKieBaseBenchmark extends AbstractBuildtimeBenchmark 
 
     @Benchmark
     public void timeKBaseCreationFromDrl(final Blackhole eater) {
-        buildResourcesWithoutKieBase(eater);
+        buildResourcesWithoutKieBase(eater, useCanonicalModel);
     }
 
 }
