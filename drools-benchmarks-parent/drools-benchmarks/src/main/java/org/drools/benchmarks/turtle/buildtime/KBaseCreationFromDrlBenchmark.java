@@ -30,6 +30,9 @@ import org.openjdk.jmh.annotations.Setup;
  */
 public class KBaseCreationFromDrlBenchmark extends AbstractBuildtimeBenchmark {
 
+    @Param({"true", "false"})
+    private boolean useCanonicalModel;
+
     @Param({"1k", "5k", "10k"})
     private String nrOfRules;
 
@@ -40,7 +43,7 @@ public class KBaseCreationFromDrlBenchmark extends AbstractBuildtimeBenchmark {
 
     @Benchmark
     public int timeKBaseCreationFromDrl() {
-        return actuallyCreateTheKBase();
+        return actuallyCreateTheKBase(useCanonicalModel);
     }
 
 }

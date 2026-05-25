@@ -22,6 +22,9 @@ package org.drools.benchmarks.turtle.buildtime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import org.drools.compiler.kie.builder.impl.DrlProject;
+import org.drools.model.codegen.ExecutableModelProject;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
@@ -69,21 +72,33 @@ public abstract class AbstractBuildtimeBenchmark {
      *
      * @return number of packages in the kbase
      */
-    protected int actuallyCreateTheKBase() {
+    protected int actuallyCreateTheKBase(boolean useCanonicalModel) {
         KieHelper kieHelper = new KieHelper();
         for (Resource resource : resources) {
             kieHelper.addResource(resource);
         }
-        KieBase kieBase = kieHelper.build();
+        KieBase kieBase;
+        if (useCanonicalModel) {
+            kieBase = kieHelper.build(ExecutableModelProject.class);
+        } else {
+            kieBase = kieHelper.build(DrlProject.class);
+        }
         int nrOfPackages = kieBase.getKiePackages().size();
         return nrOfPackages;
+    }
+
+    protected int actuallyCreateTheKBase() {
+        return actuallyCreateTheKBase(false);
     }
 
     /**
      * Builds resources without creating the KieBase.
      */
-    protected void buildResourcesWithoutKieBase(final Blackhole eater) {
-        eater.consume(KieServices.get().newKieBuilder(kieFileSystem).buildAll());
+    protected void buildResourcesWithoutKieBase(final Blackhole eater, boolean useCanonicalModel) {
+        if (useCanonicalModel) {
+            eater.consume(KieServices.get().newKieBuilder(kieFileSystem).buildAll(ExecutableModelProject.class));
+        } else {
+            eater.consume(KieServices.get().newKieBuilder(kieFileSystem).buildAll(DrlProject.class));
+        }
     }
-
 }
